@@ -13,6 +13,10 @@
   <a href="https://yaanic.github.io/cenoural/"><b>▶ Jogar agora</b></a>
 </p>
 
+<p align="center">
+  Português · <a href="README.en.md">English</a>
+</p>
+
 ---
 
 ## Sobre o jogo
