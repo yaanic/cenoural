@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- Cenoural (c) 2026 João Pedro Borges. Todos os direitos reservados. Proibida a copia, modificacao ou redistribuicao sem autorizacao. Ver LICENSE.txt -->
+<meta name="author" content="João Pedro Borges">
+<meta name="copyright" content="(c) 2026 João Pedro Borges. Todos os direitos reservados.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cenoural</title>
+<meta name="description" content="Cave cada vez mais fundo, junte minérios, melhore suas ferramentas e renasça. Cenoural é um jogo de mineração incremental em pixel art, direto no navegador.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Cenoural">
+<meta property="og:title" content="Cenoural · Abismo Sem Fim">
+<meta property="og:description" content="Cave cada vez mais fundo, junte minérios, melhore suas ferramentas e renasça. Cenoural é um jogo de mineração incremental em pixel art, direto no navegador.">
+<meta property="og:image" content="img/logo.png">
+<meta property="og:image:alt" content="Logotipo do jogo Cenoural">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cenoural · Abismo Sem Fim">
+<meta name="twitter:description" content="Cave cada vez mais fundo, junte minérios, melhore suas ferramentas e renasça. Cenoural é um jogo de mineração incremental em pixel art, direto no navegador.">
+<meta name="twitter:image" content="img/logo.png">
+<meta name="theme-color" content="#14110f">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<noscript><div style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;background:#14110f;color:#eee;font:16px/1.5 system-ui,sans-serif"><div><h1 style="margin:0 0 12px">Cenoural</h1>Este jogo precisa de JavaScript para funcionar.<br>Ative o JavaScript no seu navegador e recarregue a página.</div></div></noscript>
+<div id="stage">
+  <div id="hud">
+    <div id="goldbox"><b id="gold">0</b><small>OURO</small></div>
+    <div id="depthbox" title="Recorde: 0 m"><b id="depth">0 m</b><small>PROFUNDIDADE <span id="best">0</span></small></div>
+    <div id="clockbox" hidden><canvas id="clk" width="22" height="22"></canvas></div>
+    <div id="enbox"><div id="entrack"><i id="enfill"></i></div><small>ENERGIA <span id="ent">0</span></small></div>
+    <div id="xpbar" role="progressbar" aria-label="Experiência do nível" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="xpi"></i></div>
+  </div>
+  <div id="playfield">
+    <canvas id="cv" aria-label="Área de escavação"></canvas>
+    <div id="lvbox" title="Nível" aria-label="Nível"><b id="lv">1</b><small id="xpt"></small></div>
+    <div id="layer"></div>
+    <div id="buffs" aria-live="polite"></div>
+    <div id="depthruler" aria-label="Progresso dentro da camada atual">
+      <div id="depthtrack"><i id="depthfill"></i><b id="depthcursor"></b></div>
+    </div>
+    <div id="bar"></div>
+  </div>
+</div>
+<aside id="side">
+  <div class="qk"><button id="qk-map">Mapa</button><button id="qk-pause">Pausa</button><button id="qk-full">Tela cheia</button></div>
+  <div id="bagside"></div>
+  <div class="tabs" id="tabs"></div>
+  <div class="pane on">
+    <div class="ph" id="surfmsg"></div>
+    <div class="qty" id="qty"></div>
+    <div id="ups"></div>
+  </div>
+  <div class="pane">
+    <div class="ph" id="shopmsg"></div>
+    <div class="qty" id="shopqty"></div>
+    <div id="shop"></div>
+  </div>
+  <div class="pane">
+    <div class="ph">Poderes de renascimento (comprados com fragmentos), Renascer, estatísticas e conquistas.</div>
+    <h2>Poderes de renascimento · <span id="pts">0</span> fragmentos</h2><div class="ph" id="skmsg"></div><div id="sks"></div>
+    <button class="up" id="prest"><span class="n">Renascer</span><span class="d" id="prestd"></span><span class="c" id="prestc"></span></button>
+    <h2>Estatísticas</h2>
+    <div class="help" id="stats"></div>
+    <h2>Conquistas · <span id="achc">0/0</span></h2>
+    <div class="help" id="achl"></div>
+  </div>
+  <div class="pane">
+    <div class="ph">Como jogar, controles, som e save. Toque num título para abrir ou fechar a seção.</div>
+    <div class="help">
+      <details open><summary>Como jogar</summary>
+        <ol>
+          <li><b>Cave:</b> escolha a direção (<kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> ou setas) e segure <kbd>Espaço</kbd>.</li>
+          <li><b>Junte:</b> cada bloco dá ouro e alguns soltam minérios, que vão para a mochila.</li>
+          <li><b>Venda:</b> suba até a superfície (ou use o teleporte <kbd>Q</kbd>) e entregue a mochila no baú.</li>
+          <li><b>Melhore:</b> gaste o ouro na mesa de trabalho e na loja para descer mais a cada vez.</li>
+          <li><b>Cuidado com a energia:</b> cavar e voar gastam energia. Se acabar, você perde a mochila e volta à superfície.</li>
+          <li><b>Renasça:</b> depois de 100 m, Renascer troca o progresso da vida por fragmentos, que compram poderes permanentes na aba Poder. Baús raros também podem dar fragmentos.</li>
+        </ol>
+      </details>
+      <details open><summary>Teclado</summary>
+        <dl class="keys">
+          <dt><kbd>Espaço</kbd></dt><dd>Segure para cavar. Perto do baú, da fornalha, do quadro ou do caça-níquel, usa o objeto</dd>
+          <dt><kbd>W A S D</kbd> <kbd>←↑↓→</kbd></dt><dd>Mover e escolher a direção (W = cima). Segure ↓ num buraco já cavado para cair de graça</dd>
+          <dt><kbd>Shift</kbd></dt><dd>Correr</dd>
+          <dt><kbd>E</kbd></dt><dd>Dinamite</dd>
+          <dt><kbd>R</kbd></dt><dd>Trocar o tipo de dinamite (vale com 2 ou mais tipos)</dd>
+          <dt><kbd>Q</kbd></dt><dd>Teleporte (compre em Melhorias)</dd>
+          <dt><kbd>1</kbd> <kbd>2</kbd></dt><dd>Fúria do Minerador (libera aos 50 m) e Escavação Frenética (aos 150 m)</dd>
+          <dt><kbd>M</kbd></dt><dd>Abrir e fechar o mapa. Com ele aberto, a roda do mouse dá zoom</dd>
+          <dt><kbd>K</kbd></dt><dd>Marcador no mapa (aperte de novo no mesmo lugar para tirar)</dd>
+          <dt><kbd>N</kbd></dt><dd>Som ligado/desligado</dd>
+          <dt><kbd>Esc</kbd> <kbd>P</kbd></dt><dd>Pausa. Com o mapa aberto, Esc fecha o mapa</dd>
+          <dt><kbd>Scroll</kbd></dt><dd>Zoom do jogo</dd>
+        </dl>
+      </details>
+      <details><summary>Mouse</summary>
+        <dl class="keys">
+          <dt><kbd>Clique</kbd></dt><dd>Num bloco ao lado do personagem: muda a direção</dd>
+          <dt><kbd>Clique</kbd></dt><dd>No baú, na fornalha, no quadro ou no caça-níquel (estando perto): usa</dd>
+          <dt><kbd>Clique</kbd></dt><dd>Nos ícones da barra: usa a dinamite, a habilidade, o teleporte, a comida ou a poção</dd>
+          <dt><kbd>Botão direito</kbd></dt><dd>No ícone da dinamite: troca o tipo</dd>
+        </dl>
+      </details>
+      <details><summary>Celular</summary>
+        <dl class="keys">
+          <dt><kbd>◀ ▲ ▼ ▶</kbd></dt><dd>Mover e escolher a direção</dd>
+          <dt><kbd>Minerar</kbd></dt><dd>Segure para cavar (também usa baú, fornalha, quadro e caça-níquel quando perto)</dd>
+          <dt><kbd>Ícones</kbd></dt><dd>Toque nos ícones da barra para dinamite, habilidades, teleporte, comida e poções</dd>
+          <dt><kbd>Mapa</kbd> <kbd>Pausa</kbd></dt><dd>Botões no topo do painel. Com o mapa aberto, tocar na tela fecha</dd>
+        </dl>
+      </details>
+      <details><summary>Telas especiais</summary>
+        <dl class="keys">
+          <dt>Caça-níquel</dt><dd><kbd>←</kbd> <kbd>→</kbd> ou <kbd>A</kbd> <kbd>D</kbd> mudam a aposta, <kbd>Espaço</kbd> ou <kbd>Enter</kbd> gira, <kbd>Esc</kbd> sai</dd>
+          <dt>Baú do subsolo</dt><dd><kbd>Espaço</kbd>, <kbd>Enter</kbd> ou <kbd>Esc</kbd> avançam</dd>
+          <dt>Subir de nível</dt><dd><kbd>W A S D</kbd> ou setas escolhem, <kbd>Espaço</kbd> ou <kbd>Enter</kbd> confirma. Em 30 s o jogo escolhe por você</dd>
+          <dt>Pausa</dt><dd><kbd>W</kbd> <kbd>S</kbd> navegam, <kbd>Esc</kbd> ou <kbd>P</kbd> continuam</dd>
+          <dt>Sem energia</dt><dd><kbd>Espaço</kbd>, <kbd>Enter</kbd> ou <kbd>Esc</kbd> voltam a cavar</dd>
+        </dl>
+      </details>
+      <details><summary>Superfície</summary>
+        <p>Da esquerda para a direita:</p>
+        <ul>
+          <li><b>Cama:</b> salva o jogo e abre este menu.</li>
+          <li><b>Mesa de trabalho:</b> compre melhorias.</li>
+          <li><b>Fornalha:</b> leve os minérios, ela refina com o tempo e vende sozinha por mais ouro. Melhore a velocidade na mesa.</li>
+          <li><b>Buraco:</b> a entrada da mina.</li>
+          <li><b>Caça-níquel:</b> aposte uma parte do seu ouro. A casa ganha no longo prazo.</li>
+          <li><b>Baú:</b> fique ao lado dele e clique (ou aperte <kbd>Espaço</kbd>) para vender a mochila.</li>
+          <li><b>Loja:</b> dinamite e comida de energia.</li>
+          <li><b>Quadro de contratos:</b> missões que pagam ouro e XP.</li>
+        </ul>
+      </details>
+      <details><summary>Energia</summary>
+        <ul>
+          <li>Subir com a mochila a jato gasta mais que cavar.</li>
+          <li>Comece a subir quando a energia chegar a 25%.</li>
+          <li>O teleporte leva ao baú sem gastar energia. A <b>Poção de teleporte</b> (só cai de baús) faz o mesmo uma vez, sem precisar da melhoria.</li>
+          <li>Comida de energia (da loja) fica na barra e recupera energia no subsolo.</li>
+          <li>Na superfície a energia se recupera sozinha.</li>
+        </ul>
+      </details>
+      <details><summary>Bom saber</summary>
+        <ul>
+          <li>Veios de <b>pedra dura</b> só quebram com dinamite.</li>
+          <li><b>Veios de minério</b> são raros: manchas de blocos brilhantes que rendem vários minérios cada.</li>
+          <li>Há <b>baús raros</b> escondidos no subsolo, e o visual mostra a raridade: madeira (comum), ferro (incomum), ouro (raro), roxo (épico) e obsidiana (lendário). Dão ouro, XP, itens, minérios, fragmentos, poções de teleporte e, às vezes, um bônus de melhoria como os de subir de nível.</li>
+          <li>De <b>noite</b> a superfície escurece (o vagalume brilha mais) e descer dá um pouco mais de XP.</li>
+          <li><b>Estrelas cadentes</b> aparecem raramente à noite e dão ouro ou sorte por um tempo.</li>
+          <li>Cada mundo novo (jogo novo ou Renascer) usa uma semente aleatória.</li>
+        </ul>
+      </details>
+    </div>
+    <div class="help"><details><summary>Sobre o save</summary><p>Seu progresso fica salvo <b>só neste navegador e neste aparelho</b>. Se você limpar os dados do navegador, usar aba anônima ou trocar de aparelho, o progresso some. Para guardar ou levar para outro lugar, use <b>Exportar save</b> abaixo e guarde o texto.</p></details>
+    <details><summary>Créditos</summary><p>Criado por <b>João Pedro Borges</b> com auxílio de <b>inteligência artificial</b> (Claude, da Anthropic): parte do código e do conteúdo do jogo foi gerada com IA.<br>Fonte: Silkscreen (Jason Kottke, licença SIL OFL).</p><p style="opacity:.7">© 2026 João Pedro Borges. Todos os direitos reservados.</p></details></div>
+    <div class="qty"><button id="b-snd"></button></div>
+    <details style="margin:6px 0"><summary>Áudio</summary><div class="stats">Música <input id="vm" type="range" min="0" max="1" step=".05"><br>Efeitos <input id="vs" type="range" min="0" max="1" step=".05"><br>Ambiente <input id="va" type="range" min="0" max="1" step=".05"></div></details>
+    <textarea id="sv" rows="3" placeholder="Texto do save: exporte ou cole aqui para importar" style="width:100%;margin-top:10px;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px;font-size:.75rem"></textarea>
+    <div class="qty"><button id="exp">Exportar save</button><button id="imp">Importar save</button></div>
+    <button id="reset" style="margin-top:6px;font-size:.8rem;color:var(--mute)">Apagar progresso</button>
+  </div>
+</aside>
+<div id="title"><div class="tt"><h1 class="brand" aria-label="Cenoural"><span class="brand-icon" role="img" aria-hidden="true"></span><span class="brand-logo" role="img" aria-hidden="true"></span></h1><button id="play" type="button">Jogar</button><small style="display:block;margin-top:14px;opacity:.5;font-size:.7rem">© 2026 João Pedro Borges · Todos os direitos reservados<br>Feito com auxílio de inteligência artificial · Seu progresso fica salvo só neste navegador</small></div></div>
+<div id="ov"><div class="box" id="bx"></div></div>
+<script src="game.js"></script>
+</body>
+</html>

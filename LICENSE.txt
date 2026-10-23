@@ -1,0 +1,28 @@
+CENOURAL (Abismo Sem Fim)
+Copyright (c) 2026 João Pedro Borges. Todos os direitos reservados.
+
+AVISO DE DIREITOS AUTORAIS / ALL RIGHTS RESERVED
+
+Este jogo, incluindo todo o seu código-fonte (HTML, CSS e JavaScript), pixel art,
+imagens, logotipo, ícones, sons sintetizados, textos, balanceamento, design e
+conceito, é obra protegida por direitos autorais.
+
+Parte do código e do conteúdo deste jogo foi criada com auxílio de inteligência
+artificial (Claude, da Anthropic), sob direção e curadoria do autor.
+
+É PERMITIDO:
+  - Jogar o jogo no site onde ele foi publicado pelo autor.
+
+É PROIBIDO, sem autorização prévia e por escrito do autor:
+  - Copiar, baixar para redistribuir, hospedar em outro site ou servidor;
+  - Modificar, traduzir, adaptar ou criar obras derivadas;
+  - Vender, sublicenciar ou usar comercialmente o jogo ou partes dele;
+  - Extrair, reutilizar ou republicar o código, os textos ou os assets;
+  - Remover ou alterar este aviso de direitos autorais.
+
+O uso indevido poderá resultar em pedido de remoção (incluindo notificações a
+provedores de hospedagem e plataformas) e medidas legais cabíveis.
+
+Fonte Silkscreen (embutida no CSS): licenciada sob a SIL Open Font License,
+mantida pelos seus autores. A licença da fonte não se estende ao código e aos
+assets deste jogo.
