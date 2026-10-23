@@ -2,7 +2,7 @@
   <img src="img/logo.png" alt="Cenoural" width="420">
 </p>
 
-<h3 align="center">Cenoural · Abismo Sem Fim</h3>
+<h3 align="center">Cenoural</h3>
 
 <p align="center">
   Jogo de mineração incremental em pixel art, direto no navegador.<br>
