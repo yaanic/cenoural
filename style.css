@@ -246,3 +246,34 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 .help ol{margin:0;padding-left:18px;color:var(--mute)}
 .help ol li{margin:4px 0}
 .help .keys dt{white-space:normal}
+/* seletor de idioma (um botão por idioma registrado em src/0-idiomas) */
+.langs button{font-size:.8rem}
+#title .langs{justify-content:center;margin:-8px 0 0}
+#title .langs button{padding:4px 14px;font-size:.72rem;letter-spacing:.08em;text-indent:0}
+#title .langs button.on{color:#14110f;background:rgba(255,180,58,.85);border-color:rgba(255,180,58,.9)}
+/* aba Menu: cartão do idioma, um botão largo por idioma com a sigla à esquerda */
+.langbox{margin:4px 0 14px;padding:10px 12px 12px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.03)}
+.langbox h2{display:flex;align-items:center;gap:8px;margin:0 0 10px}
+.langbox .langs{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:6px;margin:0}
+.langbox .langs button{display:flex;align-items:center;gap:10px;padding:9px 10px;text-align:left}
+.langs button b{font-size:.66rem;letter-spacing:.08em;padding:2px 6px;border-radius:5px;background:rgba(255,255,255,.12)}
+.langs button.on b{background:rgba(0,0,0,.28)}
+/* menu suspenso de idioma da tela inicial */
+.langpick{position:relative;margin-top:-6px}
+.lp-btn{display:flex;align-items:center;gap:8px;padding:6px 14px;font-size:.72rem;letter-spacing:.08em;text-indent:0}
+.lp-btn em{font-style:normal;color:#fff;opacity:.85;padding-left:8px;border-left:1px solid rgba(255,180,58,.35)}
+.lp-btn::after{content:"";border:4px solid transparent;border-top-color:currentColor;border-bottom:0;margin-left:2px}
+.lp-list{display:none;position:absolute;left:50%;top:calc(100% + 6px);transform:translateX(-50%);min-width:100%;z-index:5;padding:5px;border-radius:10px;background:#14110f;border:1px solid rgba(255,180,58,.45);box-shadow:0 10px 28px rgba(0,0,0,.65)}
+.langpick.open .lp-list{display:flex;flex-direction:column;gap:3px}
+.lp-list button{display:flex;align-items:center;gap:10px;width:100%;padding:7px 12px;font-size:.72rem;letter-spacing:.06em;text-indent:0;text-align:left;white-space:nowrap}
+.lp-list button b{font-size:.62rem;padding:2px 6px;border-radius:5px;background:rgba(255,255,255,.12)}
+.lp-list button.on{color:#14110f;background:rgba(255,180,58,.85);border-color:rgba(255,180,58,.9)}
+.lp-list button.on b{background:rgba(0,0,0,.28)}
+/* dentro da janela de pausa a lista abre embutida (a janela cortaria uma lista flutuante) */
+.pm .langpick{margin:0}
+.pm .lp-btn{justify-content:center}
+.pm .lp-list{position:static;transform:none;margin-top:4px;min-width:0}
+.pm .lp-btn span{display:none}
+.pm .lp-btn em{border:0;padding:0;opacity:1}
+.pm .lp-list button{justify-content:flex-start;font-size:.75rem}
+.pm .lp-list button.on{color:#14110f!important;background:rgba(255,180,58,.85)!important;border-color:rgba(255,180,58,.9)!important}

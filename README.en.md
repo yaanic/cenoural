@@ -25,11 +25,11 @@ You are a miner descending through layers of dirt, clay, stone, and ever harder 
 
 Nothing to install, no sign-up, and it works on desktop and mobile.
 
-> **Note:** the game itself is in Brazilian Portuguese.
+> **Languages:** the game is available in English and Brazilian Portuguese. Pick one on the title screen, in the pause menu, or in the **Menu** tab (it follows your browser language by default).
 
 ## How to play
 
-1. **Dig:** pick a direction and hold **Space** (or the **Minerar** button on mobile).
+1. **Dig:** pick a direction and hold **Space** (or the **Mine** button on mobile).
 2. **Collect:** blocks give gold, and some drop ores that go into your backpack.
 3. **Sell:** return to the surface (or use the teleport) and hand your backpack over at the chest.
 4. **Upgrade:** spend your gold at the workbench and the shop to get deeper on every run.
@@ -51,7 +51,7 @@ Nothing to install, no sign-up, and it works on desktop and mobile.
 | `Esc` or `P` | Pause |
 | Scroll | Zoom |
 
-On mobile, use the on-screen buttons (arrows, **Minerar**, **Mapa**, and **Pausa**) and tap the icons on the bar to use items and skills.
+On mobile, use the on-screen buttons (arrows, **Mine**, **Map**, and **Pause**) and tap the icons on the bar to use items and skills.
 
 ## Features
 

@@ -23,7 +23,7 @@
 
 Você é um minerador que desce por camadas de terra, argila, pedra e rochas cada vez mais duras. Cada bloco rende ouro, e alguns soltam minérios. Suba até a superfície, venda o que carregou, compre melhorias e volte para cavar mais fundo. Quando o progresso emperrar, **renasça** para ganhar poderes permanentes e recomeçar mais forte.
 
-Não precisa instalar nada, não tem cadastro e funciona no computador e no celular.
+Não precisa instalar nada, não tem cadastro e funciona no computador e no celular. O jogo tem **português e inglês**: troque na tela inicial, no menu de pausa ou na aba **Menu** (por padrão ele segue o idioma do navegador).
 
 ## Como jogar
 

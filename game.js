@@ -1,5 +1,773 @@
 /*! Cenoural (c) 2026 João Pedro Borges. Todos os direitos reservados. Proibida a copia, modificacao ou redistribuicao sem autorizacao. Ver LICENSE.txt */
 (()=>{
+// ===== 0-idiomas/00-motor.js — Motor de idiomas: __("texto em português") devolve o texto no idioma ativo =====
+// Como funciona: o texto escrito no código é o português (idioma de origem) e serve de chave. Cada idioma é um arquivo desta pasta
+// (ex.: 20-en.js) que chama addLang(código, nome, {"texto em português":"translation"}). Texto sem tradução cai no português.
+//   __("Nível {0}!",n)      parâmetros {0}, {1}...
+//   "{0} item": n=>...      valor-função no arquivo do idioma = plural/gênero sob medida
+//   N_("Cobre")             só marca o texto para a extração (dados guardados em português no save, traduzidos ao exibir)
+//   data-i18n / data-i18n-attr  no index.html: traduz o conteúdo / os atributos (title, aria-label, placeholder) do elemento
+// Adicionar um idioma:  python tools/i18n.py novo fr  ->  cria src/0-idiomas/30-fr.js com todas as chaves; traduza os valores e rode tools/build.py.
+// Conferir o que falta:  python tools/i18n.py check
+const LANGS={},LANG_KEY="cenoural-lang",LANG_SRC="pt-BR";
+let LANG=LANG_SRC;
+const i18nMiss=new Set(),langHooks=[];
+function addLang(code,name,dict,opt){LANGS[code]=Object.assign({code,name,dict:dict||{},dec:","},opt)}
+const N_=s=>s;
+function __(s,...a){
+ const L=LANGS[LANG];let r=L.dict[s];
+ if(r===undefined||r===""){if(LANG!==LANG_SRC)i18nMiss.add(s);r=s}
+ if(typeof r==="function")return r(...a);
+ return a.length?r.replace(/\{(\d+)\}/g,(m,i)=>a[i]!==undefined?a[i]:m):r;
+}
+const ndec=x=>String(x).replace(".",LANGS[LANG].dec);   // separador decimal do idioma (vírgula no português)
+const onLang=f=>{langHooks.push(f)};
+const pickLang=c=>{c=String(c||"").toLowerCase();const ks=Object.keys(LANGS);return ks.find(k=>k.toLowerCase()===c)||ks.find(k=>k.toLowerCase().split("-")[0]===c.split("-")[0])};
+function detectLang(){   // ?lang=en  >  escolha salva  >  idioma do navegador  >  português
+ try{const q=pickLang(new URLSearchParams(location.search).get("lang"));if(q)return q}catch(e){}
+ try{const s=localStorage.getItem(LANG_KEY);if(s&&LANGS[s])return s}catch(e){}
+ for(const l of navigator.languages||[navigator.language]){const p=pickLang(l);if(p)return p}
+ return LANG_SRC;
+}
+function applyStatic(){
+ document.querySelectorAll("[data-i18n]").forEach(e=>{if(e._k===undefined)e._k=e.innerHTML.trim().replace(/\s+/g," ");e.innerHTML=__(e._k)});
+ document.querySelectorAll("[data-i18n-attr]").forEach(e=>{if(!e._ka)e._ka=e.dataset.i18nAttr.split(",").map(a=>[a,e.getAttribute(a)]);e._ka.forEach(([a,k])=>e.setAttribute(a,__(k)))});
+}
+// Botões de idioma: cada [data-langs] vira uma fileira com um botão por idioma registrado (o nome aparece no próprio idioma).
+function langButtons(){
+ document.querySelectorAll("[data-langs]").forEach(box=>{box.innerHTML="";
+  for(const c in LANGS){const b=document.createElement("button");b.type="button";b.dataset.lang=c;b.lang=c;b.innerHTML="<b></b><span></span>";b.firstChild.textContent=c.split("-")[0].toUpperCase();b.lastChild.textContent=LANGS[c].name;b.classList.toggle("on",c===LANG);b.onclick=()=>setLang(c,true);box.appendChild(b)}});
+}
+// Menu suspenso de idioma ([data-langmenu], usado na tela inicial): um botão com o idioma atual que abre a lista dos idiomas registrados.
+const GLOBE='<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></g></svg>';
+function closeLangMenus(){document.querySelectorAll(".langpick.open").forEach(x=>{x.classList.remove("open");x.firstChild.setAttribute("aria-expanded","false")})}
+document.addEventListener("click",closeLangMenus);
+document.addEventListener("keydown",e=>{const o=document.querySelector(".langpick.open");if(e.key==="Escape"&&o){e.stopPropagation();closeLangMenus();o.firstChild.focus()}},true);
+function langMenus(){
+ document.querySelectorAll("[data-langmenu]").forEach(box=>{
+  box.classList.add("langpick");box.innerHTML="";
+  const btn=document.createElement("button"),list=document.createElement("div");
+  btn.type="button";btn.className="lp-btn";btn.setAttribute("aria-haspopup","listbox");btn.setAttribute("aria-expanded","false");
+  list.className="lp-list";list.setAttribute("role","listbox");
+  const close=()=>{box.classList.remove("open");btn.setAttribute("aria-expanded","false")};
+  btn.onclick=e=>{e.stopPropagation();btn.setAttribute("aria-expanded",box.classList.toggle("open"))};
+  for(const c in LANGS){const b=document.createElement("button");b.type="button";b.dataset.lang=c;b.lang=c;b.setAttribute("role","option");
+   b.innerHTML="<b></b><span></span>";b.firstChild.textContent=c.split("-")[0].toUpperCase();b.lastChild.textContent=LANGS[c].name;
+   b.onclick=e=>{e.stopPropagation();setLang(c,true);close();btn.focus()};list.appendChild(b)}
+  box.append(btn,list);
+ });
+ langMenuLabel();
+}
+function langMenuLabel(){document.querySelectorAll(".lp-btn").forEach(b=>{b.innerHTML=GLOBE+"<span>Idioma / Language</span><em></em>";b.lastChild.textContent=LANGS[LANG].name})}
+function setLang(code,keep){
+ if(!LANGS[code])return;
+ LANG=code;document.documentElement.lang=code;
+ if(keep){try{localStorage.setItem(LANG_KEY,code)}catch(e){}}
+ applyStatic();
+ document.querySelectorAll("[data-lang]").forEach(b=>{b.classList.toggle("on",b.dataset.lang===code);b.setAttribute("aria-selected",b.dataset.lang===code)});langMenuLabel();
+ langHooks.forEach(f=>f());
+}
+window.__textosSemTraducao=()=>[...i18nMiss];   // no console: o que o idioma atual ainda não traduz
+
+// ===== 0-idiomas/10-pt-BR.js — Português (idioma de origem: os textos do código já estão em português, então o dicionário fica vazio) =====
+addLang("pt-BR","Português",{});
+
+// ===== 0-idiomas/20-en.js — English (traduza os valores; vazio = cai no português; dec = separador decimal) =====
+addLang("en","English",{
+// --- index.html
+"OURO":"GOLD",
+"PROFUNDIDADE":"DEPTH",
+"ENERGIA":"ENERGY",
+"Experiência do nível":"Level experience",
+"Área de escavação":"Digging area",
+"Nível":"Level",
+"Progresso dentro da camada atual":"Progress through the current layer",
+"Mapa":"Map",
+"Pausa":"Pause",
+"Poderes de renascimento (comprados com fragmentos), Renascer, estatísticas e conquistas.":"Rebirth powers (bought with shards), Rebirth, stats and achievements.",
+"Poderes de renascimento":"Rebirth powers",
+"fragmentos":"shards",
+"Renascer":"Rebirth",
+"Estatísticas":"Statistics",
+"Conquistas":"Achievements",
+"Como jogar, controles, som e save. Toque num título para abrir ou fechar a seção.":"How to play, controls, sound and save. Tap a title to open or close its section.",
+"Como jogar":"How to play",
+"<b>Cave:</b> escolha a direção (<kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> ou setas) e segure <kbd>Espaço</kbd>.":"<b>Dig:</b> choose a direction (<kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> or arrow keys) and hold <kbd>Space</kbd>.",
+"<b>Junte:</b> cada bloco dá ouro e alguns soltam minérios, que vão para a mochila.":"<b>Collect:</b> every block gives gold and some drop ores, which go into your backpack.",
+"<b>Venda:</b> suba até a superfície (ou use o teleporte <kbd>Q</kbd>) e entregue a mochila no baú.":"<b>Sell:</b> climb back to the surface (or use the teleport <kbd>Q</kbd>) and hand your backpack over at the chest.",
+"<b>Melhore:</b> gaste o ouro na mesa de trabalho e na loja para descer mais a cada vez.":"<b>Upgrade:</b> spend your gold at the workbench and the shop to get deeper on every run.",
+"<b>Cuidado com a energia:</b> cavar e voar gastam energia. Se acabar, você perde a mochila e volta à superfície.":"<b>Watch your energy:</b> digging and flying use energy. If it runs out, you lose your backpack and return to the surface.",
+"<b>Renasça:</b> depois de 100 m, Renascer troca o progresso da vida por fragmentos, que compram poderes permanentes na aba Poder. Baús raros também podem dar fragmentos.":"<b>Be reborn:</b> after 100 m, Rebirth trades your run's progress for shards, which buy permanent powers in the Power tab. Rare chests can also give shards.",
+"Teclado":"Keyboard",
+"<kbd>Espaço</kbd>":"<kbd>Space</kbd>",
+"Segure para cavar. Perto do baú, da fornalha, do quadro ou do caça-níquel, usa o objeto":"Hold to dig. Next to the chest, furnace, board or slot machine, it uses that object",
+"Mover e escolher a direção (W = cima). Segure ↓ num buraco já cavado para cair de graça":"Move and pick a direction (W = up). Hold ↓ over a dug hole to fall for free",
+"Correr":"Run",
+"Dinamite":"Dynamite",
+"Trocar o tipo de dinamite (vale com 2 ou mais tipos)":"Switch dynamite type (works with 2 or more types)",
+"Teleporte (compre em Melhorias)":"Teleport (buy it in Upgrades)",
+"Fúria do Minerador (libera aos 50 m) e Escavação Frenética (aos 150 m)":"Miner's Fury (unlocks at 50 m) and Frenzied Digging (at 150 m)",
+"Abrir e fechar o mapa. Com ele aberto, a roda do mouse dá zoom":"Open and close the map. While it's open, the mouse wheel zooms",
+"Marcador no mapa (aperte de novo no mesmo lugar para tirar)":"Map marker (press again on the same spot to remove it)",
+"Som ligado/desligado":"Sound on/off",
+"Pausa. Com o mapa aberto, Esc fecha o mapa":"Pause. With the map open, Esc closes the map",
+"Zoom do jogo":"Game zoom",
+"Mouse":"Mouse",
+"<kbd>Clique</kbd>":"<kbd>Click</kbd>",
+"Num bloco ao lado do personagem: muda a direção":"On a block next to the character: changes direction",
+"No baú, na fornalha, no quadro ou no caça-níquel (estando perto): usa":"On the chest, furnace, board or slot machine (when close): uses it",
+"Nos ícones da barra: usa a dinamite, a habilidade, o teleporte, a comida ou a poção":"On the bar icons: uses dynamite, the skill, teleport, food or potion",
+"<kbd>Botão direito</kbd>":"<kbd>Right click</kbd>",
+"No ícone da dinamite: troca o tipo":"On the dynamite icon: switches type",
+"Celular":"Mobile",
+"Mover e escolher a direção":"Move and pick a direction",
+"<kbd>Minerar</kbd>":"<kbd>Mine</kbd>",
+"Segure para cavar (também usa baú, fornalha, quadro e caça-níquel quando perto)":"Hold to dig (also uses the chest, furnace, board and slot machine when close)",
+"<kbd>Ícones</kbd>":"<kbd>Icons</kbd>",
+"Toque nos ícones da barra para dinamite, habilidades, teleporte, comida e poções":"Tap the bar icons for dynamite, skills, teleport, food and potions",
+"<kbd>Mapa</kbd> <kbd>Pausa</kbd>":"<kbd>Map</kbd> <kbd>Pause</kbd>",
+"Botões no topo do painel. Com o mapa aberto, tocar na tela fecha":"Buttons at the top of the panel. With the map open, tapping the screen closes it",
+"Telas especiais":"Special screens",
+"Caça-níquel":"Slot machine",
+"<kbd>←</kbd> <kbd>→</kbd> ou <kbd>A</kbd> <kbd>D</kbd> mudam a aposta, <kbd>Espaço</kbd> ou <kbd>Enter</kbd> gira, <kbd>Esc</kbd> sai":"<kbd>←</kbd> <kbd>→</kbd> or <kbd>A</kbd> <kbd>D</kbd> change the bet, <kbd>Space</kbd> or <kbd>Enter</kbd> spins, <kbd>Esc</kbd> exits",
+"Baú do subsolo":"Underground chest",
+"<kbd>Espaço</kbd>, <kbd>Enter</kbd> ou <kbd>Esc</kbd> avançam":"<kbd>Space</kbd>, <kbd>Enter</kbd> or <kbd>Esc</kbd> advance",
+"Subir de nível":"Level up",
+"<kbd>W A S D</kbd> ou setas escolhem, <kbd>Espaço</kbd> ou <kbd>Enter</kbd> confirma. Em 30 s o jogo escolhe por você":"<kbd>W A S D</kbd> or arrow keys choose, <kbd>Space</kbd> or <kbd>Enter</kbd> confirms. After 30 s the game picks for you",
+"<kbd>W</kbd> <kbd>S</kbd> navegam, <kbd>Esc</kbd> ou <kbd>P</kbd> continuam":"<kbd>W</kbd> <kbd>S</kbd> navigate, <kbd>Esc</kbd> or <kbd>P</kbd> resume",
+"Sem energia":"Out of energy",
+"<kbd>Espaço</kbd>, <kbd>Enter</kbd> ou <kbd>Esc</kbd> voltam a cavar":"<kbd>Space</kbd>, <kbd>Enter</kbd> or <kbd>Esc</kbd> go back to digging",
+"Superfície":"Surface",
+"Da esquerda para a direita:":"From left to right:",
+"<b>Cama:</b> salva o jogo e abre este menu.":"<b>Bed:</b> saves the game and opens this menu.",
+"<b>Mesa de trabalho:</b> compre melhorias.":"<b>Workbench:</b> buy upgrades.",
+"<b>Fornalha:</b> leve os minérios, ela refina com o tempo e vende sozinha por mais ouro. Melhore a velocidade na mesa.":"<b>Furnace:</b> drop off your ores; it refines them over time and sells them on its own for extra gold. Upgrade its speed at the workbench.",
+"<b>Buraco:</b> a entrada da mina.":"<b>Hole:</b> the mine entrance.",
+"<b>Caça-níquel:</b> aposte uma parte do seu ouro. A casa ganha no longo prazo.":"<b>Slot machine:</b> bet part of your gold. The house wins in the long run.",
+"<b>Baú:</b> fique ao lado dele e clique (ou aperte <kbd>Espaço</kbd>) para vender a mochila.":"<b>Chest:</b> stand next to it and click (or press <kbd>Space</kbd>) to sell your backpack.",
+"<b>Loja:</b> dinamite e comida de energia.":"<b>Shop:</b> dynamite and energy food.",
+"<b>Quadro de contratos:</b> missões que pagam ouro e XP.":"<b>Contract board:</b> missions that pay gold and XP.",
+"Energia":"Energy",
+"Subir com a mochila a jato gasta mais que cavar.":"Flying up with the jetpack costs more than digging.",
+"Comece a subir quando a energia chegar a 25%.":"Start heading up when your energy reaches 25%.",
+"O teleporte leva ao baú sem gastar energia. A <b>Poção de teleporte</b> (só cai de baús) faz o mesmo uma vez, sem precisar da melhoria.":"Teleport takes you to the chest without spending energy. The <b>Teleport potion</b> (only found in chests) does the same once, with no upgrade needed.",
+"Comida de energia (da loja) fica na barra e recupera energia no subsolo.":"Energy food (from the shop) sits on the bar and restores energy underground.",
+"Na superfície a energia se recupera sozinha.":"On the surface, energy recovers by itself.",
+"Bom saber":"Good to know",
+"Veios de <b>pedra dura</b> só quebram com dinamite.":"<b>Hard stone</b> veins only break with dynamite.",
+"<b>Veios de minério</b> são raros: manchas de blocos brilhantes que rendem vários minérios cada.":"<b>Ore veins</b> are rare: patches of shiny blocks that each yield several ores.",
+"Há <b>baús raros</b> escondidos no subsolo, e o visual mostra a raridade: madeira (comum), ferro (incomum), ouro (raro), roxo (épico) e obsidiana (lendário). Dão ouro, XP, itens, minérios, fragmentos, poções de teleporte e, às vezes, um bônus de melhoria como os de subir de nível.":"There are <b>rare chests</b> hidden underground, and their look shows the rarity: wood (common), iron (uncommon), gold (rare), purple (epic) and obsidian (legendary). They give gold, XP, items, ores, shards, teleport potions and, sometimes, an upgrade bonus like the level-up ones.",
+"De <b>noite</b> a superfície escurece (o vagalume brilha mais) e descer dá um pouco mais de XP.":"At <b>night</b> the surface gets dark (the firefly glows brighter) and descending gives a bit more XP.",
+"<b>Estrelas cadentes</b> aparecem raramente à noite e dão ouro ou sorte por um tempo.":"<b>Shooting stars</b> rarely appear at night and grant gold or luck for a while.",
+"Cada mundo novo (jogo novo ou Renascer) usa uma semente aleatória.":"Every new world (new game or Rebirth) uses a random seed.",
+"Sobre o save":"About the save",
+"Seu progresso fica salvo <b>só neste navegador e neste aparelho</b>. Se você limpar os dados do navegador, usar aba anônima ou trocar de aparelho, o progresso some. Para guardar ou levar para outro lugar, use <b>Exportar save</b> abaixo e guarde o texto.":"Your progress is saved <b>only in this browser on this device</b>. If you clear your browser data, use a private window or switch devices, your progress is gone. To keep it or move it elsewhere, use <b>Export save</b> below and store the text.",
+"Créditos":"Credits",
+"Criado por <b>João Pedro Borges</b> com auxílio de <b>inteligência artificial</b> (Claude, da Anthropic): parte do código e do conteúdo do jogo foi gerada com IA.<br>Fonte: Silkscreen (Jason Kottke, licença SIL OFL).":"Created by <b>João Pedro Borges</b> with the help of <b>artificial intelligence</b> (Claude, by Anthropic): part of the game's code and content was generated with AI.<br>Font: Silkscreen (Jason Kottke, SIL OFL license).",
+"© 2026 João Pedro Borges. Todos os direitos reservados.":"© 2026 João Pedro Borges. All rights reserved.",
+"Áudio":"Audio",
+"Música":"Music",
+"Efeitos":"Effects",
+"Ambiente":"Ambience",
+"Texto do save: exporte ou cole aqui para importar":"Save text: export, or paste here to import",
+"Exportar save":"Export save",
+"Importar save":"Import save",
+"Apagar progresso":"Erase progress",
+"Jogar":"Play",
+"© 2026 João Pedro Borges · Todos os direitos reservados<br>Feito com auxílio de inteligência artificial · Seu progresso fica salvo só neste navegador":"© 2026 João Pedro Borges · All rights reserved<br>Made with the help of artificial intelligence · Your progress is saved only in this browser",
+// --- 1-nucleo/00-balanceamento.js
+"Comum":"Common",
+"Incomum":"Uncommon",
+"Raro":"Rare",
+"Épico":"Epic",
+"Lendário":"Legendary",
+// --- 1-nucleo/02-camadas-minerios.js
+"Terra":"Dirt",
+"Argila":"Clay",
+"Areia e cascalho":"Sand and gravel",
+"Calcário":"Limestone",
+"Arenito":"Sandstone",
+"Xisto":"Shale",
+"Carvão mineral":"Coal",
+"Granito":"Granite",
+"Basalto":"Basalt",
+"Gnaisse":"Gneiss",
+"Quartzito":"Quartzite",
+"Mármore":"Marble",
+"Magma solidificado":"Solidified magma",
+"Cristais profundos":"Deep crystals",
+"Vidro vulcânico":"Volcanic glass",
+"Rocha-mãe":"Bedrock",
+"Madeira":"Wood",
+"Pedra":"Stone",
+"Ferro":"Iron",
+"Bronze":"Bronze",
+"Aço":"Steel",
+"Ouro":"Gold",
+"Diamante":"Diamond",
+"Mithril":"Mithril",
+"Adamante":"Adamantite",
+"Obsidiana":"Obsidian",
+"Titânio":"Titanium",
+"Estelar":"Stellar",
+"Cósmica":"Cosmic",
+"Abissal":"Abyssal",
+"Primordial":"Primordial",
+"Cobre":"Copper",
+"Rubi":"Ruby",
+"Esmeralda":"Emerald",
+"Safira":"Sapphire",
+"Ametista":"Amethyst",
+"Topázio":"Topaz",
+"Opala negra":"Black opal",
+"Cristal do abismo":"Abyss crystal",
+// --- 1-nucleo/04-formulas.js
+"Explode uma área de raio {0}. Gasta {1} blocos de energia; recarga de {2} s. Também quebra os veios de pedra dura":"Blasts an area of radius {0}. Costs {1} blocks of energy; {2} s cooldown. Also breaks hard stone veins",
+"Explode uma área de raio {0}. Mais forte que a anterior; gasta {1} blocos de energia; recarga de {2} s. Também quebra os veios de pedra dura":"Blasts an area of radius {0}. Stronger than the previous one; costs {1} blocks of energy; {2} s cooldown. Also breaks hard stone veins",
+"Dinamite reforçada":"Reinforced dynamite",
+"Dinamite pesada":"Heavy dynamite",
+"Carga de nitro":"Nitro charge",
+"Bomba de demolição":"Demolition bomb",
+"Cenourinha":"Little carrot",
+"Recupera 10% da energia máxima":"Restores 10% of max energy",
+"Sopa de cogumelo":"Mushroom soup",
+"Recupera 25% da energia máxima":"Restores 25% of max energy",
+"Poção de energia":"Energy potion",
+"Recupera 50% da energia máxima":"Restores 50% of max energy",
+"Poção de teleporte":"Teleport potion",
+"Uso único: leva ao baú sem gastar energia (na superfície, volta ao ponto de onde saiu). Só cai de baús":"Single use: takes you to the chest without spending energy (on the surface, returns to where you left from). Only found in chests",
+// --- 1-nucleo/05-audio-avisos.js
+"Clima: {0}":"Weather: {0}",
+"Estação: {0}":"Season: {0}",
+"Cenoura! Ouro e energia infinitos":"Carrot! Infinite gold and energy",
+"Cenoura desligada":"Carrot off",
+// --- 2-sistemas/01-melhorias.js
+"{0} blocos":"{0} blocks",
+"Afiar picareta":"Sharpen pickaxe",
+"+12% de dano da picareta por nível":"+12% pickaxe damage per level",
+"Picareta ampla":"Wide pickaxe",
+"Quebra {0} bloco(s) de cada lado do alvo, de graça (cada nível soma +1 para os dois lados)":"Breaks {0} block(s) on each side of the target for free (each level adds +1 on both sides)",
+"Velocidade de escavação":"Digging speed",
+"+5% de velocidade ao segurar a escavação por nível":"+5% speed while holding dig, per level",
+"Chance de golpe crítico":"Critical hit chance",
+"+{0}% de chance de golpe crítico (dano x3) por nível, até {1}%":"+{0}% critical hit chance (x3 damage) per level, up to {1}%",
+"Energia máxima":"Max energy",
+"+30 de energia máxima por nível":"+30 max energy per level",
+"Economia de energia":"Energy saving",
+"-5% de gasto de energia ao cavar e voar por nível (cumulativo: cada nível multiplica por 0,95). Gasto atual: {0}%":"-5% energy spent when digging and flying per level (cumulative: each level multiplies by 0.95). Current spend: {0}%",
+"Eficiência da mochila a jato":"Jetpack efficiency",
+"-5% da energia gasta ao subir com o jato por nível (cumulativo). Gasto atual: {0}%":"-5% of the energy spent flying up with the jetpack per level (cumulative). Current spend: {0}%",
+"Velocidade da mochila a jato":"Jetpack speed",
+"+10% de velocidade ao subir com o jato por nível (subir continua gastando energia)":"+10% speed when flying up with the jetpack per level (flying up still spends energy)",
+"Resistência à lava":"Lava resistance",
+"-10% do dano da lava por nível (cumulativo). Lava aqui: {0}% do dano normal (próximo nível: {1}%)":"-10% lava damage per level (cumulative). Lava here: {0}% of normal damage (next level: {1}%)",
+"-10% do dano da lava por nível (cumulativo). Lava aqui: {0}% do dano normal":"-10% lava damage per level (cumulative). Lava here: {0}% of normal damage",
+"Escavação automática":"Auto digging",
+"Quebra sozinho o bloco à frente com +0,25 golpe por segundo por nível. Gasta metade da energia, mas é mais fraco que cavar manualmente":"Automatically breaks the block ahead at +0.25 hits per second per level. Spends half the energy, but is weaker than digging by hand",
+"Força da escavação automática":"Auto-dig power",
+"+10% de dano dos golpes automáticos por nível":"+10% damage on automatic hits per level",
+"Sorte para ouro e minérios":"Luck for gold and ores",
+"+12% de ouro e +2% de chance de minério por nível":"+12% gold and +2% ore chance per level",
+"Ganho de experiência":"Experience gain",
+"+10% de experiência por nível":"+10% experience per level",
+"Duração das habilidades":"Skill duration",
+"+5% de duração da Fúria e da Escavação Frenética por nível":"+5% duration of Fury and Frenzied Digging per level",
+"Potência da Fúria do Minerador":"Miner's Fury power",
+"Dano da Fúria: x{0} (próximo nível: x{1}). Recarga: {2} s":"Fury damage: x{0} (next level: x{1}). Cooldown: {2} s",
+"Dano da Fúria: x{0}. Recarga: {1} s":"Fury damage: x{0}. Cooldown: {1} s",
+"Potência da Escavação Frenética":"Frenzied Digging power",
+"Velocidade da Frenética: x{0} (próximo nível: x{1}). Recarga: {2} s":"Frenzy speed: x{0} (next level: x{1}). Cooldown: {2} s",
+"Velocidade da Frenética: x{0}. Recarga: {1} s":"Frenzy speed: x{0}. Cooldown: {1} s",
+"Lanterna":"Lantern",
+"Um pouco mais de luz na escuridão. Luz extra: {0} (próximo nível: {1})":"A bit more light in the dark. Extra light: {0} (next level: {1})",
+"Um pouco mais de luz na escuridão. Luz extra: {0}":"A bit more light in the dark. Extra light: {0}",
+"Vagalume companheiro":"Firefly companion",
+"Um vagalume te segue e ilumina o escuro. Luz extra: {0} (próximo nível: {1})":"A firefly follows you and lights up the dark. Extra light: {0} (next level: {1})",
+"Um vagalume te segue e ilumina o escuro. Luz extra: {0}":"A firefly follows you and lights up the dark. Extra light: {0}",
+"Velocidade da fornalha":"Furnace speed",
+"Refina {0} minérios por segundo (próximo nível: {1}). O refinado vale +{2}% de ouro":"Refines {0} ores per second (next level: {1}). Refined ore is worth +{2}% gold",
+"Refina {0} minérios por segundo. O refinado vale +{1}% de ouro":"Refines {0} ores per second. Refined ore is worth +{1}% gold",
+"Relógio":"Clock",
+"Mostra na barra do topo um relógio de sol e lua com a hora do dia (o dia dura {0} min)":"Shows a sun-and-moon clock with the time of day on the top bar (a day lasts {0} min)",
+"Relógio comprado: veja a hora do dia na barra do topo (passe o mouse para ver o período)":"Clock bought: see the time of day on the top bar (hover to see the period)",
+"Teleporte":"Teleport",
+"Desbloqueia o teleporte: leva ao baú sem gastar energia e, usado na superfície, volta ao ponto de onde saiu":"Unlocks teleport: takes you to the chest without spending energy and, used on the surface, returns to where you left from",
+"Recarga do teleporte: {0} s ({1} s no próximo nível)":"Teleport cooldown: {0} s ({1} s at the next level)",
+"Recarga do teleporte: {0} s":"Teleport cooldown: {0} s",
+"Nova picareta: {0}":"New pickaxe: {0}",
+"Sem {0}: compre na loja (na superfície)":"No {0}: buy some at the shop (on the surface)",
+"Na superfície a energia já se recupera sozinha":"On the surface, energy recovers by itself",
+"Energia já está cheia":"Energy is already full",
+"{0}: +{1} de energia":"{0}: +{1} energy",
+// --- 2-sistemas/02-energia-mochila.js
+"Compre <b>comida de energia</b> na loja: ela fica na barra ao lado das habilidades e recupera energia no subsolo.":"Buy <b>energy food</b> at the shop: it sits on the bar next to your skills and restores energy underground.",
+"Melhore a <b>Energia máxima</b> na mesa de trabalho para ir mais fundo em cada descida.":"Upgrade your <b>Max energy</b> at the workbench to go deeper on every descent.",
+"O <b>Teleporte</b> leva ao baú sem gastar energia: ótimo para voltar com a mochila cheia.":"<b>Teleport</b> takes you to the chest without spending energy: great for coming back with a full backpack.",
+"Comece a subir quando a energia chegar a 25%: subir com a mochila a jato gasta mais.":"Start heading up when your energy reaches 25%: flying up with the jetpack costs more.",
+"SEM ENERGIA":"OUT OF ENERGY",
+"Você apagou e a mochila ficou para trás.":"You passed out and your backpack was left behind.",
+"Você apagou e voltou à superfície.":"You passed out and returned to the surface.",
+"PROFUNDIDADE · {0}":"DEPTH · {0}",
+"RECORDE":"RECORD",
+"OURO PERDIDO":"GOLD LOST",
+"ITENS PERDIDOS":"ITEMS LOST",
+"Voltar a cavar":"Back to digging",
+"Você apagou! Perdeu {0} itens ({1} de ouro)":"You passed out! Lost {0} items ({1} gold)",
+"Você apagou e voltou à superfície":"You passed out and returned to the surface",
+"Vendido: +{0}":"Sold: +{0}",
+"Mochila vazia: nada para vender.":"Backpack empty: nothing to sell.",
+"Sem Poção de teleporte":"No Teleport potion",
+"Teleporte: use no subsolo para subir ao baú":"Teleport: use it underground to go up to the chest",
+// --- 2-sistemas/03-nivel-xp.js
+"Dano da picareta":"Pickaxe damage",
+"+15% de dano":"+15% damage",
+"Velocidade de ataque":"Attack speed",
+"+10% de velocidade ao minerar":"+10% speed while mining",
+"+10% de duração":"+10% duration",
+"Ouro extra":"Extra gold",
+"+12% de ouro":"+12% gold",
+"+8% de energia máxima":"+8% max energy",
+"Velocidade de movimento":"Movement speed",
+"+10% de velocidade":"+10% speed",
+"+10% de experiência":"+10% experience",
+"Rara":"Rare",
+"Épica":"Epic",
+"Lendária":"Legendary",
+"Nível {0}!":"Level {0}!",
+"Nível {0}":"Level {0}",
+"Escolha uma melhoria · {0} s":"Choose an upgrade · {0} s",
+"nv {0} → {1}":"lv {0} → {1}",
+// --- 2-sistemas/04-habilidades.js
+"Herança de ouro":"Gold inheritance",
+"Começa cada vida com 400 x nível² de ouro":"Start each life with 400 x level² gold",
+"Picareta herdada":"Inherited pickaxe",
+"Começa cada vida com a picareta do tipo de nível igual ao nível deste poder":"Start each life with the pickaxe tier equal to this power's level",
+"Veia eterna":"Eternal vein",
+"+8% de ouro por nível":"+8% gold per level",
+"Músculos do abismo":"Abyss muscles",
+"+8% de dano da picareta por nível":"+8% pickaxe damage per level",
+"Fôlego eterno":"Eternal breath",
+"+6% de energia máxima por nível":"+6% max energy per level",
+"Pulmões de jato":"Jet lungs",
+"-6% da energia gasta ao subir com o jato por nível":"-6% of the energy spent flying up with the jetpack per level",
+"Faro de minério":"Ore nose",
+"+2% de chance de minério por nível":"+2% ore chance per level",
+"Sabedoria antiga":"Ancient wisdom",
+"Fúria do Minerador":"Miner's Fury",
+"Dano maior":"More damage",
+"Escavação Frenética":"Frenzied Digging",
+"Cava mais rápido":"Digs faster",
+"Dano x{0} por {1} s (recarga {2} s)":"Damage x{0} for {1} s ({2} s cooldown)",
+"Cava x{0} mais rápido por {1} s (recarga {2} s)":"Digs x{0} faster for {1} s ({2} s cooldown)",
+"Habilidade ativada: {0}":"Skill activated: {0}",
+"Dinamite escolhida: {0}":"Dynamite selected: {0}",
+"Sem dinamite: compre na loja (na superfície)":"No dynamite: buy some at the shop (on the surface)",
+"Nada para explodir aqui":"Nothing to blow up here",
+"{0}: {1} blocos · +{2}":"{0}: {1} blocks · +{2}",
+"Primeiros passos":"First steps",
+"Chegue a 10 m":"Reach 10 m",
+"Subsolo":"Underground",
+"50 m":"50 m",
+"Centenário":"Centennial",
+"100 m":"100 m",
+"Abismo":"Abyss",
+"300 m":"300 m",
+"Coração do abismo":"Heart of the abyss",
+"Chegue ao fundo (1500 m)":"Reach the bottom (1500 m)",
+"Garimpeiro":"Prospector",
+"50 minérios":"50 ores",
+"Mina de ouro":"Gold mine",
+"500 minérios":"500 ores",
+"Magnata":"Tycoon",
+"1M de ouro no total":"1M gold in total",
+"Primeira venda":"First sale",
+"Venda itens no baú":"Sell items at the chest",
+"Quase lá":"Almost there",
+"Apague de energia uma vez":"Run out of energy once",
+"Picareta de ouro":"Golden pickaxe",
+"Compre a picareta de Ouro":"Buy the Gold pickaxe",
+"Túnel largo":"Wide tunnel",
+"Picareta ampla no nível máximo":"Wide pickaxe at max level",
+"Renascido":"Reborn",
+"Use Renascer":"Use Rebirth",
+"Cavador de verdade":"Real digger",
+"Chegue a 200 m":"Reach 200 m",
+"Meia-descida":"Halfway down",
+"500 m":"500 m",
+"Metade do caminho":"Halfway there",
+"750 m":"750 m",
+"Mil metros":"A thousand meters",
+"1000 m":"1000 m",
+"Calor do magma":"Magma heat",
+"1200 m":"1200 m",
+"Beira do fim":"Edge of the end",
+"1400 m":"1400 m",
+"Colecionador":"Collector",
+"Descubra 5 minérios diferentes":"Discover 5 different ores",
+"Catálogo completo":"Complete catalog",
+"Descubra todos os minérios":"Discover every ore",
+"Brilho de diamante":"Diamond shine",
+"Encontre um Diamante":"Find a Diamond",
+"Luz do abismo":"Light of the abyss",
+"Encontre um Cristal do abismo":"Find an Abyss crystal",
+"Veia inesgotável":"Endless vein",
+"5000 minérios":"5000 ores",
+"Bilionário":"Billionaire",
+"1B de ouro no total":"1B gold in total",
+"Trilionário":"Trillionaire",
+"1T de ouro no total":"1T gold in total",
+"Britadeira":"Jackhammer",
+"Quebre 1000 blocos":"Break 1000 blocks",
+"Máquina de escavar":"Digging machine",
+"Quebre 100 mil blocos":"Break 100 thousand blocks",
+"Ferreiro":"Blacksmith",
+"Compre a picareta de Ferro":"Buy the Iron pickaxe",
+"Mãos de diamante":"Diamond hands",
+"Compre a picareta de Diamante":"Buy the Diamond pickaxe",
+"Lenda das picaretas":"Pickaxe legend",
+"Tenha a picareta Primordial":"Own the Primordial pickaxe",
+"Ao máximo":"Maxed out",
+"Deixe uma melhoria no nível máximo":"Max out one upgrade",
+"Arsenal completo":"Full arsenal",
+"Todas as melhorias no nível máximo":"Max out all upgrades",
+"Teleportado":"Teleported",
+"Desbloqueie o teleporte":"Unlock teleport",
+"Teimoso":"Stubborn",
+"Apague de energia 10 vezes":"Run out of energy 10 times",
+"Banquete":"Feast",
+"Coma 20 itens de energia":"Eat 20 energy items",
+"Pavio curto":"Short fuse",
+"Use 10 dinamites":"Use 10 dynamites",
+"Demolidor":"Demolisher",
+"Use 100 dinamites":"Use 100 dynamites",
+"Viajante":"Traveler",
+"Use o teleporte 10 vezes":"Use teleport 10 times",
+"Pedra no sapato":"Rock in your shoe",
+"Quebre 20 pedras duras":"Break 20 hard stones",
+"Veterano":"Veteran",
+"Chegue ao nível 10":"Reach level 10",
+"Experiente":"Experienced",
+"Nível 25":"Level 25",
+"Nível 50":"Level 50",
+"Ciclo":"Cycle",
+"Renasça 3 vezes":"Be reborn 3 times",
+"Eterno":"Eternal",
+"Renasça 10 vezes":"Be reborn 10 times",
+"Comerciante":"Merchant",
+"Venda no baú 25 vezes":"Sell at the chest 25 times",
+"Atacadista":"Wholesaler",
+"Venda no baú 250 vezes":"Sell at the chest 250 times",
+"Boa noite":"Good night",
+"Salve o jogo na cama":"Save the game at the bed",
+"Sono pesado":"Deep sleeper",
+"Deite na cama 20 vezes":"Lie in the bed 20 times",
+"Cartógrafo":"Cartographer",
+"Coloque um marcador no mapa":"Place a map marker",
+"Companhia":"Company",
+"Chame o vagalume":"Call the firefly",
+"Despensa cheia":"Full pantry",
+"Tenha 99 de algum item da loja":"Have 99 of any shop item",
+"Fornalha acesa":"Furnace lit",
+"Refine 1 minério na fornalha":"Refine 1 ore in the furnace",
+"Mestre ferreiro":"Master smith",
+"Refine 1000 minérios":"Refine 1000 ores",
+"Empreiteiro":"Contractor",
+"Entregue 10 contratos":"Deliver 10 contracts",
+"Na sorte":"Lucky",
+"Jogue na mesa de apostas":"Play at the slot machine",
+"Viciado":"Addicted",
+"Jogue 100 vezes na mesa de apostas":"Play the slot machine 100 times",
+"Caçador de tesouros":"Treasure hunter",
+"Abra um baú no subsolo":"Open an underground chest",
+"Baú épico":"Epic chest",
+"Abra um baú Épico ou melhor":"Open an Epic chest or better",
+"Sorte lendária":"Legendary luck",
+"Abra um baú Lendário":"Open a Legendary chest",
+"Caça-baús":"Chest hunter",
+"Abra 10 baús":"Open 10 chests",
+"Rei dos baús":"King of chests",
+"Abra 100 baús":"Open 100 chests",
+"Coleção completa":"Full collection",
+"Abra um baú de cada raridade":"Open one chest of each rarity",
+"Chuva de ouro":"Golden rain",
+"Abra 5 baús Lendários":"Open 5 Legendary chests",
+"Presente dos baús":"Chest gifts",
+"Ganhe 10 bônus de melhoria de baús":"Get 10 upgrade bonuses from chests",
+"Colecionador de cacos":"Shard collector",
+"Ache 10 fragmentos em baús":"Find 10 shards in chests",
+"Viajante de bolso":"Pocket traveler",
+"Use 5 poções de teleporte":"Use 5 teleport potions",
+"Conquista: {0}":"Achievement: {0}",
+// --- 2-sistemas/05-noite-estrelas.js
+"Estrela cadente! Minérios x{0} por {1}s":"Shooting star! Ores x{0} for {1}s",
+"Estrela cadente! Ouro x{0} por {1}s":"Shooting star! Gold x{0} for {1}s",
+"O brilho da estrela se apagou":"The star's glow faded",
+"Noite · +{0}% XP":"Night · +{0}% XP",
+"Sorte estelar · minérios x{0}":"Star luck · ores x{0}",
+"Chuva de ouro · ouro x{0}":"Golden rain · gold x{0}",
+// --- 2-sistemas/06-fornalha.js
+"Fornalha: +{0} minérios":"Furnace: +{0} ores",
+"Fornalha carregada: {0} minérios · pronta em {1}":"Furnace loaded: {0} ores · ready in {1}",
+"Refinado: +{0}":"Refined: +{0}",
+"Fornalha: {0} minérios refinados · +{1} de ouro":"Furnace: {0} ores refined · +{1} gold",
+"Só há pedra comum na mochila: ela vai para o baú.":"Only plain stone in the backpack: it goes to the chest.",
+"Sem minérios na mochila para pôr na fornalha.":"No ores in the backpack to put in the furnace.",
+// --- 2-sistemas/07-estacoes.js
+"Primavera":"Spring",
+"Chegou a primavera!":"Spring has arrived!",
+"Verão":"Summer",
+"Chegou o verão!":"Summer has arrived!",
+"Outono":"Autumn",
+"Chegou o outono!":"Autumn has arrived!",
+"Inverno":"Winter",
+"Chegou o inverno!":"Winter has arrived!",
+// --- 2-sistemas/08-clima.js
+"Céu limpo":"Clear sky",
+"O tempo abriu":"The weather cleared up",
+"Nublado":"Cloudy",
+"O céu fechou":"The sky clouded over",
+"Chuva":"Rain",
+"Começou a chover":"It started to rain",
+"Tempestade":"Storm",
+"Tempestade chegando!":"A storm is coming!",
+"Neve":"Snow",
+"Começou a nevar":"It started to snow",
+"Neblina":"Fog",
+"A neblina chegou":"Fog rolled in",
+// --- 2-sistemas/10-contratos.js
+"Quebre {0} blocos a partir de {1} m":"Break {0} blocks from {1} m",
+"Quebre {0} blocos":"Break {0} blocks",
+"Colete {0} de {1} a partir de {2} m":"Collect {0} {1} from {2} m",
+"Colete {0} de {1}":"Collect {0} {1}",
+"Chegue a {0} m de profundidade":"Reach {0} m depth",
+"Contrato: +{0}":"Contract: +{0}",
+"{0} / {1} · recompensa {2} de ouro + XP":"{0} / {1} · reward {2} gold + XP",
+"Entregar":"Deliver",
+"Em andamento":"In progress",
+"Dispensar":"Dismiss",
+"Quadro de contratos":"Contract board",
+"Missões que pagam um bônus. Conta a partir do momento em que aparece aqui; blocos e minérios só valem na profundidade indicada.":"Missions that pay a bonus. Progress counts from the moment one appears here; blocks and ores only count at the stated depth.",
+"Nenhum contrato no quadro.":"No contracts on the board.",
+"Próximo contrato em <b id='ct-w'>{0}</b>":"Next contract in <b id='ct-w'>{0}</b>",
+"Fechar":"Close",
+// --- 2-sistemas/11-cassino.js
+"Cenoura":"Carrot",
+"Moeda":"Coin",
+"Cristal":"Crystal",
+"Estrela":"Star",
+"CAÇA-NÍQUEL":"SLOT MACHINE",
+"JACKPOT! {0} de ouro":"JACKPOT! {0} gold",
+"3 {0}s! +{1} de ouro":"3 {0}s! +{1} gold",
+"Par de {0}: +{1} de ouro":"Pair of {0}s: +{1} gold",
+"Não foi dessa vez":"Not this time",
+"Ouro insuficiente para essa aposta":"Not enough gold for that bet",
+"Girando...":"Spinning...",
+"Ouro: <b>{0}</b>":"Gold: <b>{0}</b>",
+"Girar · {0}":"Spin · {0}",
+"3 iguais: {0}":"3 of a kind: {0}",
+"2 primeiros iguais: x0,5 a x8 conforme o símbolo":"First 2 matching: x0.5 to x8 depending on the symbol",
+"Retorno médio de ~{0}%: a casa sempre ganha no longo prazo. Aposte só o que não vai fazer falta.":"Average return ~{0}%: the house always wins in the long run. Only bet what you won't miss.",
+"Saldo da máquina:":"Machine balance:",
+"Boa sorte!":"Good luck!",
+// --- 2-sistemas/12-baus.js
+"Minério: {0} x{1}":"Ore: {0} x{1}",
+"Fragmentos x{0}":"Shards x{0}",
+"+ {0} baú(s) na fila":"+ {0} chest(s) in the queue",
+"Coletar":"Collect",
+"Pular":"Skip",
+"BAÚ {0}!":"{0} CHEST!",
+"achado a {0} m de profundidade":"found at {0} m deep",
+"+{0} de ouro":"+{0} gold",
+"BÔNUS {0}: {1} +{2} nv":"{0} BONUS: {1} +{2} lv",
+// --- 3-mundo/02-coleta.js
+"Novo minério: {0}":"New ore: {0}",
+// --- 3-mundo/03-mineracao.js
+"VOCÊ CHEGOU AO FUNDO":"YOU REACHED THE BOTTOM",
+"Sua jornada até aqui":"Your journey so far",
+"TEMPO DE JOGO":"PLAY TIME",
+"{0} h {1} min":"{0} h {1} min",
+"{0} min":"{0} min",
+"BLOCOS QUEBRADOS":"BLOCKS BROKEN",
+"MINÉRIOS COLETADOS":"ORES COLLECTED",
+"RENASCIMENTOS":"REBIRTHS",
+"Renascer troca esta vida por <b>{0}</b> fragmentos (poderes permanentes). Você pode continuar aqui e renascer depois, na aba Poder.":"Rebirth trades this life for <b>{0}</b> shards (permanent powers). You can keep going here and be reborn later, in the Power tab.",
+"Renascer agora":"Rebirth now",
+"Continuar no fundo":"Keep going at the bottom",
+"Novo recorde: {0} m":"New record: {0} m",
+"CORAÇÃO DO ABISMO":"HEART OF THE ABYSS",
+"CAMADA: {0}":"LAYER: {0}",
+"A Rocha-mãe é inquebrável: você chegou ao fundo!":"Bedrock is unbreakable: you reached the bottom!",
+"Lava! -{0} de energia":"Lava! -{0} energy",
+"ÓTIMO!":"GREAT!",
+"INCRÍVEL!":"INCREDIBLE!",
+"IMPARÁVEL!":"UNSTOPPABLE!",
+"LENDÁRIO!":"LEGENDARY!",
+"MÍTICO!":"MYTHIC!",
+"DIVINO!":"DIVINE!",
+"+Energia":"+Energy",
+"Pedra dura: só quebra com dinamite":"Hard stone: only breaks with dynamite",
+"CRÍTICO! {0}":"CRITICAL! {0}",
+// --- 4-interface/01-painel.js
+"Picareta":"Pickaxe",
+"Sorte e experiência":"Luck and experience",
+"Habilidades":"Skills",
+"Utilidades":"Utilities",
+"Fornalha":"Furnace",
+"Máx":"Max",
+"Consumíveis":"Consumables",
+"Recorde: {0} m":"Record: {0} m",
+"Superfície · melhorias liberadas · {0}":"Surface · upgrades unlocked · {0}",
+"INQUEBRÁVEL":"UNBREAKABLE",
+"Minérios x3":"Ores x3",
+"Ouro x3":"Gold x3",
+"Melhorias só na superfície. Suba (ou use o teleporte) para comprar.":"Upgrades only on the surface. Go up (or use teleport) to buy.",
+"Na mesa de trabalho: você pode melhorar o equipamento. Venda os itens no baú (clique nele).":"At the workbench: you can upgrade your gear. Sell items at the chest (click it).",
+"Vá até a mesa de trabalho (à esquerda do buraco) para comprar melhorias.":"Go to the workbench (left of the hole) to buy upgrades.",
+"A loja fica na superfície. Suba (ou use o teleporte) para comprar.":"The shop is on the surface. Go up (or use teleport) to buy.",
+"Na loja: compre dinamite e comida de energia. Os itens de energia ficam na barra, ao lado das habilidades (clique para usar).":"At the shop: buy dynamite and energy food. Energy items sit on the bar next to your skills (click to use).",
+"Vá até a loja (à direita do baú) para comprar.":"Go to the shop (right of the chest) to buy.",
+"{0} · você tem {1}":"{0} · you have {1}",
+"(preço sobe a cada camada alcançada)":"(price rises with every layer reached)",
+"MÁX":"MAX",
+"Fornalha: {0} minérios na fila · pronta em {1}. Pode ir cavar: ela vende sozinha.":"Furnace: {0} ores in the queue · ready in {1}. Go dig: it sells by itself.",
+"A fornalha fica à esquerda do buraco. Fique ao lado dela e clique nela para pôr os minérios da mochila: ela refina com o tempo e vende sozinha (+{0}% de ouro). Pedra comum continua indo para o baú.":"The furnace is to the left of the hole. Stand next to it and click it to load the ores from your backpack: it refines them over time and sells them on its own (+{0}% gold). Plain stone keeps going to the chest.",
+"Os poderes só podem ser comprados depois de Renascer pela primeira vez. Os fragmentos vêm do Renascer e, às vezes, dos baús raros do subsolo.":"Powers can only be bought after your first Rebirth. Shards come from Rebirth and, sometimes, from rare underground chests.",
+"Fragmentos disponíveis: {0} (vêm do Renascer e dos baús raros).":"Shards available: {0} (from Rebirth and rare chests).",
+"Som: desligado":"Sound: off",
+"Som: ligado":"Sound: on",
+"Picareta de {0}":"{0} pickaxe",
+"Melhor picareta do jogo (camada {0})":"Best pickaxe in the game (layer {0})",
+"Dano x{0} (atual: {1}). Recomendada para a camada {2}":"Damage x{0} (current: {1}). Recommended for the {2} layer",
+"{0} · nv {1}/{2}":"{0} · lv {1}/{2}",
+"{0} · nv {1}":"{0} · lv {1}",
+"{0} frag.":n=>n+(n==1?" shard":" shards"),
+"Chegue a 100 m nesta vida para ganhar fragmentos. Reinicia ouro, picareta e melhorias; mantém poderes, nível e conquistas":"Reach 100 m in this life to earn shards. Resets gold, pickaxe and upgrades; keeps powers, level and achievements",
+"Reinicia ouro, picareta e melhorias e ganha {0} fragmentos (1 por camada de 100 m alcançada nesta vida, +5 por chegar ao fundo)":g=>"Resets gold, pickaxe and upgrades and earns "+g+(g==1?" shard":" shards")+" (1 per 100 m layer reached in this life, +5 for reaching the bottom)",
+"Confirmar?":"Confirm?",
+"+{0} fragmentos":n=>"+"+n+(n==1?" shard":" shards"),
+"Escavação":"Digging",
+"Dano por golpe":"Damage per hit",
+"Dano automático":"Automatic damage",
+"Chance de crítico":"Crit chance",
+"Velocidade":"Speed",
+"Por bloco (aqui)":"Per block (here)",
+"Por bloco (automático)":"Per block (auto)",
+"Subir 1 m com o jato":"Fly up 1 m with jetpack",
+"Dano da lava (aqui)":"Lava damage (here)",
+"sem lava":"no lava",
+"Nesta profundidade · {0} m":"At this depth · {0} m",
+"Ouro por bloco":"Gold per block",
+"Dureza":"Hardness",
+"Chance de minério":"Ore chance",
+"Bônus de XP":"XP bonus",
+"Progresso":"Progress",
+"Profundidade máxima":"Max depth",
+"Ouro total":"Total gold",
+"Blocos quebrados":"Blocks broken",
+"Minérios coletados":"Ores collected",
+"Catálogo de minérios":"Ore catalog",
+"Renascimentos":"Rebirths",
+"Fragmentos":"Shards",
+"Estação do ano":"Season",
+"Uso":"Usage",
+"Vendas no baú":"Chest sales",
+"Vezes sem energia":"Times out of energy",
+"Dinamites usadas":"Dynamites used",
+"Itens comidos":"Items eaten",
+"Teleportes":"Teleports",
+"Pedras duras quebradas":"Hard stones broken",
+"Veios de minério quebrados":"Ore veins broken",
+"Vezes na cama":"Times in bed",
+"Minérios refinados":"Ores refined",
+"Baús":"Chests",
+"Baús abertos":"Chests opened",
+"Ouro de baús":"Gold from chests",
+"Fragmentos de baús":"Shards from chests",
+"Bônus de melhoria":"Upgrade bonuses",
+"Poções de teleporte usadas":"Teleport potions used",
+"Pendentes · {0}":"Pending · {0}",
+"Concluídas · {0}":"Completed · {0}",
+"Renascido! Fragmentos: {0}":"Reborn! Shards: {0}",
+"Clique de novo para apagar tudo":"Click again to erase everything",
+"Pedra dura":"Hard stone",
+"vazia":"empty",
+"MOCHILA":"BACKPACK",
+"{0} item":"{0} item",
+"{0} itens":"{0} items",
+"vale {0} de ouro":"worth {0} gold",
+// --- 4-interface/02-abas.js
+"Melhorias":"Upgrades",
+"Loja":"Shop",
+"Poder":"Power",
+"Menu":"Menu",
+"Sair da tela":"Exit fullscreen",
+"Tela cheia":"Fullscreen",
+"Jogo salvo na cama":"Game saved at the bed",
+// --- 4-interface/03-barra-habilidades.js
+"{0} — {1} (clique para usar). Você tem {2}":"{0} — {1} (click to use). You have {2}",
+"{0} — {1} (clique para usar; compre na loja). Você tem {2}":"{0} — {1} (click to use; buy at the shop). You have {2}",
+"{0} — {1}: explode uma área de raio {2} e quebra veios de pedra dura (consome 1, compre na loja). Você tem {3}. Botão direito ou R troca o tipo":"{0} — {1}: blasts an area of radius {2} and breaks hard stone veins (uses 1, buy at the shop). You have {3}. Right click or R switches type",
+"{0} — leva ao baú sem gastar energia; na superfície, volta ao ponto de onde saiu (compre em Melhorias)":"{0} — takes you to the chest without spending energy; on the surface, returns to where you left from (buy in Upgrades)",
+"{0} — {1} (desbloqueia aos {2} m)":"{0} — {1} (unlocks at {2} m)",
+"{0} (raio {1})":"{0} (radius {1})",
+// --- 4-interface/04-entrada.js
+"Marcador removido":"Marker removed",
+"Marcador colocado":"Marker placed",
+"Minerar":"Mine",
+// --- 4-interface/05-pausa.js
+"nível {0}":"level {0}",
+"Continuar":"Continue",
+"Salvar jogo":"Save game",
+"Menu inicial":"Main menu",
+"Jogo salvo":"Game saved",
+"Jogo salvo ✓":"Game saved ✓",
+// --- 4-interface/06-relogio.js
+"Manhã":"Morning",
+"Tarde":"Afternoon",
+"Noite":"Night",
+"Madrugada":"Late night",
+"{0} · {1} (o sol aparece no alto ao meio-dia e a lua à meia-noite)":"{0} · {1} (the sun is high at noon and the moon at midnight)",
+// --- 5-desenho/03-mundo.js
+"Mesa de trabalho: compre aqui":"Workbench: buy here",
+"Mesa de trabalho":"Workbench",
+"Fornalha · {0} minérios · {1}":"Furnace · {0} ores · {1}",
+"Fornalha: clique para refinar":"Furnace: click to refine",
+"Loja: compre aqui":"Shop: buy here",
+"Baú: clique para vender":"Chest: click to sell",
+"Baú: entregue a mochila":"Chest: drop off your backpack",
+// --- 5-desenho/04-combo-efeitos.js
+"Combo final x{0}":"Final combo x{0}",
+// --- 5-desenho/05-mapa.js
+"Mapa · {0} m · recorde {1} m":"Map · {0} m · record {1} m",
+"Toque na tela para fechar":"Tap the screen to close",
+"Mapa · profundidade {0} m · recorde {1} m · roda do mouse: zoom · M ou Esc fecham":"Map · depth {0} m · record {1} m · mouse wheel: zoom · M or Esc closes",
+// --- 5-desenho/06-quadro.js
+"Pedra dura: dinamite":"Hard stone: dynamite",
+"Veio de {0}: x{1}":"{0} vein: x{1}",
+// --- 5-desenho/12-povoado.js
+"Salvo!":"Saved!",
+"Cama":"Bed",
+"Poço de água":"Well",
+"Contratos: clique para abrir":"Contracts: click to open",
+"Contratos prontos!":"Contracts ready!",
+"Contratos":"Contracts",
+"Caça-níquel: clique para jogar":"Slot machine: click to play",
+// --- 5-desenho/13-paisagem.js
+"Horta de cenouras":"Carrot garden",
+"Fogueira":"Campfire",
+// --- 6-jogo/01-laco-inicio.js
+"Frenesi mineral! Minérios x3 por 20s":"Mineral Frenzy! Ores x3 for 20s",
+"Corrida do ouro! Ouro x3 por 20s":"Gold Rush! Gold x3 for 20s",
+"Escavação automática pausada: energia só para voltar":"Auto digging paused: energy is only enough to go back",
+"Save exportado: copie o texto":"Save exported: copy the text",
+"Falha ao exportar":"Export failed",
+"Save importado!":"Save imported!",
+"Save inválido":"Invalid save",
+},{dec:"."});
+
+// ===== 0-idiomas/99-iniciar.js — Escolhe o idioma ao abrir o jogo (os módulos seguintes registram o que refazer ao trocar com onLang) =====
+langButtons();langMenus();setLang(detectLang());
+
 // ===== 1-nucleo/00-balanceamento.js — TABELA ÚNICA DE BALANCEAMENTO: custos, ritmo e números do jogo (mexa só aqui para afinar) =====
 const BAL={
  // Queda livre: segurar ↓ num trecho já cavado desce de graça, acelerando (s por bloco: começa em t0 e chega a tMin depois de `ramp` s)
@@ -76,11 +844,11 @@ const BAL={
  // pk = [chance, raridade 0-4 da tabela RAR] de o baú dar uma melhoria de nível (igual às do level up, com o bônus da raridade)
  // g = ouro em blocos da profundidade do baú · xp = fração do XP do nível atual · it = [item, chance, quantidade] · w = peso do sorteio
  chest:{min:8,p:.0024,tiers:[
-  {n:"Comum",c:"#cfd3da",w:58,g:20,xp:.01,it:[["cen",.3,1]],pk:[.2,0]},
-  {n:"Incomum",c:"#5ee08a",w:28,g:45,xp:.03,it:[["cen",1,1],["sop",.3,1]],pk:[.4,1],ore:[.5,2]},
-  {n:"Raro",c:"#4aa8ff",w:10,g:110,xp:.07,it:[["sop",1,1],["dyn",.7,2],["ptp",.3,1]],pk:[.7,2],ore:[.8,4],fr:[.1,1]},
-  {n:"Épico",c:"#b45cff",w:3.5,g:300,xp:.15,it:[["poc",1,1],["dyn2",1,2],["ptp",.6,1]],pk:[1,3],ore:[1,8],fr:[.4,1]},
-  {n:"Lendário",c:"#ffb02e",w:.5,g:1000,xp:.4,it:[["poc",1,2],["dyn3",1,3],["dyn4",.5,1],["ptp",1,2]],pk:[1,4],ore:[1,15],fr:[1,2]}]},
+  {n:N_("Comum"),c:"#cfd3da",w:58,g:20,xp:.01,it:[["cen",.3,1]],pk:[.2,0]},
+  {n:N_("Incomum"),c:"#5ee08a",w:28,g:45,xp:.03,it:[["cen",1,1],["sop",.3,1]],pk:[.4,1],ore:[.5,2]},
+  {n:N_("Raro"),c:"#4aa8ff",w:10,g:110,xp:.07,it:[["sop",1,1],["dyn",.7,2],["ptp",.3,1]],pk:[.7,2],ore:[.8,4],fr:[.1,1]},
+  {n:N_("Épico"),c:"#b45cff",w:3.5,g:300,xp:.15,it:[["poc",1,1],["dyn2",1,2],["ptp",.6,1]],pk:[1,3],ore:[1,8],fr:[.4,1]},
+  {n:N_("Lendário"),c:"#ffb02e",w:.5,g:1000,xp:.4,it:[["poc",1,2],["dyn3",1,3],["dyn4",.5,1],["ptp",1,2]],pk:[1,4],ore:[1,15],fr:[1,2]}]},
  slot:{w:[10,7,5,3,2,1],p3:[5,12,24,55,170,500],p2:[.5,1,2,3,5,8],bets:[.01,.05,.1,.25,.5,.75,1],spin:[1.1,1.55,2.1]},
  prestigeBonus:5                                       // fragmentos extras por chegar ao fundo
 };
@@ -122,27 +890,27 @@ const FORGE_PILLARS=[-10.4,-6.97,-3.46,-0.95],FORGE_LANTERN_C=-6.97;
 const FURN_C=-2;                 // coluna da fornalha (refina minérios), na superfície, entre o buraco e a mesa de trabalho
 const BENCH_C=-5;                // coluna da mesa de trabalho (onde se compram as melhorias), na superfície
 // [nome, matiz, saturação, luminosidade, cor de detalhe, estilo de textura]
-const BIO=[["Terra",27,40,30,"#a97847",0],["Argila",19,45,31,"#b66445",0],["Areia e cascalho",39,32,36,"#c7ad72",0],["Calcário",45,17,41,"#c3bda2",0],["Arenito",24,48,34,"#bd7c4c",0],["Xisto",210,13,31,"#888f96",0],["Carvão mineral",220,9,21,"#70747a",0],["Granito",220,12,40,"#9da3a8",0],["Basalto",10,19,27,"#8b7467",0],["Gnaisse",210,13,32,"#969899",0],
- ["Quartzito",335,22,46,"#e8c9d8",0],["Mármore",200,8,60,"#d9dde2",0],["Magma solidificado",8,55,24,"#ff7a2a",0],["Cristais profundos",265,42,29,"#b78cff",0],["Vidro vulcânico",270,12,13,"#6a5a8a",0],
- ["Rocha-mãe",218,12,19,"#6f777f",0]];
+const BIO=[[N_("Terra"),27,40,30,"#a97847",0],[N_("Argila"),19,45,31,"#b66445",0],[N_("Areia e cascalho"),39,32,36,"#c7ad72",0],[N_("Calcário"),45,17,41,"#c3bda2",0],[N_("Arenito"),24,48,34,"#bd7c4c",0],[N_("Xisto"),210,13,31,"#888f96",0],[N_("Carvão mineral"),220,9,21,"#70747a",0],[N_("Granito"),220,12,40,"#9da3a8",0],[N_("Basalto"),10,19,27,"#8b7467",0],[N_("Gnaisse"),210,13,32,"#969899",0],
+ [N_("Quartzito"),335,22,46,"#e8c9d8",0],[N_("Mármore"),200,8,60,"#d9dde2",0],[N_("Magma solidificado"),8,55,24,"#ff7a2a",0],[N_("Cristais profundos"),265,42,29,"#b78cff",0],[N_("Vidro vulcânico"),270,12,13,"#6a5a8a",0],
+ [N_("Rocha-mãe"),218,12,19,"#6f777f",0]];
 const FINAL_DEPTH=LAYER_HEIGHT*(BIO.length-1);   // 1500 m: a Rocha-mãe é inquebrável
 const layerOf=d=>clamp(Math.floor(d/LAYER_HEIGHT),0,BIO.length-1);
-const layerName=d=>BIO[layerOf(d)][0];
+const layerName=d=>__(BIO[layerOf(d)][0]);
 // Uma picareta por camada quebrável (15 no total). Não existe picareta além da última.
-const TIERS=["Madeira","Pedra","Ferro","Bronze","Aço","Ouro","Diamante","Mithril","Adamante","Obsidiana","Titânio","Estelar","Cósmica","Abissal","Primordial"];
+const TIERS=[N_("Madeira"),N_("Pedra"),N_("Ferro"),N_("Bronze"),N_("Aço"),N_("Ouro"),N_("Diamante"),N_("Mithril"),N_("Adamante"),N_("Obsidiana"),N_("Titânio"),N_("Estelar"),N_("Cósmica"),N_("Abissal"),N_("Primordial")];
 const TCOL=["#b08a55","#9aa0a6","#cfd6dd","#c98a3a","#9fb4c7","#ffd45c","#7fe6ff","#7fb0ff","#c99bff","#6a4f9c","#d4dde6","#fff3a0","#ff7ad9","#4a2d8a","#ff5a3a"];
 // [nome, multiplicador de valor, cor, profundidade em que começa a aparecer]. Os do meio (Esmeralda a Opala) aparecem mais cedo desde 2026-10-21 para o trecho 300-900 m não arrastar.
-const ORES=[["Cobre",1.5,"#d98a4a",0],["Ferro",2.5,"#c9ced6",20],["Ouro",5,"#ffd45c",50],["Rubi",10,"#ff5a7a",100],["Diamante",20,"#7fe6ff",200],["Esmeralda",40,"#4ddf8a",280],["Safira",80,"#4f77ff",430],["Ametista",160,"#b78cff",620],["Topázio",320,"#ffb347",850],["Opala negra",640,"#ff9bf5",1150],["Cristal do abismo",1280,"#ffffff",1450]];
+const ORES=[[N_("Cobre"),1.5,"#d98a4a",0],[N_("Ferro"),2.5,"#c9ced6",20],[N_("Ouro"),5,"#ffd45c",50],[N_("Rubi"),10,"#ff5a7a",100],[N_("Diamante"),20,"#7fe6ff",200],[N_("Esmeralda"),40,"#4ddf8a",280],[N_("Safira"),80,"#4f77ff",430],[N_("Ametista"),160,"#b78cff",620],[N_("Topázio"),320,"#ffb347",850],[N_("Opala negra"),640,"#ff9bf5",1150],[N_("Cristal do abismo"),1280,"#ffffff",1450]];
 function rollOre(r){if(Math.random()>oreChance())return null;const u=ORES.filter(o=>o[3]<=r);return u[Math.floor(Math.pow(Math.random(),1.6)*u.length)]}
 
 // ===== 1-nucleo/03-estado-save.js — Estado do jogo (S), validação do save, carregar/salvar e variáveis de sessão =====
 const SAVE_KEY="abismo-v3";
 const fresh=()=>({gold:0,depth:0,mc:0,prog:0,best:0,runMax:0,tier:0,runs:0,total:0,oc:0,blocks:0,deaths:0,sold:0,en:-1,
  lv:{sharp:0,wide:0,emax:0,eco:0,jet:0,jetspd:0,auto:0,autopow:0,speed:0,crit:0,luck:0,xp:0,duration:0,furia:0,frenesi:0,tele:0,pet:0,furn:0,lavares:0,lant:0,clock:0},items:{dyn:0,dyn2:0,dyn3:0,dyn4:0,dyn5:0,cen:0,sop:0,poc:0,ptp:0},dsel:"dyn",
- bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,dir:"down",dug:[],ach:[],debug:false,real:0,pts:0,sk:{her:0,ini:0,ouro:0,dmg:0,fol:0,jato:0,gar:0,xp:0},marks:[],od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,v:7,vol:{m:.7,s:1,a:.7}});
+ bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,dir:"down",dug:[],ach:[],debug:false,real:0,pts:0,sk:{her:0,ini:0,ouro:0,dmg:0,fol:0,jato:0,gar:0,xp:0},marks:[],od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,play:0,v:7,vol:{m:.7,s:1,a:.7}});
 let S=fresh();S.seed=newSeed();
 function clean(o){const f=fresh();o=Object.assign(f,o&&typeof o==="object"?o:{});
- for(const k of["gold","depth","prog","best","runMax","tier","runs","total","oc","blocks","deaths","sold","pts","real","xp","lvp","bombs","eaten","tps","veins","sleeps","rich","refined","ctDone","spins","pend","chests","chTop","chGold","chFr","chPk","ptpUsed"])if(!Number.isFinite(o[k])||o[k]<0)o[k]=0;
+ for(const k of["gold","depth","prog","best","runMax","tier","runs","total","oc","blocks","deaths","sold","pts","real","xp","lvp","bombs","eaten","tps","veins","sleeps","rich","refined","ctDone","spins","pend","chests","chTop","chGold","chFr","chPk","ptpUsed","play"])if(!Number.isFinite(o[k])||o[k]<0)o[k]=0;
  o.chT=BAL.chest.tiers.map((_,i)=>Array.isArray(o.chT)&&Number.isFinite(o.chT[i])&&o.chT[i]>0?Math.floor(o.chT[i]):0);   // baús abertos por raridade
  if(!Number.isFinite(o.gold)&&!o.debug)o.gold=0;
  if(!Number.isFinite(o.sea)||o.sea<0)o.sea=BAL.season.len*1.5;   // relógio das estações (2-sistemas/07-estacoes.js); sem ele começa no meio do verão
@@ -250,17 +1018,20 @@ const tierCost=()=>Math.ceil(BAL.tier.b*Math.pow(BAL.tier.k,S.tier+1));
 const upCost=(k,l)=>Math.ceil(UPS[k].b*Math.pow(UPS[k].k,l));
 const teleCD=()=>Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*S.lv.tele);
 // Consumáveis (loja): preço base x 1,9^(camada mais funda já alcançada). Energia: fração da energia máxima que devolvem.
-const dynDesc=k=>"Explode uma área de raio "+String(BAL.dyn[k].r).replace(".",",")+(k==="dyn"?". Gasta ":". Mais forte que a anterior; gasta ")+String(BAL.dyn[k].e).replace(".",",")+" blocos de energia; recarga de "+String(BAL.dyn[k].cd).replace(".",",")+" s. Também quebra os veios de pedra dura";
+const dynDesc=k=>{const D=BAL.dyn[k],r=ndec(D.r),e=ndec(D.e),cd=ndec(D.cd);
+ return k==="dyn"?__("Explode uma área de raio {0}. Gasta {1} blocos de energia; recarga de {2} s. Também quebra os veios de pedra dura",r,e,cd)
+  :__("Explode uma área de raio {0}. Mais forte que a anterior; gasta {1} blocos de energia; recarga de {2} s. Também quebra os veios de pedra dura",r,e,cd)};
+// n e d são getters: o texto é traduzido na hora de exibir (vale também depois de trocar o idioma)
 const ITEMS={
- dyn:{n:"Dinamite",d:dynDesc("dyn"),b:BAL.items.dyn,c:"#e5412d"},
- dyn2:{n:"Dinamite reforçada",d:dynDesc("dyn2"),b:BAL.items.dyn2,c:"#ff9a2a"},
- dyn3:{n:"Dinamite pesada",d:dynDesc("dyn3"),b:BAL.items.dyn3,c:"#3fa8ff"},
- dyn4:{n:"Carga de nitro",d:dynDesc("dyn4"),b:BAL.items.dyn4,c:"#b45cff"},
- dyn5:{n:"Bomba de demolição",d:dynDesc("dyn5"),b:BAL.items.dyn5,c:"#ffd45c"},
- cen:{n:"Cenourinha",d:"Recupera 10% da energia máxima",b:BAL.items.cen,c:"#ff9a3a",en:.1},
- sop:{n:"Sopa de cogumelo",d:"Recupera 25% da energia máxima",b:BAL.items.sop,c:"#c9a27a",en:.25},
- poc:{n:"Poção de energia",d:"Recupera 50% da energia máxima",b:BAL.items.poc,c:"#6ff0ff",en:.5},
- ptp:{n:"Poção de teleporte",d:"Uso único: leva ao baú sem gastar energia (na superfície, volta ao ponto de onde saiu). Só cai de baús",b:0,c:"#9a5cff",tp:1,noShop:1}
+ dyn:{get n(){return __("Dinamite")},get d(){return dynDesc("dyn")},b:BAL.items.dyn,c:"#e5412d"},
+ dyn2:{get n(){return __("Dinamite reforçada")},get d(){return dynDesc("dyn2")},b:BAL.items.dyn2,c:"#ff9a2a"},
+ dyn3:{get n(){return __("Dinamite pesada")},get d(){return dynDesc("dyn3")},b:BAL.items.dyn3,c:"#3fa8ff"},
+ dyn4:{get n(){return __("Carga de nitro")},get d(){return dynDesc("dyn4")},b:BAL.items.dyn4,c:"#b45cff"},
+ dyn5:{get n(){return __("Bomba de demolição")},get d(){return dynDesc("dyn5")},b:BAL.items.dyn5,c:"#ffd45c"},
+ cen:{get n(){return __("Cenourinha")},get d(){return __("Recupera 10% da energia máxima")},b:BAL.items.cen,c:"#ff9a3a",en:.1},
+ sop:{get n(){return __("Sopa de cogumelo")},get d(){return __("Recupera 25% da energia máxima")},b:BAL.items.sop,c:"#c9a27a",en:.25},
+ poc:{get n(){return __("Poção de energia")},get d(){return __("Recupera 50% da energia máxima")},b:BAL.items.poc,c:"#6ff0ff",en:.5},
+ ptp:{get n(){return __("Poção de teleporte")},get d(){return __("Uso único: leva ao baú sem gastar energia (na superfície, volta ao ponto de onde saiu). Só cai de baús")},b:0,c:"#9a5cff",tp:1,noShop:1}
 };
 const itemCost=k=>Math.ceil(ITEMS[k].b*Math.pow(BAL.itemK,layerOf(S.best)));
 const have=k=>S.items[k]||0;
@@ -340,37 +1111,38 @@ function runCheat(w){
  if(w==="CENOURA"){toggleDbg();return}
  // se a primeira letra ("S" de SEASON) desceu um bloco no buraco, desfaz: o código não deve mudar a posição do jogador
  if(cheatPos&&S.mc===cheatPos.mc&&S.depth===cheatPos.depth+1){S.depth=cheatPos.depth;S.best=cheatPos.best;S.runMax=cheatPos.runMax;mY=camY=S.depth;S.prog=0}
- if(w==="CLIMA"){const k=WX_KEYS[(WX_KEYS.indexOf(wx.cur)+1)%WX_KEYS.length];weatherSet(k);say("Clima: "+WX[k].n);return}
- if(w==="SEASON"){const L=BAL.season.len,i=(Math.floor(S.sea/L)+1)%4;S.sea=i*L+L/2;say("Estação: "+SEASONS[i].n)}   // vai para o meio da próxima estação (a paleta dela vale por inteira ali)
+ if(w==="CLIMA"){const k=WX_KEYS[(WX_KEYS.indexOf(wx.cur)+1)%WX_KEYS.length];weatherSet(k);say(__("Clima: {0}",WX[k].n));return}
+ if(w==="SEASON"){const L=BAL.season.len,i=(Math.floor(S.sea/L)+1)%4;S.sea=i*L+L/2;say(__("Estação: {0}",SEASONS[i].n))}   // vai para o meio da próxima estação (a paleta dela vale por inteira ali)
 }
-function toggleDbg(){S.debug=!S.debug;if(S.debug){S.real=S.gold;S.gold=Infinity}else S.gold=S.real||0;say(S.debug?"Cenoura! Ouro e energia infinitos":"Cenoura desligada");build()}
+function toggleDbg(){S.debug=!S.debug;if(S.debug){S.real=S.gold;S.gold=Infinity}else S.gold=S.real||0;say(S.debug?__("Cenoura! Ouro e energia infinitos"):__("Cenoura desligada"));build()}
 
 // ===== 2-sistemas/01-melhorias.js — Tabela de melhorias (mesa de trabalho) e compra de melhorias, picareta e consumáveis (loja) =====
 // g = grupo no painel · n = nome · d = descrição · b = custo base · k = crescimento do custo · max = nível máximo
-const fmtN=x=>String(+x.toFixed(2)).replace(".",",");
-const fmtLight=(l,v)=>(l*v).toFixed(1).replace(".",",")+" blocos";
+const fmtN=x=>ndec(+x.toFixed(2));
+const fmtLight=(l,v)=>__("{0} blocos",ndec((l*v).toFixed(1)));
+// n e d: o nome é um getter e a descrição uma função, ambos traduzidos na hora de exibir (g = grupo, traduzido pelo painel)
 const UPS={
- sharp:{g:"Picareta",n:"Afiar picareta",d:l=>"+12% de dano da picareta por nível",...BAL.ups.sharp},
- wide:{g:"Picareta",n:"Picareta ampla",d:l=>"Quebra "+(l+1)+" bloco(s) de cada lado do alvo, de graça (cada nível soma +1 para os dois lados)",...BAL.ups.wide},
- speed:{g:"Picareta",n:"Velocidade de escavação",d:l=>"+5% de velocidade ao segurar a escavação por nível",...BAL.ups.speed},
- crit:{g:"Picareta",n:"Chance de golpe crítico",d:l=>"+"+Math.round(BAL.critPer*100)+"% de chance de golpe crítico (dano x3) por nível, até "+Math.round(BAL.critMax*100)+"%",...BAL.ups.crit},
- emax:{g:"Energia",n:"Energia máxima",d:l=>"+30 de energia máxima por nível",...BAL.ups.emax},
- eco:{g:"Energia",n:"Economia de energia",d:l=>"-5% de gasto de energia ao cavar e voar por nível (cumulativo: cada nível multiplica por 0,95). Gasto atual: "+Math.round(Math.pow(1-BAL.ecoPer,l)*100)+"%",...BAL.ups.eco},
- jet:{g:"Energia",n:"Eficiência da mochila a jato",d:l=>"-5% da energia gasta ao subir com o jato por nível (cumulativo). Gasto atual: "+Math.round(Math.pow(1-BAL.jetPer,l)*100)+"%",...BAL.ups.jet},
- jetspd:{g:"Energia",n:"Velocidade da mochila a jato",d:l=>"+10% de velocidade ao subir com o jato por nível (subir continua gastando energia)",...BAL.ups.jetspd},
- lavares:{g:"Energia",n:"Resistência à lava",d:l=>"-10% do dano da lava por nível (cumulativo). Lava aqui: "+Math.round(Math.pow(1-BAL.lava.res,l)*100)+"% do dano normal"+(l<BAL.ups.lavares.max?" (próximo nível: "+Math.round(Math.pow(1-BAL.lava.res,l+1)*100)+"%)":""),...BAL.ups.lavares},
- auto:{g:"Escavação automática",n:"Escavação automática",d:l=>"Quebra sozinho o bloco à frente com +0,25 golpe por segundo por nível. Gasta metade da energia, mas é mais fraco que cavar manualmente",...BAL.ups.auto},
- autopow:{g:"Escavação automática",n:"Força da escavação automática",d:l=>"+10% de dano dos golpes automáticos por nível",...BAL.ups.autopow},
- luck:{g:"Sorte e experiência",n:"Sorte para ouro e minérios",d:l=>"+12% de ouro e +2% de chance de minério por nível",...BAL.ups.luck},
- xp:{g:"Sorte e experiência",n:"Ganho de experiência",d:l=>"+10% de experiência por nível",...BAL.ups.xp},
- duration:{g:"Habilidades",n:"Duração das habilidades",d:l=>"+5% de duração da Fúria e da Escavação Frenética por nível",...BAL.ups.duration},
- furia:{g:"Habilidades",n:"Potência da Fúria do Minerador",d:l=>"Dano da Fúria: x"+fmtN(BAL.skills.fury.mult+BAL.skills.fury.per*l)+(l<BAL.ups.furia.max?" (próximo nível: x"+fmtN(BAL.skills.fury.mult+BAL.skills.fury.per*(l+1))+")":"")+". Recarga: "+BAL.skills.fury.cd+" s",...BAL.ups.furia},
- frenesi:{g:"Habilidades",n:"Potência da Escavação Frenética",d:l=>"Velocidade da Frenética: x"+fmtN(BAL.skills.frenzy.mult+BAL.skills.frenzy.per*l)+(l<BAL.ups.frenesi.max?" (próximo nível: x"+fmtN(BAL.skills.frenzy.mult+BAL.skills.frenzy.per*(l+1))+")":"")+". Recarga: "+BAL.skills.frenzy.cd+" s",...BAL.ups.frenesi},
- lant:{g:"Habilidades",n:"Lanterna",d:l=>"Um pouco mais de luz na escuridão. Luz extra: "+fmtLight(l,BAL.lant.light)+(l<BAL.ups.lant.max?" (próximo nível: "+fmtLight(l+1,BAL.lant.light)+")":""),...BAL.ups.lant},
- pet:{g:"Habilidades",n:"Vagalume companheiro",d:l=>"Um vagalume te segue e ilumina o escuro. Luz extra: "+fmtLight(l,BAL.pet.light)+(l<BAL.ups.pet.max?" (próximo nível: "+fmtLight(l+1,BAL.pet.light)+")":""),...BAL.ups.pet},
- furn:{g:"Fornalha",n:"Velocidade da fornalha",d:l=>"Refina "+furRate(l).toFixed(2).replace(".",",")+" minérios por segundo"+(l<BAL.ups.furn.max?" (próximo nível: "+furRate(l+1).toFixed(2).replace(".",",")+")":"")+". O refinado vale +"+Math.round(BAL.furnace.bonus*100)+"% de ouro",...BAL.ups.furn},
- clock:{g:"Utilidades",n:"Relógio",d:l=>l<1?"Mostra na barra do topo um relógio de sol e lua com a hora do dia (o dia dura "+Math.round(BAL.day.len/60)+" min)":"Relógio comprado: veja a hora do dia na barra do topo (passe o mouse para ver o período)",...BAL.ups.clock},
- tele:{g:"Habilidades",n:"Teleporte",d:l=>l<1?"Desbloqueia o teleporte: leva ao baú sem gastar energia e, usado na superfície, volta ao ponto de onde saiu":"Recarga do teleporte: "+Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*l)+" s"+(l<BAL.ups.tele.max?" ("+Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*(l+1))+" s no próximo nível)":""),...BAL.ups.tele}
+ sharp:{g:"Picareta",get n(){return __("Afiar picareta")},d:l=>__("+12% de dano da picareta por nível"),...BAL.ups.sharp},
+ wide:{g:"Picareta",get n(){return __("Picareta ampla")},d:l=>__("Quebra {0} bloco(s) de cada lado do alvo, de graça (cada nível soma +1 para os dois lados)",l+1),...BAL.ups.wide},
+ speed:{g:"Picareta",get n(){return __("Velocidade de escavação")},d:l=>__("+5% de velocidade ao segurar a escavação por nível"),...BAL.ups.speed},
+ crit:{g:"Picareta",get n(){return __("Chance de golpe crítico")},d:l=>__("+{0}% de chance de golpe crítico (dano x3) por nível, até {1}%",Math.round(BAL.critPer*100),Math.round(BAL.critMax*100)),...BAL.ups.crit},
+ emax:{g:"Energia",get n(){return __("Energia máxima")},d:l=>__("+30 de energia máxima por nível"),...BAL.ups.emax},
+ eco:{g:"Energia",get n(){return __("Economia de energia")},d:l=>__("-5% de gasto de energia ao cavar e voar por nível (cumulativo: cada nível multiplica por 0,95). Gasto atual: {0}%",Math.round(Math.pow(1-BAL.ecoPer,l)*100)),...BAL.ups.eco},
+ jet:{g:"Energia",get n(){return __("Eficiência da mochila a jato")},d:l=>__("-5% da energia gasta ao subir com o jato por nível (cumulativo). Gasto atual: {0}%",Math.round(Math.pow(1-BAL.jetPer,l)*100)),...BAL.ups.jet},
+ jetspd:{g:"Energia",get n(){return __("Velocidade da mochila a jato")},d:l=>__("+10% de velocidade ao subir com o jato por nível (subir continua gastando energia)"),...BAL.ups.jetspd},
+ lavares:{g:"Energia",get n(){return __("Resistência à lava")},d:l=>l<BAL.ups.lavares.max?__("-10% do dano da lava por nível (cumulativo). Lava aqui: {0}% do dano normal (próximo nível: {1}%)",Math.round(Math.pow(1-BAL.lava.res,l)*100),Math.round(Math.pow(1-BAL.lava.res,l+1)*100)):__("-10% do dano da lava por nível (cumulativo). Lava aqui: {0}% do dano normal",Math.round(Math.pow(1-BAL.lava.res,l)*100)),...BAL.ups.lavares},
+ auto:{g:"Escavação automática",get n(){return __("Escavação automática")},d:l=>__("Quebra sozinho o bloco à frente com +0,25 golpe por segundo por nível. Gasta metade da energia, mas é mais fraco que cavar manualmente"),...BAL.ups.auto},
+ autopow:{g:"Escavação automática",get n(){return __("Força da escavação automática")},d:l=>__("+10% de dano dos golpes automáticos por nível"),...BAL.ups.autopow},
+ luck:{g:"Sorte e experiência",get n(){return __("Sorte para ouro e minérios")},d:l=>__("+12% de ouro e +2% de chance de minério por nível"),...BAL.ups.luck},
+ xp:{g:"Sorte e experiência",get n(){return __("Ganho de experiência")},d:l=>__("+10% de experiência por nível"),...BAL.ups.xp},
+ duration:{g:"Habilidades",get n(){return __("Duração das habilidades")},d:l=>__("+5% de duração da Fúria e da Escavação Frenética por nível"),...BAL.ups.duration},
+ furia:{g:"Habilidades",get n(){return __("Potência da Fúria do Minerador")},d:l=>{const a=fmtN(BAL.skills.fury.mult+BAL.skills.fury.per*l),cd=BAL.skills.fury.cd;return l<BAL.ups.furia.max?__("Dano da Fúria: x{0} (próximo nível: x{1}). Recarga: {2} s",a,fmtN(BAL.skills.fury.mult+BAL.skills.fury.per*(l+1)),cd):__("Dano da Fúria: x{0}. Recarga: {1} s",a,cd)},...BAL.ups.furia},
+ frenesi:{g:"Habilidades",get n(){return __("Potência da Escavação Frenética")},d:l=>{const a=fmtN(BAL.skills.frenzy.mult+BAL.skills.frenzy.per*l),cd=BAL.skills.frenzy.cd;return l<BAL.ups.frenesi.max?__("Velocidade da Frenética: x{0} (próximo nível: x{1}). Recarga: {2} s",a,fmtN(BAL.skills.frenzy.mult+BAL.skills.frenzy.per*(l+1)),cd):__("Velocidade da Frenética: x{0}. Recarga: {1} s",a,cd)},...BAL.ups.frenesi},
+ lant:{g:"Habilidades",get n(){return __("Lanterna")},d:l=>l<BAL.ups.lant.max?__("Um pouco mais de luz na escuridão. Luz extra: {0} (próximo nível: {1})",fmtLight(l,BAL.lant.light),fmtLight(l+1,BAL.lant.light)):__("Um pouco mais de luz na escuridão. Luz extra: {0}",fmtLight(l,BAL.lant.light)),...BAL.ups.lant},
+ pet:{g:"Habilidades",get n(){return __("Vagalume companheiro")},d:l=>l<BAL.ups.pet.max?__("Um vagalume te segue e ilumina o escuro. Luz extra: {0} (próximo nível: {1})",fmtLight(l,BAL.pet.light),fmtLight(l+1,BAL.pet.light)):__("Um vagalume te segue e ilumina o escuro. Luz extra: {0}",fmtLight(l,BAL.pet.light)),...BAL.ups.pet},
+ furn:{g:"Fornalha",get n(){return __("Velocidade da fornalha")},d:l=>l<BAL.ups.furn.max?__("Refina {0} minérios por segundo (próximo nível: {1}). O refinado vale +{2}% de ouro",ndec(furRate(l).toFixed(2)),ndec(furRate(l+1).toFixed(2)),Math.round(BAL.furnace.bonus*100)):__("Refina {0} minérios por segundo. O refinado vale +{1}% de ouro",ndec(furRate(l).toFixed(2)),Math.round(BAL.furnace.bonus*100)),...BAL.ups.furn},
+ clock:{g:"Utilidades",get n(){return __("Relógio")},d:l=>l<1?__("Mostra na barra do topo um relógio de sol e lua com a hora do dia (o dia dura {0} min)",Math.round(BAL.day.len/60)):__("Relógio comprado: veja a hora do dia na barra do topo (passe o mouse para ver o período)"),...BAL.ups.clock},
+ tele:{g:"Habilidades",get n(){return __("Teleporte")},d:l=>{const c=Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*l);return l<1?__("Desbloqueia o teleporte: leva ao baú sem gastar energia e, usado na superfície, volta ao ponto de onde saiu"):l<BAL.ups.tele.max?__("Recarga do teleporte: {0} s ({1} s no próximo nível)",c,Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*(l+1))):__("Recarga do teleporte: {0} s",c)},...BAL.ups.tele}
 };
 function buy(k){
  if(!nearBench())return;
@@ -382,7 +1154,7 @@ function buy(k){
 function buyTier(){
  if(!nearBench()||S.tier>=TIERS.length-1)return;
  const c=tierCost();if(S.gold<c)return;
- S.gold-=c;S.tier++;sfx(520,.2,"sawtooth");sfx(780,.3,"triangle");say("Nova picareta: "+TIERS[S.tier]);build();
+ S.gold-=c;S.tier++;sfx(520,.2,"sawtooth");sfx(780,.3,"triangle");say(__("Nova picareta: {0}",__(TIERS[S.tier])));build();
 }
 // Loja de consumáveis (fica na superfície, à direita do baú): dinamite e comida que recupera energia.
 function buyItem(k){
@@ -396,12 +1168,12 @@ function buyItem(k){
 function useItem(k){
  const it=ITEMS[k];if(modal)return;if(it&&it.tp){teleport(true);return}
  if(!it||!it.en)return;
- if(have(k)<1){say("Sem "+it.n+": compre na loja (na superfície)");return}
- if(atSurface()){say("Na superfície a energia já se recupera sozinha");return}
- const m=maxEn();if(S.en>=m-.5){say("Energia já está cheia");return}
+ if(have(k)<1){say(__("Sem {0}: compre na loja (na superfície)",it.n));return}
+ if(atSurface()){say(__("Na superfície a energia já se recupera sozinha"));return}
+ const m=maxEn();if(S.en>=m-.5){say(__("Energia já está cheia"));return}
  if(!S.debug)S.items[k]--;S.eaten++;
  const g=Math.min(m-S.en,m*it.en);S.en+=g;
- const p=blockXY(S.mc,S.depth);texts.push({x:p.x,y:p.y-T*.8,t:0,s:it.n+": +"+Math.round(g)+" de energia",c:"#6ff0ff",big:1});
+ const p=blockXY(S.mc,S.depth);texts.push({x:p.x,y:p.y-T*.8,t:0,s:__("{0}: +{1} de energia",it.n,Math.round(g)),c:"#6ff0ff",big:1});
  for(let i=0;i<10;i++)parts.push({x:p.x,y:p.y-T*.4,vx:(Math.random()-.5)*160,vy:-60-Math.random()*140,l:.6,c:it.c});
  sfx(660,.1,"sine");sfx(990,.14,"sine");refresh();
 }
@@ -422,19 +1194,19 @@ let deathLock=0;
 function showDeath(info){
  if(modal)return;                                   // não atropela outra janela aberta
  const b=openModal("death");b.style.maxWidth="420px";
- const ores=Object.entries(info.o).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([k,v])=>{const o=ORES.find(x=>x[0]===k);return"<span><i style='background:"+(o?o[2]:"#8d9299")+"'></i>"+k+" x"+v+"</span>"}).join("");
+ const ores=Object.entries(info.o).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([k,v])=>{const o=ORES.find(x=>x[0]===k);return"<span><i style='background:"+(o?o[2]:"#8d9299")+"'></i>"+__(k)+" x"+v+"</span>"}).join("");
  const eat=Object.keys(ITEMS).filter(k=>ITEMS[k].en),noFood=eat.every(k=>have(k)<1);
- const tip=noFood?"Compre <b>comida de energia</b> na loja: ela fica na barra ao lado das habilidades e recupera energia no subsolo."
-  :S.lv.emax<5?"Melhore a <b>Energia máxima</b> na mesa de trabalho para ir mais fundo em cada descida."
-  :S.lv.tele<1?"O <b>Teleporte</b> leva ao baú sem gastar energia: ótimo para voltar com a mochila cheia."
-  :"Comece a subir quando a energia chegar a 25%: subir com a mochila a jato gasta mais.";
- b.innerHTML="<div class='dead'><h2>SEM ENERGIA</h2><div class='sub'>"+(info.n?"Você apagou e a mochila ficou para trás.":"Você apagou e voltou à superfície.")+"</div>"
-  +"<div class='grid'><div class='st'><b>"+fmt(info.depth)+" m</b><small>PROFUNDIDADE · "+layerName(info.depth).toUpperCase()+"</small></div>"
-  +"<div class='st'><b>"+fmt(S.best)+" m</b><small>RECORDE</small></div>"
-  +"<div class='st lost'><b>"+(info.n?"-"+fmt(info.v):"0")+"</b><small>OURO PERDIDO</small></div>"
-  +"<div class='st lost'><b>"+(info.n?"-"+info.n:"0")+"</b><small>ITENS PERDIDOS</small></div></div>"
+ const tip=noFood?__("Compre <b>comida de energia</b> na loja: ela fica na barra ao lado das habilidades e recupera energia no subsolo.")
+  :S.lv.emax<5?__("Melhore a <b>Energia máxima</b> na mesa de trabalho para ir mais fundo em cada descida.")
+  :S.lv.tele<1?__("O <b>Teleporte</b> leva ao baú sem gastar energia: ótimo para voltar com a mochila cheia.")
+  :__("Comece a subir quando a energia chegar a 25%: subir com a mochila a jato gasta mais.");
+ b.innerHTML="<div class='dead'><h2>"+__("SEM ENERGIA")+"</h2><div class='sub'>"+(info.n?__("Você apagou e a mochila ficou para trás."):__("Você apagou e voltou à superfície."))+"</div>"
+  +"<div class='grid'><div class='st'><b>"+fmt(info.depth)+" m</b><small>"+__("PROFUNDIDADE · {0}",layerName(info.depth).toUpperCase())+"</small></div>"
+  +"<div class='st'><b>"+fmt(S.best)+" m</b><small>"+__("RECORDE")+"</small></div>"
+  +"<div class='st lost'><b>"+(info.n?"-"+fmt(info.v):"0")+"</b><small>"+__("OURO PERDIDO")+"</small></div>"
+  +"<div class='st lost'><b>"+(info.n?"-"+info.n:"0")+"</b><small>"+__("ITENS PERDIDOS")+"</small></div></div>"
   +(ores?"<div class='ores'>"+ores+"</div>":"")
-  +"<div class='tip'>"+tip+"</div><button id='deadok'>Voltar a cavar</button></div>";
+  +"<div class='tip'>"+tip+"</div><button id='deadok'>"+__("Voltar a cavar")+"</button></div>";
  $("deadok").onclick=closeModal;deathLock=performance.now()+700;
 }
 function die(){
@@ -443,14 +1215,14 @@ function die(){
  S.depth=0;S.mc=0;S.dir="down";S.en=maxEn();
  mX=0;mY=0;camX=0;camY=0;
  flash=1;flashC="#ff2a2a";flashText="";sfx(110,.6,"sawtooth");sfx(70,.8,"square");
- say(n?"Você apagou! Perdeu "+n+" itens ("+fmt(lost)+" de ouro)":"Você apagou e voltou à superfície");
+ say(n?__("Você apagou! Perdeu {0} itens ({1} de ouro)",n,fmt(lost)):__("Você apagou e voltou à superfície"));
  showDeath(info);
 }
 function sellBag(){
  const b=S.bag;if(b.n<=0&&b.v<=0)return;
  const v=b.v,n=b.n;S.gold+=v;S.total+=v;S.sold++;S.bag={v:0,n:0,o:{},ov:{}};
  gainXp(Math.min(60,n*.3));chestOpen=1;
- const p=chestXY();texts.push({x:p.x,y:p.y-T*.8,t:0,s:"Vendido: +"+fmt(v),c:"#ffd45c",big:1});
+ const p=chestXY();texts.push({x:p.x,y:p.y-T*.8,t:0,s:__("Vendido: +{0}",fmt(v)),c:"#ffd45c",big:1});
  for(let i=0;i<Math.min(40,8+n);i++)parts.push({x:p.x+(Math.random()-.5)*T,y:p.y,vx:(Math.random()-.5)*260,vy:-180-Math.random()*320,l:1,c:i%3?"#ffd45c":"#fff3a0",big:1});
  sfx(880,.1,"triangle");setTimeout(()=>sfx(1175,.12,"triangle"),90);setTimeout(()=>sfx(1568,.2,"triangle"),180);
  refresh();
@@ -458,7 +1230,7 @@ function sellBag(){
 // Vende só quando o jogador pede: clique do mouse no baú ou Espaço ao lado dele. Devolve true se tratou o comando (não cava).
 function chestUse(){
  if(!nearChest())return false;
- if(S.bag.n>0)sellBag();else say("Mochila vazia: nada para vender.");
+ if(S.bag.n>0)sellBag();else say(__("Mochila vazia: nada para vender."));
  return true;
 }
 function chestHit(px,py){   // o ponto (px,py) da tela está sobre o desenho do baú?
@@ -467,10 +1239,10 @@ function chestHit(px,py){   // o ponto (px,py) da tela está sobre o desenho do 
 }
 function teleport(pot){   // pot: poção de teleporte (uso único, sem nível de teleporte nem recarga)
  if(modal||(!pot&&(S.lv.tele<1||tpCD>0)))return;
- if(pot&&have("ptp")<1){say("Sem Poção de teleporte");return}
+ if(pot&&have("ptp")<1){say(__("Sem Poção de teleporte"));return}
  if(S.depth>0){S.tpBack={c:S.mc,d:S.depth};goTo(CHEST_C,0)}
  else if(S.tpBack&&isDug(S.tpBack.c,S.tpBack.d-1)){goTo(S.tpBack.c,S.tpBack.d);S.tpBack=null}
- else{say("Teleporte: use no subsolo para subir ao baú");return}
+ else{say(__("Teleporte: use no subsolo para subir ao baú"));return}
  if(pot){if(!S.debug)S.items.ptp--;S.ptpUsed++}else tpCD=teleCD();
  S.tps++;sfx(300,.3,"sine");sfx(900,.35,"sine");
 }
@@ -481,10 +1253,10 @@ function goTo(c,d){
 }
 
 // ===== 2-sistemas/03-nivel-xp.js — Experiência e escolha de melhoria a cada nível =====
-const PK={dmg:["Dano da picareta","+15% de dano",.15],spd:["Velocidade de ataque","+10% de velocidade ao minerar",.1],duration:["Duração das habilidades","+10% de duração",.1],gold:["Ouro extra","+12% de ouro",.12],energy:["Energia máxima","+8% de energia máxima",.08],mov:["Velocidade de movimento","+10% de velocidade",.1],xp:["Ganho de experiência","+10% de experiência",.1]};
-const RAR=[["Comum",1,"#9aa0a6",60],["Incomum",1.5,"#6fcf6f",25],["Rara",2,"#5aa0ff",10],["Épica",3,"#b06cff",4],["Lendária",5,"#ffb43a",1]];
+const PK={dmg:[N_("Dano da picareta"),N_("+15% de dano"),.15],spd:[N_("Velocidade de ataque"),N_("+10% de velocidade ao minerar"),.1],duration:[N_("Duração das habilidades"),N_("+10% de duração"),.1],gold:[N_("Ouro extra"),N_("+12% de ouro"),.12],energy:[N_("Energia máxima"),N_("+8% de energia máxima"),.08],mov:[N_("Velocidade de movimento"),N_("+10% de velocidade"),.1],xp:[N_("Ganho de experiência"),N_("+10% de experiência"),.1]};
+const RAR=[[N_("Comum"),1,"#9aa0a6",60],[N_("Incomum"),1.5,"#6fcf6f",25],[N_("Rara"),2,"#5aa0ff",10],[N_("Épica"),3,"#b06cff",4],[N_("Lendária"),5,"#ffb43a",1]];
 const xpNeed=l=>Math.round(BAL.xp.base*Math.pow(BAL.xp.k,l-1));
-function gainXp(n){if(!(n>0)||!isFinite(n))return;S.xp+=n*xpGainMult();let g=0;while(S.xp>=xpNeed(S.lvl)&&g++<50){S.xp-=xpNeed(S.lvl);S.lvl++;S.lvp++;say("Nível "+S.lvl+"!");sfx(1100,.4,"sine")}if(S.lvp>0&&!modal)levelUp()}
+function gainXp(n){if(!(n>0)||!isFinite(n))return;S.xp+=n*xpGainMult();let g=0;while(S.xp>=xpNeed(S.lvl)&&g++<50){S.xp-=xpNeed(S.lvl);S.lvl++;S.lvp++;say(__("Nível {0}!",S.lvl));sfx(1100,.4,"sine")}if(S.lvp>0&&!modal)levelUp()}
 function clearLevelChoiceTimer(){clearInterval(levelChoiceTicker);levelChoiceTicker=0;levelChoiceId++}
 function rollPerks(n){const pool=Object.keys(PK).filter(k=>pk(k)<10),out=[];while(out.length<n&&pool.length){const k=pool.splice(Math.floor(Math.random()*pool.length),1)[0];let r=Math.random()*100,ri=0;for(;ri<4;ri++){r-=RAR[ri][3];if(r<0)break}out.push([k,ri])}return out}
 function addPerk(k,m){S.pk[k]=Math.min(10,pk(k)+m)}
@@ -496,71 +1268,71 @@ function lvMove(d){if(modal!=="lv"||lvN<1)return;lvSel=(lvSel+d+lvN)%lvN;lvPaint
 function lvPaint(){document.querySelectorAll("#bx .card").forEach((c,i)=>c.classList.toggle("sel",i===lvSel))}
 function lvConfirm(){if(modal!=="lv"||!lvPick||performance.now()<lvLock)return;lvPick(lvSel)}
 function levelUp(){clearLevelChoiceTimer();const choiceId=levelChoiceId,b=openModal("lv"),opts=rollPerks(3);if(!opts.length){S.lvp=0;closeModal();return}
- b.innerHTML="<h2>Nível "+S.lvl+"</h2><div id='lvchoice-clock' style='color:var(--mute);margin-bottom:10px'>Escolha uma melhoria · 30 s</div>";
+ b.innerHTML="<h2>"+__("Nível {0}",S.lvl)+"</h2><div id='lvchoice-clock' style='color:var(--mute);margin-bottom:10px'>"+__("Escolha uma melhoria · {0} s",30)+"</div>";
  const w=document.createElement("div");w.className="cards";
  const choose=(k,ri)=>{if(choiceId!==levelChoiceId||S.lvp<=0||modal!=="lv")return;clearLevelChoiceTimer();S.lvp--;addPerk(k,RAR[ri][1]);sfx(800,.15,"triangle");modal=null;if(S.lvp>0)levelUp();else closeModal()};
- opts.forEach(([k,ri],oi)=>{const R=RAR[ri],c=document.createElement("div");c.className="card";c.style.borderColor=R[2];c.innerHTML="<div style='color:"+R[2]+";font-weight:700'>"+R[0]+"</div><div style='font-weight:600;margin:6px 0'>"+PK[k][0]+"</div><div>"+PK[k][1].replace(/\d+%/,m=>Math.round(parseFloat(m)*R[1])+"%")+"</div><div style='color:var(--mute);font-size:.8rem;margin-top:6px'>nv "+fmtN(pk(k))+" → "+fmtN(Math.min(10,pk(k)+R[1]))+"</div>";c.onclick=()=>choose(k,ri);c.onmouseenter=()=>{lvSel=oi;lvPaint()};w.appendChild(c)});
+ opts.forEach(([k,ri],oi)=>{const R=RAR[ri],c=document.createElement("div");c.className="card";c.style.borderColor=R[2];c.innerHTML="<div style='color:"+R[2]+";font-weight:700'>"+__(R[0])+"</div><div style='font-weight:600;margin:6px 0'>"+__(PK[k][0])+"</div><div>"+__(PK[k][1]).replace(/\d+%/,m=>Math.round(parseFloat(m)*R[1])+"%")+"</div><div style='color:var(--mute);font-size:.8rem;margin-top:6px'>"+__("nv {0} → {1}",fmtN(pk(k)),fmtN(Math.min(10,pk(k)+R[1])))+"</div>";c.onclick=()=>choose(k,ri);c.onmouseenter=()=>{lvSel=oi;lvPaint()};w.appendChild(c)});
  lvN=opts.length;lvSel=Math.floor((lvN-1)/2);lvPick=i=>choose(opts[i][0],opts[i][1]);lvLock=performance.now()+450;lvPaint();
- b.appendChild(w);lvPaint();const deadline=Date.now()+30000;levelChoiceTicker=setInterval(()=>{if(choiceId!==levelChoiceId||modal!=="lv"){clearLevelChoiceTimer();return}const secs=Math.max(0,Math.ceil((deadline-Date.now())/1000)),clock=$("lvchoice-clock");if(clock)clock.textContent="Escolha uma melhoria · "+secs+" s";if(secs===0){const rarity=Math.max(...opts.map(x=>x[1])),best=opts.filter(x=>x[1]===rarity),[k,ri]=best[Math.floor(Math.random()*best.length)];choose(k,ri)}},200)}
+ b.appendChild(w);lvPaint();const deadline=Date.now()+30000;levelChoiceTicker=setInterval(()=>{if(choiceId!==levelChoiceId||modal!=="lv"){clearLevelChoiceTimer();return}const secs=Math.max(0,Math.ceil((deadline-Date.now())/1000)),clock=$("lvchoice-clock");if(clock)clock.textContent=__("Escolha uma melhoria · {0} s",secs);if(secs===0){const rarity=Math.max(...opts.map(x=>x[1])),best=opts.filter(x=>x[1]===rarity),[k,ri]=best[Math.floor(Math.random()*best.length)];choose(k,ri)}},200)}
 
 // ===== 2-sistemas/04-habilidades.js — Habilidades permanentes, ativas (Fúria, Frenesi), dinamite e conquistas =====
 // Poderes de renascimento: só se compram com fragmentos (ganhos ao Renascer). [nome, descrição, nível máximo]. O nível N custa N+1 fragmentos (15 no total por poder).
 const SK={
- her:["Herança de ouro","Começa cada vida com 400 x nível² de ouro",5],
- ini:["Picareta herdada","Começa cada vida com a picareta do tipo de nível igual ao nível deste poder",4],
- ouro:["Veia eterna","+8% de ouro por nível",5],
- dmg:["Músculos do abismo","+8% de dano da picareta por nível",5],
- fol:["Fôlego eterno","+6% de energia máxima por nível",5],
- jato:["Pulmões de jato","-6% da energia gasta ao subir com o jato por nível",5],
- gar:["Faro de minério","+2% de chance de minério por nível",5],
- xp:["Sabedoria antiga","+10% de experiência por nível",5]
+ her:[N_("Herança de ouro"),N_("Começa cada vida com 400 x nível² de ouro"),5],
+ ini:[N_("Picareta herdada"),N_("Começa cada vida com a picareta do tipo de nível igual ao nível deste poder"),4],
+ ouro:[N_("Veia eterna"),N_("+8% de ouro por nível"),5],
+ dmg:[N_("Músculos do abismo"),N_("+8% de dano da picareta por nível"),5],
+ fol:[N_("Fôlego eterno"),N_("+6% de energia máxima por nível"),5],
+ jato:[N_("Pulmões de jato"),N_("-6% da energia gasta ao subir com o jato por nível"),5],
+ gar:[N_("Faro de minério"),N_("+2% de chance de minério por nível"),5],
+ xp:[N_("Sabedoria antiga"),N_("+10% de experiência por nível"),5]
 };
 // [nome, descrição, duração s, recarga s, desbloqueia ao chegar a X m]
-const SKL=[["Fúria do Minerador","Dano maior",BAL.skills.fury.dur,BAL.skills.fury.cd,BAL.skills.fury.at],["Escavação Frenética","Cava mais rápido",BAL.skills.frenzy.dur,BAL.skills.frenzy.cd,BAL.skills.frenzy.at]];
+const SKL=[[N_("Fúria do Minerador"),N_("Dano maior"),BAL.skills.fury.dur,BAL.skills.fury.cd,BAL.skills.fury.at],[N_("Escavação Frenética"),N_("Cava mais rápido"),BAL.skills.frenzy.dur,BAL.skills.frenzy.cd,BAL.skills.frenzy.at]];
 const skillDuration=i=>SKL[i][2]*skillDurationMult();
-const skillDescription=i=>(i===0?"Dano x"+fmtN(furyMult()):"Cava x"+fmtN(frenzyMult())+" mais rápido")+" por "+fmt(skillDuration(i))+" s (recarga "+SKL[i][3]+" s)";
-function useSk(i){if(modal||i<0||i>=SKL.length||S.best<SKL[i][4]||skCD[i]>0)return;skCD[i]=SKL[i][3];skT[i]=skillDuration(i);flash=.35;flashC="#ffb43a";sfx(500+i*120,.2,"sawtooth");say("Habilidade ativada: "+SKL[i][0])}
+const skillDescription=i=>i===0?__("Dano x{0} por {1} s (recarga {2} s)",fmtN(furyMult()),fmt(skillDuration(i)),SKL[i][3]):__("Cava x{0} mais rápido por {1} s (recarga {2} s)",fmtN(frenzyMult()),fmt(skillDuration(i)),SKL[i][3]);
+function useSk(i){if(modal||i<0||i>=SKL.length||S.best<SKL[i][4]||skCD[i]>0)return;skCD[i]=SKL[i][3];skT[i]=skillDuration(i);flash=.35;flashC="#ffb43a";sfx(500+i*120,.2,"sawtooth");say(__("Habilidade ativada: {0}",__(SKL[i][0])))}
 const dynMax=()=>dynCDt;   // recarga da última dinamite usada (BAL.dyn[tipo].cd): quanto mais forte, maior
 const DYN_IDS=["dyn","dyn2","dyn3","dyn4","dyn5"];   // tipos de dinamite, do mais fraco ao mais forte (números em BAL.dyn)
 // Dinamite em uso: a escolhida (tecla R troca); se acabou, usa a mais forte que ainda houver
 function dynPick(){if(have(S.dsel)>0||S.debug)return S.dsel;for(let i=DYN_IDS.length-1;i>=0;i--)if(have(DYN_IDS[i])>0)return DYN_IDS[i];return S.dsel}
-function dynNext(){const own=DYN_IDS.filter(k=>have(k)>0||k===S.dsel||S.debug);if(!own.length)return;const i=own.indexOf(S.dsel);S.dsel=own[(i+1)%own.length];say("Dinamite escolhida: "+ITEMS[S.dsel].n);sfx(620,.08,"triangle");refresh()}
+function dynNext(){const own=DYN_IDS.filter(k=>have(k)>0||k===S.dsel||S.debug);if(!own.length)return;const i=own.indexOf(S.dsel);S.dsel=own[(i+1)%own.length];say(__("Dinamite escolhida: {0}",ITEMS[S.dsel].n));sfx(620,.08,"triangle");refresh()}
 function boom(){
  if(modal||dynCD>0)return;
  const dk=dynPick();
- if(have(dk)<1&&!S.debug){say("Sem dinamite: compre na loja (na superfície)");return}
+ if(have(dk)<1&&!S.debug){say(__("Sem dinamite: compre na loja (na superfície)"));return}
  const DB=BAL.dyn[dk];
  const[tc,tr]=tgt();let tot=0,n=0;
  const R=DB.r,RI=Math.ceil(R),cells=[];
  for(let dx=-RI;dx<=RI;dx++)for(let dy=-RI;dy<=RI;dy++){const c=tc+dx,r=tr+dy;if(dx*dx+dy*dy>R*R||!canBlast(c,r))continue;cells.push([dx*dx+dy*dy,c,r])}
- if(!cells.length){say("Nada para explodir aqui");return}
+ if(!cells.length){say(__("Nada para explodir aqui"));return}
  if(!S.debug)S.items[dk]--;
  S.dsel=dk;
  cells.sort((x,y)=>x[0]-y[0]);let B=DB.p*clickPow();   // força da explosão = p x dano da picareta (gasta a dureza dos blocos; veios de pedra dura sempre quebram)
  for(const[,c,r]of cells){if(!isVein(c,r)){const hh=hardness(r);if(B<hh)continue;B-=hh}const o=collect(c,r);tot+=o.v;n++;if(Math.random()<.5){const p=blockXY(c,r);parts.push({x:p.x,y:p.y+T/2,vx:(Math.random()-.5)*300,vy:-Math.random()*260,l:.8,c:ITEMS[dk].c})}}
  dynCDt=DB.cd;dynCD=dynCDt;S.bombs++;const big=DYN_IDS.indexOf(dk);shake=Math.max(shake,BAL.shake.dyn[big]||0);flash=.4+big*.08;flashC=ITEMS[dk].c;sfx(90-big*8,.4+big*.08,"sawtooth");
- const p=blockXY(tc,tr);texts.push({x:p.x,y:p.y-T*.5,t:0,s:ITEMS[dk].n+": "+n+" blocos · +"+fmt(tot),c:ITEMS[dk].c,big:1});
+ const p=blockXY(tc,tr);texts.push({x:p.x,y:p.y-T*.5,t:0,s:__("{0}: {1} blocos · +{2}",ITEMS[dk].n,n,fmt(tot)),c:ITEMS[dk].c,big:1});
  if(n)spend(digCost(S.depth)*DB.e);   // dinamite: custa energia = e x o custo de cavar 1 bloco na profundidade atual
 }
-const ACH=[["Primeiros passos","Chegue a 10 m",()=>S.best>=10],["Subsolo","50 m",()=>S.best>=50],["Centenário","100 m",()=>S.best>=100],["Abismo","300 m",()=>S.best>=300],["Coração do abismo","Chegue ao fundo (1500 m)",()=>S.best>=FINAL_DEPTH],["Garimpeiro","50 minérios",()=>S.oc>=50],["Mina de ouro","500 minérios",()=>S.oc>=500],["Magnata","1M de ouro no total",()=>S.total>=1e6],["Primeira venda","Venda itens no baú",()=>S.sold>0],["Quase lá","Apague de energia uma vez",()=>S.deaths>0],["Picareta de ouro","Compre a picareta de Ouro",()=>S.tier>=5],["Túnel largo","Picareta ampla no nível máximo",()=>S.lv.wide>=UPS.wide.max],["Renascido","Use Renascer",()=>S.runs>0]];
+const ACH=[[N_("Primeiros passos"),N_("Chegue a 10 m"),()=>S.best>=10],[N_("Subsolo"),N_("50 m"),()=>S.best>=50],[N_("Centenário"),N_("100 m"),()=>S.best>=100],[N_("Abismo"),N_("300 m"),()=>S.best>=300],[N_("Coração do abismo"),N_("Chegue ao fundo (1500 m)"),()=>S.best>=FINAL_DEPTH],[N_("Garimpeiro"),N_("50 minérios"),()=>S.oc>=50],[N_("Mina de ouro"),N_("500 minérios"),()=>S.oc>=500],[N_("Magnata"),N_("1M de ouro no total"),()=>S.total>=1e6],[N_("Primeira venda"),N_("Venda itens no baú"),()=>S.sold>0],[N_("Quase lá"),N_("Apague de energia uma vez"),()=>S.deaths>0],[N_("Picareta de ouro"),N_("Compre a picareta de Ouro"),()=>S.tier>=5],[N_("Túnel largo"),N_("Picareta ampla no nível máximo"),()=>S.lv.wide>=UPS.wide.max],[N_("Renascido"),N_("Use Renascer"),()=>S.runs>0]];
 // Conquistas novas ficam SEMPRE no fim da lista: o save guarda o número de cada uma.
 ACH.push(
- ["Cavador de verdade","Chegue a 200 m",()=>S.best>=200],["Meia-descida","500 m",()=>S.best>=500],["Metade do caminho","750 m",()=>S.best>=750],["Mil metros","1000 m",()=>S.best>=1000],["Calor do magma","1200 m",()=>S.best>=1200],["Beira do fim","1400 m",()=>S.best>=1400],
- ["Colecionador","Descubra 5 minérios diferentes",()=>S.od.length>=5],["Catálogo completo","Descubra todos os minérios",()=>S.od.length>=ORES.length],["Brilho de diamante","Encontre um Diamante",()=>S.od.includes("Diamante")],["Luz do abismo","Encontre um Cristal do abismo",()=>S.od.includes("Cristal do abismo")],["Veia inesgotável","5000 minérios",()=>S.oc>=5000],
- ["Bilionário","1B de ouro no total",()=>S.total>=1e9],["Trilionário","1T de ouro no total",()=>S.total>=1e12],
- ["Britadeira","Quebre 1000 blocos",()=>S.blocks>=1000],["Máquina de escavar","Quebre 100 mil blocos",()=>S.blocks>=1e5],
- ["Ferreiro","Compre a picareta de Ferro",()=>S.tier>=2],["Mãos de diamante","Compre a picareta de Diamante",()=>S.tier>=6],["Lenda das picaretas","Tenha a picareta Primordial",()=>S.tier>=TIERS.length-1],
- ["Ao máximo","Deixe uma melhoria no nível máximo",()=>Object.keys(UPS).some(k=>S.lv[k]>=UPS[k].max)],["Arsenal completo","Todas as melhorias no nível máximo",()=>Object.keys(UPS).every(k=>S.lv[k]>=UPS[k].max)],["Teleportado","Desbloqueie o teleporte",()=>S.lv.tele>=1],
- ["Teimoso","Apague de energia 10 vezes",()=>S.deaths>=10],["Banquete","Coma 20 itens de energia",()=>S.eaten>=20],["Pavio curto","Use 10 dinamites",()=>S.bombs>=10],["Demolidor","Use 100 dinamites",()=>S.bombs>=100],["Viajante","Use o teleporte 10 vezes",()=>S.tps>=10],["Pedra no sapato","Quebre 20 pedras duras",()=>S.veins>=20],
- ["Veterano","Chegue ao nível 10",()=>S.lvl>=10],["Experiente","Nível 25",()=>S.lvl>=25],["Lendário","Nível 50",()=>S.lvl>=50],
- ["Ciclo","Renasça 3 vezes",()=>S.runs>=3],["Eterno","Renasça 10 vezes",()=>S.runs>=10],
- ["Comerciante","Venda no baú 25 vezes",()=>S.sold>=25],["Atacadista","Venda no baú 250 vezes",()=>S.sold>=250],
- ["Boa noite","Salve o jogo na cama",()=>S.sleeps>=1],["Sono pesado","Deite na cama 20 vezes",()=>S.sleeps>=20],["Cartógrafo","Coloque um marcador no mapa",()=>S.marks.length>=1],["Companhia","Chame o vagalume",()=>S.lv.pet>=1],["Despensa cheia","Tenha 99 de algum item da loja",()=>Object.keys(S.items).some(k=>ITEMS[k]&&!ITEMS[k].noShop&&S.items[k]>=99)],
- ["Fornalha acesa","Refine 1 minério na fornalha",()=>S.refined>=1],["Mestre ferreiro","Refine 1000 minérios",()=>S.refined>=1000],
- ["Empreiteiro","Entregue 10 contratos",()=>S.ctDone>=10],["Na sorte","Jogue na mesa de apostas",()=>S.spins>=1],["Viciado","Jogue 100 vezes na mesa de apostas",()=>S.spins>=100],["Caçador de tesouros","Abra um baú no subsolo",()=>S.chests>=1],["Baú épico","Abra um baú Épico ou melhor",()=>S.chTop>=4],["Sorte lendária","Abra um baú Lendário",()=>S.chTop>=5],
- ["Caça-baús","Abra 10 baús",()=>S.chests>=10],["Rei dos baús","Abra 100 baús",()=>S.chests>=100],["Coleção completa","Abra um baú de cada raridade",()=>S.chT.every(n=>n>0)],["Chuva de ouro","Abra 5 baús Lendários",()=>S.chT[4]>=5],["Presente dos baús","Ganhe 10 bônus de melhoria de baús",()=>S.chPk>=10],["Colecionador de cacos","Ache 10 fragmentos em baús",()=>S.chFr>=10],["Viajante de bolso","Use 5 poções de teleporte",()=>S.ptpUsed>=5]
+ [N_("Cavador de verdade"),N_("Chegue a 200 m"),()=>S.best>=200],[N_("Meia-descida"),N_("500 m"),()=>S.best>=500],[N_("Metade do caminho"),N_("750 m"),()=>S.best>=750],[N_("Mil metros"),N_("1000 m"),()=>S.best>=1000],[N_("Calor do magma"),N_("1200 m"),()=>S.best>=1200],[N_("Beira do fim"),N_("1400 m"),()=>S.best>=1400],
+ [N_("Colecionador"),N_("Descubra 5 minérios diferentes"),()=>S.od.length>=5],[N_("Catálogo completo"),N_("Descubra todos os minérios"),()=>S.od.length>=ORES.length],[N_("Brilho de diamante"),N_("Encontre um Diamante"),()=>S.od.includes("Diamante")],[N_("Luz do abismo"),N_("Encontre um Cristal do abismo"),()=>S.od.includes("Cristal do abismo")],[N_("Veia inesgotável"),N_("5000 minérios"),()=>S.oc>=5000],
+ [N_("Bilionário"),N_("1B de ouro no total"),()=>S.total>=1e9],[N_("Trilionário"),N_("1T de ouro no total"),()=>S.total>=1e12],
+ [N_("Britadeira"),N_("Quebre 1000 blocos"),()=>S.blocks>=1000],[N_("Máquina de escavar"),N_("Quebre 100 mil blocos"),()=>S.blocks>=1e5],
+ [N_("Ferreiro"),N_("Compre a picareta de Ferro"),()=>S.tier>=2],[N_("Mãos de diamante"),N_("Compre a picareta de Diamante"),()=>S.tier>=6],[N_("Lenda das picaretas"),N_("Tenha a picareta Primordial"),()=>S.tier>=TIERS.length-1],
+ [N_("Ao máximo"),N_("Deixe uma melhoria no nível máximo"),()=>Object.keys(UPS).some(k=>S.lv[k]>=UPS[k].max)],[N_("Arsenal completo"),N_("Todas as melhorias no nível máximo"),()=>Object.keys(UPS).every(k=>S.lv[k]>=UPS[k].max)],[N_("Teleportado"),N_("Desbloqueie o teleporte"),()=>S.lv.tele>=1],
+ [N_("Teimoso"),N_("Apague de energia 10 vezes"),()=>S.deaths>=10],[N_("Banquete"),N_("Coma 20 itens de energia"),()=>S.eaten>=20],[N_("Pavio curto"),N_("Use 10 dinamites"),()=>S.bombs>=10],[N_("Demolidor"),N_("Use 100 dinamites"),()=>S.bombs>=100],[N_("Viajante"),N_("Use o teleporte 10 vezes"),()=>S.tps>=10],[N_("Pedra no sapato"),N_("Quebre 20 pedras duras"),()=>S.veins>=20],
+ [N_("Veterano"),N_("Chegue ao nível 10"),()=>S.lvl>=10],[N_("Experiente"),N_("Nível 25"),()=>S.lvl>=25],[N_("Lendário"),N_("Nível 50"),()=>S.lvl>=50],
+ [N_("Ciclo"),N_("Renasça 3 vezes"),()=>S.runs>=3],[N_("Eterno"),N_("Renasça 10 vezes"),()=>S.runs>=10],
+ [N_("Comerciante"),N_("Venda no baú 25 vezes"),()=>S.sold>=25],[N_("Atacadista"),N_("Venda no baú 250 vezes"),()=>S.sold>=250],
+ [N_("Boa noite"),N_("Salve o jogo na cama"),()=>S.sleeps>=1],[N_("Sono pesado"),N_("Deite na cama 20 vezes"),()=>S.sleeps>=20],[N_("Cartógrafo"),N_("Coloque um marcador no mapa"),()=>S.marks.length>=1],[N_("Companhia"),N_("Chame o vagalume"),()=>S.lv.pet>=1],[N_("Despensa cheia"),N_("Tenha 99 de algum item da loja"),()=>Object.keys(S.items).some(k=>ITEMS[k]&&!ITEMS[k].noShop&&S.items[k]>=99)],
+ [N_("Fornalha acesa"),N_("Refine 1 minério na fornalha"),()=>S.refined>=1],[N_("Mestre ferreiro"),N_("Refine 1000 minérios"),()=>S.refined>=1000],
+ [N_("Empreiteiro"),N_("Entregue 10 contratos"),()=>S.ctDone>=10],[N_("Na sorte"),N_("Jogue na mesa de apostas"),()=>S.spins>=1],[N_("Viciado"),N_("Jogue 100 vezes na mesa de apostas"),()=>S.spins>=100],[N_("Caçador de tesouros"),N_("Abra um baú no subsolo"),()=>S.chests>=1],[N_("Baú épico"),N_("Abra um baú Épico ou melhor"),()=>S.chTop>=4],[N_("Sorte lendária"),N_("Abra um baú Lendário"),()=>S.chTop>=5],
+ [N_("Caça-baús"),N_("Abra 10 baús"),()=>S.chests>=10],[N_("Rei dos baús"),N_("Abra 100 baús"),()=>S.chests>=100],[N_("Coleção completa"),N_("Abra um baú de cada raridade"),()=>S.chT.every(n=>n>0)],[N_("Chuva de ouro"),N_("Abra 5 baús Lendários"),()=>S.chT[4]>=5],[N_("Presente dos baús"),N_("Ganhe 10 bônus de melhoria de baús"),()=>S.chPk>=10],[N_("Colecionador de cacos"),N_("Ache 10 fragmentos em baús"),()=>S.chFr>=10],[N_("Viajante de bolso"),N_("Use 5 poções de teleporte"),()=>S.ptpUsed>=5]
 );
-function checkAch(){for(let i=0;i<ACH.length;i++)if(!S.ach.includes(i)&&ACH[i][2]()){S.ach.push(i);say("Conquista: "+ACH[i][0]);sfx(1040,.3,"sine")}}
+function checkAch(){for(let i=0;i<ACH.length;i++)if(!S.ach.includes(i)&&ACH[i][2]()){S.ach.push(i);say(__("Conquista: {0}",__(ACH[i][0])));sfx(1040,.3,"sine")}}
 
 // ===== 2-sistemas/05-noite-estrelas.js — Estrela cadente (evento raro, só de noite) e indicadores de bônus da noite =====
 // De noite, de tempos em tempos, uma estrela cruza o céu e dá um bônus por BAL.star.len segundos: ouro x2 ou chance de minério x2.
@@ -568,11 +1340,11 @@ function checkAch(){for(let i=0;i<ACH.length;i++)if(!S.ach.includes(i)&&ACH[i][2
 function starFall(){
  starT=Math.random()<.5?0:1;star=BAL.star.len;
  shoot={t:0,len:2.2,x:.3+Math.random()*.4,y:.1+Math.random()*.2,dir:Math.random()<.5?-1:1};
- say(starT?"Estrela cadente! Minérios x"+BAL.star.luck+" por "+BAL.star.len+"s":"Estrela cadente! Ouro x"+BAL.star.gold+" por "+BAL.star.len+"s");
+ say(starT?__("Estrela cadente! Minérios x{0} por {1}s",BAL.star.luck,BAL.star.len):__("Estrela cadente! Ouro x{0} por {1}s",BAL.star.gold,BAL.star.len));
  sfx(1568,.25,"sine");sfx(2093,.4,"sine");
 }
 function starTick(dt){
- if(star>0){star-=dt;if(star<=0){star=0;say("O brilho da estrela se apagou")}}
+ if(star>0){star-=dt;if(star<=0){star=0;say(__("O brilho da estrela se apagou"))}}
  if(shoot){shoot.t+=dt;if(shoot.t>=shoot.len)shoot=null}
  if(nightAmt()<BAL.night.from)return;           // a espera só corre de noite
  starNext-=dt;if(starNext>0)return;
@@ -585,8 +1357,8 @@ let buffsHtml="";
 function buffsUI(){
  const el=$("buffs");if(!el)return;
  let h="";
- if(nightDive())h+="<div class='buff night'>"+BUFF_MOON+"<span>Noite · +"+Math.round(BAL.night.xp*100)+"% XP</span></div>";
- if(star>0)h+="<div class='buff star'>"+BUFF_STAR+"<span>"+(starT?"Sorte estelar · minérios x"+BAL.star.luck:"Chuva de ouro · ouro x"+BAL.star.gold)+" · "+Math.ceil(star)+"s</span></div>";
+ if(nightDive())h+="<div class='buff night'>"+BUFF_MOON+"<span>"+__("Noite · +{0}% XP",Math.round(BAL.night.xp*100))+"</span></div>";
+ if(star>0)h+="<div class='buff star'>"+BUFF_STAR+"<span>"+(starT?__("Sorte estelar · minérios x{0}",BAL.star.luck):__("Chuva de ouro · ouro x{0}",BAL.star.gold))+" · "+Math.ceil(star)+"s</span></div>";
  if(h!==buffsHtml){buffsHtml=h;el.innerHTML=h}
 }
 
@@ -609,9 +1381,9 @@ function furLoad(){
  if(n<=0)return false;
  b.n=Math.max(0,b.n-n);b.v=b.n>0?Math.max(0,b.v-v):0;
  f.n+=n;f.v+=v;f.tn+=n;
- const p=furXY();texts.push({x:p.x,y:p.y-T*1.4,t:0,s:"Fornalha: +"+n+" minérios",c:"#ff9a3a",big:1});
+ const p=furXY();texts.push({x:p.x,y:p.y-T*1.4,t:0,s:__("Fornalha: +{0} minérios",n),c:"#ff9a3a",big:1});
  sfx(200,.25,"sawtooth");setTimeout(()=>sfx(330,.2,"triangle"),120);
- say("Fornalha carregada: "+n+" minérios · pronta em "+fmtT(furEta()));
+ say(__("Fornalha carregada: {0} minérios · pronta em {1}",n,fmtT(furEta())));
  refresh();return true;
 }
 function furTick(dt){
@@ -622,16 +1394,16 @@ function furTick(dt){
   f.n-=1;f.v-=per;f.a-=1;S.gold+=g;S.total+=g;f.e+=g;f.tg+=g;S.refined++;
  }
  furPopT-=dt;
- if(f.e>0&&furPopT<=0&&atSurface()){const p=furXY();texts.push({x:p.x,y:p.y-T*1.4,t:0,s:"Refinado: +"+fmt(f.e),c:"#ffd45c",big:1});f.e=0;furPopT=1.2;sfx(1040,.07,"triangle")}
+ if(f.e>0&&furPopT<=0&&atSurface()){const p=furXY();texts.push({x:p.x,y:p.y-T*1.4,t:0,s:__("Refinado: +{0}",fmt(f.e)),c:"#ffd45c",big:1});f.e=0;furPopT=1.2;sfx(1040,.07,"triangle")}
  if(f.n<1){   // fila vazia: avisa o total
-  say("Fornalha: "+f.tn+" minérios refinados · +"+fmt(f.tg)+" de ouro");sfx(880,.12,"triangle");
+  say(__("Fornalha: {0} minérios refinados · +{1} de ouro",f.tn,fmt(f.tg)));sfx(880,.12,"triangle");
   S.fur={n:0,v:0,a:0,e:0,tg:0,tn:0};
  }
 }
 // Carrega só quando o jogador pede: clique do mouse na fornalha ou Espaço ao lado dela. Devolve true se tratou o comando (não cava).
 function furUse(){
  if(!nearFurnace())return false;
- if(!furLoad())say(S.bag.n>0?"Só há pedra comum na mochila: ela vai para o baú.":"Sem minérios na mochila para pôr na fornalha.");
+ if(!furLoad())say(S.bag.n>0?__("Só há pedra comum na mochila: ela vai para o baú."):__("Sem minérios na mochila para pôr na fornalha."));
  return true;
 }
 function furHit(px,py){   // o ponto (px,py) da tela está sobre o desenho da fornalha?
@@ -644,10 +1416,10 @@ function furHit(px,py){   // o ponto (px,py) da tela está sobre o desenho da fo
 // As cores passam de uma estação para a próxima em degradê contínuo: cada paleta vale por inteiro no MEIO da sua estação, e o nome muda no meio da mistura.
 // g/h = grama da linha 0 (corpo e topo claro, que também é a cor das folhinhas) · nh/nhh = colinas próximas (corpo e topo) · fh/fhh = colinas distantes (corpo e topo)
 const SEASONS=[
- {n:"Primavera",art:"a",g:"#5fb03c",h:"#9be065",nh:"#4aa65a",nhh:"#74cc70",fh:"#a8dcd4",fhh:"#c4eee6"},
- {n:"Verão",art:"o",g:"#548b31",h:"#80b949",nh:"#3f7d4a",nhh:"#5aa05a",fh:"#9cc4e0",fhh:"#b4d4ea"},
- {n:"Outono",art:"o",g:"#a9722a",h:"#e0a43a",nh:"#b4532b",nhh:"#dc8438",fh:"#d1ae94",fhh:"#e4c9b0"},
- {n:"Inverno",art:"o",g:"#c6d3dc",h:"#f4f8fb",nh:"#8ba3b8",nhh:"#c9d8e4",fh:"#a9bccd",fhh:"#d2dde8"}];
+ {get n(){return __("Primavera")},get msg(){return __("Chegou a primavera!")},g:"#5fb03c",h:"#9be065",nh:"#4aa65a",nhh:"#74cc70",fh:"#a8dcd4",fhh:"#c4eee6"},
+ {get n(){return __("Verão")},get msg(){return __("Chegou o verão!")},g:"#548b31",h:"#80b949",nh:"#3f7d4a",nhh:"#5aa05a",fh:"#9cc4e0",fhh:"#b4d4ea"},
+ {get n(){return __("Outono")},get msg(){return __("Chegou o outono!")},g:"#a9722a",h:"#e0a43a",nh:"#b4532b",nhh:"#dc8438",fh:"#d1ae94",fhh:"#e4c9b0"},
+ {get n(){return __("Inverno")},get msg(){return __("Chegou o inverno!")},g:"#c6d3dc",h:"#f4f8fb",nh:"#8ba3b8",nhh:"#c9d8e4",fh:"#a9bccd",fhh:"#d2dde8"}];
 const SEA_KEYS=["g","h","nh","nhh","fh","fhh"];
 const hexCh=(s,i)=>parseInt(s.substr(i,2),16);
 const mixHex=(a,b,k)=>"#"+[1,3,5].map(i=>Math.round(hexCh(a,i)+(hexCh(b,i)-hexCh(a,i))*k).toString(16).padStart(2,"0")).join("");
@@ -663,7 +1435,7 @@ function seasonTick(dt){
  S.sea=(S.sea+dt)%(BAL.season.len*4);
  const st=Math.floor(S.sea*2);if(st===seaStep)return;seaStep=st;   // as cores só são recalculadas a cada meio segundo (a mudança é lenta demais para se notar)
  SEA=seasonMix(S.sea);
- if(seaIdx>=0&&SEA.idx!==seaIdx){const s=SEASONS[SEA.idx];say("Chegou "+s.art+" "+s.n.toLowerCase()+"!")}
+ if(seaIdx>=0&&SEA.idx!==seaIdx){const s=SEASONS[SEA.idx];say(s.msg)}
  seaIdx=SEA.idx;
 }
 
@@ -672,12 +1444,12 @@ function seasonTick(dt){
 // Os valores cover/rain/snow/fog/wind vão em direção ao alvo do tempo atual aos poucos, então tudo aparece e some em degradê. Só se vê e se ouve com o céu à vista.
 // Desenho: 5-desenho/10-clima.js (céu escurecido, nuvens extras, chuva, neve, neblina, raio). Não é salvo: ao abrir o jogo o tempo começa limpo.
 const WX={
- clear:{n:"Céu limpo",cover:0,rain:0,snow:0,fog:0,wind:.3,msg:"O tempo abriu"},
- cloudy:{n:"Nublado",cover:.7,rain:0,snow:0,fog:0,wind:.5,msg:"O céu fechou"},
- rain:{n:"Chuva",cover:.85,rain:.6,snow:0,fog:0,wind:.6,msg:"Começou a chover"},
- storm:{n:"Tempestade",cover:1,rain:1,snow:0,fog:0,wind:1,msg:"Tempestade chegando!"},
- snow:{n:"Neve",cover:.7,rain:0,snow:.8,fog:0,wind:.4,msg:"Começou a nevar"},
- fog:{n:"Neblina",cover:.4,rain:0,snow:0,fog:.8,wind:.15,msg:"A neblina chegou"}};
+ clear:{get n(){return __("Céu limpo")},cover:0,rain:0,snow:0,fog:0,wind:.3,get msg(){return __("O tempo abriu")}},
+ cloudy:{get n(){return __("Nublado")},cover:.7,rain:0,snow:0,fog:0,wind:.5,get msg(){return __("O céu fechou")}},
+ rain:{get n(){return __("Chuva")},cover:.85,rain:.6,snow:0,fog:0,wind:.6,get msg(){return __("Começou a chover")}},
+ storm:{get n(){return __("Tempestade")},cover:1,rain:1,snow:0,fog:0,wind:1,get msg(){return __("Tempestade chegando!")}},
+ snow:{get n(){return __("Neve")},cover:.7,rain:0,snow:.8,fog:0,wind:.4,get msg(){return __("Começou a nevar")}},
+ fog:{get n(){return __("Neblina")},cover:.4,rain:0,snow:0,fog:.8,wind:.15,get msg(){return __("A neblina chegou")}}};
 const WX_KEYS=["clear","cloudy","rain","storm","snow","fog"];
 const wx={cur:"clear",left:90,cover:0,rain:0,snow:0,fog:0,wind:.3,clock:0,bolt:0,boltX:0,boltJ:[],nextBolt:12,thunder:[],bed:null,bedF:null};
 const skyVis=()=>{const g=rowY(0);return g<=0?0:clamp(g/(H*.12),0,1)};   // 0 = céu fora da tela (no subsolo), 1 = céu à vista
@@ -753,11 +1525,11 @@ function ctTick(dt){
 }
 const fmtClock=t=>{t=Math.max(0,Math.ceil(t));return Math.floor(t/60)+":"+String(t%60).padStart(2,"0")};   // m:ss do próximo contrato
 const ctReady=()=>S.ct.some(c=>c.p>=c.n);
-function ctText(c){const dp=c.d>0?" a partir de "+c.d+" m":"";return c.t==="blk"?"Quebre "+c.n+" blocos"+dp:c.t==="ore"?"Colete "+c.n+" de "+c.o+dp:"Chegue a "+c.n+" m de profundidade"}
+function ctText(c){const d=c.d;return c.t==="blk"?(d>0?__("Quebre {0} blocos a partir de {1} m",c.n,d):__("Quebre {0} blocos",c.n)):c.t==="ore"?(d>0?__("Colete {0} de {1} a partir de {2} m",c.n,__(c.o),d):__("Colete {0} de {1}",c.n,__(c.o))):__("Chegue a {0} m de profundidade",c.n)}
 function ctClaim(i){
  const c=S.ct[i];if(!c||c.p<c.n)return false;
  S.gold+=c.g;S.total+=c.g;S.ctDone++;gainXp(c.x);S.ct.splice(i,1);if(S.ctW<=0)S.ctW=BAL.contracts.cd;
- const x=colX(BOARD_C),y=rowY(0);texts.push({x,y:y-T*1.6,t:0,s:"Contrato: +"+fmt(c.g),c:"#ffe08a",big:1});
+ const x=colX(BOARD_C),y=rowY(0);texts.push({x,y:y-T*1.6,t:0,s:__("Contrato: +{0}",fmt(c.g)),c:"#ffe08a",big:1});
  for(let k=0;k<22;k++)parts.push({x,y:y-T*.9,vx:(Math.random()-.5)*260,vy:-140-Math.random()*300,l:.9,c:k%3?"#ffd45c":"#fff3a0",big:1});
  sfx(784,.1,"triangle");setTimeout(()=>sfx(988,.1,"triangle"),80);setTimeout(()=>sfx(1318,.2,"triangle"),160);
  return true;
@@ -778,12 +1550,12 @@ function paintBoard(){
  if(modal!=="ct")return;const b=$("bx");ctShown=S.ct.length;
  const rows=S.ct.map((c,i)=>{const ok=c.p>=c.n,o=c.t==="ore"?ORES.find(r=>r[0]===c.o):null,pc=Math.floor(c.p/c.n*100);
   return"<div class='crow"+(ok?" ok":"")+"'><div class='ci'><b>"+ctText(c)+"</b><div class='cbar'><i style='width:"+pc+"%'></i></div>"
-   +"<small>"+Math.floor(c.p)+" / "+c.n+" · recompensa "+fmt(c.g)+" de ouro + XP</small></div>"
-   +"<div class='cb'><button data-c='"+i+"' "+(ok?"":"disabled")+">"+(ok?"Entregar":"Em andamento")+"</button><a data-d='"+i+"'>Dispensar</a></div></div>"}).join("");
- b.innerHTML="<div class='board'><h2>Quadro de contratos</h2><div class='sub'>Missões que pagam um bônus. Conta a partir do momento em que aparece aqui; blocos e minérios só valem na profundidade indicada.</div>"
-  +(rows||"<div class='sub'>Nenhum contrato no quadro.</div>")
-  +(S.ct.length<BAL.contracts.slots?"<div class='mfoot'>Próximo contrato em <b id='ct-w'>"+fmtClock(S.ctW)+"</b></div>":"")
-  +"<button id='ctok' class='cl'>Fechar</button></div>";
+   +"<small>"+__("{0} / {1} · recompensa {2} de ouro + XP",Math.floor(c.p),c.n,fmt(c.g))+"</small></div>"
+   +"<div class='cb'><button data-c='"+i+"' "+(ok?"":"disabled")+">"+(ok?__("Entregar"):__("Em andamento"))+"</button><a data-d='"+i+"'>"+__("Dispensar")+"</a></div></div>"}).join("");
+ b.innerHTML="<div class='board'><h2>"+__("Quadro de contratos")+"</h2><div class='sub'>"+__("Missões que pagam um bônus. Conta a partir do momento em que aparece aqui; blocos e minérios só valem na profundidade indicada.")+"</div>"
+  +(rows||"<div class='sub'>"+__("Nenhum contrato no quadro.")+"</div>")
+  +(S.ct.length<BAL.contracts.slots?"<div class='mfoot'>"+__("Próximo contrato em <b id='ct-w'>{0}</b>",fmtClock(S.ctW))+"</div>":"")
+  +"<button id='ctok' class='cl'>"+__("Fechar")+"</button></div>";
  b.querySelectorAll("button[data-c]").forEach(x=>x.onclick=()=>{if(ctClaim(+x.dataset.c))refresh();paintBoard()});
  b.querySelectorAll("a[data-d]").forEach(x=>x.onclick=()=>{ctDrop(+x.dataset.d);paintBoard()});
  $("ctok").onclick=closeModal;
@@ -792,7 +1564,7 @@ function paintBoard(){
 // ===== 2-sistemas/11-cassino.js — Caça-níquel de 3 rolos com animação (aposta = % do seu ouro) =====
 // O resultado é sorteado na hora de girar, o ouro da aposta sai na hora e o prêmio fica guardado em S.pend até os rolos pararem (se fechar o jogo no meio, o prêmio é pago ao carregar o save).
 // Números em BAL.slot. O retorno teórico (slotRtp) fica perto de 90%: no longo prazo a máquina é um ralo de ouro, de propósito.
-const SLOT_NAMES=["Pedra","Cenoura","Moeda","Dinamite","Cristal","Estrela"];
+const SLOT_NAMES=[N_("Pedra"),N_("Cenoura"),N_("Moeda"),N_("Dinamite"),N_("Cristal"),N_("Estrela")];
 const slotTotalW=()=>BAL.slot.w.reduce((a,b)=>a+b,0);
 function slotRoll(){let r=Math.random()*slotTotalW();for(let i=0;i<BAL.slot.w.length;i++){r-=BAL.slot.w[i];if(r<0)return i}return 0}
 function slotMult(a,b,c){const B=BAL.slot;return a===b?(b===c?B.p3[a]:B.p2[a]):0}
@@ -840,7 +1612,7 @@ function slotDrawFrame(dt){
  g.strokeStyle="#d6a02a";g.lineWidth=3;g.strokeRect(1.5,1.5,w-3,h-3);
  // lâmpadas correndo na borda de cima (acendem mais rápido quando ganha)
  const won=!!(slFx&&slFx.done&&slFx.win>0),run=won?14:5;for(let i=0;i<17;i++){const on=((i+Math.floor(t*run))%3)===0;g.fillStyle=on?"#fff3a0":"#7a5a1c";g.beginPath();g.arc(14+i*(w-28)/16,13,4,0,7);g.fill();if(on){g.globalAlpha=.35;g.fillStyle="#ffd45c";g.beginPath();g.arc(14+i*(w-28)/16,13,9,0,7);g.fill();g.globalAlpha=1}}
- g.fillStyle="#ffd45c";g.font="900 18px "+FONT;g.textAlign="center";g.textBaseline="middle";g.fillText("CAÇA-NÍQUEL",w/2,32);
+ g.fillStyle="#ffd45c";g.font="900 18px "+FONT;g.textAlign="center";g.textBaseline="middle";g.fillText(__("CAÇA-NÍQUEL"),w/2,32);
  // rolos
  const cy=top+cell*1.5;
  slReels.forEach((R,i)=>{
@@ -904,9 +1676,9 @@ function slotFinish(){
   slFx.flash=f.kind===3?1:.25;slotCoins(f.kind===3?60+tiers*40:18,f.kind===3?1.4:.6);
   const notes=[523,659,784,1047,1319,1568];const n=f.kind===3?6:3;for(let i=0;i<n;i++)setTimeout(()=>{sfx(notes[i+(f.kind===3?0:1)],.16,"triangle");if(f.kind===3)sfx(notes[i]/2,.2,"sine")},i*95);
   slotCoinSfx(f.kind===3?28+tiers*14:9,f.kind===3?55:90);if(f.kind===3)setTimeout(()=>{sfx(1568,.5,"sine");sfx(2093,.6,"sine");sfx(784,.6,"triangle")},650);
-  if(f.kind===3&&f.res[0]===5){say("JACKPOT! "+fmt(f.win)+" de ouro");for(let i=0;i<8;i++)setTimeout(()=>{sfx(1568-i*80,.2,"square");slotCoins(30,1.5)},i*180)}
-  else say((f.kind===3?"3 "+SLOT_NAMES[f.res[0]]+"s! ":"Par de "+SLOT_NAMES[f.res[0]]+": ")+"+"+fmt(f.win)+" de ouro")}
- else{slWinTo=0;slText="Não foi dessa vez";sfx(220,.16,"triangle");setTimeout(()=>sfx(185,.18,"triangle"),130);setTimeout(()=>sfx(147,.3,"triangle"),270)}
+  if(f.kind===3&&f.res[0]===5){say(__("JACKPOT! {0} de ouro",fmt(f.win)));for(let i=0;i<8;i++)setTimeout(()=>{sfx(1568-i*80,.2,"square");slotCoins(30,1.5)},i*180)}
+  else say(f.kind===3?__("3 {0}s! +{1} de ouro",__(SLOT_NAMES[f.res[0]]),fmt(f.win)):__("Par de {0}: +{1} de ouro",__(SLOT_NAMES[f.res[0]]),fmt(f.win)))}
+ else{slWinTo=0;slText=__("Não foi dessa vez");sfx(220,.16,"triangle");setTimeout(()=>sfx(185,.18,"triangle"),130);setTimeout(()=>sfx(147,.3,"triangle"),270)}
  paintSlotUi();refresh();
 }
 // ---------- sons do caça-níquel (todos sintetizados) ----------
@@ -916,11 +1688,11 @@ function slotCoinSfx(n,gap){for(let i=0;i<n;i++)setTimeout(()=>{sfx(1700+Math.ra
 function slotSpin(){
  if(slotBusy||modal!=="slot")return;
  const bet=slotBetAmt(slotSel);
- if(!(S.gold>=bet)||!(bet>0)){say("Ouro insuficiente para essa aposta");sfx(140,.1,"square");return}
+ if(!(S.gold>=bet)||!(bet>0)){say(__("Ouro insuficiente para essa aposta"));sfx(140,.1,"square");return}
  const res=[slotRoll(),slotRoll(),slotRoll()],m=slotMult(res[0],res[1],res[2]),win=bet*m;
  const kind=res[0]===res[1]?(res[1]===res[2]?3:2):0;
  S.gold-=bet;S.pend=win;S.spins++;save();   // aposta sai agora, prêmio fica pendente até os rolos pararem
- slotBusy=true;slWinShow=0;slWinTo=0;slText="Girando...";slParts=[];
+ slotBusy=true;slWinShow=0;slWinTo=0;slText=__("Girando...");slParts=[];
  slFx={bet,win,res,kind,near:kind===2,done:false,stopped:0,flash:0,lost:win<=0};
  const S0=BAL.slot.spin;
  slReels.forEach((R,i)=>{R.state="spin";R.vel=15+i*1.4;R.res=res[i];R.slow=i===2&&kind>=2;R.stopAt=slT+S0[i]+(i===2&&kind>=2?.9:0);R.lastTick=-1});
@@ -937,18 +1709,18 @@ function slotKey(e){
 function paintSlotUi(){
  const ui=$("slui");if(!ui)return;
  const bets=BAL.slot.bets.map((p,i)=>"<button data-b='"+i+"' class='"+(i===slotSel?"on":"")+"' "+(slotBusy?"disabled":"")+">"+Math.round(p*100)+"%<small>"+fmt(slotBetAmt(i))+"</small></button>").join("");
- const sym=BAL.slot.p3.map((m,i)=>"<span>"+SLOT_NAMES[i]+" <b>x"+m+"</b></span>").join("");
- ui.innerHTML="<div class='sgold'>Ouro: <b>"+fmt(S.gold)+"</b></div><div class='sbets'>"+bets+"</div>"
-  +"<button id='slgo' class='go' "+(slotBusy||!(S.gold>=slotBetAmt(slotSel)&&slotBetAmt(slotSel)>0)?"disabled":"")+">"+(slotBusy?"Girando...":"Girar · "+fmt(slotBetAmt(slotSel)))+"</button>"
-  +"<div class='stbl'>3 iguais: "+sym+"<br>2 primeiros iguais: x0,5 a x8 conforme o símbolo</div>"
-  +"<div class='snote'>Retorno médio de ~"+Math.round(slotRtp()*100)+"%: a casa sempre ganha no longo prazo. Aposte só o que não vai fazer falta."
-  +(S.spins?" · Saldo da máquina: <b style='color:"+(S.slotNet>=0?"#6fe3a0":"#ff7a6a")+"'>"+(S.slotNet>=0?"+":"-")+fmt(Math.abs(S.slotNet))+"</b>":"")+"</div>"
-  +"<button id='slok' class='cl' "+(slotBusy?"disabled":"")+">Fechar</button>";
+ const sym=BAL.slot.p3.map((m,i)=>"<span>"+__(SLOT_NAMES[i])+" <b>x"+m+"</b></span>").join("");
+ ui.innerHTML="<div class='sgold'>"+__("Ouro: <b>{0}</b>",fmt(S.gold))+"</div><div class='sbets'>"+bets+"</div>"
+  +"<button id='slgo' class='go' "+(slotBusy||!(S.gold>=slotBetAmt(slotSel)&&slotBetAmt(slotSel)>0)?"disabled":"")+">"+(slotBusy?__("Girando..."):__("Girar · {0}",fmt(slotBetAmt(slotSel))))+"</button>"
+  +"<div class='stbl'>"+__("3 iguais: {0}",sym)+"<br>"+__("2 primeiros iguais: x0,5 a x8 conforme o símbolo")+"</div>"
+  +"<div class='snote'>"+__("Retorno médio de ~{0}%: a casa sempre ganha no longo prazo. Aposte só o que não vai fazer falta.",Math.round(slotRtp()*100))
+  +(S.spins?" · "+__("Saldo da máquina:")+" <b style='color:"+(S.slotNet>=0?"#6fe3a0":"#ff7a6a")+"'>"+(S.slotNet>=0?"+":"-")+fmt(Math.abs(S.slotNet))+"</b>":"")+"</div>"
+  +"<button id='slok' class='cl' "+(slotBusy?"disabled":"")+">"+__("Fechar")+"</button>";
  ui.querySelectorAll("button[data-b]").forEach(b=>b.onclick=()=>{slotSel=+b.dataset.b;paintSlotUi();sfx(560,.04,"sine")});
  $("slgo").onclick=slotSpin;$("slok").onclick=()=>{if(!slotBusy)closeModal()};
 }
 function openSlot(){
- const b=openModal("slot");sfx(660,.06,"triangle");setTimeout(()=>sfx(880,.08,"triangle"),70);b.style.maxWidth="560px";slotBusy=false;slFx=null;slWinShow=0;slWinTo=0;slText="Boa sorte!";slParts=[];
+ const b=openModal("slot");sfx(660,.06,"triangle");setTimeout(()=>sfx(880,.08,"triangle"),70);b.style.maxWidth="560px";slotBusy=false;slFx=null;slWinShow=0;slWinTo=0;slText=__("Boa sorte!");slParts=[];
  b.innerHTML="<div class='casino'><canvas id='slcv'></canvas><div id='slui'></div></div>";
  slCv=$("slcv");const dpr=Math.min(2,window.devicePixelRatio||1);slCv.width=SL.w*dpr;slCv.height=SL.h*dpr;slCv.style.cssText="width:100%;max-width:"+SL.w+"px;aspect-ratio:"+SL.w+"/"+SL.h+";display:block;margin:0 auto 10px;border-radius:10px;image-rendering:auto";
  slG=slCv.getContext("2d");slotInitReels();paintSlotUi();
@@ -968,8 +1740,8 @@ function chestRoll(r,ti=chestTierPick(Math.random())){
  let perk=null;const pool=Object.keys(PK).filter(k=>pk(k)<10);
  if(pool.length&&Math.random()<t.pk[0])perk=[pool[Math.floor(Math.random()*pool.length)],t.pk[1]];
  const shown=items.map(([k,q])=>[ITEMS[k].n+" x"+q,ITEMS[k].c]);
- if(ore)shown.push(["Minério: "+ore[0]+" x"+ore[1],ore[2]]);
- if(frag)shown.push(["Fragmentos x"+frag,"#ffd45c"]);
+ if(ore)shown.push([__("Minério: {0} x{1}",__(ore[0]),ore[1]),ore[2]]);
+ if(frag)shown.push([__("Fragmentos x{0}",frag),"#ffd45c"]);
  return{ti,gold,xp,items,ore,frag,shown,perk,r};
 }
 function chestFound(r,ti){
@@ -1019,8 +1791,8 @@ function openChest(R){
 const chReady=()=>chT>=chDoneAt;
 function paintChUi(){
  const ui=$("chui");if(!ui)return;
- const q=chQ.length?"<div class='snote'>+ "+chQ.length+" baú(s) na fila</div>":"";
- ui.innerHTML="<button id='chok' class='go'>"+(chReady()?"Coletar":"Pular")+"</button>"+q;
+ const q=chQ.length?"<div class='snote'>"+__("+ {0} baú(s) na fila",chQ.length)+"</div>":"";
+ ui.innerHTML="<button id='chok' class='go'>"+(chReady()?__("Coletar"):__("Pular"))+"</button>"+q;
  $("chok").onclick=chestAdvance;
 }
 function chestAdvance(){
@@ -1107,20 +1879,20 @@ function chDraw(dt){
  if(!popped&&build>.3&&Math.random()<dt*(6+build*40))chParts.push({x:cx+(Math.random()-.5)*8*k,y:byy-2,vx:(Math.random()-.5)*50,vy:-60-Math.random()*90,g:60,l:.5+Math.random()*.4,ml:.9,s:2,c:auraC});
  // faixa com a raridade
  if(popped&&tr>.35){
-  const e=Math.min(1,(tr-.35)/.4),sc=easeOutBack(e),txt="BAÚ "+T.n.toUpperCase()+"!";
+  const e=Math.min(1,(tr-.35)/.4),sc=easeOutBack(e),txt=__("BAÚ {0}!",__(T.n).toUpperCase());
   g.save();g.translate(cx,56);g.scale(sc,sc);g.font="900 "+(chR.ti>=3?34:30)+"px "+FONT;g.textAlign="center";g.textBaseline="middle";
   g.lineWidth=7;g.lineJoin="round";g.strokeStyle="rgba(8,6,12,.9)";g.strokeText(txt,0,0);
   g.fillStyle=chR.ti===4?"hsl("+(40+Math.sin(t*6)*12)+",100%,"+(60+Math.sin(t*9)*8)+"%)":T.c;g.fillText(txt,0,0);g.restore();
-  g.font="700 11px "+FONT;g.textAlign="center";g.fillStyle="rgba(255,255,255,"+(e*.6)+")";g.fillText("achado a "+chR.r+" m de profundidade",cx,86)}
+  g.font="700 11px "+FONT;g.textAlign="center";g.fillStyle="rgba(255,255,255,"+(e*.6)+")";g.fillText(__("achado a {0} m de profundidade",chR.r),cx,86)}
  // prêmios
  if(popped&&tr>1.2){
   g.textAlign="center";g.textBaseline="middle";g.font="900 24px "+FONT;g.lineWidth=5;g.lineJoin="round";
-  const gt="+"+fmt(Math.floor(chShow))+" de ouro";g.strokeStyle="rgba(8,6,12,.9)";g.strokeText(gt,cx,262);g.fillStyle="#ffd45c";g.fillText(gt,cx,262);
+  const gt=__("+{0} de ouro",fmt(Math.floor(chShow)));g.strokeStyle="rgba(8,6,12,.9)";g.strokeText(gt,cx,262);g.fillStyle="#ffd45c";g.fillText(gt,cx,262);
   g.font="700 12px "+FONT;g.fillStyle="#9ad7ff";g.fillText("+"+fmt(Math.round(chR.xp))+" XP",cx,284);
   for(let i=0;i<chItemN;i++){const it=chR.shown[i],y=306+Math.floor(i/2)*20,col=i%2,n=Math.min(2,chR.shown.length-Math.floor(i/2)*2),x=cx+(col-(n-1)/2)*200;
    const pop=Math.min(1,(tr-2.1-i*.25)/.2);g.globalAlpha=Math.max(0,pop);g.fillStyle=it[1];g.fillRect(x-80,y-5,10,10);g.fillStyle="#fff";g.font="700 12px "+FONT;g.textAlign="left";g.fillText(it[0],x-66,y);g.textAlign="center";g.globalAlpha=1}}
  if(chR.perk&&chItemN>=chR.shown.length){const[pkk,pri]=chR.perk,RR=RAR[pri],pt=tr-2.1-chR.shown.length*.25,y=306+Math.ceil(chR.shown.length/2)*20+8;
-  if(pt>0){g.globalAlpha=Math.min(1,pt/.25);g.font="900 13px "+FONT;g.textAlign="center";g.textBaseline="middle";g.lineWidth=4;g.strokeStyle="rgba(8,6,12,.9)";const tx="BÔNUS "+RR[0].toUpperCase()+": "+PK[pkk][0]+" +"+fmtN(chR.perk[2]??RR[1])+" nv";g.strokeText(tx,cx,y);g.fillStyle=RR[2];g.fillText(tx,cx,y);g.globalAlpha=1}}
+  if(pt>0){g.globalAlpha=Math.min(1,pt/.25);g.font="900 13px "+FONT;g.textAlign="center";g.textBaseline="middle";g.lineWidth=4;g.strokeStyle="rgba(8,6,12,.9)";const tx=__("BÔNUS {0}: {1} +{2} nv",__(RR[0]).toUpperCase(),__(PK[pkk][0]),fmtN(chR.perk[2]??RR[1]));g.strokeText(tx,cx,y);g.fillStyle=RR[2];g.fillText(tx,cx,y);g.globalAlpha=1}}
  // flash da abertura
  if(chFlash>0){chFlash=Math.max(0,chFlash-dt*2.6);g.fillStyle="rgba(255,255,255,"+chFlash*.85+")";g.fillRect(-10,-10,w+20,h+20)}
  g.restore();
@@ -1218,7 +1990,7 @@ function collect(c,r){
  let v=blockGold(r)*(ore?ore[1]*n:vein?VEIN_GOLD:1);
  S.bag.v+=v;S.bag.n+=n;S.blocks++;if(vein)S.veins++;if(rich)S.rich++;
  const key=ore?ore[0]:vein?"Pedra dura":"Pedra";S.bag.o[key]=(S.bag.o[key]||0)+n;S.bag.ov[key]=(S.bag.ov[key]||0)+v;
- if(ore){S.oc+=n;if(!S.od.includes(ore[0])){S.od.push(ore[0]);say("Novo minério: "+ore[0])}}
+ if(ore){S.oc+=n;if(!S.od.includes(ore[0])){S.od.push(ore[0]);say(__("Novo minério: {0}",__(ore[0])))}}
  dug.add(c+","+r);
  const chk=chestAt(c,r);if(chk)chestFound(r,chk-1);   // baú: o prêmio é sorteado e pago agora; a animação de abertura roda assim que não houver outra janela aberta
  ctProg("blk",null,1,r);if(ore)ctProg("ore",ore[0],n,r);
@@ -1226,6 +1998,27 @@ function collect(c,r){
 }
 
 // ===== 3-mundo/03-mineracao.js — Movimento, golpes, picareta ampla (dois lados), combo e escavação automática =====
+// Chegada à Rocha-mãe: tremor, clarão dourado com o título e uma fanfarra (só na primeira vez de cada vida em que se chega ao fundo)
+function reachBottom(){
+ shake=Math.max(shake,10);flash=1.8;flashC="#ffd45c";flashText=__("VOCÊ CHEGOU AO FUNDO");
+ [523,659,784,1047,1319,1568].forEach((f,i)=>setTimeout(()=>{sfx(f,.35,"triangle");sfx(f/2,.4,"sine")},i*140));
+ setTimeout(()=>{sfx(1047,.9,"sine");sfx(1319,.9,"sine");sfx(1568,.9,"sine");sfx(110,.6,"sawtooth")},900);
+ setTimeout(openBottom,2800);
+}
+// Janela depois da cena: resumo da jornada e a escolha entre Renascer agora ou continuar no fundo
+function openBottom(){
+ if(modal||S.depth<FINAL_DEPTH){setTimeout(openBottom,800);return}
+ const b=openModal("bottom");b.style.maxWidth="420px";
+ const g=prestGain(),tm=Math.floor(S.play),hh=Math.floor(tm/3600),mm=Math.floor(tm%3600/60),
+  row=(l,v)=>"<div class='st'><b>"+v+"</b><small>"+l+"</small></div>";
+ b.innerHTML="<div class='dead'><h2>"+__("VOCÊ CHEGOU AO FUNDO")+"</h2><div class='sub'>"+__("Sua jornada até aqui")+"</div>"
+  +"<div class='grid'>"+row(__("TEMPO DE JOGO"),hh>0?__("{0} h {1} min",hh,mm):__("{0} min",mm))+row(__("BLOCOS QUEBRADOS"),fmt(S.blocks))+row(__("MINÉRIOS COLETADOS"),fmt(S.oc))+row(__("RENASCIMENTOS"),S.runs)+"</div>"
+  +"<div class='tip'>"+__("Renascer troca esta vida por <b>{0}</b> fragmentos (poderes permanentes). Você pode continuar aqui e renascer depois, na aba Poder.",g)+"</div>"
+  +"<button id='bt-re'>"+__("Renascer agora")+"</button><button id='bt-no' style='margin-top:8px'>"+__("Continuar no fundo")+"</button></div>";
+ $("bt-no").onclick=closeModal;
+ $("bt-re").onclick=()=>{closeModal();doRebirth()};
+ $("bt-no").focus();
+}
 function move(d){if(modal)return;setDir(d);const[a,b]=tgt();if(isDug(a,b)){S.prog=0;step(d==="down")}}   // descer por buraco já cavado é de graça
 function step(free){
  const[tc]=tgt();
@@ -1234,10 +2027,10 @@ function step(free){
  else S.depth++;
  S.depth=clamp(S.depth,0,FINAL_DEPTH);
  if(S.depth>S.runMax)S.runMax=S.depth;
- if(S.depth>S.best){S.best=S.depth;if(S.best%50===0){say("Novo recorde: "+S.best+" m");gainXp(25);sfx(1200,.3,"sine")}}
+ if(S.depth>S.best){S.best=S.depth;if(S.best%50===0){say(__("Novo recorde: {0} m",S.best));gainXp(25);sfx(1200,.3,"sine")}}
  const L=layerOf(S.depth);
- if(L>layerSeen){layerSeen=L;cmbBanner=1;cmbBannerT=L>=BIO.length-1?"CORAÇÃO DO ABISMO":"CAMADA: "+BIO[L][0].toUpperCase();sfx(330,.4,"triangle");sfx(494,.5,"triangle");
-  if(S.depth>=FINAL_DEPTH)say("A Rocha-mãe é inquebrável: você chegou ao fundo!")}
+ if(L>layerSeen){layerSeen=L;cmbBanner=1;cmbBannerT=L>=BIO.length-1?__("CORAÇÃO DO ABISMO"):__("CAMADA: {0}",__(BIO[L][0]).toUpperCase());sfx(330,.4,"triangle");sfx(494,.5,"triangle");
+  if(S.depth>=FINAL_DEPTH){say(__("A Rocha-mãe é inquebrável: você chegou ao fundo!"));reachBottom()}}
  if(S.dir==="up"){jetT=JET_FLAME;sfx(140+Math.random()*30,.07,"sawtooth");if(S.depth>=0)spend(stepCost(Math.max(0,S.depth))*jetMult())}   // subir: mochila a jato, gasta o passo inteiro
  else if(S.depth>0&&!free)spend(stepCost(Math.max(0,S.depth-1))*.5);   // descer ou andar de lado: metade
 }
@@ -1251,16 +2044,16 @@ function extra(tc,tr){
   for(let i=0;i<3;i++)parts.push({x:p.x,y:p.y+T/2,vx:(Math.random()-.5)*180,vy:-Math.random()*170,l:.5,c:o.ore?o.ore[2]:blockColor(r,c,hash(r,i)*8)});
   if(o.ore&&ORES.indexOf(o.ore)>=2)texts.push({x:p.x,y:p.y-T*.2,t:0,s:o.ore[0],c:o.ore[2]});
  }
- if(lavaE>0){const p=blockXY(tc,tr);texts.push({x:p.x,y:p.y-T*1.1,t:0,s:"Lava! -"+Math.round(lavaE)+" de energia",c:"#ff5a1f",big:1});spend(lavaE)}
+ if(lavaE>0){const p=blockXY(tc,tr);texts.push({x:p.x,y:p.y-T*1.1,t:0,s:__("Lava! -{0} de energia",Math.round(lavaE)),c:"#ff5a1f",big:1});spend(lavaE)}
 }
 // Marcos do combo: a cada um aparece uma faixa grande, tela pisca na cor do nível e toca uma fanfarra
-const CMB_MS=[[10,"ÓTIMO!"],[25,"INCRÍVEL!"],[50,"IMPARÁVEL!"],[100,"LENDÁRIO!"],[200,"MÍTICO!"],[400,"DIVINO!"]];
+const CMB_MS=[[10,N_("ÓTIMO!")],[25,N_("INCRÍVEL!")],[50,N_("IMPARÁVEL!")],[100,N_("LENDÁRIO!")],[200,N_("MÍTICO!")],[400,N_("DIVINO!")]];
 function onCombo(){
  cmbPulse=1;if(cmb>cmbMax)cmbMax=cmb;
  const ms=CMB_MS.findIndex(m=>m[0]===cmb),col=comboColor(cmb),cp=comboXY(),cx=cp.x,cy=cp.y;
  comboSfx(cmb,ms);
  if(ms>=0){   // marco: faixa + explosão de faíscas + flash + tremor
-  cmbBanner=1;cmbBannerT=CMB_MS[ms][1];cmbTier=ms+1;
+  cmbBanner=1;cmbBannerT=__(CMB_MS[ms][1]);cmbTier=ms+1;
   for(let i=0;i<14+ms*3;i++){const a=Math.random()*6.283,v=90+Math.random()*190;parts.push({x:cx,y:cy,vx:Math.cos(a)*v,vy:Math.sin(a)*v-70,l:.7,c:i%3?col:"#ffffff"})}
   flash=Math.min(.2,.1+ms*.02);flashC=col;flashText="";
  }else if(cmb>=10&&cmb%5===0){   // a cada 5 golpes: chuvinha de faíscas
@@ -1280,21 +2073,21 @@ function breakPrimary(tc,tr,auto){
  for(let i=0;i<(rich?26:10);i++)parts.push({x:p.x,y:p.y+T/2,vx:(Math.random()-.5)*240,vy:-Math.random()*220,l:.7,c:ore?ore[2]:"#ffd45c"});
  for(let i=0;i<6;i++)parts.push({x:p.x+(Math.random()-.5)*T*.8,y:p.y+Math.random()*T,vx:(Math.random()-.5)*110,vy:-30-Math.random()*90,l:.6,c:blockColor(tr,tc,hash(tr,i)*8)});
  extra(tc,tr);
- if(Math.random()<.02){const g=maxEn()*.06;S.en=Math.min(maxEn(),S.en+g);texts.push({x:p.x,y:p.y-T*.7,t:0,s:"+Energia",c:"#6ff0ff",big:1});sfx(1320,.15,"sine")}
- if(lava(tc,tr)){const l=lavaDmg(tr);texts.push({x:p.x,y:p.y-T*.9,t:0,s:"Lava! -"+Math.round(l)+" de energia",c:"#ff5a1f",big:1});spend(l)}
+ if(Math.random()<.02){const g=maxEn()*.06;S.en=Math.min(maxEn(),S.en+g);texts.push({x:p.x,y:p.y-T*.7,t:0,s:__("+Energia"),c:"#6ff0ff",big:1});sfx(1320,.15,"sine")}
+ if(lava(tc,tr)){const l=lavaDmg(tr);texts.push({x:p.x,y:p.y-T*.9,t:0,s:__("Lava! -{0} de energia",Math.round(l)),c:"#ff5a1f",big:1});spend(l)}
  spend(digCost(tr)*(auto?AUTO_ENERGY:1));
 }
 function hit(dmg,crit,auto){
  const[a,b]=tgt();
  if(isDug(a,b))return;
- if(!canBreak(a,b)){S.prog=0;if(isVein(a,b)&&!auto){hitSfx("hard",b);if(toastT<=0)say("Pedra dura: só quebra com dinamite")}return}
+ if(!canBreak(a,b)){S.prog=0;if(isVein(a,b)&&!auto){hitSfx("hard",b);if(toastT<=0)say(__("Pedra dura: só quebra com dinamite"))}return}
  const d0=S.deaths;
  if(!auto||Math.random()<.04)swing=1;
  if(!auto)hitSfx(blockKind(a,b),b);
  S.prog+=dmg;
  const p=blockXY(a,b);
  if(!auto||Math.random()<.05)for(let i=0;i<4;i++)parts.push({x:p.x+(Math.random()-.5)*T*.6,y:p.y+T/2,vx:(Math.random()-.5)*120,vy:-Math.random()*140,l:.5,c:blockColor(b,a,hash(b,i)*8)});
- if(crit){texts.push({x:p.x+(Math.random()-.5)*40,y:p.y-T*.5,t:0,s:"CRÍTICO! "+fmt(dmg),c:"#ff7a3a",big:1});shake=Math.max(shake,BAL.shake.crit)}   // tremor de tela: só no crítico e nas dinamites grandes (BAL.shake)
+ if(crit){texts.push({x:p.x+(Math.random()-.5)*40,y:p.y-T*.5,t:0,s:__("CRÍTICO! {0}",fmt(dmg)),c:"#ff7a3a",big:1});shake=Math.max(shake,BAL.shake.crit)}   // tremor de tela: só no crítico e nas dinamites grandes (BAL.shake)
  for(let g=0;g<40;g++){
   const[tc,tr]=tgt();if(!canBreak(tc,tr))break;
   const h=hardness(tr);if(S.prog<h)break;
@@ -1309,21 +2102,21 @@ function clickDig(){if(modal)return;if(atSurface()){if(nearFurnace()){furUse();r
 // ===== 4-interface/01-painel.js — Construção do painel (build) e atualização da interface (refresh), Renascer e apagar progresso =====
 const mk=(tag,cls,html)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e};
 const upBtn=(id,fn)=>{const b=mk("button","up",'<span class="n"></span><span class="d"></span><span class="c"></span>');b.id=id;b.onclick=fn;return b};
-const GROUPS=["Picareta","Energia","Escavação automática","Sorte e experiência","Habilidades","Utilidades","Fornalha"];
+const GROUPS=[N_("Picareta"),N_("Energia"),N_("Escavação automática"),N_("Sorte e experiência"),N_("Habilidades"),N_("Utilidades"),N_("Fornalha")];
 function build(){
  $("qty").innerHTML="";
- [[1,"x1"],[10,"x10"],[100,"x100"],[0,"Máx"]].forEach(([v,t])=>{const b=mk("button",qty===v?"on":"",t);b.onclick=()=>{qty=v;build()};$("qty").appendChild(b)});
+ [[1,"x1"],[10,"x10"],[100,"x100"],[0,__("Máx")]].forEach(([v,t])=>{const b=mk("button",qty===v?"on":"",t);b.onclick=()=>{qty=v;build()};$("qty").appendChild(b)});
  const box=$("ups");box.innerHTML="";
  for(const g of GROUPS){
-  box.appendChild(mk("h2",null,g));
+  box.appendChild(mk("h2",null,__(g)));
   if(g==="Fornalha"){const m=mk("div","ph");m.id="furmsg";box.appendChild(m)}
   if(g==="Picareta"){const t=upBtn("u-tier",buyTier);t.classList.add("tier");box.appendChild(t)}
   for(const k in UPS)if(UPS[k].g===g)box.appendChild(upBtn("u-"+k,()=>buy(k)));
  }
  const sh=$("shop");sh.innerHTML="";
  $("shopqty").innerHTML="";
- [[1,"x1"],[10,"x10"],[0,"Máx"]].forEach(([v,t])=>{const b=mk("button",qty===v?"on":"",t);b.onclick=()=>{qty=v;build()};$("shopqty").appendChild(b)});
- sh.appendChild(mk("h2",null,"Consumíveis"));
+ [[1,"x1"],[10,"x10"],[0,__("Máx")]].forEach(([v,t])=>{const b=mk("button",qty===v?"on":"",t);b.onclick=()=>{qty=v;build()};$("shopqty").appendChild(b)});
+ sh.appendChild(mk("h2",null,__("Consumíveis")));
  for(const k in ITEMS)if(!ITEMS[k].noShop)sh.appendChild(upBtn("i-"+k,()=>buyItem(k)));
  const sk=$("sks");sk.innerHTML="";
  for(const k in SK)sk.appendChild(upBtn("s-"+k,()=>{const l=S.sk[k];if(S.runs>0&&l<SK[k][2]&&S.pts>=l+1){S.pts-=l+1;S.sk[k]++;sfx(700,.12,"triangle");refresh()}}));
@@ -1335,31 +2128,31 @@ function setTxt(id,n,d,c,dis,tier){const b=$(id);if(!b)return;if(tier!=null)b.da
 function refresh(){
  const surf=atSurface(),shop=nearBench(),mE=maxEn();
  $("gold").textContent=fmt(S.gold);
- $("depth").textContent=fmt(S.depth)+" m";$("best").textContent=fmt(S.best);$("depthbox").title="Recorde: "+fmt(S.best)+" m";
+ $("depth").textContent=fmt(S.depth)+" m";$("best").textContent=fmt(S.best);$("depthbox").title=__("Recorde: {0} m",fmt(S.best));
  const er=clamp(S.en/mE,0,1);$("enfill").style.width=(er*100)+"%";$("ent").textContent=Math.ceil(S.en)+" / "+mE;$("enbox").classList.toggle("low",er<.25);
  barUI();
  refreshBagPop();
  $("lv").textContent=S.lvl;const xpGoal=xpNeed(S.lvl),xr=clamp(S.xp/xpGoal,0,1);$("xpt").textContent=fmt(S.xp)+" / "+fmt(xpGoal)+" XP";$("xpi").style.width=(xr*100)+"%";$("xpbar").style.setProperty("--xp-brightness",1+xr*.65);$("xpbar").style.setProperty("--xp-glow",(4+xr*18)+"px");$("xpbar").classList.toggle("xp-near",xr>=.8);$("xpbar").setAttribute("aria-valuenow",Math.round(xr*100));
  $("pts").textContent=S.pts;
- $("layer").textContent=toastT>0?toast:(surf?"Superfície · melhorias liberadas · "+WX[wx.cur].n:layerName(S.depth)+(S.depth>=FINAL_DEPTH?" · INQUEBRÁVEL":""))+(ev>0?(evT?"  Minérios x3 ":"  Ouro x3 ")+Math.ceil(ev)+"s":"");
+ $("layer").textContent=toastT>0?toast:(surf?__("Superfície · melhorias liberadas · {0}",WX[wx.cur].n):layerName(S.depth)+(S.depth>=FINAL_DEPTH?" · "+__("INQUEBRÁVEL"):""))+(ev>0?"  "+(evT?__("Minérios x3"):__("Ouro x3"))+" "+Math.ceil(ev)+"s":"");
  $("layer").title=$("layer").textContent;
- $("surfmsg").textContent=!surf?"Melhorias só na superfície. Suba (ou use o teleporte) para comprar.":shop?"Na mesa de trabalho: você pode melhorar o equipamento. Venda os itens no baú (clique nele).":"Vá até a mesa de trabalho (à esquerda do buraco) para comprar melhorias.";
+ $("surfmsg").textContent=!surf?__("Melhorias só na superfície. Suba (ou use o teleporte) para comprar."):shop?__("Na mesa de trabalho: você pode melhorar o equipamento. Venda os itens no baú (clique nele)."):__("Vá até a mesa de trabalho (à esquerda do buraco) para comprar melhorias.");
  $("surfmsg").classList.toggle("warn",!shop);
- const nshop=nearShop();$("shopmsg").textContent=!surf?"A loja fica na superfície. Suba (ou use o teleporte) para comprar.":nshop?"Na loja: compre dinamite e comida de energia. Os itens de energia ficam na barra, ao lado das habilidades (clique para usar).":"Vá até a loja (à direita do baú) para comprar.";
+ const nshop=nearShop();$("shopmsg").textContent=!surf?__("A loja fica na superfície. Suba (ou use o teleporte) para comprar."):nshop?__("Na loja: compre dinamite e comida de energia. Os itens de energia ficam na barra, ao lado das habilidades (clique para usar)."):__("Vá até a loja (à direita do baú) para comprar.");
  $("shopmsg").classList.toggle("warn",!nshop);
- for(const k in ITEMS){if(ITEMS[k].noShop)continue;const c=itemCost(k),mx=have(k)>=99;setTxt("i-"+k,ITEMS[k].n+" · você tem "+have(k),ITEMS[k].d+(ITEMS[k].en?"":" (preço sobe a cada camada alcançada)"),mx?"MÁX":fmt(c),mx||!nshop||S.gold<c)}
- if($("furmsg")){const f=S.fur;$("furmsg").textContent=f.n>0?"Fornalha: "+f.n+" minérios na fila · pronta em "+fmtT(furEta())+". Pode ir cavar: ela vende sozinha.":"A fornalha fica à esquerda do buraco. Fique ao lado dela e clique nela para pôr os minérios da mochila: ela refina com o tempo e vende sozinha (+"+Math.round(BAL.furnace.bonus*100)+"% de ouro). Pedra comum continua indo para o baú."}
- $("skmsg").textContent=S.runs<1?"Os poderes só podem ser comprados depois de Renascer pela primeira vez. Os fragmentos vêm do Renascer e, às vezes, dos baús raros do subsolo.":"Fragmentos disponíveis: "+S.pts+" (vêm do Renascer e dos baús raros).";
- $("b-snd").textContent=mute?"Som: desligado":"Som: ligado";
+ for(const k in ITEMS){if(ITEMS[k].noShop)continue;const c=itemCost(k),mx=have(k)>=99;setTxt("i-"+k,__("{0} · você tem {1}",ITEMS[k].n,have(k)),ITEMS[k].d+(ITEMS[k].en?"":" "+__("(preço sobe a cada camada alcançada)")),mx?__("MÁX"):fmt(c),mx||!nshop||S.gold<c)}
+ if($("furmsg")){const f=S.fur;$("furmsg").textContent=f.n>0?__("Fornalha: {0} minérios na fila · pronta em {1}. Pode ir cavar: ela vende sozinha.",f.n,fmtT(furEta())):__("A fornalha fica à esquerda do buraco. Fique ao lado dela e clique nela para pôr os minérios da mochila: ela refina com o tempo e vende sozinha (+{0}% de ouro). Pedra comum continua indo para o baú.",Math.round(BAL.furnace.bonus*100))}
+ $("skmsg").textContent=S.runs<1?__("Os poderes só podem ser comprados depois de Renascer pela primeira vez. Os fragmentos vêm do Renascer e, às vezes, dos baús raros do subsolo."):__("Fragmentos disponíveis: {0} (vêm do Renascer e dos baús raros).",S.pts);
+ $("b-snd").textContent=mute?__("Som: desligado"):__("Som: ligado");
  // picareta (material)
- if(S.tier>=TIERS.length-1)setTxt("u-tier","Picareta de "+TIERS[S.tier],"Melhor picareta do jogo (camada "+TIERS.length+")","MÁX",true,5);
- else setTxt("u-tier","Nova picareta: "+TIERS[S.tier+1],"Dano x"+String(BAL.tier.dmgMult).replace(".",",")+" (atual: "+TIERS[S.tier]+"). Recomendada para a camada "+BIO[S.tier+1][0],fmt(tierCost()),!shop||S.gold<tierCost(),lvTier(S.tier,TIERS.length-1));
- for(const k in UPS){const l=S.lv[k],mx=l>=UPS[k].max,c=upCost(k,l);setTxt("u-"+k,UPS[k].n+" · nv "+l+"/"+UPS[k].max,UPS[k].d(l),mx?"MÁX":fmt(c),mx||!shop||S.gold<c,lvTier(l,UPS[k].max))}
- for(const k in SK){const l=S.sk[k],mx=l>=SK[k][2];setTxt("s-"+k,SK[k][0]+" · nv "+l,SK[k][1],mx?"MÁX":(l+1)+" frag.",mx||S.pts<l+1||S.runs<1)}
+ if(S.tier>=TIERS.length-1)setTxt("u-tier",__("Picareta de {0}",__(TIERS[S.tier])),__("Melhor picareta do jogo (camada {0})",TIERS.length),__("MÁX"),true,5);
+ else setTxt("u-tier",__("Nova picareta: {0}",__(TIERS[S.tier+1])),__("Dano x{0} (atual: {1}). Recomendada para a camada {2}",ndec(BAL.tier.dmgMult),__(TIERS[S.tier]),__(BIO[S.tier+1][0])),fmt(tierCost()),!shop||S.gold<tierCost(),lvTier(S.tier,TIERS.length-1));
+ for(const k in UPS){const l=S.lv[k],mx=l>=UPS[k].max,c=upCost(k,l);setTxt("u-"+k,__("{0} · nv {1}/{2}",UPS[k].n,l,UPS[k].max),UPS[k].d(l),mx?__("MÁX"):fmt(c),mx||!shop||S.gold<c,lvTier(l,UPS[k].max))}
+ for(const k in SK){const l=S.sk[k],mx=l>=SK[k][2];setTxt("s-"+k,__("{0} · nv {1}",__(SK[k][0]),l),__(SK[k][1]),mx?__("MÁX"):__("{0} frag.",l+1),mx||S.pts<l+1||S.runs<1)}
  renderStats();clockUpdate();
  const g=prestGain();$("prest").disabled=(g<1&&!armed)||!surf;
- $("prestd").textContent=g<1?"Chegue a 100 m nesta vida para ganhar fragmentos. Reinicia ouro, picareta e melhorias; mantém poderes, nível e conquistas":"Reinicia ouro, picareta e melhorias e ganha "+g+" fragmentos (1 por camada de 100 m alcançada nesta vida, +5 por chegar ao fundo)";
- $("prestc").textContent=armed?"Confirmar?":(g>0?"+"+g+" fragmentos":"");
+ $("prestd").textContent=g<1?__("Chegue a 100 m nesta vida para ganhar fragmentos. Reinicia ouro, picareta e melhorias; mantém poderes, nível e conquistas"):__("Reinicia ouro, picareta e melhorias e ganha {0} fragmentos (1 por camada de 100 m alcançada nesta vida, +5 por chegar ao fundo)",g);
+ $("prestc").textContent=armed?__("Confirmar?"):(g>0?__("+{0} fragmentos",g):"");
  const t=document.querySelectorAll(".tabs button");
  if(t.length){t[0].classList.toggle("has",surf&&!!document.querySelector("#ups .up:not(:disabled)")&&(S.tab||0)!==0);t[2].classList.toggle("has",S.runs>0&&Object.keys(SK).some(k=>S.sk[k]<SK[k][2]&&S.pts>=S.sk[k]+1)&&(S.tab||0)!==2)}   // ponto na aba Poder só se dá para comprar algum poder
 }
@@ -1368,17 +2161,17 @@ let statsHtml="";
 function renderStats(){
  if((S.tab||0)!==2)return;
  const row=(l,v)=>"<dt>"+l+"</dt><dd>"+v+"</dd>",sec=(t,r)=>"<h3>"+t+"</h3><dl class='sg'>"+r.join("")+"</dl>",pct=x=>Math.round(x*100)+"%";
- const st=sec("Escavação",[row("Dano por golpe",fmt(clickPow())),row("Dano automático",fmt(autoDps())+"/s"),row("Chance de crítico",pct(critCh())),row("Velocidade","+"+Math.round((attackSpeedMult()-1)*100)+"%")])
-  +sec("Energia",[row("Por bloco (aqui)",digCost(S.depth).toFixed(1)),row("Por bloco (automático)",(digCost(S.depth)*AUTO_ENERGY).toFixed(1)),row("Subir 1 m com o jato",(stepCost(S.depth)*jetMult()).toFixed(2)),row("Dano da lava (aqui)",S.depth>=BAL.lava.from?Math.round(lavaDmg(S.depth)):"sem lava")])
-  +sec("Nesta profundidade · "+fmt(S.depth)+" m",[row("Ouro por bloco",fmt(blockGold(S.depth))),row("Dureza",fmt(hardness(S.depth))),row("Chance de minério",pct(oreChance())),row("Bônus de XP","+"+Math.round((xpGainMult()-1)*100)+"%")])
-  +sec("Progresso",[row("Profundidade máxima",fmt(S.best)+" m"),row("Ouro total",fmt(S.total)),row("Blocos quebrados",fmt(S.blocks)),row("Minérios coletados",fmt(S.oc)),row("Catálogo de minérios",S.od.length+"/"+ORES.length),row("Renascimentos",S.runs),row("Fragmentos",S.pts),row("Estação do ano",SEASONS[SEA.idx].n)])
-  +sec("Uso",[row("Vendas no baú",S.sold),row("Vezes sem energia",S.deaths),row("Dinamites usadas",S.bombs),row("Itens comidos",S.eaten),row("Teleportes",S.tps),row("Pedras duras quebradas",S.veins),row("Veios de minério quebrados",S.rich),row("Vezes na cama",S.sleeps),row("Minérios refinados",fmt(S.refined))])
-  +sec("Baús",[row("Baús abertos",S.chests)].concat(BAL.chest.tiers.map((t,i)=>row(t.n,"<span style='color:"+t.c+"'>"+S.chT[i]+"</span>")),[row("Ouro de baús",fmt(S.chGold)),row("Fragmentos de baús",S.chFr),row("Bônus de melhoria",S.chPk),row("Poções de teleporte usadas",S.ptpUsed)]));
+ const st=sec(__("Escavação"),[row(__("Dano por golpe"),fmt(clickPow())),row(__("Dano automático"),fmt(autoDps())+"/s"),row(__("Chance de crítico"),pct(critCh())),row(__("Velocidade"),"+"+Math.round((attackSpeedMult()-1)*100)+"%")])
+  +sec(__("Energia"),[row(__("Por bloco (aqui)"),digCost(S.depth).toFixed(1)),row(__("Por bloco (automático)"),(digCost(S.depth)*AUTO_ENERGY).toFixed(1)),row(__("Subir 1 m com o jato"),(stepCost(S.depth)*jetMult()).toFixed(2)),row(__("Dano da lava (aqui)"),S.depth>=BAL.lava.from?Math.round(lavaDmg(S.depth)):__("sem lava"))])
+  +sec(__("Nesta profundidade · {0} m",fmt(S.depth)),[row(__("Ouro por bloco"),fmt(blockGold(S.depth))),row(__("Dureza"),fmt(hardness(S.depth))),row(__("Chance de minério"),pct(oreChance())),row(__("Bônus de XP"),"+"+Math.round((xpGainMult()-1)*100)+"%")])
+  +sec(__("Progresso"),[row(__("Profundidade máxima"),fmt(S.best)+" m"),row(__("Ouro total"),fmt(S.total)),row(__("Blocos quebrados"),fmt(S.blocks)),row(__("Minérios coletados"),fmt(S.oc)),row(__("Catálogo de minérios"),S.od.length+"/"+ORES.length),row(__("Renascimentos"),S.runs),row(__("Fragmentos"),S.pts),row(__("Estação do ano"),SEASONS[SEA.idx].n)])
+  +sec(__("Uso"),[row(__("Vendas no baú"),S.sold),row(__("Vezes sem energia"),S.deaths),row(__("Dinamites usadas"),S.bombs),row(__("Itens comidos"),S.eaten),row(__("Teleportes"),S.tps),row(__("Pedras duras quebradas"),S.veins),row(__("Veios de minério quebrados"),S.rich),row(__("Vezes na cama"),S.sleeps),row(__("Minérios refinados"),fmt(S.refined))])
+  +sec(__("Baús"),[row(__("Baús abertos"),S.chests)].concat(BAL.chest.tiers.map((t,i)=>row(__(t.n),"<span style='color:"+t.c+"'>"+S.chT[i]+"</span>")),[row(__("Ouro de baús"),fmt(S.chGold)),row(__("Fragmentos de baús"),S.chFr),row(__("Bônus de melhoria"),S.chPk),row(__("Poções de teleporte usadas"),S.ptpUsed)]));
  const all=ACH.map((a,i)=>({a,i,ok:S.ach.includes(i)})),todo=all.filter(x=>!x.ok),done=all.filter(x=>x.ok);
- const li=x=>"<li class='"+(x.ok?"ok":"")+"'><i>"+(x.ok?"✓":"")+"</i><span><b>"+x.a[0]+"</b><small>"+x.a[1]+"</small></span></li>";
+ const li=x=>"<li class='"+(x.ok?"ok":"")+"'><i>"+(x.ok?"✓":"")+"</i><span><b>"+__(x.a[0])+"</b><small>"+__(x.a[1])+"</small></span></li>";
  const ac="<div class='achbar'><i style='width:"+(done.length/ACH.length*100)+"%'></i></div>"
-  +(todo.length?"<h3>Pendentes · "+todo.length+"</h3><ul class='achl'>"+todo.map(li).join("")+"</ul>":"")
-  +(done.length?"<h3>Concluídas · "+done.length+"</h3><ul class='achl'>"+done.map(li).join("")+"</ul>":"");
+  +(todo.length?"<h3>"+__("Pendentes · {0}",todo.length)+"</h3><ul class='achl'>"+todo.map(li).join("")+"</ul>":"")
+  +(done.length?"<h3>"+__("Concluídas · {0}",done.length)+"</h3><ul class='achl'>"+done.map(li).join("")+"</ul>":"");
  const h=st+"\u0001"+ac+"\u0001"+done.length+"/"+ACH.length;
  if(h===statsHtml)return;statsHtml=h;
  $("stats").innerHTML=st;$("achl").innerHTML=ac;$("achc").textContent=done.length+"/"+ACH.length;
@@ -1387,39 +2180,44 @@ let armed=false,armT=0;
 $("prest").onclick=()=>{
  if(prestGain()<1||!atSurface())return;
  if(!armed){armed=true;armT=setTimeout(()=>{armed=false;refresh()},3000);refresh();return}
- clearTimeout(armT);armed=false;
- const keep={runs:S.runs+1,best:S.best,ach:S.ach,oc:S.oc,total:S.total,debug:S.debug,sk:S.sk,pts:S.pts+prestGain(),od:S.od,xp:S.xp,lvl:S.lvl,lvp:S.lvp,pk:S.pk,vol:S.vol,deaths:S.deaths,sold:S.sold,blocks:S.blocks,tab:S.tab,items:S.items,bombs:S.bombs,eaten:S.eaten,tps:S.tps,veins:S.veins,rich:S.rich,sleeps:S.sleeps,refined:S.refined,ctDone:S.ctDone,spins:S.spins,chests:S.chests,chTop:S.chTop,chT:S.chT,chGold:S.chGold,chFr:S.chFr,chPk:S.chPk,ptpUsed:S.ptpUsed,slotNet:S.slotNet,sea:S.sea};
+ clearTimeout(armT);armed=false;doRebirth();
+};
+function doRebirth(){   // Renascer (botão do painel, depois de confirmar, e janela de chegada ao fundo)
+ const keep={runs:S.runs+1,best:S.best,ach:S.ach,oc:S.oc,total:S.total,debug:S.debug,sk:S.sk,pts:S.pts+prestGain(),od:S.od,xp:S.xp,lvl:S.lvl,lvp:S.lvp,pk:S.pk,vol:S.vol,deaths:S.deaths,sold:S.sold,play:S.play,blocks:S.blocks,tab:S.tab,items:S.items,bombs:S.bombs,eaten:S.eaten,tps:S.tps,veins:S.veins,rich:S.rich,sleeps:S.sleeps,refined:S.refined,ctDone:S.ctDone,spins:S.spins,chests:S.chests,chTop:S.chTop,chT:S.chT,chGold:S.chGold,chFr:S.chFr,chPk:S.chPk,ptpUsed:S.ptpUsed,slotNet:S.slotNet,sea:S.sea};
  const h=S.sk.her,ini=S.sk.ini,clk=S.lv.clock;S=Object.assign(fresh(),keep);S.lv.clock=clk;   // o relógio (compra única) e a estação do ano não se perdem ao renascer
  S.seed=SEED=newSeed();chQ.length=0;dug=new Set();mX=mY=camX=camY=0;layerSeen=0;
- S.tier=Math.min(ini,TIERS.length-1);S.gold=S.debug?Infinity:400*h*h;S.en=maxEn();build();save();say("Renascido! Fragmentos: "+S.pts);
-};
+ S.tier=Math.min(ini,TIERS.length-1);S.gold=S.debug?Infinity:400*h*h;S.en=maxEn();build();save();say(__("Renascido! Fragmentos: {0}",S.pts));
+}
 let rst=false;
 function wipeAll(){   // recomeça do zero (botão "Apagar progresso" e save apagado pelo navegador)
 S=fresh();S.seed=SEED=newSeed();chQ.length=0;dug=new Set();mX=mY=camX=camY=0;skT=[0,0];skCD=[0,0];dynCD=0;tpCD=0;ev=0;cmb=0;cmbT=0;layerSeen=0;rst=false;armed=false;S.en=maxEn();
  try{localStorage.removeItem("abismo-v1")}catch(e){}
- if($("reset"))$("reset").textContent="Apagar progresso";build();save()}
-$("reset").onclick=()=>{if(!rst){rst=true;$("reset").textContent="Clique de novo para apagar tudo";setTimeout(()=>{rst=false;$("reset").textContent="Apagar progresso"},3000);return}
+ if($("reset"))$("reset").textContent=__("Apagar progresso");build();save()}
+$("reset").onclick=()=>{if(!rst){rst=true;$("reset").textContent=__("Clique de novo para apagar tudo");setTimeout(()=>{rst=false;$("reset").textContent=__("Apagar progresso")},3000);return}
  wipeAll()};
 
 // Conteúdo da mochila: aparece ao passar o mouse (ou tocar) na caixa "MOCHILA", sem aba nova.
 let bagHtml="";
 function refreshBagPop(){
- const b=S.bag,names=["Pedra","Pedra dura"].concat(ORES.map(o=>o[0])),col=n=>n==="Pedra"?"#9aa0a6":n==="Pedra dura"?"#6b7a94":ORES.find(o=>o[0]===n)[2];
- const list=b.n<=0?"<div class='chips'><div>vazia</div></div>":"<div class='chips'>"+names.filter(n=>b.o[n]>0).map(n=>"<div><i style='background:"+col(n)+"'></i>"+n+" <span>x"+b.o[n]+"</span></div>").join("")+"</div>";
- const h="<div class='pt'><b>MOCHILA</b> · "+b.n+(b.n===1?" item":" itens")+" · vale "+fmt(b.v)+" de ouro</div>"+list;
+ const b=S.bag,names=[N_("Pedra"),N_("Pedra dura")].concat(ORES.map(o=>o[0])),col=n=>n==="Pedra"?"#9aa0a6":n==="Pedra dura"?"#6b7a94":ORES.find(o=>o[0]===n)[2];
+ const list=b.n<=0?"<div class='chips'><div>"+__("vazia")+"</div></div>":"<div class='chips'>"+names.filter(n=>b.o[n]>0).map(n=>"<div><i style='background:"+col(n)+"'></i>"+__(n)+" <span>x"+b.o[n]+"</span></div>").join("")+"</div>";
+ const h="<div class='pt'><b>"+__("MOCHILA")+"</b> · "+(b.n===1?__("{0} item",b.n):__("{0} itens",b.n))+" · "+__("vale {0} de ouro",fmt(b.v))+"</div>"+list;
  if(h!==bagHtml){bagHtml=h;$("bagside").innerHTML=h}
 }
 
 // ===== 4-interface/02-abas.js — Abas do painel (Melhorias, Loja, Poder, Menu), botões rápidos e abertura automática da aba certa na mesa/loja =====
 function setTab(i){S.tab=i;document.querySelectorAll(".tabs button").forEach((b,k)=>b.classList.toggle("on",k===i));document.querySelectorAll("#side .pane").forEach((p,k)=>p.classList.toggle("on",k===i))}
+const TAB_NAMES=[N_("Melhorias"),N_("Loja"),N_("Poder"),N_("Menu")];
+let fsLab=null;   // refaz o texto do botão de tela cheia (ao trocar de idioma)
+const relabelTabs=()=>document.querySelectorAll("#tabs button").forEach((b,i)=>{b.innerHTML=__(TAB_NAMES[i])+"<i class='dot'></i>"});
 function buildTabs(){
  const tb=$("tabs");tb.innerHTML="";
- ["Melhorias","Loja","Poder","Menu"].forEach((n,i)=>{const b=mk("button","",n+"<i class='dot'></i>");b.onclick=()=>{setTab(i);sfx(500,.04,"sine")};tb.appendChild(b)});
+ TAB_NAMES.forEach((n,i)=>{const b=mk("button","",__(n)+"<i class='dot'></i>");b.onclick=()=>{setTab(i);sfx(500,.04,"sine")};tb.appendChild(b)});
  $("qk-map").onclick=()=>{mapOn=!mapOn;mapZ=1};
  $("qk-pause").onclick=openPause;
  {const fb=$("qk-full"),de=document.documentElement,can=document.fullscreenEnabled||document.webkitFullscreenEnabled;   // tela cheia (iPhone não suporta: some o botão)
   if(!can)fb.hidden=true;
-  else{const isF=()=>document.fullscreenElement||document.webkitFullscreenElement,lab=()=>{fb.textContent=isF()?"Sair da tela":"Tela cheia"};
+  else{const isF=()=>document.fullscreenElement||document.webkitFullscreenElement,lab=()=>{fb.textContent=isF()?__("Sair da tela"):__("Tela cheia")};fsLab=lab;
    fb.onclick=()=>{fb.blur();try{const p=isF()?(document.exitFullscreen||document.webkitExitFullscreen).call(document):(de.requestFullscreen||de.webkitRequestFullscreen).call(de);if(p&&p.catch)p.catch(()=>{})}catch(e){}};
    document.addEventListener("fullscreenchange",lab);document.addEventListener("webkitfullscreenchange",lab);lab()}}
  $("b-snd").onclick=()=>{mute=!mute;refresh()};
@@ -1430,7 +2228,7 @@ const zoneNow=()=>nearBed()?"bed":nearBench()?"bench":nearShop()?"shop":nearFurn
 let zonePrev=zoneNow();
 function autoTab(){const z=zoneNow();if(z===zonePrev)return;zonePrev=z;if(z==="bench"&&(S.tab||0)!==0)setTab(0);else if(z==="shop"&&(S.tab||0)!==1)setTab(1);else if(z==="bed")sleepSave()}
 // Cama (ao lado da mesa de trabalho): ao chegar perto dela o jogo é salvo e o painel abre a aba Menu (save, som, exportar/importar).
-function sleepSave(){S.sleeps++;save();if((S.tab||0)!==3)setTab(3);say("Jogo salvo na cama");sfx(440,.15,"sine");setTimeout(()=>sfx(660,.2,"sine"),120)}
+function sleepSave(){S.sleeps++;save();if((S.tab||0)!==3)setTab(3);say(__("Jogo salvo na cama"));sfx(440,.15,"sine");setTimeout(()=>sfx(660,.2,"sine"),120)}
 
 // ===== 4-interface/03-barra-habilidades.js — Barra de habilidades no estilo hotbar do Minecraft (Dinamite, Fúria, Frenesi, Teleporte e itens de energia) com ícones em pixel art =====
 // Ícones: matrizes 14x14 (cada letra é uma cor da paleta, "." é vazio). O contorno escuro é desenhado automaticamente e o SVG sai com pixels nítidos (sem suavização).
@@ -1458,9 +2256,13 @@ function pixSVG(rows,pal){
 function dynSprite(k){const key="d"+k;return hotCache[key]||(hotCache[key]=pixSVG(SPR.dyn,{R:ITEMS[k].c,r:lighten(ITEMS[k].c,.4),W:"#f6e6b8",k:"#3a2a1a",f:"#e9d9aa",y:"#ffd45c",o:"#ff9a3a"}))}
 const sprite=k=>hotCache[k]||(hotCache[k]=pixSVG(SPR[k],SPR_PAL[k]));
 // [nome, tecla, item de energia (clique), sprite]. Dinamite e itens de energia são consumíveis comprados na loja; os itens de energia só têm clique.
-const BAR=[["Dinamite","E",null,"dyn"],["Fúria do Minerador","1",null,"fury"],["Escavação Frenética","2",null,"frenzy"],["Teleporte","Q",null,"tele"],["Cenourinha","","cen","cen"],["Sopa de cogumelo","","sop","sop"],["Poção de energia","","poc","poc"],["Poção de teleporte","","ptp","ptp"]];
-function slotTitle(i){const s=BAR[i];if(s[2]){const it=ITEMS[s[2]];return it.n+" — "+it.d+(it.tp?" (clique para usar)":" (clique para usar; compre na loja)")+". Você tem "+have(s[2])}
- return s[0]+" — "+(i===0?ITEMS[dynPick()].n+": explode uma área de raio "+fmtN(BAL.dyn[dynPick()].r)+" e quebra veios de pedra dura (consome 1, compre na loja). Você tem "+have(dynPick())+". Botão direito ou R troca o tipo":i===3?"leva ao baú sem gastar energia; na superfície, volta ao ponto de onde saiu (compre em Melhorias)":skillDescription(i-1)+" (desbloqueia aos "+SKL[i-1][4]+" m)")}
+const BAR=[[N_("Dinamite"),"E",null,"dyn"],[N_("Fúria do Minerador"),"1",null,"fury"],[N_("Escavação Frenética"),"2",null,"frenzy"],[N_("Teleporte"),"Q",null,"tele"],[N_("Cenourinha"),"","cen","cen"],[N_("Sopa de cogumelo"),"","sop","sop"],[N_("Poção de energia"),"","poc","poc"],[N_("Poção de teleporte"),"","ptp","ptp"]];
+function slotTitle(i){const s=BAR[i];
+ if(s[2]){const it=ITEMS[s[2]];return it.tp?__("{0} — {1} (clique para usar). Você tem {2}",it.n,it.d,have(s[2])):__("{0} — {1} (clique para usar; compre na loja). Você tem {2}",it.n,it.d,have(s[2]))}
+ const nm=__(s[0]);
+ return i===0?__("{0} — {1}: explode uma área de raio {2} e quebra veios de pedra dura (consome 1, compre na loja). Você tem {3}. Botão direito ou R troca o tipo",nm,ITEMS[dynPick()].n,fmtN(BAL.dyn[dynPick()].r),have(dynPick()))
+  :i===3?__("{0} — leva ao baú sem gastar energia; na superfície, volta ao ponto de onde saiu (compre em Melhorias)",nm)
+  :__("{0} — {1} (desbloqueia aos {2} m)",nm,skillDescription(i-1),SKL[i-1][4])}
 function buildBar(){const bar=$("bar");bar.innerHTML="";const hot=mk("div","hot");bar.appendChild(hot);
  BAR.forEach((s,i)=>{const b=mk("button","slot",(i===0?dynSprite(dynPick()):sprite(s[3]))+(s[1]?"<span class='k'>"+s[1]+"</span>":"")+"<span class='qn'></span><i class='cd'></i>");
   b.title=slotTitle(i);
@@ -1469,7 +2271,7 @@ function buildBar(){const bar=$("bar");bar.innerHTML="";const hot=mk("div","hot"
   if(i===0){const w=mk("span","dwrap");w.appendChild(b);const dp=mk("div","dpick");dp.id="dpick";w.appendChild(dp);hot.appendChild(w)}else hot.appendChild(b)})}
 // Seletor de dinamite: pilha de casinhas acima do ícone (aparece com 2 ou mais tipos); clique escolhe qual a tecla E usa
 function dpickUI(){const dp=$("dpick");if(!dp)return;const cur=dynPick(),own=DYN_IDS.filter(k=>have(k)>0||S.debug),sig=own.map(k=>k+have(k)).join()+cur;if(dp.dataset.s===sig)return;dp.dataset.s=sig;dp.innerHTML="";if(own.length<2)return;
- for(const k of own){const c=mk("button","dchip"+(k===cur?" on":""),dynSprite(k)+"<b>"+(S.debug?"∞":have(k))+"</b>");c.title=ITEMS[k].n+" (raio "+fmtN(BAL.dyn[k].r)+")";c.onclick=e=>{e.stopPropagation();S.dsel=k;say("Dinamite escolhida: "+ITEMS[k].n);refresh()};dp.appendChild(c)}}
+ for(const k of own){const c=mk("button","dchip"+(k===cur?" on":""),dynSprite(k)+"<b>"+(S.debug?"∞":have(k))+"</b>");c.title=__("{0} (raio {1})",ITEMS[k].n,fmtN(BAL.dyn[k].r));c.onclick=e=>{e.stopPropagation();S.dsel=k;say(__("Dinamite escolhida: {0}",ITEMS[k].n));refresh()};dp.appendChild(c)}}
 function barUI(){const slots=document.querySelectorAll(".slot");BAR.forEach((s,i)=>{const b=slots[i];if(!b)return;
  let lock=false,empty=false,active=0,frac=0,txt="";   // frac = parte da recarga que falta (véu branco que desce, como no Minecraft)
  if(i===0){const dk=dynPick();empty=have(dk)<1&&!S.debug;frac=dynCD>0?dynCD/dynMax():0;txt=S.debug?"∞":String(have(dk));
@@ -1506,7 +2308,7 @@ addEventListener("keydown",e=>{
   if(modal==="pause"){pauseKey(e);return}
   if(modal==="slot"){slotKey(e);return}
   if(modal==="chest"){chestKey(e);return}
-  if(modal==="title"){e.preventDefault();if(!e.repeat&&(e.code==="Space"||e.code==="Enter"))startGame();return}
+  if(modal==="title"){if(e.target.closest&&e.target.closest(".langpick"))return;e.preventDefault();if(!e.repeat&&(e.code==="Space"||e.code==="Enter"))startGame();return}
   if(modal==="death"){e.preventDefault();if(!e.repeat&&performance.now()>deathLock&&(e.code==="Space"||e.code==="Enter"||e.code==="Escape"))closeModal();return}
   if(modal==="lv"){   // escolha de melhoria ao subir de nível: WASD/setas movem, Espaço (ou Enter) confirma
    const d={KeyA:-1,ArrowLeft:-1,KeyW:-1,ArrowUp:-1,KeyD:1,ArrowRight:1,KeyS:1,ArrowDown:1}[e.code];
@@ -1533,7 +2335,7 @@ addEventListener("keydown",e=>{
  if(e.code==="KeyE"){boom();return}
  if(e.code==="KeyR"){dynNext();return}
  if(e.code==="KeyQ"){teleport();return}
- if(e.code==="KeyK"){const i=S.marks.findIndex(m=>m[0]===S.mc&&m[1]===S.depth);if(i>=0)S.marks.splice(i,1);else S.marks.push([S.mc,S.depth]);say("Marcador "+(i>=0?"removido":"colocado"));return}
+ if(e.code==="KeyK"){const i=S.marks.findIndex(m=>m[0]===S.mc&&m[1]===S.depth);if(i>=0)S.marks.splice(i,1);else S.marks.push([S.mc,S.depth]);say(i>=0?__("Marcador removido"):__("Marcador colocado"));return}
  if(e.code==="Escape"){if(mapOn)mapOn=false;else openPause();return}
  if(e.code==="KeyP"){openPause();return}
  if(e.code==="KeyM"){mapOn=!mapOn;mapZ=1;return}
@@ -1555,32 +2357,35 @@ if(matchMedia("(pointer:coarse)").matches||innerWidth<760){
  const pad=mk("div");pad.style.cssText="display:grid;grid-template-columns:repeat(3,56px);gap:6px";
  const dr=(t,d)=>btn(t,()=>{pressDir("touch-"+d,d);move(d);lastMv=performance.now()},()=>releaseDir("touch-"+d));
  [mk("span"),dr("▲","up"),mk("span"),dr("◀","left"),dr("▼","down"),dr("▶","right")].forEach(x=>pad.appendChild(x));
- const mine=btn("Minerar",()=>{holdS=true;clickDig();lastH=performance.now()},()=>{holdS=false},104,15);
+ const mine=btn(__("Minerar"),()=>{holdS=true;clickDig();lastH=performance.now()},()=>{holdS=false},104,15);
  mine.style.height="118px";mine.style.letterSpacing=".03em";mine.style.fontWeight="700";
- bar.appendChild(pad);bar.appendChild(mine);
+ bar.appendChild(pad);bar.appendChild(mine);onLang(()=>{mine.textContent=__("Minerar")});
  addEventListener("blur",()=>ups.forEach(f=>f()));document.addEventListener("visibilitychange",()=>{if(document.hidden)ups.forEach(f=>f())});
  bar.oncontextmenu=e=>e.preventDefault();document.body.style.overscrollBehavior="none";document.body.appendChild(bar);document.body.style.paddingBottom="150px"}
 
 // ===== 4-interface/05-pausa.js — Menu de pausa (Esc ou P): congela o jogo e oferece continuar, salvar, som, mapa e voltar ao menu =====
 function openPause(){
  if(modal)return;
- const b=openModal("pause");b.style.maxWidth="320px";
- const where=atSurface()?"Superfície":fmt(S.depth)+" m · "+layerName(S.depth);
- b.innerHTML="<div class='pm'><h2>Pausa</h2><div class='sub'>"+where+" · nível "+S.lvl+"</div>"
-  +"<button id='pm-go' class='main'>Continuar</button><button id='pm-sv'>Salvar jogo</button><button id='pm-snd'></button><button id='pm-map'>Mapa</button><button id='pm-menu'>Menu inicial</button>"
+ const b=openModal("pause");b.style.maxWidth="320px";paintPause();
+ $("pm-go").focus();
+}
+function paintPause(){
+ const b=$("bx"),where=atSurface()?__("Superfície"):fmt(S.depth)+" m · "+layerName(S.depth);
+ b.innerHTML="<div class='pm'><h2>"+__("Pausa")+"</h2><div class='sub'>"+where+" · "+__("nível {0}",S.lvl)+"</div>"
+  +"<button id='pm-go' class='main'>"+__("Continuar")+"</button><button id='pm-sv'>"+__("Salvar jogo")+"</button><button id='pm-snd'></button><button id='pm-map'>"+__("Mapa")+"</button><div data-langmenu></div><button id='pm-menu'>"+__("Menu inicial")+"</button>"
   +"</div>";
- const snd=()=>{$("pm-snd").textContent=mute?"Som: desligado":"Som: ligado"};snd();
+ const snd=()=>{$("pm-snd").textContent=mute?__("Som: desligado"):__("Som: ligado")};snd();
+ langMenus();
  $("pm-go").onclick=closeModal;
- $("pm-sv").onclick=()=>{save();say("Jogo salvo");$("pm-sv").textContent="Jogo salvo ✓"};
+ $("pm-sv").onclick=()=>{save();say(__("Jogo salvo"));$("pm-sv").textContent=__("Jogo salvo ✓")};
  $("pm-snd").onclick=()=>{mute=!mute;snd();refresh()};
  $("pm-map").onclick=()=>{closeModal();mapOn=true;mapZ=1};
  $("pm-menu").onclick=()=>{save();closeModal();showTitle()};
- $("pm-go").focus();
 }
 function pauseKey(e){
  if(e.code==="Escape"||e.code==="KeyP"){e.preventDefault();if(!e.repeat)closeModal();return}
  const d={ArrowUp:-1,KeyW:-1,ArrowDown:1,KeyS:1}[e.code];
- if(d){e.preventDefault();const bs=[...document.querySelectorAll("#bx .pm button")],i=bs.indexOf(document.activeElement);bs[(i+d+bs.length)%bs.length].focus()}
+ if(d){e.preventDefault();const bs=[...document.querySelectorAll("#bx .pm button")].filter(b=>b.offsetParent),i=bs.indexOf(document.activeElement);bs[(i+d+bs.length)%bs.length].focus()}
 }
 
 // ===== 4-interface/06-relogio.js — Relógio de sol e lua na barra do topo (como o do Minecraft); aparece depois de comprado na mesa de trabalho =====
@@ -1589,7 +2394,7 @@ function pauseKey(e){
 const clkCv=$("clk"),clkG=clkCv.getContext("2d");let clkLast="";
 const clkMix=(a,b,k)=>[0,1,2].map(i=>Math.round(a[i]+(b[i]-a[i])*k));
 function clockHour(){const h=((6+dayT*24)%24+24)%24;return{h:Math.floor(h),m:Math.floor((h%1)*60)}}
-function clockPeriod(){return dayT<.25?"Manhã":dayT<.5?"Tarde":dayT<.75?"Noite":"Madrugada"}
+function clockPeriod(){return dayT<.25?__("Manhã"):dayT<.5?__("Tarde"):dayT<.75?__("Noite"):__("Madrugada")}
 function clockDraw(){
  const g=clkG,a=(dayT-.25)*Math.PI*2,sx=Math.sin(a),sy=-Math.cos(a);   // direção do sol a partir do centro (para cima = meio-dia)
  g.clearRect(0,0,22,22);
@@ -1610,7 +2415,7 @@ function clockUpdate(){
  if(!own)return;
  const t=clockHour(),txt=String(t.h).padStart(2,"0")+":"+String(t.m).padStart(2,"0"),key=txt+"|"+Math.round(dayT*2000);
  if(key===clkLast)return;clkLast=key;
- clockDraw();box.title=clockPeriod()+" · "+txt+" (o sol aparece no alto ao meio-dia e a lua à meia-noite)";
+ clockDraw();box.title=__("{0} · {1} (o sol aparece no alto ao meio-dia e a lua à meia-noite)",clockPeriod(),txt);
 }
 
 // ===== 5-desenho/00-pixel.js — Direção de arte: sprites em pixel art, tiles de apoio (cavidade, rocha-base, pedra dura, veio de minério) =====
@@ -1848,7 +2653,7 @@ function drawVein(tb,c,r){ctx.drawImage(veinTile(tb,Math.floor(hash(c*13+1,r*17+
 function drawBench(t){
  const u=pu(),s=sprBench(),c=Math.round(colX(BENCH_C)),y=Math.round(rowY(0));
  pxShadow(c,(s.w+2)*u,y,u);drawSpr(s,c,y,u);
- if(atSurface())lbl(nearBench()?"Mesa de trabalho: compre aqui":"Mesa de trabalho",c,y-(s.h+3)*u-Math.sin(t*4)*2,nearBench()?"#6fe3a0":"#ffd45c");
+ if(atSurface())lbl(nearBench()?__("Mesa de trabalho: compre aqui"):__("Mesa de trabalho"),c,y-(s.h+3)*u-Math.sin(t*4)*2,nearBench()?"#6fe3a0":"#ffd45c");
 }
 function drawFurnace(t){
  const u=pu(),s=sprFurnace(),c=Math.round(colX(FURN_C)),y=Math.round(rowY(0)),f=S.fur,act=f.n>0;
@@ -1865,12 +2670,12 @@ function drawFurnace(t){
    ctx.fillRect(Math.round(x0+12.5*u+Math.sin(t*2+k*2)*u*ph*2-sz/2),Math.round(forgeStackTopY()-ph*u*11-sz),sz,sz)}
   ctx.globalAlpha=1;
  }else{ctx.fillStyle="#7a2e14";ctx.fillRect(x0+6*u,y0+12*u,u,u);ctx.fillRect(x0+9*u,y0+12*u,u,u)}   // brasas
- if(atSurface())lbl(act?"Fornalha · "+f.n+" minérios · "+fmtT(furEta()):nearFurnace()?"Fornalha: clique para refinar":"Fornalha",c,y-(s.h+3)*u-Math.sin(t*4)*2,act?"#ff9a3a":nearFurnace()?"#6fe3a0":"#ffd45c");
+ if(atSurface())lbl(act?__("Fornalha · {0} minérios · {1}",f.n,fmtT(furEta())):nearFurnace()?__("Fornalha: clique para refinar"):__("Fornalha"),c,y-(s.h+3)*u-Math.sin(t*4)*2,act?"#ff9a3a":nearFurnace()?"#6fe3a0":"#ffd45c");
 }
 function drawShop(t){
  const u=pu(),s=sprShop(),c=Math.round(colX(SHOP_C)),y=Math.round(rowY(0));
  pxShadow(c,(s.w+2)*u,y,u);drawSpr(s,c,y,u);
- if(atSurface())lbl(nearShop()?"Loja: compre aqui":"Loja",c,y-(s.h+3)*u-Math.sin(t*4)*2,nearShop()?"#6fe3a0":"#ffd45c");
+ if(atSurface())lbl(nearShop()?__("Loja: compre aqui"):__("Loja"),c,y-(s.h+3)*u-Math.sin(t*4)*2,nearShop()?"#6fe3a0":"#ffd45c");
 }
 function drawGateAndChest(t){
  // portão de madeira em volta do buraco: dois postes finos em pixel art e uma viga escura sobre a abertura
@@ -1888,7 +2693,7 @@ function drawGateAndChest(t){
  // baú: tampa fecha/abre com sprites (aberto = moedas brilhando)
  const c=chestXY(),cx=Math.round(c.x),open=chestOpen>.1,cs=sprChest(open);
  pxShadow(cx,(cs.w+2)*u,y,u);drawSpr(cs,cx,y,u);
- if(atSurface()&&S.bag.n>0)lbl(nearChest()?"Baú: clique para vender":"Baú: entregue a mochila",cx,y-(cs.h+3)*u-Math.sin(t*4)*2,"#ffd45c");
+ if(atSurface()&&S.bag.n>0)lbl(nearChest()?__("Baú: clique para vender"):__("Baú: entregue a mochila"),cx,y-(cs.h+3)*u-Math.sin(t*4)*2,"#ffd45c");
 }
 function drawPlayer(){
  const now=performance.now(),mx=colX(mX),my=rowY(mY);
@@ -1958,7 +2763,7 @@ function comboHud(dt){
  }
  if(cmbLastT>0&&cmb<2){   // combo acabou: o total final cai e some
   ctx.save();ctx.globalAlpha=Math.min(1,cmbLastT/.6);ctx.textAlign="center";ctx.textBaseline="middle";
-  comboTxt("Combo final x"+cmbLast,cx,cy+(1.4-cmbLastT)*22,13*k,"#d8d8d8",3,0);ctx.restore();
+  comboTxt(__("Combo final x{0}",cmbLast),cx,cy+(1.4-cmbLastT)*22,13*k,"#d8d8d8",3,0);ctx.restore();
  }
 }
 function drawEffects(dt){
@@ -2025,9 +2830,9 @@ function drawMap(){
  ctx.fillStyle="#4dd2ff";for(const m of S.marks){ctx.beginPath();ctx.arc(ox+m[0]*sc,oy+(m[1]-.5)*sc,Math.max(3,sc*.6),0,7);ctx.fill()}
  ctx.fillStyle="#ececec";ctx.font="600 14px "+FONT;
  if(W<600){   // celular: texto curto, abaixo do nível e do nome da camada, sem falar de mouse/Esc
-  ctx.font="600 12px "+FONT;ctx.fillText("Mapa · "+fmt(S.depth)+" m · recorde "+fmt(S.best)+" m",12,62);
-  ctx.fillStyle="#9aa0a6";ctx.fillText("Toque na tela para fechar",12,80);
- }else ctx.fillText("Mapa · profundidade "+fmt(S.depth)+" m · recorde "+fmt(S.best)+" m · roda do mouse: zoom · M ou Esc fecham",12,22);
+  ctx.font="600 12px "+FONT;ctx.fillText(__("Mapa · {0} m · recorde {1} m",fmt(S.depth),fmt(S.best)),12,62);
+  ctx.fillStyle="#9aa0a6";ctx.fillText(__("Toque na tela para fechar"),12,80);
+ }else ctx.fillText(__("Mapa · profundidade {0} m · recorde {1} m · roda do mouse: zoom · M ou Esc fecham",fmt(S.depth),fmt(S.best)),12,22);
 }
 
 // ===== 5-desenho/06-quadro.js — Desenho de cada quadro: céu, blocos, alvo, personagem, efeitos e mapa =====
@@ -2043,8 +2848,8 @@ function drawTarget(){
  // mira em cantos (estilo pixel): sombra escura por baixo e cor por cima
  for(const[col,o]of[["rgba(0,0,0,.55)",1],[ok?"#ffb43a":"#9a9a9a",0]])for(const[ax,ay,dx,dy]of[[x,cy,1,1],[x+T,cy,-1,1],[x,cy+T,1,-1],[x+T,cy+T,-1,-1]]){
   ctx.fillStyle=col;const px=ax+(dx>0?0:-u)+o,py=ay+(dy>0?0:-u)+o;ctx.fillRect(px,py,dx>0?L:-L,u);ctx.fillRect(px,py,u,dy>0?L:-L)}
- if(isVein(tc,tr))lbl("Pedra dura: dinamite",x+T/2,cy-8,"#ff9a3a");
- else{const rk=oreVeinAt(tc,tr);if(rk>=0)lbl("Veio de "+ORES[rk][0]+": x"+BAL.oreVein.units,x+T/2,cy-8,ORES[rk][2])}
+ if(isVein(tc,tr))lbl(__("Pedra dura: dinamite"),x+T/2,cy-8,"#ff9a3a");
+ else{const rk=oreVeinAt(tc,tr);if(rk>=0)lbl(__("Veio de {0}: x{1}",__(ORES[rk][0]),BAL.oreVein.units),x+T/2,cy-8,ORES[rk][2])}
  if(pr>0){
   ctx.fillStyle="rgba(255,180,58,.16)";ctx.fillRect(x+1,cy+T-(T-2)*pr-1,T-2,(T-2)*pr);
   const bh=Math.max(5,u*2);ctx.fillStyle="rgba(0,0,0,.55)";ctx.fillRect(x,cy+T-bh-2,T,bh+2);   // barra de progresso em segmentos
@@ -2445,7 +3250,7 @@ function sprBed(){return mkSpr("bed",20,9,Object.assign({c:"#e4dcc4",C:"#f6f0dc"
 function drawBed(t){
  const u=pu(),s=sprBed(),c=Math.round(colX(BED_C)),y=Math.round(rowY(0));
  pxShadow(c,(s.w+2)*u,y,u);drawSpr(s,c,y,u);
- if(atSurface()&&c>-60)lbl(nearBed()?"Salvo!":"Cama",Math.max(c,34),y-(s.h+3)*u-Math.sin(t*4)*2,nearBed()?"#6fe3a0":"#ffd45c");
+ if(atSurface()&&c>-60)lbl(nearBed()?__("Salvo!"):__("Cama"),Math.max(c,34),y-(s.h+3)*u-Math.sin(t*4)*2,nearBed()?"#6fe3a0":"#ffd45c");
 }
 
 // ---------- poste de luz: um só, de madeira fina, com a lamparina pendurada (perto da loja) ----------
@@ -2632,7 +3437,7 @@ function drawWell(t){
  ctx.fillStyle="#c9b27a";ctx.fillRect(x0+11*u+sw*.5,y0+9*u,u,2*u);
  const bx=x0+9*u+sw;ctx.fillStyle="#7a4f27";ctx.fillRect(bx,y0+11*u,5*u,3*u);ctx.fillStyle="#b27a3a";ctx.fillRect(bx,y0+11*u,5*u,Math.round(u*.6));
  ctx.fillStyle="#2f3238";ctx.fillRect(bx,y0+12*u,5*u,Math.round(u*.7));ctx.fillStyle="#4a2f16";ctx.fillRect(bx+4*u,y0+11*u,u,3*u);
- if(atSurface())lbl("Poço de água",c,y0-3*u-Math.sin(t*4)*2,"#7fd6ff");
+ if(atSurface())lbl(__("Poço de água"),c,y0-3*u-Math.sin(t*4)*2,"#7fd6ff");
 }
 
 // ---------- quadro de contratos ----------
@@ -2647,7 +3452,7 @@ function drawBoard(t){
  pxShadow(c,(s.w+2)*u,y,u);drawSpr(s,c,y,u);
  if(!atSurface())return;
  if(rd){const b=Math.abs(Math.sin(t*5))*u*2;ctx.fillStyle="#ffd45c";ctx.font="900 22px "+FONT;ctx.textAlign="center";ctx.lineWidth=4;ctx.strokeStyle="rgba(10,8,6,.85)";ctx.strokeText("!",c,y-(s.h+5)*u-b);ctx.fillText("!",c,y-(s.h+5)*u-b)}
- lbl(near?"Contratos: clique para abrir":rd?"Contratos prontos!":"Contratos",c,y-(s.h+2)*u-Math.sin(t*4)*2,near?"#6fe3a0":"#ffd45c");
+ lbl(near?__("Contratos: clique para abrir"):rd?__("Contratos prontos!"):__("Contratos"),c,y-(s.h+2)*u-Math.sin(t*4)*2,near?"#6fe3a0":"#ffd45c");
 }
 
 // ---------- caça-níquel (só a máquina, sem mesa) ----------
@@ -2665,7 +3470,7 @@ function drawSlotTable(t){
  const x0=Math.round(c-s.w*u/2),y0=Math.round(y-s.h*u),col=["#8d9299","#ff9a3a","#ffd45c","#e5412d","#7fe6ff","#fff3a0"];
  for(let i=0;i<3;i++){const k=Math.floor(t*(near?9:2.2)+i*1.7)%6;ctx.fillStyle=col[k];ctx.fillRect(x0+(2+i*2)*u,y0+5*u,u,2*u)}   // rolos girando
  for(let i=0;i<4;i++){const on=(Math.floor(t*(near?8:3))+i)%2===0;ctx.fillStyle=on?"#fff3a0":"#9a6a18";ctx.fillRect(x0+(1+i*2)*u,y0+2*u,u,u)}   // lâmpadas do letreiro
- if(atSurface())lbl(near?"Caça-níquel: clique para jogar":"Caça-níquel",c,y0-3*u-Math.sin(t*4)*2,near?"#6fe3a0":"#ffd45c");
+ if(atSurface())lbl(near?__("Caça-níquel: clique para jogar"):__("Caça-níquel"),c,y0-3*u-Math.sin(t*4)*2,near?"#6fe3a0":"#ffd45c");
 }
 // ---------- dono da carrocinha (só enfeite): parecido com o jogador, mas com chapéu de palha, avental e lenço; parado ao lado da loja ----------
 function drawShopkeeper(t){
@@ -2754,7 +3559,7 @@ function drawGarden(t){
  for(let i=0;i<4;i++){PX(cx-3.2*u+i*1.9*u,y-8*u+(i%2)*u,1.4*u,3.4*u,"#ff8a1f");PX(cx-3.2*u+i*1.9*u,y-8*u+(i%2)*u,.5*u,3.4*u,"#ffb04a");PX(cx-3*u+i*1.9*u,y-9.6*u+(i%2)*u,u,1.8*u,gl)}
  const bx=xa-Math.round(5*u);
  PX(bx-3*u,y-8*u,6*u,8*u,"#7a4f27");PX(bx-3*u,y-8*u,u,8*u,"#b27a3a");PX(bx+2*u,y-8*u,u,8*u,"#4a2f16");PX(bx-3*u,y-6*u,6*u,.8*u,"#2f3238");PX(bx-3*u,y-2.2*u,6*u,.8*u,"#2f3238");PX(bx-2.5*u,y-8.6*u,5*u,.8*u,"#4a2f16");PX(bx-2*u,y-8*u,4*u,.8*u,"#4dbb4d");
- if(atSurface())lbl("Horta de cenouras",(xa+xb)/2,y-28*u,"#9be37a");
+ if(atSurface())lbl(__("Horta de cenouras"),(xa+xb)/2,y-28*u,"#9be37a");
 }
 
 // ---------- moinho de vento (esquerda da horta): torre de pedra e enxaimel, cúpula de telhas e quatro velas girando ----------
@@ -2851,7 +3656,7 @@ function drawCampfire(t){
  for(let k=0;k<6;k++){const ph=(t*.8+hash(k,1))%1,sx=cx+(hash(k,2)-.5)*6*u+Math.sin(t*3+k)*u,sy=y-7*u-ph*26*u;PX(sx,sy,u*.8,u*.8,"rgba(255,207,112,"+(1-ph).toFixed(2)+")")}   // faíscas
  for(let k=0;k<3;k++){const ph=(t*.35+k/3)%1;PX(cx+Math.sin(t*1.5+k*2)*3*u+ph*4*u,y-9*u-ph*30*u,(1.5+ph*2.5)*u,(1.5+ph*2.5)*u,"rgba(150,150,155,"+((1-ph)*.28).toFixed(2)+")")}   // fumaça
  if(n>.03){const gx=cx,gy=y-6*u,r=T*3.2,gr=ctx.createRadialGradient(gx,gy,0,gx,gy,r);gr.addColorStop(0,"rgba(255,160,70,"+(.5*n*fl).toFixed(3)+")");gr.addColorStop(.4,"rgba(255,130,50,"+(.2*n*fl).toFixed(3)+")");gr.addColorStop(1,"rgba(255,110,40,0)");ctx.fillStyle=gr;ctx.fillRect(gx-r,gy-r,r*2,r*2)}
- if(atSurface())lbl("Fogueira",cx,y-19*u,"#ffb43a");
+ if(atSurface())lbl(__("Fogueira"),cx,y-19*u,"#ffb43a");
 }
 function campfireHoles(g,k){   // abre a escuridão em volta da fogueira (chamado por lampHoles)
  const P=campPos();if(P.x<-T*7||P.x>W+T*7)return;
@@ -3006,7 +3811,7 @@ function drawLandscape(t){
 let last=performance.now(),acc=0,sv=0,autoMsgT=0;
 function loop(now){
  const dt=modal==="pause"||modal==="lv"||modal==="chest"?0:Math.min(.1,(now-last)/1000);last=now;   // pausa, escolha de melhoria ao subir de nível e animação de abrir baú congelam o jogo (tempo, habilidades, energia, combo, clima, fornalha...)
- dayTick(dt);seasonTick(dt);weatherTick(dt);starTick(dt);cmbT-=dt;if(cmbT<=0){if(cmb>0)comboEnd();cmb=0}
+ if(modal!=="title")S.play+=dt;dayTick(dt);seasonTick(dt);weatherTick(dt);starTick(dt);cmbT-=dt;if(cmbT<=0){if(cmb>0)comboEnd();cmb=0}
  for(let i=0;i<2;i++){if(skT[i]>0)skT[i]-=dt;if(skCD[i]>0)skCD[i]-=dt}
  ambSpawn(dt);
  if(!Number.isFinite(S.gold)&&!S.debug)S.gold=0;
@@ -3014,13 +3819,13 @@ function loop(now){
  musT-=dt;if(musOn&&!mute&&S.vol.m>0&&musT<=0){musT=2+Math.random();note()}
  if(jetT>0)jetT-=dt;if(jetT>0||(!modal&&airborne())){const jx=colX(mX),jy=rowY(mY);if(Math.random()<dt*(jetT>0?60:14))parts.push({x:jx-9*worldZoom+(Math.random()-.5)*4,y:jy-6*worldZoom,vx:(Math.random()-.5)*(jetT>0?50:25),vy:(jetT>0?90+Math.random()*110:40+Math.random()*50),l:.3,c:Math.random()<.5?"#ffb43a":"#ff6a2a"})}
  dynCD=Math.max(0,dynCD-dt);tpCD=Math.max(0,tpCD-dt);toastT-=dt;autoMsgT-=dt;
- if(ev>0)ev-=dt;else{evNext-=dt;if(evNext<=0){ev=BAL.events.len;evT=Math.random()<.5?0:1;evNext=BAL.events.gapMin+Math.random()*BAL.events.gapRand;say(evT?"Frenesi mineral! Minérios x3 por 20s":"Corrida do ouro! Ouro x3 por 20s")}}
+ if(ev>0)ev-=dt;else{evNext-=dt;if(evNext<=0){ev=BAL.events.len;evT=Math.random()<.5?0:1;evNext=BAL.events.gapMin+Math.random()*BAL.events.gapRand;say(evT?__("Frenesi mineral! Minérios x3 por 20s"):__("Corrida do ouro! Ouro x3 por 20s"))}}
  // superfície: recupera energia rápido e entrega a mochila ao chegar perto do baú
  if(atSurface()){const m=maxEn();if(S.en<m)S.en=Math.min(m,S.en+60*dt);}
  furTick(dt);ctTick(dt);chestTick();
  // escavação automática (pausa sozinha quando a energia só dá para voltar)
  const ad=autoDps();
- if(ad>0&&!modal){if(autoOK())hit(ad*dt,false,true);else if(autoMsgT<=0&&S.depth>0&&canBreak(...tgt())){autoMsgT=6;say("Escavação automática pausada: energia só para voltar")}}
+ if(ad>0&&!modal){if(autoOK())hit(ad*dt,false,true);else if(autoMsgT<=0&&S.depth>0&&canBreak(...tgt())){autoMsgT=6;say(__("Escavação automática pausada: energia só para voltar"))}}
  if(!modal&&holdS&&now-lastH>(skT[1]>0?150/frenzyMult():150)/attackSpeedMult()){lastH=now;clickDig()}
  // queda livre: segurando ↓ sobre buraco já cavado, desce de graça e acelera aos poucos; soltar a tecla para na hora
  const falling=!modal&&held==="down"&&S.depth<FINAL_DEPTH&&isDug(S.mc,S.depth);fallR=falling?fallR+dt:0;
@@ -3045,8 +3850,8 @@ function loop(now){
 document.addEventListener("visibilitychange",()=>{if(document.hidden)save()});
 addEventListener("pagehide",save);
 document.addEventListener("click",e=>{if(e.target.tagName==="BUTTON")e.target.blur()});
-$("exp").onclick=()=>{try{$("sv").value=btoa(unescape(encodeURIComponent(JSON.stringify(Object.assign({},S,{dug:[...dug]})))));$("sv").select();say("Save exportado: copie o texto")}catch(e){say("Falha ao exportar")}};
-$("imp").onclick=()=>{try{const o=JSON.parse(decodeURIComponent(escape(atob($("sv").value.trim()))));S=clean(o);SEED=S.seed;chQ.length=0;dug=new Set(S.dug.filter(k=>/^-?\d+,\d+$/.test(k)));if(S.en<0)S.en=maxEn();if(S.debug)S.gold=Infinity;camX=mX=S.mc;camY=mY=S.depth;layerSeen=layerOf(S.depth);build();save();say("Save importado!")}catch(e){say("Save inválido")}};
+$("exp").onclick=()=>{try{$("sv").value=btoa(unescape(encodeURIComponent(JSON.stringify(Object.assign({},S,{dug:[...dug]})))));$("sv").select();say(__("Save exportado: copie o texto"))}catch(e){say(__("Falha ao exportar"))}};
+$("imp").onclick=()=>{try{const o=JSON.parse(decodeURIComponent(escape(atob($("sv").value.trim()))));S=clean(o);SEED=S.seed;chQ.length=0;dug=new Set(S.dug.filter(k=>/^-?\d+,\d+$/.test(k)));if(S.en<0)S.en=maxEn();if(S.debug)S.gold=Infinity;camX=mX=S.mc;camY=mY=S.depth;layerSeen=layerOf(S.depth);build();save();say(__("Save importado!"))}catch(e){say(__("Save inválido"))}};
 for(const[id,k]of[["vm","m"],["vs","s"],["va","a"]]){const e=$(id);e.value=S.vol[k];e.oninput=()=>{S.vol[k]=+e.value}}
 S.en=S.en<0?maxEn():Math.min(S.en,maxEn());
 layerSeen=layerOf(S.depth);
@@ -3059,6 +3864,8 @@ function showTitle(){ttl.style.display="";ttl.classList.remove("off");modal="tit
 if(typeof window.__TESTE__==="function")ttl.style.display="none";
 else{modal="title";$("play").onclick=startGame;$("play").focus()}
 if(S.lvp>0&&!modal)levelUp();
+// Trocar de idioma: os textos estáticos (data-t) o motor já refaz; aqui se refaz o que o jogo monta por código.
+onLang(()=>{relabelTabs();if(fsLab)fsLab();buildBar();build();statsHtml="";bagHtml="";buffsHtml="";clkLast="";if(modal==="pause"){paintPause();const lb=document.querySelector("#bx .lp-btn");if(lb)lb.focus()}refresh()});
 requestAnimationFrame(loop);
 // gancho opcional usado só por tools/smoke.js (não faz nada no jogo normal)
 if(typeof window.__TESTE__==="function")window.__TESTE__({get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,LAMPS,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v}});
