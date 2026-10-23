@@ -2,7 +2,7 @@
   <img src="img/logo.png" alt="Cenoural" width="420">
 </p>
 
-<h3 align="center">Cenoural · Endless Abyss</h3>
+<h3 align="center">Cenoural</h3>
 
 <p align="center">
   An incremental pixel-art mining game that runs right in your browser.<br>
