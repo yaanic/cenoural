@@ -45,6 +45,17 @@ button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .up .n{font-weight:600}.up .d{grid-column:1;color:var(--mute);font-size:.8rem}
 .up .c{grid-row:1/3;grid-column:2;color:var(--acc);font-weight:700;white-space:nowrap}
 .up:disabled{opacity:.45;cursor:not-allowed}
+/* dá para comprar: realce no custo + número xN balançando (cor e ritmo sobem com a quantidade) */
+.up .k{display:none}
+.up.can{grid-template-columns:1fr auto auto;--ac:#5be07a}
+.up.can[data-a="2"]{--ac:#ffd45c}.up.can[data-a="3"]{--ac:#ff7ad9}
+.up.can:disabled{opacity:.78}
+.up.can{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ac) 55%,transparent),0 0 10px color-mix(in srgb,var(--ac) 28%,transparent)}
+.up.can .c{color:#07120a;background:var(--ac);padding:2px 8px;border-radius:6px;box-shadow:0 0 10px color-mix(in srgb,var(--ac) 70%,transparent)}
+.up.can .k{display:grid;place-items:center;grid-row:1/3;grid-column:3;min-width:34px;padding:3px 8px;border-radius:999px;font-weight:800;font-size:.85rem;line-height:1;color:#07120a;background:var(--ac);box-shadow:0 0 12px var(--ac);transform-origin:50% 60%;animation:upWob .9s ease-in-out infinite}
+.up.can[data-a="2"] .k{animation-duration:.7s}.up.can[data-a="3"] .k{animation-duration:.5s;font-size:.95rem}
+@keyframes upWob{0%,100%{transform:rotate(0) scale(1)}20%{transform:rotate(-13deg) scale(1.12)}50%{transform:rotate(0) scale(1)}70%{transform:rotate(13deg) scale(1.12)}}
+@media (prefers-reduced-motion:reduce){.up.can .k{animation:none}}
 .up:not(:disabled):hover{border-color:var(--acc)}
 .tier{border-color:var(--acc)}
 .sep{border:0;border-top:1px solid var(--line);margin:12px 0}
@@ -113,6 +124,29 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 #enfill{display:block;height:100%;width:100%;background:linear-gradient(90deg,#2fae4f,#9be15a);transition:width .15s linear}
 #enbox.low #enfill{background:linear-gradient(90deg,#c0281c,#ff6a3a);animation:enLow .5s ease-in-out infinite alternate}
 #enbox.low small{color:#ff8a7a}
+#entrack{position:relative}
+/* medidor de retorno (só efeitos na barra): azul = reserva para voltar · listrado = margem · marca branca = custo de volta; brilho que corre pela barra */
+#enmar{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(45deg,rgba(255,194,58,.55) 0 3px,rgba(255,194,58,0) 3px 6px)}
+#enres{position:absolute;top:0;bottom:0;left:0;background:linear-gradient(180deg,rgba(150,210,255,.78),rgba(40,120,225,.72));box-shadow:inset -2px 0 0 #ffffffcc;animation:enRes 1.6s ease-in-out infinite alternate}
+#enmark{position:absolute;top:-2px;bottom:-2px;width:3px;margin-left:-1px;background:#fff;box-shadow:0 0 4px #000,0 0 7px #fff;animation:enMark 1.2s ease-in-out infinite}
+#enfill{position:relative;overflow:hidden}
+#enbox.ret #enfill::after{content:"";position:absolute;top:0;bottom:0;left:-40%;width:40%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);animation:enShine 2.4s ease-in-out infinite}
+#enbox.tight #entrack{animation:enGlowT .7s ease-in-out infinite alternate}
+#enbox.tight #enmark{background:#ffd45c;box-shadow:0 0 4px #000,0 0 9px #ffc23a}
+#enbox.danger #entrack{animation:enShake .16s linear infinite alternate;box-shadow:0 0 12px #ff3a2a}
+#enbox.danger #enres{background:repeating-linear-gradient(45deg,rgba(255,70,50,.9) 0 4px,rgba(110,10,0,.9) 4px 8px);animation:none}
+#enbox.danger #enmark{background:#ff4a3a;box-shadow:0 0 4px #000,0 0 10px #ff3a2a}
+@keyframes enShine{to{left:110%}}
+@keyframes enRes{to{filter:brightness(1.3)}}
+@keyframes enMark{50%{box-shadow:0 0 4px #000,0 0 14px #fff}}
+@keyframes enGlowT{to{box-shadow:0 0 12px #ffc23a}}
+@keyframes enShake{from{transform:translateX(-1px)}to{transform:translateX(1px)}}
+@media (prefers-reduced-motion:reduce){#enres,#enmark,#enbox #entrack,#enbox.ret #enfill::after{animation:none!important}}
+#enbox small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#enbox.tight #enfill{background:linear-gradient(90deg,#d9921a,#ffd45c)}
+#enbox.tight small{color:#ffd45c}
+#enbox.danger #enfill{background:linear-gradient(90deg,#c0281c,#ff6a3a);animation:enLow .5s ease-in-out infinite alternate}
+#enbox.danger small{color:#ff8a7a}
 @keyframes enLow{to{filter:brightness(1.6)}}
 .ph.warn{color:#ffb43a}
 @media (max-width:760px){#bagbox{flex-basis:92px}#depthbox{flex-basis:88px}#enbox{flex-basis:70px;min-width:60px}}
@@ -303,3 +337,7 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 #ach span{align-self:stretch;color:#9fc7dc;font-size:.7rem}
 #ach.on{display:flex;animation:achIn 4.2s ease both}
 @keyframes achIn{0%{opacity:0;transform:translate(-50%,20px)}8%{opacity:1;transform:translate(-50%,-4px)}13%{transform:translate(-50%,0)}88%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,14px)}}
+
+/* encantamentos (Fortuna, Aprimoramento): brilho roxo e estrela no nome */
+.up.ench .n::before{content:"\2726 ";color:#c58bff;text-shadow:0 0 8px #b45cff}
+.up.ench:not(.can){box-shadow:inset 0 0 0 1px #b45cff40,0 0 8px #b45cff22}

@@ -87,3 +87,12 @@ The game may be played on the official site. Copying, hosting elsewhere, modifyi
 - Game, design, and direction: João Pedro Borges
 - AI-assisted development: Claude (Anthropic)
 - Font: [Silkscreen](https://fonts.google.com/specimen/Silkscreen) by Jason Kottke, SIL Open Font License
+
+## Return gauge (energy to climb back)
+One-time bench upgrade (Energy group, `BAL.ups.back`: 30,000 gold, unlocks at 150 m best depth, kept on rebirth). When owned, the existing energy bar gets effects only (no new text or numbers): a blue zone for the climb-back reserve (white marker at its end), a striped amber margin zone and a moving shine. Tight: bar and marker turn amber and pulse; not enough: the reserve turns red-striped and the bar shakes and glows red. Short sound when the state worsens. Tuning: `BAL.ups.back`, `BAL.energy.retMargin`, `retBlocks`. Lava damage is not included (the margin covers it).
+
+## "Can afford" highlight
+Each bench upgrade, shop item and the pickaxe show an **xN** badge next to the cost (how many levels/units your gold pays for). The cost gets a colored background and the number wobbles: green (1), yellow (2-9, faster), pink (10+, fastest). Shown even away from the bench. See `.up.can` and `upWob` in style.css.
+
+## Enchantments and new return gauge look
+**Fortune** (5 levels, unlocks at 120 m): +10% chance per level (cap 50%) that a mined ore gives extra units. **Refinement** (5 levels, unlocks at 180 m): on a manual critical hit, pickaxe side reach grows +1 block per level on each side for free (adds to Wide pickaxe). Both are in the "Enchantments" group on the bench.
