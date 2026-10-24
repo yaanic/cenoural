@@ -744,6 +744,8 @@ addLang("en","English",{
 // --- 5-desenho/05-mapa.js
 "Mapa · {0} m · recorde {1} m":"Map · {0} m · record {1} m",
 "Toque na tela para fechar":"Tap the screen to close",
+"Baú":"Chest",
+"Você":"You",
 "Mapa · profundidade {0} m · recorde {1} m · roda do mouse: zoom · M ou Esc fecham":"Map · depth {0} m · record {1} m · mouse wheel: zoom · M or Esc closes",
 // --- 5-desenho/06-quadro.js
 "Pedra dura: dinamite":"Hard stone: dynamite",
@@ -890,7 +892,7 @@ const HALF=10;                   // o mundo vai de -10 a +10 (21 colunas); fora 
 const COLS=HALF*2+1;
 // Superfície: o jogador pode andar além das colunas do mundo subterrâneo, só acima da linha 0 (a mina e as camadas ficam como antes).
 // À esquerda a trilha termina no pé da grande montanha em SURF_L; à direita a praia termina no mar em SURF_R. PAD_L/PAD_R = colunas de cenário que a câmera ainda mostra além desses limites.
-const SURF_L=-36,SURF_R=52,PAD_L=8,PAD_R=9;
+const SURF_L=-100,SURF_R=52,PAD_L=8,PAD_R=9;   // esquerda estendida: do moinho (-26) até as montanhas altas (-100)
 // Paisagem estendida (só visual, em 5-desenho/13-paisagem.js). Esquerda da casa: horta de cenouras, moinho de vento e a trilha até a grande montanha (sem nada lá, só montanha).
 // Direita: riacho com ponte de madeira e roda d'água, fogueira com banco de pedra, praia com farol, trapiche e barco parado. Posições em colunas do mundo.
 const GARDEN_L=-20.6,GARDEN_R=-13,MILL_C=-26;
@@ -2995,27 +2997,72 @@ function drawOverlays(dt,mx,my){
 }
 
 // ===== 5-desenho/05-mapa.js — Mapa (tecla M) com zoom e camadas =====
+// Visual: céu e grama na linha 0, camadas coloridas com sombra, névoa abaixo do recorde, escavações na cor clara da camada,
+// grade leve, régua de profundidade, linha do recorde, construções com legenda e marcador do jogador com guias.
+let mapDC=null,mapBC=null;   // cores por camada (escavado / fundo), calculadas uma vez
+function mapChip(t,x,y,al,col,bg){const w=Math.ceil(ctx.measureText(t).width)+10,x0=Math.round(al==="right"?x-w:al==="center"?x-w/2:x),y0=Math.round(y)-12;ctx.fillStyle=bg||"rgba(8,9,13,.84)";ctx.fillRect(x0,y0,w,16);ctx.fillStyle="rgba(255,255,255,.12)";ctx.fillRect(x0,y0,w,1);ctx.textAlign="left";ctx.fillStyle=col||"#ececec";ctx.fillText(t,x0+5,Math.round(y));return w}
 function drawMap(){
  const now=performance.now();
- if(!mapB||now-mapT>400){mapT=now;let d=1;const xs=[],ys=[];for(const k of dug){const i=k.indexOf(","),x=+k.slice(0,i),y=+k.slice(i+1);xs.push(x);ys.push(y);if(y>d)d=y}mapB={d,xs,ys}}
- const{d,xs,ys}=mapB,pad=36,sr=Math.max(S.depth,d)+3;
- const fit=Math.min((W-pad*2)/(COLS+2),(H-pad*2)/sr,14),sc=fit*mapZ,ox=mapZ>1?W/2-(S.mc+.5)*sc:W/2-.5*sc,oy=mapZ>1?H/2-(S.depth-.5)*sc:pad;
- ctx.fillStyle="rgba(0,0,0,.94)";ctx.fillRect(0,0,W,H);
- ctx.textAlign="left";ctx.font="600 11px "+FONT;
- for(let L=0;L*LAYER_HEIGHT<sr;L++){ctx.globalAlpha=.25;ctx.fillStyle=blockColor(L*LAYER_HEIGHT,0,0);ctx.fillRect(ox-(HALF+.5)*sc,oy+L*LAYER_HEIGHT*sc,COLS*sc,Math.min(LAYER_HEIGHT,sr-L*LAYER_HEIGHT)*sc);ctx.globalAlpha=1;if(sc*LAYER_HEIGHT>14){ctx.fillStyle="#9a9a9a";ctx.fillText(layerName(L*LAYER_HEIGHT),8,oy+L*LAYER_HEIGHT*sc+12)}}
- ctx.fillStyle="#ffe2a8";ctx.fillRect(ox-(HALF+.5)*sc,oy-2,COLS*sc,2);
- ctx.fillStyle="#ffd45c";ctx.fillRect(ox+(CHEST_C-.5)*sc,oy-Math.max(3,sc),Math.max(3,sc),Math.max(3,sc));
- for(const[c,col]of[[BED_C,"#4f77ff"],isUnl("build","slot")&&[SLOT_C,"#38c172"],isUnl("build","board")&&[BOARD_C,"#e8d7a8"]].filter(Boolean)){ctx.fillStyle=col;ctx.fillRect(ox+(c-.5)*sc,oy-Math.max(3,sc),Math.max(3,sc),Math.max(3,sc))}
- ctx.fillStyle="#b27a3a";ctx.fillRect(ox+(BENCH_C-.5)*sc,oy-Math.max(3,sc),Math.max(3,sc),Math.max(3,sc));
- if(isUnl("build","furnace")){ctx.fillStyle="#ff5a1f";ctx.fillRect(ox+(FURN_C-.5)*sc,oy-Math.max(3,sc),Math.max(3,sc),Math.max(3,sc));}
- ctx.fillStyle="#ff9a3a";ctx.fillRect(ox+(SHOP_C-.5)*sc,oy-Math.max(3,sc),Math.max(3,sc),Math.max(3,sc));
- ctx.fillStyle="#d9b06a";const cs=Math.max(1,sc);for(let i=0;i<xs.length;i++)ctx.fillRect(ox+xs[i]*sc-sc/2,oy+ys[i]*sc,cs,cs);
- const pr=Math.max(3,sc*.8)*(1+.06*Math.sin(now/700));ctx.beginPath();ctx.arc(ox+clamp(S.mc,-HALF,HALF)*sc,oy+(S.depth-.5)*sc,pr,0,7);ctx.fillStyle="#ff4d4d";ctx.fill();ctx.lineWidth=1.5;ctx.strokeStyle="#fff";ctx.stroke();   // jogador: ponto fixo, só respira de leve
- ctx.fillStyle="#ececec";ctx.font="600 14px "+FONT;
- if(W<600){   // celular: texto curto, abaixo do nível e do nome da camada, sem falar de mouse/Esc
-  ctx.font="600 12px "+FONT;ctx.fillText(__("Mapa · {0} m · recorde {1} m",fmt(S.depth),fmt(S.best)),12,62);
-  ctx.fillStyle="#9aa0a6";ctx.fillText(__("Toque na tela para fechar"),12,80);
- }else ctx.fillText(__("Mapa · profundidade {0} m · recorde {1} m · roda do mouse: zoom · M ou Esc fecham",fmt(S.depth),fmt(S.best)),12,22);
+ if(!mapDC){mapDC=BIO.map((b,L)=>blockColor(L*LAYER_HEIGHT,0,30));mapBC=BIO.map((b,L)=>blockColor(L*LAYER_HEIGHT,0,-6))}
+ if(!mapB||now-mapT>400){mapT=now;let d=1;const B=[];for(const k of dug){const i=k.indexOf(","),x=+k.slice(0,i),y=+k.slice(i+1);if(y>d)d=y;const L=layerOf(y),b=B[L]||(B[L]={xs:[],ys:[]});b.xs.push(x);b.ys.push(y)}mapB={d,B}}
+ const{d,B}=mapB,pad=36,tp=W<600?100:64,sr=Math.max(S.depth,d)+3;
+ const fit=Math.min((W-pad*2)/(COLS+2),(H-tp-pad)/sr,14),sc=fit*mapZ,sx=sc*Math.max(1,Math.min(14/sc,4,(W-pad*2)/((COLS+2)*sc))),ox=mapZ>1?W/2-(S.mc+.5)*sx:W/2-.5*sx,oy=mapZ>1?H/2-(S.depth-.5)*sc:tp;
+ const X=v=>Math.round(ox+(v-.5)*sx),Y=v=>Math.round(oy+v*sc),wL=X(-HALF),wR=X(HALF+1),wW=wR-wL,wB=Y(sr);
+ ctx.fillStyle="rgba(3,4,7,.95)";ctx.fillRect(0,0,W,H);
+ // céu e grama (a superfície é a linha 0)
+ if(oy>0){const g=ctx.createLinearGradient(0,0,0,oy);g.addColorStop(0,"#0b1424");g.addColorStop(1,"#3a6a9c");ctx.fillStyle=g;ctx.fillRect(0,0,W,Math.round(oy))}
+ ctx.font="600 11px "+FONT;ctx.textAlign="left";
+ // mundo (recortado nas 21 colunas)
+ ctx.save();ctx.beginPath();ctx.rect(wL,Math.max(0,Y(0)),wW,Math.max(0,Math.min(H,wB)-Math.max(0,Y(0))));ctx.clip();
+ for(let L=0;L*LAYER_HEIGHT<sr;L++){
+  const t0=L*LAYER_HEIGHT,t1=Math.min(t0+LAYER_HEIGHT,sr),y0=Y(t0),y1=Y(t1);if(y0>H||y1<0)continue;
+  ctx.globalAlpha=.8;ctx.fillStyle=mapBC[L];ctx.fillRect(wL,y0,wW,y1-y0);ctx.globalAlpha=1;
+  const g=ctx.createLinearGradient(0,y0,0,y1);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,0,0,.38)");ctx.fillStyle=g;ctx.fillRect(wL,y0,wW,y1-y0);
+  if(L>0){ctx.fillStyle="rgba(255,255,255,.2)";ctx.fillRect(wL,y0,wW,1)}
+ }
+ if(sx>=4){ctx.fillStyle="rgba(255,255,255,.05)";for(let c=-HALF;c<=HALF+1;c+=5)ctx.fillRect(X(c),Math.max(0,Y(0)),1,H)}   // grade a cada 5 colunas
+ const yf=Y(Math.max(S.best,d)+2);if(yf<H){ctx.fillStyle="rgba(2,3,6,.42)";ctx.fillRect(wL,Math.max(0,yf),wW,H)}   // névoa: ainda não explorado
+ for(let L=0;L<B.length;L++){const b=B[L];if(!b)continue;ctx.fillStyle=mapDC[L];const xs=b.xs,ys=b.ys;for(let i=0;i<xs.length;i++){const x0=X(xs[i]),y0=Y(ys[i]);ctx.fillRect(x0,y0,X(xs[i]+1)-x0,Y(ys[i]+1)-y0)}}
+ ctx.fillStyle=mapDC[0];{const x0=X(0),y0=Y(0);ctx.fillRect(x0,y0,X(1)-x0,Y(1)-y0)}   // boca do buraco
+ // guias do jogador
+ const px=ox+clamp(S.mc,-HALF,HALF)*sx,py=oy+(S.depth-.5)*sc;
+ ctx.fillStyle="rgba(255,255,255,.1)";ctx.fillRect(wL,Math.round(py),wW,1);ctx.fillRect(Math.round(px),Math.max(0,Y(0)),1,H);
+ // linha do recorde
+ const rec=S.best>=1&&Math.abs(S.best-S.depth)>=2?Y(S.best):null;
+ if(rec!==null){ctx.setLineDash([4,3]);ctx.strokeStyle="rgba(255,212,92,.75)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(wL,rec+.5);ctx.lineTo(wR,rec+.5);ctx.stroke();ctx.setLineDash([])}
+ ctx.restore();
+ // grama por cima do topo e bordas do mundo
+ const gy=Math.round(oy);ctx.fillStyle="#3f8a34";ctx.fillRect(0,gy-3,W,3);ctx.fillStyle="#79c957";ctx.fillRect(0,gy-3,W,1);
+ ctx.fillStyle="#4a4e5a";ctx.fillRect(wL-1,gy,1,Math.max(0,wB-gy));ctx.fillRect(wR,gy,1,Math.max(0,wB-gy));
+ // rótulos das camadas (grudam no alto da tela enquanto a camada está à vista) e régua de profundidade
+ ctx.font="600 10px "+FONT;const top=W<600?92:40;
+ for(let L=0;L*LAYER_HEIGHT<sr;L++){
+  const t0=L*LAYER_HEIGHT,y0=Y(t0),y1=Y(Math.min(t0+LAYER_HEIGHT,sr));if(y0>H||y1<0)continue;
+  if(wR+64<W){ctx.fillStyle="#6f7480";ctx.fillRect(wR+1,y0,4,1);ctx.textAlign="left";ctx.fillText(fmt(t0)+" m",wR+9,y0+4)}
+  if(y1-y0>=28){const ly=clamp(Math.max(y0,top),y0+13,y1-6);{const nm=layerName(t0).toUpperCase();if(ly>=(W<600?20:46)){if(wL-8-ctx.measureText(nm).width-10>=(W>=600?175:6))mapChip(nm,wL-8,ly,"right","#e8e8e8");else mapChip(nm,wL+4,ly,"left","#e8e8e8","rgba(6,7,10,.7)")}}}
+ }
+ // construções da superfície
+ const bl=[[__("Cama"),BED_C,"#4f77ff"],[__("Mesa de trabalho"),BENCH_C,"#b27a3a"],isUnl("build","furnace")&&[__("Fornalha"),FURN_C,"#ff5a1f"],[__("Baú"),CHEST_C,"#ffd45c"],[__("Loja"),SHOP_C,"#ff9a3a"],isUnl("build","slot")&&[__("Caça-níquel"),SLOT_C,"#38c172"],isUnl("build","board")&&[__("Quadro de contratos"),BOARD_C,"#e8d7a8"]].filter(Boolean);
+ const u=Math.max(7,Math.round(sx*.85));
+ for(const[,c,col]of bl){const x0=Math.round(ox+c*sx-u/2),y0=gy-3-u;ctx.fillStyle="#07080b";ctx.fillRect(x0-1,y0-1,u+2,u+1);ctx.fillStyle=col;ctx.fillRect(x0,y0,u,u);ctx.fillStyle="rgba(255,255,255,.35)";ctx.fillRect(x0,y0,u,2);ctx.fillStyle="rgba(0,0,0,.28)";ctx.fillRect(x0,y0+u-2,u,2)}
+ // recorde (rótulo) e marcador do jogador
+ ctx.font="600 10px "+FONT;
+ if(rec!==null&&rec>0&&rec<H)mapChip(__("Recorde: {0} m",fmt(S.best)),wR-4,rec-3,"right","#ffd45c");
+ const pu=.5+.5*Math.sin(now/450),r0=Math.max(4,sc*.7);
+ ctx.beginPath();ctx.arc(px,py,r0+3+pu*5,0,7);ctx.lineWidth=2;ctx.strokeStyle="rgba(255,77,77,"+(.6-.4*pu)+")";ctx.stroke();
+ ctx.beginPath();ctx.arc(px,py,r0,0,7);ctx.fillStyle="#ff4d4d";ctx.fill();ctx.lineWidth=2;ctx.strokeStyle="#fff";ctx.stroke();
+ ctx.beginPath();ctx.arc(px-r0*.3,py-r0*.3,Math.max(1,r0*.28),0,7);ctx.fillStyle="rgba(255,255,255,.75)";ctx.fill();
+ ctx.font="600 10px "+FONT;
+ if(S.depth>0){const lab=fmt(S.depth)+" m",tw=ctx.measureText(lab).width+10;if(px+r0+tw+12<W)mapChip(lab,px+r0+9,py+4,"left","#ff9a9a");else mapChip(lab,px-r0-9,py+4,"right","#ff9a9a")}
+ // legenda (só em tela larga e quando não encosta no mapa)
+ if(W>=600&&wL>190){const it=[...bl.map(b=>[b[0],b[2]]),[__("Você"),"#ff4d4d"]];let lw=0;for(const t of it)lw=Math.max(lw,ctx.measureText(t[0]).width);const pw=Math.ceil(lw)+36,ph=it.length*16+12,x0=14,y0=46;
+  ctx.fillStyle="rgba(8,9,13,.84)";ctx.fillRect(x0,y0,pw,ph);ctx.fillStyle="rgba(255,255,255,.12)";ctx.fillRect(x0,y0,pw,1);
+  for(let i=0;i<it.length;i++){const yy=y0+8+i*16;ctx.fillStyle="#07080b";ctx.fillRect(x0+8,yy,11,11);ctx.fillStyle=it[i][1];ctx.fillRect(x0+9,yy+1,9,9);ctx.fillStyle="#d6d6d6";ctx.textAlign="left";ctx.fillText(it[i][0],x0+26,yy+9)}}
+ // título e ajuda
+ if(W<600){ctx.font="600 12px "+FONT;mapChip(__("Mapa · {0} m · recorde {1} m",fmt(S.depth),fmt(S.best)),12,62,"left");ctx.fillStyle="#9aa0a6";ctx.fillText(__("Toque na tela para fechar"),17,80)}
+ else{ctx.fillStyle="rgba(8,9,13,.92)";ctx.fillRect(0,0,W,32);ctx.fillStyle="#2a2d36";ctx.fillRect(0,32,W,1);ctx.font="600 13px "+FONT;ctx.fillStyle="#ececec";ctx.textAlign="left";ctx.fillText(__("Mapa · profundidade {0} m · recorde {1} m · roda do mouse: zoom · M ou Esc fecham",fmt(S.depth),fmt(S.best)),14,21)}
+ if(mapZ>1.01){ctx.font="600 10px "+FONT;mapChip("x"+mapZ.toFixed(1),W-12,H-12,"right","#9aa0a6")}
+ ctx.textAlign="left";
 }
 
 // ===== 5-desenho/06-quadro.js — Desenho de cada quadro: céu, blocos, alvo, personagem, efeitos e mapa =====
@@ -3352,13 +3399,38 @@ function drawScenery(t){
  const q=Math.max(.75,Math.round(baseTile()/11)*worldZoom),night=nightAmt(),A=H*SURF,P=scenePal(),k=hx=>nightCol(hx,night);
  ctx.save();ctx.beginPath();ctx.rect(0,0,W,y0);ctx.clip();ctx.imageSmoothingEnabled=false;
  // a grande montanha fica no fim da trilha da esquerda (espelhada, sem nada nela); à direita o cenário termina no mar (13-paisagem.js)
+ // cordilheira alta da esquerda (área estendida): duas fileiras de picos que passam do topo da tela, com neve; a de trás é mais clara e fria
+ tallRange(y0,q,A,P,k,SURF_L-14,-40,31,1.45,["#a4b4d0","#7d90b3","#5b6f93"],1.02);
+ tallRange(y0,q,A,P,k,SURF_L-10,-50,57,1.12,["#7584a4","#52617f","#37455f"],.86);
  bigMountain(y0,q,A,P,k,SURF_L-.5,true);
+ for(const c of CAIRNS)drawCairn(y0,q,P,k,c);
  // fileira de trás (árvores menores e mais frias) e depois a da frente, nos trechos livres das trilhas
  sceneScatter(y0,q,P,k,SURF_L+1,-HALF-1,true);sceneScatter(y0,q,P,k,HALF+2,SURF_R-1,true);
  sceneScatter(y0,q,P,k,SURF_L+1,-HALF-2,false);sceneScatter(y0,q,P,k,HALF+2,SURF_R-1,false);
  ctx.restore();
 }
 
+// ---------- cordilheira alta e marcos da esquerda estendida ----------
+const CAIRNS=[-58,-74,-91];   // pilhas de pedras à beira da trilha (só visual)
+const _rangeCache={};
+function tallRange(y0,q,A,P,k,w0,w1,sd,amp,cols,snowF){   // picos presos ao mundo entre as colunas w0 e w1; amp = altura máxima em frações do céu (passa de 1: o pico sai da tela)
+ const key=sd+":"+w0+":"+w1;let pk=_rangeCache[key];
+ if(!pk){pk=[];for(let c=w0,i=0;c<w1;c+=10+hash(i,sd)*7,i++)pk.push([c+(hash(i,sd+1)-.5)*4,amp*(.55+hash(i,sd+2)*.45),7+hash(i,sd+3)*7]);_rangeCache[key]=pk}
+ if(colX(w1+10)<=0||colX(w0-10)>=W)return;
+ const hOf=w=>{let h=0;for(const[c,a,hw]of pk){const t=1-Math.abs(w-c)/hw;if(t>0)h=Math.max(h,a*Math.pow(t,.85))}return h*A*(1+.05*Math.sin(w*2.9+sd)+.035*Math.sin(w*6.7+2))};
+ const lit=k(cols[0]),shade=k(cols[1]),deep=k(cols[2]),sL=k("#f4f8fb"),sD=k("#c3d1e3"),wint=P.wint,snowAt=A*(snowF-.15*wint);
+ worldCols(q,w0-10,w1+10,(w,x,cw)=>{
+  const h=Math.round(hOf(w)/q)*q;if(h<=0)return;
+  const up=hOf(w+.4)>hOf(w-.4),top=y0-h;
+  ctx.fillStyle=up?lit:shade;ctx.fillRect(x,top,cw,h);
+  for(let y=Math.max(top+q*2,y0-A*1.1);y<y0;y+=q){const v=Math.sin(w*2.2+(y0-y)/(T*.6)+Math.sin(w*.65+sd)*1.5);if(v>.82){ctx.fillStyle=deep;ctx.globalAlpha=.4;ctx.fillRect(x,y,cw,q);ctx.globalAlpha=1}}
+  if(h>snowAt){const wq=Math.floor(w*4),sh=Math.round(((h-snowAt)*.9+hash(wq,sd)*q*3)/q)*q;ctx.fillStyle=up?sL:sD;ctx.fillRect(x,top,cw,Math.min(h,Math.max(q,sh)))}
+ });
+}
+function drawCairn(y0,q,P,k,c){   // três pedras empilhadas
+ const x=colX(c);if(x<-T*2||x>W+T*2)return;
+ pxBoulder(x,y0+q,T*.5,q,P,k);pxBoulder(x+q,y0+q-T*.52,T*.34,q,P,k);pxBoulder(x-q,y0+q-T*.84,T*.2,q,P,k);
+}
 // Grande montanha à direita: sobe logo depois da última coluna andável (SURF_R) e ocupa o fundo até o limite da câmera. Sem portas nem estruturas: só rocha, neve e floresta no pé.
 function bigMountain(y0,q,A,P,k,B,mir){   // mir = espelhada (usada à esquerda: sobe depois de SURF_L)
  const C=B+5,L0=B-7,R0=C+11,sg=mir?-1:1,e0=mir?2*B-R0:L0,e1=mir?2*B-L0:R0;if(colX(e1)<=0||colX(e0)>=W)return;
@@ -3980,7 +4052,7 @@ function drawCritters(t){
   if(f<.18||f>.82){ctx.globalAlpha=.7;PX(x-q,y-.6*q,5*q,.6*q,"#ffffff");ctx.globalAlpha=1}   // respingo ao entrar/sair da água
  }
 }
-const FIREFLIES=Array.from({length:90},(_,i)=>({c:SURF_L+3+hash(i,151)*(SURF_R-SURF_L-6),h:2.5+hash(i,153)*12,ph:hash(i,155)*6.28,sp:.6+hash(i,157)*1.2}));
+const FIREFLIES=Array.from({length:Math.round(90*(SURF_R-SURF_L)/88)},(_,i)=>({c:SURF_L+3+hash(i,151)*(SURF_R-SURF_L-6),h:2.5+hash(i,153)*12,ph:hash(i,155)*6.28,sp:.6+hash(i,157)*1.2}));
 function drawFireflies(t){   // vaga-lumes: pontinhos que piscam e passeiam sobre a grama e a água; só à noite, só perto da superfície, desenhados por cima da escuridão
  const n=nightAmt();if(n<.12)return;
  const u=pu(),y=Math.round(rowY(0)),q=critterQ();if(y<-T||y>H+T*2)return;
