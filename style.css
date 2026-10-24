@@ -295,3 +295,11 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 @keyframes cartaIn{to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.carta p,.carta button{animation:none;opacity:1}}
 .carta button:disabled{pointer-events:none}
+/* notificação de conquista: azul com troféu, sobe do rodapé (acima da barra de itens) para não cobrir as outras mensagens do topo */
+#ach{position:absolute;bottom:84px;left:50%;z-index:7;transform:translate(-50%,20px);opacity:0;pointer-events:none;display:none;flex-direction:column;align-items:center;gap:3px;padding:10px 24px 12px 56px;min-width:230px;max-width:90%;text-align:left;background:#0c1c2c;border:2px solid #5fd3ff;border-radius:6px;box-shadow:0 0 0 2px #000,0 0 18px rgba(95,211,255,.45)}
+#ach::before{content:"\1F3C6";position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:1.9rem;filter:drop-shadow(0 0 6px #5fd3ff)}
+#ach small{align-self:stretch;color:#5fd3ff;font-size:.66rem;letter-spacing:.2em}
+#ach b{align-self:stretch;color:#e8f8ff;font-size:1.05rem;letter-spacing:.03em}
+#ach span{align-self:stretch;color:#9fc7dc;font-size:.7rem}
+#ach.on{display:flex;animation:achIn 4.2s ease both}
+@keyframes achIn{0%{opacity:0;transform:translate(-50%,20px)}8%{opacity:1;transform:translate(-50%,-4px)}13%{transform:translate(-50%,0)}88%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,14px)}}

@@ -499,7 +499,9 @@ addLang("en","English",{
 "Ache 10 fragmentos em baús":"Find 10 shards in chests",
 "Viajante de bolso":"Pocket traveler",
 "Use 5 poções de teleporte":"Use 5 teleport potions",
-"Conquista: {0}":"Achievement: {0}",
+"{0} CONQUISTAS":"{0} ACHIEVEMENTS",
+"CONQUISTA":"ACHIEVEMENT",
+"e mais {0}":"and {0} more",
 // --- 2-sistemas/05-noite-estrelas.js
 "Estrela cadente! Minérios x{0} por {1}s":"Shooting star! Ores x{0} for {1}s",
 "Estrela cadente! Ouro x{0} por {1}s":"Shooting star! Gold x{0} for {1}s",
@@ -1389,7 +1391,20 @@ ACH.push(
  [N_("Empreiteiro"),N_("Entregue 10 contratos"),()=>S.ctDone>=10],[N_("Na sorte"),N_("Jogue na mesa de apostas"),()=>S.spins>=1],[N_("Viciado"),N_("Jogue 100 vezes na mesa de apostas"),()=>S.spins>=100],[N_("Caçador de tesouros"),N_("Abra um baú no subsolo"),()=>S.chests>=1],[N_("Baú épico"),N_("Abra um baú Épico ou melhor"),()=>S.chTop>=4],[N_("Sorte lendária"),N_("Abra um baú Lendário"),()=>S.chTop>=5],
  [N_("Caça-baús"),N_("Abra 10 baús"),()=>S.chests>=10],[N_("Rei dos baús"),N_("Abra 100 baús"),()=>S.chests>=100],[N_("Coleção completa"),N_("Abra um baú de cada raridade"),()=>S.chT.every(n=>n>0)],[N_("Chuva de ouro"),N_("Abra 5 baús Lendários"),()=>S.chT[4]>=5],[N_("Presente dos baús"),N_("Ganhe 10 bônus de melhoria de baús"),()=>S.chPk>=10],[N_("Colecionador de cacos"),N_("Ache 10 fragmentos em baús"),()=>S.chFr>=10],[N_("Viajante de bolso"),N_("Use 5 poções de teleporte"),()=>S.ptpUsed>=5]
 );
-function checkAch(){for(let i=0;i<ACH.length;i++)if(!S.ach.includes(i)&&ACH[i][2]()){S.ach.push(i);say(__("Conquista: {0}",__(ACH[i][0])));sfx(1040,.3,"sine")}}
+// Notificação de conquista: caixa própria (azul, com troféu) e fanfarra própria; várias de uma vez viram uma caixa só
+let achQ=[],achT=0;
+function checkAch(){const n=[];for(let i=0;i<ACH.length;i++)if(!S.ach.includes(i)&&ACH[i][2]()){S.ach.push(i);n.push(i)}if(n.length)showAch(n)}
+function showAch(l){achQ.push(l);if(!achT)achNext()}
+function achNext(){
+ const el=$("ach");achT=0;if(!el)return;
+ if(modal&&achQ.length){achT=setTimeout(achNext,400);return}   // com tela aberta (título, pausa, nível...) a caixa ficaria atrás: espera fechar
+ const l=achQ.shift();if(!l){el.className="";return}
+ el.innerHTML="<small>"+(l.length>1?__("{0} CONQUISTAS",l.length):__("CONQUISTA"))+"</small>"+l.slice(0,3).map(i=>"<b>"+__(ACH[i][0])+"</b>"+(l.length===1?"<span>"+__(ACH[i][1])+"</span>":"")).join("")+(l.length>3?"<span>"+__("e mais {0}",l.length-3)+"</span>":"");
+ el.className="";void el.offsetWidth;el.className="on";
+ [392,494,587].forEach((f,i)=>setTimeout(()=>sfx(f,.14,"square"),i*90));   // fanfarra: três notas curtas e um acorde brilhante
+ setTimeout(()=>{[784,988,1175].forEach(f=>sfx(f,.7,"sine"));sfx(1568,.5,"triangle")},300);
+ achT=setTimeout(achNext,4200);
+}
 
 // ===== 2-sistemas/05-noite-estrelas.js — Estrela cadente (evento raro, só de noite) e indicadores de bônus da noite =====
 // De noite, de tempos em tempos, uma estrela cruza o céu e dá um bônus por BAL.star.len segundos: ouro x2 ou chance de minério x2.
