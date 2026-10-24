@@ -50,9 +50,9 @@ button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .up.can{grid-template-columns:1fr auto auto;--ac:#5be07a}
 .up.can[data-a="2"]{--ac:#ffd45c}.up.can[data-a="3"]{--ac:#ff7ad9}
 .up.can:disabled{opacity:.78}
-.up.can{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ac) 55%,transparent),0 0 10px color-mix(in srgb,var(--ac) 28%,transparent)}
-.up.can .c{color:#07120a;background:var(--ac);padding:2px 8px;border-radius:6px;box-shadow:0 0 10px color-mix(in srgb,var(--ac) 70%,transparent)}
-.up.can .k{display:grid;place-items:center;grid-row:1/3;grid-column:3;min-width:34px;padding:3px 8px;border-radius:999px;font-weight:800;font-size:.85rem;line-height:1;color:#07120a;background:var(--ac);box-shadow:0 0 12px var(--ac);transform-origin:50% 60%;animation:upWob .9s ease-in-out infinite}
+.up.can{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ac) 55%,transparent)}
+.up.can .c{color:#07120a;background:var(--ac);padding:2px 8px;border-radius:6px}
+.up.can .k{display:grid;place-items:center;grid-row:1/3;grid-column:3;min-width:34px;padding:3px 8px;border-radius:999px;font-weight:800;font-size:.85rem;line-height:1;color:#07120a;background:var(--ac);transform-origin:50% 60%;animation:upWob .9s ease-in-out infinite}
 .up.can[data-a="2"] .k{animation-duration:.7s}.up.can[data-a="3"] .k{animation-duration:.5s;font-size:.95rem}
 @keyframes upWob{0%,100%{transform:rotate(0) scale(1)}20%{transform:rotate(-13deg) scale(1.12)}50%{transform:rotate(0) scale(1)}70%{transform:rotate(13deg) scale(1.12)}}
 @media (prefers-reduced-motion:reduce){.up.can .k{animation:none}}
@@ -337,7 +337,3 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 #ach span{align-self:stretch;color:#9fc7dc;font-size:.7rem}
 #ach.on{display:flex;animation:achIn 4.2s ease both}
 @keyframes achIn{0%{opacity:0;transform:translate(-50%,20px)}8%{opacity:1;transform:translate(-50%,-4px)}13%{transform:translate(-50%,0)}88%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,14px)}}
-
-/* encantamentos (Fortuna, Aprimoramento): brilho roxo e estrela no nome */
-.up.ench .n::before{content:"\2726 ";color:#c58bff;text-shadow:0 0 8px #b45cff}
-.up.ench:not(.can){box-shadow:inset 0 0 0 1px #b45cff40,0 0 8px #b45cff22}
