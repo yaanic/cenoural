@@ -277,3 +277,21 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 .pm .lp-btn em{border:0;padding:0;opacity:1}
 .pm .lp-list button{justify-content:flex-start;font-size:.75rem}
 .pm .lp-list button.on{color:#14110f!important;background:rgba(255,180,58,.85)!important;border-color:rgba(255,180,58,.9)!important}
+/* liberação gradual: o que ainda não foi liberado fica escondido */
+.lock{display:none!important}
+/* faixa de novidade liberada */
+#unl{position:absolute;top:18%;left:50%;z-index:6;transform:translate(-50%,-14px) scale(.92);opacity:0;pointer-events:none;display:none;flex-direction:column;align-items:center;gap:4px;padding:12px 26px 14px;min-width:220px;max-width:88%;text-align:center;background:#140d03;border:2px solid #ffd45c;border-radius:6px;box-shadow:0 0 0 2px #000}
+#unl small{color:#ffd45c;font-size:.7rem;letter-spacing:.22em}
+#unl b{color:#fff3c4;font-size:1.15rem;letter-spacing:.04em}
+#unl small::before,#unl small::after{content:"\2605";margin:0 8px;color:#ffb43a}
+#unl.on{display:flex;animation:unlIn 4.3s ease both}
+@keyframes unlIn{0%{opacity:0;transform:translate(-50%,-14px) scale(.8)}9%{opacity:1;transform:translate(-50%,0) scale(1.06)}15%{transform:translate(-50%,0) scale(1)}86%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-10px) scale(.96)}}
+/* cena da cenoura dourada: papel escuro com borda dourada, cada parágrafo aparece em sequência */
+.carta{background:#2a2110;color:#ffe9a8;border:3px solid #d9a83a;box-shadow:0 0 0 3px #000,0 0 28px rgba(255,200,70,.35);padding:20px 22px 18px;text-align:left;line-height:1.55;max-height:88vh;overflow:auto}
+.carta h2{margin:0 0 14px;font-size:1.05rem;letter-spacing:.08em;color:#ffd45c;text-align:center}
+.carta p{margin:0 0 10px;font-size:.82rem}
+.carta button{display:block;width:100%;padding:10px;background:#ffb43a;color:#14110f;border:2px solid #000;font:inherit;font-weight:700;cursor:pointer}
+.carta p,.carta button{opacity:0;animation:cartaIn .6s ease forwards;animation-delay:calc(var(--i)*.55s + .2s)}
+@keyframes cartaIn{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.carta p,.carta button{animation:none;opacity:1}}
+.carta button:disabled{pointer-events:none}

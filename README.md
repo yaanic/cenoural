@@ -44,7 +44,7 @@ Não precisa instalar nada, não tem cadastro e funciona no computador e no celu
 | `E` / `R` | Usar dinamite / trocar o tipo de dinamite |
 | `Q` | Teleporte para o baú |
 | `1` `2` | Habilidades |
-| `M` / `K` | Abrir o mapa / colocar marcador |
+| `M` | Abrir o mapa |
 | `N` | Som ligado ou desligado |
 | `Esc` ou `P` | Pausa |
 | Scroll | Zoom |
@@ -55,12 +55,14 @@ No celular, use os botões na tela (setas, **Minerar**, **Mapa** e **Pausa**) e 
 
 - 15 camadas quebráveis (1500 m de profundidade) e uma rocha-mãe inquebrável no fundo
 - Mesa de trabalho com dezenas de melhorias, picaretas diferentes e loja de itens
+- Liberação gradual: melhorias, itens da loja, fornalha, contratos e caça-níquel vão sendo liberados conforme o seu recorde de profundidade (as construções já aparecem na superfície, quebradas, e voltam a funcionar ao chegar na profundidade), com aviso na tela e dica do que vem a seguir
+- Final na Rocha-mãe: a cenoura dourada e a escolha entre Renascer e continuar cavando
 - Dinamite, veios de pedra dura e veios ricos em minério
 - Baús raros escondidos no subsolo, de comum a lendário
 - Fornalha que refina minérios, contratos com recompensas e um caça-níquel
 - Sistema de nível, habilidades e conquistas
 - Ciclo de dia e noite, estações do ano, clima (chuva, tempestade, neve, neblina) e estrelas cadentes
-- Mapa com zoom e marcadores
+- Mapa com zoom
 - Mundo novo a cada partida, gerado por semente aleatória
 - Trilha e efeitos sonoros, com controle de volume
 

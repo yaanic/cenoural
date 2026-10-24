@@ -108,7 +108,6 @@ addLang("en","English",{
 "Teleporte (compre em Melhorias)":"Teleport (buy it in Upgrades)",
 "Fúria do Minerador (libera aos 50 m) e Escavação Frenética (aos 150 m)":"Miner's Fury (unlocks at 50 m) and Frenzied Digging (at 150 m)",
 "Abrir e fechar o mapa. Com ele aberto, a roda do mouse dá zoom":"Open and close the map. While it's open, the mouse wheel zooms",
-"Marcador no mapa (aperte de novo no mesmo lugar para tirar)":"Map marker (press again on the same spot to remove it)",
 "Som ligado/desligado":"Sound on/off",
 "Pausa. Com o mapa aberto, Esc fecha o mapa":"Pause. With the map open, Esc closes the map",
 "Zoom do jogo":"Game zoom",
@@ -159,6 +158,7 @@ addLang("en","English",{
 "Há <b>baús raros</b> escondidos no subsolo, e o visual mostra a raridade: madeira (comum), ferro (incomum), ouro (raro), roxo (épico) e obsidiana (lendário). Dão ouro, XP, itens, minérios, fragmentos, poções de teleporte e, às vezes, um bônus de melhoria como os de subir de nível.":"There are <b>rare chests</b> hidden underground, and their look shows the rarity: wood (common), iron (uncommon), gold (rare), purple (epic) and obsidian (legendary). They give gold, XP, items, ores, shards, teleport potions and, sometimes, an upgrade bonus like the level-up ones.",
 "De <b>noite</b> a superfície escurece (o vagalume brilha mais) e descer dá um pouco mais de XP.":"At <b>night</b> the surface gets dark (the firefly glows brighter) and descending gives a bit more XP.",
 "<b>Estrelas cadentes</b> aparecem raramente à noite e dão ouro ou sorte por um tempo.":"<b>Shooting stars</b> rarely appear at night and grant gold or luck for a while.",
+"<b>Liberação gradual:</b> o jogo começa com poucas melhorias e itens, e a fornalha, o quadro de contratos e o caça-níquel só aparecem depois. Tudo vai sendo liberado conforme o seu <b>recorde de profundidade</b>, com um aviso dourado na tela, e a dica no topo das Melhorias mostra o que vem a seguir. O que já foi liberado não some ao Renascer.":"<b>Gradual unlocks:</b> the game starts with few upgrades and items, and the furnace, the contract board, and the slot machine only show up later. Everything unlocks as your <b>depth record</b> grows, with a golden notice on screen, and the hint at the top of Upgrades shows what comes next. Whatever you unlocked is kept when you are reborn.",
 "Cada mundo novo (jogo novo ou Renascer) usa uma semente aleatória.":"Every new world (new game or Rebirth) uses a random seed.",
 "Sobre o save":"About the save",
 "Seu progresso fica salvo <b>só neste navegador e neste aparelho</b>. Se você limpar os dados do navegador, usar aba anônima ou trocar de aparelho, o progresso some. Para guardar ou levar para outro lugar, use <b>Exportar save</b> abaixo e guarde o texto.":"Your progress is saved <b>only in this browser on this device</b>. If you clear your browser data, use a private window or switch devices, your progress is gone. To keep it or move it elsewhere, use <b>Export save</b> below and store the text.",
@@ -236,6 +236,10 @@ addLang("en","English",{
 "Recupera 50% da energia máxima":"Restores 50% of max energy",
 "Poção de teleporte":"Teleport potion",
 "Uso único: leva ao baú sem gastar energia (na superfície, volta ao ponto de onde saiu). Só cai de baús":"Single use: takes you to the chest without spending energy (on the surface, returns to where you left from). Only found in chests",
+"Fornalha":"Furnace",
+"Quadro de contratos":"Contract board",
+"NOVIDADE LIBERADA":"NEW UNLOCK",
+"Próxima novidade aos {0} m: {1}":"Next unlock at {0} m: {1}",
 // --- 1-nucleo/05-audio-avisos.js
 "Clima: {0}":"Weather: {0}",
 "Estação: {0}":"Season: {0}",
@@ -461,8 +465,6 @@ addLang("en","English",{
 "Salve o jogo na cama":"Save the game at the bed",
 "Sono pesado":"Deep sleeper",
 "Deite na cama 20 vezes":"Lie in the bed 20 times",
-"Cartógrafo":"Cartographer",
-"Coloque um marcador no mapa":"Place a map marker",
 "Companhia":"Company",
 "Chame o vagalume":"Call the firefly",
 "Despensa cheia":"Full pantry",
@@ -545,7 +547,6 @@ addLang("en","English",{
 "Entregar":"Deliver",
 "Em andamento":"In progress",
 "Dispensar":"Dismiss",
-"Quadro de contratos":"Contract board",
 "Missões que pagam um bônus. Conta a partir do momento em que aparece aqui; blocos e minérios só valem na profundidade indicada.":"Missions that pay a bonus. Progress counts from the moment one appears here; blocks and ores only count at the stated depth.",
 "Nenhum contrato no quadro.":"No contracts on the board.",
 "Próximo contrato em <b id='ct-w'>{0}</b>":"Next contract in <b id='ct-w'>{0}</b>",
@@ -579,6 +580,11 @@ addLang("en","English",{
 "achado a {0} m de profundidade":"found at {0} m deep",
 "+{0} de ouro":"+{0} gold",
 "BÔNUS {0}: {1} +{2} nv":"{0} BONUS: {1} +{2} lv",
+// --- 2-sistemas/15-fundo.js
+"Uma cenoura dourada cresce da raiz do cristal, bem no coração do abismo. Ela pulsa devagar, como se esperasse por você.":"A golden carrot grows from the crystal’s root, deep in the heart of the abyss. It pulses slowly, as if waiting for you.",
+"O vagalume não sai do seu lado. Ele brilha tanto que dá para sentir o calor daqui.":"The firefly stays by your side. It glows so brightly you can feel the warmth from here.",
+"A CENOURA DOURADA":"THE GOLDEN CARROT",
+"Tocar na cenoura":"Touch the carrot",
 // --- 3-mundo/02-coleta.js
 "Novo minério: {0}":"New ore: {0}",
 // --- 3-mundo/03-mineracao.js
@@ -590,9 +596,9 @@ addLang("en","English",{
 "BLOCOS QUEBRADOS":"BLOCKS BROKEN",
 "MINÉRIOS COLETADOS":"ORES COLLECTED",
 "RENASCIMENTOS":"REBIRTHS",
-"Renascer troca esta vida por <b>{0}</b> fragmentos (poderes permanentes). Você pode continuar aqui e renascer depois, na aba Poder.":"Rebirth trades this life for <b>{0}</b> shards (permanent powers). You can keep going here and be reborn later, in the Power tab.",
+"Renascer troca esta vida por <b>{0}</b> fragmentos (poderes permanentes). Ou continue cavando e renasça depois, na aba Poder.":"Rebirth trades this life for <b>{0}</b> shards (permanent powers). Or keep digging and be reborn later, in the Power tab.",
 "Renascer agora":"Rebirth now",
-"Continuar no fundo":"Keep going at the bottom",
+"Continuar cavando":"Keep digging",
 "Novo recorde: {0} m":"New record: {0} m",
 "CORAÇÃO DO ABISMO":"HEART OF THE ABYSS",
 "CAMADA: {0}":"LAYER: {0}",
@@ -612,7 +618,6 @@ addLang("en","English",{
 "Sorte e experiência":"Luck and experience",
 "Habilidades":"Skills",
 "Utilidades":"Utilities",
-"Fornalha":"Furnace",
 "Máx":"Max",
 "Consumíveis":"Consumables",
 "Recorde: {0} m":"Record: {0} m",
@@ -711,8 +716,6 @@ addLang("en","English",{
 "{0} — {1} (desbloqueia aos {2} m)":"{0} — {1} (unlocks at {2} m)",
 "{0} (raio {1})":"{0} (radius {1})",
 // --- 4-interface/04-entrada.js
-"Marcador removido":"Marker removed",
-"Marcador colocado":"Marker placed",
 "Minerar":"Mine",
 // --- 4-interface/05-pausa.js
 "nível {0}":"level {0}",
@@ -730,6 +733,8 @@ addLang("en","English",{
 // --- 5-desenho/03-mundo.js
 "Mesa de trabalho: compre aqui":"Workbench: buy here",
 "Mesa de trabalho":"Workbench",
+"fora de uso · {0} m":"out of order · {0} m",
+"fora de uso":"out of order",
 "Fornalha · {0} minérios · {1}":"Furnace · {0} ores · {1}",
 "Fornalha: clique para refinar":"Furnace: click to refine",
 "Loja: compre aqui":"Shop: buy here",
@@ -797,6 +802,12 @@ const BAL={
   furn:{b:500,k:1.812,max:20},  // velocidade da fornalha
   clock:{b:400,k:1,max:1}   // relógio na barra do topo (compra única; custo fixo b)
  },
+ // LIBERAÇÃO GRADUAL: cada coisa só aparece quando o recorde de profundidade (m) chega ao número abaixo (0 = desde o início). Vale para melhorias da mesa, itens da loja e construções da superfície.
+ // O recorde sobrevive ao Renascer, então o que foi liberado não some. Quem já tem nível/estoque no save continua vendo. on:false libera tudo (modo antigo).
+ unlock:{on:true,
+  ups:{sharp:0,speed:0,emax:0,eco:10,jet:15,luck:20,lant:25,xp:30,furn:30,crit:40,auto:50,duration:50,furia:50,autopow:60,clock:60,jetspd:70,lavares:80,tele:120,frenesi:150,pet:150,wide:200},
+  items:{cen:0,dyn:25,sop:60,dyn2:100,poc:150,dyn3:250,dyn4:500,dyn5:900},
+  build:{furnace:30,board:60,slot:150}},
  critMax:.75,                                          // teto da chance de crítico
  critPer:.04,                                           // chance de crítico por nível da melhoria
  ecoPer:.05,jetPer:.05,                                  // economia e eficiência do jato: -5% COMPOSTO por nível (0,95^nível), então nunca zera mesmo com muitos níveis
@@ -907,7 +918,7 @@ function rollOre(r){if(Math.random()>oreChance())return null;const u=ORES.filter
 const SAVE_KEY="abismo-v3";
 const fresh=()=>({gold:0,depth:0,mc:0,prog:0,best:0,runMax:0,tier:0,runs:0,total:0,oc:0,blocks:0,deaths:0,sold:0,en:-1,
  lv:{sharp:0,wide:0,emax:0,eco:0,jet:0,jetspd:0,auto:0,autopow:0,speed:0,crit:0,luck:0,xp:0,duration:0,furia:0,frenesi:0,tele:0,pet:0,furn:0,lavares:0,lant:0,clock:0},items:{dyn:0,dyn2:0,dyn3:0,dyn4:0,dyn5:0,cen:0,sop:0,poc:0,ptp:0},dsel:"dyn",
- bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,dir:"down",dug:[],ach:[],debug:false,real:0,pts:0,sk:{her:0,ini:0,ouro:0,dmg:0,fol:0,jato:0,gar:0,xp:0},marks:[],od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,play:0,v:7,vol:{m:.7,s:1,a:.7}});
+ bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,dir:"down",dug:[],ach:[],debug:false,real:0,pts:0,sk:{her:0,ini:0,ouro:0,dmg:0,fol:0,jato:0,gar:0,xp:0},od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,play:0,v:7,vol:{m:.7,s:1,a:.7}});
 let S=fresh();S.seed=newSeed();
 function clean(o){const f=fresh();o=Object.assign(f,o&&typeof o==="object"?o:{});
  for(const k of["gold","depth","prog","best","runMax","tier","runs","total","oc","blocks","deaths","sold","pts","real","xp","lvp","bombs","eaten","tps","veins","sleeps","rich","refined","ctDone","spins","pend","chests","chTop","chGold","chFr","chPk","ptpUsed","play"])if(!Number.isFinite(o[k])||o[k]<0)o[k]=0;
@@ -932,7 +943,7 @@ function clean(o){const f=fresh();o=Object.assign(f,o&&typeof o==="object"?o:{})
  for(const k in o.bag.ov)if(!Number.isFinite(o.bag.ov[k])||o.bag.ov[k]<0)delete o.bag.ov[k];   // valor por minério na mochila (a fornalha só aceita o que tem valor registrado)
  if(!o.fur||typeof o.fur!=="object"||Array.isArray(o.fur))o.fur={};o.fur=Object.assign(fresh().fur,o.fur);for(const k in o.fur)if(!Number.isFinite(o.fur[k])||o.fur[k]<0)o.fur[k]=0;o.fur.n=Math.floor(o.fur.n);if(o.fur.n<1)o.fur=fresh().fur;
  if(!["down","left","right","up"].includes(o.dir))o.dir="down";
- for(const k of["ach","marks","dug","od"])if(!Array.isArray(o[k]))o[k]=[];
+ for(const k of["ach","dug","od"])if(!Array.isArray(o[k]))o[k]=[];
  o.lvl=Math.max(1,Math.floor(o.lvl)||1);
  if(!o.pk||typeof o.pk!=="object"||Array.isArray(o.pk))o.pk={};
  for(const k of["crit","ore"]){const L=Math.round(Number(o.pk[k]))||0;if(L>0)o.lvp=(Number.isFinite(o.lvp)?o.lvp:0)+L;delete o.pk[k]}   // cartas de crítico e minério por nível foram removidas: devolve os pontos para escolher outra melhoria
@@ -950,7 +961,8 @@ for(const k in o.pk)if(!Number.isFinite(o.pk[k])||o.pk[k]<0)o.pk[k]=0;
  if(!Number.isFinite(o.ctW)||o.ctW<0)o.ctW=0;
  if(!Number.isFinite(o.slotNet))o.slotNet=0;
  if(o.pend>0){o.gold+=o.pend;o.pend=0}   // fechou o jogo no meio de uma rodada do caça-níquel: o prêmio já sorteado é pago
- delete o.shards;o.v=7;return o}
+ if(o.v<8)o.ach=o.ach.filter(i=>i!==49).map(i=>i>49?i-1:i);   // conquista "Cartógrafo" (marcador no mapa) foi removida: as seguintes sobem uma posição
+ delete o.marks;delete o.shards;o.v=8;return o}
 let dug=new Set(),saveSeen=false;   // saveSeen: já existe save gravado por este jogo (se ele sumir, o jogador apagou o save)
 try{
  const r=localStorage.getItem(SAVE_KEY);
@@ -974,8 +986,8 @@ let star=0,starT=0,starNext=60+Math.random()*120,shoot=null;   // estrela cadent
 let mute=false,actx=null,toast="",toastT=0,breakNoise=null,breakSfxNext=0;
 let camX=0,camY=0,mX=0,mY=0,swing=0,parts=[],texts=[],shake=0,flash=0,flashC="#ff2a2a",flashText="",chestOpen=0,lowEnPulse=0,layerSeen=0,jetT=0;
 let holdM=false,holdS=false,lastH=0,held=null,heldC=null,lastMv=0,shiftOn=false,fallR=0,fallAcc=0,cheatBuf="",cheatT=0,cheatSurf=false,cheatPos=null;
-// Códigos secretos (digitar a palavra, como em GTA). CENOURA: ouro e energia infinitos (em qualquer lugar). CLIMA: troca o clima · SEASON: avança a estação (esses dois só valem na superfície, onde se vê o efeito).
-const CHEATS=["CENOURA","CLIMA","SEASON"],CHEATS_SURF=["CLIMA","SEASON"];
+// Códigos secretos (digitar a palavra, como em GTA). CENOURA: ouro e energia infinitos (em qualquer lugar). FINAL: teleporta para a Rocha-mãe e dispara a cena da cenoura dourada (em qualquer lugar) · CLIMA: troca o clima · SEASON: avança a estação (esses dois só valem na superfície, onde se vê o efeito).
+const CHEATS=["CENOURA","CLIMA","SEASON","FINAL"],CHEATS_SURF=["CLIMA","SEASON"];
 
 // ===== 1-nucleo/04-formulas.js — Fórmulas de dano, dureza, ouro, energia e custos (os números ficam em BAL, 00-balanceamento.js) =====
 const pk=k=>S.pk[k]||0;
@@ -1035,6 +1047,47 @@ const ITEMS={
 };
 const itemCost=k=>Math.ceil(ITEMS[k].b*Math.pow(BAL.itemK,layerOf(S.best)));
 const have=k=>S.items[k]||0;
+// ----- Liberação gradual (BAL.unlock): o que ainda não foi liberado fica escondido -----
+const BUILD_NAMES={furnace:N_("Fornalha"),board:N_("Quadro de contratos"),slot:N_("Caça-níquel")};
+function unlockAt(kind,k){const u=BAL.unlock[kind];return u&&u[k]!=null?u[k]:0}
+function isUnl(kind,k){
+ if(!BAL.unlock.on||S.debug)return true;
+ if(kind==="ups"&&S.lv[k]>0)return true;                 // já comprou: continua visível
+ if(kind==="items"&&have(k)>0)return true;
+ if(kind==="build"&&(k==="furnace"?S.fur.n>0||S.refined>0:k==="board"?S.ctDone>0:S.spins>0))return true;
+ return S.best>=unlockAt(kind,k);
+}
+// nomes (já traduzidos) do que se libera ao passar de `from` até `to` m; sem `from`, tudo que ainda está bloqueado
+function unlockNames(from,to){
+ const out=[],add=(kind,k,nm)=>{const a=unlockAt(kind,k);if(a>from&&a<=to&&(to>=1e9?!isUnl(kind,k):true))out.push([a,nm])};
+ for(const k in UPS)add("ups",k,UPS[k].n);
+ for(const k in ITEMS)if(!ITEMS[k].noShop)add("items",k,ITEMS[k].n);
+ for(const k in BUILD_NAMES)add("build",k,__(BUILD_NAMES[k]));
+ return out;
+}
+let ulSeen=-1;
+function checkUnlocks(){   // avisa na tela quando o recorde libera algo novo (não avisa ao carregar o jogo nem ao apagar o progresso)
+ if(!BAL.unlock.on||S.debug||ulSeen<0||S.best<ulSeen){ulSeen=S.best;return}
+ if(S.best===ulSeen)return;
+ const l=unlockNames(ulSeen,S.best);ulSeen=S.best;
+ if(l.length)showUnlock(l.map(x=>x[1]));
+}
+// Faixa própria de "novidade liberada" (não é o aviso comum do canto): aparece no meio do jogo, dourada, com fanfarra; várias seguidas entram em fila
+let ulQ=[],ulT=0;
+function showUnlock(names){ulQ.push(names);if(!ulT)ulNext()}
+function ulNext(){
+ const el=$("unl");ulT=0;if(!el)return;
+ const n=ulQ.shift();if(!n){el.className="";return}
+ el.innerHTML="<small>"+__("NOVIDADE LIBERADA")+"</small>"+n.map(x=>"<b>"+x+"</b>").join("");
+ el.className="";void el.offsetWidth;el.className="on";
+ [523,659,784,1047,1319].forEach((f,i)=>setTimeout(()=>sfx(f,.2,"triangle"),i*85));setTimeout(()=>sfx(2093,.35,"sine"),430);
+ ulT=setTimeout(ulNext,4300);
+}
+function nextUnlockText(){   // dica no topo das melhorias: o que vem a seguir
+ const l=unlockNames(S.best,1e9);if(!l.length)return"";
+ const m=Math.min(...l.map(x=>x[0]));
+ return __("Próxima novidade aos {0} m: {1}",m,l.filter(x=>x[0]===m).map(x=>x[1]).join(", "));
+}
 // Renascer: fragmentos = 1 por camada de 100 m alcançada nesta vida (+5 por chegar ao fundo)
 const prestGain=()=>S.runMax>=LAYER_HEIGHT?Math.floor(S.runMax/LAYER_HEIGHT)+(S.runMax>=FINAL_DEPTH?BAL.prestigeBonus:0):0;
 
@@ -1111,6 +1164,10 @@ function runCheat(w){
  if(w==="CENOURA"){toggleDbg();return}
  // se a primeira letra ("S" de SEASON) desceu um bloco no buraco, desfaz: o código não deve mudar a posição do jogador
  if(cheatPos&&S.mc===cheatPos.mc&&S.depth===cheatPos.depth+1){S.depth=cheatPos.depth;S.best=cheatPos.best;S.runMax=cheatPos.runMax;mY=camY=S.depth;S.prog=0}
+ if(w==="FINAL"){   // vai direto para a Rocha-mãe (abre o poço da coluna atual, para dar para subir de volta) e roda a cena de chegada
+  if(modal)return;S.mc=clamp(S.mc,-HALF,HALF);for(let r=1;r<FINAL_DEPTH;r++)dug.add(S.mc+","+r);
+  S.depth=FINAL_DEPTH;S.best=Math.max(S.best,FINAL_DEPTH);S.runMax=Math.max(S.runMax,FINAL_DEPTH);S.prog=0;S.en=maxEn();
+  mX=camX=S.mc;mY=camY=S.depth;layerSeen=BIO.length-1;carrotC=null;reachBottom();return}
  if(w==="CLIMA"){const k=WX_KEYS[(WX_KEYS.indexOf(wx.cur)+1)%WX_KEYS.length];weatherSet(k);say(__("Clima: {0}",WX[k].n));return}
  if(w==="SEASON"){const L=BAL.season.len,i=(Math.floor(S.sea/L)+1)%4;S.sea=i*L+L/2;say(__("Estação: {0}",SEASONS[i].n))}   // vai para o meio da próxima estação (a paleta dela vale por inteira ali)
 }
@@ -1145,7 +1202,7 @@ const UPS={
  tele:{g:"Habilidades",get n(){return __("Teleporte")},d:l=>{const c=Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*l);return l<1?__("Desbloqueia o teleporte: leva ao baú sem gastar energia e, usado na superfície, volta ao ponto de onde saiu"):l<BAL.ups.tele.max?__("Recarga do teleporte: {0} s ({1} s no próximo nível)",c,Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*(l+1))):__("Recarga do teleporte: {0} s",c)},...BAL.ups.tele}
 };
 function buy(k){
- if(!nearBench())return;
+ if(!nearBench()||!isUnl("ups",k))return;
  let n=qty===0?(S.debug?100:1e9):qty,done=0;
  while(done<n){const l=S.lv[k];if(l>=UPS[k].max)break;const c=upCost(k,l);if(S.gold<c)break;S.gold-=c;S.lv[k]++;done++}
  if(done){sfx(700,.12,"triangle");sfx(940,.14,"triangle");if(k==="emax")S.en=Math.max(S.en,Math.min(maxEn(),S.en+30*done))}
@@ -1158,7 +1215,7 @@ function buyTier(){
 }
 // Loja de consumáveis (fica na superfície, à direita do baú): dinamite e comida que recupera energia.
 function buyItem(k){
- if(!nearShop()||!ITEMS[k]||ITEMS[k].noShop)return;
+ if(!nearShop()||!ITEMS[k]||ITEMS[k].noShop||!isUnl("items",k))return;
  let n=qty===0?(S.debug?100:1e9):qty,done=0;
  while(done<n&&have(k)+done<99){const c=itemCost(k);if(S.gold<c)break;S.gold-=c;done++}
  if(done){S.items[k]=have(k)+done;if(DYN_IDS.includes(k)&&have(S.dsel)<1)S.dsel=k;sfx(700,.12,"triangle");sfx(940,.14,"triangle")}
@@ -1183,9 +1240,9 @@ const atSurface=()=>S.depth<=0;
 const nearChest=()=>atSurface()&&Math.abs(S.mc-CHEST_C)<=1;
 const nearBench=()=>atSurface()&&Math.abs(S.mc-BENCH_C)<=1;
 const nearBed=()=>atSurface()&&Math.abs(S.mc-BED_C)<=1;
-const nearSlot=()=>atSurface()&&Math.abs(S.mc-SLOT_C)<=1;
-const nearBoard=()=>atSurface()&&Math.abs(S.mc-BOARD_C)<=1;
-const nearFurnace=()=>atSurface()&&Math.abs(S.mc-FURN_C)<=1;
+const nearSlot=()=>atSurface()&&isUnl("build","slot")&&Math.abs(S.mc-SLOT_C)<=1;
+const nearBoard=()=>atSurface()&&isUnl("build","board")&&Math.abs(S.mc-BOARD_C)<=1;
+const nearFurnace=()=>atSurface()&&isUnl("build","furnace")&&Math.abs(S.mc-FURN_C)<=1;
 const nearShop=()=>atSurface()&&Math.abs(S.mc-SHOP_C)<=1;
 const JET_FLAME=.3;
 function spend(n){if(S.debug||S.depth<=0)return;S.en-=n;if(lowEnPulse<=0&&S.en<maxEn()*.25)lowEnPulse=1;if(S.en<=0){S.en=0;die()}}
@@ -1327,7 +1384,7 @@ ACH.push(
  [N_("Veterano"),N_("Chegue ao nível 10"),()=>S.lvl>=10],[N_("Experiente"),N_("Nível 25"),()=>S.lvl>=25],[N_("Lendário"),N_("Nível 50"),()=>S.lvl>=50],
  [N_("Ciclo"),N_("Renasça 3 vezes"),()=>S.runs>=3],[N_("Eterno"),N_("Renasça 10 vezes"),()=>S.runs>=10],
  [N_("Comerciante"),N_("Venda no baú 25 vezes"),()=>S.sold>=25],[N_("Atacadista"),N_("Venda no baú 250 vezes"),()=>S.sold>=250],
- [N_("Boa noite"),N_("Salve o jogo na cama"),()=>S.sleeps>=1],[N_("Sono pesado"),N_("Deite na cama 20 vezes"),()=>S.sleeps>=20],[N_("Cartógrafo"),N_("Coloque um marcador no mapa"),()=>S.marks.length>=1],[N_("Companhia"),N_("Chame o vagalume"),()=>S.lv.pet>=1],[N_("Despensa cheia"),N_("Tenha 99 de algum item da loja"),()=>Object.keys(S.items).some(k=>ITEMS[k]&&!ITEMS[k].noShop&&S.items[k]>=99)],
+ [N_("Boa noite"),N_("Salve o jogo na cama"),()=>S.sleeps>=1],[N_("Sono pesado"),N_("Deite na cama 20 vezes"),()=>S.sleeps>=20],[N_("Companhia"),N_("Chame o vagalume"),()=>S.lv.pet>=1],[N_("Despensa cheia"),N_("Tenha 99 de algum item da loja"),()=>Object.keys(S.items).some(k=>ITEMS[k]&&!ITEMS[k].noShop&&S.items[k]>=99)],
  [N_("Fornalha acesa"),N_("Refine 1 minério na fornalha"),()=>S.refined>=1],[N_("Mestre ferreiro"),N_("Refine 1000 minérios"),()=>S.refined>=1000],
  [N_("Empreiteiro"),N_("Entregue 10 contratos"),()=>S.ctDone>=10],[N_("Na sorte"),N_("Jogue na mesa de apostas"),()=>S.spins>=1],[N_("Viciado"),N_("Jogue 100 vezes na mesa de apostas"),()=>S.spins>=100],[N_("Caçador de tesouros"),N_("Abra um baú no subsolo"),()=>S.chests>=1],[N_("Baú épico"),N_("Abra um baú Épico ou melhor"),()=>S.chTop>=4],[N_("Sorte lendária"),N_("Abra um baú Lendário"),()=>S.chTop>=5],
  [N_("Caça-baús"),N_("Abra 10 baús"),()=>S.chests>=10],[N_("Rei dos baús"),N_("Abra 100 baús"),()=>S.chests>=100],[N_("Coleção completa"),N_("Abra um baú de cada raridade"),()=>S.chT.every(n=>n>0)],[N_("Chuva de ouro"),N_("Abra 5 baús Lendários"),()=>S.chT[4]>=5],[N_("Presente dos baús"),N_("Ganhe 10 bônus de melhoria de baús"),()=>S.chPk>=10],[N_("Colecionador de cacos"),N_("Ache 10 fragmentos em baús"),()=>S.chFr>=10],[N_("Viajante de bolso"),N_("Use 5 poções de teleporte"),()=>S.ptpUsed>=5]
@@ -1407,6 +1464,7 @@ function furUse(){
  return true;
 }
 function furHit(px,py){   // o ponto (px,py) da tela está sobre o desenho da fornalha?
+ if(!isUnl("build","furnace"))return false;
  const u=pu(),s=sprFurnace(),c=colX(FURN_C),y=rowY(0);
  return px>=c-s.w*u/2&&px<=c+s.w*u/2&&py>=y-s.h*u&&py<=y;
 }
@@ -1540,7 +1598,7 @@ function boardUse(){
  if(modal)return true;
  openBoard();return true;
 }
-function boardHit(px,py){const u=pu(),s=sprBoard(),c=colX(BOARD_C),y=rowY(0);return px>=c-s.w*u/2&&px<=c+s.w*u/2&&py>=y-s.h*u&&py<=y}
+function boardHit(px,py){if(!isUnl("build","board"))return false;const u=pu(),s=sprBoard(),c=colX(BOARD_C),y=rowY(0);return px>=c-s.w*u/2&&px<=c+s.w*u/2&&py>=y-s.h*u&&py<=y}
 let ctShown=-1;
 function openBoard(){
  const b=openModal("ct");b.style.maxWidth="520px";ctShown=-1;paintBoard();
@@ -1578,7 +1636,7 @@ function slotUse(){
  if(modal)return true;
  openSlot();return true;
 }
-function slotHit(px,py){const u=pu(),s=sprSlot(),c=colX(SLOT_C),y=rowY(0);return px>=c-s.w*u/2&&px<=c+s.w*u/2&&py>=y-s.h*u&&py<=y}
+function slotHit(px,py){if(!isUnl("build","slot"))return false;const u=pu(),s=sprSlot(),c=colX(SLOT_C),y=rowY(0);return px>=c-s.w*u/2&&px<=c+s.w*u/2&&py>=y-s.h*u&&py<=y}
 
 // ---------- animação (canvas dentro do modal) ----------
 const SL={w:460,h:306,cell:68,top:48,rx:[34,170,306],rw:120};
@@ -1900,6 +1958,33 @@ function chDraw(dt){
  g.strokeStyle=popped?T.c:"#7a4f27";g.lineWidth=3;g.strokeRect(1.5,1.5,w-3,h-3);
 }
 
+// ===== 2-sistemas/15-fundo.js — Final: a cenoura dourada na Rocha-mãe (cena de chegada) e a escolha entre Renascer e continuar cavando =====
+// Ao chegar à Rocha-mãe (1500 m) abre-se uma alcova ao lado do jogador com a cenoura dourada. A cena pede para tocar nela; depois vem a tela "VOCÊ CHEGOU AO FUNDO" (3-mundo/03-mineracao.js, openBottom) com as duas escolhas.
+// carrotC é só da sessão (não entra no save): o Renascer gera outro mundo e zera.
+let carrotC=null,memLock=0;
+function carrotSpot(){
+ if(carrotC===null&&S.depth>=FINAL_DEPTH){carrotC=clamp(S.mc+(S.mc>0?-1:1),-HALF,HALF);dug.add(carrotC+","+(FINAL_DEPTH-1))}
+ return carrotC}
+// Chamado pelo laço: se o jogo foi aberto no fundo, a cenoura continua lá (desenhada), sem repetir a cena.
+function memCheck(){if(S.depth>=FINAL_DEPTH)carrotSpot()}
+function openMemoria(){
+ if(S.depth<FINAL_DEPTH)return;
+ if(modal){setTimeout(openMemoria,800);return}
+ const b=openModal("mem");b.style.maxWidth="440px";
+ const P=[__("Uma cenoura dourada cresce da raiz do cristal, bem no coração do abismo. Ela pulsa devagar, como se esperasse por você.")];
+ if(S.lv.pet>0)P.push(__("O vagalume não sai do seu lado. Ele brilha tanto que dá para sentir o calor daqui."));
+ b.innerHTML="<div class='carta gold'><h2>"+__("A CENOURA DOURADA")+"</h2>"+P.map((t,i)=>"<p style='--i:"+i+"'>"+t+"</p>").join("")
+  +"<button id='mem-go' disabled style='--i:"+(P.length+1)+"'>"+__("Tocar na cenoura")+"</button></div>";
+ memLock=performance.now()+(P.length+1)*550+900;
+ setTimeout(()=>{const x=$("mem-go");if(x)x.disabled=false},memLock-performance.now());
+ $("mem-go").onclick=tocarCenoura}
+function memKey(e){   // só o botão "Tocar na cenoura" aceita teclado (Espaço/Enter, depois da trava); Esc não fecha a cena
+ if($("mem-go")){e.preventDefault();if(!e.repeat&&performance.now()>=memLock&&(e.code==="Space"||e.code==="Enter"))$("mem-go").click()}}
+function tocarCenoura(){
+ flash=1.2;flashC="#ffd45c";flashText="";shake=Math.max(shake,6);
+ [392,523,659,784,1047].forEach((f,i)=>setTimeout(()=>sfx(f,.5,"sine"),i*160));
+ closeModal();openBottom()}
+
 // ===== 3-mundo/00-camera.js — Canvas, câmera, zoom limitado ao mundo e conversão de coordenadas =====
 const cv=$("cv"),ctx=cv.getContext("2d");
 let W=0,H=0,T=44,dpr=1,worldZoom=1;
@@ -1998,12 +2083,12 @@ function collect(c,r){
 }
 
 // ===== 3-mundo/03-mineracao.js — Movimento, golpes, picareta ampla (dois lados), combo e escavação automática =====
-// Chegada à Rocha-mãe: tremor, clarão dourado com o título e uma fanfarra (só na primeira vez de cada vida em que se chega ao fundo)
+// Chegada à Rocha-mãe: tremor, clarão dourado com o título e uma fanfarra (só na primeira vez de cada vida em que se chega ao fundo); depois a cena da cenoura dourada (2-sistemas/15-fundo.js)
 function reachBottom(){
  shake=Math.max(shake,10);flash=1.8;flashC="#ffd45c";flashText=__("VOCÊ CHEGOU AO FUNDO");
  [523,659,784,1047,1319,1568].forEach((f,i)=>setTimeout(()=>{sfx(f,.35,"triangle");sfx(f/2,.4,"sine")},i*140));
  setTimeout(()=>{sfx(1047,.9,"sine");sfx(1319,.9,"sine");sfx(1568,.9,"sine");sfx(110,.6,"sawtooth")},900);
- setTimeout(openBottom,2800);
+ carrotSpot();setTimeout(openMemoria,2800);   // cena da cenoura dourada (tocar nela) e só depois a escolha de openBottom
 }
 // Janela depois da cena: resumo da jornada e a escolha entre Renascer agora ou continuar no fundo
 function openBottom(){
@@ -2013,8 +2098,8 @@ function openBottom(){
   row=(l,v)=>"<div class='st'><b>"+v+"</b><small>"+l+"</small></div>";
  b.innerHTML="<div class='dead'><h2>"+__("VOCÊ CHEGOU AO FUNDO")+"</h2><div class='sub'>"+__("Sua jornada até aqui")+"</div>"
   +"<div class='grid'>"+row(__("TEMPO DE JOGO"),hh>0?__("{0} h {1} min",hh,mm):__("{0} min",mm))+row(__("BLOCOS QUEBRADOS"),fmt(S.blocks))+row(__("MINÉRIOS COLETADOS"),fmt(S.oc))+row(__("RENASCIMENTOS"),S.runs)+"</div>"
-  +"<div class='tip'>"+__("Renascer troca esta vida por <b>{0}</b> fragmentos (poderes permanentes). Você pode continuar aqui e renascer depois, na aba Poder.",g)+"</div>"
-  +"<button id='bt-re'>"+__("Renascer agora")+"</button><button id='bt-no' style='margin-top:8px'>"+__("Continuar no fundo")+"</button></div>";
+  +"<div class='tip'>"+__("Renascer troca esta vida por <b>{0}</b> fragmentos (poderes permanentes). Ou continue cavando e renasça depois, na aba Poder.",g)+"</div>"
+  +"<button id='bt-re'>"+__("Renascer agora")+"</button><button id='bt-no' style='margin-top:8px'>"+__("Continuar cavando")+"</button></div>";
  $("bt-no").onclick=closeModal;
  $("bt-re").onclick=()=>{closeModal();doRebirth()};
  $("bt-no").focus();
@@ -2107,9 +2192,10 @@ function build(){
  $("qty").innerHTML="";
  [[1,"x1"],[10,"x10"],[100,"x100"],[0,__("Máx")]].forEach(([v,t])=>{const b=mk("button",qty===v?"on":"",t);b.onclick=()=>{qty=v;build()};$("qty").appendChild(b)});
  const box=$("ups");box.innerHTML="";
+ {const nx=mk("div","ph");nx.id="nextul";box.appendChild(nx)}   // dica: o que se libera a seguir (liberação gradual)
  for(const g of GROUPS){
-  box.appendChild(mk("h2",null,__(g)));
-  if(g==="Fornalha"){const m=mk("div","ph");m.id="furmsg";box.appendChild(m)}
+  {const h=mk("h2",null,__(g));h.dataset.g=g;box.appendChild(h)}
+  if(g==="Fornalha"){const m=mk("div","ph");m.id="furmsg";m.dataset.g=g;box.appendChild(m)}
   if(g==="Picareta"){const t=upBtn("u-tier",buyTier);t.classList.add("tier");box.appendChild(t)}
   for(const k in UPS)if(UPS[k].g===g)box.appendChild(upBtn("u-"+k,()=>buy(k)));
  }
@@ -2148,6 +2234,11 @@ function refresh(){
  if(S.tier>=TIERS.length-1)setTxt("u-tier",__("Picareta de {0}",__(TIERS[S.tier])),__("Melhor picareta do jogo (camada {0})",TIERS.length),__("MÁX"),true,5);
  else setTxt("u-tier",__("Nova picareta: {0}",__(TIERS[S.tier+1])),__("Dano x{0} (atual: {1}). Recomendada para a camada {2}",ndec(BAL.tier.dmgMult),__(TIERS[S.tier]),__(BIO[S.tier+1][0])),fmt(tierCost()),!shop||S.gold<tierCost(),lvTier(S.tier,TIERS.length-1));
  for(const k in UPS){const l=S.lv[k],mx=l>=UPS[k].max,c=upCost(k,l);setTxt("u-"+k,__("{0} · nv {1}/{2}",UPS[k].n,l,UPS[k].max),UPS[k].d(l),mx?__("MÁX"):fmt(c),mx||!shop||S.gold<c,lvTier(l,UPS[k].max))}
+ {const vis={};   // liberação gradual: esconde o que ainda não foi liberado (e grupos que ficaram vazios)
+  for(const k in UPS){const on=isUnl("ups",k),b=$("u-"+k);if(b){b.classList.toggle("lock",!on);if(!on)b.disabled=true}if(on)vis[UPS[k].g]=1}
+  $("ups").querySelectorAll("[data-g]").forEach(e=>e.classList.toggle("lock",!(e.dataset.g==="Picareta"||vis[e.dataset.g])));
+  for(const k in ITEMS){if(ITEMS[k].noShop)continue;const on=isUnl("items",k),b=$("i-"+k);if(b){b.classList.toggle("lock",!on);if(!on)b.disabled=true}}
+  const nx=$("nextul");if(nx){const tx=nextUnlockText();nx.textContent=tx;nx.classList.toggle("lock",!tx)}}
  for(const k in SK){const l=S.sk[k],mx=l>=SK[k][2];setTxt("s-"+k,__("{0} · nv {1}",__(SK[k][0]),l),__(SK[k][1]),mx?__("MÁX"):__("{0} frag.",l+1),mx||S.pts<l+1||S.runs<1)}
  renderStats();clockUpdate();
  const g=prestGain();$("prest").disabled=(g<1&&!armed)||!surf;
@@ -2185,12 +2276,12 @@ $("prest").onclick=()=>{
 function doRebirth(){   // Renascer (botão do painel, depois de confirmar, e janela de chegada ao fundo)
  const keep={runs:S.runs+1,best:S.best,ach:S.ach,oc:S.oc,total:S.total,debug:S.debug,sk:S.sk,pts:S.pts+prestGain(),od:S.od,xp:S.xp,lvl:S.lvl,lvp:S.lvp,pk:S.pk,vol:S.vol,deaths:S.deaths,sold:S.sold,play:S.play,blocks:S.blocks,tab:S.tab,items:S.items,bombs:S.bombs,eaten:S.eaten,tps:S.tps,veins:S.veins,rich:S.rich,sleeps:S.sleeps,refined:S.refined,ctDone:S.ctDone,spins:S.spins,chests:S.chests,chTop:S.chTop,chT:S.chT,chGold:S.chGold,chFr:S.chFr,chPk:S.chPk,ptpUsed:S.ptpUsed,slotNet:S.slotNet,sea:S.sea};
  const h=S.sk.her,ini=S.sk.ini,clk=S.lv.clock;S=Object.assign(fresh(),keep);S.lv.clock=clk;   // o relógio (compra única) e a estação do ano não se perdem ao renascer
- S.seed=SEED=newSeed();chQ.length=0;dug=new Set();mX=mY=camX=camY=0;layerSeen=0;
+ S.seed=SEED=newSeed();chQ.length=0;carrotC=null;dug=new Set();mX=mY=camX=camY=0;layerSeen=0;
  S.tier=Math.min(ini,TIERS.length-1);S.gold=S.debug?Infinity:400*h*h;S.en=maxEn();build();save();say(__("Renascido! Fragmentos: {0}",S.pts));
 }
 let rst=false;
 function wipeAll(){   // recomeça do zero (botão "Apagar progresso" e save apagado pelo navegador)
-S=fresh();S.seed=SEED=newSeed();chQ.length=0;dug=new Set();mX=mY=camX=camY=0;skT=[0,0];skCD=[0,0];dynCD=0;tpCD=0;ev=0;cmb=0;cmbT=0;layerSeen=0;rst=false;armed=false;S.en=maxEn();
+S=fresh();S.seed=SEED=newSeed();chQ.length=0;carrotC=null;dug=new Set();mX=mY=camX=camY=0;skT=[0,0];skCD=[0,0];dynCD=0;tpCD=0;ev=0;cmb=0;cmbT=0;layerSeen=0;rst=false;armed=false;S.en=maxEn();
  try{localStorage.removeItem("abismo-v1")}catch(e){}
  if($("reset"))$("reset").textContent=__("Apagar progresso");build();save()}
 $("reset").onclick=()=>{if(!rst){rst=true;$("reset").textContent=__("Clique de novo para apagar tudo");setTimeout(()=>{rst=false;$("reset").textContent=__("Apagar progresso")},3000);return}
@@ -2306,6 +2397,7 @@ addEventListener("keydown",e=>{
  if(/^(TEXTAREA|INPUT)$/.test(e.target.tagName))return;
  if(modal){
   if(modal==="pause"){pauseKey(e);return}
+  if(modal==="mem"){memKey(e);return}
   if(modal==="slot"){slotKey(e);return}
   if(modal==="chest"){chestKey(e);return}
   if(modal==="title"){if(e.target.closest&&e.target.closest(".langpick"))return;e.preventDefault();if(!e.repeat&&(e.code==="Space"||e.code==="Enter"))startGame();return}
@@ -2335,7 +2427,6 @@ addEventListener("keydown",e=>{
  if(e.code==="KeyE"){boom();return}
  if(e.code==="KeyR"){dynNext();return}
  if(e.code==="KeyQ"){teleport();return}
- if(e.code==="KeyK"){const i=S.marks.findIndex(m=>m[0]===S.mc&&m[1]===S.depth);if(i>=0)S.marks.splice(i,1);else S.marks.push([S.mc,S.depth]);say(i>=0?__("Marcador removido"):__("Marcador colocado"));return}
  if(e.code==="Escape"){if(mapOn)mapOn=false;else openPause();return}
  if(e.code==="KeyP"){openPause();return}
  if(e.code==="KeyM"){mapOn=!mapOn;mapZ=1;return}
@@ -2655,7 +2746,47 @@ function drawBench(t){
  pxShadow(c,(s.w+2)*u,y,u);drawSpr(s,c,y,u);
  if(atSurface())lbl(nearBench()?__("Mesa de trabalho: compre aqui"):__("Mesa de trabalho"),c,y-(s.h+3)*u-Math.sin(t*4)*2,nearBench()?"#6fe3a0":"#ffd45c");
 }
+// Construção ainda não liberada (liberação gradual): aparece desligada e em ruínas, sem chama nem luz: cores apagadas e sujas de fuligem, cantos lascados, buracos, trinca, teia, entulho no chão e uma faísca de curto de vez em quando. O rótulo diz a profundidade que a conserta.
+const brokenCache={};
+function brokenSpr(s,kind){
+ if(brokenCache[kind])return brokenCache[kind];
+ const W=s.w+2,H=s.h+2,cv=document.createElement("canvas");cv.width=W;cv.height=H;const q=cv.getContext("2d");
+ q.drawImage(s.cv,0,0);
+ const im=q.getImageData(0,0,W,H),d=im.data;
+ let sd=kind.length*7919+13;const rnd=()=>{sd=(sd*1103515245+12345)&0x7fffffff;return sd/0x7fffffff};
+ const ok=(i,j)=>i>=0&&j>=0&&i<W&&j<H&&d[(j*W+i)*4+3]>0;
+ const put=(i,j,r,g,b)=>{if(!ok(i,j))return;const k=(j*W+i)*4;d[k]=r;d[k+1]=g;d[k+2]=b};
+ for(let j=0;j<H;j++){const br=.42+.2*(j/H);   // mais escuro em cima (fuligem), um pouco mais claro embaixo
+  for(let i=0;i<W;i++){const k=(j*W+i)*4;if(!d[k+3])continue;
+   const l=d[k]*.3+d[k+1]*.59+d[k+2]*.11,m=(c,t)=>Math.min(255,(l*.72+c*.28)*br*t);
+   d[k]=m(d[k],1.04);d[k+1]=m(d[k+1],1);d[k+2]=m(d[k+2],1.1)}}
+ for(let n=0;n<14&&n<40;n++){   // cantos lascados: tira 1 a 3 pixels de pontas da borda
+  const i=1+Math.floor(rnd()*(W-2)),j=1+Math.floor(rnd()*(H-2));
+  if(!ok(i,j)||ok(i-1,j)&&ok(i+1,j)&&ok(i,j-1)&&ok(i,j+1))continue;
+  for(const[di,dj]of[[0,0],[1,0],[0,1],[-1,0],[0,-1]])if(rnd()<.55&&ok(i+di,j+dj))d[((j+dj)*W+i+di)*4+3]=0}
+ for(let n=0;n<3;n++){   // buracos por dentro (rombo escuro de 1 a 2 pixels)
+  const i=2+Math.floor(rnd()*(W-4)),j=2+Math.floor(rnd()*(H-4));
+  put(i,j,12,9,8);if(rnd()<.6)put(i+1,j,12,9,8);if(rnd()<.4)put(i,j+1,12,9,8)}
+ {let x=Math.floor(W*(.3+rnd()*.4));   // trinca em zigue-zague de cima até quase o chão, com um filete claro ao lado
+  for(let j=1;j<H*.75;j++){put(x,j,14,10,8);if(rnd()<.45)put(x+1,j,106,100,94);const r=rnd();x+=r<.3?-1:r<.6?1:0}}
+ for(let t=0;t<5;t++){put(1+t,1,176,172,166);put(1,1+t,176,172,166);put(1+t,1+t,150,146,140)}   // teia no canto de cima
+ put(3,2,150,146,140);put(2,3,150,146,140);put(4,2,150,146,140);put(2,4,150,146,140);
+ q.putImageData(im,0,0);
+ return brokenCache[kind]={cv,w:s.w,h:s.h,sx:.35+rnd()*.3};
+}
+function drawBroken(s,c,y,u,nome,kind){
+ const t=performance.now()/1000,bs=brokenSpr(s,kind),x0=Math.round(c-s.w*u/2),y0=Math.round(y-s.h*u),hw=s.w/2;
+ pxShadow(c,(s.w+2)*u,y,u);drawSpr(bs,c,y,u);
+ for(const[dx,w,col]of[[-hw-2,2,"#5b5650"],[-hw-.5,1,"#3f3b37"],[hw+.5,2,"#6a645d"],[hw+2.5,1,"#3f3b37"],[-hw+2,1,"#4a3a2a"],[hw-2.5,1,"#4a3a2a"],[-1,1,"#5b5650"]]){   // entulho no chão
+  ctx.fillStyle=col;ctx.fillRect(Math.round(c+dx*u),Math.round(y-u),Math.round(w*u),Math.round(u))}
+ const ph=(t*1.1+kind.length*.7)%5;
+ if(ph<.16&&Math.floor(t*30)%2===0){const sx=Math.round(x0+bs.sx*s.w*u),sy=Math.round(y0+s.h*u*.45);   // faísca de curto, rara e curta
+  ctx.fillStyle="#fff3a0";ctx.fillRect(sx,sy,u,u);ctx.fillStyle="#ffd45c";ctx.fillRect(sx-u,sy,u,Math.max(1,Math.round(u*.5)));ctx.fillRect(sx+u,sy+u,u,Math.max(1,Math.round(u*.5)));ctx.fillRect(sx,sy-u,Math.max(1,Math.round(u*.5)),u)}
+ if(atSurface()){const a=unlockAt("build",kind),by=y-(s.h+3)*u-Math.sin(t*4)*2;   // duas linhas para não encostar nos vizinhos
+  lbl(nome,c,by-14,"#9a8f86");lbl(a>0?__("fora de uso · {0} m",a):__("fora de uso"),c,by,"#7d746c")}
+}
 function drawFurnace(t){
+ if(!isUnl("build","furnace")){drawBroken(sprFurnace(),Math.round(colX(FURN_C)),Math.round(rowY(0)),pu(),__("Fornalha"),"furnace");return}
  const u=pu(),s=sprFurnace(),c=Math.round(colX(FURN_C)),y=Math.round(rowY(0)),f=S.fur,act=f.n>0;
  pxShadow(c,(s.w+2)*u,y,u);
  if(act){ctx.save();ctx.fillStyle="#ff9a3a";ctx.globalAlpha=.07+.03*Math.sin(t*9);ctx.fillRect(c-s.w*u,y-s.h*u*1.4,2*s.w*u,s.h*u*1.4);ctx.globalAlpha=.08+.03*Math.sin(t*7+1);ctx.fillRect(c-s.w*u*.6,y-s.h*u,s.w*u*1.2,s.h*u);ctx.restore()}
@@ -2810,7 +2941,7 @@ function drawOverlays(dt,mx,my){
  chestOpen=Math.max(0,chestOpen-dt*1.4);
 }
 
-// ===== 5-desenho/05-mapa.js — Mapa (tecla M) com zoom, camadas e marcadores =====
+// ===== 5-desenho/05-mapa.js — Mapa (tecla M) com zoom e camadas =====
 function drawMap(){
  const now=performance.now();
  if(!mapB||now-mapT>400){mapT=now;let d=1;const xs=[],ys=[];for(const k of dug){const i=k.indexOf(","),x=+k.slice(0,i),y=+k.slice(i+1);xs.push(x);ys.push(y);if(y>d)d=y}mapB={d,xs,ys}}
@@ -2821,13 +2952,12 @@ function drawMap(){
  for(let L=0;L*LAYER_HEIGHT<sr;L++){ctx.globalAlpha=.25;ctx.fillStyle=blockColor(L*LAYER_HEIGHT,0,0);ctx.fillRect(ox-(HALF+.5)*sc,oy+L*LAYER_HEIGHT*sc,COLS*sc,Math.min(LAYER_HEIGHT,sr-L*LAYER_HEIGHT)*sc);ctx.globalAlpha=1;if(sc*LAYER_HEIGHT>14){ctx.fillStyle="#9a9a9a";ctx.fillText(layerName(L*LAYER_HEIGHT),8,oy+L*LAYER_HEIGHT*sc+12)}}
  ctx.fillStyle="#ffe2a8";ctx.fillRect(ox-(HALF+.5)*sc,oy-2,COLS*sc,2);
  ctx.fillStyle="#ffd45c";ctx.fillRect(ox+(CHEST_C-.5)*sc,oy-Math.max(3,sc),Math.max(3,sc),Math.max(3,sc));
- for(const[c,col]of[[BED_C,"#4f77ff"],[SLOT_C,"#38c172"],[BOARD_C,"#e8d7a8"]]){ctx.fillStyle=col;ctx.fillRect(ox+(c-.5)*sc,oy-Math.max(3,sc),Math.max(3,sc),Math.max(3,sc))}
+ for(const[c,col]of[[BED_C,"#4f77ff"],isUnl("build","slot")&&[SLOT_C,"#38c172"],isUnl("build","board")&&[BOARD_C,"#e8d7a8"]].filter(Boolean)){ctx.fillStyle=col;ctx.fillRect(ox+(c-.5)*sc,oy-Math.max(3,sc),Math.max(3,sc),Math.max(3,sc))}
  ctx.fillStyle="#b27a3a";ctx.fillRect(ox+(BENCH_C-.5)*sc,oy-Math.max(3,sc),Math.max(3,sc),Math.max(3,sc));
- ctx.fillStyle="#ff5a1f";ctx.fillRect(ox+(FURN_C-.5)*sc,oy-Math.max(3,sc),Math.max(3,sc),Math.max(3,sc));
+ if(isUnl("build","furnace")){ctx.fillStyle="#ff5a1f";ctx.fillRect(ox+(FURN_C-.5)*sc,oy-Math.max(3,sc),Math.max(3,sc),Math.max(3,sc));}
  ctx.fillStyle="#ff9a3a";ctx.fillRect(ox+(SHOP_C-.5)*sc,oy-Math.max(3,sc),Math.max(3,sc),Math.max(3,sc));
  ctx.fillStyle="#d9b06a";const cs=Math.max(1,sc);for(let i=0;i<xs.length;i++)ctx.fillRect(ox+xs[i]*sc-sc/2,oy+ys[i]*sc,cs,cs);
  const pr=Math.max(3,sc*.8)*(1+.06*Math.sin(now/700));ctx.beginPath();ctx.arc(ox+clamp(S.mc,-HALF,HALF)*sc,oy+(S.depth-.5)*sc,pr,0,7);ctx.fillStyle="#ff4d4d";ctx.fill();ctx.lineWidth=1.5;ctx.strokeStyle="#fff";ctx.stroke();   // jogador: ponto fixo, só respira de leve
- ctx.fillStyle="#4dd2ff";for(const m of S.marks){ctx.beginPath();ctx.arc(ox+m[0]*sc,oy+(m[1]-.5)*sc,Math.max(3,sc*.6),0,7);ctx.fill()}
  ctx.fillStyle="#ececec";ctx.font="600 14px "+FONT;
  if(W<600){   // celular: texto curto, abaixo do nível e do nome da camada, sem falar de mouse/Esc
   ctx.font="600 12px "+FONT;ctx.fillText(__("Mapa · {0} m · recorde {1} m",fmt(S.depth),fmt(S.best)),12,62);
@@ -2883,6 +3013,7 @@ function draw(dt){
  }
  drawGateAndChest(t);
  drawTarget();
+ drawGoldenCarrot(t);
  drawPlayer();
  drawPet(dt,t);
  drawEffects(dt);
@@ -3448,6 +3579,7 @@ function sprBoard(){return mkSpr("board",14,18,{p:"#c99a5b",w:"#7a4f27",d:"#4a2f
  R(4,4,1,1,"X");R(9,5,1,1,"X");R(6,9,1,1,"X");R(1,17,2,1,"k");R(11,17,2,1,"k");
 },1)}
 function drawBoard(t){
+ if(!isUnl("build","board")){drawBroken(sprBoard(),Math.round(colX(BOARD_C)),Math.round(rowY(0)),pu(),__("Quadro de contratos"),"board");return}
  const u=pu(),s=sprBoard(),c=Math.round(colX(BOARD_C)),y=Math.round(rowY(0)),near=nearBoard(),rd=ctReady();
  pxShadow(c,(s.w+2)*u,y,u);drawSpr(s,c,y,u);
  if(!atSurface())return;
@@ -3465,6 +3597,7 @@ function sprSlot(){return mkSpr("slotmachine2",10,13,{R:"#b8283a",r:"#e8485a",e:
  R(0,11,10,2,"N");R(0,11,10,1,"M");R(0,12,10,1,"n");                                                  // base
 },1)}
 function drawSlotTable(t){
+ if(!isUnl("build","slot")){drawBroken(sprSlot(),Math.round(colX(SLOT_C)),Math.round(rowY(0)),pu(),__("Caça-níquel"),"slot");return}
  const u=pu(),s=sprSlot(),c=Math.round(colX(SLOT_C)),y=Math.round(rowY(0)),near=nearSlot();
  pxShadow(c,(s.w+2)*u,y,u);drawSpr(s,c,y,u);
  const x0=Math.round(c-s.w*u/2),y0=Math.round(y-s.h*u),col=["#8d9299","#ff9a3a","#ffd45c","#e5412d","#7fe6ff","#fff3a0"];
@@ -3807,6 +3940,35 @@ function drawLandscape(t){
  drawWindmill(t);drawGarden(t);drawRiver(t);drawCampfire(t);drawBeach(t);drawCritters(t);
 }
 
+// ===== 5-desenho/14-cenoura-dourada.js — A cenoura dourada brotando da Rocha-mãe, no fundo do abismo =====
+// Cenoura dourada: só o ombro aparece, brotando da rocha-mãe; raízes de cristal azuis e roxas descem pela pedra. Desenhada antes do jogador e da escuridão.
+function drawGoldenCarrot(t){
+ if(carrotC===null)return;
+ const u=Math.max(2,Math.round(T/14)),cx=Math.round(colX(carrotC)),y0=Math.round(rowY(FINAL_DEPTH)),pulse=.5+.5*Math.sin(t*2.2);
+ ctx.save();   // raízes de cristal
+ for(let k=-3;k<=3;k++)for(let i=0;i<7;i++){
+  ctx.globalAlpha=Math.max(.12,.55-i*.06)*(.7+.3*Math.sin(t*2+k+i*.5));
+  ctx.fillStyle=(k+i)%2?"#8fe6ff":"#d9a6ff";
+  ctx.fillRect(cx+Math.round(k*(i*.55+1)*u),y0+i*2*u,u,2*u)}
+ ctx.restore();
+ ctx.save();ctx.globalCompositeOperation="lighter";   // brilho dourado
+ const gr=T*(2.6+.4*pulse),gy=y0-5*u,g=ctx.createRadialGradient(cx,gy,0,cx,gy,gr);
+ g.addColorStop(0,"rgba(255,214,90,"+(.5+.2*pulse)+")");g.addColorStop(1,"rgba(255,180,40,0)");
+ ctx.fillStyle=g;ctx.fillRect(cx-gr,gy-gr,gr*2,gr*2);ctx.restore();
+ const W7=[3,5,6,7,8,8,8];   // ombro: contorno, luz à esquerda, sombra à direita e sulcos
+ ctx.fillStyle="#7a4a00";ctx.fillRect(cx-1.5*u,y0-8*u,3*u,u);
+ for(let i=0;i<7;i++){const w=W7[i]*u,x=cx-w/2,y=y0-(7-i)*u;
+  ctx.fillStyle="#7a4a00";ctx.fillRect(x-u,y,w+2*u,u);
+  ctx.fillStyle="#ffd84a";ctx.fillRect(x,y,w,u);
+  ctx.fillStyle="#e3a400";ctx.fillRect(x+w*.62,y,w*.38,u);
+  if(i%2){ctx.fillStyle="#b87800";ctx.fillRect(x+u,y+u*.5,Math.max(u,w*.3),u*.4)}}
+ ctx.fillStyle="#fff6c2";ctx.fillRect(cx-2*u,y0-5*u,u,2*u);
+ const top=y0-8*u;   // folhas balançando
+ for(let k=-1;k<=1;k++){const sw=Math.sin(t*1.4+k*1.3)*u*.8;
+  ctx.fillStyle=k?"#4dbb4d":"#2f8a3a";ctx.fillRect(cx+k*2*u+sw*.5-u*.5,top-4*u,u,4*u);ctx.fillRect(cx+k*3*u+sw-u,top-6*u,2*u,2.5*u)}
+ if(Math.random()<.18)parts.push({x:cx+(Math.random()-.5)*5*u,y:y0-4*u,vx:(Math.random()-.5)*14,vy:-18-Math.random()*22,l:.9,c:Math.random()<.5?"#ffd45c":"#fff6c2"});
+}
+
 // ===== 6-jogo/01-laco-inicio.js — Laço principal, eventos, salvar/exportar/importar e inicialização =====
 let last=performance.now(),acc=0,sv=0,autoMsgT=0;
 function loop(now){
@@ -3822,7 +3984,7 @@ function loop(now){
  if(ev>0)ev-=dt;else{evNext-=dt;if(evNext<=0){ev=BAL.events.len;evT=Math.random()<.5?0:1;evNext=BAL.events.gapMin+Math.random()*BAL.events.gapRand;say(evT?__("Frenesi mineral! Minérios x3 por 20s"):__("Corrida do ouro! Ouro x3 por 20s"))}}
  // superfície: recupera energia rápido e entrega a mochila ao chegar perto do baú
  if(atSurface()){const m=maxEn();if(S.en<m)S.en=Math.min(m,S.en+60*dt);}
- furTick(dt);ctTick(dt);chestTick();
+ furTick(dt);ctTick(dt);chestTick();memCheck();
  // escavação automática (pausa sozinha quando a energia só dá para voltar)
  const ad=autoDps();
  if(ad>0&&!modal){if(autoOK())hit(ad*dt,false,true);else if(autoMsgT<=0&&S.depth>0&&canBreak(...tgt())){autoMsgT=6;say(__("Escavação automática pausada: energia só para voltar"))}}
@@ -3843,7 +4005,7 @@ function loop(now){
  const k=Math.min(1,dt*(falling?(shiftOn?60:40):shiftOn?26:14)),kc=Math.min(1,dt*(falling?(shiftOn?30:20):shiftOn?12:7));
  mX+=(S.mc-mX)*k;mY+=(S.depth-mY)*k;camX+=(mX-camX)*kc;camY+=(mY-camY)*kc;clampCam();
  draw(dt);
- acc+=dt;if(acc>.15){acc=0;checkAch();autoTab();refresh();buffsUI()}
+ acc+=dt;if(acc>.15){acc=0;checkAch();checkUnlocks();autoTab();refresh();buffsUI()}
  sv+=dt;if(sv>5){sv=0;save()}
  requestAnimationFrame(loop);
 }
@@ -3851,7 +4013,7 @@ document.addEventListener("visibilitychange",()=>{if(document.hidden)save()});
 addEventListener("pagehide",save);
 document.addEventListener("click",e=>{if(e.target.tagName==="BUTTON")e.target.blur()});
 $("exp").onclick=()=>{try{$("sv").value=btoa(unescape(encodeURIComponent(JSON.stringify(Object.assign({},S,{dug:[...dug]})))));$("sv").select();say(__("Save exportado: copie o texto"))}catch(e){say(__("Falha ao exportar"))}};
-$("imp").onclick=()=>{try{const o=JSON.parse(decodeURIComponent(escape(atob($("sv").value.trim()))));S=clean(o);SEED=S.seed;chQ.length=0;dug=new Set(S.dug.filter(k=>/^-?\d+,\d+$/.test(k)));if(S.en<0)S.en=maxEn();if(S.debug)S.gold=Infinity;camX=mX=S.mc;camY=mY=S.depth;layerSeen=layerOf(S.depth);build();save();say(__("Save importado!"))}catch(e){say(__("Save inválido"))}};
+$("imp").onclick=()=>{try{const o=JSON.parse(decodeURIComponent(escape(atob($("sv").value.trim()))));S=clean(o);SEED=S.seed;chQ.length=0;carrotC=null;dug=new Set(S.dug.filter(k=>/^-?\d+,\d+$/.test(k)));if(S.en<0)S.en=maxEn();if(S.debug)S.gold=Infinity;camX=mX=S.mc;camY=mY=S.depth;layerSeen=layerOf(S.depth);build();save();say(__("Save importado!"))}catch(e){say(__("Save inválido"))}};
 for(const[id,k]of[["vm","m"],["vs","s"],["va","a"]]){const e=$(id);e.value=S.vol[k];e.oninput=()=>{S.vol[k]=+e.value}}
 S.en=S.en<0?maxEn():Math.min(S.en,maxEn());
 layerSeen=layerOf(S.depth);
@@ -3868,5 +4030,5 @@ if(S.lvp>0&&!modal)levelUp();
 onLang(()=>{relabelTabs();if(fsLab)fsLab();buildBar();build();statsHtml="";bagHtml="";buffsHtml="";clkLast="";if(modal==="pause"){paintPause();const lb=document.querySelector("#bx .lp-btn");if(lb)lb.focus()}refresh()});
 requestAnimationFrame(loop);
 // gancho opcional usado só por tools/smoke.js (não faz nada no jogo normal)
-if(typeof window.__TESTE__==="function")window.__TESTE__({get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,LAMPS,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v}});
+if(typeof window.__TESTE__==="function")window.__TESTE__({get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,LAMPS,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v}});
 })();

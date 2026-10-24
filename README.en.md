@@ -46,7 +46,7 @@ Nothing to install, no sign-up, and it works on desktop and mobile.
 | `E` / `R` | Use dynamite / switch dynamite type |
 | `Q` | Teleport to the chest |
 | `1` `2` | Skills |
-| `M` / `K` | Open the map / place a marker |
+| `M` | Open the map |
 | `N` | Sound on or off |
 | `Esc` or `P` | Pause |
 | Scroll | Zoom |
@@ -57,12 +57,14 @@ On mobile, use the on-screen buttons (arrows, **Mine**, **Map**, and **Pause**) 
 
 - 15 breakable layers (1500 m deep) and an unbreakable bedrock at the bottom
 - Workbench with dozens of upgrades, different pickaxes, and an item shop
+- Gradual unlocks: upgrades, shop items, the furnace, contracts board and slot machine unlock as your depth record grows (the buildings show up broken on the surface until then), with an on-screen notice and a hint about what comes next
+- Ending at the bedrock: the golden carrot, then a choice between Rebirth and digging on
 - Dynamite, hard-stone veins, and ore-rich veins
 - Rare chests hidden underground, from common to legendary
 - A furnace that refines ores, contracts with rewards, and a slot machine
 - Levels, skills, and achievements
 - Day and night cycle, seasons, weather (rain, storms, snow, fog), and shooting stars
-- Map with zoom and markers
+- Map with zoom
 - A new world every run, generated from a random seed
 - Music and sound effects with volume controls
 
