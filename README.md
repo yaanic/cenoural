@@ -49,6 +49,28 @@ Não precisa instalar nada, não tem cadastro e funciona no computador e no celu
 | `Esc` ou `P` | Pausa |
 | Scroll | Zoom |
 
+### Controle
+
+Conecte um controle (Xbox, PlayStation, Switch Pro ou similar) e aperte qualquer botão. Funciona sozinho, sem configurar nada.
+
+| Botão | Ação |
+| --- | --- |
+| Direcional ou analógico esquerdo | Mover, escolher a direção e navegar nos menus |
+| `A` / ✕ | Cavar (segure) e usar baú, fornalha, quadro e caça-níquel; confirma nos menus |
+| `B` / ○ | Correr (segure); voltar nos menus |
+| `X` / □ | Dinamite |
+| `Y` / △ | Trocar o tipo de dinamite |
+| `LB` / `RB` | Habilidades 1 e 2 |
+| `LT` | Teleporte para o baú |
+| `RT` | Correr (segure) |
+| `Select` | Mapa |
+| `Start` | Pausa |
+| Analógico direito (cima/baixo) | Zoom |
+| Clique no analógico esquerdo | Som ligado ou desligado |
+| Clique no analógico direito | Entrar/sair do painel (Melhorias, Loja, Poder, Menu) |
+
+Dentro do painel: cima/baixo escolhem o item, `A` compra ou aciona, `LB`/`RB` (ou esquerda/direita) trocam de aba, `B` volta ao jogo.
+
 No celular, use os botões na tela (setas, **Minerar**, **Mapa** e **Pausa**) e toque nos ícones da barra para usar itens e habilidades.
 
 ## O que tem no jogo

@@ -249,7 +249,6 @@ addLang("en","English",{
 "{0} blocos":"{0} blocks",
 "Afiar picareta":"Sharpen pickaxe",
 "+12% de dano da picareta por nível":"+12% pickaxe damage per level",
-"Quebra {0} bloco(s) de cada lado do alvo, de graça (cada nível soma +1 para os dois lados)":"Breaks {0} block(s) on each side of the target for free (each level adds +1 on both sides)",
 "Velocidade de escavação":"Digging speed",
 "+5% de velocidade ao segurar a escavação por nível":"+5% speed while holding dig, per level",
 "Chance de golpe crítico":"Critical hit chance",
@@ -290,6 +289,12 @@ addLang("en","English",{
 "Velocidade da fornalha":"Furnace speed",
 "Refina {0} minérios por segundo (próximo nível: {1}). O refinado vale +{2}% de ouro":"Refines {0} ores per second (next level: {1}). Refined ore is worth +{2}% gold",
 "Refina {0} minérios por segundo. O refinado vale +{1}% de ouro":"Refines {0} ores per second. Refined ore is worth +{1}% gold",
+"Melhoria de minérios":"Ore improvement",
+"Minérios têm {0}% de chance de render unidades extras (+1 a +{1}). Próximo nível: {2}%":"Ores have a {0}% chance to give extra units (+1 to +{1}). Next level: {2}%",
+"Minérios têm {0}% de chance de render unidades extras (+1 a +{1})":"Ores have a {0}% chance to give extra units (+1 to +{1})",
+"Medidor de retorno":"Return gauge",
+"Marca na barra de energia a reserva para subir de volta à superfície e a faz brilhar e pulsar (com som) quando a energia fica apertada. Compra única":"Marks on the energy bar the reserve needed to climb back and makes it glow and pulse (with sound) when energy gets tight. One-time purchase",
+"Medidor de retorno comprado: a barra de energia mostra a reserva para voltar e avisa quando ela fica apertada":"Return gauge bought: the energy bar shows the reserve to climb back and warns when it gets tight",
 "Relógio":"Clock",
 "Mostra na barra do topo um relógio de sol e lua com a hora do dia (o dia dura {0} min)":"Shows a sun-and-moon clock with the time of day on the top bar (a day lasts {0} min)",
 "Relógio comprado: veja a hora do dia na barra do topo (passe o mouse para ver o período)":"Clock bought: see the time of day on the top bar (hover to see the period)",
@@ -602,14 +607,15 @@ addLang("en","English",{
 "CORAÇÃO DO ABISMO":"HEART OF THE ABYSS",
 "CAMADA: {0}":"LAYER: {0}",
 "A Rocha-mãe é inquebrável: você chegou ao fundo!":"Bedrock is unbreakable: you reached the bottom!",
-"Lava! -{0} de energia":"Lava! -{0} energy",
 "ÓTIMO!":"GREAT!",
 "INCRÍVEL!":"INCREDIBLE!",
 "IMPARÁVEL!":"UNSTOPPABLE!",
 "LENDÁRIO!":"LEGENDARY!",
 "MÍTICO!":"MYTHIC!",
 "DIVINO!":"DIVINE!",
+"Minério extra! +{0}":"Extra ore! +{0}",
 "+Energia":"+Energy",
+"Lava! -{0} de energia":"Lava! -{0} energy",
 "Pedra dura: só quebra com dinamite":"Hard stone: only breaks with dynamite",
 "CRÍTICO! {0}":"CRITICAL! {0}",
 // --- 4-interface/01-painel.js
@@ -619,6 +625,7 @@ addLang("en","English",{
 "Utilidades":"Utilities",
 "Máx":"Max",
 "Consumíveis":"Consumables",
+"Você consegue comprar {0}x com o ouro que tem":"You can buy {0}x with the gold you have",
 "Recorde: {0} m":"Record: {0} m",
 "Superfície · melhorias liberadas · {0}":"Surface · upgrades unlocked · {0}",
 "INQUEBRÁVEL":"UNBREAKABLE",
@@ -729,6 +736,10 @@ addLang("en","English",{
 "Noite":"Night",
 "Madrugada":"Late night",
 "{0} · {1} (o sol aparece no alto ao meio-dia e a lua à meia-noite)":"{0} · {1} (the sun is high at noon and the moon at midnight)",
+// --- 4-interface/07-controle.js
+"Painel: A escolhe, LB/RB troca de aba, B volta":"Panel: A selects, LB/RB switch tab, B goes back",
+"Controle conectado":"Controller connected",
+"Controle desconectado":"Controller disconnected",
 // --- 5-desenho/03-mundo.js
 "Mesa de trabalho: compre aqui":"Workbench: buy here",
 "Mesa de trabalho":"Workbench",
@@ -742,24 +753,23 @@ addLang("en","English",{
 // --- 5-desenho/04-combo-efeitos.js
 "Combo final x{0}":"Final combo x{0}",
 // --- 5-desenho/05-mapa.js
-"Mapa · {0} m · recorde {1} m":"Map · {0} m · record {1} m",
-"Toque na tela para fechar":"Tap the screen to close",
+"Cama":"Bed",
 "Baú":"Chest",
 "Você":"You",
+"Mapa · {0} m · recorde {1} m":"Map · {0} m · record {1} m",
+"Toque na tela para fechar":"Tap the screen to close",
 "Mapa · profundidade {0} m · recorde {1} m · roda do mouse: zoom · M ou Esc fecham":"Map · depth {0} m · record {1} m · mouse wheel: zoom · M or Esc closes",
 // --- 5-desenho/06-quadro.js
 "Pedra dura: dinamite":"Hard stone: dynamite",
 "Veio de {0}: x{1}":"{0} vein: x{1}",
 // --- 5-desenho/12-povoado.js
 "Salvo!":"Saved!",
-"Cama":"Bed",
 "Poço de água":"Well",
 "Contratos: clique para abrir":"Contracts: click to open",
 "Contratos prontos!":"Contracts ready!",
 "Contratos":"Contracts",
 "Caça-níquel: clique para jogar":"Slot machine: click to play",
 // --- 5-desenho/13-paisagem.js
-"Horta de cenouras":"Carrot garden",
 "Fogueira":"Campfire",
 // --- 6-jogo/01-laco-inicio.js
 "Frenesi mineral! Minérios x3 por 20s":"Mineral Frenzy! Ores x3 for 20s",
@@ -769,14 +779,6 @@ addLang("en","English",{
 "Falha ao exportar":"Export failed",
 "Save importado!":"Save imported!",
 "Save inválido":"Invalid save",
-"Melhoria de minérios":"Ore improvement",
-"Minérios têm {0}% de chance de render unidades extras (+1 a +{1}). Próximo nível: {2}%":"Ores have a {0}% chance to give extra units (+1 to +{1}). Next level: {2}%",
-"Minério extra! +{0}":"Extra ore! +{0}",
-"Minérios têm {0}% de chance de render unidades extras (+1 a +{1})":"Ores have a {0}% chance to give extra units (+1 to +{1})",
-"Você consegue comprar {0}x com o ouro que tem":"You can buy {0}x with the gold you have",
-"Medidor de retorno":"Return gauge",
-"Marca na barra de energia a reserva para subir de volta à superfície e a faz brilhar e pulsar (com som) quando a energia fica apertada. Compra única":"Marks on the energy bar the reserve needed to climb back and makes it glow and pulse (with sound) when energy gets tight. One-time purchase",
-"Medidor de retorno comprado: a barra de energia mostra a reserva para voltar e avisa quando ela fica apertada":"Return gauge bought: the energy bar shows the reserve to climb back and warns when it gets tight",
 },{dec:"."});
 
 // ===== 0-idiomas/99-iniciar.js — Escolhe o idioma ao abrir o jogo (os módulos seguintes registram o que refazer ao trocar com onLang) =====
@@ -2563,6 +2565,144 @@ function clockUpdate(){
  if(key===clkLast)return;clkLast=key;
  clockDraw();box.title=__("{0} · {1} (o sol aparece no alto ao meio-dia e a lua à meia-noite)",clockPeriod(),txt);
 }
+
+// ===== 4-interface/07-controle.js — Suporte a controle (Gamepad API: Xbox, PlayStation, Switch Pro e genéricos no layout padrão) =====
+// Jogo:   direcional ou analógico esquerdo = mover · A = cavar (segure) / usar baú, fornalha, quadro e caça-níquel · B (segure) = correr
+//         X = dinamite · Y = trocar dinamite · LB / RB = habilidades 1 e 2 · LT = teleporte · RT (segure) = correr
+//         Select = mapa · Start = pausa · analógico direito (cima/baixo) = zoom · clique do analógico esquerdo = som · clique do analógico direito = painel (Melhorias/Loja)
+// Janelas: direcional/analógico navega · A confirma · B volta/fecha · Start fecha a pausa
+const GP={dz:.5,id:"",dir:null,a:false,prev:[],navT:0,navD:null,lastModal:null,wait:{a:false,b:false,st:false},tLast:0,seen:false,sel:-1,edge:false,panel:false,psel:0};
+function gpPad(){
+ const l=navigator.getGamepads?navigator.getGamepads():[];
+ for(const p of l)if(p&&p.connected&&p.mapping==="standard")return p;
+ for(const p of l)if(p&&p.connected)return p;
+ return null;
+}
+function gpKey(code,down=true){   // reaproveita os tratadores de teclado das janelas (nível, baú, cassino, cena final, morte)
+ window.dispatchEvent(new KeyboardEvent(down?"keydown":"keyup",{code,key:code,bubbles:true,cancelable:true}));
+}
+function gpRelease(){   // solta tudo (janela abriu, controle desconectou, aba perdeu o foco)
+ if(GP.dir){releaseDir("gp-"+GP.dir);GP.dir=null}
+ if(GP.a){holdS=false;GP.a=false}
+ shiftOn=false;
+}
+function gpFocusList(){return[...document.querySelectorAll("#bx button, #bx a[data-d]")].filter(b=>b.offsetParent&&!b.disabled)}
+// Seleção própria (não depende do anel de foco do navegador, que some depois de um clique do mouse) e que sobrevive a repintar/confirmar.
+function gpPaintSel(){
+ const bs=gpFocusList();document.querySelectorAll(".gp-sel").forEach(x=>x.classList.remove("gp-sel"));
+ if(!bs.length)return null;
+ if(GP.sel<0||GP.sel>=bs.length){const i=bs.findIndex(b=>b.classList.contains("main")||b.classList.contains("go"));GP.sel=i<0?0:i}
+ const el=bs[GP.sel];el.classList.add("gp-sel");if(document.activeElement!==el)el.focus({preventScroll:false});return el;
+}
+function gpNavMenu(d){   // d: -1 / +1 entre os botões visíveis da janela
+ const bs=gpFocusList();if(!bs.length)return;
+ gpPaintSel();GP.sel=(GP.sel+d+bs.length)%bs.length;gpPaintSel();sfx(560,.04,"sine");
+}
+function gpConfirmMenu(){const el=gpPaintSel();if(el)el.click()}
+function gpModalInput(p,now,up,down,left,right,pa,pb,pst){
+ const m=modal,dir=up?-1:down?1:left?-1:right?1:0;
+ if(m==="title"){if(pa||pst)startGame();return}
+ if(m==="lv"||m==="slot"){   // esquerda/direita escolhem (cartões ou aposta); cima/baixo também no nível
+  const k=m==="lv"?(up||left?"ArrowLeft":down||right?"ArrowRight":null):(left?"ArrowLeft":right?"ArrowRight":null);
+  if(k&&GP.edge)gpKey(k);
+  if(pa)gpKey("Space");
+  if(pb&&m==="slot")gpKey("Escape");
+  return;
+ }
+ if(m==="death"||m==="mem"||m==="chest"){if(pa||pb&&m!=="mem")gpKey(pa?"Space":"Escape");return}
+ // pausa, quadro de contratos, melhorias e outras janelas com botões
+ if(dir&&GP.edge)gpNavMenu(dir);
+ if(pa)gpConfirmMenu();
+ if(pb||(pst&&m==="pause")){if(m==="pause"||!/^(mem|death|chest|title|lv)$/.test(m))closeModal()}
+}
+// Painel lateral (Melhorias, Loja, Poder, Menu): clique no analógico direito entra/sai; cima/baixo escolhe, A compra, esquerda/direita ou LB/RB trocam de aba.
+function gpPanelList(){return[...document.querySelectorAll("#side .pane.on button")].filter(b=>b.offsetParent)}
+function gpPanelPaint(scroll){
+ document.querySelectorAll("#side .gp-sel").forEach(x=>x.classList.remove("gp-sel"));
+ const bs=gpPanelList();if(!bs.length)return null;
+ GP.psel=Math.max(0,Math.min(GP.psel,bs.length-1));
+ const el=bs[GP.psel];el.classList.add("gp-sel");if(scroll)el.scrollIntoView({block:"nearest"});return el;
+}
+function gpPanelOff(){GP.panel=false;$("side").classList.remove("gp-panel");document.querySelectorAll("#side .gp-sel").forEach(x=>x.classList.remove("gp-sel"))}
+function gpTab(d){const t=clamp((S.tab||0)+d,0,3);if(t!==(S.tab||0)){setTab(t);GP.psel=0;sfx(500,.04,"sine")}gpPanelPaint(true)}
+function gpPanelInput(pa,pb,up,down,left,right,rb,lb){
+ if(pb){gpPanelOff();return}
+ if(GP.edge&&(up||down)){const n=gpPanelList().length;if(n){GP.psel=(GP.psel+(down?1:-1)+n)%n;sfx(560,.04,"sine");gpPanelPaint(true)}}
+ if(lb||(GP.edge&&left))gpTab(-1);
+ if(rb||(GP.edge&&right))gpTab(1);
+ if(pa){const el=gpPanelPaint(true);if(el)el.click()}
+ gpPanelPaint(false);
+}
+function gpFrame(now){
+ requestAnimationFrame(gpFrame);
+ const dt=Math.min(.1,(now-(GP.tLast||now))/1000);GP.tLast=now;
+ const p=gpPad();
+ if(!p){if(GP.seen){GP.seen=false;gpRelease()}return}
+ if(!GP.seen){GP.seen=true;GP.id=p.id}
+ const B=i=>!!(p.buttons[i]&&p.buttons[i].pressed),ax=i=>p.axes[i]||0;
+ const pr=i=>B(i)&&!GP.prev[i];                 // acabou de apertar
+ let lx=ax(0),ly=ax(1);const ry=ax(3);
+ let dh=0;if(p.mapping!=="standard"&&p.axes.length>9){const h=p.axes[9],T=[[-1,"u"],[-.714,"ur"],[-.428,"r"],[-.142,"dr"],[.143,"d"],[.428,"dl"],[.714,"l"],[1,"ul"]];const m=T.find(x=>Math.abs(x[0]-h)<.1);dh=m?m[1]:""}
+ let up=B(12)||dh==="u"||dh==="ur"||dh==="ul"||ly<-GP.dz,down=B(13)||dh==="d"||dh==="dr"||dh==="dl"||ly>GP.dz,left=B(14)||dh==="l"||dh==="dl"||dh==="ul"||lx<-GP.dz,right=B(15)||dh==="r"||dh==="ur"||dh==="dr"||lx>GP.dz;
+ if(!B(12)&&!B(13)&&!B(14)&&!B(15)&&(up||down)&&(left||right)){   // analógico na diagonal: vale o eixo mais forte
+  if(Math.abs(ly)>=Math.abs(lx)){left=right=false}else{up=down=false}
+ }
+ if((up||down)&&(left||right)){up=down=false}   // direcional + analógico juntos: horizontal ganha
+ const nowD=up?"up":down?"down":left?"left":right?"right":null;
+ const pa=pr(0),pb=pr(1),pst=pr(9);
+ // borda de navegação com repetição (350 ms até repetir, depois 120 ms)
+ GP.edge=false;
+ if(nowD!==GP.navD){GP.navD=nowD;GP.navT=now+350;GP.edge=!!nowD}
+ else if(nowD&&now>=GP.navT){GP.navT=now+120;GP.edge=true}
+ // qualquer entrada libera o áudio (os navegadores só liberam depois de um gesto)
+ if(p.buttons.some(b=>b.pressed)||Math.abs(lx)>GP.dz||Math.abs(ly)>GP.dz)musOn=true;
+ if(modal){
+  if(GP.lastModal!==modal){gpPanelOff();gpRelease();GP.lastModal=modal;GP.sel=-1;GP.wait.a=B(0);GP.wait.b=B(1);GP.wait.st=B(9)}
+  // botões que já estavam apertados quando a janela abriu só valem depois de soltos
+  if(!B(0))GP.wait.a=false;if(!B(1))GP.wait.b=false;if(!B(9))GP.wait.st=false;
+  if(!/^(title|lv|slot|death|mem|chest)$/.test(modal))gpPaintSel();
+  gpModalInput(p,now,up,down,left,right,pa&&!GP.wait.a,pb&&!GP.wait.b,pst&&!GP.wait.st);
+ }else{
+  if(GP.lastModal){GP.lastModal=null;document.querySelectorAll(".gp-sel").forEach(x=>x.classList.remove("gp-sel"));GP.wait.a=B(0);GP.wait.b=B(1);GP.wait.st=B(9)}
+  if(!B(0))GP.wait.a=false;if(!B(1))GP.wait.b=false;if(!B(9))GP.wait.st=false;
+  // mapa aberto: B / Select fecham, analógico direito dá zoom
+  if(pr(11)&&!mapOn){
+   GP.panel=!GP.panel;gpRelease();GP.psel=0;
+   if(GP.panel){$("side").classList.add("gp-panel");gpPanelPaint(true);say(__("Painel: A escolhe, LB/RB troca de aba, B volta"))}else gpPanelOff();
+  }
+  if(GP.panel){gpPanelInput(pa&&!GP.wait.a,pb&&!GP.wait.b,up,down,left,right,pr(5),pr(4));if(pst&&!GP.wait.st){gpPanelOff();openPause()}}
+  else if(mapOn){
+   if(pb||pr(8)||pa)mapOn=false;
+   if(Math.abs(ry)>.25)mapZ=clamp(mapZ*Math.exp(-ry*dt*2),1,12);
+  }else{
+   // movimento
+   if(nowD!==GP.dir){
+    if(GP.dir)releaseDir("gp-"+GP.dir);
+    GP.dir=nowD;
+    if(nowD){pressDir("gp-"+nowD,nowD);move(held);lastMv=performance.now()}
+   }
+   // cavar: segurar A
+   const dig=B(0)&&!GP.wait.a;
+   if(dig&&!GP.a){GP.a=true;holdS=true;clickDig();lastH=performance.now()}
+   else if(!dig&&GP.a){GP.a=false;holdS=false}
+   shiftOn=B(1)||B(7);
+   if(pr(2))boom();
+   if(pr(3))dynNext();
+   if(pr(4))useSk(0);
+   if(pr(5))useSk(1);
+   if(pr(6))teleport();
+   if(pr(8)){mapOn=true;mapZ=1}
+   if(pr(10)){mute=!mute;refresh()}
+   if(pst&&!GP.wait.st)openPause();
+   if(Math.abs(ry)>.25)setZoom(zoomPreference*Math.exp(-ry*dt*1.4));
+  }
+ }
+ GP.prev=p.buttons.map(b=>b.pressed);
+}
+addEventListener("gamepadconnected",e=>{say(__("Controle conectado"));musOn=true});
+addEventListener("gamepaddisconnected",()=>{gpRelease();say(__("Controle desconectado"))});
+addEventListener("blur",gpRelease);
+requestAnimationFrame(gpFrame);
 
 // ===== 5-desenho/00-pixel.js — Direção de arte: sprites em pixel art, tiles de apoio (cavidade, rocha-base, pedra dura, veio de minério) =====
 // Regras do estilo (as mesmas dos blocos): grade de pixels grossos, nada de degradê liso; luz clara em cima/à esquerda,
