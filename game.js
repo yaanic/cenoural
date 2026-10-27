@@ -82,7 +82,6 @@ addLang("en","English",{
 "Área de escavação":"Digging area",
 "Nível":"Level",
 "Progresso dentro da camada atual":"Progress through the current layer",
-"Mapa":"Map",
 "Pausa":"Pause",
 "Poderes de renascimento (comprados com fragmentos), Renascer, estatísticas e conquistas.":"Rebirth powers (bought with shards), Rebirth, stats and achievements.",
 "Poderes de renascimento":"Rebirth powers",
@@ -108,9 +107,7 @@ addLang("en","English",{
 "Comer a comida de peixe escolhida (botão direito no slot troca o tipo)":"Eat the selected fish food (right-click the slot to switch type)",
 "Teleporte (compre em Melhorias)":"Teleport (buy it in Upgrades)",
 "Fúria do Minerador (libera aos 50 m) e Escavação Frenética (aos 150 m)":"Miner's Fury (unlocks at 50 m) and Frenzied Digging (at 150 m)",
-"Abrir e fechar o mapa. Com ele aberto, a roda do mouse dá zoom":"Open and close the map. While it's open, the mouse wheel zooms",
 "Som ligado/desligado":"Sound on/off",
-"Pausa. Com o mapa aberto, Esc fecha o mapa":"Pause. With the map open, Esc closes the map",
 "Zoom do jogo":"Game zoom",
 "Mouse":"Mouse",
 "<kbd>Clique</kbd>":"<kbd>Click</kbd>",
@@ -125,8 +122,8 @@ addLang("en","English",{
 "Segure para cavar (também usa baú, fornalha, quadro e caça-níquel quando perto)":"Hold to dig (also uses the chest, furnace, board and slot machine when close)",
 "<kbd>Ícones</kbd>":"<kbd>Icons</kbd>",
 "Toque nos ícones da barra para dinamite, habilidades, teleporte, comida e poções":"Tap the bar icons for dynamite, skills, teleport, food and potions",
-"<kbd>Mapa</kbd> <kbd>Pausa</kbd>":"<kbd>Map</kbd> <kbd>Pause</kbd>",
-"Botões no topo do painel. Com o mapa aberto, tocar na tela fecha":"Buttons at the top of the panel. With the map open, tapping the screen closes it",
+"<kbd>Pausa</kbd>":"<kbd>Pause</kbd>",
+"Botão no topo do painel":"Button at the top of the panel",
 "Telas especiais":"Special screens",
 "Caça-níquel":"Slot machine",
 "<kbd>←</kbd> <kbd>→</kbd> ou <kbd>A</kbd> <kbd>D</kbd> mudam a aposta, <kbd>Espaço</kbd> ou <kbd>Enter</kbd> gira, <kbd>Esc</kbd> sai":"<kbd>←</kbd> <kbd>→</kbd> or <kbd>A</kbd> <kbd>D</kbd> change the bet, <kbd>Space</kbd> or <kbd>Enter</kbd> spins, <kbd>Esc</kbd> exits",
@@ -266,6 +263,7 @@ addLang("en","English",{
 "Fornalha":"Furnace",
 "Quadro de contratos":"Contract board",
 "NOVIDADE LIBERADA":"NEW UNLOCK",
+"e mais {0}":"and {0} more",
 "Próxima novidade aos {0} m: {1}":"Next unlock at {0} m: {1}",
 // --- 1-nucleo/05-audio-avisos.js
 "Clima: {0}":"Weather: {0}",
@@ -554,7 +552,6 @@ addLang("en","English",{
 "Deixe todas as cenouras da horta douradas":"Turn every carrot in the garden golden",
 "{0} CONQUISTAS":"{0} ACHIEVEMENTS",
 "CONQUISTA":"ACHIEVEMENT",
-"e mais {0}":"and {0} more",
 // --- 2-sistemas/05-noite-estrelas.js
 "Estrela cadente! Minérios x{0} por {1}s":"Shooting star! Ores x{0} for {1}s",
 "Estrela cadente! Ouro x{0} por {1}s":"Shooting star! Gold x{0} for {1}s",
@@ -651,7 +648,7 @@ addLang("en","English",{
 "O peixe fugiu!":"The fish got away!",
 "{0}: {1} cm. Vale cerca de {2} de ouro. Venda na carrocinha ou asse na fogueira.":"{0}: {1} cm. Worth about {2} gold. Sell it at the cart or roast it at the campfire.",
 "Você pescou: {0}. Vendida por {1} de ouro.":"You caught: {0}. Sold for {1} gold.",
-"Peixaria da carrocinha":"Cart fishmonger",
+"Vender para Izans":"Sell to Izans",
 "Vender tudo · {0}":"Sell all · {0}",
 "Você não tem peixes para vender.":"You have no fish to sell.",
 "Dica: peixes também podem ser assados na fogueira e viram comida de energia.":"Tip: fish can also be roasted at the campfire into energy food.",
@@ -851,18 +848,12 @@ addLang("en","English",{
 "Baú: entregue a mochila":"Chest: drop off your backpack",
 // --- 5-desenho/04-combo-efeitos.js
 "Combo final x{0}":"Final combo x{0}",
-// --- 5-desenho/05-mapa.js
-"Cama":"Bed",
-"Baú":"Chest",
-"Você":"You",
-"Mapa · {0} m · recorde {1} m":"Map · {0} m · record {1} m",
-"Toque na tela para fechar":"Tap the screen to close",
-"Mapa · profundidade {0} m · recorde {1} m · roda do mouse: zoom · M ou Esc fecham":"Map · depth {0} m · record {1} m · mouse wheel: zoom · M or Esc closes",
 // --- 5-desenho/06-quadro.js
 "Pedra dura: dinamite":"Hard stone: dynamite",
 "Veio de {0}: x{1}":"{0} vein: x{1}",
 // --- 5-desenho/12-povoado.js
 "Salvo!":"Saved!",
+"Cama":"Bed",
 "Poço de água":"Well",
 "Contratos: clique para abrir":"Contracts: click to open",
 "Contratos prontos!":"Contracts ready!",
@@ -1137,7 +1128,7 @@ function save(){try{
  localStorage.setItem(SAVE_KEY,JSON.stringify(Object.assign({},S,{dug:[...dug],ts:Date.now()})));saveSeen=localStorage.getItem(SAVE_KEY)!==null}catch(e){}}
 let qty=1;
 // variáveis de sessão (não são salvas)
-let mapOn=false,mapB=null,mapT=0,mapZ=1,musOn=false,musT=0,ambT=0,amb=[],modal=null,levelChoiceId=0,levelChoiceTicker=0;
+let musOn=false,musT=0,ambT=0,amb=[],modal=null,levelChoiceId=0,levelChoiceTicker=0;
 let cmb=0,cmbT=0,cmbPulse=0,cmbMax=0,cmbFlash=0,cmbBanner=0,cmbBannerT="",cmbLast=0,cmbLastT=0,cmbTier=0;
 let skT=[0,0],skCD=[0,0],dynCD=0,dynCDt=1.5,tpCD=0,ev=0,evT=0,evNext=60+Math.random()*60;
 let star=0,starT=0,starNext=60+Math.random()*120,shoot=null;   // estrela cadente: segundos de bônus restantes · tipo (0 ouro, 1 sorte) · espera até a próxima · risco no céu
@@ -1243,13 +1234,13 @@ function checkUnlocks(){   // avisa na tela quando o recorde libera algo novo (n
  const l=unlockNames(ulSeen,S.best);ulSeen=S.best;
  if(l.length)showUnlock(l.map(x=>x[1]));
 }
-// Faixa própria de "novidade liberada" (não é o aviso comum do canto): aparece no meio do jogo, dourada, com fanfarra; várias seguidas entram em fila
+// Faixa própria de "novidade liberada": dourada, com fanfarra, no canto inferior direito (#notis, junto com as conquistas, sem cobrir uma à outra); várias seguidas entram em fila
 let ulQ=[],ulT=0;
 function showUnlock(names){ulQ.push(names);if(!ulT)ulNext()}
 function ulNext(){
  const el=$("unl");ulT=0;if(!el)return;
  const n=ulQ.shift();if(!n){el.className="";return}
- el.innerHTML="<small>"+__("NOVIDADE LIBERADA")+"</small>"+n.map(x=>"<b>"+x+"</b>").join("");
+ el.innerHTML="<small>"+__("NOVIDADE LIBERADA")+"</small>"+n.slice(0,3).map(x=>"<b>"+x+"</b>").join("")+(n.length>3?"<span>"+__("e mais {0}",n.length-3)+"</span>":"");
  el.className="";void el.offsetWidth;el.className="on";
  [523,659,784,1047,1319].forEach((f,i)=>setTimeout(()=>sfx(f,.2,"triangle"),i*85));setTimeout(()=>sfx(2093,.35,"sine"),430);
  ulT=setTimeout(ulNext,4300);
@@ -2347,7 +2338,7 @@ function openMarket(){const b=openModal("fmk");b.style.maxWidth="460px";paintMar
 function paintMarket(){
  const b=$("bx");if(modal!=="fmk"||!b)return;
  const gs=fishGroups(),tot=gs.reduce((a,x)=>a+x.v,0);
- b.innerHTML="<div class='fkw'><h2 class='fkh'>"+__("Peixaria da carrocinha")+"</h2>"
+ b.innerHTML="<div class='fkw'><h2 class='fkh'>"+__("Vender para Izans")+"</h2>"
   +(gs.length?"<div class='fklist'>"+gs.map(x=>"<button data-s='"+x.f.id+"' data-t='"+x.f.t+"'><i style='background:"+x.f.c+"'></i><span class='n'>"+__(x.f.n)+" <small>x"+x.n+"</small></span><span class='v'>+"+fmt(x.v)+"</span></button>").join("")+"</div><button id='fkall' class='go'>"+__("Vender tudo · {0}",fmt(tot))+"</button>"
    :"<div class='fkfood'>"+__("Você não tem peixes para vender.")+"</div>")
   +"<div class='fkfood'>"+__("Dica: peixes também podem ser assados na fogueira e viram comida de energia.")+"</div><div class='fsbtns'><button id='fkclose'>"+__("Fechar")+"</button></div></div>";
@@ -2875,7 +2866,6 @@ const relabelTabs=()=>document.querySelectorAll("#tabs button").forEach((b,i)=>{
 function buildTabs(){
  const tb=$("tabs");tb.innerHTML="";
  TAB_NAMES.forEach((n,i)=>{const b=mk("button","",__(n)+"<i class='dot'></i>");b.onclick=()=>{setTab(i);sfx(500,.04,"sine")};tb.appendChild(b)});
- $("qk-map").onclick=()=>{mapOn=!mapOn;mapZ=1};
  $("qk-pause").onclick=openPause;
  {const fb=$("qk-full"),de=document.documentElement,can=document.fullscreenEnabled||document.webkitFullscreenEnabled;   // tela cheia (iPhone não suporta: some o botão)
   if(!can)fb.hidden=true;
@@ -2965,7 +2955,6 @@ function barUI(){const slots=document.querySelectorAll(".slot");BAR.forEach((s,i
 
 // ===== 4-interface/04-entrada.js — Mouse, teclado, toque e botões de celular =====
 cv.addEventListener("pointerdown",e=>{e.preventDefault();
- if(mapOn){mapOn=false;return}   // mapa aberto: tocar na tela fecha (no celular não há mais botão de Mapa na barra)
  if(fs&&!modal){fishHold=true;fishAct();return}   // pescando: tocar/clicar fisga, segura a barra e lança de novo
  if(atSurface()&&!modal){for(const[hit,use]of[[boardHit,boardUse],[slotHit,slotUse],[campHit,campUse],[fishHit,fishUse],[marketHit,marketUse]])if(hit(e.offsetX,e.offsetY)&&use())return}
  if(atSurface()&&furHit(e.offsetX,e.offsetY)){furUse();return}
@@ -3027,17 +3016,16 @@ addEventListener("keydown",e=>{
  if(e.code==="KeyR"){dynNext();return}
  if(e.code==="KeyF"){useItem(foodPick());return}
  if(e.code==="KeyQ"){teleport();return}
- if(e.code==="Escape"){if(mapOn)mapOn=false;else openPause();return}
+ if(e.code==="Escape"){openPause();return}
  if(e.code==="KeyP"){openPause();return}
- if(e.code==="KeyM"){mapOn=!mapOn;mapZ=1;return}
  if(e.code==="KeyN"){mute=!mute;refresh();return}
  if(m){e.preventDefault();if(!e.repeat){pressDir(e.code,m);move(held);lastMv=performance.now()}return}
  if(e.code==="Space"){e.preventDefault();if(!e.repeat){holdS=true;clickDig();lastH=performance.now()}}});
 addEventListener("keyup",e=>{if(e.code==="Space"){holdS=false;e.preventDefault()}releaseDir(e.code);if(e.key==="Shift")shiftOn=false});
 addEventListener("blur",()=>{holdS=holdM=false;dirKeys.length=0;setHeld();shiftOn=false});
-cv.addEventListener("wheel",e=>{e.preventDefault();if(mapOn){mapZ=clamp(mapZ*(e.deltaY<0?1.25:.8),1,12);return}setZoom(zoomPreference*(e.deltaY<0?1.12:1/1.12))},{passive:false});
+cv.addEventListener("wheel",e=>{e.preventDefault();setZoom(zoomPreference*(e.deltaY<0?1.12:1/1.12))},{passive:false});
 if(matchMedia("(pointer:coarse)").matches||innerWidth<760){
- // Controles de celular: direcionais à esquerda, Minerar à direita (Mapa e Pausa ficam só no painel e no teclado).
+ // Controles de celular: direcionais à esquerda, Minerar à direita (a Pausa fica só no painel e no teclado).
  const bar=mk("div");bar.style.cssText="position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:flex-end;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));pointer-events:none;z-index:9;-webkit-touch-callout:none;background:linear-gradient(rgba(11,12,16,0),#0b0c10 42%)";
  const ups=[];   // liberadores ativos: soltam tudo se o toque se perder (janela abriu, app foi para segundo plano etc.)
  const btn=(t,dn,up,w,fs)=>{const b=mk("button","",t);
@@ -3054,7 +3042,7 @@ if(matchMedia("(pointer:coarse)").matches||innerWidth<760){
  addEventListener("blur",()=>ups.forEach(f=>f()));document.addEventListener("visibilitychange",()=>{if(document.hidden)ups.forEach(f=>f())});
  bar.oncontextmenu=e=>e.preventDefault();document.body.style.overscrollBehavior="none";document.body.appendChild(bar);document.body.style.paddingBottom="150px"}
 
-// ===== 4-interface/05-pausa.js — Menu de pausa (Esc ou P): congela o jogo e oferece continuar, salvar, som, mapa e voltar ao menu =====
+// ===== 4-interface/05-pausa.js — Menu de pausa (Esc ou P): congela o jogo e oferece continuar, salvar, som e voltar ao menu =====
 function openPause(){
  if(modal)return;
  const b=openModal("pause");b.style.maxWidth="320px";paintPause();
@@ -3063,14 +3051,13 @@ function openPause(){
 function paintPause(){
  const b=$("bx"),where=atSurface()?__("Superfície"):fmt(S.depth)+" m · "+layerName(S.depth);
  b.innerHTML="<div class='pm'><h2>"+__("Pausa")+"</h2><div class='sub'>"+where+" · "+__("nível {0}",S.lvl)+"</div>"
-  +"<button id='pm-go' class='main'>"+__("Continuar")+"</button><button id='pm-sv'>"+__("Salvar jogo")+"</button><button id='pm-snd'></button><button id='pm-map'>"+__("Mapa")+"</button><div data-langmenu></div><button id='pm-menu'>"+__("Menu inicial")+"</button>"
+  +"<button id='pm-go' class='main'>"+__("Continuar")+"</button><button id='pm-sv'>"+__("Salvar jogo")+"</button><button id='pm-snd'></button><div data-langmenu></div><button id='pm-menu'>"+__("Menu inicial")+"</button>"
   +"</div>";
  const snd=()=>{$("pm-snd").textContent=mute?__("Som: desligado"):__("Som: ligado")};snd();
  langMenus();
  $("pm-go").onclick=closeModal;
  $("pm-sv").onclick=()=>{save();sayInfo(__("Jogo salvo"));$("pm-sv").textContent=__("Jogo salvo ✓")};
  $("pm-snd").onclick=()=>{mute=!mute;snd();refresh()};
- $("pm-map").onclick=()=>{closeModal();mapOn=true;mapZ=1};
  $("pm-menu").onclick=()=>{save();closeModal();showTitle()};
 }
 function pauseKey(e){
@@ -3112,7 +3099,7 @@ function clockUpdate(){
 // ===== 4-interface/07-controle.js — Suporte a controle (Gamepad API: Xbox, PlayStation, Switch Pro e genéricos no layout padrão) =====
 // Jogo:   direcional ou analógico esquerdo = mover · A = cavar (segure) / usar baú, fornalha, quadro e caça-níquel · B (segure) = correr
 //         X = dinamite · Y = trocar dinamite · LB / RB = habilidades 1 e 2 · LT = teleporte · RT (segure) = correr
-//         Select = mapa · Start = pausa · analógico direito (cima/baixo) = zoom · clique do analógico esquerdo = som · clique do analógico direito = painel (Melhorias/Loja)
+//         Start = pausa · analógico direito (cima/baixo) = zoom · clique do analógico esquerdo = som · clique do analógico direito = painel (Melhorias/Loja)
 // Janelas: direcional/analógico navega · A confirma · B volta/fecha · Start fecha a pausa
 const GP={dz:.5,id:"",dir:null,a:false,prev:[],navT:0,navD:null,lastModal:null,wait:{a:false,b:false,st:false},tLast:0,seen:false,sel:-1,edge:false,panel:false,psel:0};
 function gpPad(){
@@ -3208,16 +3195,12 @@ function gpFrame(now){
  }else{
   if(GP.lastModal){GP.lastModal=null;document.querySelectorAll(".gp-sel").forEach(x=>x.classList.remove("gp-sel"));GP.wait.a=B(0);GP.wait.b=B(1);GP.wait.st=B(9)}
   if(!B(0))GP.wait.a=false;if(!B(1))GP.wait.b=false;if(!B(9))GP.wait.st=false;
-  // mapa aberto: B / Select fecham, analógico direito dá zoom
-  if(pr(11)&&!mapOn){
+  if(pr(11)){
    GP.panel=!GP.panel;gpRelease();GP.psel=0;
    if(GP.panel){$("side").classList.add("gp-panel");gpPanelPaint(true);sayInfo(__("Painel: A escolhe, LB/RB troca de aba, B volta"))}else gpPanelOff();
   }
   if(GP.panel){gpPanelInput(pa&&!GP.wait.a,pb&&!GP.wait.b,up,down,left,right,pr(5),pr(4));if(pst&&!GP.wait.st){gpPanelOff();openPause()}}
-  else if(mapOn){
-   if(pb||pr(8)||pa)mapOn=false;
-   if(Math.abs(ry)>.25)mapZ=clamp(mapZ*Math.exp(-ry*dt*2),1,12);
-  }else{
+  else{
    // movimento
    if(nowD!==GP.dir){
     if(GP.dir)releaseDir("gp-"+GP.dir);
@@ -3235,7 +3218,6 @@ function gpFrame(now){
    if(pr(4))useSk(0);
    if(pr(5))useSk(1);
    if(pr(6))teleport();
-   if(pr(8)){mapOn=true;mapZ=1}
    if(pr(10)){mute=!mute;refresh()}
    if(pst&&!GP.wait.st)openPause();
    if(Math.abs(ry)>.25)setZoom(zoomPreference*Math.exp(-ry*dt*1.4));
@@ -3736,78 +3718,9 @@ function drawOverlays(dt,mx,my){
  chestOpen=Math.max(0,chestOpen-dt*1.4);
 }
 
-// ===== 5-desenho/05-mapa.js — Mapa (tecla M) com zoom e camadas =====
-// Visual: céu e grama na linha 0, camadas coloridas com sombra, névoa abaixo do recorde, escavações na cor clara da camada,
-// grade leve, régua de profundidade, linha do recorde, construções com legenda e marcador do jogador com guias.
-let mapDC=null,mapBC=null;   // cores por camada (escavado / fundo), calculadas uma vez
-function mapChip(t,x,y,al,col,bg){const w=Math.ceil(ctx.measureText(t).width)+10,x0=Math.round(al==="right"?x-w:al==="center"?x-w/2:x),y0=Math.round(y)-12;ctx.fillStyle=bg||"rgba(8,9,13,.84)";ctx.fillRect(x0,y0,w,16);ctx.fillStyle="rgba(255,255,255,.12)";ctx.fillRect(x0,y0,w,1);ctx.textAlign="left";ctx.fillStyle=col||"#ececec";ctx.fillText(t,x0+5,Math.round(y));return w}
-function drawMap(){
- const now=performance.now();
- if(!mapDC){mapDC=BIO.map((b,L)=>blockColor(L*LAYER_HEIGHT,0,30));mapBC=BIO.map((b,L)=>blockColor(L*LAYER_HEIGHT,0,-6))}
- if(!mapB||now-mapT>400){mapT=now;let d=1;const B=[];for(const k of dug){const i=k.indexOf(","),x=+k.slice(0,i),y=+k.slice(i+1);if(y>d)d=y;const L=layerOf(y),b=B[L]||(B[L]={xs:[],ys:[]});b.xs.push(x);b.ys.push(y)}mapB={d,B}}
- const{d,B}=mapB,pad=36,tp=W<600?100:64,sr=Math.max(S.depth,d)+3;
- const fit=Math.min((W-pad*2)/(COLS+2),(H-tp-pad)/sr,14),sc=fit*mapZ,sx=sc*Math.max(1,Math.min(14/sc,4,(W-pad*2)/((COLS+2)*sc))),ox=mapZ>1?W/2-(S.mc+.5)*sx:W/2-.5*sx,oy=mapZ>1?H/2-(S.depth-.5)*sc:tp;
- const X=v=>Math.round(ox+(v-.5)*sx),Y=v=>Math.round(oy+v*sc),wL=X(-HALF),wR=X(HALF+1),wW=wR-wL,wB=Y(sr);
- ctx.fillStyle="rgba(3,4,7,.95)";ctx.fillRect(0,0,W,H);
- // céu e grama (a superfície é a linha 0)
- if(oy>0){const g=ctx.createLinearGradient(0,0,0,oy);g.addColorStop(0,"#0b1424");g.addColorStop(1,"#3a6a9c");ctx.fillStyle=g;ctx.fillRect(0,0,W,Math.round(oy))}
- ctx.font="600 11px "+FONT;ctx.textAlign="left";
- // mundo (recortado nas 21 colunas)
- ctx.save();ctx.beginPath();ctx.rect(wL,Math.max(0,Y(0)),wW,Math.max(0,Math.min(H,wB)-Math.max(0,Y(0))));ctx.clip();
- for(let L=0;L*LAYER_HEIGHT<sr;L++){
-  const t0=L*LAYER_HEIGHT,t1=Math.min(t0+LAYER_HEIGHT,sr),y0=Y(t0),y1=Y(t1);if(y0>H||y1<0)continue;
-  ctx.globalAlpha=.8;ctx.fillStyle=mapBC[L];ctx.fillRect(wL,y0,wW,y1-y0);ctx.globalAlpha=1;
-  const g=ctx.createLinearGradient(0,y0,0,y1);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,0,0,.38)");ctx.fillStyle=g;ctx.fillRect(wL,y0,wW,y1-y0);
-  if(L>0){ctx.fillStyle="rgba(255,255,255,.2)";ctx.fillRect(wL,y0,wW,1)}
- }
- if(sx>=4){ctx.fillStyle="rgba(255,255,255,.05)";for(let c=-HALF;c<=HALF+1;c+=5)ctx.fillRect(X(c),Math.max(0,Y(0)),1,H)}   // grade a cada 5 colunas
- const yf=Y(Math.max(S.best,d)+2);if(yf<H){ctx.fillStyle="rgba(2,3,6,.42)";ctx.fillRect(wL,Math.max(0,yf),wW,H)}   // névoa: ainda não explorado
- for(let L=0;L<B.length;L++){const b=B[L];if(!b)continue;ctx.fillStyle=mapDC[L];const xs=b.xs,ys=b.ys;for(let i=0;i<xs.length;i++){const x0=X(xs[i]),y0=Y(ys[i]);ctx.fillRect(x0,y0,X(xs[i]+1)-x0,Y(ys[i]+1)-y0)}}
- ctx.fillStyle=mapDC[0];{const x0=X(0),y0=Y(0);ctx.fillRect(x0,y0,X(1)-x0,Y(1)-y0)}   // boca do buraco
- // guias do jogador
- const px=ox+clamp(S.mc,-HALF,HALF)*sx,py=oy+(S.depth-.5)*sc;
- ctx.fillStyle="rgba(255,255,255,.1)";ctx.fillRect(wL,Math.round(py),wW,1);ctx.fillRect(Math.round(px),Math.max(0,Y(0)),1,H);
- // linha do recorde
- const rec=S.best>=1&&Math.abs(S.best-S.depth)>=2?Y(S.best):null;
- if(rec!==null){ctx.setLineDash([4,3]);ctx.strokeStyle="rgba(255,212,92,.75)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(wL,rec+.5);ctx.lineTo(wR,rec+.5);ctx.stroke();ctx.setLineDash([])}
- ctx.restore();
- // grama por cima do topo e bordas do mundo
- const gy=Math.round(oy);ctx.fillStyle="#3f8a34";ctx.fillRect(0,gy-3,W,3);ctx.fillStyle="#79c957";ctx.fillRect(0,gy-3,W,1);
- ctx.fillStyle="#4a4e5a";ctx.fillRect(wL-1,gy,1,Math.max(0,wB-gy));ctx.fillRect(wR,gy,1,Math.max(0,wB-gy));
- // rótulos das camadas (grudam no alto da tela enquanto a camada está à vista) e régua de profundidade
- ctx.font="600 10px "+FONT;const top=W<600?92:40;
- for(let L=0;L*LAYER_HEIGHT<sr;L++){
-  const t0=L*LAYER_HEIGHT,y0=Y(t0),y1=Y(Math.min(t0+LAYER_HEIGHT,sr));if(y0>H||y1<0)continue;
-  if(wR+64<W){ctx.fillStyle="#6f7480";ctx.fillRect(wR+1,y0,4,1);ctx.textAlign="left";ctx.fillText(fmt(t0)+" m",wR+9,y0+4)}
-  if(y1-y0>=28){const ly=clamp(Math.max(y0,top),y0+13,y1-6);{const nm=layerName(t0).toUpperCase();if(ly>=(W<600?20:46)){if(wL-8-ctx.measureText(nm).width-10>=(W>=600?175:6))mapChip(nm,wL-8,ly,"right","#e8e8e8");else mapChip(nm,wL+4,ly,"left","#e8e8e8","rgba(6,7,10,.7)")}}}
- }
- // construções da superfície
- const bl=[[__("Cama"),BED_C,"#4f77ff"],[__("Mesa de trabalho"),BENCH_C,"#b27a3a"],isUnl("build","furnace")&&[__("Fornalha"),FURN_C,"#ff5a1f"],[__("Baú"),CHEST_C,"#ffd45c"],[__("Loja"),SHOP_C,"#ff9a3a"],isUnl("build","slot")&&[__("Caça-níquel"),SLOT_C,"#38c172"],isUnl("build","board")&&[__("Quadro de contratos"),BOARD_C,"#e8d7a8"]].filter(Boolean);
- const u=Math.max(7,Math.round(sx*.85));
- for(const[,c,col]of bl){const x0=Math.round(ox+c*sx-u/2),y0=gy-3-u;ctx.fillStyle="#07080b";ctx.fillRect(x0-1,y0-1,u+2,u+1);ctx.fillStyle=col;ctx.fillRect(x0,y0,u,u);ctx.fillStyle="rgba(255,255,255,.35)";ctx.fillRect(x0,y0,u,2);ctx.fillStyle="rgba(0,0,0,.28)";ctx.fillRect(x0,y0+u-2,u,2)}
- // recorde (rótulo) e marcador do jogador
- ctx.font="600 10px "+FONT;
- if(rec!==null&&rec>0&&rec<H)mapChip(__("Recorde: {0} m",fmt(S.best)),wR-4,rec-3,"right","#ffd45c");
- const pu=.5+.5*Math.sin(now/450),r0=Math.max(4,sc*.7);
- ctx.beginPath();ctx.arc(px,py,r0+3+pu*5,0,7);ctx.lineWidth=2;ctx.strokeStyle="rgba(255,77,77,"+(.6-.4*pu)+")";ctx.stroke();
- ctx.beginPath();ctx.arc(px,py,r0,0,7);ctx.fillStyle="#ff4d4d";ctx.fill();ctx.lineWidth=2;ctx.strokeStyle="#fff";ctx.stroke();
- ctx.beginPath();ctx.arc(px-r0*.3,py-r0*.3,Math.max(1,r0*.28),0,7);ctx.fillStyle="rgba(255,255,255,.75)";ctx.fill();
- ctx.font="600 10px "+FONT;
- if(S.depth>0){const lab=fmt(S.depth)+" m",tw=ctx.measureText(lab).width+10;if(px+r0+tw+12<W)mapChip(lab,px+r0+9,py+4,"left","#ff9a9a");else mapChip(lab,px-r0-9,py+4,"right","#ff9a9a")}
- // legenda (só em tela larga e quando não encosta no mapa)
- if(W>=600&&wL>190){const it=[...bl.map(b=>[b[0],b[2]]),[__("Você"),"#ff4d4d"]];let lw=0;for(const t of it)lw=Math.max(lw,ctx.measureText(t[0]).width);const pw=Math.ceil(lw)+36,ph=it.length*16+12,x0=14,y0=46;
-  ctx.fillStyle="rgba(8,9,13,.84)";ctx.fillRect(x0,y0,pw,ph);ctx.fillStyle="rgba(255,255,255,.12)";ctx.fillRect(x0,y0,pw,1);
-  for(let i=0;i<it.length;i++){const yy=y0+8+i*16;ctx.fillStyle="#07080b";ctx.fillRect(x0+8,yy,11,11);ctx.fillStyle=it[i][1];ctx.fillRect(x0+9,yy+1,9,9);ctx.fillStyle="#d6d6d6";ctx.textAlign="left";ctx.fillText(it[i][0],x0+26,yy+9)}}
- // título e ajuda
- if(W<600){ctx.font="600 12px "+FONT;mapChip(__("Mapa · {0} m · recorde {1} m",fmt(S.depth),fmt(S.best)),12,62,"left");ctx.fillStyle="#9aa0a6";ctx.fillText(__("Toque na tela para fechar"),17,80)}
- else{ctx.fillStyle="rgba(8,9,13,.92)";ctx.fillRect(0,0,W,32);ctx.fillStyle="#2a2d36";ctx.fillRect(0,32,W,1);ctx.font="600 13px "+FONT;ctx.fillStyle="#ececec";ctx.textAlign="left";ctx.fillText(__("Mapa · profundidade {0} m · recorde {1} m · roda do mouse: zoom · M ou Esc fecham",fmt(S.depth),fmt(S.best)),14,21)}
- if(mapZ>1.01){ctx.font="600 10px "+FONT;mapChip("x"+mapZ.toFixed(1),W-12,H-12,"right","#9aa0a6")}
- ctx.textAlign="left";
-}
-
-// ===== 5-desenho/06-quadro.js — Desenho de cada quadro: céu, blocos, alvo, personagem, efeitos e mapa =====
+// ===== 5-desenho/06-quadro.js — Desenho de cada quadro: céu, blocos, alvo, personagem e efeitos =====
 function updateDepthRuler(){
- const ruler=$("depthruler");ruler.classList.toggle("map-hidden",mapOn);if(mapOn)return;
+ const ruler=$("depthruler");
  const layer=layerOf(S.depth),pos=S.depth>=FINAL_DEPTH?1:clamp((S.depth-layer*LAYER_HEIGHT)/LAYER_HEIGHT,0,1),css=(pos*100)+"%",color=BIO[layer][4];
  if(ruler.style.getPropertyValue("--depth-position")!==css)ruler.style.setProperty("--depth-position",css);
  if(ruler.style.getPropertyValue("--layer-color")!==color)ruler.style.setProperty("--layer-color",color);
@@ -3864,7 +3777,6 @@ function draw(dt){
  drawFireflies(t);   // vaga-lumes por cima da escuridão da noite (13-paisagem.js)
  updateDepthRuler();
  comboHud(dt);
- if(mapOn)drawMap();
 }
 
 // ===== 5-desenho/07-pet.js — Vagalume companheiro: segue o jogador, brilha e aumenta o raio de luz no escuro (brilha bem mais à noite, na superfície) =====

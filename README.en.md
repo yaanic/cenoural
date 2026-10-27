@@ -46,7 +46,6 @@ Nothing to install, no sign-up, and it works on desktop and mobile.
 | `E` / `R` | Use dynamite / switch dynamite type |
 | `Q` | Teleport to the chest |
 | `1` `2` | Skills |
-| `M` | Open the map |
 | `N` | Sound on or off |
 | `Esc` or `P` | Pause |
 | Scroll | Zoom |
@@ -65,7 +64,6 @@ Plug in a controller (Xbox, PlayStation, Switch Pro, or similar) and press any b
 | `LB` / `RB` | Skills 1 and 2 |
 | `LT` | Teleport to the chest |
 | `RT` | Run (hold) |
-| `Select` | Map |
 | `Start` | Pause |
 | Right stick (up/down) | Zoom |
 | Left stick click | Sound on or off |
@@ -73,7 +71,7 @@ Plug in a controller (Xbox, PlayStation, Switch Pro, or similar) and press any b
 
 Inside the panel: up/down choose an item, `A` buys or activates it, `LB`/`RB` (or left/right) switch tabs, `B` returns to the game.
 
-On mobile, use the on-screen buttons (arrows, **Mine**, **Map**, and **Pause**) and tap the icons on the bar to use items and skills.
+On mobile, use the on-screen buttons (arrows, **Mine** and **Pause**) and tap the icons on the bar to use items and skills.
 
 ## Features
 
@@ -87,7 +85,6 @@ On mobile, use the on-screen buttons (arrows, **Mine**, **Map**, and **Pause**) 
 - Stardew Valley style fishing in the stream and the sea (green-bar minigame, 14 species that depend on season, time of day and rain), rod and bait upgrades, fish sold at the shop cart, and a campfire to roast fish into energy food
 - Levels, skills, and achievements
 - Day and night cycle, seasons, weather (rain, storms, snow, fog), and shooting stars
-- Map with zoom
 - A new world every run, generated from a random seed
 - Music and sound effects with volume controls
 

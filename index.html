@@ -43,8 +43,10 @@
     <canvas id="cv" data-i18n-attr="aria-label" aria-label="Área de escavação"></canvas>
     <div id="lvbox" data-i18n-attr="title,aria-label" title="Nível" aria-label="Nível"><small id="lvt" data-i18n>Nível</small><b id="lv">1</b><small id="xpt"></small></div>
     <div id="layer"></div>
-    <div id="unl" aria-live="polite"></div>
-    <div id="ach" aria-live="polite"></div>
+    <div id="notis">   <!-- canto da tela: novidade liberada e conquista empilham aqui, uma abaixo da outra, sem cobrir os avisos do topo -->
+      <div id="unl" aria-live="polite"></div>
+      <div id="ach" aria-live="polite"></div>
+    </div>
     <div id="buffs" aria-live="polite"></div>
     <div id="depthruler" data-i18n-attr="aria-label" aria-label="Progresso dentro da camada atual">
       <div id="depthtrack"><i id="depthfill"></i><b id="depthcursor"></b></div>
@@ -53,7 +55,7 @@
   </div>
 </div>
 <aside id="side">
-  <div class="qk"><button id="qk-map" data-i18n>Mapa</button><button id="qk-pause" data-i18n>Pausa</button><button id="qk-full">Tela cheia</button></div>
+  <div class="qk"><button id="qk-pause" data-i18n>Pausa</button><button id="qk-full">Tela cheia</button></div>
   <div id="bagside"></div>
   <div class="tabs" id="tabs"></div>
   <div class="pane on">
@@ -99,9 +101,8 @@
           <dt><kbd>F</kbd></dt><dd data-i18n>Comer a comida de peixe escolhida (botão direito no slot troca o tipo)</dd>
           <dt><kbd>Q</kbd></dt><dd data-i18n>Teleporte (compre em Melhorias)</dd>
           <dt><kbd>1</kbd> <kbd>2</kbd></dt><dd data-i18n>Fúria do Minerador (libera aos 50 m) e Escavação Frenética (aos 150 m)</dd>
-          <dt><kbd>M</kbd></dt><dd data-i18n>Abrir e fechar o mapa. Com ele aberto, a roda do mouse dá zoom</dd>
           <dt><kbd>N</kbd></dt><dd data-i18n>Som ligado/desligado</dd>
-          <dt><kbd>Esc</kbd> <kbd>P</kbd></dt><dd data-i18n>Pausa. Com o mapa aberto, Esc fecha o mapa</dd>
+          <dt><kbd>Esc</kbd> <kbd>P</kbd></dt><dd data-i18n>Pausa</dd>
           <dt><kbd>Scroll</kbd></dt><dd data-i18n>Zoom do jogo</dd>
         </dl>
       </details>
@@ -118,7 +119,7 @@
           <dt><kbd>◀ ▲ ▼ ▶</kbd></dt><dd data-i18n>Mover e escolher a direção</dd>
           <dt data-i18n><kbd>Minerar</kbd></dt><dd data-i18n>Segure para cavar (também usa baú, fornalha, quadro e caça-níquel quando perto)</dd>
           <dt data-i18n><kbd>Ícones</kbd></dt><dd data-i18n>Toque nos ícones da barra para dinamite, habilidades, teleporte, comida e poções</dd>
-          <dt data-i18n><kbd>Mapa</kbd> <kbd>Pausa</kbd></dt><dd data-i18n>Botões no topo do painel. Com o mapa aberto, tocar na tela fecha</dd>
+          <dt data-i18n><kbd>Pausa</kbd></dt><dd data-i18n>Botão no topo do painel</dd>
         </dl>
       </details>
       <details><summary data-i18n>Telas especiais</summary>

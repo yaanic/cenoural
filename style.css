@@ -33,7 +33,6 @@ body{background:var(--bg);color:var(--text);font-family:"Silkscreen","Courier Ne
 #layer{position:absolute;top:8px;right:44px;z-index:2;max-width:calc(100% - 104px);   /* right:44px deixa a régua de profundidade livre: ela cobria o fim do texto */width:max-content;padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.78);text-align:right;font-weight:600;white-space:normal;overflow-wrap:anywhere;pointer-events:none}
 #layer .ic{display:inline-block;width:1.2em;height:1.2em;margin-right:.55em;vertical-align:-.22em;background:no-repeat center/contain;image-rendering:pixelated}   /* ícone em pixel colorido por categoria de aviso */
 #depthruler{position:absolute;top:60px;right:9px;bottom:10px;z-index:3;width:24px;display:flex;align-items:stretch;justify-content:center;padding:6px 4px;border:1px solid #ffffff24;border-radius:10px;background:#050607d9;pointer-events:none}
-#depthruler.map-hidden{display:none}
 #depthtrack{position:relative;flex:1;width:12px;min-height:0;overflow:visible;border:1px solid #ffffff45;border-radius:8px;background:#080808e8}
 #depthfill{position:absolute;left:1px;right:1px;top:0;height:var(--depth-position,0%);border-radius:7px;background:var(--layer-color,#ff9e28);opacity:.88}
 #depthcursor{position:absolute;left:-4px;top:var(--depth-position,0%);width:18px;height:4px;transform:translateY(-50%);border-radius:4px;background:#fff}
@@ -320,12 +319,15 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 /* liberação gradual: o que ainda não foi liberado fica escondido */
 .lock{display:none!important}
 /* faixa de novidade liberada */
-#unl{position:absolute;top:18%;left:50%;z-index:6;transform:translate(-50%,-14px) scale(.92);opacity:0;pointer-events:none;display:none;flex-direction:column;align-items:center;gap:4px;padding:12px 26px 14px;min-width:220px;max-width:88%;text-align:center;background:#140d03;border:2px solid #ffd45c;border-radius:6px;box-shadow:0 0 0 2px #000}
-#unl small{color:#ffd45c;font-size:.7rem;letter-spacing:.22em}
-#unl b{color:#fff3c4;font-size:1.15rem;letter-spacing:.04em}
-#unl small::before,#unl small::after{content:"\2605";margin:0 8px;color:#ffb43a}
+/* Notificações de canto: novidade liberada (#unl) e conquista (#ach) ficam dentro de #notis, no centro, no alto da tela, logo abaixo do aviso comum (#layer). Cada uma ocupa seu próprio espaço (coluna), então nunca se cobrem; o aviso comum do topo (#layer) fica livre. */
+#notis{position:absolute;top:60px;left:50%;transform:translateX(-50%);z-index:7;display:flex;flex-direction:column;align-items:center;gap:8px;width:max-content;max-width:min(340px,calc(100% - 100px));pointer-events:none}
+#unl{opacity:0;display:none;flex-direction:column;align-items:flex-start;gap:3px;padding:10px 18px 12px;width:max-content;min-width:200px;max-width:100%;box-sizing:border-box;text-align:left;background:#140d03;border:2px solid #ffd45c;border-radius:6px;box-shadow:0 0 0 2px #000}
+#unl small{color:#ffd45c;font-size:.66rem;letter-spacing:.2em}
+#unl b{align-self:stretch;color:#fff3c4;font-size:.9rem;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#unl span{color:#c9b27a;font-size:.7rem}
+#unl small::before{content:"\2605";margin-right:8px;color:#ffb43a}
 #unl.on{display:flex;animation:unlIn 4.3s ease both}
-@keyframes unlIn{0%{opacity:0;transform:translate(-50%,-14px) scale(.8)}9%{opacity:1;transform:translate(-50%,0) scale(1.06)}15%{transform:translate(-50%,0) scale(1)}86%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-10px) scale(.96)}}
+@keyframes unlIn{0%{opacity:0;transform:translateY(-24px)}9%{opacity:1;transform:translateY(4px)}14%{transform:translateY(0)}86%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-24px)}}
 /* cena da cenoura dourada: papel escuro com borda dourada, cada parágrafo aparece em sequência */
 .carta{background:#2a2110;color:#ffe9a8;border:3px solid #d9a83a;box-shadow:0 0 0 3px #000;padding:20px 22px 18px;text-align:left;line-height:1.55;max-height:88vh;overflow:auto}
 .carta h2{margin:0 0 14px;font-size:1.05rem;letter-spacing:.08em;color:#ffd45c;text-align:center}
@@ -335,15 +337,17 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 @keyframes cartaIn{to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.carta p,.carta button{animation:none;opacity:1}}
 .carta button:disabled{pointer-events:none}
-/* notificação de conquista: azul com troféu, sobe do rodapé (acima da barra de itens) para não cobrir as outras mensagens do topo */
-#ach{position:absolute;bottom:84px;left:50%;z-index:7;transform:translate(-50%,20px);opacity:0;pointer-events:none;display:none;flex-direction:column;align-items:center;gap:3px;padding:10px 24px 12px 56px;width:max-content;min-width:230px;max-width:94%;box-sizing:border-box;text-align:left;background:#0c1c2c;border:2px solid #5fd3ff;border-radius:6px;box-shadow:0 0 0 2px #000}
-#ach::before{content:"\1F3C6";position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:1.9rem}
+/* notificação de conquista: azul com troféu (posição: #notis, acima) */
+#ach{opacity:0;display:none;flex-direction:column;align-items:flex-start;gap:3px;padding:10px 18px 12px 54px;position:relative;width:max-content;min-width:200px;max-width:100%;box-sizing:border-box;text-align:left;background:#0c1c2c;border:2px solid #5fd3ff;border-radius:6px;box-shadow:0 0 0 2px #000}
+#ach::before{content:"\1F3C6";position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:1.8rem}
 #ach small,#ach b,#ach span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #ach small{align-self:stretch;color:#5fd3ff;font-size:.66rem;letter-spacing:.2em}
-#ach b{align-self:stretch;color:#e8f8ff;font-size:1.05rem;letter-spacing:.03em}
+#ach b{align-self:stretch;color:#e8f8ff;font-size:1rem;letter-spacing:.03em}
 #ach span{align-self:stretch;color:#9fc7dc;font-size:.7rem}
 #ach.on{display:flex;animation:achIn 4.2s ease both}
-@keyframes achIn{0%{opacity:0;transform:translate(-50%,20px)}8%{opacity:1;transform:translate(-50%,-4px)}13%{transform:translate(-50%,0)}88%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,14px)}}
+@keyframes achIn{0%{opacity:0;transform:translateY(-24px)}9%{opacity:1;transform:translateY(4px)}14%{transform:translateY(0)}88%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-24px)}}
+@media (prefers-reduced-motion:reduce){#unl.on,#ach.on{animation-name:notiFade}}
+@keyframes notiFade{0%{opacity:0}10%,88%{opacity:1}100%{opacity:0}}
 
 /* Seleção por controle nas janelas (destaque próprio, independe do anel de foco do navegador) */
 .gp-sel{outline:3px solid var(--acc)!important;outline-offset:2px;box-shadow:0 0 0 5px rgba(255,255,255,.12)}
@@ -379,4 +383,4 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 .cpfg .fd.no{opacity:.55}.cpfg .fd.no b{color:var(--mute)}
 .fsbtns .go:active,#fkall:active{transform:translateY(2px)}
 #fkall{padding:11px 8px;font-size:1rem}
-body.fishing #ach{bottom:auto;top:58px}
+

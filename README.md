@@ -44,7 +44,6 @@ Não precisa instalar nada, não tem cadastro e funciona no computador e no celu
 | `E` / `R` | Usar dinamite / trocar o tipo de dinamite |
 | `Q` | Teleporte para o baú |
 | `1` `2` | Habilidades |
-| `M` | Abrir o mapa |
 | `N` | Som ligado ou desligado |
 | `Esc` ou `P` | Pausa |
 | Scroll | Zoom |
@@ -63,7 +62,6 @@ Conecte um controle (Xbox, PlayStation, Switch Pro ou similar) e aperte qualquer
 | `LB` / `RB` | Habilidades 1 e 2 |
 | `LT` | Teleporte para o baú |
 | `RT` | Correr (segure) |
-| `Select` | Mapa |
 | `Start` | Pausa |
 | Analógico direito (cima/baixo) | Zoom |
 | Clique no analógico esquerdo | Som ligado ou desligado |
@@ -71,7 +69,7 @@ Conecte um controle (Xbox, PlayStation, Switch Pro ou similar) e aperte qualquer
 
 Dentro do painel: cima/baixo escolhem o item, `A` compra ou aciona, `LB`/`RB` (ou esquerda/direita) trocam de aba, `B` volta ao jogo.
 
-No celular, use os botões na tela (setas, **Minerar**, **Mapa** e **Pausa**) e toque nos ícones da barra para usar itens e habilidades.
+No celular, use os botões na tela (setas, **Minerar** e **Pausa**) e toque nos ícones da barra para usar itens e habilidades.
 
 ## O que tem no jogo
 
@@ -85,7 +83,6 @@ No celular, use os botões na tela (setas, **Minerar**, **Mapa** e **Pausa**) e 
 - Pesca estilo Stardew Valley no riacho e no mar, direto no mapa (sem janela: aperte Espaço ou clique perto da água, o personagem lança a vara e a câmera dá zoom; minijogo da barra verde, 14 espécies que dependem da estação, da hora e da chuva), vara e isca como melhorias, venda dos peixes na carrocinha e fogueira para assar peixes e virar comida de energia
 - Sistema de nível, habilidades e conquistas
 - Ciclo de dia e noite, estações do ano, clima (chuva, tempestade, neve, neblina) e estrelas cadentes
-- Mapa com zoom
 - Mundo novo a cada partida, gerado por semente aleatória
 - Trilha e efeitos sonoros, com controle de volume
 
