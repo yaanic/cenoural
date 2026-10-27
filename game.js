@@ -550,6 +550,8 @@ addLang("en","English",{
 "Asse 10 peixes na fogueira":"Roast 10 fish at the campfire",
 "Ponto perfeito":"Perfectly done",
 "Asse um peixe no ponto perfeito":"Roast a fish to the perfect point",
+"Horta dourada":"Golden Garden",
+"Deixe todas as cenouras da horta douradas":"Turn every carrot in the garden golden",
 "{0} CONQUISTAS":"{0} ACHIEVEMENTS",
 "CONQUISTA":"ACHIEVEMENT",
 "e mais {0}":"and {0} more",
@@ -641,8 +643,11 @@ addLang("en","English",{
 "raro":"rare",
 "lendário":"legendary",
 "Bolsa de peixes cheia: venda na carrocinha ou asse na fogueira":"Fish bag full: sell at the cart or roast at the campfire",
+"Espere morder. Aperte Espaço no !":"Wait for a bite. Press Space at the !",
 "O peixe soltou a isca antes de você puxar!":"The fish let go of the bait before you pulled!",
+"AGORA!":"NOW!",
 "Você puxou cedo demais e o peixe fugiu!":"You pulled too early and the fish got away!",
+"Segure Espaço: sobe · Solte: desce":"Hold Space: up · Release: down",
 "O peixe fugiu!":"The fish got away!",
 "{0}: {1} cm. Vale cerca de {2} de ouro. Venda na carrocinha ou asse na fogueira.":"{0}: {1} cm. Worth about {2} gold. Sell it at the cart or roast it at the campfire.",
 "Você pescou: {0}. Vendida por {1} de ouro.":"You caught: {0}. Sold for {1} gold.",
@@ -672,6 +677,7 @@ addLang("en","English",{
 "O vagalume não sai do seu lado. Ele brilha tanto que dá para sentir o calor daqui.":"The firefly stays by your side. It glows so brightly you can feel the warmth from here.",
 "A CENOURA DOURADA":"THE GOLDEN CARROT",
 "Tocar na cenoura":"Touch the carrot",
+"Cenoura dourada na horta: {0}/{1}":"Golden carrot in the garden: {0}/{1}",
 // --- 3-mundo/02-coleta.js
 "Novo minério: {0}":"New ore: {0}",
 // --- 3-mundo/03-mineracao.js
@@ -865,14 +871,6 @@ addLang("en","English",{
 // --- 5-desenho/13-paisagem.js
 "Fogueira: clique para assar":"Campfire: click to roast",
 // --- 5-desenho/16-pesca-desenho.js
-"Espaço":"Space",
-"NOVA ESPÉCIE!":"NEW SPECIES!",
-"NOVO RECORDE!":"NEW RECORD!",
-"Escapou!":"It got away!",
-"AGORA!":"NOW!",
-"Segure Espaço: sobe · Solte: desce":"Hold Space: up · Release: down",
-"Espere morder. Aperte Espaço no !":"Wait for a bite. Press Space at the !",
-"Espaço: lançar de novo · Esc: sair":"Space: cast again · Esc: leave",
 "Riacho: clique para pescar":"Stream: click to fish",
 "Mar: clique para pescar":"Sea: click to fish",
 "Vender":"Sell",
@@ -1012,7 +1010,7 @@ const COLS=HALF*2+1;
 const SURF_L=-100,SURF_R=52,PAD_L=8,PAD_R=9;   // esquerda estendida: do moinho (-26) até as montanhas altas (-100)
 // Paisagem estendida (só visual, em 5-desenho/13-paisagem.js). Esquerda da casa: horta de cenouras, moinho de vento e a trilha até a grande montanha (sem nada lá, só montanha).
 // Direita: riacho com ponte de madeira e roda d'água, fogueira com banco de pedra, praia com farol e trapiche. Posições em colunas do mundo.
-const GARDEN_L=-20.6,GARDEN_R=-13,MILL_C=-26;
+const GARDEN_L=-20.6,GARDEN_R=-13,MILL_C=-26,GARDEN_SLOTS=16;   // GARDEN_SLOTS: cenouras da horta; cada chegada ao fundo (1 por vida) deixa mais uma dourada
 const RIVER_C0=24,RIVER_C1=30,WHEEL_C=27.4;                       // água do riacho: colunas RIVER_C0..RIVER_C1 (a ponte passa por cima)
 const CAMP_C=38.4,BEACH_C0=42,LIGHT_C=46.5,PIER_C=52.4,PIER_END_C=55.6;   // o mar começa depois de SURF_R
 const isRiver=c=>c>=RIVER_C0&&c<=RIVER_C1,isSea=c=>c>SURF_R,isBeach=c=>c>=BEACH_C0&&c<=SURF_R;
@@ -1066,12 +1064,13 @@ const FISH_BAG_MAX=80;   // teto de peixes na bolsa (o save é limpo com este n�
 
 // ===== 1-nucleo/03-estado-save.js — Estado do jogo (S), validação do save, carregar/salvar e variáveis de sessão =====
 const SAVE_KEY="abismo-v3";
-const fresh=()=>({gold:0,depth:0,mc:0,prog:0,best:0,runMax:0,tier:0,runs:0,total:0,oc:0,blocks:0,deaths:0,sold:0,en:-1,
+const fresh=()=>({gc:0,gcAt:-1,gold:0,depth:0,mc:0,prog:0,best:0,runMax:0,tier:0,runs:0,total:0,oc:0,blocks:0,deaths:0,sold:0,en:-1,
  lv:{sharp:0,emax:0,eco:0,jet:0,jetspd:0,auto:0,autopow:0,speed:0,crit:0,luck:0,xp:0,duration:0,furia:0,frenesi:0,tele:0,pet:0,furn:0,lavares:0,lant:0,clock:0,back:0,fort:0,rod:0,bait:0},items:{dyn:0,dyn2:0,dyn3:0,dyn4:0,dyn5:0,cen:0,sop:0,poc:0,ptp:0,pas:0,pgr:0,pbq:0},dsel:"dyn",fsel:"pas",
  bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,dir:"down",dug:[],ach:[],debug:false,real:0,pts:0,sk:{her:0,ini:0,ouro:0,dmg:0,fol:0,jato:0,gar:0,xp:0},od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,fb:[],fdx:{},fishN:0,fishP:0,fishG:0,cookN:0,cookP:0,play:0,v:9,vol:{m:.7,s:1,a:.7}});
 let S=fresh();S.seed=newSeed();
 function clean(o){const src=o&&typeof o==="object"?o:{},hasVersion=Number.isFinite(src.v),f=fresh();o=Object.assign(f,src);if(!hasVersion)o.v=7;
- for(const k of["gold","depth","prog","best","runMax","tier","runs","total","oc","blocks","deaths","sold","pts","real","xp","lvp","bombs","eaten","tps","veins","sleeps","rich","refined","ctDone","spins","pend","chests","chTop","chGold","chFr","chPk","ptpUsed","fishN","fishP","fishG","cookN","cookP","play"])if(!Number.isFinite(o[k])||o[k]<0)o[k]=0;
+ for(const k of["gold","depth","prog","best","runMax","tier","runs","total","oc","blocks","deaths","sold","pts","real","xp","lvp","bombs","eaten","tps","veins","sleeps","rich","refined","ctDone","spins","pend","chests","chTop","chGold","chFr","chPk","ptpUsed","fishN","fishP","fishG","cookN","cookP","play","gc"])if(!Number.isFinite(o[k])||o[k]<0)o[k]=0;
+ o.gc=Math.min(GARDEN_SLOTS,Math.floor(o.gc));if(!Number.isFinite(o.gcAt))o.gcAt=-1;
  o.chT=BAL.chest.tiers.map((_,i)=>Array.isArray(o.chT)&&Number.isFinite(o.chT[i])&&o.chT[i]>0?Math.floor(o.chT[i]):0);   // baús abertos por raridade
  // pesca: bolsa de peixes [id, cm, perfeito] e álbum (melhor tamanho por espécie)
  o.fb=(Array.isArray(o.fb)?o.fb:[]).filter(e=>Array.isArray(e)&&FISH.some(f=>f.id===e[0])&&Number.isFinite(e[1])&&e[1]>0).slice(0,FISH_BAG_MAX).map(e=>[e[0],Math.round(e[1]),e[2]?1:0]);
@@ -1580,7 +1579,8 @@ ACH.push(
  [N_("Caça-baús"),N_("Abra 10 baús"),()=>S.chests>=10],[N_("Rei dos baús"),N_("Abra 100 baús"),()=>S.chests>=100],[N_("Coleção completa"),N_("Abra um baú de cada raridade"),()=>S.chT.every(n=>n>0)],[N_("Chuva de ouro"),N_("Abra 5 baús Lendários"),()=>S.chT[4]>=5],[N_("Presente dos baús"),N_("Ganhe 10 bônus de melhoria de baús"),()=>S.chPk>=10],[N_("Colecionador de cacos"),N_("Ache 10 fragmentos em baús"),()=>S.chFr>=10],[N_("Viajante de bolso"),N_("Use 5 poções de teleporte"),()=>S.ptpUsed>=5],
  [N_("Primeira fisgada"),N_("Pesque seu primeiro peixe"),()=>S.fishN>=1],[N_("Pescador"),N_("Pesque 25 peixes"),()=>S.fishN>=25],[N_("Mestre das águas"),N_("Pesque 150 peixes"),()=>S.fishN>=150],[N_("Mão firme"),N_("Faça uma pescaria perfeita"),()=>S.fishP>=1],
  [N_("Álbum completo"),N_("Descubra todas as espécies de peixe"),()=>Object.keys(S.fdx).length>=FISH.length],[N_("Lenda das águas"),N_("Pesque um peixe lendário"),()=>FISH.some(f=>f.t===2&&S.fdx[f.id])],
- [N_("Churrasqueiro"),N_("Asse 10 peixes na fogueira"),()=>S.cookN>=10],[N_("Ponto perfeito"),N_("Asse um peixe no ponto perfeito"),()=>S.cookP>=1]
+ [N_("Churrasqueiro"),N_("Asse 10 peixes na fogueira"),()=>S.cookN>=10],[N_("Ponto perfeito"),N_("Asse um peixe no ponto perfeito"),()=>S.cookP>=1],
+ [N_("Horta dourada"),N_("Deixe todas as cenouras da horta douradas"),()=>S.gc>=GARDEN_SLOTS]
 );
 // Notificação de conquista: caixa própria (azul, com troféu) e fanfarra própria; várias de uma vez viram uma caixa só
 let achQ=[],achT=0;
@@ -2485,7 +2485,15 @@ function openMemoria(){
  $("mem-go").onclick=tocarCenoura}
 function memKey(e){   // só o botão "Tocar na cenoura" aceita teclado (Espaço/Enter, depois da trava); Esc não fecha a cena
  if($("mem-go")){e.preventDefault();if(!e.repeat&&performance.now()>=memLock&&(e.code==="Space"||e.code==="Enter"))$("mem-go").click()}}
+// Cada vida que chega ao fundo deixa UMA cenoura da horta (superfície, 13-paisagem.js) dourada; com a horta toda dourada sai a conquista. gcAt guarda a vida (S.runs) já contada.
+function gainGoldenCarrot(){
+ if(S.runMax<FINAL_DEPTH&&S.depth<FINAL_DEPTH)return false;
+ if(S.gcAt===S.runs)return false;
+ S.gcAt=S.runs;
+ if(S.gc<GARDEN_SLOTS){S.gc++;sayGold(__("Cenoura dourada na horta: {0}/{1}",S.gc,GARDEN_SLOTS))}
+ return true}
 function tocarCenoura(){
+ gainGoldenCarrot();
  flash=1.2;flashC="#ffd45c";flashText="";shake=Math.max(shake,6);
  [392,523,659,784,1047].forEach((f,i)=>setTimeout(()=>sfx(f,.5,"sine"),i*160));
  closeModal();openBottom()}
@@ -2836,7 +2844,8 @@ $("prest").onclick=()=>{
  clearTimeout(armT);armed=false;doRebirth();
 };
 function doRebirth(){   // Renascer (botão do painel, depois de confirmar, e janela de chegada ao fundo)
- const keep={runs:S.runs+1,best:S.best,ach:S.ach,oc:S.oc,total:S.total,debug:S.debug,sk:S.sk,pts:S.pts+prestGain(),od:S.od,xp:S.xp,lvl:S.lvl,lvp:S.lvp,pk:S.pk,vol:S.vol,deaths:S.deaths,sold:S.sold,play:S.play,blocks:S.blocks,tab:S.tab,items:S.items,bombs:S.bombs,eaten:S.eaten,tps:S.tps,veins:S.veins,rich:S.rich,sleeps:S.sleeps,refined:S.refined,ctDone:S.ctDone,spins:S.spins,chests:S.chests,chTop:S.chTop,chT:S.chT,chGold:S.chGold,chFr:S.chFr,chPk:S.chPk,ptpUsed:S.ptpUsed,slotNet:S.slotNet,sea:S.sea,fb:S.fb,fdx:S.fdx,fishN:S.fishN,fishP:S.fishP,fishG:S.fishG,cookN:S.cookN,cookP:S.cookP};
+ gainGoldenCarrot();   // quem chegou ao fundo nesta vida e não tocou na cenoura (jogo reaberto lá embaixo) também ganha a dourada
+ const keep={gc:S.gc,gcAt:S.gcAt,runs:S.runs+1,best:S.best,ach:S.ach,oc:S.oc,total:S.total,debug:S.debug,sk:S.sk,pts:S.pts+prestGain(),od:S.od,xp:S.xp,lvl:S.lvl,lvp:S.lvp,pk:S.pk,vol:S.vol,deaths:S.deaths,sold:S.sold,play:S.play,blocks:S.blocks,tab:S.tab,items:S.items,bombs:S.bombs,eaten:S.eaten,tps:S.tps,veins:S.veins,rich:S.rich,sleeps:S.sleeps,refined:S.refined,ctDone:S.ctDone,spins:S.spins,chests:S.chests,chTop:S.chTop,chT:S.chT,chGold:S.chGold,chFr:S.chFr,chPk:S.chPk,ptpUsed:S.ptpUsed,slotNet:S.slotNet,sea:S.sea,fb:S.fb,fdx:S.fdx,fishN:S.fishN,fishP:S.fishP,fishG:S.fishG,cookN:S.cookN,cookP:S.cookP};
  const h=S.sk.her,ini=S.sk.ini,clk=S.lv.clock,bk=S.lv.back,rd=S.lv.rod,bt=S.lv.bait;S=Object.assign(fresh(),keep);S.lv.clock=clk;S.lv.back=bk;S.lv.rod=rd;S.lv.bait=bt;   // o relógio (compra única), a vara e a isca de pesca e a estação do ano não se perdem ao renascer
  S.seed=SEED=newSeed();chQ.length=0;carrotC=null;dug=new Set();mX=mY=camX=camY=0;layerSeen=0;
  S.tier=Math.min(ini,TIERS.length-1);S.gold=S.debug?Infinity:400*h*h;S.en=maxEn();build();save();sayLevel(__("Renascido! Fragmentos: {0}",S.pts));
@@ -4567,9 +4576,12 @@ function drawGarden(t){
  for(const[oy,c1,c2,c3]of rows){
   const by=y-oy*u;
   PX(xa+u,by-2*u,len-2*u,2*u,c1);PX(xa+u,by-2*u,len-2*u,.7*u,c2);PX(xa+u,by-.6*u,len-2*u,.6*u,c3);
-  for(let x=xa+4*u,i=0;x<xb-3*u;x+=Math.round(5*u),i++){
+  for(let i=0;i<GARDEN_SLOTS;i++){   // GARDEN_SLOTS cenouras com espaçamento fixo (a quantidade não muda com o zoom); as primeiras S.gc são douradas
+   const x=xa+4*u+Math.round(i*(len-7*u)/(GARDEN_SLOTS-1)),gold=i<S.gc;
    const sw=Math.round(Math.sin(t*1.5+i*1.3+oy)*.6*u);
-   PX(x-u,by-3*u,2*u,u,"#ff8a1f");PX(x-.5*u,by-3*u,u,.6*u,"#ffb04a");   // ombro da cenoura laranja saindo da terra
+   if(gold){PX(x-u,by-3*u,2*u,u,"#ffd84a");PX(x-.5*u,by-3*u,u,.6*u,"#fff6c2");PX(x+.4*u,by-3*u,.6*u,u,"#e3a400");   // ombro dourado, com luz e sombra
+    const tw=Math.sin(t*3+i*2.1);if(tw>.55){ctx.save();ctx.globalAlpha=(tw-.55)/.45;PX(x-.5*u,by-4.6*u,u,u,"#fffbe0");PX(x-1.5*u,by-3.6*u,.6*u,.6*u,"#ffe98a");PX(x+1.1*u,by-3.8*u,.6*u,.6*u,"#ffe98a");ctx.restore()}}   // brilhinho que pisca
+   else{PX(x-u,by-3*u,2*u,u,"#ff8a1f");PX(x-.5*u,by-3*u,u,.6*u,"#ffb04a")}   // ombro da cenoura laranja saindo da terra
    PX(x-.4*u+sw*.5,by-5*u,.8*u,2*u,gd);   // caule
    PX(x-2*u+sw,by-7*u,1.2*u,2.5*u,gl);PX(x+.8*u+sw,by-7*u,1.2*u,2.5*u,gl);PX(x-.6*u+sw,by-8.2*u,1.2*u,3.2*u,gd);   // folhas
   }
