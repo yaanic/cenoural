@@ -38,7 +38,7 @@ Não precisa instalar nada, não tem cadastro e funciona no computador e no celu
 
 | Tecla | Ação |
 | --- | --- |
-| `Espaço` | Cavar (e usar baú, fornalha, quadro e caça-níquel quando estiver perto) |
+| `Espaço` | Cavar (e usar baú, fornalha, quadro, caça-níquel, fogueira, carrocinha de peixes e pescar quando estiver perto) |
 | `W` `A` `S` `D` ou setas | Mover e escolher a direção |
 | `Shift` | Correr |
 | `E` / `R` | Usar dinamite / trocar o tipo de dinamite |
@@ -82,6 +82,7 @@ No celular, use os botões na tela (setas, **Minerar**, **Mapa** e **Pausa**) e 
 - Dinamite, veios de pedra dura e veios ricos em minério
 - Baús raros escondidos no subsolo, de comum a lendário
 - Fornalha que refina minérios, contratos com recompensas e um caça-níquel
+- Pesca estilo Stardew Valley no riacho e no mar, direto no mapa (sem janela: aperte Espaço ou clique perto da água, o personagem lança a vara e a câmera dá zoom; minijogo da barra verde, 14 espécies que dependem da estação, da hora e da chuva), vara e isca como melhorias, venda dos peixes na carrocinha e fogueira para assar peixes e virar comida de energia
 - Sistema de nível, habilidades e conquistas
 - Ciclo de dia e noite, estações do ano, clima (chuva, tempestade, neve, neblina) e estrelas cadentes
 - Mapa com zoom

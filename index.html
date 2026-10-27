@@ -41,7 +41,7 @@
   </div>
   <div id="playfield">
     <canvas id="cv" data-i18n-attr="aria-label" aria-label="Área de escavação"></canvas>
-    <div id="lvbox" data-i18n-attr="title,aria-label" title="Nível" aria-label="Nível"><b id="lv">1</b><small id="xpt"></small></div>
+    <div id="lvbox" data-i18n-attr="title,aria-label" title="Nível" aria-label="Nível"><small id="lvt" data-i18n>Nível</small><b id="lv">1</b><small id="xpt"></small></div>
     <div id="layer"></div>
     <div id="unl" aria-live="polite"></div>
     <div id="ach" aria-live="polite"></div>
@@ -96,6 +96,7 @@
           <dt><kbd>Shift</kbd></dt><dd data-i18n>Correr</dd>
           <dt><kbd>E</kbd></dt><dd data-i18n>Dinamite</dd>
           <dt><kbd>R</kbd></dt><dd data-i18n>Trocar o tipo de dinamite (vale com 2 ou mais tipos)</dd>
+          <dt><kbd>F</kbd></dt><dd data-i18n>Comer a comida de peixe escolhida (botão direito no slot troca o tipo)</dd>
           <dt><kbd>Q</kbd></dt><dd data-i18n>Teleporte (compre em Melhorias)</dd>
           <dt><kbd>1</kbd> <kbd>2</kbd></dt><dd data-i18n>Fúria do Minerador (libera aos 50 m) e Escavação Frenética (aos 150 m)</dd>
           <dt><kbd>M</kbd></dt><dd data-i18n>Abrir e fechar o mapa. Com ele aberto, a roda do mouse dá zoom</dd>
@@ -123,6 +124,8 @@
       <details><summary data-i18n>Telas especiais</summary>
         <dl class="keys">
           <dt data-i18n>Caça-níquel</dt><dd data-i18n><kbd>←</kbd> <kbd>→</kbd> ou <kbd>A</kbd> <kbd>D</kbd> mudam a aposta, <kbd>Espaço</kbd> ou <kbd>Enter</kbd> gira, <kbd>Esc</kbd> sai</dd>
+          <dt data-i18n>Pesca</dt><dd data-i18n><kbd>Espaço</kbd> ou clique lança e fisga; segure <kbd>Espaço</kbd> para subir a barra verde; <kbd>Esc</kbd> sai</dd>
+          <dt data-i18n>Fogueira</dt><dd data-i18n><kbd>Espaço</kbd> tira o peixe do fogo; <kbd>Esc</kbd> fecha (o peixe não se perde)</dd>
           <dt data-i18n>Baú do subsolo</dt><dd data-i18n><kbd>Espaço</kbd>, <kbd>Enter</kbd> ou <kbd>Esc</kbd> avançam</dd>
           <dt data-i18n>Subir de nível</dt><dd data-i18n><kbd>W A S D</kbd> ou setas escolhem, <kbd>Espaço</kbd> ou <kbd>Enter</kbd> confirma. Em 30 s o jogo escolhe por você</dd>
           <dt data-i18n>Pausa</dt><dd data-i18n><kbd>W</kbd> <kbd>S</kbd> navegam, <kbd>Esc</kbd> ou <kbd>P</kbd> continuam</dd>
@@ -139,6 +142,8 @@
           <li data-i18n><b>Caça-níquel:</b> aposte uma parte do seu ouro. A casa ganha no longo prazo.</li>
           <li data-i18n><b>Baú:</b> fique ao lado dele e clique (ou aperte <kbd>Espaço</kbd>) para vender a mochila.</li>
           <li data-i18n><b>Loja:</b> dinamite e comida de energia.</li>
+          <li data-i18n><b>Riacho e praia:</b> perto da água, aperte <kbd>Espaço</kbd> (ou clique) para lançar a vara: a câmera dá zoom na água e a pesca acontece ali mesmo. Quando aparecer um <b>!</b>, aperte <kbd>Espaço</kbd>; depois segure <kbd>Espaço</kbd> para manter o peixe na barra verde. <kbd>Esc</kbd> sai da pesca.</li>
+          <li data-i18n><b>Fogueira:</b> asse os peixes no ponto certo e ganhe comida de energia. Os peixes também podem ser vendidos na carrocinha da loja.</li>
           <li data-i18n><b>Quadro de contratos:</b> missões que pagam ouro e XP.</li>
         </ul>
       </details>

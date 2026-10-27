@@ -40,7 +40,7 @@ Nothing to install, no sign-up, and it works on desktop and mobile.
 
 | Key | Action |
 | --- | --- |
-| `Space` | Dig (and use the chest, furnace, board, and slot machine when nearby) |
+| `Space` | Dig (and use the chest, furnace, board, slot machine, campfire, fish cart, and fish when nearby) |
 | `W` `A` `S` `D` or arrow keys | Move and choose direction |
 | `Shift` | Run |
 | `E` / `R` | Use dynamite / switch dynamite type |
@@ -84,6 +84,7 @@ On mobile, use the on-screen buttons (arrows, **Mine**, **Map**, and **Pause**) 
 - Dynamite, hard-stone veins, and ore-rich veins
 - Rare chests hidden underground, from common to legendary
 - A furnace that refines ores, contracts with rewards, and a slot machine
+- Stardew Valley style fishing in the stream and the sea (green-bar minigame, 14 species that depend on season, time of day and rain), rod and bait upgrades, fish sold at the shop cart, and a campfire to roast fish into energy food
 - Levels, skills, and achievements
 - Day and night cycle, seasons, weather (rain, storms, snow, fog), and shooting stars
 - Map with zoom

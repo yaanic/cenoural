@@ -105,6 +105,7 @@ addLang("en","English",{
 "Correr":"Run",
 "Dinamite":"Dynamite",
 "Trocar o tipo de dinamite (vale com 2 ou mais tipos)":"Switch dynamite type (works with 2 or more types)",
+"Comer a comida de peixe escolhida (botão direito no slot troca o tipo)":"Eat the selected fish food (right-click the slot to switch type)",
 "Teleporte (compre em Melhorias)":"Teleport (buy it in Upgrades)",
 "Fúria do Minerador (libera aos 50 m) e Escavação Frenética (aos 150 m)":"Miner's Fury (unlocks at 50 m) and Frenzied Digging (at 150 m)",
 "Abrir e fechar o mapa. Com ele aberto, a roda do mouse dá zoom":"Open and close the map. While it's open, the mouse wheel zooms",
@@ -129,6 +130,10 @@ addLang("en","English",{
 "Telas especiais":"Special screens",
 "Caça-níquel":"Slot machine",
 "<kbd>←</kbd> <kbd>→</kbd> ou <kbd>A</kbd> <kbd>D</kbd> mudam a aposta, <kbd>Espaço</kbd> ou <kbd>Enter</kbd> gira, <kbd>Esc</kbd> sai":"<kbd>←</kbd> <kbd>→</kbd> or <kbd>A</kbd> <kbd>D</kbd> change the bet, <kbd>Space</kbd> or <kbd>Enter</kbd> spins, <kbd>Esc</kbd> exits",
+"Pesca":"Fishing",
+"<kbd>Espaço</kbd> ou clique lança e fisga; segure <kbd>Espaço</kbd> para subir a barra verde; <kbd>Esc</kbd> sai":"<kbd>Space</kbd> or click casts and hooks; hold <kbd>Space</kbd> to raise the green bar; <kbd>Esc</kbd> exits",
+"Fogueira":"Campfire",
+"<kbd>Espaço</kbd> tira o peixe do fogo; <kbd>Esc</kbd> fecha (o peixe não se perde)":"<kbd>Space</kbd> takes the fish off the fire; <kbd>Esc</kbd> closes (the fish is not lost)",
 "Baú do subsolo":"Underground chest",
 "<kbd>Espaço</kbd>, <kbd>Enter</kbd> ou <kbd>Esc</kbd> avançam":"<kbd>Space</kbd>, <kbd>Enter</kbd> or <kbd>Esc</kbd> advance",
 "Subir de nível":"Level up",
@@ -145,6 +150,8 @@ addLang("en","English",{
 "<b>Caça-níquel:</b> aposte uma parte do seu ouro. A casa ganha no longo prazo.":"<b>Slot machine:</b> bet part of your gold. The house wins in the long run.",
 "<b>Baú:</b> fique ao lado dele e clique (ou aperte <kbd>Espaço</kbd>) para vender a mochila.":"<b>Chest:</b> stand next to it and click (or press <kbd>Space</kbd>) to sell your backpack.",
 "<b>Loja:</b> dinamite e comida de energia.":"<b>Shop:</b> dynamite and energy food.",
+"<b>Riacho e praia:</b> perto da água, aperte <kbd>Espaço</kbd> (ou clique) para lançar a vara: a câmera dá zoom na água e a pesca acontece ali mesmo. Quando aparecer um <b>!</b>, aperte <kbd>Espaço</kbd>; depois segure <kbd>Espaço</kbd> para manter o peixe na barra verde. <kbd>Esc</kbd> sai da pesca.":"<b>Stream and beach:</b> near the water, press <kbd>Space</kbd> (or click) to cast the rod: the camera zooms in on the water and the fishing happens right there. When a <b>!</b> appears, press <kbd>Space</kbd>; then hold <kbd>Space</kbd> to keep the fish inside the green bar. <kbd>Esc</kbd> leaves fishing.",
+"<b>Fogueira:</b> asse os peixes no ponto certo e ganhe comida de energia. Os peixes também podem ser vendidos na carrocinha da loja.":"<b>Campfire:</b> roast fish to just the right point and get energy food. Fish can also be sold at the shop cart.",
 "<b>Quadro de contratos:</b> missões que pagam ouro e XP.":"<b>Contract board:</b> missions that pay gold and XP.",
 "Energia":"Energy",
 "Subir com a mochila a jato gasta mais que cavar.":"Flying up with the jetpack costs more than digging.",
@@ -221,6 +228,20 @@ addLang("en","English",{
 "Topázio":"Topaz",
 "Opala negra":"Black opal",
 "Cristal do abismo":"Abyss crystal",
+"Lambari":"Tetra",
+"Tilápia":"Tilapia",
+"Bagre":"Catfish",
+"Traíra":"Wolf fish",
+"Truta":"Trout",
+"Dourado":"Golden dorado",
+"Peixe-cenoura":"Carrot fish",
+"Sardinha":"Sardine",
+"Tainha":"Mullet",
+"Robalo":"Sea bass",
+"Atum":"Tuna",
+"Lagosta":"Lobster",
+"Peixe-espada":"Swordfish",
+"Peixe-lua":"Moonfish",
 // --- 1-nucleo/04-formulas.js
 "Explode uma área de raio {0}. Gasta {1} blocos de energia; recarga de {2} s. Também quebra os veios de pedra dura":"Blasts an area of radius {0}. Costs {1} blocks of energy; {2} s cooldown. Also breaks hard stone veins",
 "Explode uma área de raio {0}. Mais forte que a anterior; gasta {1} blocos de energia; recarga de {2} s. Também quebra os veios de pedra dura":"Blasts an area of radius {0}. Stronger than the previous one; costs {1} blocks of energy; {2} s cooldown. Also breaks hard stone veins",
@@ -236,6 +257,12 @@ addLang("en","English",{
 "Recupera 50% da energia máxima":"Restores 50% of max energy",
 "Poção de teleporte":"Teleport potion",
 "Uso único: leva ao baú sem gastar energia (na superfície, volta ao ponto de onde saiu). Só cai de baús":"Single use: takes you to the chest without spending energy (on the surface, returns to where you left from). Only found in chests",
+"Peixe assado":"Roasted fish",
+"Recupera 20% da energia máxima. Só se faz na fogueira":"Restores 20% of max energy. Only made at the campfire",
+"Peixe grelhado":"Grilled fish",
+"Recupera 45% da energia máxima. Só se faz na fogueira":"Restores 45% of max energy. Only made at the campfire",
+"Banquete do pescador":"Fisherman's feast",
+"Recupera 85% da energia máxima. Só se faz na fogueira":"Restores 85% of max energy. Only made at the campfire",
 "Fornalha":"Furnace",
 "Quadro de contratos":"Contract board",
 "NOVIDADE LIBERADA":"NEW UNLOCK",
@@ -292,6 +319,12 @@ addLang("en","English",{
 "Melhoria de minérios":"Ore improvement",
 "Minérios têm {0}% de chance de render unidades extras (+1 a +{1}). Próximo nível: {2}%":"Ores have a {0}% chance to give extra units (+1 to +{1}). Next level: {2}%",
 "Minérios têm {0}% de chance de render unidades extras (+1 a +{1})":"Ores have a {0}% chance to give extra units (+1 to +{1})",
+"Vara de pesca":"Fishing rod",
+"Zona verde do minijogo da pesca: {0}% da pista (próximo nível: {1}%)":"Green zone of the fishing minigame: {0}% of the track (next level: {1}%)",
+"Zona verde do minijogo da pesca: {0}% da pista":"Green zone of the fishing minigame: {0}% of the track",
+"Isca":"Bait",
+"O peixe morde {0}% mais rápido e peixes raros aparecem {1}% mais (próximo nível: {2}% e {3}%)":"Fish bite {0}% faster and rare fish show up {1}% more (next level: {2}% and {3}%)",
+"O peixe morde {0}% mais rápido e peixes raros aparecem {1}% mais":"Fish bite {0}% faster and rare fish show up {1}% more",
 "Medidor de retorno":"Return gauge",
 "Marca na barra de energia a reserva para subir de volta à superfície e a faz brilhar e pulsar (com som) quando a energia fica apertada. Compra única":"Marks on the energy bar the reserve needed to climb back and makes it glow and pulse (with sound) when energy gets tight. One-time purchase",
 "Medidor de retorno comprado: a barra de energia mostra a reserva para voltar e avisa quando ela fica apertada":"Return gauge bought: the energy bar shows the reserve to climb back and warns when it gets tight",
@@ -501,6 +534,22 @@ addLang("en","English",{
 "Ache 10 fragmentos em baús":"Find 10 shards in chests",
 "Viajante de bolso":"Pocket traveler",
 "Use 5 poções de teleporte":"Use 5 teleport potions",
+"Primeira fisgada":"First catch",
+"Pesque seu primeiro peixe":"Catch your first fish",
+"Pescador":"Angler",
+"Pesque 25 peixes":"Catch 25 fish",
+"Mestre das águas":"Master of the waters",
+"Pesque 150 peixes":"Catch 150 fish",
+"Mão firme":"Steady hand",
+"Faça uma pescaria perfeita":"Make a perfect catch",
+"Álbum completo":"Complete album",
+"Descubra todas as espécies de peixe":"Discover every fish species",
+"Lenda das águas":"Legend of the waters",
+"Pesque um peixe lendário":"Catch a legendary fish",
+"Churrasqueiro":"Grill master",
+"Asse 10 peixes na fogueira":"Roast 10 fish at the campfire",
+"Ponto perfeito":"Perfectly done",
+"Asse um peixe no ponto perfeito":"Roast a fish to the perfect point",
 "{0} CONQUISTAS":"{0} ACHIEVEMENTS",
 "CONQUISTA":"ACHIEVEMENT",
 "e mais {0}":"and {0} more",
@@ -584,6 +633,40 @@ addLang("en","English",{
 "achado a {0} m de profundidade":"found at {0} m deep",
 "+{0} de ouro":"+{0} gold",
 "BÔNUS {0}: {1} +{2} nv":"{0} BONUS: {1} +{2} lv",
+// --- 2-sistemas/13-pesca.js
+"Bota velha":"Old boot",
+"Alga":"Seaweed",
+"Lata enferrujada":"Rusty can",
+"comum":"common",
+"raro":"rare",
+"lendário":"legendary",
+"Bolsa de peixes cheia: venda na carrocinha ou asse na fogueira":"Fish bag full: sell at the cart or roast at the campfire",
+"O peixe soltou a isca antes de você puxar!":"The fish let go of the bait before you pulled!",
+"Você puxou cedo demais e o peixe fugiu!":"You pulled too early and the fish got away!",
+"O peixe fugiu!":"The fish got away!",
+"{0}: {1} cm. Vale cerca de {2} de ouro. Venda na carrocinha ou asse na fogueira.":"{0}: {1} cm. Worth about {2} gold. Sell it at the cart or roast it at the campfire.",
+"Você pescou: {0}. Vendida por {1} de ouro.":"You caught: {0}. Sold for {1} gold.",
+"Peixaria da carrocinha":"Cart fishmonger",
+"Vender tudo · {0}":"Sell all · {0}",
+"Você não tem peixes para vender.":"You have no fish to sell.",
+"Dica: peixes também podem ser assados na fogueira e viram comida de energia.":"Tip: fish can also be roasted at the campfire into energy food.",
+"Peixes vendidos: +{0}":"Fish sold: +{0}",
+// --- 2-sistemas/14-fogueira.js
+"Escolha um peixe para assar. No ponto perfeito a comida sobe um nível.":"Choose a fish to roast. Done perfectly, the food goes up one tier.",
+"Você não tem peixes. Pesque no riacho ou no mar e volte aqui.":"You have no fish. Fish in the stream or the sea and come back.",
+"Comidas":"Food",
+"+{0}% de energia":"+{0}% energy",
+"Fechar · Esc":"Close · Esc",
+"Aperte <b>Espaço</b> quando o marcador passar pela faixa <b>dourada</b>. Ele vai e volta cada vez mais rápido, e se demorar o peixe queima!":"Press <b>Space</b> when the marker crosses the <b>golden</b> band. It goes back and forth, faster each time, and if you wait too long the fish burns!",
+"Tirar do fogo · Espaço":"Take off the fire · Space",
+"Voltar":"Back",
+"Mal passado":"Undercooked",
+"No ponto":"Done",
+"PERFEITO!":"PERFECT!",
+"Queimou!":"Burnt!",
+"Você ganhou: {0}":"You got: {0}",
+"Virou carvão. Mais sorte da próxima vez.":"It turned to charcoal. Better luck next time.",
+"Assar outro":"Roast another",
 // --- 2-sistemas/15-fundo.js
 "Uma cenoura dourada cresce da raiz do cristal, bem no coração do abismo. Ela pulsa devagar, como se esperasse por você.":"A golden carrot grows from the crystal’s root, deep in the heart of the abyss. It pulses slowly, as if waiting for you.",
 "O vagalume não sai do seu lado. Ele brilha tanto que dá para sentir o calor daqui.":"The firefly stays by your side. It glows so brightly you can feel the warmth from here.",
@@ -696,6 +779,12 @@ addLang("en","English",{
 "Fragmentos de baús":"Shards from chests",
 "Bônus de melhoria":"Upgrade bonuses",
 "Poções de teleporte usadas":"Teleport potions used",
+"Peixes pescados":"Fish caught",
+"Pescarias perfeitas":"Perfect catches",
+"Peixes na bolsa":"Fish in bag",
+"Peixes assados":"Fish roasted",
+"Ouro de peixes":"Fish gold",
+"Álbum de peixes":"Fish album",
 "Pendentes · {0}":"Pending · {0}",
 "Concluídas · {0}":"Completed · {0}",
 "Renascido! Fragmentos: {0}":"Reborn! Shards: {0}",
@@ -715,7 +804,11 @@ addLang("en","English",{
 "Tela cheia":"Fullscreen",
 "Jogo salvo na cama":"Game saved at the bed",
 // --- 4-interface/03-barra-habilidades.js
+"Comida de peixe":"Fish food",
+"Comida escolhida: {0}":"Food selected: {0}",
+"{0} — {1} (clique ou F para usar; feito na fogueira). Você tem {2}. Botão direito troca o tipo":"{0} — {1} (click or F to use; made at the campfire). You have {2}. Right-click to switch type",
 "{0} — {1} (clique para usar). Você tem {2}":"{0} — {1} (click to use). You have {2}",
+"{0} — {1} (clique para usar; feito na fogueira). Você tem {2}":"{0} — {1} (click to use; made at the campfire). You have {2}",
 "{0} — {1} (clique para usar; compre na loja). Você tem {2}":"{0} — {1} (click to use; buy at the shop). You have {2}",
 "{0} — {1}: explode uma área de raio {2} e quebra veios de pedra dura (consome 1, compre na loja). Você tem {3}. Botão direito ou R troca o tipo":"{0} — {1}: blasts an area of radius {2} and breaks hard stone veins (uses 1, buy at the shop). You have {3}. Right click or R switches type",
 "{0} — leva ao baú sem gastar energia; na superfície, volta ao ponto de onde saiu (compre em Melhorias)":"{0} — takes you to the chest without spending energy; on the surface, returns to where you left from (buy in Upgrades)",
@@ -770,7 +863,19 @@ addLang("en","English",{
 "Contratos":"Contracts",
 "Caça-níquel: clique para jogar":"Slot machine: click to play",
 // --- 5-desenho/13-paisagem.js
-"Fogueira":"Campfire",
+"Fogueira: clique para assar":"Campfire: click to roast",
+// --- 5-desenho/16-pesca-desenho.js
+"Espaço":"Space",
+"NOVA ESPÉCIE!":"NEW SPECIES!",
+"NOVO RECORDE!":"NEW RECORD!",
+"Escapou!":"It got away!",
+"AGORA!":"NOW!",
+"Segure Espaço: sobe · Solte: desce":"Hold Space: up · Release: down",
+"Espere morder. Aperte Espaço no !":"Wait for a bite. Press Space at the !",
+"Espaço: lançar de novo · Esc: sair":"Space: cast again · Esc: leave",
+"Riacho: clique para pescar":"Stream: click to fish",
+"Mar: clique para pescar":"Sea: click to fish",
+"Vender":"Sell",
 // --- 6-jogo/01-laco-inicio.js
 "Frenesi mineral! Minérios x3 por 20s":"Mineral Frenzy! Ores x3 for 20s",
 "Corrida do ouro! Ouro x3 por 20s":"Gold Rush! Gold x3 for 20s",
@@ -812,6 +917,8 @@ const BAL={
   furn:{b:500,k:1.812,max:20},  // velocidade da fornalha
   clock:{b:400,k:1,max:1},   // relógio na barra do topo (compra única; custo fixo b)
   fort:{b:20000,k:7,max:5},    // Melhoria de minérios: 20 mil, 140 mil, 980 mil, 6,9 mi, 48 mi
+  rod:{b:120,k:1.85,max:10},   // vara de pesca: zona verde maior no minijogo
+  bait:{b:200,k:1.9,max:10},   // isca: peixe morde mais rápido e peixes raros aparecem mais
   back:{b:30000,k:1,max:1}   // medidor de retorno: energia para subir de volta (compra única, cara; custo fixo b)
  },
  // LIBERAÇÃO GRADUAL: cada coisa só aparece quando o recorde de profundidade (m) chega ao número abaixo (0 = desde o início). Vale para melhorias da mesa, itens da loja e construções da superfície.
@@ -820,6 +927,14 @@ const BAL={
   ups:{sharp:0,speed:0,emax:0,eco:10,jet:15,luck:20,lant:25,xp:30,furn:30,crit:40,auto:50,duration:50,furia:50,autopow:60,clock:60,jetspd:70,lavares:80,tele:120,frenesi:150,pet:150,back:150,fort:120},
   items:{cen:0,dyn:25,sop:60,dyn2:100,poc:150,dyn3:250,dyn4:500,dyn5:900},
   build:{furnace:30,board:60,slot:150}},
+ // PESCA (2-sistemas/13-pesca.js) e FOGUEIRA (2-sistemas/14-fogueira.js). Espécies e valores: FISH em 1-nucleo/02-camadas-minerios.js (valor = blocos de ouro da profundidade do recorde).
+ // wait = espera até morder (s, dividida pela isca) · window = tempo para fisgar depois do "!" (s) · baitCut = -7% de espera por nível de isca · baitRare = +18% de chance dos peixes raros por nível · rain = chuva favorece os raros · junk = chance de lixo · bag = peixes na bolsa
+ // bar (minijogo): h = altura da pista (px) · base/per = zona verde (px) e ganho por nível da vara (teto 60% da pista) · lift/grav = aceleração ao segurar/soltar · bounce = quique no fundo · maxV = velocidade máxima da zona
+ // fishSpd/fishSpdD = velocidade do peixe (px/s) base e por ponto de dificuldade · prog = progresso por segundo (sobe dentro da zona, desce fora; downD = descida extra por dificuldade) · perfectOut = máximo de segundos fora da zona para a pesca ser perfeita (valor x perfect)
+ // cook: speed = voltas do marcador por segundo (vai e volta na barra) por raridade do peixe · ramp = aumento de velocidade a cada ida/volta · passes = idas e voltas até queimar sozinho · zones = limites do ponto (cru < z0 <= no ponto < z1 <= perfeito < z2 <= queimado)
+ fish:{wait:[1.8,5.2],window:1,baitCut:.07,baitRare:.18,rain:1.6,junk:.08,junkV:.5,bag:80,perfect:1.5,perfectOut:.9,maxTime:60,
+  bar:{h:288,base:44,per:2,lift:520,grav:330,bounce:.35,maxV:270},fishSpd:24,fishSpdD:15,prog:{up:.16,down:.09,downD:.05,start:.35},
+  cook:{speed:[1.5,1.9,2.4],ramp:.1,passes:6,zones:[.38,.6,.74]}},
  fort:{per:.1,max:.5},                                   // Melhoria de minérios: +10% de chance por nível (teto 50%) de o minério render unidades extras (+1 a +ceil(nível/2))
  critMax:.75,                                          // teto da chance de crítico
  critPer:.04,                                           // chance de crítico por nível da melhoria
@@ -896,20 +1011,21 @@ const COLS=HALF*2+1;
 // À esquerda a trilha termina no pé da grande montanha em SURF_L; à direita a praia termina no mar em SURF_R. PAD_L/PAD_R = colunas de cenário que a câmera ainda mostra além desses limites.
 const SURF_L=-100,SURF_R=52,PAD_L=8,PAD_R=9;   // esquerda estendida: do moinho (-26) até as montanhas altas (-100)
 // Paisagem estendida (só visual, em 5-desenho/13-paisagem.js). Esquerda da casa: horta de cenouras, moinho de vento e a trilha até a grande montanha (sem nada lá, só montanha).
-// Direita: riacho com ponte de madeira e roda d'água, fogueira com banco de pedra, praia com farol, trapiche e barco parado. Posições em colunas do mundo.
+// Direita: riacho com ponte de madeira e roda d'água, fogueira com banco de pedra, praia com farol e trapiche. Posições em colunas do mundo.
 const GARDEN_L=-20.6,GARDEN_R=-13,MILL_C=-26;
 const RIVER_C0=24,RIVER_C1=30,WHEEL_C=27.4;                       // água do riacho: colunas RIVER_C0..RIVER_C1 (a ponte passa por cima)
-const CAMP_C=38.4,BEACH_C0=42,LIGHT_C=46.5,PIER_C=52.4,PIER_END_C=55.6,BOAT_C=57.6;   // o mar começa depois de SURF_R
+const CAMP_C=38.4,BEACH_C0=42,LIGHT_C=46.5,PIER_C=52.4,PIER_END_C=55.6;   // o mar começa depois de SURF_R
 const isRiver=c=>c>=RIVER_C0&&c<=RIVER_C1,isSea=c=>c>SURF_R,isBeach=c=>c>=BEACH_C0&&c<=SURF_R;
-const inS=c=>c>=SURF_L&&c<=SURF_R;
+const WALK_R=Math.floor(PIER_END_C-.5);   // última coluna andável: a ponta do trapiche (a praia termina em SURF_R, o trapiche segue sobre o mar)
+const inS=c=>c>=SURF_L&&c<=WALK_R;
 const CHEST_C=5;                 // coluna do baú de depósito, na superfície
+const KEEPER_C=10.7;   // Izans, o dono da carrocinha (SHOP_C+1.7): é com ele que se vendem os peixes
 const SHOP_C=9;                  // coluna da loja de consumáveis (dinamite, comida de energia), na superfície, depois do baú
 const BED_C=-9;                  // coluna da cama (salva o jogo e abre o menu), na superfície, depois da mesa de trabalho
 const ENCH_C=-7.65;              // mesa decorativa de encantamento, apenas visual, dentro da casa entre a cama e o pilar da lanterna
 const SLOT_C=3;                  // máquina de caça-níquel, ao lado do baú (entre o buraco e o baú)
 const BOARD_C=14;                // quadro de contratos, na passagem da direita
 const WELL_C=19;                 // poço de água (só enfeite), na passagem da direita, depois do quadro de contratos
-const LAMPS=[7.4];               // o único poste de luz: madeira fina com lamparina pendurada, perto da loja
 // Ferraria medieval alemã (enxaimel + telhado de telhas sobre cama, mesa e fornalha): pilares em colunas fixas; a lanterna fica pendurada em FORGE_LANTERN_C
 const FORGE_PILLARS=[-10.4,-6.97,-3.46,-0.95],FORGE_LANTERN_C=-6.97;
 const FURN_C=-2;                 // coluna da fornalha (refina minérios), na superfície, entre o buraco e a mesa de trabalho
@@ -927,19 +1043,42 @@ const TCOL=["#b08a55","#9aa0a6","#cfd6dd","#c98a3a","#9fb4c7","#ffd45c","#7fe6ff
 // [nome, multiplicador de valor, cor, profundidade em que começa a aparecer]. Os do meio (Esmeralda a Opala) aparecem mais cedo desde 2026-10-21 para o trecho 300-900 m não arrastar.
 const ORES=[[N_("Cobre"),1.5,"#d98a4a",0],[N_("Ferro"),2.5,"#c9ced6",20],[N_("Ouro"),5,"#ffd45c",50],[N_("Rubi"),10,"#ff5a7a",100],[N_("Diamante"),20,"#7fe6ff",200],[N_("Esmeralda"),40,"#4ddf8a",280],[N_("Safira"),80,"#4f77ff",430],[N_("Ametista"),160,"#b78cff",620],[N_("Topázio"),320,"#ffb347",850],[N_("Opala negra"),640,"#ff9bf5",1150],[N_("Cristal do abismo"),1280,"#ffffff",1450]];
 function rollOre(r){if(Math.random()>oreChance())return null;const u=ORES.filter(o=>o[3]<=r);return u[Math.floor(Math.pow(Math.random(),1.6)*u.length)]}
+// ===== Pesca (2-sistemas/13-pesca.js): espécies =====
+// id · nome · lugar (r = riacho, s = mar) · peso do sorteio · valor em blocos de ouro da profundidade do recorde · dificuldade do minijogo (1 a 10) · raridade (0 comum, 1 raro, 2 lendário) · cor · comprimento médio (cm)
+// Condições: se = estações em que aparece (0 primavera, 1 verão, 2 outono, 3 inverno) · ng = só à noite · rn = só com chuva ou tempestade
+const FISH=[
+ {id:"lam",n:N_("Lambari"),p:"r",w:30,v:10,d:2,t:0,c:"#a9bfd0",len:12},
+ {id:"til",n:N_("Tilápia"),p:"r",w:24,v:16,d:3,t:0,c:"#c2b08a",len:28},
+ {id:"bag",n:N_("Bagre"),p:"r",w:18,v:26,d:4,t:0,c:"#7d776b",len:40},
+ {id:"tra",n:N_("Traíra"),p:"r",w:11,v:48,d:5,t:1,c:"#64855a",len:45},
+ {id:"tru",n:N_("Truta"),p:"r",w:8,v:80,d:6,t:1,c:"#d29a9a",len:38,se:[2,3]},
+ {id:"dou",n:N_("Dourado"),p:"r",w:6,v:150,d:7,t:1,c:"#ffcc4a",len:70,rn:1},
+ {id:"pce",n:N_("Peixe-cenoura"),p:"r",w:1.3,v:900,d:9,t:2,c:"#ff8a2a",len:80,ng:1},
+ {id:"sar",n:N_("Sardinha"),p:"s",w:30,v:10,d:2,t:0,c:"#b9ccd8",len:18},
+ {id:"tai",n:N_("Tainha"),p:"s",w:22,v:18,d:3,t:0,c:"#9fb0b8",len:40},
+ {id:"rob",n:N_("Robalo"),p:"s",w:16,v:34,d:4,t:0,c:"#8fa4a0",len:55},
+ {id:"ata",n:N_("Atum"),p:"s",w:10,v:70,d:6,t:1,c:"#4f6f9a",len:120},
+ {id:"lag",n:N_("Lagosta"),p:"s",w:7,v:110,d:6,t:1,c:"#d4533a",len:35,se:[0,1]},
+ {id:"esp",n:N_("Peixe-espada"),p:"s",w:5,v:170,d:8,t:1,c:"#c7d3de",len:130,ng:1},
+ {id:"lua",n:N_("Peixe-lua"),p:"s",w:1.2,v:1000,d:9,t:2,c:"#e8e2c0",len:200,ng:1}
+];
+const FISH_BAG_MAX=80;   // teto de peixes na bolsa (o save é limpo com este número)
 
 // ===== 1-nucleo/03-estado-save.js — Estado do jogo (S), validação do save, carregar/salvar e variáveis de sessão =====
 const SAVE_KEY="abismo-v3";
 const fresh=()=>({gold:0,depth:0,mc:0,prog:0,best:0,runMax:0,tier:0,runs:0,total:0,oc:0,blocks:0,deaths:0,sold:0,en:-1,
- lv:{sharp:0,emax:0,eco:0,jet:0,jetspd:0,auto:0,autopow:0,speed:0,crit:0,luck:0,xp:0,duration:0,furia:0,frenesi:0,tele:0,pet:0,furn:0,lavares:0,lant:0,clock:0,back:0,fort:0},items:{dyn:0,dyn2:0,dyn3:0,dyn4:0,dyn5:0,cen:0,sop:0,poc:0,ptp:0},dsel:"dyn",
- bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,dir:"down",dug:[],ach:[],debug:false,real:0,pts:0,sk:{her:0,ini:0,ouro:0,dmg:0,fol:0,jato:0,gar:0,xp:0},od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,play:0,v:9,vol:{m:.7,s:1,a:.7}});
+ lv:{sharp:0,emax:0,eco:0,jet:0,jetspd:0,auto:0,autopow:0,speed:0,crit:0,luck:0,xp:0,duration:0,furia:0,frenesi:0,tele:0,pet:0,furn:0,lavares:0,lant:0,clock:0,back:0,fort:0,rod:0,bait:0},items:{dyn:0,dyn2:0,dyn3:0,dyn4:0,dyn5:0,cen:0,sop:0,poc:0,ptp:0,pas:0,pgr:0,pbq:0},dsel:"dyn",fsel:"pas",
+ bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,dir:"down",dug:[],ach:[],debug:false,real:0,pts:0,sk:{her:0,ini:0,ouro:0,dmg:0,fol:0,jato:0,gar:0,xp:0},od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,fb:[],fdx:{},fishN:0,fishP:0,fishG:0,cookN:0,cookP:0,play:0,v:9,vol:{m:.7,s:1,a:.7}});
 let S=fresh();S.seed=newSeed();
 function clean(o){const src=o&&typeof o==="object"?o:{},hasVersion=Number.isFinite(src.v),f=fresh();o=Object.assign(f,src);if(!hasVersion)o.v=7;
- for(const k of["gold","depth","prog","best","runMax","tier","runs","total","oc","blocks","deaths","sold","pts","real","xp","lvp","bombs","eaten","tps","veins","sleeps","rich","refined","ctDone","spins","pend","chests","chTop","chGold","chFr","chPk","ptpUsed","play"])if(!Number.isFinite(o[k])||o[k]<0)o[k]=0;
+ for(const k of["gold","depth","prog","best","runMax","tier","runs","total","oc","blocks","deaths","sold","pts","real","xp","lvp","bombs","eaten","tps","veins","sleeps","rich","refined","ctDone","spins","pend","chests","chTop","chGold","chFr","chPk","ptpUsed","fishN","fishP","fishG","cookN","cookP","play"])if(!Number.isFinite(o[k])||o[k]<0)o[k]=0;
  o.chT=BAL.chest.tiers.map((_,i)=>Array.isArray(o.chT)&&Number.isFinite(o.chT[i])&&o.chT[i]>0?Math.floor(o.chT[i]):0);   // baús abertos por raridade
+ // pesca: bolsa de peixes [id, cm, perfeito] e álbum (melhor tamanho por espécie)
+ o.fb=(Array.isArray(o.fb)?o.fb:[]).filter(e=>Array.isArray(e)&&FISH.some(f=>f.id===e[0])&&Number.isFinite(e[1])&&e[1]>0).slice(0,FISH_BAG_MAX).map(e=>[e[0],Math.round(e[1]),e[2]?1:0]);
+ {const d={};if(o.fdx&&typeof o.fdx==="object"&&!Array.isArray(o.fdx))for(const f of FISH)if(Number.isFinite(o.fdx[f.id])&&o.fdx[f.id]>0)d[f.id]=Math.round(o.fdx[f.id]);o.fdx=d}
  if(!Number.isFinite(o.gold)&&!o.debug)o.gold=0;
  if(!Number.isFinite(o.sea)||o.sea<0)o.sea=BAL.season.len*1.5;   // relógio das estações (2-sistemas/07-estacoes.js); sem ele começa no meio do verão
- o.depth=clamp(Math.floor(o.depth),0,FINAL_DEPTH);o.mc=clamp(Math.floor(Number.isFinite(o.mc)?o.mc:0),o.depth>0?-HALF:SURF_L,o.depth>0?HALF:SURF_R);   // na superfície dá para estar fora das colunas da minao.best=Math.max(Math.floor(o.best),o.depth);o.runMax=Math.max(Math.floor(o.runMax),o.depth);
+ o.depth=clamp(Math.floor(o.depth),0,FINAL_DEPTH);o.mc=clamp(Math.floor(Number.isFinite(o.mc)?o.mc:0),o.depth>0?-HALF:SURF_L,o.depth>0?HALF:WALK_R);   // na superfície dá para estar fora das colunas da minao.best=Math.max(Math.floor(o.best),o.depth);o.runMax=Math.max(Math.floor(o.runMax),o.depth);
  o.tier=Math.min(TIERS.length-1,Math.floor(o.tier));
  if(!Number.isFinite(o.en))o.en=-1;
  if(o.v<4){ // poderes de renascimento foram refeitos: devolve os pontos gastos e converte os fragmentos antigos
@@ -964,7 +1103,7 @@ function clean(o){const src=o&&typeof o==="object"?o:{},hasVersion=Number.isFini
 for(const k in o.pk)if(!Number.isFinite(o.pk[k])||o.pk[k]<0)o.pk[k]=0;
  if(o.tpBack&&!(Number.isFinite(o.tpBack.c)&&Number.isFinite(o.tpBack.d)))o.tpBack=null;
  if(!o.items||typeof o.items!=="object"||Array.isArray(o.items))o.items={};o.items=Object.assign(fresh().items,o.items);for(const k in o.items)o.items[k]=Number.isFinite(o.items[k])&&o.items[k]>0?Math.floor(o.items[k]):0;
- if(!/^dyn[2-5]?$/.test(o.dsel))o.dsel="dyn";   // dinamite escolhida (tecla R troca)
+ if(!/^dyn[2-5]?$/.test(o.dsel))o.dsel="dyn";if(!/^p(as|gr|bq)$/.test(o.fsel))o.fsel="pas";   // dinamite escolhida (tecla R troca)
  o.vol=Object.assign({m:.7,s:1,a:.7},o.vol);for(const k in o.vol)if(!Number.isFinite(o.vol[k]))o.vol[k]=.7;
  if(o.v<6&&!Number.isFinite(o.seed))o.seed=0;   // saves antigos mantêm o mundo que já escavaram
  if(!Number.isFinite(o.seed)||o.seed<0)o.seed=newSeed();o.seed=Math.floor(o.seed);
@@ -1003,7 +1142,7 @@ let mapOn=false,mapB=null,mapT=0,mapZ=1,musOn=false,musT=0,ambT=0,amb=[],modal=n
 let cmb=0,cmbT=0,cmbPulse=0,cmbMax=0,cmbFlash=0,cmbBanner=0,cmbBannerT="",cmbLast=0,cmbLastT=0,cmbTier=0;
 let skT=[0,0],skCD=[0,0],dynCD=0,dynCDt=1.5,tpCD=0,ev=0,evT=0,evNext=60+Math.random()*60;
 let star=0,starT=0,starNext=60+Math.random()*120,shoot=null;   // estrela cadente: segundos de bônus restantes · tipo (0 ouro, 1 sorte) · espera até a próxima · risco no céu
-let mute=false,actx=null,toast="",toastT=0,breakNoise=null,breakSfxNext=0;
+let mute=false,actx=null,toast="",toastK="info",toastT=0,breakNoise=null,breakSfxNext=0;
 let camX=0,camY=0,mX=0,mY=0,swing=0,parts=[],texts=[],shake=0,flash=0,flashC="#ff2a2a",flashText="",chestOpen=0,lowEnPulse=0,retSeen=0,layerSeen=0,jetT=0;
 let holdM=false,holdS=false,lastH=0,held=null,heldC=null,lastMv=0,shiftOn=false,fallR=0,fallAcc=0,cheatBuf="",cheatT=0,cheatSurf=false,cheatPos=null;
 // Códigos secretos (digitar a palavra, como em GTA). CENOURA: ouro e energia infinitos (em qualquer lugar). FINAL: teleporta para a Rocha-mãe e dispara a cena da cenoura dourada (em qualquer lugar) · CLIMA: troca o clima · SEASON: avança a estação (esses dois só valem na superfície, onde se vê o efeito).
@@ -1070,7 +1209,10 @@ const ITEMS={
  cen:{get n(){return __("Cenourinha")},get d(){return __("Recupera 10% da energia máxima")},b:BAL.items.cen,c:"#ff9a3a",en:.1},
  sop:{get n(){return __("Sopa de cogumelo")},get d(){return __("Recupera 25% da energia máxima")},b:BAL.items.sop,c:"#c9a27a",en:.25},
  poc:{get n(){return __("Poção de energia")},get d(){return __("Recupera 50% da energia máxima")},b:BAL.items.poc,c:"#6ff0ff",en:.5},
- ptp:{get n(){return __("Poção de teleporte")},get d(){return __("Uso único: leva ao baú sem gastar energia (na superfície, volta ao ponto de onde saiu). Só cai de baús")},b:0,c:"#9a5cff",tp:1,noShop:1}
+ ptp:{get n(){return __("Poção de teleporte")},get d(){return __("Uso único: leva ao baú sem gastar energia (na superfície, volta ao ponto de onde saiu). Só cai de baús")},b:0,c:"#9a5cff",tp:1,noShop:1},
+ pas:{get n(){return __("Peixe assado")},get d(){return __("Recupera 20% da energia máxima. Só se faz na fogueira")},b:0,c:"#e0a45f",en:.2,noShop:1},
+ pgr:{get n(){return __("Peixe grelhado")},get d(){return __("Recupera 45% da energia máxima. Só se faz na fogueira")},b:0,c:"#ee8a4a",en:.45,noShop:1},
+ pbq:{get n(){return __("Banquete do pescador")},get d(){return __("Recupera 85% da energia máxima. Só se faz na fogueira")},b:0,c:"#ffd45c",en:.85,noShop:1}
 };
 const itemCost=k=>Math.ceil(ITEMS[k].b*Math.pow(BAL.itemK,layerOf(S.best)));
 const have=k=>S.items[k]||0;
@@ -1188,7 +1330,19 @@ function hitSfx(kind,depth){
 }
 function note(){try{if(!actx)return;const sc=[0,3,5,7,10,12],f=(110+layerOf(S.depth)*6)*Math.pow(2,sc[Math.floor(Math.random()*6)]/12),o=actx.createOscillator(),g=actx.createGain(),t=actx.currentTime;o.type="sine";o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.025*S.vol.m,t+.6);g.gain.exponentialRampToValueAtTime(.0001,t+3);o.connect(g);g.connect(actx.destination);o.start();o.stop(t+3.1)}catch(e){}}
 function drip(){if(!actx)return;try{const o=actx.createOscillator(),g=actx.createGain(),t=actx.currentTime;o.type="sine";o.frequency.value=300+layerOf(S.depth)%BIO.length*110+Math.random()*120;g.gain.setValueAtTime(.02*S.vol.a,t);g.gain.exponentialRampToValueAtTime(.0001,t+.25);o.connect(g);g.connect(actx.destination);o.start();o.stop(t+.3)}catch(e){}}
-function say(m){toast=String(m).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u27FF\u2B00-\u2BFF]|\uFE0F|\u200D|\u20E3/g,"").trim();toastT=4}
+function say(m){toastK="info";toast=String(m).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u27FF\u2B00-\u2BFF]|\uFE0F|\u200D|\u20E3/g,"").trim();toastT=Math.min(8,Math.max(4,2+toast.length*.05))}   // texto longo fica mais tempo na tela (4 s a 8 s)
+// Categorias dos avisos: cada uma tem cor e ícone próprios (ver ICONS em 4-interface/01-painel.js)
+function sayK(k,m){say(m);toastK=k}
+function sayMine(m){sayK("mine",m)}
+function sayFish(m){sayK("fish",m)}
+function sayGold(m){sayK("gold",m)}
+function sayWeather(m){sayK("weather",m)}
+function sayStar(m){sayK("star",m)}
+function sayLevel(m){sayK("level",m)}
+function sayPower(m){sayK("power",m)}
+function sayFood(m){sayK("food",m)}
+function sayWarn(m){sayK("warn",m)}
+function sayInfo(m){sayK("info",m)}
 // Executa um código secreto digitado (ver CHEATS em 1-nucleo/03-estado-save.js e o tratamento em 4-interface/04-entrada.js)
 function runCheat(w){
  if(w==="CENOURA"){toggleDbg();return}
@@ -1198,10 +1352,10 @@ function runCheat(w){
   if(modal)return;S.mc=clamp(S.mc,-HALF,HALF);for(let r=1;r<FINAL_DEPTH;r++)dug.add(S.mc+","+r);
   S.depth=FINAL_DEPTH;S.best=Math.max(S.best,FINAL_DEPTH);S.runMax=Math.max(S.runMax,FINAL_DEPTH);S.prog=0;S.en=maxEn();
   mX=camX=S.mc;mY=camY=S.depth;layerSeen=BIO.length-1;carrotC=null;reachBottom();return}
- if(w==="CLIMA"){const k=WX_KEYS[(WX_KEYS.indexOf(wx.cur)+1)%WX_KEYS.length];weatherSet(k);say(__("Clima: {0}",WX[k].n));return}
- if(w==="SEASON"){const L=BAL.season.len,i=(Math.floor(S.sea/L)+1)%4;S.sea=i*L+L/2;say(__("Estação: {0}",SEASONS[i].n))}   // vai para o meio da próxima estação (a paleta dela vale por inteira ali)
+ if(w==="CLIMA"){const k=WX_KEYS[(WX_KEYS.indexOf(wx.cur)+1)%WX_KEYS.length];weatherSet(k);sayWeather(__("Clima: {0}",WX[k].n));return}
+ if(w==="SEASON"){const L=BAL.season.len,i=(Math.floor(S.sea/L)+1)%4;S.sea=i*L+L/2;sayWeather(__("Estação: {0}",SEASONS[i].n))}   // vai para o meio da próxima estação (a paleta dela vale por inteira ali)
 }
-function toggleDbg(){S.debug=!S.debug;if(S.debug){S.real=S.gold;S.gold=Infinity}else S.gold=S.real||0;say(S.debug?__("Cenoura! Ouro e energia infinitos"):__("Cenoura desligada"));build()}
+function toggleDbg(){S.debug=!S.debug;if(S.debug){S.real=S.gold;S.gold=Infinity}else S.gold=S.real||0;sayInfo(S.debug?__("Cenoura! Ouro e energia infinitos"):__("Cenoura desligada"));build()}
 
 // ===== 2-sistemas/01-melhorias.js — Tabela de melhorias (mesa de trabalho) e compra de melhorias, picareta e consumáveis (loja) =====
 // g = grupo no painel · n = nome · d = descrição · b = custo base · k = crescimento do custo · max = nível máximo
@@ -1229,6 +1383,8 @@ const UPS={
  pet:{g:"Habilidades",get n(){return __("Vagalume companheiro")},d:l=>l<BAL.ups.pet.max?__("Um vagalume te segue e ilumina o escuro. Luz extra: {0} (próximo nível: {1})",fmtLight(l,BAL.pet.light),fmtLight(l+1,BAL.pet.light)):__("Um vagalume te segue e ilumina o escuro. Luz extra: {0}",fmtLight(l,BAL.pet.light)),...BAL.ups.pet},
  furn:{g:"Fornalha",get n(){return __("Velocidade da fornalha")},d:l=>l<BAL.ups.furn.max?__("Refina {0} minérios por segundo (próximo nível: {1}). O refinado vale +{2}% de ouro",ndec(furRate(l).toFixed(2)),ndec(furRate(l+1).toFixed(2)),Math.round(BAL.furnace.bonus*100)):__("Refina {0} minérios por segundo. O refinado vale +{1}% de ouro",ndec(furRate(l).toFixed(2)),Math.round(BAL.furnace.bonus*100)),...BAL.ups.furn},
  fort:{g:"Sorte e experiência",get n(){return __("Melhoria de minérios")},d:l=>{const ch=Math.round(fortPct(l)),ex=Math.max(1,Math.ceil(l/2));return l<BAL.ups.fort.max?__("Minérios têm {0}% de chance de render unidades extras (+1 a +{1}). Próximo nível: {2}%",ch,ex,Math.round(fortPct(l+1))):__("Minérios têm {0}% de chance de render unidades extras (+1 a +{1})",ch,ex)},...BAL.ups.fort},
+ rod:{g:"Pesca",get n(){return __("Vara de pesca")},d:l=>l<BAL.ups.rod.max?__("Zona verde do minijogo da pesca: {0}% da pista (próximo nível: {1}%)",Math.round(rodZone(l)/BAL.fish.bar.h*100),Math.round(rodZone(l+1)/BAL.fish.bar.h*100)):__("Zona verde do minijogo da pesca: {0}% da pista",Math.round(rodZone(l)/BAL.fish.bar.h*100)),...BAL.ups.rod},
+ bait:{g:"Pesca",get n(){return __("Isca")},d:l=>l<BAL.ups.bait.max?__("O peixe morde {0}% mais rápido e peixes raros aparecem {1}% mais (próximo nível: {2}% e {3}%)",Math.round((1-baitBite(l))*100),Math.round((baitRare(l)-1)*100),Math.round((1-baitBite(l+1))*100),Math.round((baitRare(l+1)-1)*100)):__("O peixe morde {0}% mais rápido e peixes raros aparecem {1}% mais",Math.round((1-baitBite(l))*100),Math.round((baitRare(l)-1)*100)),...BAL.ups.bait},
  back:{g:"Energia",get n(){return __("Medidor de retorno")},d:l=>l<1?__("Marca na barra de energia a reserva para subir de volta à superfície e a faz brilhar e pulsar (com som) quando a energia fica apertada. Compra única"):__("Medidor de retorno comprado: a barra de energia mostra a reserva para voltar e avisa quando ela fica apertada"),...BAL.ups.back},
  clock:{g:"Utilidades",get n(){return __("Relógio")},d:l=>l<1?__("Mostra na barra do topo um relógio de sol e lua com a hora do dia (o dia dura {0} min)",Math.round(BAL.day.len/60)):__("Relógio comprado: veja a hora do dia na barra do topo (passe o mouse para ver o período)"),...BAL.ups.clock},
  tele:{g:"Habilidades",get n(){return __("Teleporte")},d:l=>{const c=Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*l);return l<1?__("Desbloqueia o teleporte: leva ao baú sem gastar energia e, usado na superfície, volta ao ponto de onde saiu"):l<BAL.ups.tele.max?__("Recarga do teleporte: {0} s ({1} s no próximo nível)",c,Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*(l+1))):__("Recarga do teleporte: {0} s",c)},...BAL.ups.tele}
@@ -1243,7 +1399,7 @@ function buy(k){
 function buyTier(){
  if(!nearBench()||S.tier>=TIERS.length-1)return;
  const c=tierCost();if(S.gold<c)return;
- S.gold-=c;S.tier++;sfx(520,.2,"sawtooth");sfx(780,.3,"triangle");say(__("Nova picareta: {0}",__(TIERS[S.tier])));build();
+ S.gold-=c;S.tier++;sfx(520,.2,"sawtooth");sfx(780,.3,"triangle");sayMine(__("Nova picareta: {0}",__(TIERS[S.tier])));build();
 }
 // Loja de consumáveis (fica na superfície, à direita do baú): dinamite e comida que recupera energia.
 function buyItem(k){
@@ -1257,9 +1413,9 @@ function buyItem(k){
 function useItem(k){
  const it=ITEMS[k];if(modal)return;if(it&&it.tp){teleport(true);return}
  if(!it||!it.en)return;
- if(have(k)<1){say(__("Sem {0}: compre na loja (na superfície)",it.n));return}
- if(atSurface()){say(__("Na superfície a energia já se recupera sozinha"));return}
- const m=maxEn();if(S.en>=m-.5){say(__("Energia já está cheia"));return}
+ if(have(k)<1){sayWarn(__("Sem {0}: compre na loja (na superfície)",it.n));return}
+ if(atSurface()){sayPower(__("Na superfície a energia já se recupera sozinha"));return}
+ const m=maxEn();if(S.en>=m-.5){sayPower(__("Energia já está cheia"));return}
  if(!S.debug)S.items[k]--;S.eaten++;
  const g=Math.min(m-S.en,m*it.en);S.en+=g;
  const p=blockXY(S.mc,S.depth);texts.push({x:p.x,y:p.y-T*.8,t:0,s:__("{0}: +{1} de energia",it.n,Math.round(g)),c:"#6ff0ff",big:1});
@@ -1269,13 +1425,15 @@ function useItem(k){
 
 // ===== 2-sistemas/02-energia-mochila.js — Energia, morte, venda no baú e teleporte =====
 const atSurface=()=>S.depth<=0;
-const nearChest=()=>atSurface()&&Math.abs(S.mc-CHEST_C)<=1;
-const nearBench=()=>atSurface()&&Math.abs(S.mc-BENCH_C)<=1;
-const nearBed=()=>atSurface()&&Math.abs(S.mc-BED_C)<=1;
-const nearSlot=()=>atSurface()&&isUnl("build","slot")&&Math.abs(S.mc-SLOT_C)<=1;
-const nearBoard=()=>atSurface()&&isUnl("build","board")&&Math.abs(S.mc-BOARD_C)<=1;
-const nearFurnace=()=>atSurface()&&isUnl("build","furnace")&&Math.abs(S.mc-FURN_C)<=1;
-const nearShop=()=>atSurface()&&Math.abs(S.mc-SHOP_C)<=1;
+const onGround=()=>S.depth===0;   // no chão (voando acima da linha 0 não vale): só assim se usa mesa, baú, loja, fornalha, quadro, cama, caça-níquel e fogueira
+const nearChest=()=>onGround()&&Math.abs(S.mc-CHEST_C)<=1;
+const nearBench=()=>onGround()&&Math.abs(S.mc-BENCH_C)<=1;
+const nearBed=()=>onGround()&&Math.abs(S.mc-BED_C)<=1;
+const nearSlot=()=>onGround()&&isUnl("build","slot")&&Math.abs(S.mc-SLOT_C)<=1;
+const nearBoard=()=>onGround()&&isUnl("build","board")&&Math.abs(S.mc-BOARD_C)<=1;
+const nearFurnace=()=>onGround()&&isUnl("build","furnace")&&Math.abs(S.mc-FURN_C)<=1;
+const nearShop=()=>onGround()&&Math.abs(S.mc-SHOP_C)<=1;
+const nearKeeper=()=>onGround()&&Math.abs(S.mc-KEEPER_C)<=1.3;   // perto do Izans (vender peixes)
 const JET_FLAME=.3;
 function spend(n){if(S.debug||S.depth<=0)return;S.en-=n;if(lowEnPulse<=0&&S.en<maxEn()*.25)lowEnPulse=1;if(S.en<=0){S.en=0;die()}}
 function bagCount(){return S.bag.n}
@@ -1304,7 +1462,7 @@ function die(){
  S.depth=0;S.mc=0;S.dir="down";S.en=maxEn();
  mX=0;mY=0;camX=0;camY=0;
  flash=1;flashC="#ff2a2a";flashText="";sfx(110,.6,"sawtooth");sfx(70,.8,"square");
- say(n?__("Você apagou! Perdeu {0} itens ({1} de ouro)",n,fmt(lost)):__("Você apagou e voltou à superfície"));
+ sayWarn(n?__("Você apagou! Perdeu {0} itens ({1} de ouro)",n,fmt(lost)):__("Você apagou e voltou à superfície"));
  showDeath(info);
 }
 function sellBag(){
@@ -1319,7 +1477,7 @@ function sellBag(){
 // Vende só quando o jogador pede: clique do mouse no baú ou Espaço ao lado dele. Devolve true se tratou o comando (não cava).
 function chestUse(){
  if(!nearChest())return false;
- if(S.bag.n>0)sellBag();else say(__("Mochila vazia: nada para vender."));
+ if(S.bag.n>0)sellBag();else sayWarn(__("Mochila vazia: nada para vender."));
  return true;
 }
 function chestHit(px,py){   // o ponto (px,py) da tela está sobre o desenho do baú?
@@ -1328,10 +1486,10 @@ function chestHit(px,py){   // o ponto (px,py) da tela está sobre o desenho do 
 }
 function teleport(pot){   // pot: poção de teleporte (uso único, sem nível de teleporte nem recarga)
  if(modal||(!pot&&(S.lv.tele<1||tpCD>0)))return;
- if(pot&&have("ptp")<1){say(__("Sem Poção de teleporte"));return}
+ if(pot&&have("ptp")<1){sayWarn(__("Sem Poção de teleporte"));return}
  if(S.depth>0){S.tpBack={c:S.mc,d:S.depth};goTo(CHEST_C,0)}
  else if(S.tpBack&&isDug(S.tpBack.c,S.tpBack.d-1)){goTo(S.tpBack.c,S.tpBack.d);S.tpBack=null}
- else{say(__("Teleporte: use no subsolo para subir ao baú"));return}
+ else{sayInfo(__("Teleporte: use no subsolo para subir ao baú"));return}
  if(pot){if(!S.debug)S.items.ptp--;S.ptpUsed++}else tpCD=teleCD();
  S.tps++;sfx(300,.3,"sine");sfx(900,.35,"sine");
 }
@@ -1345,7 +1503,7 @@ function goTo(c,d){
 const PK={dmg:[N_("Dano da picareta"),N_("+15% de dano"),.15],spd:[N_("Velocidade de ataque"),N_("+10% de velocidade ao minerar"),.1],duration:[N_("Duração das habilidades"),N_("+10% de duração"),.1],gold:[N_("Ouro extra"),N_("+12% de ouro"),.12],energy:[N_("Energia máxima"),N_("+8% de energia máxima"),.08],mov:[N_("Velocidade de movimento"),N_("+10% de velocidade"),.1],xp:[N_("Ganho de experiência"),N_("+10% de experiência"),.1]};
 const RAR=[[N_("Comum"),1,"#9aa0a6",60],[N_("Incomum"),1.5,"#6fcf6f",25],[N_("Rara"),2,"#5aa0ff",10],[N_("Épica"),3,"#b06cff",4],[N_("Lendária"),5,"#ffb43a",1]];
 const xpNeed=l=>Math.round(BAL.xp.base*Math.pow(BAL.xp.k,l-1));
-function gainXp(n){if(!(n>0)||!isFinite(n))return;S.xp+=n*xpGainMult();let g=0;while(S.xp>=xpNeed(S.lvl)&&g++<50){S.xp-=xpNeed(S.lvl);S.lvl++;S.lvp++;say(__("Nível {0}!",S.lvl));sfx(1100,.4,"sine")}if(S.lvp>0&&!modal)levelUp()}
+function gainXp(n){if(!(n>0)||!isFinite(n))return;S.xp+=n*xpGainMult();let g=0;while(S.xp>=xpNeed(S.lvl)&&g++<50){S.xp-=xpNeed(S.lvl);S.lvl++;S.lvp++;sayLevel(__("Nível {0}!",S.lvl));sfx(1100,.4,"sine")}if(S.lvp>0&&!modal)levelUp()}
 function clearLevelChoiceTimer(){clearInterval(levelChoiceTicker);levelChoiceTicker=0;levelChoiceId++}
 function rollPerks(n){const pool=Object.keys(PK).filter(k=>pk(k)<10),out=[];while(out.length<n&&pool.length){const k=pool.splice(Math.floor(Math.random()*pool.length),1)[0];let r=Math.random()*100,ri=0;for(;ri<4;ri++){r-=RAR[ri][3];if(r<0)break}out.push([k,ri])}return out}
 function addPerk(k,m){S.pk[k]=Math.min(10,pk(k)+m)}
@@ -1380,21 +1538,21 @@ const SK={
 const SKL=[[N_("Fúria do Minerador"),N_("Dano maior"),BAL.skills.fury.dur,BAL.skills.fury.cd,BAL.skills.fury.at],[N_("Escavação Frenética"),N_("Cava mais rápido"),BAL.skills.frenzy.dur,BAL.skills.frenzy.cd,BAL.skills.frenzy.at]];
 const skillDuration=i=>SKL[i][2]*skillDurationMult();
 const skillDescription=i=>i===0?__("Dano x{0} por {1} s (recarga {2} s; efeito reduzido quando combinada)",fmtN(skT[1]>0?furyActiveMult():furyMult()),fmt(skillDuration(i)),SKL[i][3]):__("Cava x{0} mais rápido por {1} s (recarga {2} s; efeito reduzido quando combinada)",fmtN(skT[0]>0?frenzyActiveMult():frenzyMult()),fmt(skillDuration(i)),SKL[i][3]);
-function useSk(i){if(modal||i<0||i>=SKL.length||S.best<SKL[i][4]||skCD[i]>0)return;skCD[i]=SKL[i][3];skT[i]=skillDuration(i);flash=.35;flashC="#ffb43a";sfx(500+i*120,.2,"sawtooth");say(__("Habilidade ativada: {0}",__(SKL[i][0])))}
+function useSk(i){if(modal||i<0||i>=SKL.length||S.best<SKL[i][4]||skCD[i]>0)return;skCD[i]=SKL[i][3];skT[i]=skillDuration(i);flash=.35;flashC="#ffb43a";sfx(500+i*120,.2,"sawtooth");sayPower(__("Habilidade ativada: {0}",__(SKL[i][0])))}
 const dynMax=()=>dynCDt;   // recarga da última dinamite usada (BAL.dyn[tipo].cd): quanto mais forte, maior
 const DYN_IDS=["dyn","dyn2","dyn3","dyn4","dyn5"];   // tipos de dinamite, do mais fraco ao mais forte (números em BAL.dyn)
 // Dinamite em uso: a escolhida (tecla R troca); se acabou, usa a mais forte que ainda houver
 function dynPick(){if(have(S.dsel)>0||S.debug)return S.dsel;for(let i=DYN_IDS.length-1;i>=0;i--)if(have(DYN_IDS[i])>0)return DYN_IDS[i];return S.dsel}
-function dynNext(){const own=DYN_IDS.filter(k=>have(k)>0||k===S.dsel||S.debug);if(!own.length)return;const i=own.indexOf(S.dsel);S.dsel=own[(i+1)%own.length];say(__("Dinamite escolhida: {0}",ITEMS[S.dsel].n));sfx(620,.08,"triangle");refresh()}
+function dynNext(){const own=DYN_IDS.filter(k=>have(k)>0||k===S.dsel||S.debug);if(!own.length)return;const i=own.indexOf(S.dsel);S.dsel=own[(i+1)%own.length];sayMine(__("Dinamite escolhida: {0}",ITEMS[S.dsel].n));sfx(620,.08,"triangle");refresh()}
 function boom(){
  if(modal||dynCD>0)return;
  const dk=dynPick();
- if(have(dk)<1&&!S.debug){say(__("Sem dinamite: compre na loja (na superfície)"));return}
+ if(have(dk)<1&&!S.debug){sayWarn(__("Sem dinamite: compre na loja (na superfície)"));return}
  const DB=BAL.dyn[dk];
  const[tc,tr]=tgt();let tot=0,n=0;
  const R=DB.r,RI=Math.ceil(R),cells=[];
  for(let dx=-RI;dx<=RI;dx++)for(let dy=-RI;dy<=RI;dy++){const c=tc+dx,r=tr+dy;if(dx*dx+dy*dy>R*R||!canBlast(c,r))continue;cells.push([dx*dx+dy*dy,c,r])}
- if(!cells.length){say(__("Nada para explodir aqui"));return}
+ if(!cells.length){sayWarn(__("Nada para explodir aqui"));return}
  if(!S.debug)S.items[dk]--;
  S.dsel=dk;
  cells.sort((x,y)=>x[0]-y[0]);let B=DB.p*clickPow();   // força da explosão = p x dano da picareta (gasta a dureza dos blocos; veios de pedra dura sempre quebram)
@@ -1411,7 +1569,7 @@ ACH.push(
  [N_("Bilionário"),N_("1B de ouro no total"),()=>S.total>=1e9],[N_("Trilionário"),N_("1T de ouro no total"),()=>S.total>=1e12],
  [N_("Britadeira"),N_("Quebre 1000 blocos"),()=>S.blocks>=1000],[N_("Máquina de escavar"),N_("Quebre 100 mil blocos"),()=>S.blocks>=1e5],
  [N_("Ferreiro"),N_("Compre a picareta de Ferro"),()=>S.tier>=2],[N_("Mãos de diamante"),N_("Compre a picareta de Diamante"),()=>S.tier>=6],[N_("Lenda das picaretas"),N_("Tenha a picareta Primordial"),()=>S.tier>=TIERS.length-1],
- [N_("Ao máximo"),N_("Deixe uma melhoria no nível máximo"),()=>Object.keys(UPS).some(k=>S.lv[k]>=UPS[k].max)],[N_("Arsenal completo"),N_("Todas as melhorias no nível máximo"),()=>Object.keys(UPS).every(k=>S.lv[k]>=UPS[k].max)],[N_("Teleportado"),N_("Desbloqueie o teleporte"),()=>S.lv.tele>=1],
+ [N_("Ao máximo"),N_("Deixe uma melhoria no nível máximo"),()=>Object.keys(UPS).some(k=>S.lv[k]>=UPS[k].max)],[N_("Arsenal completo"),N_("Todas as melhorias no nível máximo"),()=>Object.keys(UPS).filter(k=>UPS[k].g!=="Pesca").every(k=>S.lv[k]>=UPS[k].max)],[N_("Teleportado"),N_("Desbloqueie o teleporte"),()=>S.lv.tele>=1],
  [N_("Teimoso"),N_("Apague de energia 10 vezes"),()=>S.deaths>=10],[N_("Banquete"),N_("Coma 20 itens de energia"),()=>S.eaten>=20],[N_("Pavio curto"),N_("Use 10 dinamites"),()=>S.bombs>=10],[N_("Demolidor"),N_("Use 100 dinamites"),()=>S.bombs>=100],[N_("Viajante"),N_("Use o teleporte 10 vezes"),()=>S.tps>=10],[N_("Pedra no sapato"),N_("Quebre 20 pedras duras"),()=>S.veins>=20],
  [N_("Veterano"),N_("Chegue ao nível 10"),()=>S.lvl>=10],[N_("Experiente"),N_("Nível 25"),()=>S.lvl>=25],[N_("Lendário"),N_("Nível 50"),()=>S.lvl>=50],
  [N_("Ciclo"),N_("Renasça 3 vezes"),()=>S.runs>=3],[N_("Eterno"),N_("Renasça 10 vezes"),()=>S.runs>=10],
@@ -1419,7 +1577,10 @@ ACH.push(
  [N_("Boa noite"),N_("Salve o jogo na cama"),()=>S.sleeps>=1],[N_("Sono pesado"),N_("Deite na cama 20 vezes"),()=>S.sleeps>=20],[N_("Companhia"),N_("Chame o vagalume"),()=>S.lv.pet>=1],[N_("Despensa cheia"),N_("Tenha 99 de algum item da loja"),()=>Object.keys(S.items).some(k=>ITEMS[k]&&!ITEMS[k].noShop&&S.items[k]>=99)],
  [N_("Fornalha acesa"),N_("Refine 1 minério na fornalha"),()=>S.refined>=1],[N_("Mestre ferreiro"),N_("Refine 1000 minérios"),()=>S.refined>=1000],
  [N_("Empreiteiro"),N_("Entregue 10 contratos"),()=>S.ctDone>=10],[N_("Na sorte"),N_("Jogue na mesa de apostas"),()=>S.spins>=1],[N_("Viciado"),N_("Jogue 100 vezes na mesa de apostas"),()=>S.spins>=100],[N_("Caçador de tesouros"),N_("Abra um baú no subsolo"),()=>S.chests>=1],[N_("Baú épico"),N_("Abra um baú Épico ou melhor"),()=>S.chTop>=4],[N_("Sorte lendária"),N_("Abra um baú Lendário"),()=>S.chTop>=5],
- [N_("Caça-baús"),N_("Abra 10 baús"),()=>S.chests>=10],[N_("Rei dos baús"),N_("Abra 100 baús"),()=>S.chests>=100],[N_("Coleção completa"),N_("Abra um baú de cada raridade"),()=>S.chT.every(n=>n>0)],[N_("Chuva de ouro"),N_("Abra 5 baús Lendários"),()=>S.chT[4]>=5],[N_("Presente dos baús"),N_("Ganhe 10 bônus de melhoria de baús"),()=>S.chPk>=10],[N_("Colecionador de cacos"),N_("Ache 10 fragmentos em baús"),()=>S.chFr>=10],[N_("Viajante de bolso"),N_("Use 5 poções de teleporte"),()=>S.ptpUsed>=5]
+ [N_("Caça-baús"),N_("Abra 10 baús"),()=>S.chests>=10],[N_("Rei dos baús"),N_("Abra 100 baús"),()=>S.chests>=100],[N_("Coleção completa"),N_("Abra um baú de cada raridade"),()=>S.chT.every(n=>n>0)],[N_("Chuva de ouro"),N_("Abra 5 baús Lendários"),()=>S.chT[4]>=5],[N_("Presente dos baús"),N_("Ganhe 10 bônus de melhoria de baús"),()=>S.chPk>=10],[N_("Colecionador de cacos"),N_("Ache 10 fragmentos em baús"),()=>S.chFr>=10],[N_("Viajante de bolso"),N_("Use 5 poções de teleporte"),()=>S.ptpUsed>=5],
+ [N_("Primeira fisgada"),N_("Pesque seu primeiro peixe"),()=>S.fishN>=1],[N_("Pescador"),N_("Pesque 25 peixes"),()=>S.fishN>=25],[N_("Mestre das águas"),N_("Pesque 150 peixes"),()=>S.fishN>=150],[N_("Mão firme"),N_("Faça uma pescaria perfeita"),()=>S.fishP>=1],
+ [N_("Álbum completo"),N_("Descubra todas as espécies de peixe"),()=>Object.keys(S.fdx).length>=FISH.length],[N_("Lenda das águas"),N_("Pesque um peixe lendário"),()=>FISH.some(f=>f.t===2&&S.fdx[f.id])],
+ [N_("Churrasqueiro"),N_("Asse 10 peixes na fogueira"),()=>S.cookN>=10],[N_("Ponto perfeito"),N_("Asse um peixe no ponto perfeito"),()=>S.cookP>=1]
 );
 // Notificação de conquista: caixa própria (azul, com troféu) e fanfarra própria; várias de uma vez viram uma caixa só
 let achQ=[],achT=0;
@@ -1442,11 +1603,11 @@ function achNext(){
 function starFall(){
  starT=Math.random()<.5?0:1;star=BAL.star.len;
  shoot={t:0,len:2.2,x:.3+Math.random()*.4,y:.1+Math.random()*.2,dir:Math.random()<.5?-1:1};
- say(starT?__("Estrela cadente! Minérios x{0} por {1}s",BAL.star.luck,BAL.star.len):__("Estrela cadente! Ouro x{0} por {1}s",BAL.star.gold,BAL.star.len));
+ sayStar(starT?__("Estrela cadente! Minérios x{0} por {1}s",BAL.star.luck,BAL.star.len):__("Estrela cadente! Ouro x{0} por {1}s",BAL.star.gold,BAL.star.len));
  sfx(1568,.25,"sine");sfx(2093,.4,"sine");
 }
 function starTick(dt){
- if(star>0){star-=dt;if(star<=0){star=0;say(__("O brilho da estrela se apagou"))}}
+ if(star>0){star-=dt;if(star<=0){star=0;sayStar(__("O brilho da estrela se apagou"))}}
  if(shoot){shoot.t+=dt;if(shoot.t>=shoot.len)shoot=null}
  if(nightAmt()<BAL.night.from)return;           // a espera só corre de noite
  starNext-=dt;if(starNext>0)return;
@@ -1485,7 +1646,7 @@ function furLoad(){
  f.n+=n;f.v+=v;f.tn+=n;
  const p=furXY();texts.push({x:p.x,y:p.y-T*1.4,t:0,s:__("Fornalha: +{0} minérios",n),c:"#ff9a3a",big:1});
  sfx(200,.25,"sawtooth");setTimeout(()=>sfx(330,.2,"triangle"),120);
- say(__("Fornalha carregada: {0} minérios · pronta em {1}",n,fmtT(furEta())));
+ sayMine(__("Fornalha carregada: {0} minérios · pronta em {1}",n,fmtT(furEta())));
  refresh();return true;
 }
 function furTick(dt){
@@ -1498,14 +1659,14 @@ function furTick(dt){
  furPopT-=dt;
  if(f.e>0&&furPopT<=0&&atSurface()){const p=furXY();texts.push({x:p.x,y:p.y-T*1.4,t:0,s:__("Refinado: +{0}",fmt(f.e)),c:"#ffd45c",big:1});f.e=0;furPopT=1.2;sfx(1040,.07,"triangle")}
  if(f.n<1){   // fila vazia: avisa o total
-  say(__("Fornalha: {0} minérios refinados · +{1} de ouro",f.tn,fmt(f.tg)));sfx(880,.12,"triangle");
+  sayMine(__("Fornalha: {0} minérios refinados · +{1} de ouro",f.tn,fmt(f.tg)));sfx(880,.12,"triangle");
   S.fur={n:0,v:0,a:0,e:0,tg:0,tn:0};
  }
 }
 // Carrega só quando o jogador pede: clique do mouse na fornalha ou Espaço ao lado dela. Devolve true se tratou o comando (não cava).
 function furUse(){
  if(!nearFurnace())return false;
- if(!furLoad())say(S.bag.n>0?__("Só há pedra comum na mochila: ela vai para o baú."):__("Sem minérios na mochila para pôr na fornalha."));
+ if(!furLoad())sayMine(S.bag.n>0?__("Só há pedra comum na mochila: ela vai para o baú."):__("Sem minérios na mochila para pôr na fornalha."));
  return true;
 }
 function furHit(px,py){   // o ponto (px,py) da tela está sobre o desenho da fornalha?
@@ -1517,13 +1678,13 @@ function furHit(px,py){   // o ponto (px,py) da tela está sobre o desenho da fo
 // ===== 2-sistemas/07-estacoes.js — Estações do ano: a grama e as colinas da superfície mudam de cor com o tempo =====
 // Cada estação dura BAL.season.len segundos de jogo. O relógio S.sea é salvo e só corre com o jogo aberto; um jogo novo começa no meio do verão (as cores de sempre).
 // As cores passam de uma estação para a próxima em degradê contínuo: cada paleta vale por inteiro no MEIO da sua estação, e o nome muda no meio da mistura.
-// g/h = grama da linha 0 (corpo e topo claro, que também é a cor das folhinhas) · nh/nhh = colinas próximas (corpo e topo) · fh/fhh = colinas distantes (corpo e topo)
+// g/h = grama da linha 0 (corpo e topo claro, que também é a cor das folhinhas) · nh/nhh = colinas próximas (corpo e topo) · fh/fhh = colinas distantes (corpo e topo) · d/dh = trilha de terra (corpo e topo; no inverno vira neve)
 const SEASONS=[
- {get n(){return __("Primavera")},get msg(){return __("Chegou a primavera!")},g:"#5fb03c",h:"#9be065",nh:"#4aa65a",nhh:"#74cc70",fh:"#a8dcd4",fhh:"#c4eee6"},
- {get n(){return __("Verão")},get msg(){return __("Chegou o verão!")},g:"#548b31",h:"#80b949",nh:"#3f7d4a",nhh:"#5aa05a",fh:"#9cc4e0",fhh:"#b4d4ea"},
- {get n(){return __("Outono")},get msg(){return __("Chegou o outono!")},g:"#a9722a",h:"#e0a43a",nh:"#b4532b",nhh:"#dc8438",fh:"#d1ae94",fhh:"#e4c9b0"},
- {get n(){return __("Inverno")},get msg(){return __("Chegou o inverno!")},g:"#c6d3dc",h:"#f4f8fb",nh:"#8ba3b8",nhh:"#c9d8e4",fh:"#a9bccd",fhh:"#d2dde8"}];
-const SEA_KEYS=["g","h","nh","nhh","fh","fhh"];
+ {get n(){return __("Primavera")},get msg(){return __("Chegou a primavera!")},g:"#5fb03c",h:"#9be065",nh:"#4aa65a",nhh:"#74cc70",fh:"#a8dcd4",fhh:"#c4eee6",d:"#8f6a3f",dh:"#b08a58"},
+ {get n(){return __("Verão")},get msg(){return __("Chegou o verão!")},g:"#548b31",h:"#80b949",nh:"#3f7d4a",nhh:"#5aa05a",fh:"#9cc4e0",fhh:"#b4d4ea",d:"#b48a58",dh:"#d4ad76"},
+ {get n(){return __("Outono")},get msg(){return __("Chegou o outono!")},g:"#a9722a",h:"#e0a43a",nh:"#b4532b",nhh:"#dc8438",fh:"#d1ae94",fhh:"#e4c9b0",d:"#9a5e2e",dh:"#c98a4a"},
+ {get n(){return __("Inverno")},get msg(){return __("Chegou o inverno!")},g:"#c6d3dc",h:"#f4f8fb",nh:"#8ba3b8",nhh:"#c9d8e4",fh:"#a9bccd",fhh:"#d2dde8",d:"#dfe8ef",dh:"#f6fafc"}];
+const SEA_KEYS=["g","h","nh","nhh","fh","fhh","d","dh"];
 const hexCh=(s,i)=>parseInt(s.substr(i,2),16);
 const mixHex=(a,b,k)=>"#"+[1,3,5].map(i=>Math.round(hexCh(a,i)+(hexCh(b,i)-hexCh(a,i))*k).toString(16).padStart(2,"0")).join("");
 // Paleta do relógio "sea" (s): idx = estação em curso (0 primavera · 1 verão · 2 outono · 3 inverno) mais as 6 cores já misturadas
@@ -1538,7 +1699,7 @@ function seasonTick(dt){
  S.sea=(S.sea+dt)%(BAL.season.len*4);
  const st=Math.floor(S.sea*2);if(st===seaStep)return;seaStep=st;   // as cores só são recalculadas a cada meio segundo (a mudança é lenta demais para se notar)
  SEA=seasonMix(S.sea);
- if(seaIdx>=0&&SEA.idx!==seaIdx){const s=SEASONS[SEA.idx];say(s.msg)}
+ if(seaIdx>=0&&SEA.idx!==seaIdx){const s=SEASONS[SEA.idx];sayWeather(s.msg)}
  seaIdx=SEA.idx;
 }
 
@@ -1586,7 +1747,7 @@ function weatherTick(dt){
  wx.clock+=dt;
  if(dt>0){
   wx.left-=dt;
-  if(wx.left<=0){const prev=wx.cur;weatherSet(weatherPick());if(prev!==wx.cur&&skyVis()>0)say(WX[wx.cur].msg)}
+  if(wx.left<=0){const prev=wx.cur;weatherSet(weatherPick());if(prev!==wx.cur&&skyVis()>0)sayWeather(WX[wx.cur].msg)}
   const T=WX[wx.cur],k=1-Math.exp(-dt/(BAL.weather.fade/3));
   for(const p of["cover","rain","snow","fog","wind"])wx[p]+=(T[p]-wx[p])*k;
   wx.bolt=Math.max(0,wx.bolt-dt*4);
@@ -1779,8 +1940,8 @@ function slotFinish(){
   slFx.flash=f.kind===3?1:.25;slotCoins(f.kind===3?60+tiers*40:18,f.kind===3?1.4:.6);
   const notes=[523,659,784,1047,1319,1568];const n=f.kind===3?6:3;for(let i=0;i<n;i++)setTimeout(()=>{sfx(notes[i+(f.kind===3?0:1)],.16,"triangle");if(f.kind===3)sfx(notes[i]/2,.2,"sine")},i*95);
   slotCoinSfx(f.kind===3?28+tiers*14:9,f.kind===3?55:90);if(f.kind===3)setTimeout(()=>{sfx(1568,.5,"sine");sfx(2093,.6,"sine");sfx(784,.6,"triangle")},650);
-  if(f.kind===3&&f.res[0]===5){say(__("JACKPOT! {0} de ouro",fmt(f.win)));for(let i=0;i<8;i++)setTimeout(()=>{sfx(1568-i*80,.2,"square");slotCoins(30,1.5)},i*180)}
-  else say(f.kind===3?__("3 {0}s! +{1} de ouro",__(SLOT_NAMES[f.res[0]]),fmt(f.win)):__("Par de {0}: +{1} de ouro",__(SLOT_NAMES[f.res[0]]),fmt(f.win)))}
+  if(f.kind===3&&f.res[0]===5){sayGold(__("JACKPOT! {0} de ouro",fmt(f.win)));for(let i=0;i<8;i++)setTimeout(()=>{sfx(1568-i*80,.2,"square");slotCoins(30,1.5)},i*180)}
+  else sayGold(f.kind===3?__("3 {0}s! +{1} de ouro",__(SLOT_NAMES[f.res[0]]),fmt(f.win)):__("Par de {0}: +{1} de ouro",__(SLOT_NAMES[f.res[0]]),fmt(f.win)))}
  else{slWinTo=0;slText=__("Não foi dessa vez");sfx(220,.16,"triangle");setTimeout(()=>sfx(185,.18,"triangle"),130);setTimeout(()=>sfx(147,.3,"triangle"),270)}
  paintSlotUi();refresh();
 }
@@ -1791,7 +1952,7 @@ function slotCoinSfx(n,gap){for(let i=0;i<n;i++)setTimeout(()=>{sfx(1700+Math.ra
 function slotSpin(){
  if(slotBusy||modal!=="slot")return;
  const bet=slotBetAmt(slotSel);
- if(!(S.gold>=bet)||!(bet>0)){say(__("Ouro insuficiente para essa aposta"));sfx(140,.1,"square");return}
+ if(!(S.gold>=bet)||!(bet>0)){sayWarn(__("Ouro insuficiente para essa aposta"));sfx(140,.1,"square");return}
  const res=[slotRoll(),slotRoll(),slotRoll()],m=slotMult(res[0],res[1],res[2]),win=bet*m;
  const kind=res[0]===res[1]?(res[1]===res[2]?3:2):0;
  S.gold-=bet;S.pend=win;S.spins++;save();   // aposta sai agora, prêmio fica pendente até os rolos pararem
@@ -2003,6 +2164,305 @@ function chDraw(dt){
  g.strokeStyle=popped?T.c:"#7a4f27";g.lineWidth=3;g.strokeRect(1.5,1.5,w-3,h-3);
 }
 
+// ===== 2-sistemas/13-pesca.js — Pesca no estilo Stardew Valley (riacho e mar) e venda dos peixes na carrocinha =====
+// Fluxo (tudo no próprio mapa, sem janela): Espaço (ou clique) perto da água -> a câmera dá zoom e o personagem lança a vara -> espere o peixe morder (aparece "!")
+// -> aperte Espaço a tempo para fisgar -> minijogo: segure Espaço para subir a barra verde e solte para ela descer; mantenha o peixe dentro dela até a barra de progresso encher. Esc sai.
+// Números: BAL.fish. Espécies e preços: FISH (1-nucleo/02-camadas-minerios.js). Os peixes ficam em S.fb ([id, cm, perfeito]) e podem ser vendidos
+// na carrocinha da loja ou assados na fogueira (14-fogueira.js). Desenho da pesca no mundo e dicas: 5-desenho/16-pesca-desenho.js (zoom e câmera: 3-mundo/00-camera.js e 6-jogo/01-laco-inicio.js).
+const FISH_BY={};for(const f of FISH)FISH_BY[f.id]=f;
+const JUNK=[N_("Bota velha"),N_("Alga"),N_("Lata enferrujada")];
+// Onde dá para pescar: perto do riacho (inclui a ponte) ou no fim da praia, junto ao trapiche
+const fishSpot=()=>{if(S.depth!==0)return null;const c=S.mc;if(c>=RIVER_C0-2&&c<=RIVER_C1+2)return"r";if(c>=SURF_R-3)return"s";return null};
+const rainy=()=>wx.cur==="rain"||wx.cur==="storm";
+const rodZone=l=>Math.min(BAL.fish.bar.h*.6,BAL.fish.bar.base+BAL.fish.bar.per*l);   // altura da zona verde (px da pista)
+const baitBite=l=>Math.max(.3,1-BAL.fish.baitCut*l);                                  // multiplicador do tempo de espera
+const baitRare=l=>1+BAL.fish.baitRare*l;                                              // multiplicador do peso dos peixes raros
+const fishValue=e=>{const f=FISH_BY[e[0]];return f?Math.max(1,Math.ceil(blockGold(S.best)*f.v*(e[1]/f.len)*(e[2]?BAL.fish.perfect:1))):0};
+const tierName=t=>[__("comum"),__("raro"),__("lendário")][t]||"";
+function fishOk(f,p){
+ if(f.p!==p)return false;
+ if(f.se&&!f.se.includes(SEA.idx))return false;
+ if(f.ng&&nightAmt()<.5)return false;
+ if(f.rn&&!rainy())return false;
+ return true;
+}
+// Sorteia a espécie (null = lixo). A isca e a chuva aumentam a chance dos peixes raros.
+function fishPick(p){
+ if(Math.random()<BAL.fish.junk)return null;
+ const bo=baitRare(S.lv.bait),rb=rainy()?BAL.fish.rain:1,pool=FISH.filter(f=>fishOk(f,p)).map(f=>({f,w:f.w*(f.t>0?bo*rb:1)}));
+ let tot=0;for(const x of pool)tot+=x.w;
+ let r=Math.random()*tot;for(const x of pool){r-=x.w;if(r<=0)return x.f}
+ return pool[0].f;
+}
+
+// ---------- pesca direto no mundo (sem janela): a câmera dá zoom na água e o personagem lança a vara ----------
+let fs=null,fishHold=false;
+const FSC={h:288,tw:14};   // pista do minijogo (px lógicos; o desenho escala para a tela)
+const CASTT={wind:.32,snap:.1,fly:.55};   // balançar a vara para trás, estalar para a frente e voo da boia (s)
+function fishUse(){
+ const p=fishSpot();if(!p)return false;
+ if(modal)return true;
+ if(fs)return true;
+ if(S.fb.length>=BAL.fish.bag){sayWarn(__("Bolsa de peixes cheia: venda na carrocinha ou asse na fogueira"));return true}
+ startFish(p);return true;
+}
+function fishHit(px,py){   // clique do mouse sobre a água (riacho ou mar/trapiche) estando perto dela
+ if(fs)return false;
+ if(!fishSpot())return false;
+ const y=rowY(0);if(py<y-T*2.6||py>y+T*1.6)return false;
+ const c=camX+(px-W/2)/T;
+ return(c>=RIVER_C0-.5&&c<=RIVER_C1+.5)||c>=PIER_C-1.2;
+}
+// Coluna da água onde a boia cai e para que lado o personagem olha
+function fishAim(p){
+ const m=S.mc;let d=S.dir==="left"?-1:1,tc;
+ if(p==="r"){
+  if(m<RIVER_C0)d=1;else if(m>RIVER_C1)d=-1;
+  tc=clamp(m+d*3,RIVER_C0,RIVER_C1);
+ }else{
+  d=1;tc=Math.min(Math.max(SURF_R+2.2,m+4,PIER_END_C+1.4),SURF_R+9);   // a boia cai sempre depois da ponta do trapiche
+ }
+ return{d,tc};
+}
+function startFish(p){
+ const{d,tc}=fishAim(p);
+ S.dir=d<0?"left":"right";S.prog=0;
+ document.body.classList.add("fishing");   // avisos de conquista sobem para o alto enquanto pesca (não cobrem a tira de dicas nem o cartão)
+ fs={p,age:0,t:0,ph:"cast",tc,lock:performance.now()+350,rel:false,rip:9,stop:false};
+ fishHold=false;fishCast();
+}
+function fishEnd(){fishHold=false;fs=null;document.body.classList.remove("fishing")}
+function fishCast(){
+ const B=BAL.fish;
+ Object.assign(fs,{ph:"cast",t:0,rel:false,rip:9,wait:(B.wait[0]+Math.random()*(B.wait[1]-B.wait[0]))*baitBite(S.lv.bait),f:null,junk:null,res:null,lost:false,msg:""});
+ sfx(360,.06,"triangle");setTimeout(()=>sfx(240,.09,"sine"),70);
+ sayFish(__("Espere morder. Aperte Espaço no !"));
+}
+// Um passo da pesca (chamado pelo laço do jogo; dt = 0 com o jogo pausado)
+function fishTick(dt){
+ if(!fs)return;
+ if(!fishSpot()||S.depth>0){fishEnd();return}
+ fs.age+=dt;fs.t+=dt;fs.rip+=dt;
+ const ph=fs.ph,C=CASTT;
+ if(ph==="cast"){
+  if(!fs.rel&&fs.t>=C.wind+C.snap){fs.rel=true;sfx(520,.05,"triangle");sfx(300,.12,"sine")}
+  if(fs.t>=C.wind+C.snap+C.fly){fs.ph="wait";fs.t=0;fs.rip=0;fishSplash(10);sfx(170,.1,"sine");sfx(90,.14,"triangle")}
+ }
+ else if(ph==="wait"){if(fs.t>=fs.wait)fishBite()}
+ else if(ph==="bite"){if(fs.t>=BAL.fish.window)fishLose(__("O peixe soltou a isca antes de você puxar!"))}
+ else if(ph==="reel")fishReelTick(dt);
+}
+function fishBite(){
+ fs.f=fishPick(fs.p);fs.ph="bite";fs.t=0;fs.rip=0;
+ sfx(880,.07,"square");setTimeout(()=>sfx(1320,.12,"square"),70);
+ fishSplash(6);
+ sayFish(__("AGORA!"));
+}
+// Espaço / clique / toque / botão A (um aperto): fisga ou lança de novo
+function fishAct(){
+ if(!fs||performance.now()<fs.lock)return;
+ const ph=fs.ph;
+ if(ph==="wait")fishLose(__("Você puxou cedo demais e o peixe fugiu!"));
+ else if(ph==="bite")fishHook();
+ else if(ph==="done"){
+  if(S.fb.length>=BAL.fish.bag){sayWarn(__("Bolsa de peixes cheia: venda na carrocinha ou asse na fogueira"));return}
+  fishCast();
+ }
+}
+function fishHook(){
+ const f=fs.f;
+ if(!f){fishJunk();return}
+ const B=BAL.fish,H=B.bar.h,zh=rodZone(S.lv.rod);
+ Object.assign(fs,{ph:"reel",t:0,zh,zc:H-zh/2,vz:0,fy:H*.6,ft:H*.6,ftT:.4,pr:B.prog.start,outT:0,inZ:false,len:Math.round(f.len*(.75+Math.random()*.5))});
+ sfx(660,.06,"triangle");setTimeout(()=>sfx(990,.08,"triangle"),60);
+ sayFish(__("Segure Espaço: sobe · Solte: desce"));
+}
+// Um passo do minijogo (dt em s). Posições em px da pista, de cima (0) para baixo (altura BAL.fish.bar.h).
+// Devolve 1 (pegou), -1 (fugiu) ou 0 (continua). Fica separado do desenho para poder ser testado.
+function reelStep(s,dt,hold){
+ const B=BAL.fish,H=B.bar.h,zh=s.zh,f=s.f;
+ s.vz+=(hold?-B.bar.lift:B.bar.grav)*dt;s.vz=clamp(s.vz,-B.bar.maxV,B.bar.maxV);s.zc+=s.vz*dt;
+ if(s.zc<zh/2){s.zc=zh/2;if(s.vz<0)s.vz=0}
+ if(s.zc>H-zh/2){s.zc=H-zh/2;s.vz=s.vz>0?-s.vz*B.bar.bounce:0;if(Math.abs(s.vz)<25)s.vz=0}
+ // o peixe nada em arrancadas até um alvo novo; quanto mais difícil a espécie, mais rápido e mais longe ele vai
+ s.ftT-=dt;
+ if(s.ftT<=0){const far=Math.random()<.3+.05*f.d;s.ft=clamp(s.fy+(Math.random()-.5)*H*(far?1.1:.45),14,H-14);s.ftT=Math.max(.3,1.5-.09*f.d)*(.5+Math.random())}
+ const sp=B.fishSpd+f.d*B.fishSpdD,dy=s.ft-s.fy;s.fy+=Math.sign(dy)*Math.min(Math.abs(dy),sp*dt);
+ s.inZ=Math.abs(s.fy-s.zc)<=zh/2;
+ if(s.inZ)s.pr+=B.prog.up*dt;else{s.pr-=B.prog.down*(1+B.prog.downD*f.d)*dt;s.outT+=dt}
+ s.pr=Math.min(1,s.pr);
+ return s.pr>=1?1:s.pr<=0?-1:0;
+}
+function fishReelTick(dt){
+ const r=reelStep(fs,dt,fishHold);
+ if(r>0)fishWin();else if(r<0||fs.t>BAL.fish.maxTime)fishLose(__("O peixe fugiu!"));
+ else if(fs.inZ&&Math.random()<dt*7)sfx(500+fs.pr*500,.015,"square");   // tique da carretilha, mais agudo perto de pegar
+}
+function fishWin(){
+ const f=fs.f,B=BAL.fish,perfect=fs.outT<=B.perfectOut,e=[f.id,fs.len,perfect?1:0];
+ S.fb.push(e);S.fishN++;if(perfect)S.fishP++;
+ const known=f.id in S.fdx,rec=fs.len>(S.fdx[f.id]||0);if(rec)S.fdx[f.id]=fs.len;
+ gainXp(xpNeed(S.lvl)*(.015+.02*f.t)*(perfect?1.5:1));
+ const val=fishValue(e);
+ fs.ph="done";fs.t=0;fs.res={f,len:fs.len,perfect,isNew:!known,rec:known&&rec,val};
+ fs.msg=__("{0}: {1} cm. Vale cerca de {2} de ouro. Venda na carrocinha ou asse na fogueira.",__(f.n),fs.len,fmt(val));
+ fishSplash(14);sayFish(fs.msg);
+ const notes=[523,659,784,1047,1319].slice(0,2+f.t*1+(perfect?1:0)+(known?0:1));notes.forEach((n,i)=>setTimeout(()=>{sfx(n,.16,"triangle");if(perfect)sfx(n/2,.2,"sine")},i*95));
+ save();
+}
+function fishLose(msg){
+ fs.ph="done";fs.t=0;fs.res=null;fs.lost=true;fs.msg=msg;sayFish(msg);
+ sfx(300,.15,"triangle");setTimeout(()=>sfx(220,.2,"triangle"),120);setTimeout(()=>sfx(160,.3,"triangle"),260);
+}
+function fishJunk(){
+ const n=JUNK[Math.floor(Math.random()*JUNK.length)],g=Math.max(1,Math.ceil(blockGold(S.best)*BAL.fish.junkV));
+ S.gold+=g;S.total+=g;S.fishG+=g;
+ fs.ph="done";fs.t=0;fs.res=null;fs.lost=false;fs.junk=n;
+ fs.msg=__("Você pescou: {0}. Vendida por {1} de ouro.",__(n),fmt(g));
+ sfx(200,.12,"sawtooth");sfx(150,.14,"square");sayFish(fs.msg);refresh();
+}
+// Controle: A fisga e segura para subir a barra (o estado "segurando" vem do botão), B sai (ver 4-interface/07-controle.js)
+addEventListener("keyup",e=>{if(e.code==="Space"||e.code==="Enter")fishHold=false});
+addEventListener("pointerup",()=>{fishHold=false});
+addEventListener("pointercancel",()=>{fishHold=false});
+addEventListener("blur",()=>{fishHold=false});
+
+// ---------- Izans (dono da carrocinha): vender peixes ----------
+function fishGroups(){   // peixes da bolsa agrupados por espécie (na ordem de FISH) com quantidade e valor total
+ const g={};
+ for(const e of S.fb){const f=FISH_BY[e[0]];if(!f)continue;const o=g[e[0]]||(g[e[0]]={f,n:0,v:0});o.n++;o.v+=fishValue(e)}
+ return FISH.filter(f=>g[f.id]).map(f=>g[f.id]);
+}
+function marketUse(){
+ if(!nearKeeper()||!S.fb.length)return false;
+ if(modal)return true;
+ openMarket();return true;
+}
+function marketHit(px,py){
+ if(!S.fb.length)return false;
+ const y=rowY(0);if(py<y-T*2.8||py>y+T*.4)return false;
+ return Math.abs(camX+(px-W/2)/T-KEEPER_C)<=1.1;   // clique no Izans
+}
+function openMarket(){const b=openModal("fmk");b.style.maxWidth="460px";paintMarket()}
+function paintMarket(){
+ const b=$("bx");if(modal!=="fmk"||!b)return;
+ const gs=fishGroups(),tot=gs.reduce((a,x)=>a+x.v,0);
+ b.innerHTML="<div class='fkw'><h2 class='fkh'>"+__("Peixaria da carrocinha")+"</h2>"
+  +(gs.length?"<div class='fklist'>"+gs.map(x=>"<button data-s='"+x.f.id+"' data-t='"+x.f.t+"'><i style='background:"+x.f.c+"'></i><span class='n'>"+__(x.f.n)+" <small>x"+x.n+"</small></span><span class='v'>+"+fmt(x.v)+"</span></button>").join("")+"</div><button id='fkall' class='go'>"+__("Vender tudo · {0}",fmt(tot))+"</button>"
+   :"<div class='fkfood'>"+__("Você não tem peixes para vender.")+"</div>")
+  +"<div class='fkfood'>"+__("Dica: peixes também podem ser assados na fogueira e viram comida de energia.")+"</div><div class='fsbtns'><button id='fkclose'>"+__("Fechar")+"</button></div></div>";
+ b.querySelectorAll("button[data-s]").forEach(x=>x.onclick=()=>fishSell(x.dataset.s));
+ const all=$("fkall");if(all)all.onclick=()=>fishSell(null);
+ $("fkclose").onclick=closeModal;
+}
+function fishSell(id){   // id = espécie; null vende tudo
+ let v=0,n=0;const keep=[];
+ for(const e of S.fb){if(id==null||e[0]===id){v+=fishValue(e);n++}else keep.push(e)}
+ if(!n)return;
+ S.fb=keep;S.gold+=v;S.total+=v;S.fishG+=v;gainXp(Math.min(60,n*.3));
+ sfx(880,.1,"triangle");setTimeout(()=>sfx(1175,.12,"triangle"),90);setTimeout(()=>sfx(1568,.2,"triangle"),180);
+ sayFish(__("Peixes vendidos: +{0}",fmt(v)));
+ paintMarket();refresh();save();
+}
+
+// ===== 2-sistemas/14-fogueira.js — Fogueira: assar os peixes pescados e transformá-los em comida de energia =====
+// Espaço (ou clique) perto da fogueira abre a janela: escolha um peixe, ele fica no espeto e o marcador da barra de ponto vai e volta cada vez mais rápido; aperte Espaço (ou o botão)
+// quando ele passar pela faixa certa (se demorar demais o peixe queima sozinho). Crua/mal passada rebaixa a comida, no ponto mantém, PERFEITA sobe um nível, queimada vira carvão (o peixe se perde).
+// Comida pela raridade do peixe: comum = Peixe assado, raro = Peixe grelhado, lendário = Banquete do pescador (ITEMS pas/pgr/pbq; ficam na barra).
+// Velocidade e limites do ponto: BAL.fish.cook. Desenho da janela: 5-desenho/16-pesca-desenho.js. O peixe só sai da bolsa no fim, então fechar a janela no meio não perde nada.
+const FOODS=["pas","pgr","pbq"];
+const nearCamp=()=>onGround()&&Math.abs(S.mc-CAMP_C)<=2;
+const CPC={w:460,h:220};
+let cp=null,cpRaf=0,cpCv=null,cpG=null;
+function campHit(px,py){
+ const y=rowY(0);if(py<y-T*2.6||py>y+T*.4)return false;
+ return Math.abs(camX+(px-W/2)/T-CAMP_C)<=2.2;
+}
+function campUse(){
+ if(!nearCamp())return false;
+ if(modal)return true;
+ openCamp();return true;
+}
+function openCamp(){
+ const b=openModal("camp");b.style.maxWidth="500px";
+ b.innerHTML="<div class='casino campbox'><canvas id='cpcv'></canvas><div id='cpui'></div></div>";
+ cpCv=$("cpcv");const dpr=Math.min(2,window.devicePixelRatio||1);cpCv.width=CPC.w*dpr;cpCv.height=CPC.h*dpr;
+ cpCv.style.cssText="width:100%;max-width:"+CPC.w+"px;aspect-ratio:"+CPC.w+"/"+CPC.h+";display:block;margin:0 auto 8px;border-radius:10px";
+ cpG=cpCv.getContext("2d");
+ cpCv.onpointerdown=()=>{if(!cp)return;if(cp.sc==="roast")campTake();else if(cp.sc==="result"&&cp.t>.5){cp={sc:"list",t:0,age:cp.age};campPaint()}};   // tocar/clicar na fogueira tira o peixe (celular) e volta à lista
+ cp={sc:"list",t:0,age:0};campPaint();
+ cancelAnimationFrame(cpRaf);campFrame.last=0;cpRaf=requestAnimationFrame(campFrame);
+}
+function campPaint(){
+ const ui=$("cpui");if(!ui||!cp||modal!=="camp")return;
+ if(cp.sc==="list"){
+  const gs=fishGroups();
+  ui.innerHTML="<div class='fshint'>"+(gs.length?__("Escolha um peixe para assar. No ponto perfeito a comida sobe um nível."):__("Você não tem peixes. Pesque no riacho ou no mar e volte aqui."))+"</div>"
+   +(gs.length?"<div class='fklist'>"+gs.map(x=>"<button data-s='"+x.f.id+"' data-t='"+x.f.t+"'><i style='background:"+x.f.c+"'></i><span class='n'>"+__(x.f.n)+" <small>x"+x.n+" · "+tierName(x.f.t)+"</small></span><span class='v'>\u2192 "+ITEMS[FOODS[x.f.t]].n+"</span></button>").join("")+"</div>":"")
+   +"<div class='cpfoods'><div class='cpft'>"+__("Comidas")+"</div><div class='cpfg'>"+FOODS.map(k=>"<div class='fd"+(have(k)?"":" no")+"' style='--fc:"+ITEMS[k].c+"'><i></i><span class='fn'>"+ITEMS[k].n+"</span><small>"+__("+{0}% de energia",Math.round(ITEMS[k].en*100))+"</small><b>x"+have(k)+"</b></div>").join("")+"</div></div>"
+   +"<div class='fsbtns'><button id='cpclose'>"+__("Fechar · Esc")+"</button></div>";
+  ui.querySelectorAll("button[data-s]").forEach(x=>x.onclick=()=>campStart(x.dataset.s));
+  $("cpclose").onclick=closeModal;
+ }else if(cp.sc==="roast"){
+  ui.innerHTML="<div class='fshint'>"+__("Aperte <b>Espaço</b> quando o marcador passar pela faixa <b>dourada</b>. Ele vai e volta cada vez mais rápido, e se demorar o peixe queima!")+"</div>"
+   +"<div class='fsbtns'><button id='cptake' class='go'>"+__("Tirar do fogo · Espaço")+"</button><button id='cpback'>"+__("Voltar")+"</button></div>";
+  $("cptake").onclick=campTake;$("cpback").onclick=()=>{cp={sc:"list",t:0,age:cp.age};campPaint()};
+ }else{
+  const r=cp.res,names=[__("Mal passado"),__("No ponto"),__("PERFEITO!"),__("Queimou!")];
+  ui.innerHTML="<div class='fshint'><b>"+names[r.q]+"</b> "+(r.food?__("Você ganhou: {0}",ITEMS[r.food].n):__("Virou carvão. Mais sorte da próxima vez."))+"</div>"
+   +"<div class='fsbtns'><button id='cpagain' class='go'>"+__("Assar outro")+"</button><button id='cpclose'>"+__("Fechar · Esc")+"</button></div>";
+  $("cpagain").onclick=()=>{cp={sc:"list",t:0,age:cp.age};campPaint()};$("cpclose").onclick=closeModal;
+ }
+}
+function campStart(id){
+ let idx=-1;   // assa o menor peixe da espécie primeiro (os maiores valem mais para vender)
+ for(let i=0;i<S.fb.length;i++){const e=S.fb[i];if(e[0]===id&&(idx<0||e[1]<S.fb[idx][1]))idx=i}
+ const f=FISH_BY[id];if(idx<0||!f)return;
+ cp={sc:"roast",t:0,age:cp.age,id,idx,f,ph:0,p:0,tt:0,sizz:0};
+ campPaint();sfx(300,.06,"triangle");
+}
+// qualidade pelo ponto p (0 a 1): 0 mal passado · 1 no ponto · 2 perfeito · 3 queimado
+const campQuality=p=>{const z=BAL.fish.cook.zones;return p<z[0]?0:p<z[1]?1:p<z[2]?2:3};
+function campTake(){
+ if(!cp||cp.sc!=="roast"||modal!=="camp")return;
+ const q=campQuality(Math.min(1,cp.p)),f=cp.f,e=S.fb[cp.idx];
+ if(!e||e[0]!==cp.id){cp={sc:"list",t:0,age:cp.age};campPaint();return}
+ S.fb.splice(cp.idx,1);
+ let food=null;
+ if(q<3){
+  const tier=clamp(f.t+(q===2?1:q===0?-1:0),0,2);food=FOODS[tier];
+  S.items[food]=Math.min(99,have(food)+1);S.cookN++;if(q===2)S.cookP++;
+  gainXp(xpNeed(S.lvl)*.01*(1+tier));
+ }
+ cp={sc:"result",t:0,age:cp.age,f,res:{q,food}};
+ if(q===2){[659,784,988,1319].forEach((n,i)=>setTimeout(()=>{sfx(n,.16,"triangle");sfx(n/2,.2,"sine")},i*90))}
+ else if(q===3){sfx(150,.25,"sawtooth");setTimeout(()=>sfx(110,.3,"sawtooth"),140)}
+ else{sfx(587,.1,"triangle");setTimeout(()=>sfx(784,.14,"triangle"),90)}
+ campPaint();save();refresh();
+}
+function campFrame(now){
+ if(modal!=="camp"||!cp||!cpCv){cpRaf=0;return}
+ const dt=Math.min(.05,(now-(campFrame.last||now))/1000);campFrame.last=now;
+ cp.age+=dt;cp.t+=dt;
+ if(cp.sc==="roast"){
+  const C=BAL.fish.cook;cp.ph+=C.speed[cp.f.t]*(1+C.ramp*Math.floor(cp.ph))*dt;   // fase: cada 1 é uma ida ou uma volta, cada vez mais rápida
+  const m=cp.ph%2;cp.p=m<1?m:2-m;cp.tt=Math.min(1,cp.ph/C.passes);cp.sizz-=dt;
+  if(cp.sizz<=0){cp.sizz=.1+Math.random()*.16;sfx(1800+Math.random()*2200,.02,"sawtooth")}
+  if(cp.ph>=C.passes){cp.p=1;campTake()}   // demorou demais: queimou
+ }
+ campDraw(cpG,dt);
+ cpRaf=requestAnimationFrame(campFrame);
+}
+function campKey(e){
+ if(e.code==="Escape"){e.preventDefault();closeModal();return}
+ if(e.code==="Space"||e.code==="Enter"){
+  if(!cp)return;
+  e.preventDefault();if(e.repeat)return;
+  if(cp.sc==="roast")campTake();
+  else if(cp.sc==="result"&&cp.t>.5){cp={sc:"list",t:0,age:cp.age};campPaint()}
+ }
+}
+
 // ===== 2-sistemas/15-fundo.js — Final: a cenoura dourada na Rocha-mãe (cena de chegada) e a escolha entre Renascer e continuar cavando =====
 // Ao chegar à Rocha-mãe (1500 m) abre-se uma alcova ao lado do jogador com a cenoura dourada. A cena pede para tocar nela; depois vem a tela "VOCÊ CHEGOU AO FUNDO" (3-mundo/03-mineracao.js, openBottom) com as duas escolhas.
 // carrotC é só da sessão (não entra no save): o Renascer gera outro mundo e zera.
@@ -2039,9 +2499,9 @@ const zoomMin=()=>W/(COLS+2)/baseTile();          // zoom normal mínimo: o mund
 const zoomMax=()=>Math.max(2.2,zoomMin()*1.8);
 const zoomSurfaceMin=()=>W/(SURF_R-SURF_L+PAD_L+PAD_R+2)/baseTile(); // mínimo para mostrar toda a extensão da superfície
 function surfaceZoomTarget(){
- if(S.depth>0||S.mc<=0)return zoomPreference;
- const p=clamp(S.mc/Math.max(1,SURF_R),0,1),e=p*p*(3-2*p); // progressão suave do zoom ao caminhar para a direita
- return Math.max(zoomSurfaceMin(),zoomPreference*(1-.65*e));
+ if(fs)return Math.max(zoomPreference,Math.min(3.2,W/(baseTile()*9),H/(baseTile()*7)));   // pescando: zoom in na água (suave, como o resto)
+ if(S.depth>0)return zoomPreference;
+ return zoomPreference;                                  // na superfície (qualquer lado): sem zoom out, o zoom fica como o jogador escolheu
 }
 function applyZoom(dt=0){const target=surfaceZoomTarget();if(dt>0)worldZoom+=(target-worldZoom)*(1-Math.exp(-4*dt));else worldZoom=target;T=baseTile()*worldZoom}
 function setZoom(z){zoomPreference=clamp(z,zoomMin(),zoomMax());applyZoom(0)}
@@ -2114,10 +2574,17 @@ function tgt(){const p=S.depth,c=S.mc;switch(S.dir){
  case"left":return[c-1,p-1];case"right":return[c+1,p-1];case"up":return[c,p-2];
  default:return[c,p]}}
 // No ar: abaixo da superfície, com a célula sob os pés já cavada (sem chão). Nesse caso a mochila a jato fica ligada, com chama.
-const airborne=()=>S.depth>0&&S.depth<FINAL_DEPTH&&isDug(S.mc,S.depth);
+const SKY_CEIL=8;   // teto invisível: a mochila a jato sobe no máximo este tanto de blocos acima do chão da superfície (acima do telhado da casa e da chaminé)
+// Telhado da casa da ferraria: sólido nas linhas -2 e -3 (do beiral à cumeeira) nas colunas da casa. Dentro dela sobe-se só até -1 (a viga) e de lado não se entra pelo telhado,
+// mas a partir de -4 (acima da chaminé) passa-se por cima dele livremente.
+const HOUSE_L=-10,HOUSE_R=-1;
+const houseSolid=(c,d)=>c>=HOUSE_L&&c<=HOUSE_R&&d>=-3&&d<=-2;
+const houseBlocks=(dir)=>{if(houseSolid(S.mc,S.depth))return false;   // se já estiver preso nele, deixa sair
+ const c=dir==="left"?S.mc-1:dir==="right"?S.mc+1:S.mc,d=dir==="up"?S.depth-1:dir==="down"?S.depth+1:S.depth;return houseSolid(c,d)}
+const airborne=()=>S.depth<0||(S.depth>0&&S.depth<FINAL_DEPTH&&isDug(S.mc,S.depth));
 const DIR_UP=["up"];
 function setDir(d){if(!["up","down","left","right"].includes(d))return;   // só as 4 direções: não existe mais golpe nem movimento na diagonal
- if(DIR_UP.includes(d)&&S.depth<1)return;if(d==="down"){jetT=0;parts=parts.filter(p=>!p.jet)} // ao começar a descer, apaga a chama e as partículas imediatamente
+ if(DIR_UP.includes(d)&&S.depth<=-SKY_CEIL)return;if(d==="down"){jetT=0;parts=parts.filter(p=>!p.jet)} // ao começar a descer, apaga a chama e as partículas imediatamente
  if(S.dir!==d){S.dir=d;S.prog=0}}
 
 // ===== 3-mundo/02-coleta.js — Quebrar um bloco: sorteia minério, coloca na mochila e abre a célula =====
@@ -2131,7 +2598,7 @@ function collect(c,r){
  let v=blockGold(r)*(ore?ore[1]*n:vein?VEIN_GOLD:1);
  S.bag.v+=v;S.bag.n+=n;S.blocks++;if(vein)S.veins++;if(rich)S.rich++;
  const key=ore?ore[0]:vein?"Pedra dura":"Pedra";S.bag.o[key]=(S.bag.o[key]||0)+n;S.bag.ov[key]=(S.bag.ov[key]||0)+v;
- if(ore){S.oc+=n;if(!S.od.includes(ore[0])){S.od.push(ore[0]);say(__("Novo minério: {0}",__(ore[0])))}}
+ if(ore){S.oc+=n;if(!S.od.includes(ore[0])){S.od.push(ore[0]);sayMine(__("Novo minério: {0}",__(ore[0])))}}
  dug.add(c+","+r);
  const chk=chestAt(c,r);if(chk)chestFound(r,chk-1);   // baú: o prêmio é sorteado e pago agora; a animação de abertura roda assim que não houver outra janela aberta
  ctProg("blk",null,1,r);if(ore)ctProg("ore",ore[0],n,r);
@@ -2160,18 +2627,19 @@ function openBottom(){
  $("bt-re").onclick=()=>{closeModal();doRebirth()};
  $("bt-no").focus();
 }
-function move(d){if(modal)return;setDir(d);const[a,b]=tgt();if(isDug(a,b)){S.prog=0;step(d==="down")}}   // descer por buraco já cavado é de graça
+function move(d){if(modal||fs)return;if(d==="up"&&S.depth<=-SKY_CEIL)return;setDir(d);if(houseBlocks(d))return;   // telhado da casa: sólido; só se passa por cima dele
+ const[a,b]=tgt();if(isDug(a,b)){S.prog=0;step(d==="down")}}   // descer por buraco já cavado é de graça
 function step(free){
  const[tc]=tgt();
  if(S.dir==="left"||S.dir==="right")S.mc=tc;
  else if(S.dir==="up")S.depth--;
  else S.depth++;
- S.depth=clamp(S.depth,0,FINAL_DEPTH);
+ S.depth=clamp(S.depth,-SKY_CEIL,FINAL_DEPTH);
  if(S.depth>S.runMax)S.runMax=S.depth;
- if(S.depth>S.best){S.best=S.depth;if(S.best%50===0){say(__("Novo recorde: {0} m",S.best));gainXp(25);sfx(1200,.3,"sine")}}
+ if(S.depth>S.best){S.best=S.depth;if(S.best%50===0){sayMine(__("Novo recorde: {0} m",S.best));gainXp(25);sfx(1200,.3,"sine")}}
  const L=layerOf(S.depth);
  if(L>layerSeen){layerSeen=L;cmbBanner=1;cmbBannerT=L>=BIO.length-1?__("CORAÇÃO DO ABISMO"):__("CAMADA: {0}",__(BIO[L][0]).toUpperCase());sfx(330,.4,"triangle");sfx(494,.5,"triangle");
-  if(S.depth>=FINAL_DEPTH){say(__("A Rocha-mãe é inquebrável: você chegou ao fundo!"));reachBottom()}}
+  if(S.depth>=FINAL_DEPTH){sayMine(__("A Rocha-mãe é inquebrável: você chegou ao fundo!"));reachBottom()}}
  if(S.dir==="up"){jetT=JET_FLAME;sfx(140+Math.random()*30,.07,"sawtooth");if(S.depth>=0)spend(stepCost(Math.max(0,S.depth))*jetMult())}   // subir: mochila a jato, gasta o passo inteiro
  else if(S.depth>0&&!free)spend(stepCost(Math.max(0,S.depth-1))*.5);   // descer ou andar de lado: metade
 }
@@ -2209,7 +2677,7 @@ function breakPrimary(tc,tr,auto,crit){
 function hit(dmg,crit,auto){
  const[a,b]=tgt();
  if(isDug(a,b))return;
- if(!canBreak(a,b)){S.prog=0;if(isVein(a,b)&&!auto){hitSfx("hard",b);if(toastT<=0)say(__("Pedra dura: só quebra com dinamite"))}return}
+ if(!canBreak(a,b)){S.prog=0;if(isVein(a,b)&&!auto){hitSfx("hard",b);if(toastT<=0)sayWarn(__("Pedra dura: só quebra com dinamite"))}return}
  const d0=S.deaths;
  if(!auto||Math.random()<.04)swing=1;
  if(!auto)hitSfx(blockKind(a,b),b);
@@ -2226,13 +2694,48 @@ function hit(dmg,crit,auto){
   const[a2,b2]=tgt();if(isDug(a2,b2)||!canBreak(a2,b2)){S.prog=0;break}
  }
 }
-function clickDig(){if(modal)return;if(atSurface()){if(nearFurnace()){furUse();return}if(nearChest()){chestUse();return}if(nearBoard()){boardUse();return}if(nearSlot()){slotUse();return}}const c=Math.random()<critCh();hit(clickPow()*(c?CRIT_MULT:1),c)}
+function clickDig(){if(modal)return;if(fs){fishAct();return}if(atSurface()){if(nearFurnace()){furUse();return}if(nearChest()){chestUse();return}if(nearBoard()){boardUse();return}if(nearSlot()){slotUse();return}if(nearCamp()){campUse();return}if(fishSpot()){fishUse();return}if(nearKeeper()&&S.fb.length){marketUse();return}}const c=Math.random()<critCh();hit(clickPow()*(c?CRIT_MULT:1),c)}
 
+// Ícones em pixel dos avisos (9x9): a = cor principal, b = brilho, c = detalhe escuro. Cada categoria tem sua cor: mina, pesca, ouro, clima, estrela, nível, habilidade, comida, alerta e geral.
+const NOTE_ICONS={
+ mine:{c:["#f0913a","#ffc27a","#9a5b2a"],r:["..aaaaa..",".aabbbaa.","aa..c..aa","a...c...a","....c....","....c....","....c....","....c....","....c...."]},
+ fish:{c:["#4db6ff","#a6dcff","#2a6fb0"],r:[".........",".........","..aaaa...",".abbaaa.a","aadaaaaaa",".aaaaaa.a","..aaaa...",".........","........."]},
+ gold:{c:["#f5c431","#fff0a0","#b8860b"],r:["..aaaaa..",".abbaaaa.","abaaacaaa","aaaaacaaa","aaaaacaaa","aaaaacaaa","aaaaacaaa",".aaaaaaa.","..aaaaa.."]},
+ weather:{c:["#7cc8ff","#d6efff","#4a8fc4"],r:[".........",".........","...aaa...","..abbaa..",".abbaaaaa","aaaaaaaaa","aaaaaaaaa",".aaaaaaa.","........."]},
+ star:{c:["#c7a0ff","#eadbff","#8a5fd0"],r:["....a....","....a....","...aaa...","aaaaaaaaa",".aaabaaa.","..aaaaa..","..aa.aa..",".aa...aa.",".a.....a."]},
+ level:{c:["#6ee07a","#c4f5c9","#3a9a47"],r:["....a....","...aaa...","..aabaa..",".aabaaaa.","...aaa...","...aaa...","...aaa...","...aaa...","........."]},
+ power:{c:["#c8e84a","#f1ffa8","#8aa51f"],r:["....aaa..","...aaa...","..aaa....",".aaaaaaa.","...aaa...","..aaa....",".aaa.....",".aa......",".a......."]},
+ food:{c:["#f0893a","#ffc08a","#5fd35f"],r:["...c.c...","....c....","...aaa...","..abaaa..","..aaaaa..","...aaa...","...aaa...","....a....","....a...."]},
+ warn:{c:["#ff6b6b","#ffb0b0","#b83a3a"],r:["...aaa...","...aaa...","...aaa...","...aaa...","...aaa...",".........","...aaa...","...aaa...","........."]},
+ info:{c:["#cfd8ea","#ffffff","#8a96b0"],r:["....a....","...aba...","..aabaa..",".aaaaaaa.","aaaaaaaaa",".aaaaaaa.","..aaaaa..","...aaa...","....a...."]}
+};
+const noteIconCache={};
+function noteIcon(kind){
+ if(noteIconCache[kind])return noteIconCache[kind];
+ const d=NOTE_ICONS[kind]||NOTE_ICONS.info,cv=document.createElement("canvas");cv.width=9;cv.height=9;
+ const g=cv.getContext("2d");
+ d.r.forEach((row,y)=>{for(let x=0;x<9;x++){const ch=row[x];if(ch==="."||ch===undefined)continue;g.fillStyle=d.c[ch==="b"?1:ch==="a"?0:2];g.fillRect(x,y,1,1)}});
+ return noteIconCache[kind]="url("+cv.toDataURL()+")";
+}
+// Texto do aviso do canto superior direito: ícone colorido + texto, tentando caber em UMA linha. Se faltar pouco espaço, a letra diminui até 25%; se o texto for bem longo, quebra linha normalmente.
+let layerKey="",layerBase=0;
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{layerKey=""});   // a fonte pixelada é mais larga que a reserva: mede de novo quando carregar
+function setLayerText(txt,kind){
+ const l=$("layer"),pw=l.parentElement.clientWidth,key=kind+"|"+txt+"|"+pw;
+ if(key===layerKey)return;layerKey=key;
+ l.textContent="";const ic=document.createElement("i");ic.className="ic";ic.style.backgroundImage=noteIcon(kind);l.appendChild(ic);l.appendChild(document.createTextNode(txt));
+ l.style.fontSize="";l.style.whiteSpace="nowrap";
+ if(!layerBase)layerBase=parseFloat(getComputedStyle(l).fontSize)||12;
+ const cs=getComputedStyle(l),padX=parseFloat(cs.paddingLeft)+parseFloat(cs.paddingRight),bdX=parseFloat(cs.borderLeftWidth)+parseFloat(cs.borderRightWidth);
+ const maxW=pw-(matchMedia("(max-width:760px)").matches?96:104),nat=l.scrollWidth;   // nat = largura natural em uma linha (ícone + texto + padding); o ícone usa em, então encolhe junto com a letra
+ if(nat+bdX>maxW){const r=(maxW-padX-bdX)/(nat-padX);if(r>=.75)l.style.fontSize=(layerBase*r*.95).toFixed(2)+"px";else l.style.whiteSpace="";}
+}
 // ===== 4-interface/01-painel.js — Construção do painel (build) e atualização da interface (refresh), Renascer e apagar progresso =====
 const mk=(tag,cls,html)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e};
 const upBtn=(id,fn)=>{const b=mk("button","up",'<span class="n"></span><span class="d"></span><span class="c"></span><span class="k"></span>');b.id=id;b.onclick=fn;return b};
-const GROUPS=[N_("Picareta"),N_("Energia"),N_("Escavação automática"),N_("Sorte e experiência"),N_("Habilidades"),N_("Utilidades"),N_("Fornalha")];
+const GROUPS=[N_("Picareta"),N_("Energia"),N_("Escavação automática"),N_("Sorte e experiência"),N_("Habilidades"),N_("Utilidades"),N_("Fornalha"),N_("Pesca")];
 function build(){
+ const keepScroll=[...document.querySelectorAll(".pane")].map(p=>[p,p.scrollTop]);   // recriar a lista não pode jogar o scroll de volta para o topo ao comprar
  $("qty").innerHTML="";
  [[1,"x1"],[10,"x10"],[100,"x100"],[0,__("Máx")]].forEach(([v,t])=>{const b=mk("button",qty===v?"on":"",t);b.onclick=()=>{qty=v;build()};$("qty").appendChild(b)});
  const box=$("ups");box.innerHTML="";
@@ -2251,6 +2754,7 @@ function build(){
  const sk=$("sks");sk.innerHTML="";
  for(const k in SK)sk.appendChild(upBtn("s-"+k,()=>{const l=S.sk[k];if(S.runs>0&&l<SK[k][2]&&S.pts>=l+1){S.pts-=l+1;S.sk[k]++;sfx(700,.12,"triangle");refresh()}}));
  refresh();
+ for(const[p,y]of keepScroll)p.scrollTop=y;
 }
 // Cor discreta por progresso da melhoria (igual para todas): 0 = sem cor · 1..4 = faixas de 25% · 5 = máximo
 const lvTier=(l,mx)=>l<=0?0:l>=mx?5:1+Math.min(3,Math.floor(l/mx*4));
@@ -2263,7 +2767,7 @@ function setTxt(id,n,d,c,dis,tier,cnt){const b=$(id);if(!b)return;if(tier!=null)
 function refresh(){
  const surf=atSurface(),shop=nearBench(),mE=maxEn();
  $("gold").textContent=fmt(S.gold);
- $("depth").textContent=fmt(S.depth)+" m";$("best").textContent=fmt(S.best);$("depthbox").title=__("Recorde: {0} m",fmt(S.best));
+ $("depth").textContent=fmt(Math.max(0,S.depth))+" m";$("best").textContent=fmt(S.best);$("depthbox").title=__("Recorde: {0} m",fmt(S.best));
  const er=clamp(S.en/mE,0,1);$("enfill").style.width=(er*100)+"%";$("ent").textContent=Math.ceil(S.en)+" / "+mE;$("enbox").classList.toggle("low",er<.25);
  // medidor de retorno (melhoria da mesa): só efeitos na barra de energia (zonas, marca e brilho), sem textos nem números novos
  const rs=returnState(),rc=returnCost(),own=S.lv.back>0&&S.depth>0&&!S.debug,eb=$("enbox");
@@ -2277,7 +2781,7 @@ function refresh(){
  refreshBagPop();
  $("lv").textContent=S.lvl;const xpGoal=xpNeed(S.lvl),xr=clamp(S.xp/xpGoal,0,1);$("xpt").textContent=fmt(S.xp)+" / "+fmt(xpGoal)+" XP";$("xpi").style.width=(xr*100)+"%";$("xpbar").style.setProperty("--xp-brightness",1+xr*.65);$("xpbar").style.setProperty("--xp-glow",(4+xr*18)+"px");$("xpbar").classList.toggle("xp-near",xr>=.8);$("xpbar").setAttribute("aria-valuenow",Math.round(xr*100));
  $("pts").textContent=S.pts;
- $("layer").textContent=toastT>0?toast:(surf?__("Superfície · melhorias liberadas · {0}",WX[wx.cur].n):layerName(S.depth)+(S.depth>=FINAL_DEPTH?" · "+__("INQUEBRÁVEL"):""))+(ev>0?"  "+(evT?__("Minérios x3"):__("Ouro x3"))+" "+Math.ceil(ev)+"s":"");
+ setLayerText(toastT>0?toast:(surf?__("Superfície · melhorias liberadas · {0}",WX[wx.cur].n):layerName(S.depth)+(S.depth>=FINAL_DEPTH?" · "+__("INQUEBRÁVEL"):""))+(ev>0?"  "+(evT?__("Minérios x3"):__("Ouro x3"))+" "+Math.ceil(ev)+"s":""),toastT>0?toastK:(surf?"weather":"mine"));
  $("layer").title=$("layer").textContent;
  $("surfmsg").textContent=!surf?__("Melhorias só na superfície. Suba (ou use o teleporte) para comprar."):shop?__("Na mesa de trabalho: você pode melhorar o equipamento. Venda os itens no baú (clique nele)."):__("Vá até a mesa de trabalho (à esquerda do buraco) para comprar melhorias.");
  $("surfmsg").classList.toggle("warn",!shop);
@@ -2310,11 +2814,12 @@ function renderStats(){
  if((S.tab||0)!==2)return;
  const row=(l,v)=>"<dt>"+l+"</dt><dd>"+v+"</dd>",sec=(t,r)=>"<h3>"+t+"</h3><dl class='sg'>"+r.join("")+"</dl>",pct=x=>Math.round(x*100)+"%";
  const st=sec(__("Escavação"),[row(__("Dano por golpe"),fmt(clickPow())),row(__("Dano automático"),fmt(autoDps())+"/s"),row(__("Chance de crítico"),pct(critCh())),row(__("Velocidade"),"+"+Math.round((attackSpeedMult()-1)*100)+"%")])
-  +sec(__("Energia"),[row(__("Por bloco (aqui)"),digCost(S.depth).toFixed(1)),row(__("Por bloco (automático)"),(digCost(S.depth)*AUTO_ENERGY).toFixed(1)),row(__("Subir 1 m com o jato"),(stepCost(S.depth)*jetMult()).toFixed(2)),row(__("Dano da lava (aqui)"),S.depth>=BAL.lava.from?Math.round(lavaDmg(S.depth)):__("sem lava"))])
+  +sec(__("Energia"),[row(__("Por bloco (aqui)"),digCost(Math.max(0,S.depth)).toFixed(1)),row(__("Por bloco (automático)"),(digCost(Math.max(0,S.depth))*AUTO_ENERGY).toFixed(1)),row(__("Subir 1 m com o jato"),(stepCost(Math.max(0,S.depth))*jetMult()).toFixed(2)),row(__("Dano da lava (aqui)"),S.depth>=BAL.lava.from?Math.round(lavaDmg(S.depth)):__("sem lava"))])
   +sec(__("Nesta profundidade · {0} m",fmt(S.depth)),[row(__("Ouro por bloco"),fmt(blockGold(S.depth))),row(__("Dureza"),fmt(hardness(S.depth))),row(__("Chance de minério"),pct(oreChance())),row(__("Bônus de XP"),"+"+Math.round((xpGainMult()-1)*100)+"%")])
   +sec(__("Progresso"),[row(__("Profundidade máxima"),fmt(S.best)+" m"),row(__("Ouro total"),fmt(S.total)),row(__("Blocos quebrados"),fmt(S.blocks)),row(__("Minérios coletados"),fmt(S.oc)),row(__("Catálogo de minérios"),S.od.length+"/"+ORES.length),row(__("Renascimentos"),S.runs),row(__("Fragmentos"),S.pts),row(__("Estação do ano"),SEASONS[SEA.idx].n)])
   +sec(__("Uso"),[row(__("Vendas no baú"),S.sold),row(__("Vezes sem energia"),S.deaths),row(__("Dinamites usadas"),S.bombs),row(__("Itens comidos"),S.eaten),row(__("Teleportes"),S.tps),row(__("Pedras duras quebradas"),S.veins),row(__("Veios de minério quebrados"),S.rich),row(__("Vezes na cama"),S.sleeps),row(__("Minérios refinados"),fmt(S.refined))])
-  +sec(__("Baús"),[row(__("Baús abertos"),S.chests)].concat(BAL.chest.tiers.map((t,i)=>row(__(t.n),"<span style='color:"+t.c+"'>"+S.chT[i]+"</span>")),[row(__("Ouro de baús"),fmt(S.chGold)),row(__("Fragmentos de baús"),S.chFr),row(__("Bônus de melhoria"),S.chPk),row(__("Poções de teleporte usadas"),S.ptpUsed)]));
+  +sec(__("Baús"),[row(__("Baús abertos"),S.chests)].concat(BAL.chest.tiers.map((t,i)=>row(__(t.n),"<span style='color:"+t.c+"'>"+S.chT[i]+"</span>")),[row(__("Ouro de baús"),fmt(S.chGold)),row(__("Fragmentos de baús"),S.chFr),row(__("Bônus de melhoria"),S.chPk),row(__("Poções de teleporte usadas"),S.ptpUsed)]))
+  +sec(__("Pesca"),[row(__("Peixes pescados"),S.fishN),row(__("Pescarias perfeitas"),S.fishP),row(__("Peixes na bolsa"),S.fb.length+"/"+BAL.fish.bag),row(__("Peixes assados"),S.cookN),row(__("Ouro de peixes"),fmt(S.fishG)),row(__("Álbum de peixes"),Object.keys(S.fdx).length+"/"+FISH.length)].concat(FISH.map(f=>row(S.fdx[f.id]?"<span style='color:"+f.c+"'>"+__(f.n)+"</span>":"???",S.fdx[f.id]?S.fdx[f.id]+" cm":"-"))));
  const all=ACH.map((a,i)=>({a,i,ok:S.ach.includes(i)})),todo=all.filter(x=>!x.ok),done=all.filter(x=>x.ok);
  const li=x=>"<li class='"+(x.ok?"ok":"")+"'><i>"+(x.ok?"✓":"")+"</i><span><b>"+__(x.a[0])+"</b><small>"+__(x.a[1])+"</small></span></li>";
  const ac="<div class='achbar'><i style='width:"+(done.length/ACH.length*100)+"%'></i></div>"
@@ -2331,10 +2836,10 @@ $("prest").onclick=()=>{
  clearTimeout(armT);armed=false;doRebirth();
 };
 function doRebirth(){   // Renascer (botão do painel, depois de confirmar, e janela de chegada ao fundo)
- const keep={runs:S.runs+1,best:S.best,ach:S.ach,oc:S.oc,total:S.total,debug:S.debug,sk:S.sk,pts:S.pts+prestGain(),od:S.od,xp:S.xp,lvl:S.lvl,lvp:S.lvp,pk:S.pk,vol:S.vol,deaths:S.deaths,sold:S.sold,play:S.play,blocks:S.blocks,tab:S.tab,items:S.items,bombs:S.bombs,eaten:S.eaten,tps:S.tps,veins:S.veins,rich:S.rich,sleeps:S.sleeps,refined:S.refined,ctDone:S.ctDone,spins:S.spins,chests:S.chests,chTop:S.chTop,chT:S.chT,chGold:S.chGold,chFr:S.chFr,chPk:S.chPk,ptpUsed:S.ptpUsed,slotNet:S.slotNet,sea:S.sea};
- const h=S.sk.her,ini=S.sk.ini,clk=S.lv.clock,bk=S.lv.back;S=Object.assign(fresh(),keep);S.lv.clock=clk;S.lv.back=bk;   // o relógio (compra única) e a estação do ano não se perdem ao renascer
+ const keep={runs:S.runs+1,best:S.best,ach:S.ach,oc:S.oc,total:S.total,debug:S.debug,sk:S.sk,pts:S.pts+prestGain(),od:S.od,xp:S.xp,lvl:S.lvl,lvp:S.lvp,pk:S.pk,vol:S.vol,deaths:S.deaths,sold:S.sold,play:S.play,blocks:S.blocks,tab:S.tab,items:S.items,bombs:S.bombs,eaten:S.eaten,tps:S.tps,veins:S.veins,rich:S.rich,sleeps:S.sleeps,refined:S.refined,ctDone:S.ctDone,spins:S.spins,chests:S.chests,chTop:S.chTop,chT:S.chT,chGold:S.chGold,chFr:S.chFr,chPk:S.chPk,ptpUsed:S.ptpUsed,slotNet:S.slotNet,sea:S.sea,fb:S.fb,fdx:S.fdx,fishN:S.fishN,fishP:S.fishP,fishG:S.fishG,cookN:S.cookN,cookP:S.cookP};
+ const h=S.sk.her,ini=S.sk.ini,clk=S.lv.clock,bk=S.lv.back,rd=S.lv.rod,bt=S.lv.bait;S=Object.assign(fresh(),keep);S.lv.clock=clk;S.lv.back=bk;S.lv.rod=rd;S.lv.bait=bt;   // o relógio (compra única), a vara e a isca de pesca e a estação do ano não se perdem ao renascer
  S.seed=SEED=newSeed();chQ.length=0;carrotC=null;dug=new Set();mX=mY=camX=camY=0;layerSeen=0;
- S.tier=Math.min(ini,TIERS.length-1);S.gold=S.debug?Infinity:400*h*h;S.en=maxEn();build();save();say(__("Renascido! Fragmentos: {0}",S.pts));
+ S.tier=Math.min(ini,TIERS.length-1);S.gold=S.debug?Infinity:400*h*h;S.en=maxEn();build();save();sayLevel(__("Renascido! Fragmentos: {0}",S.pts));
 }
 let rst=false;
 function wipeAll(){   // recomeça do zero (botão "Apagar progresso" e save apagado pelo navegador)
@@ -2376,7 +2881,7 @@ const zoneNow=()=>nearBed()?"bed":nearBench()?"bench":nearShop()?"shop":nearFurn
 let zonePrev=zoneNow();
 function autoTab(){const z=zoneNow();if(z===zonePrev)return;zonePrev=z;if(z==="bench"&&(S.tab||0)!==0)setTab(0);else if(z==="shop"&&(S.tab||0)!==1)setTab(1);else if(z==="bed")sleepSave()}
 // Cama (ao lado da mesa de trabalho): ao chegar perto dela o jogo é salvo e o painel abre a aba Menu (save, som, exportar/importar).
-function sleepSave(){S.sleeps++;save();if((S.tab||0)!==3)setTab(3);say(__("Jogo salvo na cama"));sfx(440,.15,"sine");setTimeout(()=>sfx(660,.2,"sine"),120)}
+function sleepSave(){S.sleeps++;save();if((S.tab||0)!==3)setTab(3);sayInfo(__("Jogo salvo na cama"));sfx(440,.15,"sine");setTimeout(()=>sfx(660,.2,"sine"),120)}
 
 // ===== 4-interface/03-barra-habilidades.js — Barra de habilidades no estilo hotbar do Minecraft (Dinamite, Fúria, Frenesi, Teleporte e itens de energia) com ícones em pixel art =====
 // Ícones: matrizes 14x14 (cada letra é uma cor da paleta, "." é vazio). O contorno escuro é desenhado automaticamente e o SVG sai com pixels nítidos (sem suavização).
@@ -2391,6 +2896,11 @@ const SPR={
 };
 const SPR_PAL={fury:{O:"#ff6a2a",Y:"#ffd45c",W:"#fff3b0"},frenzy:{Y:"#ffe14a",W:"#fff8c8"},tele:{D:"#2c1766",P:"#6a3dff",p:"#b9a2ff",W:"#ffffff"},cen:{O:"#ff8a2a",o:"#c75a12",g:"#58c458"},sop:{w:"#f2f2f2",y:"#f0cf8c",r:"#e24b3b",B:"#c98a4b",b:"#e9b27a",d:"#8a5a2a"},poc:{c:"#b9854a",G:"#e6f7ff",L:"#35dcff",w:"#c9f6ff"}};
 SPR.ptp=SPR.poc;SPR_PAL.ptp={c:"#b9854a",G:"#efe6ff",L:"#9a5cff",w:"#e3d2ff"};
+// comidas feitas na fogueira: o mesmo peixe no espeto, mais dourado a cada nível (b corpo, l brilho, d marcas da brasa, t cauda, e olho, s espeto)
+const FISHSPR=["..............","..............","..............","...bbbbbb.....","..bblllbbbb..t",".bbllbbddbbbtt","ssebbbbddbbbtt",".bbbbbbddbbbtt","..bbbbbbbbb..t","...bbbbbb.....","..............","..............","..............",".............."];
+SPR.pas=FISHSPR;SPR_PAL.pas={b:"#d9a05b",l:"#f0c98a",d:"#8a5a2a",t:"#c9843a",e:"#2a1a0a",s:"#a8793f"};
+SPR.pgr=FISHSPR;SPR_PAL.pgr={b:"#ee8a4a",l:"#ffc08a",d:"#8a3a1a",t:"#d96a2a",e:"#2a1a0a",s:"#a8793f"};
+SPR.pbq=FISHSPR;SPR_PAL.pbq={b:"#ffd45c",l:"#fff3b0",d:"#c98a1a",t:"#f0b02a",e:"#2a1a0a",s:"#d9b46a"};
 const lighten=(h,a)=>"#"+[1,3,5].map(i=>Math.round(parseInt(h.slice(i,i+2),16)*(1-a)+255*a).toString(16).padStart(2,"0")).join("");
 const hotCache={};
 function pixSVG(rows,pal){
@@ -2404,26 +2914,38 @@ function pixSVG(rows,pal){
 function dynSprite(k){const key="d"+k;return hotCache[key]||(hotCache[key]=pixSVG(SPR.dyn,{R:ITEMS[k].c,r:lighten(ITEMS[k].c,.4),W:"#f6e6b8",k:"#3a2a1a",f:"#e9d9aa",y:"#ffd45c",o:"#ff9a3a"}))}
 const sprite=k=>hotCache[k]||(hotCache[k]=pixSVG(SPR[k],SPR_PAL[k]));
 // [nome, tecla, item de energia (clique), sprite]. Dinamite e itens de energia são consumíveis comprados na loja; os itens de energia só têm clique.
-const BAR=[[N_("Dinamite"),"E",null,"dyn"],[N_("Fúria do Minerador"),"1",null,"fury"],[N_("Escavação Frenética"),"2",null,"frenzy"],[N_("Teleporte"),"Q",null,"tele"],[N_("Cenourinha"),"","cen","cen"],[N_("Sopa de cogumelo"),"","sop","sop"],[N_("Poção de energia"),"","poc","poc"],[N_("Poção de teleporte"),"","ptp","ptp"]];
+const BAR=[[N_("Dinamite"),"E",null,"dyn"],[N_("Fúria do Minerador"),"1",null,"fury"],[N_("Escavação Frenética"),"2",null,"frenzy"],[N_("Teleporte"),"Q",null,"tele"],[N_("Cenourinha"),"","cen","cen"],[N_("Sopa de cogumelo"),"","sop","sop"],[N_("Poção de energia"),"","poc","poc"],[N_("Poção de teleporte"),"","ptp","ptp"],[N_("Comida de peixe"),"F",null,"fish"]];
+const FI=BAR.length-1;   // slot único das comidas de peixe (alterna entre assado, grelhado e banquete)
+const foodPick=()=>{if(have(S.fsel)>0||S.debug)return S.fsel;for(let i=FOODS.length-1;i>=0;i--)if(have(FOODS[i])>0)return FOODS[i];return S.fsel};
+function foodNext(){const own=FOODS.filter(k=>have(k)>0||k===S.fsel||S.debug);if(!own.length)return;const i=own.indexOf(S.fsel);S.fsel=own[(i+1)%own.length];sayFood(__("Comida escolhida: {0}",ITEMS[S.fsel].n));refresh()}
 function slotTitle(i){const s=BAR[i];
- if(s[2]){const it=ITEMS[s[2]];return it.tp?__("{0} — {1} (clique para usar). Você tem {2}",it.n,it.d,have(s[2])):__("{0} — {1} (clique para usar; compre na loja). Você tem {2}",it.n,it.d,have(s[2]))}
+ if(i===FI){const k=foodPick(),it=ITEMS[k];return __("{0} — {1} (clique ou F para usar; feito na fogueira). Você tem {2}. Botão direito troca o tipo",it.n,it.d,have(k))}
+ if(s[2]){const it=ITEMS[s[2]];return it.tp?__("{0} — {1} (clique para usar). Você tem {2}",it.n,it.d,have(s[2])):it.noShop?__("{0} — {1} (clique para usar; feito na fogueira). Você tem {2}",it.n,it.d,have(s[2])):__("{0} — {1} (clique para usar; compre na loja). Você tem {2}",it.n,it.d,have(s[2]))}
  const nm=__(s[0]);
  return i===0?__("{0} — {1}: explode uma área de raio {2} e quebra veios de pedra dura (consome 1, compre na loja). Você tem {3}. Botão direito ou R troca o tipo",nm,ITEMS[dynPick()].n,fmtN(BAL.dyn[dynPick()].r),have(dynPick()))
   :i===3?__("{0} — leva ao baú sem gastar energia; na superfície, volta ao ponto de onde saiu (compre em Melhorias)",nm)
   :__("{0} — {1} (desbloqueia aos {2} m)",nm,skillDescription(i-1),SKL[i-1][4])}
 function buildBar(){const bar=$("bar");bar.innerHTML="";const hot=mk("div","hot");bar.appendChild(hot);
- BAR.forEach((s,i)=>{const b=mk("button","slot",(i===0?dynSprite(dynPick()):sprite(s[3]))+(s[1]?"<span class='k'>"+s[1]+"</span>":"")+"<span class='qn'></span><i class='cd'></i>");
+ const G=[mk("div","hg g-sk"),mk("div","hg g-it"),mk("div","hg g-fd")];G.forEach(g=>hot.appendChild(g));   // habilidades · consumíveis · comida de peixe
+ BAR.forEach((s,i)=>{const b=mk("button","slot",(i===0?dynSprite(dynPick()):i===FI?sprite(foodPick()):sprite(s[3]))+(s[1]?"<span class='k'>"+s[1]+"</span>":"")+"<span class='qn'></span><i class='cd'></i>");
   b.title=slotTitle(i);
   if(i===0)b.oncontextmenu=e=>{e.preventDefault();dynNext()};
-  b.onclick=()=>{if(i===0)boom();else if(i===3)teleport();else if(s[2])useItem(s[2]);else useSk(i-1)};
-  if(i===0){const w=mk("span","dwrap");w.appendChild(b);const dp=mk("div","dpick");dp.id="dpick";w.appendChild(dp);hot.appendChild(w)}else hot.appendChild(b)})}
+  if(i===FI)b.oncontextmenu=e=>{e.preventDefault();foodNext()};
+  b.onclick=()=>{if(i===0)boom();else if(i===3)teleport();else if(i===FI)useItem(foodPick());else if(s[2])useItem(s[2]);else useSk(i-1)};
+  const g=G[i<4?0:i<8?1:2];
+  if(i===0||i===FI){const w=mk("span","dwrap");w.appendChild(b);const dp=mk("div","dpick");dp.id=i===0?"dpick":"fpick";w.appendChild(dp);g.appendChild(w)}else g.appendChild(b)})}
 // Seletor de dinamite: pilha de casinhas acima do ícone (aparece com 2 ou mais tipos); clique escolhe qual a tecla E usa
-function dpickUI(){const dp=$("dpick");if(!dp)return;const cur=dynPick(),own=DYN_IDS.filter(k=>have(k)>0||S.debug),sig=own.map(k=>k+have(k)).join()+cur;if(dp.dataset.s===sig)return;dp.dataset.s=sig;dp.innerHTML="";if(own.length<2)return;
- for(const k of own){const c=mk("button","dchip"+(k===cur?" on":""),dynSprite(k)+"<b>"+(S.debug?"∞":have(k))+"</b>");c.title=__("{0} (raio {1})",ITEMS[k].n,fmtN(BAL.dyn[k].r));c.onclick=e=>{e.stopPropagation();S.dsel=k;say(__("Dinamite escolhida: {0}",ITEMS[k].n));refresh()};dp.appendChild(c)}}
+function pickUI(id,ids,cur,sp,tip,choose){const dp=$(id);if(!dp)return;const own=ids.filter(k=>have(k)>0||S.debug),sig=own.map(k=>k+have(k)).join()+cur;if(dp.dataset.s===sig)return;dp.dataset.s=sig;dp.innerHTML="";if(own.length<2)return;
+ for(const k of own){const c=mk("button","dchip"+(k===cur?" on":""),sp(k)+"<b>"+(S.debug?"\u221e":have(k))+"</b>");c.title=tip(k);c.onclick=e=>{e.stopPropagation();choose(k)};dp.appendChild(c)}}
+function dpickUI(){
+ pickUI("dpick",DYN_IDS,dynPick(),dynSprite,k=>__("{0} (raio {1})",ITEMS[k].n,fmtN(BAL.dyn[k].r)),k=>{S.dsel=k;sayMine(__("Dinamite escolhida: {0}",ITEMS[k].n));refresh()});
+ pickUI("fpick",FOODS,foodPick(),sprite,k=>ITEMS[k].n,k=>{S.fsel=k;sayFood(__("Comida escolhida: {0}",ITEMS[k].n));refresh()})}
 function barUI(){const slots=document.querySelectorAll(".slot");BAR.forEach((s,i)=>{const b=slots[i];if(!b)return;
  let lock=false,empty=false,active=0,frac=0,txt="";   // frac = parte da recarga que falta (véu branco que desce, como no Minecraft)
  if(i===0){const dk=dynPick();empty=have(dk)<1&&!S.debug;frac=dynCD>0?dynCD/dynMax():0;txt=S.debug?"∞":String(have(dk));
   if(b.dataset.dk!==dk){b.dataset.dk=dk;b.querySelector("svg").outerHTML=dynSprite(dk)}}
+ else if(i===FI){const fk=foodPick();empty=have(fk)<1&&!S.debug;txt=S.debug?"∞":String(have(fk));if(b.dataset.fk!==fk){b.dataset.fk=fk;b.querySelector("svg").outerHTML=sprite(fk);b.style.setProperty("--tc",ITEMS[fk].c)}
+  const hid=S.cookN<1&&!FOODS.some(k=>have(k)>0)&&!S.debug,grp=b.closest(".hg"),dsp=hid?"none":"";if(grp&&grp.style.display!==dsp)grp.style.display=dsp}
  else if(s[2]){empty=have(s[2])<1&&!S.debug;txt=S.debug?"∞":String(have(s[2]))}
  else if(i===3){lock=S.lv.tele<1;frac=tpCD>0?tpCD/teleCD():0;if(tpCD>0)txt=Math.ceil(tpCD)+"s"}
  else{const k=SKL[i-1];lock=S.best<k[4];active=skT[i-1];frac=!lock&&active<=0&&skCD[i-1]>0?skCD[i-1]/k[3]:0;txt=lock?k[4]+"m":active>0?Math.ceil(active)+"s":skCD[i-1]>0?Math.ceil(skCD[i-1])+"s":""}
@@ -2435,7 +2957,8 @@ function barUI(){const slots=document.querySelectorAll(".slot");BAR.forEach((s,i
 // ===== 4-interface/04-entrada.js — Mouse, teclado, toque e botões de celular =====
 cv.addEventListener("pointerdown",e=>{e.preventDefault();
  if(mapOn){mapOn=false;return}   // mapa aberto: tocar na tela fecha (no celular não há mais botão de Mapa na barra)
- if(atSurface()&&!modal){for(const[hit,use]of[[boardHit,boardUse],[slotHit,slotUse]])if(hit(e.offsetX,e.offsetY)&&use())return}
+ if(fs&&!modal){fishHold=true;fishAct();return}   // pescando: tocar/clicar fisga, segura a barra e lança de novo
+ if(atSurface()&&!modal){for(const[hit,use]of[[boardHit,boardUse],[slotHit,slotUse],[campHit,campUse],[fishHit,fishUse],[marketHit,marketUse]])if(hit(e.offsetX,e.offsetY)&&use())return}
  if(atSurface()&&furHit(e.offsetX,e.offsetY)){furUse();return}
  if(atSurface()&&chestHit(e.offsetX,e.offsetY)){chestUse();return}
  const c=Math.floor((e.offsetX-W/2)/T+camX+.5),r=Math.floor((e.offsetY-H*SURF)/T+camY),p=S.depth,m=S.mc;
@@ -2457,6 +2980,7 @@ addEventListener("keydown",e=>{
   if(modal==="mem"){memKey(e);return}
   if(modal==="slot"){slotKey(e);return}
   if(modal==="chest"){chestKey(e);return}
+  if(modal==="camp"){campKey(e);return}
   if(modal==="title"){if(e.target.closest&&e.target.closest(".langpick"))return;e.preventDefault();if(!e.repeat&&(e.code==="Space"||e.code==="Enter"))startGame();return}
   if(modal==="death"){e.preventDefault();if(!e.repeat&&performance.now()>deathLock&&(e.code==="Space"||e.code==="Enter"||e.code==="Escape"))closeModal();return}
   if(modal==="lv"){   // escolha de melhoria ao subir de nível: WASD/setas movem, Espaço (ou Enter) confirma
@@ -2466,6 +2990,15 @@ addEventListener("keydown",e=>{
   }
   if(e.code==="Escape"&&modal!=="lv")closeModal();return}
  if(e.key==="Shift")shiftOn=true;musOn=true;
+ // pescando (sem janela): Espaço/Enter fisga, segura a barra e lança de novo; Esc sai; andar só sai da pesca fora do minijogo
+ if(fs){
+  const dk=/^(ArrowLeft|ArrowRight|ArrowUp|ArrowDown|KeyA|KeyD|KeyW|KeyS)$/.test(e.code);
+  if(e.code==="Escape"){e.preventDefault();fishEnd();return}
+  if(e.code==="Space"||e.code==="Enter"){e.preventDefault();if(!e.repeat){fishHold=true;fishAct()}return}
+  if(e.code==="KeyP"){openPause();return}
+  if(e.code==="KeyN"){mute=!mute;refresh();return}
+  if(dk&&(fs.ph==="cast"||fs.ph==="wait"||fs.ph==="done"))fishEnd();else return;
+ }
  // código secreto (como em GTA): digitar uma das palavras de CHEATS. A primeira letra ainda faz a sua função normal; as seguintes são engolidas (não cavam, não explodem, não abrem o mapa).
  // CLIMA e SEASON só valem se a primeira letra foi digitada na superfície (profundidade 0): lá "S" e "E" não atrapalham, e é onde se vê o efeito.
  if(!e.ctrlKey&&!e.metaKey&&!e.altKey&&!e.repeat&&/^Key[A-Z]$/.test(e.code)){
@@ -2483,6 +3016,7 @@ addEventListener("keydown",e=>{
  if(/^Digit[1-2]$/.test(e.code)){useSk(+e.code.slice(5)-1);return}
  if(e.code==="KeyE"){boom();return}
  if(e.code==="KeyR"){dynNext();return}
+ if(e.code==="KeyF"){useItem(foodPick());return}
  if(e.code==="KeyQ"){teleport();return}
  if(e.code==="Escape"){if(mapOn)mapOn=false;else openPause();return}
  if(e.code==="KeyP"){openPause();return}
@@ -2505,7 +3039,7 @@ if(matchMedia("(pointer:coarse)").matches||innerWidth<760){
  const pad=mk("div");pad.style.cssText="display:grid;grid-template-columns:repeat(3,56px);gap:6px";
  const dr=(t,d)=>btn(t,()=>{pressDir("touch-"+d,d);move(d);lastMv=performance.now()},()=>releaseDir("touch-"+d));
  [mk("span"),dr("▲","up"),mk("span"),dr("◀","left"),dr("▼","down"),dr("▶","right")].forEach(x=>pad.appendChild(x));
- const mine=btn(__("Minerar"),()=>{holdS=true;clickDig();lastH=performance.now()},()=>{holdS=false},104,15);
+ const mine=btn(__("Minerar"),()=>{holdS=true;if(fs)fishHold=true;clickDig();lastH=performance.now()},()=>{holdS=false;fishHold=false},104,15);
  mine.style.height="118px";mine.style.letterSpacing=".03em";mine.style.fontWeight="700";
  bar.appendChild(pad);bar.appendChild(mine);onLang(()=>{mine.textContent=__("Minerar")});
  addEventListener("blur",()=>ups.forEach(f=>f()));document.addEventListener("visibilitychange",()=>{if(document.hidden)ups.forEach(f=>f())});
@@ -2525,7 +3059,7 @@ function paintPause(){
  const snd=()=>{$("pm-snd").textContent=mute?__("Som: desligado"):__("Som: ligado")};snd();
  langMenus();
  $("pm-go").onclick=closeModal;
- $("pm-sv").onclick=()=>{save();say(__("Jogo salvo"));$("pm-sv").textContent=__("Jogo salvo ✓")};
+ $("pm-sv").onclick=()=>{save();sayInfo(__("Jogo salvo"));$("pm-sv").textContent=__("Jogo salvo ✓")};
  $("pm-snd").onclick=()=>{mute=!mute;snd();refresh()};
  $("pm-map").onclick=()=>{closeModal();mapOn=true;mapZ=1};
  $("pm-menu").onclick=()=>{save();closeModal();showTitle()};
@@ -2668,7 +3202,7 @@ function gpFrame(now){
   // mapa aberto: B / Select fecham, analógico direito dá zoom
   if(pr(11)&&!mapOn){
    GP.panel=!GP.panel;gpRelease();GP.psel=0;
-   if(GP.panel){$("side").classList.add("gp-panel");gpPanelPaint(true);say(__("Painel: A escolhe, LB/RB troca de aba, B volta"))}else gpPanelOff();
+   if(GP.panel){$("side").classList.add("gp-panel");gpPanelPaint(true);sayInfo(__("Painel: A escolhe, LB/RB troca de aba, B volta"))}else gpPanelOff();
   }
   if(GP.panel){gpPanelInput(pa&&!GP.wait.a,pb&&!GP.wait.b,up,down,left,right,pr(5),pr(4));if(pst&&!GP.wait.st){gpPanelOff();openPause()}}
   else if(mapOn){
@@ -2683,6 +3217,7 @@ function gpFrame(now){
    }
    // cavar: segurar A
    const dig=B(0)&&!GP.wait.a;
+   if(fs){fishHold=dig;if(pb&&!GP.wait.b)fishEnd()}   // pescando: A fisga e segura a barra, B sai
    if(dig&&!GP.a){GP.a=true;holdS=true;clickDig();lastH=performance.now()}
    else if(!dig&&GP.a){GP.a=false;holdS=false}
    shiftOn=B(1)||B(7);
@@ -2699,8 +3234,8 @@ function gpFrame(now){
  }
  GP.prev=p.buttons.map(b=>b.pressed);
 }
-addEventListener("gamepadconnected",e=>{say(__("Controle conectado"));musOn=true});
-addEventListener("gamepaddisconnected",()=>{gpRelease();say(__("Controle desconectado"))});
+addEventListener("gamepadconnected",e=>{sayInfo(__("Controle conectado"));musOn=true});
+addEventListener("gamepaddisconnected",()=>{gpRelease();sayInfo(__("Controle desconectado"))});
 addEventListener("blur",gpRelease);
 requestAnimationFrame(gpFrame);
 
@@ -2843,6 +3378,31 @@ function blockColor(d,c,v){const B=BIO[layerOf(d)%BIO.length];return"hsl("+B[1]+
 // ===== 5-desenho/02-ceu-nuvens.js — Céu em degradê, sol e colinas em pixel art (cores da estação do ano), nuvens em duas camadas com parallax (sprites em 00-pixel.js) =====
 // Cada nuvem: [posição inicial 0-1, altura 0-1, tamanho, velocidade, camada (0 = longe, 1 = perto), fase]
 const CLOUDS=[[.05,.55,34,5,0,0],[.32,.3,40,6,0,1.3],[.6,.62,30,4.5,0,2.1],[.85,.25,38,5.5,0,3.4],[.15,.2,62,11,1,.7],[.5,.5,78,14,1,2.7],[.8,.15,56,12,1,4.1],[.98,.58,66,10,1,5.2]];
+// As camadas do céu (estrelas, aurora, sol/lua, estrela cadente, nuvens) são desenhadas como se o céu tivesse sempre a altura skyH() e presas ao horizonte (translate):
+// ao subir com o jato elas rolam junto com o chão, sem esticar nem se espalhar. Subindo, sobra uma faixa vazia no alto: tile = repete a camada para cima, só dentro dela.
+function skyLayers(sky,fn,tile){
+ const sh=skyH(),off=Math.round(sky-sh);
+ ctx.save();ctx.translate(0,off);fn(sh,0);ctx.restore();
+ if(tile&&off>0){
+  const step=Math.max(8,Math.round(sh*.62));
+  ctx.save();ctx.beginPath();ctx.rect(0,0,W,off);ctx.clip();
+  for(let dy=off-step,k=1;dy+sh*.72>0;dy-=step,k++){ctx.save();ctx.translate(0,dy);fn(sh,k);ctx.restore()}
+  ctx.restore();
+ }
+}
+// Nuvens das faixas de cima (k>=1, quando se sobe muito): igualmente espaçadas, em fileiras alternadas (padrão simétrico, sem colunas repetidas), todas na mesma velocidade para o espaçamento nunca se desfazer
+function cloudBand(i,k,n){return{p:(i+.25+.5*(k&1))/n,hh:.12+.4*((i+k)&1),v:6+(k%3)*3,par:.12}}
+function skyClouds(sh,t,scale,night,k){
+ const span=W+240*scale;let n=0,i=0;
+ for(const[p0,hh0,s,v0,ly,ph]of CLOUDS){
+  const bd=k>0?cloudBand(i++,k,CLOUDS.length):null,p=bd?bd.p:p0,hh=bd?bd.hh:hh0,v=bd?bd.v:v0;
+  const size=s*scale*(W<500?.8:1),par=bd?bd.par:(ly?.18:.07),px=Math.max(2,Math.round(size/13)),sp=sprCloud(n++%3);
+  const x=((p*span+t*v*scale-camX*T*par)%span+span)%span-120*scale,y=sh*(.12+hh*.6)+Math.sin(t*.25+ph)*3;
+  ctx.globalAlpha=(ly?1:.62)*(1-night*.55);
+  ctx.drawImage(sp.cv,1,1,sp.w,sp.h,Math.round(x/px)*px,Math.round(y/px)*px,sp.w*px,sp.h*px);
+ }
+ ctx.globalAlpha=1;
+}
 function drawSky(sky,t){
  if(sky<=0)return;
  ctx.imageSmoothingEnabled=false;
@@ -2852,19 +3412,20 @@ function drawSky(sky,t){
  if(sky<42)return;
  const scale=clamp(W/850,.5,1.1),ps=Math.max(3,Math.round(4*scale)),night=nightAmt();
  ctx.save();ctx.beginPath();ctx.rect(0,0,W,sky);ctx.clip();
- skyTint(sky);skyStars(sky,t,ps);skyBody(sky,ps);skyShoot(sky,ps);
- const span=W+240*scale;let n=0;
- for(const[p,hh,s,v,ly,ph]of CLOUDS){
-  const size=s*scale*(W<500?.8:1),par=ly?.18:.07,px=Math.max(2,Math.round(size/13)),sp=sprCloud(n++%3);
-  const x=((p*span+t*v*scale-camX*T*par)%span+span)%span-120*scale,y=sky*(.12+hh*.6)+Math.sin(t*.25+ph)*3;
-  ctx.globalAlpha=(ly?1:.62)*(1-night*.55);
-  ctx.drawImage(sp.cv,1,1,sp.w,sp.h,Math.round(x/px)*px,Math.round(y/px)*px,sp.w*px,sp.h*px);
- }
- ctx.globalAlpha=1;
+ altSpace(sky);   // altitude: o céu escurece de azul-profundo a índigo, quase o espaço no teto do jato (17-altitude.js)
+ skyTint(sky);
+ skyLayers(sky,sh=>skyStars(sh,t,ps),true);
+ altStars(sky,t,ps);   // estrelas fracas de dia, só onde o céu já está escuro
+ // aurora e sol/lua: uma só, presas ao horizonte (sem repetir); ao subir andam na metade da velocidade do chão (ficam longe, sempre à vista)
+ skyLayers(sky,sh=>{ctx.translate(0,-Math.max(0,sky-sh)*.5);skyAurora(sh,t,ps)},false);
+ skyLayers(sky,sh=>{ctx.translate(0,-Math.max(0,sky-sh)*.5);skyBody(sh,ps);skyShoot(sh,ps)},false);
+ skyLayers(sky,(sh,k)=>skyClouds(sh,t,scale,night,k),false);   // nuvens fofas só na faixa de baixo (não repetem mais para cima)
+ altClouds(sky,t,scale,night,ps);   // cirros e fiapos mais acima
+ skyLife(sky,t,scale,night,ps);   // pássaros, pipa, avião de papel e balão
  sceneRanges(sky,ps,night);   // cordilheiras ao fundo, em 3 camadas (5-desenho/11-cenario.js)
- // colinas distantes (azul-acinzentado) e próximas (verde escuro), em degraus de pixel, com parallax
- pixHills(sky,.03,sky*.2,nightCol(SEA.fh,night),nightCol(SEA.fhh,night),40,ps);   // as colinas escurecem de noite pela própria cor
- pixHills(sky,.08,sky*.11,nightCol(SEA.nh,night),nightCol(SEA.nhh,night),300,ps);   // as cores das colinas e da grama vêm da estação do ano (2-sistemas/07-estacoes.js)
+ // colinas distantes (azul-acinzentado) e próximas (verde escuro), em degraus de pixel, com parallax (altura fixa: não crescem quando se sobe)
+ pixHills(sky,.03,skyH()*.2,nightCol(SEA.fh,night),nightCol(SEA.fhh,night),40,ps);   // as colinas escurecem de noite pela própria cor
+ pixHills(sky,.08,skyH()*.11,nightCol(SEA.nh,night),nightCol(SEA.nhh,night),300,ps);   // as cores das colinas e da grama vêm da estação do ano (2-sistemas/07-estacoes.js)
  weatherSky(sky,scale,night);   // clima: nuvens extras, véu escuro, neblina e clarão do raio (5-desenho/10-clima.js)
  ctx.restore();
 }
@@ -3000,8 +3561,8 @@ function drawFurnace(t){
 }
 function drawShop(t){
  const u=pu(),s=sprShop(),c=Math.round(colX(SHOP_C)),y=Math.round(rowY(0));
- pxShadow(c,(s.w+2)*u,y,u);drawSpr(s,c,y,u);
- if(atSurface())lbl(nearShop()?__("Loja: compre aqui"):__("Loja"),c,y-(s.h+3)*u-Math.sin(t*4)*2,nearShop()?"#6fe3a0":"#ffd45c");
+ pxShadow(c,(s.w+2)*u,y,u);drawSpr(s,c,y,u);drawShopLamp(t);
+ if(atSurface())lbl(nearShop()?__("Loja: compre aqui"):__("Loja"),c,y-(s.h+12)*u-Math.sin(t*4)*2,nearShop()?"#6fe3a0":"#ffd45c");
 }
 function drawGateAndChest(t){
  // portão de madeira em volta do buraco: dois postes finos em pixel art e uma viga escura sobre a abertura
@@ -3009,7 +3570,7 @@ function drawGateAndChest(t){
  ctx.fillStyle="#2b1a0d";ctx.fillRect(Math.round(x-u),y-Math.round(u*.6),Math.round(T+2*u),Math.round(u*1.4));
  ctx.fillStyle="#8a5a2b";ctx.fillRect(Math.round(x-u),y-Math.round(u*.6),Math.round(T+2*u),Math.max(1,Math.round(u*.4)));
  drawSpr(pl,x-pl.w*u/2+u,y,u);drawSpr(pl,x+T+pl.w*u/2-u,y,u);
- drawLandscape(t);   // horta, moinho, riacho com ponte e roda, fogueira, praia com farol e barco, bichinhos (13-paisagem.js)
+ drawLandscape(t);   // horta, moinho, riacho com ponte e roda, fogueira, praia com farol, bichinhos (13-paisagem.js)
  drawRopeLadder(t);
  drawForge(t);   // forja por trás: os nomes das estruturas ficam sempre legíveis por cima dos pilares e da chaminé
  drawVillage(t);
@@ -3021,27 +3582,50 @@ function drawGateAndChest(t){
  pxShadow(cx,(cs.w+2)*u,y,u);drawSpr(cs,cx,y,u);
  if(atSurface()&&S.bag.n>0)lbl(nearChest()?__("Baú: clique para vender"):__("Baú: entregue a mochila"),cx,y-(cs.h+3)*u-Math.sin(t*4)*2,"#ffd45c");
 }
+// Voo para os lados: o corpo se inclina para a frente (pose de super-herói) com os braços à frente e as pernas esticadas para trás. plK vai de 0 (em pé) a 1 (deitado no ar), suavizado
+let plK=0,plAt=0,plHAt=-9999;
+let flameL=4;   // comprimento médio da chama da mochila, suavizado (mudar de direção rápido não faz a chama disparar)
+// Passos: nuvenzinhas de poeira atrás dos pés (mais e maiores com Shift); com chuva, respingos de poça; com neve, flocos levantados
+function stepDust(mx,my,sg,dt){
+ const run=shiftOn,wet=wx.rain>.25,snow=wx.snow>.25&&!wet,z=worldZoom,r=Math.random;
+ if(r()>dt*(run?46:20))return;
+ const back=-sg,n=run&&r()<.5?2:1;
+ for(let i=0;i<n;i++){
+  const x=mx+back*(5+r()*4)*z,y=my-1*z;
+  if(wet)parts.push({x,y,vx:back*(20+r()*50)+(r()-.5)*40,vy:-(60+r()*(run?130:90)),l:.38+r()*.2,c:r()<.4?"#ffffff":"#bfe6ff",s:Math.max(2,Math.round(1.8*z)),a:.9});
+  else{
+   const c=snow?(r()<.5?"#ffffff":"#dfeaf5"):(r()<.5?"#c9b189":"#a8905f"),l=(run?.55:.4)+r()*.25;
+   parts.push({x,y,vx:back*(14+r()*(run?55:30)),vy:-(6+r()*(run?34:20)),g:-14,l,l0:l,c,s:Math.max(2,Math.round((run?2.6:2)*z)),gr:run?.6:.4,a:.55});
+  }
+ }
+}
 function drawPlayer(){
  const now=performance.now(),mx=colX(mX),my=rowY(mY);
- const dx=S.mc-mX,dy=S.depth-mY,descending=S.depth>0&&S.dir==="down"&&(dy>.05||airborne()),flying=!descending&&(jetT>0||dy<-.05||airborne()),falling=descending||(!flying&&dy>.05),walking=!flying&&!falling&&Math.abs(dx)>.05;
+ const dx=S.mc-mX,dy=S.depth-mY,descending=S.depth!==0&&S.dir==="down"&&(dy>.05||airborne()),flying=!descending&&(jetT>0||dy<-.05||airborne()),falling=descending||(!flying&&dy>.05),walking=!flying&&!falling&&Math.abs(dx)>.05;
  const ph=now/(shiftOn?65:105),sw=Math.sin(ph),idle=Math.sin(now/280);
  const bob=flying?Math.sin(now/60)*1.3:walking?-Math.abs(sw)*3:idle*.9;
- const lean=flying?-.2:walking?.1:falling?-.04:0;                         // inclinação do corpo (em torno dos pés)
+ if(flying&&!fs&&(S.dir==="left"||S.dir==="right")&&Math.abs(dx)>.03)plHAt=now;
+ const dtK=Math.min(.1,Math.max(0,(now-plAt)/1000));plAt=now;
+ if(walking&&!modal&&!fs)stepDust(mx,my,Math.sign(dx),dtK);
+ const hf=flying&&!fs&&now-plHAt<240;plK+=((hf?1:0)-plK)*Math.min(1,dtK*(hf?9:7));if(plK<.002)plK=0;
+ const k1=plK,glide=k1*(.3+Math.sin(now/130)*.02);   // inclinação leve (~17°) no voo para os lados
+ const lean=(fs?0:flying?-.2:walking?.1:falling?-.04:0)*(1-k1)+glide;   // inclinação do corpo (em torno dos pés; no voo lateral, em torno do meio do corpo)
  const squash=1-Math.min(.07,swing*.07);                                    // agacha um pouco no golpe
  const cloth="#3b6fb5",clothD="#2c5590",skin="#e6b48a";
  ctx.save();ctx.translate(mx,my);ctx.scale(worldZoom,worldZoom);ctx.translate(-mx,-my);
  ctx.translate(mx,0);ctx.scale(S.dir==="left"?-1:1,1);ctx.translate(-mx,0);
- ctx.translate(mx,my);ctx.rotate(lean);ctx.scale(1,squash);ctx.translate(-mx,-my);
+ {const pv=my-15*k1;ctx.translate(mx,pv);ctx.rotate(lean);ctx.translate(-mx,-pv);ctx.translate(mx,my);ctx.scale(1,squash);ctx.translate(-mx,-my)}
  // perna de trás, braço de trás
  const leg=(hx,a,col)=>{ctx.save();ctx.translate(hx,my-9+bob*.4);ctx.rotate(a);ctx.fillStyle=col;ctx.fillRect(-3,0,6,6);ctx.fillStyle="#1d1d1d";ctx.fillRect(-3,5,8,4);ctx.restore()};
- const la=flying?.32+Math.sin(now/85)*.12:falling?-.4:walking?sw*.85:idle*.03, lb=flying?.14+Math.sin(now/85+1.4)*.12:falling?.4:walking?-sw*.85:0;
+ const la=(flying?.32+Math.sin(now/85)*.12:falling?-.4:walking?sw*.85:idle*.03)+k1*.25, lb=(flying?.14+Math.sin(now/85+1.4)*.12:falling?.4:walking?-sw*.85:0)+k1*.2;
  leg(mx-3,la,"#23252b");
  // mochila a jato (nas costas): tanque, bocal e chama
  ctx.fillStyle="#4a4f58";ctx.fillRect(mx-15,my-25+bob,7,14);ctx.fillStyle="#7d8591";ctx.fillRect(mx-15,my-25+bob,7,3);ctx.fillStyle="#c8452f";ctx.fillRect(mx-14,my-20+bob,5,3);
  ctx.fillStyle="#2b2e34";ctx.fillRect(mx-14,my-11+bob,5,3);
- if(!descending&&(jetT>0||flying)){const fl=(jetT>0?10:2.5)+Math.random()*(jetT>0?12:3.5);ctx.fillStyle="#ffb43a";ctx.fillRect(mx-14,my-8+bob,5,fl);ctx.fillStyle="#fff3a0";ctx.fillRect(mx-13,my-8+bob,3,fl*.55);ctx.fillStyle="#ff5a1f";ctx.fillRect(mx-14,my-8+bob+fl,5,3)}
+ if(!descending&&(jetT>0||flying)){const sb=shiftOn&&!fs&&(S.dir==="left"||S.dir==="right"),fl=(flameL+=(Math.min(30,(jetT>0?16:4.25)*(1+.6*k1)*(sb?2.4:1))-flameL)*Math.min(1,dtK*12))*(.6+Math.random()*.8);   // Shift + A/D: o jato queima muito mais forte
+  ctx.fillStyle="#ffb43a";ctx.fillRect(mx-14,my-8+bob,5,fl);ctx.fillStyle="#fff3a0";ctx.fillRect(mx-13,my-8+bob,3,fl*.55);ctx.fillStyle="#ff5a1f";ctx.fillRect(mx-14,my-8+bob+fl,5,3)}
  // braço de trás (balança ao contrário do braço da picareta)
- ctx.save();ctx.translate(mx-6,my-21+bob);ctx.rotate(flying?-2.3:falling?-2.5:walking?-sw*.8+.2:.25+idle*.06);ctx.fillStyle=clothD;ctx.fillRect(-2,0,4,7);ctx.fillStyle=skin;ctx.fillRect(-2,6,4,3);ctx.restore();
+ ctx.save();ctx.translate(mx-6,my-21+bob);ctx.rotate((flying?-2.3:falling?-2.5:walking?-sw*.8+.2:.25+idle*.06)*(1-k1)+(-1.15+Math.sin(now/110)*.06)*k1);ctx.fillStyle=clothD;ctx.fillRect(-2,0,4,7);ctx.fillStyle=skin;ctx.fillRect(-2,6,4,3);ctx.restore();
  // tronco com cinto e gola
  ctx.fillStyle=cloth;ctx.fillRect(mx-9,my-24+bob,18,16);ctx.fillStyle=clothD;ctx.fillRect(mx-9,my-24+bob,3,16);ctx.fillStyle="#5a8fd6";ctx.fillRect(mx-6,my-24+bob,12,2);
  ctx.fillStyle="#6a4a2a";ctx.fillRect(mx-9,my-12+bob,18,3);ctx.fillStyle="#d9b24a";ctx.fillRect(mx-1,my-12+bob,3,3);
@@ -3052,11 +3636,19 @@ function drawPlayer(){
  ctx.fillStyle="#2a1a10";if(now%3200<130)ctx.fillRect(mx+2,my-29+hb,3,1);else ctx.fillRect(mx+2,my-30+hb,2,3);
  ctx.fillStyle="#ffb43a";ctx.fillRect(mx-8,my-38+hb,16,6);ctx.fillStyle="#d98a1c";ctx.fillRect(mx-8,my-33+hb,16,1);ctx.fillStyle="#fff6b8";ctx.fillRect(mx+5,my-37+hb,4,3);
  ctx.globalAlpha=.25+.1*Math.sin(now/200);ctx.fillStyle="#fff3a0";ctx.fillRect(mx+9,my-38+hb,6,5);ctx.globalAlpha=1;
- // braço da frente com a picareta: levanta ao voar/cair, balança ao andar, golpeia ao cavar
- const base=S.dir==="up"?-1.6:flying?-2.3:falling?-2.1:walking?-.9+sw*.55:-1.1+idle*.05;
- ctx.save();ctx.translate(mx+8,my-20+bob);ctx.rotate(base+swing*1.8);
- ctx.fillStyle="#8a5a2b";ctx.fillRect(0,-2,22,4);ctx.fillStyle=TCOL[S.tier%TCOL.length];ctx.fillRect(18,-9,5,18);ctx.fillStyle="rgba(255,255,255,.35)";ctx.fillRect(18,-9,2,18);
- if(swing>.5){ctx.fillStyle="#fff6b8";ctx.fillRect(22,-4,4,4)}
+ // braço da frente com a picareta: levanta ao voar/cair, balança ao andar, golpeia ao cavar. Pescando, segura a vara (rodPose em 16-pesca-desenho.js)
+ const rp=fs?rodPose():null,base0=rp?rp.a:S.dir==="up"?-1.6:flying?-2.3:falling?-2.1:walking?-.9+sw*.55:-1.1+idle*.05,base=base0*(1-k1)+(-1.0+Math.sin(now/110+.8)*.05)*k1;
+ ctx.save();ctx.translate(mx+8,my-20+bob);ctx.rotate(base+(rp?0:swing*1.8));
+ if(rp){
+  ctx.fillStyle="#7a5428";ctx.fillRect(-4,-1.5,26,3);ctx.fillStyle="#caa264";ctx.fillRect(-4,-1.5,26,1);
+  ctx.fillStyle="#555b66";ctx.fillRect(6,1.5,6,4);ctx.fillStyle="#9aa3b0";ctx.fillRect(7,2.5,4,2);   // carretilha
+  ctx.save();ctx.translate(22,0);ctx.rotate(rp.b);ctx.fillStyle="#8a6334";ctx.fillRect(0,-1.2,24,2.4);ctx.fillStyle="#d9b97a";ctx.fillRect(0,-1.2,24,.9);ctx.restore();   // ponta da vara, que envergada
+  const ex=22+24*Math.cos(rp.b),ey=24*Math.sin(rp.b),X=mx+8+ex*Math.cos(rp.a)-ey*Math.sin(rp.a),Y=my-20+bob+ex*Math.sin(rp.a)+ey*Math.cos(rp.a),fx=S.dir==="left"?2*mx-X:X;
+  fishTip={x:mx+(fx-mx)*worldZoom,y:my+(Y-my)*worldZoom};   // onde a linha começa (tela)
+ }else{
+  ctx.fillStyle="#8a5a2b";ctx.fillRect(0,-2,22,4);ctx.fillStyle=TCOL[S.tier%TCOL.length];ctx.fillRect(18,-9,5,18);ctx.fillStyle="rgba(255,255,255,.35)";ctx.fillRect(18,-9,2,18);
+  if(swing>.5){ctx.fillStyle="#fff6b8";ctx.fillRect(22,-4,4,4)}
+ }
  ctx.fillStyle=cloth;ctx.fillRect(-2,-2,8,4);ctx.fillStyle=skin;ctx.fillRect(5,-2,4,4);ctx.restore();
  ctx.restore();
 }
@@ -3065,10 +3657,9 @@ function drawPlayer(){
 // Cores por nível do combo (de 100 para cima a cor gira pelo arco-íris)
 const comboColor=n=>n>=100?"hsl("+Math.floor(performance.now()/5%360)+",100%,66%)":n>=50?"#ff6a2a":n>=25?"#ffa83a":n>=10?"#ffd45c":"#fff0b8";
 const comboXY=()=>({x:clamp(colX(mX),70,W-70),y:Math.max(46,rowY(mY)-T*2.1)});   // segue o personagem, um pouco acima da cabeça
-function comboTxt(s,x,y,size,col,lw,glow){   // texto com contorno grosso e brilho colorido
+function comboTxt(s,x,y,size,col,lw,glow){   // texto com contorno grosso (sem brilho)
  ctx.font="700 "+Math.round(size)+"px "+FONT;ctx.lineJoin="round";ctx.lineWidth=lw;ctx.strokeStyle="#000";
- if(glow){ctx.shadowColor=col;ctx.shadowBlur=glow}
- ctx.strokeText(s,x,y);ctx.shadowBlur=0;ctx.fillStyle=col;ctx.fillText(s,x,y);
+ ctx.strokeText(s,x,y);ctx.fillStyle=col;ctx.fillText(s,x,y);
 }
 function comboHud(dt){
  cmbPulse=Math.max(0,cmbPulse-dt*5);cmbBanner=Math.max(0,cmbBanner-dt*.8);cmbLastT=Math.max(0,cmbLastT-dt);
@@ -3095,7 +3686,7 @@ function comboHud(dt){
 function drawEffects(dt){
  drawAmb(dt);
  weatherFront();
- for(const p of parts){p.l-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=520*dt;ctx.globalAlpha=clamp(p.l*1.6,0,1);ctx.fillStyle=p.c;const s=p.big?6:4;ctx.fillRect(p.x-s/2,p.y-s/2,s,s)}
+ for(const p of parts){p.l-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=(p.g===undefined?520:p.g)*dt;ctx.globalAlpha=clamp(p.l*1.6,0,1)*(p.a||1);ctx.fillStyle=p.c;let s=p.s||(p.big?6:4);if(p.gr)s*=1+p.gr*(1-p.l/p.l0);s=Math.round(s);ctx.fillRect(Math.round(p.x-s/2),Math.round(p.y-s/2),s,s)}
  parts=parts.filter(p=>p.l>0);if(parts.length>500)parts.splice(0,parts.length-500);ctx.globalAlpha=1;
  ctx.textAlign="center";
  for(const t of texts){t.t+=dt;const life=t.big?1.5:1.1;ctx.globalAlpha=clamp(1-t.t/life,0,1);ctx.font=(t.big?"800 19px":"700 15px")+" "+FONT;const yy=t.y-t.t*(t.big?42:50),pop=t.t<.12?1+(.12-t.t)*4:1;
@@ -3116,7 +3707,7 @@ function nightLayer(mx,my,sn){
  for(const[o,a]of[[0,0],[.25,.12],[.5,.45],[.75,.8],[1,1]])gr.addColorStop(o,"rgba(4,8,34,"+(a*d).toFixed(3)+")");
  g.fillStyle=gr;g.fillRect(0,0,w,h);
  lampHoles(g,k,sn);   // postes de luz abrem a escuridão em volta deles
- const hz=rowY(0),zone=T*B.skyZone,ramp=Math.max(40,hz*.5);   // hz = linha do chão na tela
+ const hz=rowY(0),zone=T*B.skyZone,ramp=Math.max(40,skyH()*.5);   // hz = linha do chão na tela
  if(hz-zone>0){   // alto do céu: tira parte da escuridão (só sobra a fração B.sky) para as estrelas e a lua aparecerem
   g.globalCompositeOperation="destination-out";
   const sg=g.createLinearGradient(0,(hz-zone-ramp)*k,0,(hz-zone)*k);sg.addColorStop(0,"rgba(0,0,0,"+(1-B.sky)+")");sg.addColorStop(1,"rgba(0,0,0,0)");
@@ -3131,7 +3722,7 @@ function drawOverlays(dt,mx,my){
  if(dark>0){const cy=my-T*.5,gr=ctx.createRadialGradient(mx,cy,T*(1.4+lanternLight()+petLight()),mx,cy,Math.max(W,H)*.6);gr.addColorStop(0,"rgba(0,0,0,0)");gr.addColorStop(1,"rgba(0,0,0,"+dark+")");ctx.fillStyle=gr;ctx.fillRect(0,0,W,H)}
  // energia baixa: bordas vermelhas pulsando
  const er=S.en/maxEn();
- if(S.depth>0&&er<.25){lowEnPulse=Math.max(0,lowEnPulse-dt);const a=(.25-er)*2.2*(.55+.45*Math.sin(performance.now()/160));const gr=ctx.createRadialGradient(W/2,H/2,Math.min(W,H)*.3,W/2,H/2,Math.max(W,H)*.7);gr.addColorStop(0,"rgba(255,0,0,0)");gr.addColorStop(1,"rgba(255,30,30,"+clamp(a,0,.6)+")");ctx.fillStyle=gr;ctx.fillRect(0,0,W,H)}
+ if(S.depth>0&&er<.25){lowEnPulse=Math.max(0,lowEnPulse-dt);const a=(.25-er)*2.2*(.55+.45*Math.sin(performance.now()/160));ctx.strokeStyle="rgba(255,30,30,"+clamp(a,0,.6)+")";ctx.lineWidth=8;ctx.strokeRect(4,4,W-8,H-8)}
  if(flash>0){ctx.globalAlpha=clamp(flash,0,1)*.5;ctx.fillStyle=flashC;ctx.fillRect(0,0,W,H);ctx.globalAlpha=1;if(flashText){ctx.save();ctx.globalAlpha=clamp(flash*1.4,0,1);ctx.textAlign="center";ctx.font="900 40px "+FONT;ctx.lineWidth=7;ctx.strokeStyle="#000";ctx.strokeText(flashText,W/2,H*.4);ctx.fillStyle="#fff";ctx.fillText(flashText,W/2,H*.4);ctx.restore()}flash=Math.max(0,flash-dt*1.1)}
  chestOpen=Math.max(0,chestOpen-dt*1.4);
 }
@@ -3260,6 +3851,7 @@ function draw(dt){
  swing=Math.max(0,swing-dt*5);
  ctx.restore();
  drawOverlays(dt,colX(mX),rowY(mY));
+ drawFishing(t);   // pesca: linha, boia, peixe, minijogo e resultado por cima de tudo (16-pesca-desenho.js)
  drawFireflies(t);   // vaga-lumes por cima da escuridão da noite (13-paisagem.js)
  updateDepthRuler();
  comboHud(dt);
@@ -3292,7 +3884,7 @@ function drawPet(dt,t){
  if(Math.random()<dt*7)parts.push({x:px,y:py+2*u,vx:(Math.random()-.5)*18,vy:6,l:.45,c:"#ffd45c"});
 }
 
-// ===== 5-desenho/08-dia-noite.js — Ciclo de dia e noite (sol, lua, estrelas, estrela cadente e tons do céu) =====
+// ===== 5-desenho/08-dia-noite.js — Ciclo de dia e noite (sol, lua, estrelas, aurora boreal, estrela cadente e tons do céu) =====
 // dayT: 0 = amanhecer · .25 = meio-dia · .5 = pôr do sol · .75 = meia-noite. Duração do ciclo: BAL.day.len.
 // O céu é pintado só com degradês contínuos (um por camada de cor), sem faixas nem retângulos translúcidos sobrepostos,
 // que deixavam linhas horizontais visíveis. O degradê é ancorado na linha do horizonte e rola junto com o chão.
@@ -3319,6 +3911,30 @@ function skyStars(sky,t,ps){
  }
  ctx.globalAlpha=1;
 }
+// Aurora boreal: duas cortinas de raios verdes, azul-turquesa e roxos que ondulam devagar. Só de noite e com o céu aberto
+// (sem nuvens, chuva, neve ou neblina); no inverno aparece mais forte. Colunas de 2 pixels de sprite, cada uma com seu degradê vertical.
+function skyAurora(sky,t,ps){
+ const al=altAmt(),n=clamp(nightAmt()+altSmooth(.3,1,al)*.4,0,1);if(n<.2)return;   // lá no alto a aurora aparece até de dia (fraca) e fica mais forte
+ const aur=Math.pow(n,1.4)*clamp(1-wx.cover*1.25,0,1)*clamp(1-wx.fog*1.5,0,1)*(SEA.idx===3?1:.62)*(.8+.2*Math.sin(t*.23))*(1+.4*al);
+ if(aur<.03)return;
+ const cw=ps*2,top0=sky-skyH();
+ ctx.save();ctx.globalCompositeOperation="lighter";
+ for(let L=0;L<2;L++){
+  const ph=L*2.3,sh=L?.7:1;
+  for(let x=0;x<W+cw;x+=cw){
+   const wv=Math.sin(x*.0071+t*.11+ph)*.5+Math.sin(x*.0193-t*.19+ph*1.7)*.3+Math.sin(x*.0037+t*.05)*.2;   // forma da cortina (-1 a 1)
+   const cy=top0+sky*(.24+.07*L+.08*wv),h=sky*(.26+.16*(.5+.5*Math.sin(x*.012+t*.33+ph)))*(L?.8:1);
+   const ray=.45+.55*(.5+.5*Math.sin(x*.046+t*.8+L*1.9)),a=Math.min(1,aur*ray*sh*.95);
+   if(a<.01)continue;
+   const yt=cy-h*.55,yb=cy+h*.45,g=ctx.createLinearGradient(0,yt,0,yb);
+   g.addColorStop(0,"rgba(150,90,255,0)");g.addColorStop(.22,"rgba(130,100,255,"+(a*.55).toFixed(3)+")");
+   g.addColorStop(.5,L?"rgba(70,230,230,"+(a*.8).toFixed(3)+")":"rgba(80,255,160,"+a.toFixed(3)+")");
+   g.addColorStop(.82,"rgba(60,230,150,"+(a*.5).toFixed(3)+")");g.addColorStop(1,"rgba(60,230,150,0)");
+   ctx.fillStyle=g;ctx.fillRect(Math.round(x),Math.round(yt),cw,Math.round(yb-yt));
+  }
+ }
+ ctx.restore();
+}
 // Sol (dia) ou lua (noite) cruzando o céu em arco
 function skyBody(sky,ps){
  const e=sunElev(),horizon=sky*.8,arc=sky*.6,u=dayT<.5?dayT/.5:(dayT-.5)/.5,x=Math.round(W*(.08+.84*u)/ps)*ps;
@@ -3327,8 +3943,14 @@ function skyBody(sky,ps){
   pixDisc(x,y,14,ps,"rgba(255,244,170,.07)");pixDisc(x,y,10,ps,"rgba(255,244,170,.09)");pixDisc(x,y,7,ps,warm?"rgba(255,170,90,.16)":"rgba(255,244,170,.12)");
   pixDisc(x,y,5,ps,warm?"#ff9a50":"#ffe27a");pixDisc(x,y,4,ps,warm?"#ffc27a":"#fff7c4");
   ctx.fillStyle=warm?"#ffb070":"#fff1a0";for(const[a,b,w,hh]of[[0,-8,1,2],[0,7,1,2],[-8,0,2,1],[7,0,2,1]])ctx.fillRect(x+a*ps,y+b*ps,w*ps,hh*ps);
+  const al=altAmt();   // lá no alto a lua também aparece de dia, do lado oposto ao do sol
+  if(al>.3){
+   const mu=(u+.5)%1,ma=altSmooth(.3,.85,al)*Math.sin(Math.PI*mu)*.75*clamp(1-wx.cover*.8,0,1),mx=Math.round(W*(.08+.84*mu)/ps)*ps,my=Math.round((horizon-Math.sin(Math.PI*mu)*arc)/ps)*ps;
+   if(ma>.02){ctx.globalAlpha=ma;pixDisc(mx,my,9,ps,"rgba(200,215,255,.08)");pixDisc(mx,my,7,ps,"rgba(200,215,255,.1)");pixDisc(mx,my,5,ps,"#dfe5f5");pixDisc(mx,my,4,ps,"#f4f6fb");ctx.fillStyle="#c3cae0";ctx.fillRect(mx-2*ps,my-ps,ps,ps);ctx.fillRect(mx+ps,my+ps,ps,ps);ctx.fillRect(mx-ps,my+2*ps,ps,ps);ctx.globalAlpha=1}
+  }
  }else{
-  const y=Math.round((horizon+e*arc)/ps)*ps;
+  const y=Math.round((horizon+e*arc)/ps)*ps,al=altAmt();
+  if(al>.05){pixDisc(x,y,13,ps,"rgba(200,215,255,"+(.05*al).toFixed(3)+")");pixDisc(x,y,11,ps,"rgba(200,215,255,"+(.07*al).toFixed(3)+")")}   // no alto o brilho da lua é maior
   pixDisc(x,y,9,ps,"rgba(200,215,255,.07)");pixDisc(x,y,7,ps,"rgba(200,215,255,.1)");
   pixDisc(x,y,5,ps,"#dfe5f5");pixDisc(x,y,4,ps,"#f4f6fb");
   ctx.fillStyle="#c3cae0";ctx.fillRect(x-2*ps,y-ps,ps,ps);ctx.fillRect(x+ps,y+ps,ps,ps);ctx.fillRect(x-ps,y+2*ps,ps,ps);
@@ -3382,23 +4004,24 @@ function drawAmb(dt){
 const wxR=(i,s)=>{const x=Math.sin(i*12.9898+s*78.233)*43758.5453;return x-Math.floor(x)};
 function weatherSky(sky,scale,night){   // dentro do recorte do céu, depois das nuvens e colinas de sempre
  const c=wx.cover;if(c<.01&&wx.bolt<=0&&wx.fog<.01)return;
- if(c>.02){   // camada extra de nuvens (maiores e mais lentas) que cobre o céu
-  const span=W+240*scale;let n=1;
-  for(const[p,hh,s,v,ly,ph]of CLOUDS){
-   const size=s*1.3*scale*(W<500?.8:1),par=ly?.18:.07,px=Math.max(2,Math.round(size/13)),sp=sprCloud(n++%3);
-   const x=((((p+.37)%1)*span+wx.clock*v*(.6+wx.wind)*scale-camX*T*par)%span+span)%span-120*scale,y=sky*(.08+hh*.62)+Math.sin(wx.clock*.2+ph)*3;
+ if(c>.02)skyLayers(sky,(sh,k)=>{   // camada extra de nuvens (maiores e mais lentas) que cobre o céu (presa ao horizonte, como o resto do céu)
+  const span=W+240*scale;let n=1,i=0;
+  for(const[p0,hh0,s,v0,ly,ph]of CLOUDS){
+   const bd=k>0?cloudBand(i++,k,CLOUDS.length):null,p=bd?bd.p-.37:p0,hh=bd?bd.hh:hh0,v=bd?bd.v:v0;   // faixas de cima: espaçadas por igual (o -.37 compensa o deslocamento abaixo)
+   const size=s*1.3*scale*(W<500?.8:1),par=bd?bd.par:(ly?.18:.07),px=Math.max(2,Math.round(size/13)),sp=sprCloud(n++%3);
+   const x=((((p+.37)%1)*span+wx.clock*v*(.6+wx.wind)*scale-camX*T*par)%span+span)%span-120*scale,y=sh*(.08+hh*.62)+Math.sin(wx.clock*.2+ph)*3;
    ctx.globalAlpha=c*(ly?.95:.65)*(1-night*.5);
    ctx.drawImage(sp.cv,1,1,sp.w,sp.h,Math.round(x/px)*px,Math.round(y/px)*px,sp.w*px,sp.h*px);
   }
   ctx.globalAlpha=1;
- }
+ },false);   // sem repetir para cima: acima das nuvens o céu fica limpo
 }
 // Véu do tempo (nublado, neblina de fundo e clarão do raio): é desenhado DEPOIS do cenário da superfície (chamado em 5-desenho/06-quadro.js), por cima do céu, das cordilheiras, colinas, montanhas, árvores e pedras.
 // Se ficasse junto das nuvens, o cenário (que é desenhado depois do céu) apareceria sem o véu e a borda do efeito ficaria visível na silhueta dele.
 function weatherVeil(sky){
- const c=wx.cover;if(sky<=0||(c<.02&&wx.bolt<=0&&wx.fog<.01))return;
+ const c=wx.cover*(1-clamp(altAmt()*1.2-.2,0,1)*.9);if(sky<=0||(c<.02&&wx.bolt<=0&&wx.fog<.01))return;   // lá no alto, acima das nuvens, o véu cinza some
  if(c>.02){
-  const g=ctx.createLinearGradient(0,0,0,sky);   // véu cinza-azulado: mais escuro no alto, mais claro no horizonte
+  const g=ctx.createLinearGradient(0,sky-skyH(),0,sky);   // véu cinza-azulado: mais escuro no alto, mais claro no horizonte
   g.addColorStop(0,"rgba(46,56,76,"+(.5*c).toFixed(3)+")");g.addColorStop(1,"rgba(112,124,142,"+(.28*c).toFixed(3)+")");
   ctx.fillStyle=g;ctx.fillRect(0,0,W,sky);
  }
@@ -3409,14 +4032,22 @@ function weatherFront(){   // por cima do mundo, antes da escuridão da noite
  const g=rowY(0);if(g<=8)return;
  const ck=wx.clock;ctx.save();
  if(wx.rain>.02){
-  const N=Math.round(wx.rain*Math.min(200,W/4.5)),slope=.12+.22*wx.wind,sp=1+.25*wx.rain;
+  const N=Math.round(wx.rain*Math.min(200,W/4.5)),slope=.12+.22*wx.wind,sp=1+.25*wx.rain,SPL=.3;
   ctx.strokeStyle="rgba(196,214,238,.5)";ctx.lineWidth=1;ctx.beginPath();
   const sp2=[];
   for(let i=0;i<N;i++){
-   const r1=wxR(i,1),r2=wxR(i,2),v=(520+r1*240)*sp,len=7+r1*7,y=(r1*4000+ck*v)%(g+30),x=((r2*(W+260)+y*slope-60)%(W+260)+W+260)%(W+260)-130;
-   if(y<g-2){ctx.moveTo(x,y);ctx.lineTo(x-slope*len,y-len)}else if(y<g+12)sp2.push(x);   // chegou ao chão: respingo
+   const r1=wxR(i,1),r2=wxR(i,2),v=(520+r1*240)*sp,len=7+r1*7,y=(r1*4000+ck*v)%(g+v*SPL),yy=Math.min(y,g),x=((r2*(W+260)+yy*slope-60)%(W+260)+W+260)%(W+260)-130;
+   if(y<g-2){ctx.moveTo(x,y);ctx.lineTo(x-slope*len,y-len)}else if(y>=g)sp2.push([x,(y-g)/(v*SPL)]);   // chegou ao chão: respingo (q de 0 a 1 ao longo de ~0,3 s)
   }
-  ctx.stroke();ctx.fillStyle="rgba(210,224,242,.45)";for(const x of sp2)ctx.fillRect(Math.round(x)-2,Math.round(g)-1,4,1);
+  ctx.stroke();
+  const gy=Math.round(g),pz=Math.max(2,Math.round(T/24));
+  for(const[x0,q]of sp2){
+   const x=Math.round(x0),a=1-q;
+   ctx.fillStyle="rgba(210,224,242,"+(.5*a).toFixed(3)+")";ctx.fillRect(x-Math.round((2+q*9)*pz/2),gy-1,Math.round((4+q*18)*pz/2),Math.max(1,Math.round(pz/2)));   // ondinha que abre
+   ctx.fillStyle="rgba(228,238,252,"+(.95*a).toFixed(3)+")";
+   const up=Math.sin(Math.PI*Math.min(1,q*1.15))*(5+3*(x%3))*pz*.8,sd=(2+q*7)*pz*.7;
+   ctx.fillRect(x-Math.round(sd),gy-2-Math.round(up),pz,pz);ctx.fillRect(x+Math.round(sd),gy-2-Math.round(up),pz,pz);ctx.fillRect(x,gy-2-Math.round(up*1.3),pz,pz);   // gotículas que saltam
+  }
  }
  if(wx.snow>.02){
   const N=Math.round(wx.snow*Math.min(150,W/6));ctx.fillStyle="rgba(255,255,255,.88)";
@@ -3476,10 +4107,11 @@ function scenePal(){
  return{wint:w,trunk:"#5a3f2a",pL:mixHex("#2f7a45","#e9f2f6",w*.55),pD:mixHex("#1c4f33","#c3d2dc",w*.5),pLb:mixHex("#3b6a52","#cfdde4",w*.4),pDb:mixHex("#27503f","#a9bccb",w*.35),
   lf:SEA.nhh,lfD:SEA.nh,lfb:mixHex(SEA.nh,"#2d4d3f",.4),
   rkL:"#a3a7ae",rkM:"#7c8189",rkD:"#575c66",rkE:"#3f434c",moss:SEA.nh,gr:SEA.g,grH:SEA.h,
-  snow:"#f4f8fb",dirt:"#b48a58",dirtH:"#d4ad76"};
+  snow:"#f4f8fb",dirt:SEA.d,dirtH:SEA.dh};
 }
+const TREE_K=2.2;   // fator de tamanho das árvores e pinheiros (altura e largura crescem juntas)
 function pxPine(cx,by,hpx,q,P,k,back){   // pinheiro em degraus; back = versão mais escura e fria (fileira de trás)
- cx=Math.round(cx);by=Math.round(by);
+ hpx*=TREE_K;cx=Math.round(cx);by=Math.round(by);
  const th=Math.max(q,Math.round(hpx*.16/q)*q),R=Math.max(3,Math.round((hpx-th)/q)),mh=Math.max(2,Math.round(hpx*.2/q)),tr=Math.max(2,Math.round(R/3));
  ctx.fillStyle=k(P.trunk);ctx.fillRect(cx-Math.floor(q/2),by-th,q,th);
  const cL=k(back?P.pLb:P.pL),cD=k(back?P.pDb:P.pD),cS=k(P.snow);
@@ -3490,7 +4122,7 @@ function pxPine(cx,by,hpx,q,P,k,back){   // pinheiro em degraus; back = versão 
  }
 }
 function pxTree(cx,by,hpx,q,P,k,back){   // árvore de copa redonda (copa nas cores da estação)
- cx=Math.round(cx);by=Math.round(by);
+ hpx*=TREE_K;cx=Math.round(cx);by=Math.round(by);
  const th=Math.max(q,Math.round(hpx*.36/q)*q),cw=Math.max(2,Math.round(hpx*.28/q)),ch=Math.max(3,Math.round((hpx-th)/q)+1);
  ctx.fillStyle=k(P.trunk);ctx.fillRect(cx-Math.floor(q/2),by-th,q,th);
  const cL=k(back?P.lfb:P.lf),cD=k(back?mixHex(P.lfb,"#10261c",.35):P.lfD);
@@ -3513,15 +4145,19 @@ function pxBoulder(cx,by,rad,q,P,k){   // pedra grande: meia elipse em degraus, 
 }
 // trilha de terra da passagem da direita: troca a grama da linha 0 (chamada de 5-desenho/06-quadro.js)
 function drawPathTop(x,y,ts,tb,c){
- const P=scenePal();ctx.save();ctx.translate(x,y);ctx.scale(ts,ts);
+ const P=scenePal(),w=P.wint,au=SEA.idx===2?1:0;ctx.save();ctx.translate(x,y);ctx.scale(ts,ts);
  ctx.fillStyle=P.dirt;ctx.fillRect(0,0,tb+1,5);ctx.fillStyle=P.dirtH;ctx.fillRect(0,0,tb+1,2);
- ctx.fillStyle="rgba(0,0,0,.18)";for(let i=0;i<3;i++)ctx.fillRect(2+hash(c*3+i,611)*(tb-6),2+hash(c*5+i,613)*2,2,1);
+ ctx.fillStyle=mixHex("#000000","#6d8aa3",w)+"";ctx.globalAlpha=.18+.17*w;   // marquinhas: terra escura; no inverno sombras azuladas na neve
+ for(let i=0;i<3;i++)ctx.fillRect(2+hash(c*3+i,611)*(tb-6),2+hash(c*5+i,613)*2,2,1);
+ ctx.globalAlpha=1;
+ if(au>.5)for(let i=0;i<2;i++){ctx.fillStyle=hash(c*7+i,617)<.5?"#e0a43a":"#b4532b";ctx.fillRect(1+hash(c*11+i,619)*(tb-4),hash(c*13+i,621)*3,2,1)}   // folhas secas caídas no outono
+ if(w>.15){ctx.globalAlpha=Math.min(1,w*1.4);ctx.fillStyle="#f4f8fb";for(let i=0;i<3;i++){const bx=hash(c*17+i,623)*(tb-4);ctx.fillRect(bx,-1,3,1)}ctx.globalAlpha=1}   // montinhos de neve no topo
  ctx.restore();
 }
 
 // ---------- cenário preso ao mundo (atrás do chão e do jogador) ----------
 // árvores, arbustos e pedras espalhados entre as colunas c0 e c1 (deterministas: não piscam nem mudam ao andar)
-const sceneBlocked=c=>(c>=-22&&c<=-11)||(c>=-28.5&&c<=-23.5)||(c>=22&&c<=32)||(c>=35.5&&c<=41)||c>=BEACH_C0;   // horta, moinho, riacho, fogueira e praia ficam sem árvores aleatórias
+const sceneBlocked=c=>(c>=-22&&c<=-11)||(c>=-30&&c<=-22.5)||(c>=22&&c<=32)||(c>=35.5&&c<=41)||c>=BEACH_C0;   // horta, moinho, riacho, fogueira e praia ficam sem árvores aleatórias
 function sceneScatter(y0,q,P,k,c0,c1,back){
  for(let c=c0;c<=c1;c++){
   const x=colX(c);if(x<-T*3||x>W+T*3||sceneBlocked(c))continue;
@@ -3540,13 +4176,19 @@ function drawScenery(t){
  ctx.save();ctx.beginPath();ctx.rect(0,0,W,y0);ctx.clip();ctx.imageSmoothingEnabled=false;
  // a grande montanha fica no fim da trilha da esquerda (espelhada, sem nada nela); à direita o cenário termina no mar (13-paisagem.js)
  // cordilheira alta da esquerda (área estendida): duas fileiras de picos que passam do topo da tela, com neve; a de trás é mais clara e fria
- tallRange(y0,q,A,P,k,SURF_L-14,-40,31,1.45,["#a4b4d0","#7d90b3","#5b6f93"],1.02);
- tallRange(y0,q,A,P,k,SURF_L-10,-50,57,1.12,["#7584a4","#52617f","#37455f"],.86);
- bigMountain(y0,q,A,P,k,SURF_L-.5,true);
+ // As montanhas são fundo distante: forma, tamanho E velocidade de rolagem fixos, sem depender do zoom (que varia enquanto se anda para a esquerda e fazia a montanha "esticar").
+ // x = centro + (w-SURF_L)*Tm + (SURF_L-camX)*Tp -> o pé da montanha em SURF_L anda a Tp px por coluna, linear, e chega ao centro junto com o jogador no fim da trilha.
+ // Para isso troca por um instante a escala T e a câmera por uma câmera "de fundo".
+ const T0=T,cam0=camX,Tm=baseTile()*zoomPreference,Tp=Tm*.6,qm=Math.max(.75,Math.round(baseTile()/11)*zoomPreference);
+ T=Tm;camX=SURF_L-(SURF_L-cam0)*Tp/Tm;
+ tallRange(y0,qm,A,P,k,SURF_L-14,-40,31,1.45,["#a4b4d0","#7d90b3","#5b6f93"],1.02);
+ tallRange(y0,qm,A,P,k,SURF_L-10,-50,57,1.12,["#7584a4","#52617f","#37455f"],.86);
+ bigMountain(y0,qm,A,P,k,SURF_L-.5,true);
+ T=T0;camX=cam0;
  for(const c of CAIRNS)drawCairn(y0,q,P,k,c);
  // fileira de trás (árvores menores e mais frias) e depois a da frente, nos trechos livres das trilhas
- sceneScatter(y0,q,P,k,SURF_L+1,-HALF-1,true);sceneScatter(y0,q,P,k,HALF+2,SURF_R-1,true);
- sceneScatter(y0,q,P,k,SURF_L+1,-HALF-2,false);sceneScatter(y0,q,P,k,HALF+2,SURF_R-1,false);
+ sceneScatter(y0,q,P,k,SURF_L-16,-HALF-1,true);sceneScatter(y0,q,P,k,HALF+2,SURF_R-1,true);
+ sceneScatter(y0,q,P,k,SURF_L-16,-HALF-2,false);sceneScatter(y0,q,P,k,HALF+2,SURF_R-1,false);   // a mata passa 16 colunas do fim da trilha (SURF_L): a câmera mostra além dele e antes ficava sem árvores
  ctx.restore();
 }
 
@@ -3633,7 +4275,7 @@ function leftBlock(y0,q,A,P,k,E,back){
  pxBoulder(colX(E+.1),y0+q,T*.55,q,P,k);pxBoulder(colX(E-.7),y0+q,T*.7,q,P,k);
 }
 
-// ===== 5-desenho/12-povoado.js — Cama, poste de luz (perto da loja), poço de água, ferraria alemã de enxaimel, quadro de contratos e caça-níquel na superfície =====
+// ===== 5-desenho/12-povoado.js — Cama, lamparina da carrocinha da loja, poço de água, ferraria alemã de enxaimel, quadro de contratos e caça-níquel na superfície =====
 // Tudo em pixel art (mkSpr, 00-pixel.js) e posições em colunas fixas (02-camadas-minerios.js).
 // ---------- cama (volta ao lugar de antes, ao lado da mesa de trabalho) ----------
 function sprBed(){return mkSpr("bed",20,9,Object.assign({c:"#e4dcc4",C:"#f6f0dc",B:"#3f6fd0",L:"#6f98f0",D:"#2d4fa0",f:"#fbfaf4",F:"#d8d3c0"},WOOD),R=>{
@@ -3649,37 +4291,30 @@ function drawBed(t){
  if(atSurface()&&c>-60)lbl(nearBed()?__("Salvo!"):__("Cama"),Math.max(c,34),y-(s.h+3)*u-Math.sin(t*4)*2,nearBed()?"#6fe3a0":"#ffd45c");
 }
 
-// ---------- poste de luz: um só, de madeira fina, com a lamparina pendurada (perto da loja) ----------
-const LAMP_DX=-2.5,LAMP_Y=29.5;   // posição da lamparina em pixels de sprite, em relação ao centro do sprite e à base
-function sprLamp(){return mkSpr("lamp3",10,40,{W:"#b27a3a",w:"#7a4f27",d:"#4a2f16",k:"#241609",y:"#ffd98a",Y:"#fff3c4",m:"#8d9299",N:"#3a3a44"},R=>{
- R(6,4,2,36,"W");R(7,4,1,36,"w");R(5,38,4,2,"w");R(5,38,4,1,"W");     // poste fino de madeira e base
- R(1,3,7,2,"W");R(1,4,7,1,"w");R(5,5,1,1,"w");R(4,6,1,1,"w");           // braço e mão-francesa
- R(2,5,1,2,"m");R(1,7,3,1,"N");                                         // corrente e argola
- R(0,8,5,1,"N");R(1,9,3,4,"k");R(2,9,1,3,"y");R(2,9,1,1,"Y");R(0,13,5,1,"N");   // lamparina de vidro
-},1)}
-function drawLamps(t){
- const u=pu(),s=sprLamp(),y=Math.round(rowY(0)),n=nightAmt();
- for(const col of LAMPS){const x=Math.round(colX(col));if(x<-T*5||x>W+T*5)continue;
-  const lx=x+Math.round(LAMP_DX*u),ly=y-LAMP_Y*u;
-  if(n>.03){
-   const fl=.92+.08*Math.sin(t*7+col*3),r=T*3;
-   const gr=ctx.createRadialGradient(lx,ly,0,lx,ly,r);gr.addColorStop(0,"rgba(255,214,130,"+(.5*n*fl).toFixed(3)+")");gr.addColorStop(.35,"rgba(255,196,100,"+(.2*n*fl).toFixed(3)+")");gr.addColorStop(1,"rgba(255,180,80,0)");
-   ctx.fillStyle=gr;ctx.fillRect(lx-r,ly-r,r*2,r*2);
-   ctx.fillStyle="rgba(255,205,120,"+(.18*n*fl).toFixed(3)+")";ctx.beginPath();ctx.ellipse(lx,y-u*.3,T*1.7,u*1.4,0,0,7);ctx.fill();
-  }
-  pxShadow(x+u,(s.w+2)*u,y,u);
-  // a lamparina balança de leve na corrente
-  drawSpr(s,x,y,u);
-  if(n>.03){ctx.fillStyle="rgba(255,250,200,"+(.85*n).toFixed(3)+")";ctx.fillRect(lx-Math.round(u),ly-Math.round(1.5*u),Math.round(2*u),Math.round(3*u))}
+// ---------- lamparina da carrocinha da loja: haste de madeira sobre o toldo, braço, corrente e lamparina de vidro (sem poste separado) ----------
+const SHOP_LAMP={dx:-6.5,dy:23};   // centro da lamparina em pixels de sprite, em relação ao centro da carrocinha e à base
+function shopLampPos(){const u=pu();return{x:forgeFx(SHOP_C)+Math.round(SHOP_LAMP.dx*u),y:rowY(0)-SHOP_LAMP.dy*u}}
+function drawShopLamp(t){
+ const u=pu(),c=forgeFx(SHOP_C),y=Math.round(rowY(0)),n=nightAmt();if(c<-T*5||c>W+T*5)return;
+ const x0=c-11*u,y0=y-19*u,L=shopLampPos(),lx=L.x,ly=L.y,fl=.92+.08*Math.sin(t*7+SHOP_C*3);
+ PX(x0+1*u,y0-9*u,u,9*u,"#7a4f27");PX(x0+1*u,y0-9*u,.4*u,9*u,"#b27a3a");           // haste de madeira presa ao canto do toldo
+ PX(x0+1*u,y0-9*u,4*u,u,"#7a4f27");PX(x0+2*u,y0-8*u,u,u,"#4a2f16");                // braço e mão-francesa
+ PX(x0+4*u,y0-8*u,u,u,"#8d9299");PX(x0+3*u,y0-7*u,3*u,u,"#3a3a44");               // corrente e tampa
+ PX(x0+3*u,y0-6*u,3*u,3*u,"#241609");PX(x0+4*u,y0-6*u,u,2*u,n>.03?"#fff3c4":"#ffd98a");PX(x0+3*u,y0-3*u,3*u,u,"#3a3a44");   // vidro com chama e base
+ if(n>.03){
+  const r=T*3,gr=ctx.createRadialGradient(lx,ly,0,lx,ly,r);gr.addColorStop(0,"rgba(255,214,130,"+(.5*n*fl).toFixed(3)+")");gr.addColorStop(.35,"rgba(255,196,100,"+(.2*n*fl).toFixed(3)+")");gr.addColorStop(1,"rgba(255,180,80,0)");
+  ctx.fillStyle=gr;ctx.fillRect(lx-r,ly-r,r*2,r*2);
+  ctx.fillStyle="rgba(255,205,120,"+(.18*n*fl).toFixed(3)+")";ctx.beginPath();ctx.ellipse(lx,y-u*.3,T*1.7,u*1.4,0,0,7);ctx.fill();
+  ctx.fillStyle="rgba(255,250,200,"+(.85*n).toFixed(3)+")";ctx.fillRect(Math.round(lx-u),Math.round(ly-1.5*u),Math.round(2*u),Math.round(3*u));
  }
 }
-function lampHoles(g,k,d){   // chamado por nightLayer (04-combo-efeitos.js): abre a escuridão em volta da lamparina
- g.globalCompositeOperation="destination-out";const hz=rowY(0),u=pu();
- for(const col of LAMPS){const x=colX(col);if(x<-T*6||x>W+T*6)continue;
-  const cx=(x+LAMP_DX*u)*k,cy=(hz-LAMP_Y*u)*k,r=T*3.6*k,gr=g.createRadialGradient(cx,cy,0,cx,cy,r);
+function lampHoles(g,k,d){   // chamado por nightLayer (04-combo-efeitos.js): abre a escuridão em volta da lamparina da carrocinha e das outras luzes
+ g.globalCompositeOperation="destination-out";
+ {const L=shopLampPos();if(L.x>=-T*6&&L.x<=W+T*6){
+  const cx=L.x*k,cy=L.y*k,r=T*3.6*k,gr=g.createRadialGradient(cx,cy,0,cx,cy,r);
   for(const[o,a]of[[0,.93],[.35,.85],[.6,.5],[.82,.18],[1,0]])gr.addColorStop(o,"rgba(0,0,0,"+a+")");
-  g.fillStyle=gr;g.fillRect(cx-r,cy-r,r*2,r*2)}
- forgeHoles(g,k);campfireHoles(g,k);lighthouseHoles(g,k);
+  g.fillStyle=gr;g.fillRect(cx-r,cy-r,r*2,r*2)}}
+ forgeHoles(g,k);campfireHoles(g,k);lighthouseHoles(g,k);pierHoles(g,k);
  g.globalCompositeOperation="source-over";
 }
 
@@ -3738,7 +4373,7 @@ function drawForge(t){
   R(x-1.5*u,by-u,3*u,FORGE_H*u-pl+u,TB);R(x-1.5*u,by-u,u,FORGE_H*u-pl+u,TH);R(x+.5*u,by-u,u,FORGE_H*u-pl+u,TD);   // poste
   R(x-2*u,y-pl-u,4*u,u,TD);R(x-2*u,by+3*u,4*u,u,TD);   // sapatas
   for(let k=0;k<3;k++)R(x-.5*u,y-pl-(4+k*3)*u,u,u,TH);   // entalhes decorativos
-  for(let k=0;k<6;k++){R(x+1.5*u+k*u,by+(7-k)*u,u*1.3,u*1.5,TB);R(x-2.8*u-k*u,by+(7-k)*u,u*1.3,u*1.5,TB)}   // escoras
+  for(let k=0;k<6;k++){if(i<P.length-1)R(x+1.5*u+k*u,by+(7-k)*u,u*1.3,u*1.5,TB);if(i>0)R(x-2.8*u-k*u,by+(7-k)*u,u*1.3,u*1.5,TB)}   // escoras (só para dentro da casa: a de fora dos pilares das pontas ficava solta no ar)
  });
  // ---- chaminé de pedra por DENTRO da casa: sobe da fornalha atrás dos pilares e da viga; o telhado fica na frente dela e só a ponta aparece saindo da cumeeira
  const sF=sprFurnace(),cF=Math.round(colX(FURN_C)),y0F=Math.round(y-sF.h*u),csx=cF-Math.round(sF.w*u/2)+10*u,csw=5*u,ctop=Math.round(forgeStackTopY());
@@ -3812,27 +4447,25 @@ function drawRopeLadder(t){
  R(cx-half-u,y-u*.4,u,u,"#8d9299");R(cx+half-u,y-u*.4,u,u,"#8d9299");
 }
 
-// ---------- poço de água: aro de pedra, dois postes, rolo com manivela, telhadinho de tábuas e balde na corda ----------
-function sprWell(){return mkSpr("well",22,24,Object.assign({B:"#8d8984",L:"#b0aba3",b:"#625f5b",q:"#4aa8e8",Q:"#2f7fc0",k:"#1c120c",P:"#e0cf9a"},WOOD),R=>{
- R(9,0,4,1,"W");R(6,1,10,1,"W");R(3,2,16,1,"W");R(0,3,22,1,"w");R(7,1,1,1,"d");R(13,1,1,1,"d");R(5,2,1,1,"d");R(11,2,1,1,"d");R(16,2,1,1,"d");   // telhadinho de tábuas
- R(0,3,22,1,"W");R(1,4,20,1,"w");R(2,5,18,1,"d");                                                                   // viga
- R(3,5,2,9,"w");R(3,5,1,9,"W");R(4,5,1,9,"d");R(17,5,2,9,"w");R(17,5,1,9,"W");R(18,5,1,9,"d");                         // postes
- R(5,7,12,2,"W");R(5,8,12,1,"d");R(5,7,12,1,"P");R(4,7,1,2,"n");R(17,7,1,2,"n");                                    // rolo da corda
- R(19,7,3,1,"w");R(21,7,1,3,"w");R(21,9,1,1,"W");                                                                   // manivela
- R(4,12,14,2,"k");R(5,13,12,1,"q");R(6,13,3,1,"Q");                                                                  // boca do poço com água
- R(2,14,18,2,"L");R(2,14,18,1,"P");R(2,15,18,1,"B");R(2,16,18,8,"B");R(2,16,1,8,"L");R(19,16,1,8,"b");R(2,23,18,1,"b");   // aro de pedra
- R(2,18,18,1,"b");R(2,21,18,1,"b");R(6,16,1,2,"b");R(12,16,1,2,"b");R(16,16,1,2,"b");R(4,19,1,2,"b");R(9,19,1,2,"b");R(14,19,1,2,"b");R(7,22,1,1,"b");R(13,22,1,1,"b");   // argamassa
+// ---------- poço de água (pequeno, 14x15): aro de pedra baixo, dois postes finos, rolo com manivela, telhadinho e balde na corda ----------
+function sprWell(){return mkSpr("well",14,15,Object.assign({B:"#8d8984",L:"#b0aba3",b:"#625f5b",q:"#4aa8e8",Q:"#2f7fc0",k:"#1c120c",P:"#e0cf9a"},WOOD),R=>{
+ R(5,0,4,1,"W");R(3,1,8,1,"W");R(1,2,12,1,"w");R(1,3,12,1,"d");R(6,1,1,1,"d");R(4,2,1,1,"d");R(9,2,1,1,"d");                  // telhadinho de tábuas
+ R(2,4,1,5,"w");R(11,4,1,5,"w");R(2,4,1,5,"W");R(11,4,1,5,"w");                                                          // postes
+ R(3,5,8,2,"W");R(3,5,8,1,"P");R(3,6,8,1,"d");R(12,5,2,1,"w");R(13,6,1,2,"w");                                          // rolo da corda e manivela
+ R(1,8,12,1,"L");R(2,9,10,1,"k");R(3,9,8,1,"q");R(3,9,2,1,"Q");                                                          // borda e boca do poço com água
+ R(0,10,14,1,"L");R(0,11,14,4,"B");R(0,11,1,4,"L");R(13,11,1,4,"b");R(0,14,14,1,"b");R(0,13,14,1,"b");                  // aro de pedra
+ R(4,11,1,2,"b");R(9,11,1,2,"b");R(2,13,1,1,"B");R(6,13,1,1,"B");R(11,13,1,1,"B");                                       // argamassa
 },1)}
 function drawWell(t){
  const u=pu(),s=sprWell(),c=Math.round(colX(WELL_C)),y=Math.round(rowY(0));if(c<-T*2||c>W+T*2)return;
  pxShadow(c,(s.w+2)*u,y,u);drawSpr(s,c,y,u);
- const x0=Math.round(c-s.w*u/2),y0=Math.round(y-s.h*u),sw=Math.round(Math.sin(t*1.7)*u*.6);
+ const x0=Math.round(c-s.w*u/2),y0=Math.round(y-s.h*u),sw=Math.round(Math.sin(t*1.7)*u*.5);
  // brilhos na água
- for(let i=0;i<3;i++){if(Math.sin(t*2.4+i*2.1)>.55){ctx.fillStyle="#d9f3ff";ctx.fillRect(x0+(7+i*3)*u,y0+13*u,u,Math.max(1,Math.round(u*.6)))}}
+ for(let i=0;i<3;i++){if(Math.sin(t*2.4+i*2.1)>.55){ctx.fillStyle="#d9f3ff";ctx.fillRect(x0+(4+i*2)*u,y0+9*u,u,Math.max(1,Math.round(u*.6)))}}
  // corda e balde pendurados no rolo, balançando de leve
- ctx.fillStyle="#c9b27a";ctx.fillRect(x0+11*u+sw*.5,y0+9*u,u,2*u);
- const bx=x0+9*u+sw;ctx.fillStyle="#7a4f27";ctx.fillRect(bx,y0+11*u,5*u,3*u);ctx.fillStyle="#b27a3a";ctx.fillRect(bx,y0+11*u,5*u,Math.round(u*.6));
- ctx.fillStyle="#2f3238";ctx.fillRect(bx,y0+12*u,5*u,Math.round(u*.7));ctx.fillStyle="#4a2f16";ctx.fillRect(bx+4*u,y0+11*u,u,3*u);
+ ctx.fillStyle="#c9b27a";ctx.fillRect(x0+7*u+Math.round(sw*.5),y0+7*u,u,u);
+ const bx=x0+6*u+sw;ctx.fillStyle="#7a4f27";ctx.fillRect(bx,y0+8*u,3*u,2*u);ctx.fillStyle="#b27a3a";ctx.fillRect(bx,y0+8*u,3*u,Math.max(1,Math.round(u*.5)));
+ ctx.fillStyle="#2f3238";ctx.fillRect(bx,y0+9*u,3*u,Math.max(1,Math.round(u*.5)));
  if(atSurface())lbl(__("Poço de água"),c,y0-3*u-Math.sin(t*4)*2,"#7fd6ff");
 }
 
@@ -3848,7 +4481,6 @@ function drawBoard(t){
  const u=pu(),s=sprBoard(),c=Math.round(colX(BOARD_C)),y=Math.round(rowY(0)),near=nearBoard(),rd=ctReady();
  pxShadow(c,(s.w+2)*u,y,u);drawSpr(s,c,y,u);
  if(!atSurface())return;
- if(rd){const b=Math.abs(Math.sin(t*5))*u*2;ctx.fillStyle="#ffd45c";ctx.font="900 22px "+FONT;ctx.textAlign="center";ctx.lineWidth=4;ctx.strokeStyle="rgba(10,8,6,.85)";ctx.strokeText("!",c,y-(s.h+5)*u-b);ctx.fillText("!",c,y-(s.h+5)*u-b)}
  lbl(near?__("Contratos: clique para abrir"):rd?__("Contratos prontos!"):__("Contratos"),c,y-(s.h+2)*u-Math.sin(t*4)*2,near?"#6fe3a0":"#ffd45c");
 }
 
@@ -3888,12 +4520,13 @@ function drawShopkeeper(t){
  ctx.fillStyle="#d8b45a";ctx.fillRect(mx-6,my-41+hb,12,6);ctx.fillStyle="#a8842c";ctx.fillRect(mx-6,my-37+hb,12,1);ctx.fillStyle="#d8b45a";ctx.fillRect(mx-12,my-36+hb,24,3);ctx.fillStyle="#a8842c";ctx.fillRect(mx-12,my-34+hb,24,1);ctx.fillStyle="#f0d27a";ctx.fillRect(mx-12,my-36+hb,24,1);   // chapéu de palha
  ctx.save();ctx.translate(mx+7,my-21+bob);ctx.rotate(-.5+wave);ctx.fillStyle=cloth;ctx.fillRect(-2,0,4,7);ctx.fillStyle=skin;ctx.fillRect(-2,6,4,3);ctx.restore();   // braço da frente, acenando de leve
  ctx.restore();
+ if(atSurface())lbl("Izans",mx,Math.round(my-50*worldZoom+hb*worldZoom),"#ffd45c");   // nome do vendedor
 }
 function drawVillage(t){
- drawBed(t);drawEnchant(t);drawLamps(t);drawSlotTable(t);drawBoard(t);drawWell(t);
+ drawBed(t);drawEnchant(t);drawSlotTable(t);drawBoard(t);drawWell(t);
 }
 
-// ===== 5-desenho/13-paisagem.js — Paisagem estendida da superfície: horta e moinho (esquerda); riacho com ponte e roda d'água, fogueira, praia com farol, trapiche e barco (direita); bichinhos de pixel =====
+// ===== 5-desenho/13-paisagem.js — Paisagem estendida da superfície: horta e moinho (esquerda); riacho com ponte e roda d'água, fogueira, praia com farol e trapiche (direita); bichinhos de pixel =====
 // Tudo aqui é só visual (não muda a física). Posições em colunas do mundo (constantes em 1-nucleo/02-camadas-minerios.js). As peças usam forgeFx (âncora única de arredondamento)
 // e padrões por índice/hash, para nada tremer ao andar. Luzes noturnas: campfireHoles/lighthouseHoles (chamadas por lampHoles) e vaga-lumes por cima da escuridão (drawFireflies).
 const PX=(x,y,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),Math.max(1,Math.round(w)),Math.max(1,Math.round(h)))};
@@ -3929,8 +4562,8 @@ function drawGarden(t){
  const fy=y-13*u;
  PX(xa,fy+2*u,len,u,TB);PX(xa,fy+5*u,len,u,TB);
  for(let x=xa,i=0;x<=xb;x+=Math.round(4.5*u),i++){PX(x,fy,1.6*u,8*u,"#8a5a2b");PX(x,fy,.6*u,8*u,"#b27a3a");PX(x,fy,1.6*u,u,TH)}
- // canteiros em três fileiras (as de trás ficam mais altas na tela); o espantalho fica na última
- const rows=[[8,"#74522f","#946b3c","#523720"],[4,"#6f4e2e","#8f673a","#4e341c"],[0,"#6b4a2a","#8a6238","#4a3018"]];
+ // canteiro de uma fileira só
+ const rows=[[3,"#6f4e2e","#8f673a","#4e341c"]];
  for(const[oy,c1,c2,c3]of rows){
   const by=y-oy*u;
   PX(xa+u,by-2*u,len-2*u,2*u,c1);PX(xa+u,by-2*u,len-2*u,.7*u,c2);PX(xa+u,by-.6*u,len-2*u,.6*u,c3);
@@ -3939,15 +4572,6 @@ function drawGarden(t){
    PX(x-u,by-3*u,2*u,u,"#ff8a1f");PX(x-.5*u,by-3*u,u,.6*u,"#ffb04a");   // ombro da cenoura laranja saindo da terra
    PX(x-.4*u+sw*.5,by-5*u,.8*u,2*u,gd);   // caule
    PX(x-2*u+sw,by-7*u,1.2*u,2.5*u,gl);PX(x+.8*u+sw,by-7*u,1.2*u,2.5*u,gl);PX(x-.6*u+sw,by-8.2*u,1.2*u,3.2*u,gd);   // folhas
-  }
-  if(oy===8){   // espantalho
-   const sx=xa+Math.round(len*.46),sb=by-.5*u;
-   PX(sx-.75*u,sb-18*u,1.5*u,18*u,TH);PX(sx-7*u,sb-13*u,14*u,1.5*u,TH);
-   PX(sx-3*u,sb-14*u,6*u,7*u,"#c8452f");PX(sx-3*u,sb-14*u,6*u,u,"#e0604a");PX(sx-1.5*u,sb-10.5*u,3*u,2*u,"#3b6aa8");
-   PX(sx-2.5*u,sb-20*u,5*u,5*u,"#e0c47a");PX(sx-1.5*u,sb-18.5*u,u,u,"#2f1c0e");PX(sx+.7*u,sb-18.5*u,u,u,"#2f1c0e");PX(sx-u,sb-16.8*u,2*u,.7*u,"#2f1c0e");
-   PX(sx-4.5*u,sb-21*u,9*u,u,"#8a5a2b");PX(sx-2.5*u,sb-24*u,5*u,3*u,TH);PX(sx-2.5*u,sb-22.2*u,5*u,.7*u,"#c8452f");
-   PX(sx-8*u,sb-13.6*u,1.4*u,3*u,"#e0c47a");PX(sx+6.6*u,sb-13.6*u,1.4*u,3*u,"#e0c47a");
-   PX(sx+4*u,sb-15.6*u,2.5*u,1.8*u,"#1c120c");PX(sx+6.2*u,sb-15.2*u,u,.7*u,"#ffb43a");   // corvo pousado no braço
   }
  }
  // portão de estacas mais altas nas pontas + caixote de cenouras e barril
@@ -3960,9 +4584,10 @@ function drawGarden(t){
 }
 
 // ---------- moinho de vento (esquerda da horta): torre de pedra e enxaimel, cúpula de telhas e quatro velas girando ----------
+const MILL_S=1.5,LIGHT_S=1.5;   // aumento do moinho e do farol (multiplica o tamanho do pixel do sprite)
 function drawWindmill(t){
- const u=pu(),y=Math.round(rowY(0)),cx=forgeFx(MILL_C),n=nightAmt();
- if(cx<-T*6||cx>W+T*6)return;
+ const u=pu()*MILL_S,y=Math.round(rowY(0)),cx=forgeFx(MILL_C),n=nightAmt();
+ if(cx<-T*9||cx>W+T*9)return;
  const H1=24,TB="#4a2f16";
  pxShadow(cx,28*u,y,u);
  for(let i=0;i<H1;i++){   // torre cônica: pedra até 8 linhas, reboco com madeira por cima
@@ -3999,7 +4624,7 @@ function drawWindmill(t){
 
 // ---------- riacho: margens de pedra, juncos, vitórias-régias, roda d'água por trás e ponte de madeira ----------
 function drawRiver(t){
- const u=pu(),y=Math.round(rowY(0)),xa=Math.round(colX(RIVER_C0-.5)),xb=Math.round(colX(RIVER_C1+.5));
+ const u=pu(),y=Math.round(rowY(0)),xa=Math.round(colX(RIVER_C0-.5)),xb=xa+Math.round((RIVER_C1-RIVER_C0+1)*T);
  if(xb<-T*5||xa>W+T*5)return;
  const TB="#4a2f16",TH="#6b4423",dp=Math.round(T*2);
  for(const[bx,dir]of[[xa,-1],[xb,1]]){   // muros de pedra nas duas margens (por baixo da linha da água)
@@ -4021,7 +4646,7 @@ function drawRiver(t){
  }
  // vitórias-régias e juncos
  for(let i=0;i<5;i++){const px=xa+(.12+.76*hash(i,3))*(xb-xa);PX(px,y+u*.2,4*u,u,"#2f8a3a");PX(px,y+u*.2,2*u,u*.5,"#4dbb4d");if(i%2===0)PX(px+1.6*u,y-.7*u,u,u,"#f2a6c8")}
- for(const rx of[xa-4*u,xa-8*u,xb+4*u,xb+8*u])for(let k=0;k<3;k++){const sw=Math.round(Math.sin(t*1.3+rx*.05+k)*.7*u),hh=(6+k*1.5)*u;PX(rx+k*1.4*u+sw,y-hh,.8*u,hh,"#3f8a3a");PX(rx+k*1.4*u+sw-.2*u,y-hh-1.2*u,1.2*u,2.4*u,"#6b4423")}
+ [xa-4*u,xa-8*u,xb+4*u,xb+8*u].forEach((rx,ri)=>{for(let k=0;k<3;k++){const sw=Math.round(Math.sin(t*1.3+ri*2.1+k)*.7*u),hh=(6+k*1.5)*u;PX(rx+k*1.4*u+sw,y-hh,.8*u,hh,"#3f8a3a");PX(rx+k*1.4*u+sw-.2*u,y-hh-1.2*u,1.2*u,2.4*u,"#6b4423")}})
  // ponte de madeira: pilares na água, tabuleiro de tábuas, vigas e guarda-corpo
  const b0=xa-5*u,b1=xb+5*u,len=b1-b0;
  for(let i=0;i<4;i++){const px=xa+(xb-xa)*(i+.5)/4;PX(px-u,y+2.5*u,2*u,T*1.1,TB);PX(px-u,y+2.5*u,.7*u,T*1.1,TH)}
@@ -4039,9 +4664,9 @@ function drawCampfire(t){
  const u=pu(),y=Math.round(rowY(0)),n=nightAmt(),cx=forgeFx(CAMP_C);
  if(cx<-T*5||cx>W+T*5)return;
  const fl=.85+.15*Math.sin(t*9.1)+.05*Math.sin(t*14.3),bx=cx-Math.round(T*1.9);
- pxShadow(bx,19*u,y,u);   // banco de pedra: dois pés e uma laje comprida
- PX(bx-7*u,y-4*u,4*u,4*u,"#7f7b76");PX(bx+3*u,y-4*u,4*u,4*u,"#7f7b76");PX(bx-7*u,y-4*u,u,4*u,"#a39e96");PX(bx+3*u,y-4*u,u,4*u,"#a39e96");PX(bx+6*u,y-4*u,u,4*u,"#625f5b");
- PX(bx-9*u,y-6.5*u,18*u,2.5*u,"#9a968f");PX(bx-9*u,y-6.5*u,18*u,.8*u,"#b8b3aa");PX(bx-9*u,y-4.5*u,18*u,u,"#625f5b");PX(bx-u,y-6.5*u,.7*u,2.5*u,"#625f5b");
+ pxShadow(bx,13*u,y,u);   // banco de pedra (pequeno): dois pés e uma laje curta
+ PX(bx-4.5*u,y-3*u,3*u,3*u,"#7f7b76");PX(bx+1.5*u,y-3*u,3*u,3*u,"#7f7b76");PX(bx-4.5*u,y-3*u,.8*u,3*u,"#a39e96");PX(bx+1.5*u,y-3*u,.8*u,3*u,"#a39e96");PX(bx+3.7*u,y-3*u,.8*u,3*u,"#625f5b");
+ PX(bx-6*u,y-5*u,12*u,2*u,"#9a968f");PX(bx-6*u,y-5*u,12*u,.7*u,"#b8b3aa");PX(bx-6*u,y-3.6*u,12*u,.8*u,"#625f5b");PX(bx-.7*u,y-5*u,.6*u,2*u,"#625f5b");
  for(let i=0;i<7;i++){const h=2*u+hash(i,61)*u;PX(cx-7*u+i*2.3*u,y-h,2.4*u,h,STONE4[i%4]);PX(cx-7*u+i*2.3*u,y-h,2.4*u,.6*u,"#b8b3aa")}   // anel de pedras
  PX(cx-5*u,y-3.4*u,10*u,2*u,"#5a3a1c");PX(cx-5*u,y-3.4*u,10*u,.6*u,"#7a4f27");PX(cx-5*u,y-3.4*u,u,2*u,"#c28e4a");PX(cx+4*u,y-3.4*u,u,2*u,"#c28e4a");   // lenha
  for(let k=0;k<8;k++){PX(cx-4*u+k*u,y-3.6*u-k*.7*u,1.6*u,1.6*u,"#4a2f16");PX(cx+4*u-k*u,y-3.6*u-k*.7*u,1.6*u,1.6*u,"#5a3a1c")}
@@ -4053,7 +4678,7 @@ function drawCampfire(t){
  for(let k=0;k<6;k++){const ph=(t*.8+hash(k,1))%1,sx=cx+(hash(k,2)-.5)*6*u+Math.sin(t*3+k)*u,sy=y-7*u-ph*26*u;PX(sx,sy,u*.8,u*.8,"rgba(255,207,112,"+(1-ph).toFixed(2)+")")}   // faíscas
  for(let k=0;k<3;k++){const ph=(t*.35+k/3)%1;PX(cx+Math.sin(t*1.5+k*2)*3*u+ph*4*u,y-9*u-ph*30*u,(1.5+ph*2.5)*u,(1.5+ph*2.5)*u,"rgba(150,150,155,"+((1-ph)*.28).toFixed(2)+")")}   // fumaça
  if(n>.03){const gx=cx,gy=y-6*u,r=T*3.2,gr=ctx.createRadialGradient(gx,gy,0,gx,gy,r);gr.addColorStop(0,"rgba(255,160,70,"+(.5*n*fl).toFixed(3)+")");gr.addColorStop(.4,"rgba(255,130,50,"+(.2*n*fl).toFixed(3)+")");gr.addColorStop(1,"rgba(255,110,40,0)");ctx.fillStyle=gr;ctx.fillRect(gx-r,gy-r,r*2,r*2)}
- if(atSurface())lbl(__("Fogueira"),cx,y-19*u,"#ffb43a");
+ if(atSurface())lbl(nearCamp()?__("Fogueira: clique para assar"):__("Fogueira"),cx,y-19*u,nearCamp()?"#6fe3a0":"#ffb43a");
 }
 function campfireHoles(g,k){   // abre a escuridão em volta da fogueira (chamado por lampHoles)
  const P=campPos();if(P.x<-T*7||P.x>W+T*7)return;
@@ -4063,10 +4688,10 @@ function campfireHoles(g,k){   // abre a escuridão em volta da fogueira (chamad
  g.fillStyle=gr;g.fillRect(cx-r,cy-r,r*2,r*2);g.globalCompositeOperation="source-over";
 }
 
-// ---------- praia: farol listrado com luz giratória, trapiche e barco parado ----------
-const lhLamp=()=>({x:forgeFx(LIGHT_C),y:rowY(0)-35*pu()});
+// ---------- praia: farol listrado com luz giratória e trapiche ----------
+const lhLamp=()=>({x:forgeFx(LIGHT_C),y:rowY(0)-35*pu()*LIGHT_S});
 function drawLighthouse(t){
- const u=pu(),y=Math.round(rowY(0)),cx=forgeFx(LIGHT_C),n=nightAmt();
+ const u=pu()*LIGHT_S,y=Math.round(rowY(0)),cx=forgeFx(LIGHT_C),n=nightAmt();
  if(cx<-T*16||cx>W+T*16)return;
  pxShadow(cx,24*u,y,u);
  for(let i=0;i<3;i++){const hw=Math.round((12-i*2)*u);PX(cx-hw,y-(i+1)*u,2*hw,u,STONE4[(i+1)%4]);PX(cx-hw,y-(i+1)*u,Math.round(hw*.6),u,"rgba(255,255,255,.14)");if(i)PX(cx-hw+(i%2?3:7)*u,y-(i+1)*u,.7*u,u,"#625f5b")}   // base de pedras
@@ -4100,13 +4725,29 @@ function lighthouseHoles(g,k){   // abre a escuridão em volta da lanterna do fa
  for(const[o,a]of[[0,.95],[.35,.8],[.65,.4],[1,0]])gr.addColorStop(o,"rgba(0,0,0,"+a+")");
  g.fillStyle=gr;g.fillRect(cx-r,cy-r,r*2,r*2);
  if(ac>.06){const bg=g.createLinearGradient(cx,cy,cx+ext*k,cy);bg.addColorStop(0,"rgba(0,0,0,"+(.8*Math.sqrt(ac)).toFixed(3)+")");bg.addColorStop(1,"rgba(0,0,0,0)");g.fillStyle=bg;g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+ext*k,cy-Math.abs(ext)*.17*k);g.lineTo(cx+ext*k,cy+Math.abs(ext)*.17*k);g.closePath();g.fill()}
- {const u=pu(),bx=(forgeFx(BOAT_C)+Math.round(8.7*u))*k,by=(rowY(0)-26*u)*k,r=T*2.2*k,g2=g.createRadialGradient(bx,by,0,bx,by,r);   // lanterninha do barco
-  g2.addColorStop(0,"rgba(0,0,0,.9)");g2.addColorStop(.5,"rgba(0,0,0,.4)");g2.addColorStop(1,"rgba(0,0,0,0)");g.fillStyle=g2;g.fillRect(bx-r,by-r,r*2,r*2)}
  g.globalCompositeOperation="source-over";
+}
+// ---------- lamparina do trapiche: poste fino de madeira com a lamparina pendurada num braço, no meio do deck ----------
+function pierLampPos(){const u=pu(),x=Math.round(colX(PIER_C+(PIER_END_C-PIER_C)*.5));return{x,lx:x+Math.round(3.1*u),ly:rowY(0)-9.6*u}}
+function drawPierLamp(t,y,u,n){
+ const L=pierLampPos(),x=L.x,lx=L.lx,ly=L.ly,TB="#4a2f16",fl=.92+.08*Math.sin(t*7+2);
+ if(n>.03){const r=T*2.8,gr=ctx.createRadialGradient(lx,ly,0,lx,ly,r);gr.addColorStop(0,"rgba(255,214,130,"+(.5*n*fl).toFixed(3)+")");gr.addColorStop(.35,"rgba(255,196,100,"+(.2*n*fl).toFixed(3)+")");gr.addColorStop(1,"rgba(255,180,80,0)");ctx.fillStyle=gr;ctx.fillRect(lx-r,ly-r,r*2,r*2)}
+ PX(x-.8*u,y-14*u,1.6*u,14*u,"#6b4423");PX(x-.8*u,y-14*u,.6*u,14*u,"#8a5a2b");PX(x-1.2*u,y-.8*u,2.4*u,.8*u,TB);   // poste e base
+ PX(x-.8*u,y-14*u,4.6*u,1.2*u,TB);PX(x-.8*u,y-14*u,4.6*u,.5*u,"#6b4423");                                              // braço
+ PX(lx-.2*u,y-12.8*u,.4*u,1.2*u,"#8d9299");PX(lx-1.6*u,y-11.6*u,3.2*u,.8*u,"#3a3a44");                                // corrente e tampa
+ PX(lx-1.2*u,y-10.8*u,2.4*u,2.6*u,"#241609");PX(lx-.7*u,y-10.4*u,1.4*u,1.8*u,"#ffd98a");PX(lx-.7*u,y-10.4*u,1.4*u,.7*u,"#fff3c4");PX(lx-1.6*u,y-8.2*u,3.2*u,.8*u,"#3a3a44");   // vidro, chama e base
+ if(n>.03){ctx.fillStyle="rgba(255,250,200,"+(.85*n).toFixed(3)+")";ctx.fillRect(Math.round(lx-.7*u),Math.round(y-10.4*u),Math.round(1.4*u),Math.round(1.8*u))}
+}
+function pierHoles(g,k){   // abre a escuridão da noite em volta da lamparina do trapiche (chamado por lampHoles)
+ const L=pierLampPos();if(L.x<-T*6||L.x>W+T*6)return;
+ g.globalCompositeOperation="destination-out";
+ const cx=L.lx*k,cy=L.ly*k,r=T*3.2*k,gr=g.createRadialGradient(cx,cy,0,cx,cy,r);
+ for(const[o,a]of[[0,.93],[.35,.85],[.6,.5],[.82,.18],[1,0]])gr.addColorStop(o,"rgba(0,0,0,"+a+")");
+ g.fillStyle=gr;g.fillRect(cx-r,cy-r,r*2,r*2);g.globalCompositeOperation="source-over";
 }
 function drawBeach(t){
  const u=pu(),y=Math.round(rowY(0)),n=nightAmt(),xs=Math.round(colX(SURF_R+.5));
- if(colX(BEACH_C0)>W+T*8||colX(BOAT_C)<-T*8)return;
+ if(colX(BEACH_C0)>W+T*8||colX(PIER_END_C)<-T*8)return;
  // enfeites da areia: capim de duna, madeira trazida pelo mar, conchas e estrela-do-mar
  for(const c of[41.4,42.2,43.0]){const x=forgeFx(c);for(let k=0;k<4;k++){const sw=Math.round(Math.sin(t*1.4+c+k)*.6*u);PX(x+k*1.3*u+sw,y-(5-k%2*1.5)*u,.8*u,(5-k%2*1.5)*u,"#9ab04a");PX(x+k*1.3*u+sw,y-(5-k%2*1.5)*u,.8*u,u,"#c9d27a")}}
  {const x=forgeFx(44.6);PX(x-5*u,y-2.2*u,10*u,2.2*u,"#8a6a45");PX(x-5*u,y-2.2*u,10*u,.7*u,"#b8946a");PX(x+3*u,y-3.6*u,u,1.6*u,"#8a6a45");PX(x-5*u,y-2.2*u,u,2.2*u,"#5a3f2a")}
@@ -4118,28 +4759,11 @@ function drawBeach(t){
  // trapiche (deck ao nível do chão, vigas e pilares na água) com poste de amarração
  {const p0=Math.round(colX(PIER_C)),p1=Math.round(colX(PIER_END_C)),len=p1-p0,TB="#4a2f16";
   for(let x=p0+3*u;x<p1;x+=Math.round(7*u)){PX(x-u,y+2.5*u,2*u,T*1.1,TB);PX(x-u,y+2.5*u,.7*u,T*1.1,"#6b4423")}
-  PX(p0,y+T*.55,len,T*.6,"rgba(50,125,190,.35)");
   PX(p0,y,len,2.5*u,"#8a5a2b");PX(p0,y,len,.8*u,"#b27a3a");PX(p0,y+1.7*u,len,.8*u,"#3a2410");
   for(let x=p0+3*u,ix=0;x<p1-u;x+=Math.round((4.5+hash(ix,57)*3)*u),ix++)PX(x,y+.8*u,.6*u,1.7*u,TB);
   PX(p0,y+2.5*u,len,1.4*u,TB);
   PX(p1-3*u,y-5*u,2.2*u,5*u,"#6b4423");PX(p1-3*u,y-5*u,.8*u,5*u,"#8a5a2b");PX(p1-3.4*u,y-5.6*u,3*u,u,TB);PX(p1-3.2*u,y-3.4*u,2.6*u,.8*u,"#c9b27a");   // poste e corda enrolada
- }
- // barco parado, preso ao poste do trapiche (balança de leve na água)
- {const bc=forgeFx(BOAT_C),bob=Math.sin(t*1.3)*u*.5,tilt=Math.sin(t*.9)*.025,pole=Math.round(colX(PIER_END_C))-3*u+1.1*u;
-  ctx.strokeStyle="#c9b27a";ctx.lineWidth=Math.max(1,u*.7);ctx.beginPath();ctx.moveTo(pole,y-3*u);ctx.quadraticCurveTo((pole+bc-15*u)/2,y+3*u,bc-15*u,y-3*u+bob);ctx.stroke();   // corda
-  ctx.save();ctx.translate(bc,y+bob);ctx.rotate(tilt);
-  ctx.fillStyle="#7a4f27";ctx.beginPath();ctx.moveTo(-17*u,-5*u);ctx.lineTo(19*u,-7*u);ctx.lineTo(13*u,3.5*u);ctx.lineTo(-12*u,3.5*u);ctx.closePath();ctx.fill();   // casco
-  ctx.fillStyle="#c8452f";ctx.beginPath();ctx.moveTo(-17*u,-5*u);ctx.lineTo(19*u,-7*u);ctx.lineTo(18.4*u,-4.8*u);ctx.lineTo(-16.4*u,-2.8*u);ctx.closePath();ctx.fill();   // faixa vermelha
-  ctx.fillStyle="#b27a3a";ctx.fillRect(-17*u,-5.4*u,35*u,.6*u);
-  ctx.fillStyle="rgba(0,0,0,.28)";ctx.fillRect(-13*u,0,26*u,.7*u);ctx.fillRect(-14*u,-1.4*u,31*u,.5*u);   // tábuas do casco
-  ctx.fillStyle="#8a5a2b";ctx.fillRect(-9*u,-12*u,10*u,7*u);ctx.fillStyle="#b27a3a";ctx.fillRect(-9*u,-12*u,10*u,u);ctx.fillStyle="#4a2f16";ctx.fillRect(-10*u,-13*u,12*u,1.4*u);   // cabine
-  ctx.fillStyle=n>.03?"#ffd98a":"#2f3a4a";ctx.fillRect(-6.5*u,-10.5*u,3*u,3*u);ctx.fillStyle="#4a2f16";ctx.fillRect(-5.2*u,-10.5*u,.6*u,3*u);
-  ctx.fillStyle="#6b4423";ctx.fillRect(8*u,-25*u,1.4*u,20*u);ctx.fillRect(2*u,-14*u,14*u,1.2*u);   // mastro e retranca
-  ctx.fillStyle="#e8dfc6";ctx.fillRect(2.5*u,-14*u,13*u,-3.6*u);ctx.fillStyle="rgba(0,0,0,.2)";ctx.fillRect(2.5*u,-15.5*u,13*u,u);   // vela enrolada
-  ctx.fillStyle="#2f3238";ctx.fillRect(7.2*u,-27*u,3*u,2*u);ctx.fillStyle=n>.03?"#ffd98a":"#e8d7a0";ctx.fillRect(7.8*u,-26.6*u,1.8*u,1.2*u);   // lanterninha do mastro
-  ctx.restore();
-  PX(bc-20*u,y,40*u,6*u,"rgba(50,125,190,.55)");PX(bc-20*u,y,40*u,u*.6,"rgba(255,255,255,.6)");   // casco afundado na água
-  if(n>.03){const gx=bc+8.7*u,gy=y-26*u,r=T*1.6,gr=ctx.createRadialGradient(gx,gy,0,gx,gy,r);gr.addColorStop(0,"rgba(255,210,120,"+(.4*n).toFixed(3)+")");gr.addColorStop(1,"rgba(255,200,100,0)");ctx.fillStyle=gr;ctx.fillRect(gx-r,gy-r,r*2,r*2)}
+  drawPierLamp(t,y,u,n);
  }
 }
 
@@ -4206,7 +4830,7 @@ function drawFireflies(t){   // vaga-lumes: pontinhos que piscam e passeiam sobr
 // ---------- tudo junto (chamado por drawGateAndChest, atrás do jogador) ----------
 function drawLandscape(t){
  if(rowY(0)<=8)return;
- drawWindmill(t);drawGarden(t);drawRiver(t);drawCampfire(t);drawBeach(t);drawCritters(t);
+ drawWindmill(t);drawGarden(t);drawRiver(t);drawCampfire(t);drawBeach(t);drawFishHints(t);drawCritters(t);
 }
 
 // ===== 5-desenho/14-cenoura-dourada.js — A cenoura dourada brotando da Rocha-mãe, no fundo do abismo =====
@@ -4268,6 +4892,337 @@ function drawEnchant(t){
  ctx.globalAlpha=1;
 }
 
+// ===== 5-desenho/16-pesca-desenho.js — Desenho da pesca no mundo (vara, linha, boia, minijogo e resultado), da janela da fogueira e das dicas de pesca/venda no mundo =====
+// Tudo em canvas 2D, só com quadradinhos (pixel art). Lógica: 2-sistemas/13-pesca.js e 14-fogueira.js.
+// ===== Pixel art: tudo é desenhado com quadradinhos (fillRect em grade inteira), sem curvas nem suavização =====
+// Preenche um retângulo em coordenadas inteiras (bordas arredondadas para a grade, sem borrar)
+function fsR(g,x,y,w,h){const x1=Math.round(x),y1=Math.round(y),x2=Math.round(x+w),y2=Math.round(y+h);if(x2>x1&&y2>y1)g.fillRect(x1,y1,x2-x1,y2-y1)}
+// Lista de pixels [coluna,linha,cor] -> contorno escuro de 1 pixel em volta e depois as cores; u = tamanho do pixel
+function fsPx(g,px,x0,y0,u){
+ g.fillStyle="#0b0f14";for(const[i,j]of px){g.fillRect(x0+(i-1)*u,y0+j*u,u,u);g.fillRect(x0+(i+1)*u,y0+j*u,u,u);g.fillRect(x0+i*u,y0+(j-1)*u,u,u);g.fillRect(x0+i*u,y0+(j+1)*u,u,u)}
+ for(const[i,j,c]of px){g.fillStyle=c;g.fillRect(x0+i*u,y0+j*u,u,u)}
+}
+// Peixe de lado (16x9), olhando para a esquerda. B corpo · D dorso · L barriga · F nadadeiras e cauda · E/P olho
+const FISH_PX=["......FFF.......","....DDDDDD....FF","..DDDDDDDDDD.FFF",".DDDDDDDDDDDFFFF",".BPEBBBBBBBBFFFF",".LLLLLLLLLLLFFFF","..LLLLLLLLLL.FFF","....LLLLLL....FF","......FF........"];
+function fishIcon(g,cx,cy,s,col,dir,tail,uFix){   // s = comprimento aproximado em px · dir = 1 (esquerda) ou -1 (direita) · tail = balanço da cauda · uFix = tamanho do pixel fixo (opcional)
+ const u=uFix||Math.max(1,Math.round(s*1.25/16)),d=dir||1,x0=Math.round(cx-8*u),y0=Math.round(cy-4.5*u),st=clamp(Math.round((tail||0)/(u*1.5)),-1,1);
+ const pal={B:col,D:mixHex(col,"#000000",.28),L:mixHex(col,"#ffffff",.32),F:mixHex(col,"#000000",.14),E:"#ffffff",P:"#111111"},px=[];
+ FISH_PX.forEach((row,j)=>{for(let i=0;i<16;i++){const c=row[i];if(c!==".")px.push([d>0?i:15-i,j+(i>=12?st:0),pal[c]])}});
+ fsPx(g,px,x0,y0,u);
+}
+// Peixinho de 10x5 para a pista fina do minigame (olhando para a esquerda)
+const FISHM_PX=["...DDD....",".DDBBBB.FF",".PEBBBBFFF",".LLLLLL.FF","...LL....."];
+function fishMini(g,cx,cy,col,dir,tail){
+ const d=dir||1,x0=Math.round(cx-5),y0=Math.round(cy-2.5),st=clamp(Math.round((tail||0)/2),-1,1),pal={B:col,D:mixHex(col,"#000000",.28),L:mixHex(col,"#ffffff",.32),F:mixHex(col,"#000000",.14),E:"#ffffff",P:"#111111"},px=[];
+ FISHM_PX.forEach((row,j)=>{for(let i=0;i<10;i++){const c=row[i];if(c!==".")px.push([d>0?i:9-i,j+(i>=7?st:0),pal[c]])}});
+ fsPx(g,px,x0,y0,1);
+}
+// Peixe da pista fina do minigame, de pé (5x10, escala u): a cabeça aponta para onde ele está indo (dir -1 = sobe, 1 = desce)
+function fishLane(g,cx,cy,col,dir,tail,u){
+ const d=dir||-1,x0=Math.round(cx-2.5*u),y0=Math.round(cy-5*u),st=clamp(Math.round((tail||0)/2),-1,1),pal={B:col,D:mixHex(col,"#000000",.28),L:mixHex(col,"#ffffff",.32),F:mixHex(col,"#000000",.14),E:"#ffffff",P:"#111111"},px=[];
+ FISHM_PX.forEach((row,j)=>{for(let i=0;i<10;i++){const c=row[i];if(c!==".")px.push([j+(i>=7?st:0),d<0?i:9-i,pal[c]])}});
+ fsPx(g,px,x0,y0,u);
+}
+// Boia (5x5): antena, topo vermelho e base branca
+const BOB_PX=["..K..",".RRR.","RRRRR","WWWWW",".WWW."],BOB_C={K:"#111111",R:"#e23a2a",W:"#f4f4f4"};
+function fsBobber(g,x,y,u){const px=[];BOB_PX.forEach((row,j)=>{for(let i=0;i<5;i++)if(row[i]!==".")px.push([i,j,BOB_C[row[i]]])});fsPx(g,px,Math.round(x-2.5*u),Math.round(y-2.5*u),u)}
+// Elipse vazada em pixels (ondas na água)
+function pxEllipse(g,cx,cy,rx,ry,u,col){
+ g.fillStyle=col;const n=Math.max(12,Math.ceil((rx+ry)/u*1.6));
+ for(let i=0;i<n;i++){const a=i/n*Math.PI*2;g.fillRect(Math.round((cx+Math.cos(a)*rx)/u)*u,Math.round((cy+Math.sin(a)*ry)/u)*u,u,u)}
+}
+// Elipse cheia em pixels (brilho em degraus da fogueira)
+function pxDisc(g,cx,cy,rx,ry,u,col){
+ g.fillStyle=col;for(let y=-ry;y<ry;y+=u){const hw=rx*Math.sqrt(Math.max(0,1-(y+u/2)*(y+u/2)/(ry*ry)));g.fillRect(Math.round((cx-hw)/u)*u,Math.round((cy+y)/u)*u,Math.round(hw*2/u)*u,u)}
+}
+// Curva (linha de pesca) em pixels: pontos de uma Bézier quadrática encaixados na grade
+function pxCurve(g,x0,y0,cx,cy,x1,y1,u,col){
+ g.fillStyle=col;const n=Math.max(2,Math.ceil((Math.abs(x1-x0)+Math.abs(y1-y0))/u));
+ for(let i=0;i<=n;i++){const t=i/n,m=1-t,x=m*m*x0+2*m*t*cx+t*t*x1,y=m*m*y0+2*m*t*cy+t*t*y1;g.fillRect(Math.round(x/u)*u,Math.round(y/u)*u,u,u)}
+}
+// Corta o texto com reticências para caber em maxW
+function fsClip(g,txt,maxW){let t=String(txt);if(g.measureText(t).width<=maxW)return t;while(t.length>1&&g.measureText(t+"\u2026").width>maxW)t=t.slice(0,-1);return t+"\u2026"}
+const fsLerp=(a,b,k)=>a+(b-a)*k;
+// ---------- pesca no mundo ----------
+let fishTip={x:0,y:0};   // ponta da vara na tela (calculada em drawPlayer a cada quadro)
+// Ângulo do braço/vara (rad, antes do espelhamento) e curvatura da ponta, por fase da pesca
+function rodPose(){
+ const C=CASTT,t=fs.t,n=fs.age,ease=k=>k*k*(3-2*k);
+ let a=-.95+Math.sin(n*1.6)*.02,b=.12;
+ if(fs.ph==="cast"){
+  if(t<C.wind){const k=ease(t/C.wind);a=fsLerp(-.95,-2.45,k);b=-.12*k}                 // balança a vara para trás
+  else if(t<C.wind+C.snap){const k=(t-C.wind)/C.snap;a=fsLerp(-2.45,-.55,k);b=.55*(1-k)}   // estala para a frente
+  else{const k=Math.min(1,(t-C.wind-C.snap)/.35);a=fsLerp(-.55,-.95,k);b=.2*(1-k)+.12*k}
+ }else if(fs.ph==="bite"){a=-.83+Math.sin(n*38)*.07;b=.45+Math.sin(n*30)*.1}
+ else if(fs.ph==="reel"){a=-.95+(fs.inZ?0:.1)+Math.sin(n*9)*(fs.inZ?.02:.06);b=fs.inZ?.3:.52}
+ return{a,b};
+}
+// Altura (tela) da água visível: no riacho a ponte cobre a superfície, então a boia cai logo abaixo dela
+const fishWy=()=>Math.round(rowY(0))+T*(fs.p==="r"?.6:.1);
+// Posição da boia na tela
+function fishBob(){
+ const C=CASTT,k=T/baseTile(),tx=colX(fs.tc),ty=fishWy()+T*.04;
+ let x=tx,y=ty;
+ if(fs.ph==="cast"){
+  const tr=C.wind+C.snap;
+  if(fs.t<tr){x=fishTip.x;y=fishTip.y+5*k}   // pendurada na ponta da vara
+  else{const q=Math.min(1,(fs.t-tr)/C.fly),e=1-(1-q)*(1-q);x=fsLerp(fishTip.x,tx,e);y=fsLerp(fishTip.y+5*k,ty,q)-Math.sin(q*Math.PI)*T*1.5}
+ }
+ else if(fs.ph==="wait")y=ty+Math.sin(fs.age*2.4)*2*k;
+ else if(fs.ph==="bite"){y=ty+T*.1+Math.sin(fs.age*38)*3*k;x=tx+Math.sin(fs.age*29)*2*k}
+ else if(fs.ph==="reel"){x=tx+Math.sin(fs.age*3.2)*(fs.inZ?5:16)*k;y=ty+Math.sin(fs.age*5)*3*k}
+ return{x,y};
+}
+function fishSplash(n){   // gotinhas na água onde a boia está
+ if(!fs)return;const B=fishBob();
+ for(let i=0;i<n;i++)parts.push({x:B.x+(Math.random()-.5)*10,y:B.y,vx:(Math.random()-.5)*120,vy:-70-Math.random()*140,l:.55,c:i%3?"#bfe6ff":"#ffffff"});
+}
+function fsWrap(g,txt,maxW){const w=String(txt).split(" "),L=[];let c="";for(const x of w){const t=c?c+" "+x:x;if(g.measureText(t).width>maxW&&c){L.push(c);c=x}else c=t}if(c)L.push(c);return L}
+function fsText(g,s,x,y,col,size,wt){g.font=(wt||700)+" "+size+"px "+FONT;g.lineWidth=Math.max(3,size/4);g.lineJoin="round";g.strokeStyle="rgba(0,0,0,.8)";g.strokeText(s,x,y);g.fillStyle=col;g.fillText(s,x,y)}
+// Visual das janelas: cor por raridade (comum, raro, lendário), painel com cantos arredondados e pílula de texto
+const TIERC=["#7f9db3","#5fb8ff","#ffb43a"];
+function fsRR(g,x,y,w,h){g.beginPath();g.rect(Math.round(x),Math.round(y),Math.round(w),Math.round(h))}   // cantos retos, como o resto do jogo (o raio é ignorado)
+function fsPanel(g,x,y,w,h,acc){   // painel chapado como a hotbar: borda preta de 2px, sem chanfro nem brilho; acc = faixa de cor no alto
+ x=Math.round(x);y=Math.round(y);w=Math.round(w);h=Math.round(h);
+ g.fillStyle="#000";g.fillRect(x,y,w,h);g.fillStyle="#1b1b1b";g.fillRect(x+2,y+2,w-4,h-4);
+ if(acc){g.fillStyle=acc;g.fillRect(x+4,y+4,w-8,2)}
+}
+// Painel no estilo da janela do baú e do caça-níquel: fundo escuro em degradê com pedrinhas, moldura grossa de 3px na cor da raridade e lâmpadas correndo na borda de cima
+// (mais rápidas quando está indo bem). Tudo em quadradinhos inteiros.
+function fsBox(g,x,y,w,h,col,t,fast,noLamps){
+ x=Math.round(x);y=Math.round(y);w=Math.round(w);h=Math.round(h);
+ g.fillStyle="#000";g.fillRect(x,y,w,h);
+ const bg=g.createLinearGradient(0,y,0,y+h);bg.addColorStop(0,"#0b0c14");bg.addColorStop(1,"#1a1420");g.fillStyle=bg;g.fillRect(x+3,y+3,w-6,h-6);
+ for(let i=0;i<14;i++){const px=x+4+(i*53)%Math.max(1,w-14),py=y+4+(i*37)%Math.max(1,h-14),s=2+(i%3)*2;g.fillStyle=i%2?"rgba(255,255,255,.05)":"rgba(0,0,0,.25)";g.fillRect(px,py,s,s)}
+ g.fillStyle=col;g.fillRect(x,y,w,3);g.fillRect(x,y+h-3,w,3);g.fillRect(x,y,3,h);g.fillRect(x+w-3,y,3,h);
+ g.fillStyle="#000";g.fillRect(x+3,y+3,w-6,1);g.fillRect(x+3,y+h-4,w-6,1);g.fillRect(x+3,y+3,1,h-6);g.fillRect(x+w-4,y+3,1,h-6);
+ if(noLamps)return;   // sem as lâmpadas piscando na borda de cima
+ const n=Math.max(4,Math.floor((w-16)/10)),run=fast?14:5;
+ for(let i=0;i<n;i++){const on=((i+Math.floor(t*run))%3)===0,lx=Math.round(x+8+i*(w-20)/Math.max(1,n-1));g.fillStyle=on?"#fff3a0":mixHex(col,"#000000",.55);g.fillRect(lx,y+5,4,4);if(on){g.fillStyle="rgba(255,212,92,.35)";g.fillRect(lx-1,y+4,6,1);g.fillRect(lx-1,y+9,6,1)}}
+}
+// "!" desenhado em pixels (2 de largura, 5 de haste, vão e ponto), com contorno escuro, para não depender da fonte
+const BANG_PX=["XX","XX","XX","XX","XX","..","XX","XX"];
+function fsBang(g,cx,cy,u,hop){
+ const px=[];BANG_PX.forEach((row,j)=>{for(let i=0;i<2;i++)if(row[i]==="X")px.push([i,j,j<2?"#fff3a0":"#ffd45c"])});
+ fsPx(g,px,Math.round(cx-u),Math.round(cy-4*u-hop),u);
+}
+function fsFit(g,txt,maxW,size,wt){let z=size;g.font=(wt||700)+" "+z+"px "+FONT;while(g.measureText(txt).width>maxW&&z>7){z--;g.font=(wt||700)+" "+z+"px "+FONT}return z}
+function drawFishing(t){
+ if(!fs)return;
+ const g=ctx,k=T/baseTile(),sy=fishWy(),ph=fs.ph,t2=fs.age,C=CASTT,B=fishBob(),done=ph==="done";
+ g.save();g.textBaseline="alphabetic";
+ if(!done){
+  // ondas em volta da boia e o anel da queda na água
+  if(ph==="wait"||ph==="bite"||ph==="reel"){
+   const bite=ph==="bite";g.lineWidth=Math.max(1.5,k*.9);
+   for(let i=0;i<2;i++){const q=((bite?t2*3:t2*.8)+i*.5)%1;g.globalAlpha=(1-q)*.85;pxEllipse(g,B.x,sy,(8+q*(bite?34:22))*k,(2+q*(bite?9:5))*k,Math.max(2,Math.round(k*1.5)),"#ffffff")}
+  }
+  if(fs.rip<.9){const q=fs.rip/.9;g.globalAlpha=(1-q)*.9;pxEllipse(g,colX(fs.tc),sy,(6+q*34)*k,(1.6+q*8)*k,Math.max(2,Math.round(k*1.5)),"#ffffff")}
+  g.globalAlpha=1;
+  // linha da ponta da vara até a boia
+  const sag=ph==="cast"?(fs.t<C.wind+C.snap?4*k:T*.12):ph==="wait"?T*.5:ph==="bite"?T*.28:T*.07;
+  pxCurve(g,fishTip.x,fishTip.y,(fishTip.x+B.x)/2,(fishTip.y+B.y)/2+sag,B.x,B.y-5*k,Math.max(1,Math.round(k*.9)),"#e8eef2");
+  // peixe nadando embaixo da boia durante o minijogo
+  if(ph==="reel"&&fs.f){
+   const fx=colX(fs.tc)+Math.sin(t2*2.3)*18*k*.8,fy=sy+T*(.3+1.0*(fs.fy/FSC.h)),sz=(26+fs.f.d*2)*k*.55;
+   g.globalAlpha=.9;fishIcon(g,fx,fy,sz,fs.f.c,Math.cos(t2*2.3)>0?1:-1,Math.sin(t2*14)*3*k);g.globalAlpha=.35;pxCurve(g,B.x,B.y+5*k,(B.x+fx)/2,(B.y+fy)/2,fx,fy-sz*.2,Math.max(1,Math.round(k*.9)),"#ffffff");g.globalAlpha=1;
+  }
+  // boia
+  const r=5.5*k;
+  fsBobber(g,B.x,B.y,Math.max(2,Math.round(1.3*k)));   // boia/isca pequena (antes 2.2*k)
+  // "!" quando o peixe morde
+  if(ph==="bite"){
+   const fz=clamp(34*k*.75,28,88),u=Math.max(2,Math.round(fz/15)),hop=Math.round(Math.abs(Math.sin(t2*16))*u*1.5),by=Math.round(B.y-r-u*5);
+   fsBang(g,B.x,by,u,hop);
+  }
+ }
+ g.globalAlpha=1;
+ // minijogo: painel ao lado da boia, no estilo do baú/cassino (moldura na cor da raridade, lâmpadas na borda). Alto: lâmpadas e tempo restante · meio: pista de captura e barra de progresso com marcas de 25%
+ // · baixo: ★ com a tolerância do PERFEITO (esvazia a cada segundo fora da zona) e a tecla Espaço, cheia enquanto você segura
+ if(ph==="reel"){
+  const B2=BAL.fish,kb=clamp((H-190)/(FSC.h+78),.55,1.5),bh=FSC.h*kb,fu=Math.max(2,Math.round(kb*2)),tw=5*fu+6,pw=Math.max(3,Math.round(3*kb)),pad=7*kb,iw=Math.max(tw+pw+5*kb,36*kb),tot=pad*2+iw,rest=colX(fs.tc),hd=Math.max(20,Math.round(20*kb)),ft=40*kb;
+  let x0=rest+T;if(x0+tot>W-16)x0=rest-T-tot;x0=clamp(x0,16,Math.max(16,W-tot-16));   // à direita da boia; se não couber, à esquerda
+  const ty=clamp(H*.5-bh/2,60+hd,Math.max(60+hd,H-bh-ft-120)),ix=x0+pad,tx=ix+(iw-tw-pw-6*kb)/2,tc=TIERC[fs.f.t]||TIERC[0];
+  fsBox(g,x0,ty-hd,tot,bh+hd+ft,tc,t2,fs.inZ,true);
+  // tempo restante (azul; vermelho no fim)
+  const tl=clamp(1-fs.t/B2.maxTime,0,1),tb=ty-9,th=3;
+  g.fillStyle="#000";fsR(g,ix-1,tb-1,iw+2,th+2);g.fillStyle="#13222f";fsR(g,ix,tb,iw,th);g.fillStyle=tl>.2?"#6fb8ff":"#ff6a4a";fsR(g,ix,tb,iw*tl,th);
+  // pista
+  g.fillStyle="#13222f";fsRR(g,tx,ty,tw,bh);g.fill();
+  g.save();fsRR(g,tx,ty,tw,bh);g.clip();
+  for(let i=1;i<8;i++){g.fillStyle="rgba(255,255,255,.07)";fsR(g,tx,ty+i*bh/8,tw,1)}
+  const zt=ty+(fs.zc-fs.zh/2)*kb,zh=fs.zh*kb;
+  g.fillStyle=fs.inZ?"rgba(90,230,130,.65)":"rgba(90,230,130,.34)";fsRR(g,tx+2,zt,tw-4,zh);g.fill();g.strokeStyle=fs.inZ?"#b6ffc8":"#5fd885";g.lineWidth=2;g.stroke();
+  g.restore();
+  g.strokeStyle="#000";g.lineWidth=2;fsRR(g,tx,ty,tw,bh);g.stroke();
+  if(fs.pfy===undefined)fs.pfy=fs.fy;if(Math.abs(fs.fy-fs.pfy)>.2)fs.fd=fs.fy<fs.pfy?-1:1;fs.pfy=fs.fy;
+  fishLane(g,tx+tw/2,ty+fs.fy*kb,fs.f.c,fs.fd||-1,Math.sin(t2*16)*2,fu);
+  // barra de progresso: vermelha perto de perder, verde perto de pegar
+  const px=tx+tw+5*kb,pr=clamp(fs.pr,0,1);
+  g.fillStyle="#13222f";fsRR(g,px,ty,pw,bh);g.fill();
+  if(pr>0){g.fillStyle="hsl("+Math.round(pr*120)+",80%,52%)";fsR(g,px,ty+bh*(1-pr),pw,bh*pr)}
+  g.fillStyle="#000";for(let i=1;i<4;i++)fsR(g,px,Math.round(ty+bh*i/4)-1,pw,2);   // marcas de 25%, 50% e 75%
+  g.strokeStyle="#000";g.lineWidth=2;fsRR(g,px,ty,pw,bh);g.stroke();
+  // rodapé 1: ★ + tolerância do PERFEITO
+  const f1=ty+bh+10*kb,left=clamp(1-fs.outT/B2.perfectOut,0,1),bx=ix+16*kb,bwf=iw-16*kb,bhf=7*kb;
+  g.textAlign="left";g.textBaseline="middle";g.font="900 "+Math.round(13*kb)+"px "+FONT;g.fillStyle=left>0?"#ffd45c":"#4a5a68";g.fillText(left>0?"\u2605":"\u2606",ix,f1+bhf/2);
+  g.fillStyle="#000";fsR(g,bx-1,f1-1,bwf+2,bhf+2);g.fillStyle="#13222f";fsR(g,bx,f1,bwf,bhf);g.fillStyle="#ffd45c";fsR(g,bx,f1,bwf*left,bhf);
+  // rodapé 2: tecla Espaço (cheia enquanto segura)
+  const f2=f1+bhf+16*kb,ch2=Math.round(18*kb);
+  g.fillStyle="#000";fsR(g,ix,f2-ch2/2,iw,ch2);g.fillStyle=fishHold?"#ffd45c":"#2c2c2c";fsR(g,ix+2,f2-ch2/2+2,iw-4,ch2-4);
+
+ }
+ g.restore();
+}
+
+// ---------- janela da fogueira ----------
+function campDraw(g,dt){
+ const{w,h}=CPC,c=cp,t=c.age,fl=.85+.15*Math.sin(t*9.1)+.05*Math.sin(t*14.3),cx=w/2,gy=170;
+ g.setTransform(cpCv.width/w,0,0,cpCv.height/h,0,0);g.clearRect(0,0,w,h);
+ ["#120d1c","#161020","#1b1321","#211722","#2a1a12"].forEach((c,i)=>{g.fillStyle=c;g.fillRect(0,Math.round(i*h/5),w,Math.ceil(h/5)+1)});   // céu em faixas
+ for(let i=0;i<18;i++){g.fillStyle="rgba(255,255,255,"+(.25+.35*Math.abs(Math.sin(t*1.3+i))).toFixed(2)+")";g.fillRect((i*67+13)%w,(i*31+5)%70,2,2)}
+ for(let i=5;i>=1;i--)pxDisc(g,cx,gy-20,i*34,i*22,4,"rgba(255,130,45,"+(.075*fl).toFixed(3)+")");   // luz da fogueira em degraus
+ g.fillStyle="#2b1d12";g.fillRect(0,gy,w,h-gy);g.fillStyle="#3a2817";g.fillRect(0,gy,w,4);
+ // pedras, lenha e chamas
+ for(let i=0;i<9;i++){const a=i/9*Math.PI*2,sx=cx+Math.cos(a)*50,sy=gy+2+Math.sin(a)*5;g.fillStyle=["#8a8680","#6f6b66","#9a968f"][i%3];g.fillRect(sx-8,sy-8,16,10)}
+ g.fillStyle="#5a3a1c";g.save();g.translate(cx,gy-4);g.rotate(-.35);g.fillRect(-44,-5,88,10);g.restore();g.save();g.translate(cx,gy-4);g.rotate(.35);g.fillRect(-44,-5,88,10);g.fillStyle="#7a4f27";g.fillRect(-44,-5,88,3);g.restore();
+ for(let i=-4;i<=4;i++){const hh=(46-Math.abs(i)*8)*fl*(.8+.2*Math.sin(t*7+i*2.1)),x=cx+i*9-5;
+  g.fillStyle="#ff8a1f";g.fillRect(x,gy-6-hh,10,hh);g.fillStyle="#ffb43a";g.fillRect(x+1,gy-6-hh*.65,8,hh*.65);g.fillStyle="#fff0a0";g.fillRect(x+2,gy-6-hh*.35,6,hh*.35)}
+ for(let k=0;k<10;k++){const ph=(t*.7+k*.137)%1,sx=cx+Math.sin(t*2+k*3)*30+(k%3-1)*8,sy=gy-40-ph*90;g.fillStyle="rgba(255,207,112,"+(1-ph).toFixed(2)+")";g.fillRect(sx,sy,2,2)}
+ // peixe no espeto
+ if(c.sc==="roast"||c.sc==="result"){
+  const f=c.f,p=c.sc==="roast"?c.tt:null,q=c.sc==="result"?c.res.q:null;
+  let col;
+  if(c.sc==="roast"){const z=[.5,.74,.9];col=p<z[0]?mixHex(f.c,"#d9a05b",p/z[0]):p<z[1]?mixHex("#d9a05b","#e8a43a",(p-z[0])/(z[1]-z[0])):p<z[2]?"#f0b23c":mixHex("#f0b23c","#241812",Math.min(1,(p-z[2])/(1-z[2])))}
+  else col=[mixHex(f.c,"#d9a05b",.7),"#e8a43a","#f0b23c","#241812"][q];
+  const sy=gy-96+Math.sin(t*3)*1.2;
+  g.strokeStyle="#a8793f";g.lineWidth=4;g.lineCap="round";g.beginPath();g.moveTo(cx-100,sy+4);g.lineTo(cx+100,sy-4);g.stroke();
+  g.fillStyle="#5a3a1c";g.fillRect(cx-122,sy+6,18,40);g.fillRect(cx+104,sy-6,18,52);   // forquilhas de apoio
+  fishIcon(g,cx,sy,56,col,1,0);
+  if(c.sc==="roast"&&p>.4){for(let k=0;k<3;k++){const ph=(t*.9+k/3)%1;g.fillStyle="rgba(235,235,240,"+((1-ph)*(p>.88?.5:.25)).toFixed(2)+")";if(p>.88)g.fillStyle="rgba(60,60,64,"+((1-ph)*.6).toFixed(2)+")";g.fillRect(cx-30+k*30+Math.sin(t*2+k)*6,sy-20-ph*40,8+ph*6,8+ph*6)}}
+  if(c.sc==="result"){   // faixa do resultado como a do baú: texto grande com contorno, sem painel
+   const nm=[__("Mal passado"),__("No ponto"),__("PERFEITO!"),__("Queimou!")][q],qc2=["#9fb4c4","#ffb43a","#ffd45c","#ff6a4a"][q],e=clamp(c.t/.35,0,1),sz=Math.max(8,Math.round(fsFit(g,nm,w-40,30,900)*easeOutBack(e)));
+   g.textAlign="center";g.textBaseline="middle";g.font="900 "+sz+"px "+FONT;g.lineWidth=7;g.lineJoin="round";g.strokeStyle="rgba(8,6,12,.9)";g.strokeText(nm,cx,42);g.fillStyle=q===2?"hsl("+(40+Math.sin(t*6)*12)+",100%,"+(60+Math.sin(t*9)*8)+"%)":qc2;g.fillText(nm,cx,42)}
+ }
+ // HUD do assado, no estilo do baú/cassino: só o medidor, num painel com moldura na cor da raridade e lâmpadas na borda (correm mais rápido e a moldura fica dourada no ponto PERFEITO).
+ // Sem nome do peixe, aviso de estado nem segundos: as cores das faixas dizem o ponto. Barra fina; o marcador vai e volta cada vez mais rápido.
+ let frame="#7a4f27";
+ if(c.sc==="roast"){
+  const z=BAL.fish.cook.zones,x0=24,bw=w-48,y0=199,bh=8,p=Math.min(1,c.p),qi=campQuality(p),big=qi===2;
+  frame=TIERC[c.f.t]||TIERC[0];
+  fsBox(g,x0-12,182,bw+24,34,big?(Math.floor(t*8)%2?"#ffd45c":"#fff3a0"):frame,t,big);
+  const segs=[[0,z[0],"#566a7a"],[z[0],z[1],"#d98a2a"],[z[1],z[2],"#ffd45c"],[z[2],1,"#6a2420"]];
+  for(const[a,b,col]of segs){const sx=Math.round(x0+bw*a),sw=Math.round(x0+bw*b)-sx;g.fillStyle=col;g.fillRect(sx,y0,sw,bh);g.fillStyle="rgba(255,255,255,.18)";g.fillRect(sx,y0,sw,2)}
+  g.fillStyle="#000";for(const f of z)g.fillRect(Math.round(x0+bw*f)-1,y0,2,bh);
+  const mx=Math.round(x0+bw*p);   // marcador que vai e volta
+  g.fillStyle="#000";g.fillRect(mx-3,y0-4,6,bh+8);g.fillStyle="#fff";g.fillRect(mx-1,y0-4,2,bh+8);
+  g.strokeStyle="#000";g.lineWidth=2;g.strokeRect(x0,y0,bw,bh);
+ }else if(c.sc==="result")frame=["#9fb4c4","#ffb43a","#ffd45c","#ff6a4a"][c.res.q];
+ g.strokeStyle=frame;g.lineWidth=3;g.strokeRect(1.5,1.5,w-3,h-3);   // moldura da janela, como a do baú
+}
+
+// ---------- dicas no mundo ----------
+function drawFishHints(t){
+ if(!atSurface()||modal||fs)return;
+ const u=pu(),y=Math.round(rowY(0)),sp=fishSpot();
+ if(sp){const c=sp==="r"?(RIVER_C0+RIVER_C1)/2:PIER_C+.6,x=Math.round(forgeFx(c));if(x>-T*3&&x<W+T*3)lbl(sp==="r"?__("Riacho: clique para pescar"):__("Mar: clique para pescar"),x,y-14*u-Math.sin(t*4)*2,"#6fe3a0")}
+ if(nearKeeper()&&S.fb.length){const x=Math.round(colX(KEEPER_C));lbl(__("Vender"),x,y-66*worldZoom-Math.sin(t*4)*2,"#6fe3a0")}   // logo acima do nome do Izans
+}
+
+// ===== 5-desenho/17-altitude.js — Céu com altitude: escurece até quase o espaço, estrelas de dia, camadas de nuvens (cirros e fiapos) e vida no céu (pássaros, pipa, avião de papel, balão) =====
+// Tudo aqui é desenhado em coordenadas da tela, preso ao chão (a altura de cada coisa é medida acima do horizonte), então rola junto com o mundo quando se sobe com o jato.
+// altAmt(): 0 = no chão · 1 = no teto do jato (SKY_CEIL, em 3-mundo/01-celulas.js). altTop(): altura (em blocos) do topo da tela no teto do jato.
+const altAmt=()=>clamp((rowY(0)-H*SURF)/(T*SKY_CEIL),0,1);
+const altTop=()=>H*SURF/T+SKY_CEIL;
+const altSmooth=(a,b,x)=>{const u=clamp((x-a)/(b-a),0,1);return u*u*(3-2*u)};
+// Escurecimento: por cima do degradê do céu, de baixo (transparente, perto do horizonte) para cima (azul-profundo, índigo e quase o preto do espaço).
+// [posição 0-1, r, g, b, alfa]. A escuridão de cada ponto depende da altura dele acima do chão, então o horizonte continua claro e o topo escurece só quando se sobe.
+const ALT_PAL=[[0,40,90,200,0],[.3,30,70,175,.42],[.62,26,30,128,.8],[1,8,8,38,.97]];
+function altPal(d){let i=1;while(i<ALT_PAL.length-1&&d>ALT_PAL[i][0])i++;const a=ALT_PAL[i-1],b=ALT_PAL[i],k=(d-a[0])/(b[0]-a[0]);return[1,2,3,4].map(j=>a[j]+(b[j]-a[j])*k)}
+function altSpace(sky){
+ const yRef=H*SURF,span=T*SKY_CEIL;if(sky-yRef<2)return;
+ const g=ctx.createLinearGradient(0,0,0,sky),N=18;
+ for(let i=0;i<=N;i++){const f=i/N,c=altPal(altSmooth(0,1,clamp((sky-f*sky-yRef)/span,0,1)));g.addColorStop(f,"rgba("+Math.round(c[0])+","+Math.round(c[1])+","+Math.round(c[2])+","+c[3].toFixed(3)+")")}
+ ctx.fillStyle=g;ctx.fillRect(0,0,W,sky+1);
+ const al=altAmt(),hh=T*3.2,hg=ctx.createLinearGradient(0,sky-hh,0,sky);   // brilho claro perto do horizonte
+ hg.addColorStop(0,"rgba(150,205,255,0)");hg.addColorStop(1,"rgba(170,215,255,"+(.3*al).toFixed(3)+")");ctx.fillStyle=hg;ctx.fillRect(0,sky-hh,W,hh+1);
+}
+// Estrelas fracas: cada uma tem uma altura fixa acima do chão e só aparece quando o céu ali já está escuro (somem de novo ao descer)
+function altStars(sky,t,ps){
+ const yRef=H*SURF,span=T*SKY_CEIL,hmax=yRef+span;if(sky-yRef<2)return;
+ const cov=clamp(1-wx.cover*.7,0,1),s=Math.max(2,Math.round(ps*.75));
+ for(let i=0;i<90;i++){
+  const hp=hash(i,47)*hmax,d=(hp-yRef)/span;if(d<=.12)continue;
+  const y=Math.round((sky-hp)/ps)*ps;if(y<0||y>sky)continue;
+  const x=Math.round(((((hash(i,31)*W-camX*T*.02)%W)+W)%W)/ps)*ps,k=i%6===0?2:1;
+  ctx.globalAlpha=clamp(altSmooth(.12,.7,d)*(.4+.4*(.5+.5*Math.sin(t*1.3+i*2.1)))*cov,0,1);
+  ctx.fillStyle=i%7===0?"#fff3c0":"#ffffff";ctx.fillRect(x,y,s*k,s*k);
+ }
+ ctx.globalAlpha=1;
+}
+// Nuvens de altitude: cirros (finos e esticados, poucos) na faixa do meio e só alguns fiapos perto do topo; acima disso nenhuma.
+// As nuvens fofas de baixo continuam em 02-ceu-nuvens.js (só na faixa de baixo, sem repetir para cima).
+function altClouds(sky,t,scale,night,ps){
+ const top=altTop(),hmax=H*SURF+SKY_CEIL*T,span=W+360*scale,al0=1-night*.5;
+ const X=(i,sd,v,par,mg)=>{return((((hash(i,sd)*span)+t*v-camX*T*par)%span)+span)%span-mg};
+ const R=v=>Math.round(v/ps)*ps;
+ ctx.fillStyle="#ffffff";
+ for(let i=0;i<9;i++){   // cirros
+  const L=.44+.2*((i*.618+.13)%1),len=R((110+90*hash(i,5))*scale),x=R(X(i,9,(2.6+1.6*(i%3))*(i&1?-1:1),.1,180*scale)),y=R(sky-L*hmax+Math.sin(t*.2+i)*2);
+  if(x>W||x+len<0||y<-ps*3||y>sky)continue;
+  ctx.globalAlpha=.4*al0;ctx.fillRect(x,y,len,ps);
+  ctx.globalAlpha=.26*al0;ctx.fillRect(x+R(len*.18)+ps*3,y+ps,R(len*.6),ps);
+  ctx.globalAlpha=.2*al0;ctx.fillRect(x+R(len*.62),y-ps,R(len*.28),ps);
+ }
+ for(let i=0;i<5;i++){   // fiapos no topo
+  const L=.7+.18*((i*.618+.31)%1),len=R((50+60*hash(i,15))*scale),x=R(X(i,19,(2+i%2)*(i&1?1:-1),.08,120*scale)),y=R(sky-L*hmax),f=1-altSmooth(.8,.9,L);
+  if(x>W||x+len<0||y<-ps*3||y>sky||f<.02)continue;
+  ctx.globalAlpha=.3*al0*f;ctx.fillRect(x,y,len,ps);
+  ctx.globalAlpha=.18*al0*f;ctx.fillRect(x+R(len*.3),y+ps,R(len*.35),ps);ctx.fillRect(x+len,y-ps,ps,ps);
+ }
+ ctx.globalAlpha=1;
+}
+// ---- Vida no céu ----
+// [tipo, altura 0-1 (fração de altTop), velocidade px/s (negativa = vai para a esquerda), pássaros, fase]
+const SKY_LIFE=[["flock",.27,15,6,1],["kite",.36,-8,0,2],["flock",.52,-12,5,3],["plane",.6,24,0,4],["balloon",.74,6,0,5],["flock",.82,-18,2,6]];
+function skyBird(x,y,u,f){
+ for(const[i,j]of(f?[[-2,1],[-1,0],[0,-1],[1,0],[2,1],[0,0]]:[[-2,-1],[-1,0],[0,1],[1,0],[2,-1],[0,0]]))ctx.fillRect(x+i*u,y+j*u,u,u);
+}
+function skyKite(x,y,u,t){
+ for(let j=-3;j<=3;j++){const w=3-Math.abs(j);for(let i=-w;i<=w;i++){ctx.fillStyle=i===0||j===0?"#7a3a1a":i<0?"#e8483a":"#ffd24a";ctx.fillRect(x+i*u,y+j*u,u,u)}}
+ for(let k=1;k<=7;k++){ctx.fillStyle=k&1?"#e8483a":"#ffffff";ctx.fillRect(Math.round((x+Math.sin(t*3+k*.9)*u*1.4*(.3+k/7))/u)*u,y+(3+k*1.7)*u,u,u)}
+}
+function skyPlane(x,y,u){
+ ctx.fillStyle="#ffffff";ctx.fillRect(x,y,u*7,u);ctx.fillRect(x,y-u,u,u);
+ ctx.fillStyle="#d5dcea";ctx.fillRect(x+u*2,y+u,u*5,u);
+ ctx.fillStyle="#a9b4cc";ctx.fillRect(x+u*4,y+u*2,u*3,u);
+}
+function skyBalloon(x,y,u){
+ const cols=["#d9483b","#f6e7c1"];
+ for(let j=-6;j<=9;j++){const w=j<=6?Math.floor(Math.sqrt(36-j*j+.5)):j===7?3:j===8?2:1;for(let i=-w;i<=w;i++){ctx.fillStyle=cols[Math.floor((i+7)/2)&1];ctx.fillRect(x+i*u,y+j*u,u,u)}}
+ ctx.fillStyle="#5a3b24";ctx.fillRect(x-u*2,y+9*u,u,u*3);ctx.fillRect(x+u,y+9*u,u,u*3);
+ ctx.fillStyle="#a8693a";ctx.fillRect(x-u*2,y+12*u,u*4,u*2);ctx.fillStyle="#7a4a28";ctx.fillRect(x-u*2,y+13*u,u*4,u);
+ ctx.fillStyle="#ffdf80";ctx.fillRect(x-u,y+8*u,u*2,u);
+}
+function skyLife(sky,t,scale,night,ps){
+ const vis=clamp(1-wx.cover*1.2,0,1)*(1-night*.45);if(vis<.03)return;
+ const hmax=H*SURF+SKY_CEIL*T,yRef=H*SURF,span=T*SKY_CEIL,w=W+300,u=Math.max(2,ps-1);
+ ctx.globalAlpha=vis;
+ for(const[k,L,v,n,ph]of SKY_LIFE){
+  const hp=L*hmax,bob=Math.sin(t*.5+ph)*ps*2,y=Math.round((sky-hp+bob)/ps)*ps,dir=v<0?-1:1;
+  const x=Math.round(((((hash(ph,77)*w)+t*v-camX*T*.08)%w)+w)%w-150);
+  if(y<-ps*16||y>sky+ps*4||x<-90||x>W+90)continue;
+  if(k==="flock"){
+   const d=altSmooth(0,1,clamp((hp-yRef)/span,0,1)),c=[0,1,2].map(j=>Math.round([40,52,78][j]+([216,224,244][j]-[40,52,78][j])*d));
+   ctx.fillStyle="rgb("+c+")";
+   for(let j=0;j<n;j++){const r=Math.ceil(j/2),sd=j&1?-1:1;skyBird(Math.round((x-dir*r*u*4+Math.sin(t*.9+j)*u)/u)*u,Math.round((y+(j?sd*r*u*1.8:0)+Math.sin(t*.7+j*1.3)*u*.6)/u)*u,u,Math.sin(t*8+j*1.7+ph)>.15)}
+  }else if(k==="kite")skyKite(Math.round(x/ps)*ps,y,ps,t);
+  else if(k==="plane")skyPlane(Math.round(x/ps)*ps,Math.round((y+Math.sin(t*.9+ph)*ps*3)/ps)*ps,ps);
+  else if(k==="balloon")skyBalloon(Math.round(x/ps)*ps,y,ps);
+ }
+ ctx.globalAlpha=1;
+}
+
 // ===== 6-jogo/01-laco-inicio.js — Laço principal, eventos, salvar/exportar/importar e inicialização =====
 let last=performance.now(),acc=0,sv=0,autoMsgT=0;
 function loop(now){
@@ -4278,18 +5233,18 @@ function loop(now){
  if(!Number.isFinite(S.gold)&&!S.debug)S.gold=0;
  ambT-=dt;if(musOn&&!mute&&S.vol.a>0&&ambT<=0){ambT=3+Math.random()*4;drip()}
  musT-=dt;if(musOn&&!mute&&S.vol.m>0&&musT<=0){musT=2+Math.random();note()}
- if(S.dir==="down")jetT=0;if(jetT>0)jetT-=dt;if(jetT>0||(!modal&&airborne()&&S.dir!=="down")){const jx=colX(mX),jy=rowY(mY);if(Math.random()<dt*(jetT>0?60:14))parts.push({x:jx-9*worldZoom+(Math.random()-.5)*4,y:jy-6*worldZoom,vx:(Math.random()-.5)*(jetT>0?50:25),vy:(jetT>0?90+Math.random()*110:40+Math.random()*50),l:.3,c:Math.random()<.5?"#ffb43a":"#ff6a2a",jet:true})}
+ if(S.dir==="down")jetT=0;if(jetT>0)jetT-=dt;if(jetT>0||(!modal&&airborne()&&S.dir!=="down")){const jx=colX(mX),jy=rowY(mY);const sb=shiftOn&&!fs&&(S.dir==="left"||S.dir==="right");if(Math.random()<dt*(jetT>0?60:sb?55:14)){const bz=sb?2.2:1;parts.push({x:jx-9*worldZoom+(Math.random()-.5)*4,y:jy-6*worldZoom,vx:(Math.random()-.5)*(jetT>0?50:25)*bz,vy:(jetT>0?90+Math.random()*110:40+Math.random()*50)*bz,l:.3,c:Math.random()<.5?"#ffb43a":"#ff6a2a",jet:true})}}
  dynCD=Math.max(0,dynCD-dt);tpCD=Math.max(0,tpCD-dt);toastT-=dt;autoMsgT-=dt;
- if(ev>0)ev-=dt;else{evNext-=dt;if(evNext<=0){ev=BAL.events.len;evT=Math.random()<.5?0:1;evNext=BAL.events.gapMin+Math.random()*BAL.events.gapRand;say(evT?__("Frenesi mineral! Minérios x3 por 20s"):__("Corrida do ouro! Ouro x3 por 20s"))}}
+ if(ev>0)ev-=dt;else{evNext-=dt;if(evNext<=0){ev=BAL.events.len;evT=Math.random()<.5?0:1;evNext=BAL.events.gapMin+Math.random()*BAL.events.gapRand;sayK(evT?"mine":"gold",evT?__("Frenesi mineral! Minérios x3 por 20s"):__("Corrida do ouro! Ouro x3 por 20s"))}}
  // superfície: recupera energia rápido e entrega a mochila ao chegar perto do baú
  if(atSurface()){const m=maxEn();if(S.en<m)S.en=Math.min(m,S.en+60*dt);}
- furTick(dt);ctTick(dt);chestTick();memCheck();
+ furTick(dt);ctTick(dt);chestTick();memCheck();fishTick(dt);
  // escavação automática (pausa sozinha quando a energia só dá para voltar)
  const ad=autoDps();
- if(ad>0&&!modal){if(autoOK())hit(ad*dt,false,true);else if(autoMsgT<=0&&S.depth>0&&canBreak(...tgt())){autoMsgT=6;say(__("Escavação automática pausada: energia só para voltar"))}}
- if(!modal&&holdS&&now-lastH>(skT[1]>0?150/frenzyActiveMult():150)/attackSpeedMult()){lastH=now;clickDig()}
+ if(ad>0&&!modal&&!fs){if(autoOK())hit(ad*dt,false,true);else if(autoMsgT<=0&&S.depth>0&&canBreak(...tgt())){autoMsgT=6;sayWarn(__("Escavação automática pausada: energia só para voltar"))}}
+ if(!modal&&!fs&&holdS&&now-lastH>(skT[1]>0?150/frenzyActiveMult():150)/attackSpeedMult()){lastH=now;clickDig()}
  // queda livre: segurando ↓ sobre buraco já cavado, desce de graça e acelera aos poucos; soltar a tecla para na hora
- const falling=!modal&&held==="down"&&S.depth<FINAL_DEPTH&&isDug(S.mc,S.depth);fallR=falling?fallR+dt:0;
+ const falling=!modal&&!fs&&held==="down"&&S.depth<FINAL_DEPTH&&isDug(S.mc,S.depth);fallR=falling?fallR+dt:0;
  let mvMs=(shiftOn?60:130)/(1+.1*pk("mov"))/(held==="up"?jetSpdMult():1);
  if(falling){
   // queda livre: vários blocos por quadro se preciso; começa em t0 e acelera até tMin; Shift multiplica o intervalo por F.shift
@@ -4299,10 +5254,11 @@ function loop(now){
   lastMv=now;
  }else{
   fallAcc=0;
-  if(!modal&&held&&now-lastMv>mvMs){lastMv=now;move(held)}
+  if(!modal&&!fs&&held&&now-lastMv>mvMs){lastMv=now;move(held)}
  }
  const k=Math.min(1,dt*(falling?(shiftOn?60:40):shiftOn?26:14)),kc=Math.min(1,dt*(falling?(shiftOn?30:20):shiftOn?12:7));
- mX+=(S.mc-mX)*k;mY+=(S.depth-mY)*k;camX+=(mX-camX)*kc;camY+=(mY-camY)*kc;updateZoom(dt);clampCam();
+ mX+=(S.mc-mX)*k;mY+=(S.depth-mY)*k;camX+=((fs?(mX+fs.tc)/2:mX)-camX)*kc;camY+=((fs?mY+.6:mY)-camY)*kc;   // pescando: a câmera fica entre o personagem e a boia e mostra mais água
+ updateZoom(dt);clampCam();
  draw(dt);
  acc+=dt;if(acc>.15){acc=0;checkAch();checkUnlocks();autoTab();refresh();buffsUI()}
  sv+=dt;if(sv>5){sv=0;save()}
@@ -4311,8 +5267,8 @@ function loop(now){
 document.addEventListener("visibilitychange",()=>{if(document.hidden)save()});
 addEventListener("pagehide",save);
 document.addEventListener("click",e=>{if(e.target.tagName==="BUTTON")e.target.blur()});
-$("exp").onclick=()=>{try{$("sv").value=btoa(unescape(encodeURIComponent(JSON.stringify(Object.assign({},S,{dug:[...dug]})))));$("sv").select();say(__("Save exportado: copie o texto"))}catch(e){say(__("Falha ao exportar"))}};
-$("imp").onclick=()=>{try{const o=JSON.parse(decodeURIComponent(escape(atob($("sv").value.trim()))));S=clean(o);SEED=S.seed;chQ.length=0;carrotC=null;dug=new Set(S.dug.filter(k=>/^-?\d+,\d+$/.test(k)));if(S.en<0)S.en=maxEn();if(S.debug)S.gold=Infinity;camX=mX=S.mc;camY=mY=S.depth;layerSeen=layerOf(S.depth);build();save();say(__("Save importado!"))}catch(e){say(__("Save inválido"))}};
+$("exp").onclick=()=>{try{$("sv").value=btoa(unescape(encodeURIComponent(JSON.stringify(Object.assign({},S,{dug:[...dug]})))));$("sv").select();sayInfo(__("Save exportado: copie o texto"))}catch(e){sayWarn(__("Falha ao exportar"))}};
+$("imp").onclick=()=>{try{const o=JSON.parse(decodeURIComponent(escape(atob($("sv").value.trim()))));S=clean(o);SEED=S.seed;chQ.length=0;carrotC=null;dug=new Set(S.dug.filter(k=>/^-?\d+,\d+$/.test(k)));if(S.en<0)S.en=maxEn();if(S.debug)S.gold=Infinity;camX=mX=S.mc;camY=mY=S.depth;layerSeen=layerOf(S.depth);build();save();sayInfo(__("Save importado!"))}catch(e){sayWarn(__("Save inválido"))}};
 for(const[id,k]of[["vm","m"],["vs","s"],["va","a"]]){const e=$(id);e.value=S.vol[k];e.oninput=()=>{S.vol[k]=+e.value}}
 S.en=S.en<0?maxEn():Math.min(S.en,maxEn());
 layerSeen=layerOf(S.depth);
@@ -4329,5 +5285,5 @@ if(S.lvp>0&&!modal)levelUp();
 onLang(()=>{relabelTabs();if(fsLab)fsLab();buildBar();build();statsHtml="";bagHtml="";buffsHtml="";clkLast="";if(modal==="pause"){paintPause();const lb=document.querySelector("#bx .lp-btn");if(lb)lb.focus()}refresh()});
 requestAnimationFrame(loop);
 // gancho opcional usado só por tools/smoke.js (não faz nada no jogo normal)
-if(typeof window.__TESTE__==="function")window.__TESTE__({fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,LAMPS,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,furyActiveMult,frenzyActiveMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v}});
+if(typeof window.__TESTE__==="function")window.__TESTE__({get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,furyActiveMult,frenzyActiveMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v}});
 })();
