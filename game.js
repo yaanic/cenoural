@@ -891,6 +891,7 @@ const BAL={
  // Queda livre: segurar ↓ num trecho já cavado desce de graça, acelerando (s por bloco: começa em t0 e chega a tMin depois de `ramp` s)
  // shift = multiplicador do intervalo com Shift apertado (menor = mais rápido) · maxSteps = máx. de blocos por quadro
  fall:{t0:.14,tMin:.025,ramp:1.3,shift:.45,maxSteps:12},
+ exitBrake:{rows:5,ms:150},   // subindo pelo buraco: nos últimos `rows` blocos antes da superfície o intervalo entre passos vai subindo até `ms` (ms por bloco), desacelerando a saída
  // Melhorias da mesa de trabalho: custo do nível N = b x k^N (N começa em 0) · max = nível máximo
  ups:{
   sharp:{b:80,k:2.114,max:20}, // afiar picareta
@@ -4139,9 +4140,13 @@ function weatherFront(){   // por cima do mundo, antes da escuridão da noite
    if(y<g-1){const s=r2>.7?3:2;ctx.fillRect(Math.round(x),Math.round(y),s,s)}
   }
  }
- if(wx.fog>.01){   // faixas de névoa à deriva por cima do chão
-  for(let k=0;k<3;k++){const f=ctx.createLinearGradient(0,g-T*(1.5+k*.7),0,g+T*.4);f.addColorStop(0,"rgba(228,234,240,0)");f.addColorStop(.7,"rgba(228,234,240,"+(.2*wx.fog).toFixed(3)+")");f.addColorStop(1,"rgba(228,234,240,"+(.05*wx.fog).toFixed(3)+")");
-   ctx.fillStyle=f;ctx.fillRect(((ck*(6+k*3)+k*W*.37)%(W*1.4))-W*.2-W*.5+W*.5,g-T*(1.5+k*.7),W*.9,T*(1.9+k*.7))}
+ if(wx.fog>.01){   // faixas de névoa à deriva por cima do chão: manchas elípticas com degradê radial (sem bordas retas) que entram e saem da tela suavemente
+  for(let k=0;k<3;k++){
+   const bw=W*.9,per=W+bw,top=g-T*(1.5+k*.7),h=T*(1.9+k*.7),rx=bw/2,ry=h*.5;
+   const cx=((ck*(6+k*3)+k*W*.37)%per)-bw+rx,cy=top+h*.6;   // o salto do módulo acontece com a mancha toda fora da tela
+   const f=ctx.createRadialGradient(0,0,0,0,0,rx),a=.2*wx.fog;
+   f.addColorStop(0,"rgba(228,234,240,"+a.toFixed(3)+")");f.addColorStop(.5,"rgba(228,234,240,"+(a*.6).toFixed(3)+")");f.addColorStop(.8,"rgba(228,234,240,"+(a*.18).toFixed(3)+")");f.addColorStop(1,"rgba(228,234,240,0)");
+   ctx.save();ctx.translate(cx,cy);ctx.scale(1,ry/rx);ctx.fillStyle=f;ctx.fillRect(-rx,-rx,rx*2,rx*2);ctx.restore()}
  }
  if(wx.bolt>.45){   // o raio, só nos primeiros instantes do clarão
   const bx=wx.boltX*W,n=wx.boltJ.length;ctx.strokeStyle="rgba(255,255,255,.95)";ctx.lineWidth=2;ctx.shadowColor="#bcd6ff";ctx.shadowBlur=10;ctx.beginPath();ctx.moveTo(bx,0);
@@ -5375,7 +5380,7 @@ function skyLife(sky,t,scale,night,ps){
 }
 
 // ===== 6-jogo/01-laco-inicio.js — Laço principal, eventos, salvar/exportar/importar e inicialização =====
-let last=performance.now(),acc=0,sv=0,autoMsgT=0;
+let last=performance.now(),acc=0,sv=0,autoMsgT=0,exitUp=false;   // exitUp: está subindo pelo buraco (vale até o passo que cruza a superfície)
 function loop(now){
  requestAnimationFrame(loop);   // agenda o próximo quadro antes de tudo: uma exceção num quadro não congela o jogo para sempre
  const dt=modal==="pause"||modal==="lv"||modal==="chest"?0:Math.min(.1,(now-last)/1000);last=now;   // pausa, escolha de melhoria ao subir de nível e animação de abrir baú congelam o jogo (tempo, habilidades, energia, combo, clima, fornalha...)
@@ -5398,6 +5403,9 @@ function loop(now){
  // queda livre: segurando ↓ sobre buraco já cavado, desce de graça e acelera aos poucos; soltar a tecla para na hora
  const falling=!modal&&!fs&&held==="down"&&S.depth<FINAL_DEPTH&&isDug(S.mc,S.depth);fallR=falling?fallR+dt:0;
  let mvMs=(shiftOn?60:130)/(1+.1*pk("mov"))/(held==="up"?jetSpdMult():1);
+ // saída do buraco: ao subir, a mochila a jato vai freando nos últimos blocos até a superfície (suave, sem trancos) e só solta depois de sair
+ if(held==="up"&&S.depth>0)exitUp=true;else if(held!=="up"||S.depth<0)exitUp=false;
+ if(exitUp&&S.depth>=0&&S.depth<=BAL.exitBrake.rows){const X=BAL.exitBrake,u=S.depth>0?1-(S.depth-1)/X.rows:1;mvMs+=(Math.max(mvMs,X.ms)-mvMs)*u*u*(3-2*u)}
  if(falling){
   // queda livre: vários blocos por quadro se preciso; começa em t0 e acelera até tMin; Shift multiplica o intervalo por F.shift
   const F=BAL.fall,iv=(shiftOn?F.shift:1)*(F.t0-(F.t0-F.tMin)*Math.min(1,fallR/F.ramp));
@@ -5406,7 +5414,9 @@ function loop(now){
   lastMv=now;
  }else{
   fallAcc=0;
-  if(!modal&&!fs&&held&&now-lastMv>mvMs){lastMv=now;move(held)}
+  const surfStop=exitUp&&held==="up"&&S.depth===0;   // saiu do buraco segurando ↑: para na superfície (não sai voando para o céu); soltar e apertar ↑ de novo voa
+  if(surfStop)jetT=0;
+  if(!modal&&!fs&&held&&!surfStop&&now-lastMv>mvMs){lastMv=now;move(held)}
  }
  const k=Math.min(1,dt*(falling?(shiftOn?60:40):shiftOn?26:14)),kc=Math.min(1,dt*(falling?(shiftOn?30:20):shiftOn?12:7));
  mX+=(S.mc-mX)*k;mY+=(S.depth-mY)*k;camX+=((fs?(mX+fs.tc)/2:mX)-camX)*kc;camY+=((fs?mY+.6:mY)-camY)*kc;   // pescando: a câmera fica entre o personagem e a boia e mostra mais água
