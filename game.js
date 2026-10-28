@@ -275,22 +275,22 @@ addLang("en","English",{
 "Afiar picareta":"Sharpen pickaxe",
 "+12% de dano da picareta por nível":"+12% pickaxe damage per level",
 "Velocidade de escavação":"Digging speed",
-"+5% de velocidade ao segurar a escavação por nível":"+5% speed while holding dig, per level",
+"+5% de velocidade de escavação por nível":"+5% dig speed per level",
 "Chance de golpe crítico":"Critical hit chance",
-"+{0}% de chance de golpe crítico (dano x3) por nível, até {1}%":"+{0}% critical hit chance (x3 damage) per level, up to {1}%",
+"+{0}% de chance de crítico (dano x3) por nível, até {1}%":"+{0}% crit chance (x3 damage) per level, up to {1}%",
 "Energia máxima":"Max energy",
 "+30 de energia máxima por nível":"+30 max energy per level",
 "Economia de energia":"Energy saving",
-"-5% de gasto de energia ao cavar e voar por nível (cumulativo: cada nível multiplica por 0,95). Gasto atual: {0}%":"-5% energy spent when digging and flying per level (cumulative: each level multiplies by 0.95). Current spend: {0}%",
+"-5% de gasto de energia por nível (cumulativo). Gasto atual: {0}%":"-5% energy spent per level (cumulative). Current spend: {0}%",
 "Eficiência da mochila a jato":"Jetpack efficiency",
-"-5% da energia gasta ao subir com o jato por nível (cumulativo). Gasto atual: {0}%":"-5% of the energy spent flying up with the jetpack per level (cumulative). Current spend: {0}%",
+"-5% de energia gasta no jato por nível (cumulativo). Gasto atual: {0}%":"-5% jetpack energy spent per level (cumulative). Current spend: {0}%",
 "Velocidade da mochila a jato":"Jetpack speed",
-"+10% de velocidade ao subir com o jato por nível (subir continua gastando energia)":"+10% speed when flying up with the jetpack per level (flying up still spends energy)",
+"+10% de velocidade do jato por nível":"+10% jetpack speed per level",
 "Resistência à lava":"Lava resistance",
-"-10% do dano da lava por nível (cumulativo). Lava aqui: {0}% do dano normal (próximo nível: {1}%)":"-10% lava damage per level (cumulative). Lava here: {0}% of normal damage (next level: {1}%)",
-"-10% do dano da lava por nível (cumulativo). Lava aqui: {0}% do dano normal":"-10% lava damage per level (cumulative). Lava here: {0}% of normal damage",
+"-10% do dano da lava por nível. Agora: {0}% (próximo: {1}%)":"-10% lava damage per level. Now: {0}% (next: {1}%)",
+"-10% do dano da lava por nível. Agora: {0}%":"-10% lava damage per level. Now: {0}%",
 "Escavação automática":"Auto digging",
-"Quebra sozinho o bloco à frente com +0,25 golpe por segundo por nível. Gasta metade da energia, mas é mais fraco que cavar manualmente":"Automatically breaks the block ahead at +0.25 hits per second per level. Spends half the energy, but is weaker than digging by hand",
+"Quebra o bloco à frente sozinho: +0,25 golpe/s por nível. Gasta metade da energia, mas é mais fraco":"Breaks the block ahead by itself: +0.25 hits/s per level. Half the energy, but weaker",
 "Força da escavação automática":"Auto-dig power",
 "+10% de dano dos golpes automáticos por nível":"+10% damage on automatic hits per level",
 "Sorte para ouro e minérios":"Luck for gold and ores",
@@ -298,41 +298,41 @@ addLang("en","English",{
 "Ganho de experiência":"Experience gain",
 "+10% de experiência por nível":"+10% experience per level",
 "Duração das habilidades":"Skill duration",
-"+5% de duração da Fúria e da Escavação Frenética por nível":"+5% duration of Fury and Frenzied Digging per level",
+"+5% de duração da Fúria e da Frenética por nível":"+5% Fury and Frenzy duration per level",
 "Potência da Fúria do Minerador":"Miner's Fury power",
-"Dano da Fúria: x{0} (próximo nível: x{1}). Recarga: {2} s":"Fury damage: x{0} (next level: x{1}). Cooldown: {2} s",
-"Dano da Fúria: x{0}. Recarga: {1} s":"Fury damage: x{0}. Cooldown: {1} s",
+"Dano: x{0} (próximo: x{1}). Recarga: {2} s":"Damage: x{0} (next: x{1}). Cooldown: {2} s",
+"Dano: x{0}. Recarga: {1} s":"Damage: x{0}. Cooldown: {1} s",
 "Potência da Escavação Frenética":"Frenzied Digging power",
-"Velocidade da Frenética: x{0} (próximo nível: x{1}). Recarga: {2} s":"Frenzy speed: x{0} (next level: x{1}). Cooldown: {2} s",
-"Velocidade da Frenética: x{0}. Recarga: {1} s":"Frenzy speed: x{0}. Cooldown: {1} s",
+"Velocidade: x{0} (próximo: x{1}). Recarga: {2} s":"Speed: x{0} (next: x{1}). Cooldown: {2} s",
+"Velocidade: x{0}. Recarga: {1} s":"Speed: x{0}. Cooldown: {1} s",
 "Lanterna":"Lantern",
-"Um pouco mais de luz na escuridão. Luz extra: {0} (próximo nível: {1})":"A bit more light in the dark. Extra light: {0} (next level: {1})",
-"Um pouco mais de luz na escuridão. Luz extra: {0}":"A bit more light in the dark. Extra light: {0}",
+"Mais luz no escuro: {0} (próximo: {1})":"More light in the dark: {0} (next: {1})",
+"Mais luz no escuro: {0}":"More light in the dark: {0}",
 "Vagalume companheiro":"Firefly companion",
-"Um vagalume te segue e ilumina o escuro. Luz extra: {0} (próximo nível: {1})":"A firefly follows you and lights up the dark. Extra light: {0} (next level: {1})",
-"Um vagalume te segue e ilumina o escuro. Luz extra: {0}":"A firefly follows you and lights up the dark. Extra light: {0}",
+"Vagalume que ilumina o escuro: {0} (próximo: {1})":"Firefly that lights the dark: {0} (next: {1})",
+"Vagalume que ilumina o escuro: {0}":"Firefly that lights the dark: {0}",
 "Velocidade da fornalha":"Furnace speed",
-"Refina {0} minérios por segundo (próximo nível: {1}). O refinado vale +{2}% de ouro":"Refines {0} ores per second (next level: {1}). Refined ore is worth +{2}% gold",
-"Refina {0} minérios por segundo. O refinado vale +{1}% de ouro":"Refines {0} ores per second. Refined ore is worth +{1}% gold",
+"Refina {0} minérios/s (próximo: {1}). Refinado vale +{2}% de ouro":"Refines {0} ores/s (next: {1}). Refined ore: +{2}% gold",
+"Refina {0} minérios/s. Refinado vale +{1}% de ouro":"Refines {0} ores/s. Refined ore: +{1}% gold",
 "Melhoria de minérios":"Ore improvement",
-"Minérios têm {0}% de chance de render unidades extras (+1 a +{1}). Próximo nível: {2}%":"Ores have a {0}% chance to give extra units (+1 to +{1}). Next level: {2}%",
-"Minérios têm {0}% de chance de render unidades extras (+1 a +{1})":"Ores have a {0}% chance to give extra units (+1 to +{1})",
+"{0}% de chance de minério render extras (+1 a +{1}). Próximo: {2}%":"{0}% chance of extra ore (+1 to +{1}). Next: {2}%",
+"{0}% de chance de minério render extras (+1 a +{1})":"{0}% chance of extra ore (+1 to +{1})",
 "Vara de pesca":"Fishing rod",
-"Zona verde do minijogo da pesca: {0}% da pista (próximo nível: {1}%)":"Green zone of the fishing minigame: {0}% of the track (next level: {1}%)",
-"Zona verde do minijogo da pesca: {0}% da pista":"Green zone of the fishing minigame: {0}% of the track",
+"Zona verde da pesca: {0}% da pista (próximo: {1}%)":"Fishing green zone: {0}% of the track (next: {1}%)",
+"Zona verde da pesca: {0}% da pista":"Fishing green zone: {0}% of the track",
 "Isca":"Bait",
-"O peixe morde {0}% mais rápido e peixes raros aparecem {1}% mais (próximo nível: {2}% e {3}%)":"Fish bite {0}% faster and rare fish show up {1}% more (next level: {2}% and {3}%)",
-"O peixe morde {0}% mais rápido e peixes raros aparecem {1}% mais":"Fish bite {0}% faster and rare fish show up {1}% more",
+"Peixe morde {0}% mais rápido; raros {1}% mais (próximo: {2}% e {3}%)":"Fish bite {0}% faster; rare fish {1}% more (next: {2}% and {3}%)",
+"Peixe morde {0}% mais rápido; raros {1}% mais":"Fish bite {0}% faster; rare fish {1}% more",
 "Medidor de retorno":"Return gauge",
-"Marca na barra de energia a reserva para subir de volta à superfície e a faz brilhar e pulsar (com som) quando a energia fica apertada. Compra única":"Marks on the energy bar the reserve needed to climb back and makes it glow and pulse (with sound) when energy gets tight. One-time purchase",
-"Medidor de retorno comprado: a barra de energia mostra a reserva para voltar e avisa quando ela fica apertada":"Return gauge bought: the energy bar shows the reserve to climb back and warns when it gets tight",
+"Marca na barra de energia a reserva para voltar e pulsa quando fica apertada. Compra única":"Marks the energy needed to return on the bar and pulses when tight. One-time purchase",
+"Comprado: a barra mostra a reserva para voltar e avisa quando fica apertada":"Bought: the bar shows the reserve to return and warns when tight",
 "Relógio":"Clock",
-"Mostra na barra do topo um relógio de sol e lua com a hora do dia (o dia dura {0} min)":"Shows a sun-and-moon clock with the time of day on the top bar (a day lasts {0} min)",
-"Relógio comprado: veja a hora do dia na barra do topo (passe o mouse para ver o período)":"Clock bought: see the time of day on the top bar (hover to see the period)",
+"Relógio de sol e lua na barra do topo (o dia dura {0} min)":"Sun-and-moon clock on the top bar (a day lasts {0} min)",
+"Comprado: hora do dia na barra do topo (passe o mouse para ver o período)":"Bought: time of day on the top bar (hover for the period)",
 "Teleporte":"Teleport",
-"Desbloqueia o teleporte: leva ao baú sem gastar energia e, usado na superfície, volta ao ponto de onde saiu":"Unlocks teleport: takes you to the chest without spending energy and, used on the surface, returns to where you left from",
-"Recarga do teleporte: {0} s ({1} s no próximo nível)":"Teleport cooldown: {0} s ({1} s at the next level)",
-"Recarga do teleporte: {0} s":"Teleport cooldown: {0} s",
+"Teleporte ao baú sem gastar energia; na superfície, volta de onde saiu":"Teleports to the chest for free; on the surface, returns you to where you left",
+"Recarga: {0} s ({1} s no próximo)":"Cooldown: {0} s ({1} s next)",
+"Recarga: {0} s":"Cooldown: {0} s",
 "Nova picareta: {0}":"New pickaxe: {0}",
 "Sem {0}: compre na loja (na superfície)":"No {0}: buy some at the shop (on the surface)",
 "Na superfície a energia já se recupera sozinha":"On the surface, energy recovers by itself",
@@ -702,32 +702,32 @@ addLang("en","English",{
 "Minério extra! +{0}":"Extra ore! +{0}",
 "+Energia":"+Energy",
 "Lava! -{0} de energia":"Lava! -{0} energy",
-"Pedra dura: só quebra com dinamite":"Hard stone: only breaks with dynamite",
+"Pedra dura: use dinamite":"Hard stone: use dynamite",
 "CRÍTICO! {0}":"CRITICAL! {0}",
 // --- 4-interface/01-painel.js
+"Dinamites":"Dynamites",
+"Comida de energia":"Energy food",
 "Picareta":"Pickaxe",
 "Sorte e experiência":"Luck and experience",
 "Habilidades":"Skills",
 "Utilidades":"Utilities",
 "Máx":"Max",
-"Consumíveis":"Consumables",
 "Você consegue comprar {0}x com o ouro que tem":"You can buy {0}x with the gold you have",
+"MÁX":"MAX",
+"Nv {0}/{1}":"Lv {0}/{1}",
 "Recorde: {0} m":"Record: {0} m",
 "Superfície · melhorias liberadas · {0}":"Surface · upgrades unlocked · {0}",
 "INQUEBRÁVEL":"UNBREAKABLE",
 "Minérios x3":"Ores x3",
 "Ouro x3":"Gold x3",
 "Melhorias só na superfície. Suba (ou use o teleporte) para comprar.":"Upgrades only on the surface. Go up (or use teleport) to buy.",
-"Na mesa de trabalho: você pode melhorar o equipamento. Venda os itens no baú (clique nele).":"At the workbench: you can upgrade your gear. Sell items at the chest (click it).",
-"Vá até a mesa de trabalho (à esquerda do buraco) para comprar melhorias.":"Go to the workbench (left of the hole) to buy upgrades.",
 "A loja fica na superfície. Suba (ou use o teleporte) para comprar.":"The shop is on the surface. Go up (or use teleport) to buy.",
 "Na loja: compre dinamite e comida de energia. Os itens de energia ficam na barra, ao lado das habilidades (clique para usar).":"At the shop: buy dynamite and energy food. Energy items sit on the bar next to your skills (click to use).",
 "Vá até a loja (à direita do baú) para comprar.":"Go to the shop (right of the chest) to buy.",
 "{0} · você tem {1}":"{0} · you have {1}",
 "(preço sobe a cada camada alcançada)":"(price rises with every layer reached)",
-"MÁX":"MAX",
 "Fornalha: {0} minérios na fila · pronta em {1}. Pode ir cavar: ela vende sozinha.":"Furnace: {0} ores in the queue · ready in {1}. Go dig: it sells by itself.",
-"A fornalha fica à esquerda do buraco. Fique ao lado dela e clique nela para pôr os minérios da mochila: ela refina com o tempo e vende sozinha (+{0}% de ouro). Pedra comum continua indo para o baú.":"The furnace is to the left of the hole. Stand next to it and click it to load the ores from your backpack: it refines them over time and sells them on its own (+{0}% gold). Plain stone keeps going to the chest.",
+"Refina os minérios com o tempo e vende sozinha (+{0}% de ouro). Pedra comum vai para o baú.":"Refines ores over time and sells them on its own (+{0}% gold). Plain stone goes to the chest.",
 "Os poderes só podem ser comprados depois de Renascer pela primeira vez. Os fragmentos vêm do Renascer e, às vezes, dos baús raros do subsolo.":"Powers can only be bought after your first Rebirth. Shards come from Rebirth and, sometimes, from rare underground chests.",
 "Fragmentos disponíveis: {0} (vêm do Renascer e dos baús raros).":"Shards available: {0} (from Rebirth and rare chests).",
 "Som: desligado":"Sound: off",
@@ -735,8 +735,6 @@ addLang("en","English",{
 "Picareta de {0}":"{0} pickaxe",
 "Melhor picareta do jogo (camada {0})":"Best pickaxe in the game (layer {0})",
 "Dano x{0} (atual: {1}). Recomendada para a camada {2}":"Damage x{0} (current: {1}). Recommended for the {2} layer",
-"{0} · nv {1}/{2}":"{0} · lv {1}/{2}",
-"{0} · nv {1}":"{0} · lv {1}",
 "{0} frag.":n=>n+(n==1?" shard":" shards"),
 "Chegue a 100 m nesta vida para ganhar fragmentos. Reinicia ouro, picareta e melhorias; mantém poderes, nível e conquistas":"Reach 100 m in this life to earn shards. Resets gold, pickaxe and upgrades; keeps powers, level and achievements",
 "Reinicia ouro, picareta e melhorias e ganha {0} fragmentos (1 por camada de 100 m alcançada nesta vida, +5 por chegar ao fundo)":g=>"Resets gold, pickaxe and upgrades and earns "+g+(g==1?" shard":" shards")+" (1 per 100 m layer reached in this life, +5 for reaching the bottom)",
@@ -831,7 +829,7 @@ addLang("en","English",{
 "Tarde":"Afternoon",
 "Noite":"Night",
 "Madrugada":"Late night",
-"{0} · {1} (o sol aparece no alto ao meio-dia e a lua à meia-noite)":"{0} · {1} (the sun is high at noon and the moon at midnight)",
+"{0} · {1} · {2} (o sol aparece no alto ao meio-dia e a lua à meia-noite)":"{0} · {1} · {2} (the sun is high at noon and the moon at midnight)",
 // --- 4-interface/07-controle.js
 "Painel: A escolhe, LB/RB troca de aba, B volta":"Panel: A selects, LB/RB switch tab, B goes back",
 "Controle conectado":"Controller connected",
@@ -851,6 +849,15 @@ addLang("en","English",{
 // --- 5-desenho/06-quadro.js
 "Pedra dura: dinamite":"Hard stone: dynamite",
 "Veio de {0}: x{1}":"{0} vein: x{1}",
+// --- 5-desenho/08-dia-noite.js
+"Lua nova":"New moon",
+"Crescente":"Waxing crescent",
+"Quarto crescente":"First quarter",
+"Gibosa crescente":"Waxing gibbous",
+"Lua cheia":"Full moon",
+"Gibosa minguante":"Waning gibbous",
+"Quarto minguante":"Last quarter",
+"Minguante":"Waning crescent",
 // --- 5-desenho/12-povoado.js
 "Salvo!":"Saved!",
 "Cama":"Bed",
@@ -862,6 +869,7 @@ addLang("en","English",{
 // --- 5-desenho/13-paisagem.js
 "Fogueira: clique para assar":"Campfire: click to roast",
 // --- 5-desenho/16-pesca-desenho.js
+"Riacho da floresta: clique para pescar":"Forest stream: click to fish",
 "Riacho: clique para pescar":"Stream: click to fish",
 "Mar: clique para pescar":"Sea: click to fish",
 "Vender":"Sell",
@@ -947,6 +955,7 @@ const BAL={
  dyn:{dyn:{r:2.2,p:60,e:2,cd:1.5},dyn2:{r:3,p:160,e:3,cd:3},dyn3:{r:4,p:420,e:4.5,cd:6},dyn4:{r:5,p:1100,e:6.5,cd:10},dyn5:{r:6.5,p:3000,e:9,cd:16}},
  pet:{light:.9},                                       // vagalume: blocos de luz extra por nível
  lant:{light:.3},                                      // lanterna: blocos de luz extra por nível (upgrade mais barato, comprável antes do vagalume)
+ moon:{cycle:8,start:.5,south:true,glow:.3},               // fases da lua (só visual): cycle = dias de jogo (1 dia = day.len s) de uma lua nova à seguinte (8 = uma fase por dia) · start = fase de um jogo novo (0 nova, .25 quarto crescente, .5 cheia, .75 quarto minguante) · south: hemisfério sul (a crescente fica iluminada à esquerda) · glow = brilho que sobra no halo com lua nova
  day:{len:480,start:.12},                              // dia e noite na superfície: duração do ciclo (s) e hora inicial (0 = amanhecer, .25 = meio-dia, .5 = pôr do sol, .75 = meia-noite)
  // noite: from = a partir de que escuridão (0-1) vale o bônus · xp = bônus de XP ao descer de noite · dark = escurecimento máximo da superfície (1 = breu total) · pet = brilho extra do vagalume
  // luz: lit = raio (blocos) da lanterna do jogador sem vagalume · petLit = blocos de luz que cada bloco de BAL.pet.light acrescenta · soft = largura (blocos) da borda suave da luz
@@ -1004,7 +1013,9 @@ const SURF_L=-100,SURF_R=52,PAD_L=8,PAD_R=9;   // esquerda estendida: do moinho 
 const GARDEN_L=-20.6,GARDEN_R=-13,MILL_C=-26,GARDEN_SLOTS=16;   // GARDEN_SLOTS: cenouras da horta; cada chegada ao fundo (1 por vida) deixa mais uma dourada
 const RIVER_C0=24,RIVER_C1=30,WHEEL_C=27.4;                       // água do riacho: colunas RIVER_C0..RIVER_C1 (a ponte passa por cima)
 const CAMP_C=38.4,BEACH_C0=42,LIGHT_C=46.5,PIER_C=52.4,PIER_END_C=55.6;   // o mar começa depois de SURF_R
-const isRiver=c=>c>=RIVER_C0&&c<=RIVER_C1,isSea=c=>c>SURF_R,isBeach=c=>c>=BEACH_C0&&c<=SURF_R;
+const FRIV_C0=-68,FRIV_C1=-63;   // riacho da floresta da esquerda (entre o moinho e as montanhas): colunas FRIV_C0..FRIV_C1, com pontezinha; também dá para pescar
+const riverOf=c=>c<(RIVER_C0+FRIV_C1)/2?[FRIV_C0,FRIV_C1]:[RIVER_C0,RIVER_C1];   // o riacho mais próximo da coluna c
+const isRiver=c=>(c>=RIVER_C0&&c<=RIVER_C1)||(c>=FRIV_C0&&c<=FRIV_C1),isSea=c=>c>SURF_R,isBeach=c=>c>=BEACH_C0&&c<=SURF_R;
 const WALK_R=Math.floor(PIER_END_C-.5);   // última coluna andável: a ponta do trapiche (a praia termina em SURF_R, o trapiche segue sobre o mar)
 const inS=c=>c>=SURF_L&&c<=WALK_R;
 const CHEST_C=5;                 // coluna do baú de depósito, na superfície
@@ -1057,7 +1068,7 @@ const FISH_BAG_MAX=80;   // teto de peixes na bolsa (o save é limpo com este n�
 const SAVE_KEY="abismo-v3";
 const fresh=()=>({gc:0,gcAt:-1,gold:0,depth:0,mc:0,prog:0,best:0,runMax:0,tier:0,runs:0,total:0,oc:0,blocks:0,deaths:0,sold:0,en:-1,
  lv:{sharp:0,emax:0,eco:0,jet:0,jetspd:0,auto:0,autopow:0,speed:0,crit:0,luck:0,xp:0,duration:0,furia:0,frenesi:0,tele:0,pet:0,furn:0,lavares:0,lant:0,clock:0,back:0,fort:0,rod:0,bait:0},items:{dyn:0,dyn2:0,dyn3:0,dyn4:0,dyn5:0,cen:0,sop:0,poc:0,ptp:0,pas:0,pgr:0,pbq:0},dsel:"dyn",fsel:"pas",
- bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,dir:"down",dug:[],ach:[],debug:false,real:0,pts:0,sk:{her:0,ini:0,ouro:0,dmg:0,fol:0,jato:0,gar:0,xp:0},od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,fb:[],fdx:{},fishN:0,fishP:0,fishG:0,cookN:0,cookP:0,play:0,v:9,vol:{m:.7,s:1,a:.7}});
+ bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,moon:BAL.moon.start*BAL.moon.cycle,dir:"down",dug:[],ach:[],debug:false,real:0,pts:0,sk:{her:0,ini:0,ouro:0,dmg:0,fol:0,jato:0,gar:0,xp:0},od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,fb:[],fdx:{},fishN:0,fishP:0,fishG:0,cookN:0,cookP:0,play:0,v:9,vol:{m:.7,s:1,a:.7}});
 let S=fresh();S.seed=newSeed();
 function clean(o){const src=o&&typeof o==="object"?o:{},hasVersion=Number.isFinite(src.v),f=fresh();o=Object.assign(f,src);if(!hasVersion)o.v=7;
  for(const k of["gold","depth","prog","best","runMax","tier","runs","total","oc","blocks","deaths","sold","pts","real","xp","lvp","bombs","eaten","tps","veins","sleeps","rich","refined","ctDone","spins","pend","chests","chTop","chGold","chFr","chPk","ptpUsed","fishN","fishP","fishG","cookN","cookP","play","gc"])if(!Number.isFinite(o[k])||o[k]<0)o[k]=0;
@@ -1067,8 +1078,10 @@ function clean(o){const src=o&&typeof o==="object"?o:{},hasVersion=Number.isFini
  o.fb=(Array.isArray(o.fb)?o.fb:[]).filter(e=>Array.isArray(e)&&FISH.some(f=>f.id===e[0])&&Number.isFinite(e[1])&&e[1]>0).slice(0,FISH_BAG_MAX).map(e=>[e[0],Math.round(e[1]),e[2]?1:0]);
  {const d={};if(o.fdx&&typeof o.fdx==="object"&&!Array.isArray(o.fdx))for(const f of FISH)if(Number.isFinite(o.fdx[f.id])&&o.fdx[f.id]>0)d[f.id]=Math.round(o.fdx[f.id]);o.fdx=d}
  if(!Number.isFinite(o.gold)&&!o.debug)o.gold=0;
+ if(!Number.isFinite(o.moon)||o.moon<0)o.moon=BAL.moon.start*BAL.moon.cycle;   // idade da lua em dias (5-desenho/08-dia-noite.js); sem ela começa na lua cheia
  if(!Number.isFinite(o.sea)||o.sea<0)o.sea=BAL.season.len*1.5;   // relógio das estações (2-sistemas/07-estacoes.js); sem ele começa no meio do verão
- o.depth=clamp(Math.floor(o.depth),0,FINAL_DEPTH);o.mc=clamp(Math.floor(Number.isFinite(o.mc)?o.mc:0),o.depth>0?-HALF:SURF_L,o.depth>0?HALF:WALK_R);   // na superfície dá para estar fora das colunas da minao.best=Math.max(Math.floor(o.best),o.depth);o.runMax=Math.max(Math.floor(o.runMax),o.depth);
+ o.depth=clamp(Math.floor(o.depth),0,FINAL_DEPTH);o.mc=clamp(Math.floor(Number.isFinite(o.mc)?o.mc:0),o.depth>0?-HALF:SURF_L,o.depth>0?HALF:WALK_R);   // na superfície dá para estar fora das colunas da mina
+ o.best=Math.max(Math.floor(o.best),o.depth);o.runMax=Math.max(Math.floor(o.runMax),o.depth);
  o.tier=Math.min(TIERS.length-1,Math.floor(o.tier));
  if(!Number.isFinite(o.en))o.en=-1;
  if(o.v<4){ // poderes de renascimento foram refeitos: devolve os pontos gastos e converte os fragmentos antigos
@@ -1132,7 +1145,7 @@ let musOn=false,musT=0,ambT=0,amb=[],modal=null,levelChoiceId=0,levelChoiceTicke
 let cmb=0,cmbT=0,cmbPulse=0,cmbMax=0,cmbFlash=0,cmbBanner=0,cmbBannerT="",cmbLast=0,cmbLastT=0,cmbTier=0;
 let skT=[0,0],skCD=[0,0],dynCD=0,dynCDt=1.5,tpCD=0,ev=0,evT=0,evNext=60+Math.random()*60;
 let star=0,starT=0,starNext=60+Math.random()*120,shoot=null;   // estrela cadente: segundos de bônus restantes · tipo (0 ouro, 1 sorte) · espera até a próxima · risco no céu
-let mute=false,actx=null,toast="",toastK="info",toastT=0,breakNoise=null,breakSfxNext=0;
+let mute=false,actx=null,toasts=[],breakNoise=null,breakSfxNext=0;
 let camX=0,camY=0,mX=0,mY=0,swing=0,parts=[],texts=[],shake=0,flash=0,flashC="#ff2a2a",flashText="",chestOpen=0,lowEnPulse=0,retSeen=0,layerSeen=0,jetT=0;
 let holdM=false,holdS=false,lastH=0,held=null,heldC=null,lastMv=0,shiftOn=false,fallR=0,fallAcc=0,cheatBuf="",cheatT=0,cheatSurf=false,cheatPos=null;
 // Códigos secretos (digitar a palavra, como em GTA). CENOURA: ouro e energia infinitos (em qualquer lugar). FINAL: teleporta para a Rocha-mãe e dispara a cena da cenoura dourada (em qualquer lugar) · CLIMA: troca o clima · SEASON: avança a estação (esses dois só valem na superfície, onde se vê o efeito).
@@ -1191,14 +1204,14 @@ const dynDesc=k=>{const D=BAL.dyn[k],r=ndec(D.r),e=ndec(D.e),cd=ndec(D.cd);
   :__("Explode uma área de raio {0}. Mais forte que a anterior; gasta {1} blocos de energia; recarga de {2} s. Também quebra os veios de pedra dura",r,e,cd)};
 // n e d são getters: o texto é traduzido na hora de exibir (vale também depois de trocar o idioma)
 const ITEMS={
- dyn:{get n(){return __("Dinamite")},get d(){return dynDesc("dyn")},b:BAL.items.dyn,c:"#e5412d"},
- dyn2:{get n(){return __("Dinamite reforçada")},get d(){return dynDesc("dyn2")},b:BAL.items.dyn2,c:"#ff9a2a"},
- dyn3:{get n(){return __("Dinamite pesada")},get d(){return dynDesc("dyn3")},b:BAL.items.dyn3,c:"#3fa8ff"},
- dyn4:{get n(){return __("Carga de nitro")},get d(){return dynDesc("dyn4")},b:BAL.items.dyn4,c:"#b45cff"},
- dyn5:{get n(){return __("Bomba de demolição")},get d(){return dynDesc("dyn5")},b:BAL.items.dyn5,c:"#ffd45c"},
- cen:{get n(){return __("Cenourinha")},get d(){return __("Recupera 10% da energia máxima")},b:BAL.items.cen,c:"#ff9a3a",en:.1},
- sop:{get n(){return __("Sopa de cogumelo")},get d(){return __("Recupera 25% da energia máxima")},b:BAL.items.sop,c:"#c9a27a",en:.25},
- poc:{get n(){return __("Poção de energia")},get d(){return __("Recupera 50% da energia máxima")},b:BAL.items.poc,c:"#6ff0ff",en:.5},
+ dyn:{g:"Dinamites",get n(){return __("Dinamite")},get d(){return dynDesc("dyn")},b:BAL.items.dyn,c:"#e5412d"},
+ dyn2:{g:"Dinamites",get n(){return __("Dinamite reforçada")},get d(){return dynDesc("dyn2")},b:BAL.items.dyn2,c:"#ff9a2a"},
+ dyn3:{g:"Dinamites",get n(){return __("Dinamite pesada")},get d(){return dynDesc("dyn3")},b:BAL.items.dyn3,c:"#3fa8ff"},
+ dyn4:{g:"Dinamites",get n(){return __("Carga de nitro")},get d(){return dynDesc("dyn4")},b:BAL.items.dyn4,c:"#b45cff"},
+ dyn5:{g:"Dinamites",get n(){return __("Bomba de demolição")},get d(){return dynDesc("dyn5")},b:BAL.items.dyn5,c:"#ffd45c"},
+ cen:{g:"Comida de energia",get n(){return __("Cenourinha")},get d(){return __("Recupera 10% da energia máxima")},b:BAL.items.cen,c:"#ff9a3a",en:.1},
+ sop:{g:"Comida de energia",get n(){return __("Sopa de cogumelo")},get d(){return __("Recupera 25% da energia máxima")},b:BAL.items.sop,c:"#c9a27a",en:.25},
+ poc:{g:"Comida de energia",get n(){return __("Poção de energia")},get d(){return __("Recupera 50% da energia máxima")},b:BAL.items.poc,c:"#6ff0ff",en:.5},
  ptp:{get n(){return __("Poção de teleporte")},get d(){return __("Uso único: leva ao baú sem gastar energia (na superfície, volta ao ponto de onde saiu). Só cai de baús")},b:0,c:"#9a5cff",tp:1,noShop:1},
  pas:{get n(){return __("Peixe assado")},get d(){return __("Recupera 20% da energia máxima. Só se faz na fogueira")},b:0,c:"#e0a45f",en:.2,noShop:1},
  pgr:{get n(){return __("Peixe grelhado")},get d(){return __("Recupera 45% da energia máxima. Só se faz na fogueira")},b:0,c:"#ee8a4a",en:.45,noShop:1},
@@ -1320,9 +1333,33 @@ function hitSfx(kind,depth){
 }
 function note(){try{if(!actx)return;const sc=[0,3,5,7,10,12],f=(110+layerOf(S.depth)*6)*Math.pow(2,sc[Math.floor(Math.random()*6)]/12),o=actx.createOscillator(),g=actx.createGain(),t=actx.currentTime;o.type="sine";o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.025*S.vol.m,t+.6);g.gain.exponentialRampToValueAtTime(.0001,t+3);o.connect(g);g.connect(actx.destination);o.start();o.stop(t+3.1)}catch(e){}}
 function drip(){if(!actx)return;try{const o=actx.createOscillator(),g=actx.createGain(),t=actx.currentTime;o.type="sine";o.frequency.value=300+layerOf(S.depth)%BIO.length*110+Math.random()*120;g.gain.setValueAtTime(.02*S.vol.a,t);g.gain.exponentialRampToValueAtTime(.0001,t+.25);o.connect(g);g.connect(actx.destination);o.start();o.stop(t+.3)}catch(e){}}
-function say(m){toastK="info";toast=String(m).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u27FF\u2B00-\u2BFF]|\uFE0F|\u200D|\u20E3/g,"").trim();toastT=Math.min(8,Math.max(4,2+toast.length*.05))}   // texto longo fica mais tempo na tela (4 s a 8 s)
-// Categorias dos avisos: cada uma tem cor e ícone próprios (ver ICONS em 4-interface/01-painel.js)
-function sayK(k,m){say(m);toastK=k}
+// ----- Fila de avisos -----
+// Cada aviso vira uma linha na pilha #toasts (abaixo da barra fixa #layer): entram um atrás do outro, ficam um tempo e somem. No máximo TOAST_MAX ao mesmo tempo (o mais antigo sai primeiro).
+// Aviso repetido (mesmo texto ainda na tela) não duplica: só renova o tempo dele. O texto longo fica mais tempo (4 s a 8 s).
+const TOAST_MAX=5;
+function toastClean(m){return String(m).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u27FF\u2B00-\u2BFF]|\uFE0F|\u200D|\u20E3/g,"").trim()}
+function toastHas(m){const t=toastClean(m);return toasts.some(x=>x.txt===t)}
+function sayK(k,m){
+ const txt=toastClean(m),dur=Math.min(8,Math.max(4,2+txt.length*.05));
+ if(!txt)return;
+ const old=toasts.find(x=>x.txt===txt);
+ if(old){old.t=dur;old.el.classList.remove("out");return}
+ const box=document.getElementById("toasts");if(!box)return;
+ const el=document.createElement("div");el.className="toast";
+ const ic=document.createElement("i");ic.className="ic";ic.style.backgroundImage=noteIcon(k);
+ el.appendChild(ic);el.appendChild(document.createTextNode(txt));box.appendChild(el);
+ toastFit(el);toasts.push({el,txt,t:dur});
+ while(toasts.length>TOAST_MAX){const o=toasts.shift();o.el.remove()}
+}
+// tenta caber em UMA linha: se faltar espaço, a letra diminui (até 60%); só então quebra a linha
+function toastFit(el){
+ const pf=el.parentElement.parentElement,avail=pf.clientWidth-(matchMedia("(max-width:760px)").matches?96:104);
+ el.style.fontSize="";const base=parseFloat(getComputedStyle(el).fontSize)||12,nat=el.scrollWidth;
+ if(avail>0&&nat>avail){const r=avail/nat;if(r>=.6)el.style.fontSize=(base*r*.97).toFixed(2)+"px";else el.style.whiteSpace="normal"}
+}
+function toastTick(dt){
+ for(let i=toasts.length-1;i>=0;i--){const x=toasts[i];x.t-=dt;if(x.t<=0){x.el.remove();toasts.splice(i,1)}else if(x.t<.5)x.el.classList.add("out")}
+}
 function sayMine(m){sayK("mine",m)}
 function sayFish(m){sayK("fish",m)}
 function sayGold(m){sayK("gold",m)}
@@ -1355,29 +1392,29 @@ const fmtLight=(l,v)=>__("{0} blocos",ndec((l*v).toFixed(1)));
 // n e d: o nome é um getter e a descrição uma função, ambos traduzidos na hora de exibir (g = grupo, traduzido pelo painel)
 const UPS={
  sharp:{g:"Picareta",get n(){return __("Afiar picareta")},d:l=>__("+12% de dano da picareta por nível"),...BAL.ups.sharp},
- speed:{g:"Picareta",get n(){return __("Velocidade de escavação")},d:l=>__("+5% de velocidade ao segurar a escavação por nível"),...BAL.ups.speed},
- crit:{g:"Picareta",get n(){return __("Chance de golpe crítico")},d:l=>__("+{0}% de chance de golpe crítico (dano x3) por nível, até {1}%",Math.round(BAL.critPer*100),Math.round(BAL.critMax*100)),...BAL.ups.crit},
+ speed:{g:"Picareta",get n(){return __("Velocidade de escavação")},d:l=>__("+5% de velocidade de escavação por nível"),...BAL.ups.speed},
+ crit:{g:"Picareta",get n(){return __("Chance de golpe crítico")},d:l=>__("+{0}% de chance de crítico (dano x3) por nível, até {1}%",Math.round(BAL.critPer*100),Math.round(BAL.critMax*100)),...BAL.ups.crit},
  emax:{g:"Energia",get n(){return __("Energia máxima")},d:l=>__("+30 de energia máxima por nível"),...BAL.ups.emax},
- eco:{g:"Energia",get n(){return __("Economia de energia")},d:l=>__("-5% de gasto de energia ao cavar e voar por nível (cumulativo: cada nível multiplica por 0,95). Gasto atual: {0}%",Math.round(Math.pow(1-BAL.ecoPer,l)*100)),...BAL.ups.eco},
- jet:{g:"Energia",get n(){return __("Eficiência da mochila a jato")},d:l=>__("-5% da energia gasta ao subir com o jato por nível (cumulativo). Gasto atual: {0}%",Math.round(Math.pow(1-BAL.jetPer,l)*100)),...BAL.ups.jet},
- jetspd:{g:"Energia",get n(){return __("Velocidade da mochila a jato")},d:l=>__("+10% de velocidade ao subir com o jato por nível (subir continua gastando energia)"),...BAL.ups.jetspd},
- lavares:{g:"Energia",get n(){return __("Resistência à lava")},d:l=>l<BAL.ups.lavares.max?__("-10% do dano da lava por nível (cumulativo). Lava aqui: {0}% do dano normal (próximo nível: {1}%)",Math.round(Math.pow(1-BAL.lava.res,l)*100),Math.round(Math.pow(1-BAL.lava.res,l+1)*100)):__("-10% do dano da lava por nível (cumulativo). Lava aqui: {0}% do dano normal",Math.round(Math.pow(1-BAL.lava.res,l)*100)),...BAL.ups.lavares},
- auto:{g:"Escavação automática",get n(){return __("Escavação automática")},d:l=>__("Quebra sozinho o bloco à frente com +0,25 golpe por segundo por nível. Gasta metade da energia, mas é mais fraco que cavar manualmente"),...BAL.ups.auto},
+ eco:{g:"Energia",get n(){return __("Economia de energia")},d:l=>__("-5% de gasto de energia por nível (cumulativo). Gasto atual: {0}%",Math.round(Math.pow(1-BAL.ecoPer,l)*100)),...BAL.ups.eco},
+ jet:{g:"Energia",get n(){return __("Eficiência da mochila a jato")},d:l=>__("-5% de energia gasta no jato por nível (cumulativo). Gasto atual: {0}%",Math.round(Math.pow(1-BAL.jetPer,l)*100)),...BAL.ups.jet},
+ jetspd:{g:"Energia",get n(){return __("Velocidade da mochila a jato")},d:l=>__("+10% de velocidade do jato por nível"),...BAL.ups.jetspd},
+ lavares:{g:"Energia",get n(){return __("Resistência à lava")},d:l=>l<BAL.ups.lavares.max?__("-10% do dano da lava por nível. Agora: {0}% (próximo: {1}%)",Math.round(Math.pow(1-BAL.lava.res,l)*100),Math.round(Math.pow(1-BAL.lava.res,l+1)*100)):__("-10% do dano da lava por nível. Agora: {0}%",Math.round(Math.pow(1-BAL.lava.res,l)*100)),...BAL.ups.lavares},
+ auto:{g:"Escavação automática",get n(){return __("Escavação automática")},d:l=>__("Quebra o bloco à frente sozinho: +0,25 golpe/s por nível. Gasta metade da energia, mas é mais fraco"),...BAL.ups.auto},
  autopow:{g:"Escavação automática",get n(){return __("Força da escavação automática")},d:l=>__("+10% de dano dos golpes automáticos por nível"),...BAL.ups.autopow},
  luck:{g:"Sorte e experiência",get n(){return __("Sorte para ouro e minérios")},d:l=>__("+12% de ouro e +2% de chance de minério por nível"),...BAL.ups.luck},
  xp:{g:"Sorte e experiência",get n(){return __("Ganho de experiência")},d:l=>__("+10% de experiência por nível"),...BAL.ups.xp},
- duration:{g:"Habilidades",get n(){return __("Duração das habilidades")},d:l=>__("+5% de duração da Fúria e da Escavação Frenética por nível"),...BAL.ups.duration},
- furia:{g:"Habilidades",get n(){return __("Potência da Fúria do Minerador")},d:l=>{const a=fmtN(BAL.skills.fury.mult+BAL.skills.fury.per*l),cd=BAL.skills.fury.cd;return l<BAL.ups.furia.max?__("Dano da Fúria: x{0} (próximo nível: x{1}). Recarga: {2} s",a,fmtN(BAL.skills.fury.mult+BAL.skills.fury.per*(l+1)),cd):__("Dano da Fúria: x{0}. Recarga: {1} s",a,cd)},...BAL.ups.furia},
- frenesi:{g:"Habilidades",get n(){return __("Potência da Escavação Frenética")},d:l=>{const a=fmtN(BAL.skills.frenzy.mult+BAL.skills.frenzy.per*l),cd=BAL.skills.frenzy.cd;return l<BAL.ups.frenesi.max?__("Velocidade da Frenética: x{0} (próximo nível: x{1}). Recarga: {2} s",a,fmtN(BAL.skills.frenzy.mult+BAL.skills.frenzy.per*(l+1)),cd):__("Velocidade da Frenética: x{0}. Recarga: {1} s",a,cd)},...BAL.ups.frenesi},
- lant:{g:"Habilidades",get n(){return __("Lanterna")},d:l=>l<BAL.ups.lant.max?__("Um pouco mais de luz na escuridão. Luz extra: {0} (próximo nível: {1})",fmtLight(l,BAL.lant.light),fmtLight(l+1,BAL.lant.light)):__("Um pouco mais de luz na escuridão. Luz extra: {0}",fmtLight(l,BAL.lant.light)),...BAL.ups.lant},
- pet:{g:"Habilidades",get n(){return __("Vagalume companheiro")},d:l=>l<BAL.ups.pet.max?__("Um vagalume te segue e ilumina o escuro. Luz extra: {0} (próximo nível: {1})",fmtLight(l,BAL.pet.light),fmtLight(l+1,BAL.pet.light)):__("Um vagalume te segue e ilumina o escuro. Luz extra: {0}",fmtLight(l,BAL.pet.light)),...BAL.ups.pet},
- furn:{g:"Fornalha",get n(){return __("Velocidade da fornalha")},d:l=>l<BAL.ups.furn.max?__("Refina {0} minérios por segundo (próximo nível: {1}). O refinado vale +{2}% de ouro",ndec(furRate(l).toFixed(2)),ndec(furRate(l+1).toFixed(2)),Math.round(BAL.furnace.bonus*100)):__("Refina {0} minérios por segundo. O refinado vale +{1}% de ouro",ndec(furRate(l).toFixed(2)),Math.round(BAL.furnace.bonus*100)),...BAL.ups.furn},
- fort:{g:"Sorte e experiência",get n(){return __("Melhoria de minérios")},d:l=>{const ch=Math.round(fortPct(l)),ex=Math.max(1,Math.ceil(l/2));return l<BAL.ups.fort.max?__("Minérios têm {0}% de chance de render unidades extras (+1 a +{1}). Próximo nível: {2}%",ch,ex,Math.round(fortPct(l+1))):__("Minérios têm {0}% de chance de render unidades extras (+1 a +{1})",ch,ex)},...BAL.ups.fort},
- rod:{g:"Pesca",get n(){return __("Vara de pesca")},d:l=>l<BAL.ups.rod.max?__("Zona verde do minijogo da pesca: {0}% da pista (próximo nível: {1}%)",Math.round(rodZone(l)/BAL.fish.bar.h*100),Math.round(rodZone(l+1)/BAL.fish.bar.h*100)):__("Zona verde do minijogo da pesca: {0}% da pista",Math.round(rodZone(l)/BAL.fish.bar.h*100)),...BAL.ups.rod},
- bait:{g:"Pesca",get n(){return __("Isca")},d:l=>l<BAL.ups.bait.max?__("O peixe morde {0}% mais rápido e peixes raros aparecem {1}% mais (próximo nível: {2}% e {3}%)",Math.round((1-baitBite(l))*100),Math.round((baitRare(l)-1)*100),Math.round((1-baitBite(l+1))*100),Math.round((baitRare(l+1)-1)*100)):__("O peixe morde {0}% mais rápido e peixes raros aparecem {1}% mais",Math.round((1-baitBite(l))*100),Math.round((baitRare(l)-1)*100)),...BAL.ups.bait},
- back:{g:"Energia",get n(){return __("Medidor de retorno")},d:l=>l<1?__("Marca na barra de energia a reserva para subir de volta à superfície e a faz brilhar e pulsar (com som) quando a energia fica apertada. Compra única"):__("Medidor de retorno comprado: a barra de energia mostra a reserva para voltar e avisa quando ela fica apertada"),...BAL.ups.back},
- clock:{g:"Utilidades",get n(){return __("Relógio")},d:l=>l<1?__("Mostra na barra do topo um relógio de sol e lua com a hora do dia (o dia dura {0} min)",Math.round(BAL.day.len/60)):__("Relógio comprado: veja a hora do dia na barra do topo (passe o mouse para ver o período)"),...BAL.ups.clock},
- tele:{g:"Habilidades",get n(){return __("Teleporte")},d:l=>{const c=Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*l);return l<1?__("Desbloqueia o teleporte: leva ao baú sem gastar energia e, usado na superfície, volta ao ponto de onde saiu"):l<BAL.ups.tele.max?__("Recarga do teleporte: {0} s ({1} s no próximo nível)",c,Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*(l+1))):__("Recarga do teleporte: {0} s",c)},...BAL.ups.tele}
+ duration:{g:"Habilidades",get n(){return __("Duração das habilidades")},d:l=>__("+5% de duração da Fúria e da Frenética por nível"),...BAL.ups.duration},
+ furia:{g:"Habilidades",get n(){return __("Potência da Fúria do Minerador")},d:l=>{const a=fmtN(BAL.skills.fury.mult+BAL.skills.fury.per*l),cd=BAL.skills.fury.cd;return l<BAL.ups.furia.max?__("Dano: x{0} (próximo: x{1}). Recarga: {2} s",a,fmtN(BAL.skills.fury.mult+BAL.skills.fury.per*(l+1)),cd):__("Dano: x{0}. Recarga: {1} s",a,cd)},...BAL.ups.furia},
+ frenesi:{g:"Habilidades",get n(){return __("Potência da Escavação Frenética")},d:l=>{const a=fmtN(BAL.skills.frenzy.mult+BAL.skills.frenzy.per*l),cd=BAL.skills.frenzy.cd;return l<BAL.ups.frenesi.max?__("Velocidade: x{0} (próximo: x{1}). Recarga: {2} s",a,fmtN(BAL.skills.frenzy.mult+BAL.skills.frenzy.per*(l+1)),cd):__("Velocidade: x{0}. Recarga: {1} s",a,cd)},...BAL.ups.frenesi},
+ lant:{g:"Habilidades",get n(){return __("Lanterna")},d:l=>l<BAL.ups.lant.max?__("Mais luz no escuro: {0} (próximo: {1})",fmtLight(l,BAL.lant.light),fmtLight(l+1,BAL.lant.light)):__("Mais luz no escuro: {0}",fmtLight(l,BAL.lant.light)),...BAL.ups.lant},
+ pet:{g:"Habilidades",get n(){return __("Vagalume companheiro")},d:l=>l<BAL.ups.pet.max?__("Vagalume que ilumina o escuro: {0} (próximo: {1})",fmtLight(l,BAL.pet.light),fmtLight(l+1,BAL.pet.light)):__("Vagalume que ilumina o escuro: {0}",fmtLight(l,BAL.pet.light)),...BAL.ups.pet},
+ furn:{g:"Fornalha",get n(){return __("Velocidade da fornalha")},d:l=>l<BAL.ups.furn.max?__("Refina {0} minérios/s (próximo: {1}). Refinado vale +{2}% de ouro",ndec(furRate(l).toFixed(2)),ndec(furRate(l+1).toFixed(2)),Math.round(BAL.furnace.bonus*100)):__("Refina {0} minérios/s. Refinado vale +{1}% de ouro",ndec(furRate(l).toFixed(2)),Math.round(BAL.furnace.bonus*100)),...BAL.ups.furn},
+ fort:{g:"Sorte e experiência",get n(){return __("Melhoria de minérios")},d:l=>{const ch=Math.round(fortPct(l)),ex=Math.max(1,Math.ceil(l/2));return l<BAL.ups.fort.max?__("{0}% de chance de minério render extras (+1 a +{1}). Próximo: {2}%",ch,ex,Math.round(fortPct(l+1))):__("{0}% de chance de minério render extras (+1 a +{1})",ch,ex)},...BAL.ups.fort},
+ rod:{g:"Pesca",get n(){return __("Vara de pesca")},d:l=>l<BAL.ups.rod.max?__("Zona verde da pesca: {0}% da pista (próximo: {1}%)",Math.round(rodZone(l)/BAL.fish.bar.h*100),Math.round(rodZone(l+1)/BAL.fish.bar.h*100)):__("Zona verde da pesca: {0}% da pista",Math.round(rodZone(l)/BAL.fish.bar.h*100)),...BAL.ups.rod},
+ bait:{g:"Pesca",get n(){return __("Isca")},d:l=>l<BAL.ups.bait.max?__("Peixe morde {0}% mais rápido; raros {1}% mais (próximo: {2}% e {3}%)",Math.round((1-baitBite(l))*100),Math.round((baitRare(l)-1)*100),Math.round((1-baitBite(l+1))*100),Math.round((baitRare(l+1)-1)*100)):__("Peixe morde {0}% mais rápido; raros {1}% mais",Math.round((1-baitBite(l))*100),Math.round((baitRare(l)-1)*100)),...BAL.ups.bait},
+ back:{g:"Energia",get n(){return __("Medidor de retorno")},d:l=>l<1?__("Marca na barra de energia a reserva para voltar e pulsa quando fica apertada. Compra única"):__("Comprado: a barra mostra a reserva para voltar e avisa quando fica apertada"),...BAL.ups.back},
+ clock:{g:"Utilidades",get n(){return __("Relógio")},d:l=>l<1?__("Relógio de sol e lua na barra do topo (o dia dura {0} min)",Math.round(BAL.day.len/60)):__("Comprado: hora do dia na barra do topo (passe o mouse para ver o período)"),...BAL.ups.clock},
+ tele:{g:"Habilidades",get n(){return __("Teleporte")},d:l=>{const c=Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*l);return l<1?__("Teleporte ao baú sem gastar energia; na superfície, volta de onde saiu"):l<BAL.ups.tele.max?__("Recarga: {0} s ({1} s no próximo)",c,Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*(l+1))):__("Recarga: {0} s",c)},...BAL.ups.tele}
 };
 function buy(k){
  if(!nearBench()||!isUnl("ups",k))return;
@@ -1426,7 +1463,6 @@ const nearShop=()=>onGround()&&Math.abs(S.mc-SHOP_C)<=1;
 const nearKeeper=()=>onGround()&&Math.abs(S.mc-KEEPER_C)<=1.3;   // perto do Izans (vender peixes)
 const JET_FLAME=.3;
 function spend(n){if(S.debug||S.depth<=0)return;S.en-=n;if(lowEnPulse<=0&&S.en<maxEn()*.25)lowEnPulse=1;if(S.en<=0){S.en=0;die()}}
-function bagCount(){return S.bag.n}
 let deathLock=0;
 function showDeath(info){
  if(modal)return;                                   // não atropela outra janela aberta
@@ -1718,9 +1754,20 @@ function weatherSet(k){
  wx.cur=k;const d=BAL.weather.dur[k];wx.left=d[0]+Math.random()*(d[1]-d[0]);
  wx.nextBolt=BAL.weather.boltGap[0]+Math.random()*(BAL.weather.boltGap[1]-BAL.weather.boltGap[0]);
 }
-function thunderSfx(){
+function thunderSfx(k){   // 3 tipos de trovão, conforme a distância do raio: 0 = perto (estalo seco + estrondo), 1 = médio (rolando em ondas), 2 = longe (surdo e demorado)
  const v=skyVis();if(mute||S.vol.s<=0||v<=0||!actx)return;
- try{const t=actx.currentTime,s=S.vol.s*v;nz(t,"lowpass",650,.6,.05*s,1.8,110);tn(t,"sine",75,34,.04*s,1.3)}catch(e){}
+ try{const t=actx.currentTime,s=S.vol.s*v;
+  if(k===0){
+   nz(t,"bandpass",2600,.7,.15*s,.22,500);nz(t+.02,"lowpass",1500,.5,.12*s,.9,220);   // estalo
+   nz(t+.12,"lowpass",430,.6,.14*s,2.6,70);tn(t,"sine",90,32,.1*s,1.8);               // estrondo
+   nz(t+.9,"lowpass",300,.6,.07*s,2.2,60);                                            // eco nas montanhas
+  }else if(k===1){
+   for(let i=0;i<4;i++)nz(t+i*(.35+Math.random()*.3),"lowpass",520-i*70,.6,(.1-i*.016)*s,1.4+Math.random()*.8,90);
+   tn(t,"sine",70,30,.08*s,2.4);
+  }else{
+   nz(t,"lowpass",300,.5,.07*s,3.4,55);nz(t+1.1,"lowpass",240,.5,.05*s,2.6,50);tn(t,"sine",58,28,.05*s,3);
+  }
+ }catch(e){}
 }
 function rainBed(){   // chiado contínuo de chuva e vento (ruído filtrado em laço), com volume que acompanha o tempo
  if(!actx)return;
@@ -1744,8 +1791,8 @@ function weatherTick(dt){
   wx.bolt=Math.max(0,wx.bolt-dt*4);
   if(wx.cur==="storm"&&wx.rain>.7){wx.nextBolt-=dt;if(wx.nextBolt<=0){   // raio: clarão no céu e, um pouco depois, o trovão
    wx.bolt=1;wx.boltX=.15+Math.random()*.7;wx.boltJ=Array.from({length:9},()=>(Math.random()-.5)*.09);
-   wx.nextBolt=BAL.weather.boltGap[0]+Math.random()*(BAL.weather.boltGap[1]-BAL.weather.boltGap[0]);wx.thunder.push(.3+Math.random()*1.5)}}
-  for(let i=wx.thunder.length-1;i>=0;i--){wx.thunder[i]-=dt;if(wx.thunder[i]<=0){wx.thunder.splice(i,1);thunderSfx()}}
+   wx.nextBolt=BAL.weather.boltGap[0]+Math.random()*(BAL.weather.boltGap[1]-BAL.weather.boltGap[0]);{const d=.2+Math.random()*3;wx.thunder.push({t:d,k:d<.9?0:d<2?1:2})}}}
+  for(let i=wx.thunder.length-1;i>=0;i--){const th=wx.thunder[i];th.t-=dt;if(th.t<=0){wx.thunder.splice(i,1);thunderSfx(th.k)}}
  }
  rainBed();
 }
@@ -2163,7 +2210,7 @@ function chDraw(dt){
 const FISH_BY={};for(const f of FISH)FISH_BY[f.id]=f;
 const JUNK=[N_("Bota velha"),N_("Alga"),N_("Lata enferrujada")];
 // Onde dá para pescar: perto do riacho (inclui a ponte) ou no fim da praia, junto ao trapiche
-const fishSpot=()=>{if(S.depth!==0)return null;const c=S.mc;if(c>=RIVER_C0-2&&c<=RIVER_C1+2)return"r";if(c>=SURF_R-3)return"s";return null};
+const fishSpot=()=>{if(S.depth!==0)return null;const c=S.mc;if((c>=RIVER_C0-2&&c<=RIVER_C1+2)||(c>=FRIV_C0-2&&c<=FRIV_C1+2))return"r";if(c>=SURF_R-3)return"s";return null};
 const rainy=()=>wx.cur==="rain"||wx.cur==="storm";
 const rodZone=l=>Math.min(BAL.fish.bar.h*.6,BAL.fish.bar.base+BAL.fish.bar.per*l);   // altura da zona verde (px da pista)
 const baitBite=l=>Math.max(.3,1-BAL.fish.baitCut*l);                                  // multiplicador do tempo de espera
@@ -2202,14 +2249,15 @@ function fishHit(px,py){   // clique do mouse sobre a água (riacho ou mar/trapi
  if(!fishSpot())return false;
  const y=rowY(0);if(py<y-T*2.6||py>y+T*1.6)return false;
  const c=camX+(px-W/2)/T;
- return(c>=RIVER_C0-.5&&c<=RIVER_C1+.5)||c>=PIER_C-1.2;
+ return(c>=RIVER_C0-.5&&c<=RIVER_C1+.5)||(c>=FRIV_C0-.5&&c<=FRIV_C1+.5)||c>=PIER_C-1.2;
 }
 // Coluna da água onde a boia cai e para que lado o personagem olha
 function fishAim(p){
  const m=S.mc;let d=S.dir==="left"?-1:1,tc;
  if(p==="r"){
-  if(m<RIVER_C0)d=1;else if(m>RIVER_C1)d=-1;
-  tc=clamp(m+d*3,RIVER_C0,RIVER_C1);
+  const[R0,R1]=riverOf(m);
+  if(m<R0)d=1;else if(m>R1)d=-1;
+  tc=clamp(m+d*3,R0,R1);
  }else{
   d=1;tc=Math.min(Math.max(SURF_R+2.2,m+4,PIER_END_C+1.4),SURF_R+9);   // a boia cai sempre depois da ponta do trapiche
  }
@@ -2490,13 +2538,12 @@ function tocarCenoura(){
  closeModal();openBottom()}
 
 // ===== 3-mundo/00-camera.js — Canvas, câmera, zoom limitado ao mundo e conversão de coordenadas =====
-const cv=$("cv"),ctx=cv.getContext("2d");
+const cv=$("cv");let ctx=cv.getContext("2d");   // let: 5-desenho/00b-cache.js troca o ctx por um instante para pré-renderizar camadas
 let W=0,H=0,T=44,dpr=1,worldZoom=1,zoomPreference=1;
 const SURF=.3;                                   // fração da altura onde fica a superfície
 const baseTile=()=>W<500?36:44;
 const zoomMin=()=>W/(COLS+2)/baseTile();          // zoom normal mínimo: o mundo da mina cabe na tela
 const zoomMax=()=>Math.max(2.2,zoomMin()*1.8);
-const zoomSurfaceMin=()=>W/(SURF_R-SURF_L+PAD_L+PAD_R+2)/baseTile(); // mínimo para mostrar toda a extensão da superfície
 function surfaceZoomTarget(){
  if(fs)return Math.max(zoomPreference,Math.min(3.2,W/(baseTile()*9),H/(baseTile()*7)));   // pescando: zoom in na água (suave, como o resto)
  if(S.depth>0)return zoomPreference;
@@ -2511,7 +2558,6 @@ resize();
 const rowY=r=>H*SURF+(r-camY)*T;
 const colX=c=>W/2+(c-camX)*T;                    // centro da coluna na tela
 const blockXY=(c,r)=>({x:colX(c),y:rowY(r)});
-const shopXY=()=>({x:colX(SHOP_C),y:rowY(0)});
 const chestXY=()=>({x:colX(CHEST_C),y:rowY(0)});
 // Limites do centro da câmera: o mundo (HALF) no subsolo e, SÓ na superfície (profundidade 0), o cenário todo (SURF_L..SURF_R mais PAD_L/PAD_R).
 // Os limites vão de um para o outro devagar (camLo/camHi), cada um em direção ao seu alvo: nunca se cruzam nem puxam a câmera para o lado, então descer ou subir não faz a tela balançar.
@@ -2676,7 +2722,7 @@ function breakPrimary(tc,tr,auto,crit){
 function hit(dmg,crit,auto){
  const[a,b]=tgt();
  if(isDug(a,b))return;
- if(!canBreak(a,b)){S.prog=0;if(isVein(a,b)&&!auto){hitSfx("hard",b);if(toastT<=0)sayWarn(__("Pedra dura: só quebra com dinamite"))}return}
+ if(!canBreak(a,b)){S.prog=0;if(isVein(a,b)&&!auto){hitSfx("hard",b);{const m=__("Pedra dura: use dinamite");if(!toastHas(m))sayWarn(m)}}return}
  const d0=S.deaths;
  if(!auto||Math.random()<.04)swing=1;
  if(!auto)hitSfx(blockKind(a,b),b);
@@ -2731,7 +2777,8 @@ function setLayerText(txt,kind){
 }
 // ===== 4-interface/01-painel.js — Construção do painel (build) e atualização da interface (refresh), Renascer e apagar progresso =====
 const mk=(tag,cls,html)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e};
-const upBtn=(id,fn)=>{const b=mk("button","up",'<span class="n"></span><span class="d"></span><span class="c"></span><span class="k"></span>');b.id=id;b.onclick=fn;return b};
+const upBtn=(id,fn)=>{const b=mk("button","up",'<span class="n"></span><span class="d"></span><span class="c"></span><span class="k"></span><span class="lv"><b class="lt"></b><span class="pips"></span></span>');b.id=id;b.onclick=fn;return b};
+const SGROUPS=[N_("Dinamites"),N_("Comida de energia")];   // categorias da aba Loja
 const GROUPS=[N_("Picareta"),N_("Energia"),N_("Escavação automática"),N_("Sorte e experiência"),N_("Habilidades"),N_("Utilidades"),N_("Fornalha"),N_("Pesca")];
 function build(){
  const keepScroll=[...document.querySelectorAll(".pane")].map(p=>[p,p.scrollTop]);   // recriar a lista não pode jogar o scroll de volta para o topo ao comprar
@@ -2748,8 +2795,10 @@ function build(){
  const sh=$("shop");sh.innerHTML="";
  $("shopqty").innerHTML="";
  [[1,"x1"],[10,"x10"],[0,__("Máx")]].forEach(([v,t])=>{const b=mk("button",qty===v?"on":"",t);b.onclick=()=>{qty=v;build()};$("shopqty").appendChild(b)});
- sh.appendChild(mk("h2",null,__("Consumíveis")));
- for(const k in ITEMS)if(!ITEMS[k].noShop)sh.appendChild(upBtn("i-"+k,()=>buyItem(k)));
+ for(const g of SGROUPS){
+  {const h=mk("h2",null,__(g));h.dataset.g=g;sh.appendChild(h)}
+  for(const k in ITEMS)if(!ITEMS[k].noShop&&ITEMS[k].g===g)sh.appendChild(upBtn("i-"+k,()=>buyItem(k)));
+ }
  const sk=$("sks");sk.innerHTML="";
  for(const k in SK)sk.appendChild(upBtn("s-"+k,()=>{const l=S.sk[k];if(S.runs>0&&l<SK[k][2]&&S.pts>=l+1){S.pts-=l+1;S.sk[k]++;sfx(700,.12,"triangle");refresh()}}));
  refresh();
@@ -2758,16 +2807,26 @@ function build(){
 // Cor discreta por progresso da melhoria (igual para todas): 0 = sem cor · 1..4 = faixas de 25% · 5 = máximo
 const lvTier=(l,mx)=>l<=0?0:l>=mx?5:1+Math.min(3,Math.floor(l/mx*4));
 // Realce de "dá para comprar": número xN balançando ao lado do custo; a cor/intensidade sobe com a quantidade (1 · 2 a 9 · 10 ou mais)
-function afford(b,cnt){const a=cnt>0?(cnt>=10?3:cnt>=2?2:1):0,k=b.querySelector(".k");
+// Escreve no DOM só quando o valor muda (refresh() roda a cada ~150 ms e reescrevia ~100 textos iguais, invalidando o layout e forçando reflow no offsetHeight)
+const txSet=(e,v)=>{if(e.textContent!==v)e.textContent=v};
+function afford(b,cnt){const a=cnt>0?(cnt>=10?3:cnt>=2?2:1):0,k=b._k||(b._k=b.querySelector(".k"));
  if(k){const t=a?"x"+fmt(cnt):"";if(k.textContent!==t)k.textContent=t}
  b.classList.toggle("can",a>0);if(a){if(b.dataset.a!==String(a))b.dataset.a=a}else if(b.dataset.a)delete b.dataset.a;
  const tt=a?__("Você consegue comprar {0}x com o ouro que tem",fmt(cnt)):"";if(b.title!==tt)b.title=tt}
-function setTxt(id,n,d,c,dis,tier,cnt){const b=$(id);if(!b)return;if(tier!=null)b.dataset.t=tier;if(cnt!==undefined)afford(b,cnt);b.querySelector(".n").textContent=n;b.querySelector(".d").textContent=d;b.querySelector(".c").textContent=c;b.disabled=!!dis}
+// Linha de nível da melhoria: selo "Nv 3/10" (ou "MÁX") + uma barrinha por nível (barra contínua que enche conforme o nível). A cor vem do tier do botão (data-t).
+function setLv(b,l,mx){
+ const lv=b._lv||(b._lv=b.querySelector(".lv")),key=l+"/"+mx;b.classList.add("hl");
+ if(lv.dataset.k===key)return;lv.dataset.k=key;const p=lv.querySelector(".pips");
+ lv.querySelector(".lt").textContent=l>=mx?__("MÁX"):__("Nv {0}/{1}",l,mx);
+ p.classList.add("bar");p.style.setProperty("--p",(mx>0?Math.min(1,l/mx)*100:0)+"%");
+}
+function setTxt(id,n,d,c,dis,tier,cnt,lvl){const b=$(id);if(!b)return;if(lvl)setLv(b,lvl[0],lvl[1]);if(tier!=null&&b.dataset.t!==String(tier))b.dataset.t=tier;if(cnt!==undefined)afford(b,cnt);
+ const q=b._q||(b._q=[b.querySelector(".n"),b.querySelector(".d"),b.querySelector(".c")]);txSet(q[0],n);txSet(q[1],d);txSet(q[2],c);if(b.disabled!==!!dis)b.disabled=!!dis}
 function refresh(){
  const surf=atSurface(),shop=nearBench(),mE=maxEn();
- $("gold").textContent=fmt(S.gold);
- $("depth").textContent=fmt(Math.max(0,S.depth))+" m";$("best").textContent=fmt(S.best);$("depthbox").title=__("Recorde: {0} m",fmt(S.best));
- const er=clamp(S.en/mE,0,1);$("enfill").style.width=(er*100)+"%";$("ent").textContent=Math.ceil(S.en)+" / "+mE;$("enbox").classList.toggle("low",er<.25);
+ txSet($("gold"),fmt(S.gold));
+ txSet($("depth"),fmt(Math.max(0,S.depth))+" m");txSet($("best"),fmt(S.best));{const tt=__("Recorde: {0} m",fmt(S.best)),db=$("depthbox");if(db.title!==tt)db.title=tt}
+ const er=clamp(S.en/mE,0,1);$("enfill").style.width=(er*100)+"%";txSet($("ent"),Math.ceil(S.en)+" / "+mE);$("enbox").classList.toggle("low",er<.25);
  // medidor de retorno (melhoria da mesa): só efeitos na barra de energia (zonas, marca e brilho), sem textos nem números novos
  const rs=returnState(),rc=returnCost(),own=S.lv.back>0&&S.depth>0&&!S.debug,eb=$("enbox");
  eb.classList.toggle("ret",own);eb.classList.toggle("tight",rs===1);eb.classList.toggle("danger",rs===2);
@@ -2778,32 +2837,35 @@ function refresh(){
  retSeen=rs;
  barUI();
  refreshBagPop();
- $("lv").textContent=S.lvl;const xpGoal=xpNeed(S.lvl),xr=clamp(S.xp/xpGoal,0,1);$("xpt").textContent=fmt(S.xp)+" / "+fmt(xpGoal)+" XP";$("xpi").style.width=(xr*100)+"%";$("xpbar").style.setProperty("--xp-brightness",1+xr*.65);$("xpbar").style.setProperty("--xp-glow",(4+xr*18)+"px");$("xpbar").classList.toggle("xp-near",xr>=.8);$("xpbar").setAttribute("aria-valuenow",Math.round(xr*100));
- $("pts").textContent=S.pts;
- setLayerText(toastT>0?toast:(surf?__("Superfície · melhorias liberadas · {0}",WX[wx.cur].n):layerName(S.depth)+(S.depth>=FINAL_DEPTH?" · "+__("INQUEBRÁVEL"):""))+(ev>0?"  "+(evT?__("Minérios x3"):__("Ouro x3"))+" "+Math.ceil(ev)+"s":""),toastT>0?toastK:(surf?"weather":"mine"));
- $("layer").title=$("layer").textContent;
- $("surfmsg").textContent=!surf?__("Melhorias só na superfície. Suba (ou use o teleporte) para comprar."):shop?__("Na mesa de trabalho: você pode melhorar o equipamento. Venda os itens no baú (clique nele)."):__("Vá até a mesa de trabalho (à esquerda do buraco) para comprar melhorias.");
+ txSet($("lv"),String(S.lvl));const xpGoal=xpNeed(S.lvl),xr=clamp(S.xp/xpGoal,0,1);txSet($("xpt"),fmt(S.xp)+" / "+fmt(xpGoal)+" XP");$("xpi").style.width=(xr*100)+"%";$("xpbar").style.setProperty("--xp-brightness",1+xr*.65);$("xpbar").style.setProperty("--xp-glow",(4+xr*18)+"px");$("xpbar").classList.toggle("xp-near",xr>=.8);$("xpbar").setAttribute("aria-valuenow",Math.round(xr*100));
+ txSet($("pts"),String(S.pts));
+ setLayerText((surf?__("Superfície · melhorias liberadas · {0}",WX[wx.cur].n):layerName(S.depth)+(S.depth>=FINAL_DEPTH?" · "+__("INQUEBRÁVEL"):""))+(ev>0?"  "+(evT?__("Minérios x3"):__("Ouro x3"))+" "+Math.ceil(ev)+"s":""),surf?"weather":"mine");
+ $("toasts").style.top=($("layer").offsetHeight+14)+"px";
+ {const l=$("layer"),tt=l.textContent;if(l.title!==tt)l.title=tt}
+ txSet($("surfmsg"),!surf?__("Melhorias só na superfície. Suba (ou use o teleporte) para comprar."):"");{const d=surf?"none":"";if($("surfmsg").style.display!==d)$("surfmsg").style.display=d}   // só o aviso no subsolo: na superfície a aba não traz texto de ajuda
  $("surfmsg").classList.toggle("warn",!shop);
- const nshop=nearShop();$("shopmsg").textContent=!surf?__("A loja fica na superfície. Suba (ou use o teleporte) para comprar."):nshop?__("Na loja: compre dinamite e comida de energia. Os itens de energia ficam na barra, ao lado das habilidades (clique para usar)."):__("Vá até a loja (à direita do baú) para comprar.");
+ const nshop=nearShop();txSet($("shopmsg"),!surf?__("A loja fica na superfície. Suba (ou use o teleporte) para comprar."):nshop?__("Na loja: compre dinamite e comida de energia. Os itens de energia ficam na barra, ao lado das habilidades (clique para usar)."):__("Vá até a loja (à direita do baú) para comprar."));
  $("shopmsg").classList.toggle("warn",!nshop);
  for(const k in ITEMS){if(ITEMS[k].noShop)continue;const c=itemCost(k),mx=have(k)>=99;setTxt("i-"+k,__("{0} · você tem {1}",ITEMS[k].n,have(k)),ITEMS[k].d+(ITEMS[k].en?"":" "+__("(preço sobe a cada camada alcançada)")),mx?__("MÁX"):fmt(c),mx||!nshop||S.gold<c,undefined,mx?0:affordItem(k))}
- if($("furmsg")){const f=S.fur;$("furmsg").textContent=f.n>0?__("Fornalha: {0} minérios na fila · pronta em {1}. Pode ir cavar: ela vende sozinha.",f.n,fmtT(furEta())):__("A fornalha fica à esquerda do buraco. Fique ao lado dela e clique nela para pôr os minérios da mochila: ela refina com o tempo e vende sozinha (+{0}% de ouro). Pedra comum continua indo para o baú.",Math.round(BAL.furnace.bonus*100))}
- $("skmsg").textContent=S.runs<1?__("Os poderes só podem ser comprados depois de Renascer pela primeira vez. Os fragmentos vêm do Renascer e, às vezes, dos baús raros do subsolo."):__("Fragmentos disponíveis: {0} (vêm do Renascer e dos baús raros).",S.pts);
- $("b-snd").textContent=mute?__("Som: desligado"):__("Som: ligado");
+ if($("furmsg")){const f=S.fur;txSet($("furmsg"),f.n>0?__("Fornalha: {0} minérios na fila · pronta em {1}. Pode ir cavar: ela vende sozinha.",f.n,fmtT(furEta())):__("Refina os minérios com o tempo e vende sozinha (+{0}% de ouro). Pedra comum vai para o baú.",Math.round(BAL.furnace.bonus*100)))}
+ txSet($("skmsg"),S.runs<1?__("Os poderes só podem ser comprados depois de Renascer pela primeira vez. Os fragmentos vêm do Renascer e, às vezes, dos baús raros do subsolo."):__("Fragmentos disponíveis: {0} (vêm do Renascer e dos baús raros).",S.pts));
+ txSet($("b-snd"),mute?__("Som: desligado"):__("Som: ligado"));
  // picareta (material)
- if(S.tier>=TIERS.length-1)setTxt("u-tier",__("Picareta de {0}",__(TIERS[S.tier])),__("Melhor picareta do jogo (camada {0})",TIERS.length),__("MÁX"),true,5,0);
- else setTxt("u-tier",__("Nova picareta: {0}",__(TIERS[S.tier+1])),__("Dano x{0} (atual: {1}). Recomendada para a camada {2}",ndec(BAL.tier.dmgMult),__(TIERS[S.tier]),__(BIO[S.tier+1][0])),fmt(tierCost()),!shop||S.gold<tierCost(),lvTier(S.tier,TIERS.length-1),S.gold>=tierCost()?1:0);
- for(const k in UPS){const l=S.lv[k],mx=l>=UPS[k].max,c=upCost(k,l);setTxt("u-"+k,__("{0} · nv {1}/{2}",UPS[k].n,l,UPS[k].max),UPS[k].d(l),mx?__("MÁX"):fmt(c),mx||!shop||S.gold<c,lvTier(l,UPS[k].max),mx?0:affordUp(k))}
+ if(S.tier>=TIERS.length-1)setTxt("u-tier",__("Picareta de {0}",__(TIERS[S.tier])),__("Melhor picareta do jogo (camada {0})",TIERS.length),__("MÁX"),true,5,0,[S.tier,TIERS.length-1]);
+ else setTxt("u-tier",__("Nova picareta: {0}",__(TIERS[S.tier+1])),__("Dano x{0} (atual: {1}). Recomendada para a camada {2}",ndec(BAL.tier.dmgMult),__(TIERS[S.tier]),__(BIO[S.tier+1][0])),fmt(tierCost()),!shop||S.gold<tierCost(),lvTier(S.tier,TIERS.length-1),S.gold>=tierCost()?1:0,[S.tier,TIERS.length-1]);
+ for(const k in UPS){const l=S.lv[k],mx=l>=UPS[k].max,c=upCost(k,l);setTxt("u-"+k,UPS[k].n,UPS[k].d(l),mx?__("MÁX"):fmt(c),mx||!shop||S.gold<c,lvTier(l,UPS[k].max),mx?0:affordUp(k),[l,UPS[k].max])}
  {const vis={};   // liberação gradual: esconde o que ainda não foi liberado (e grupos que ficaram vazios)
   for(const k in UPS){const on=isUnl("ups",k),b=$("u-"+k);if(b){b.classList.toggle("lock",!on);if(!on)b.disabled=true}if(on)vis[UPS[k].g]=1}
   $("ups").querySelectorAll("[data-g]").forEach(e=>e.classList.toggle("lock",!(e.dataset.g==="Picareta"||vis[e.dataset.g])));
-  for(const k in ITEMS){if(ITEMS[k].noShop)continue;const on=isUnl("items",k),b=$("i-"+k);if(b){b.classList.toggle("lock",!on);if(!on)b.disabled=true}}
+  const visS={};   // idem na loja: a categoria só aparece se tiver algum item liberado
+  for(const k in ITEMS){if(ITEMS[k].noShop)continue;const on=isUnl("items",k),b=$("i-"+k);if(b){b.classList.toggle("lock",!on);if(!on)b.disabled=true}if(on)visS[ITEMS[k].g]=1}
+  $("shop").querySelectorAll("[data-g]").forEach(e=>e.classList.toggle("lock",!visS[e.dataset.g]));
   const nx=$("nextul");if(nx){const tx=nextUnlockText();nx.textContent=tx;nx.classList.toggle("lock",!tx)}}
- for(const k in SK){const l=S.sk[k],mx=l>=SK[k][2];setTxt("s-"+k,__("{0} · nv {1}",__(SK[k][0]),l),__(SK[k][1]),mx?__("MÁX"):__("{0} frag.",l+1),mx||S.pts<l+1||S.runs<1)}
+ for(const k in SK){const l=S.sk[k],mx=l>=SK[k][2];setTxt("s-"+k,__(SK[k][0]),__(SK[k][1]),mx?__("MÁX"):__("{0} frag.",l+1),mx||S.pts<l+1||S.runs<1,undefined,undefined,[l,SK[k][2]])}
  renderStats();clockUpdate();
  const g=prestGain();$("prest").disabled=(g<1&&!armed)||!surf;
- $("prestd").textContent=g<1?__("Chegue a 100 m nesta vida para ganhar fragmentos. Reinicia ouro, picareta e melhorias; mantém poderes, nível e conquistas"):__("Reinicia ouro, picareta e melhorias e ganha {0} fragmentos (1 por camada de 100 m alcançada nesta vida, +5 por chegar ao fundo)",g);
- $("prestc").textContent=armed?__("Confirmar?"):(g>0?__("+{0} fragmentos",g):"");
+ txSet($("prestd"),g<1?__("Chegue a 100 m nesta vida para ganhar fragmentos. Reinicia ouro, picareta e melhorias; mantém poderes, nível e conquistas"):__("Reinicia ouro, picareta e melhorias e ganha {0} fragmentos (1 por camada de 100 m alcançada nesta vida, +5 por chegar ao fundo)",g));
+ txSet($("prestc"),armed?__("Confirmar?"):(g>0?__("+{0} fragmentos",g):""));
  const t=document.querySelectorAll(".tabs button");
  if(t.length){t[0].classList.toggle("has",surf&&!!document.querySelector("#ups .up:not(:disabled)")&&(S.tab||0)!==0);t[2].classList.toggle("has",S.runs>0&&Object.keys(SK).some(k=>S.sk[k]<SK[k][2]&&S.pts>=S.sk[k]+1)&&(S.tab||0)!==2)}   // ponto na aba Poder só se dá para comprar algum poder
 }
@@ -2836,7 +2898,7 @@ $("prest").onclick=()=>{
 };
 function doRebirth(){   // Renascer (botão do painel, depois de confirmar, e janela de chegada ao fundo)
  gainGoldenCarrot();   // quem chegou ao fundo nesta vida e não tocou na cenoura (jogo reaberto lá embaixo) também ganha a dourada
- const keep={gc:S.gc,gcAt:S.gcAt,runs:S.runs+1,best:S.best,ach:S.ach,oc:S.oc,total:S.total,debug:S.debug,sk:S.sk,pts:S.pts+prestGain(),od:S.od,xp:S.xp,lvl:S.lvl,lvp:S.lvp,pk:S.pk,vol:S.vol,deaths:S.deaths,sold:S.sold,play:S.play,blocks:S.blocks,tab:S.tab,items:S.items,bombs:S.bombs,eaten:S.eaten,tps:S.tps,veins:S.veins,rich:S.rich,sleeps:S.sleeps,refined:S.refined,ctDone:S.ctDone,spins:S.spins,chests:S.chests,chTop:S.chTop,chT:S.chT,chGold:S.chGold,chFr:S.chFr,chPk:S.chPk,ptpUsed:S.ptpUsed,slotNet:S.slotNet,sea:S.sea,fb:S.fb,fdx:S.fdx,fishN:S.fishN,fishP:S.fishP,fishG:S.fishG,cookN:S.cookN,cookP:S.cookP};
+ const keep={gc:S.gc,gcAt:S.gcAt,runs:S.runs+1,best:S.best,ach:S.ach,oc:S.oc,total:S.total,debug:S.debug,sk:S.sk,pts:S.pts+prestGain(),od:S.od,xp:S.xp,lvl:S.lvl,lvp:S.lvp,pk:S.pk,vol:S.vol,deaths:S.deaths,sold:S.sold,play:S.play,blocks:S.blocks,tab:S.tab,items:S.items,bombs:S.bombs,eaten:S.eaten,tps:S.tps,veins:S.veins,rich:S.rich,sleeps:S.sleeps,refined:S.refined,ctDone:S.ctDone,spins:S.spins,chests:S.chests,chTop:S.chTop,chT:S.chT,chGold:S.chGold,chFr:S.chFr,chPk:S.chPk,ptpUsed:S.ptpUsed,slotNet:S.slotNet,sea:S.sea,moon:S.moon,fb:S.fb,fdx:S.fdx,fishN:S.fishN,fishP:S.fishP,fishG:S.fishG,cookN:S.cookN,cookP:S.cookP};
  const h=S.sk.her,ini=S.sk.ini,clk=S.lv.clock,bk=S.lv.back,rd=S.lv.rod,bt=S.lv.bait;S=Object.assign(fresh(),keep);S.lv.clock=clk;S.lv.back=bk;S.lv.rod=rd;S.lv.bait=bt;   // o relógio (compra única), a vara e a isca de pesca e a estação do ano não se perdem ao renascer
  S.seed=SEED=newSeed();chQ.length=0;carrotC=null;dug=new Set();mX=mY=camX=camY=0;layerSeen=0;
  S.tier=Math.min(ini,TIERS.length-1);S.gold=S.debug?Infinity:400*h*h;S.en=maxEn();build();save();sayLevel(__("Renascido! Fragmentos: {0}",S.pts));
@@ -3084,16 +3146,20 @@ function clockDraw(){
   g.fillStyle=c;g.fillRect(x,y,1,1);
  }
  const disc=(cx,cy,r,col,hi)=>{for(let y=0;y<22;y++)for(let x=0;x<22;x++){const q=Math.hypot(x+.5-cx,y+.5-cy);if(q<=r){g.fillStyle=hi&&q<r*.5?hi:col;g.fillRect(x,y,1,1)}}};
- const R=6.3,mx=11-sx*R,my=11-sy*R;
+ const R=6.3,mx=11-sx*R,my=11-sy*R,mp=moonP(),mr=2.3;
  disc(11+sx*R,11+sy*R,2.3,"#ffd45c","#fff3a0");   // sol
- disc(mx,my,2.1,"#e6ebf5");g.fillStyle="#a9b2c8";g.fillRect(Math.round(mx+.2),Math.round(my-1),1,1);g.fillRect(Math.round(mx-1),Math.round(my+.3),1,1);   // lua com crateras
+ for(let y=0;y<22;y++)for(let x=0;x<22;x++){   // lua com a fase atual: parte iluminada clara, parte escura apagada
+  const qx=x+.5-mx,qy=y+.5-my;if(Math.hypot(qx,qy)>mr)continue;
+  g.fillStyle=moonLit(qx/mr,qy/mr,mp)?"#e6ebf5":"#2c3458";g.fillRect(x,y,1,1);
+ }
+ if(moonLight(mp)>.55){g.fillStyle="#a9b2c8";g.fillRect(Math.round(mx+.2),Math.round(my-1),1,1);g.fillRect(Math.round(mx-1),Math.round(my+.3),1,1)}   // crateras (só com a lua bem iluminada)
 }
 function clockUpdate(){
  const own=S.lv.clock>0,box=$("clockbox");if(box.hidden===own)box.hidden=!own;
  if(!own)return;
- const t=clockHour(),txt=String(t.h).padStart(2,"0")+":"+String(t.m).padStart(2,"0"),key=txt+"|"+Math.round(dayT*2000);
+ const t=clockHour(),txt=String(t.h).padStart(2,"0")+":"+String(t.m).padStart(2,"0"),key=txt+"|"+Math.round(dayT*2000)+"|"+Math.round(moonP()*64);
  if(key===clkLast)return;clkLast=key;
- clockDraw();box.title=__("{0} · {1} (o sol aparece no alto ao meio-dia e a lua à meia-noite)",clockPeriod(),txt);
+ clockDraw();box.title=__("{0} · {1} · {2} (o sol aparece no alto ao meio-dia e a lua à meia-noite)",clockPeriod(),txt,moonName());
 }
 
 // ===== 4-interface/07-controle.js — Suporte a controle (Gamepad API: Xbox, PlayStation, Switch Pro e genéricos no layout padrão) =====
@@ -3361,7 +3427,62 @@ function sprCloud(i){
  if(i===1)return mkSpr("cl1",11,5,CLOUD_PAL,R=>{R(3,0,4,1,"h");R(1,1,8,1,"h");R(0,2,11,1,"w");R(1,3,9,1,"s");R(3,4,5,1,"u")});
  return mkSpr("cl2",22,6,CLOUD_PAL,R=>{R(6,0,4,1,"h");R(14,0,4,1,"h");R(3,1,16,1,"h");R(1,2,20,2,"w");R(2,4,18,1,"s");R(4,5,14,1,"u")});
 }
-function pixHills(sky,par,amp,col,hi,seed,ps){for(let x=0;x<W+ps;x+=ps){const wx=x+camX*T*par+seed,v=(Math.sin(wx*.006)*.5+Math.sin(wx*.0145+seed)*.3+Math.sin(wx*.031+1.7)*.2)*.5+.5,h=Math.max(ps,Math.round(v*amp/ps)*ps);ctx.fillStyle=col;ctx.fillRect(x,sky-h,ps,h);ctx.fillStyle=hi;ctx.fillRect(x,sky-h,ps,ps)}}
+// Colinas em degraus de pixel com parallax. As colunas são PRESAS À CAMADA (coluna k fica em k*ps, só desliza), pré-renderizadas numa faixa (00b-cache.js): idx = slot da faixa; night escurece as cores
+const _hills=[];
+function pixHills(idx,sky,par,amp,hexCol,hexHi,seed,ps,night){
+ const off=camX*T*par,hmax=Math.max(ps,Math.ceil(amp/ps)*ps),nq=Math.round(night*32)/32;
+ const s=stripFor(_hills[idx]||(_hills[idx]=bakeNew()),off,ps,hmax,ps+"|"+hmax+"|"+seed,nq+"|"+hexCol+"|"+hexHi,(k,x)=>{
+  const wx=k*ps+seed,v=(Math.sin(wx*.006)*.5+Math.sin(wx*.0145+seed)*.3+Math.sin(wx*.031+1.7)*.2)*.5+.5,h=Math.max(ps,Math.round(v*amp/ps)*ps);
+  ctx.fillStyle=nightCol(hexCol,nq);ctx.fillRect(x,hmax-h,ps,h);ctx.fillStyle=nightCol(hexHi,nq);ctx.fillRect(x,hmax-h,ps,ps)});
+ ctx.drawImage(s.cv,Math.round(s.c0*ps-off),Math.round(sky-hmax));
+}
+
+// ===== 5-desenho/00b-cache.js — Camadas pré-renderizadas ("bake"): peças que só deslizam com a câmera são desenhadas UMA vez num canvas e depois só copiadas =====
+// Cordilheiras, colinas e a parte fixa da forja custavam milhares de fillRect por quadro. Agora cada uma vive num canvas 1x (a pixel art tem coordenadas inteiras, então o
+// drawImage sem suavização, ampliado pelo dpr da tela, fica idêntico ao desenho direto) e só é refeita quando a forma muda (tamanho, zoom, semente) ou sai da área já pronta.
+// Mudança só de COR (estação do ano, escurecer da noite) pode esperar: no máximo `bakeBudget` camadas por quadro são refeitas por cor, o resto usa a versão anterior por instantes.
+let bakeBudget=1;
+const bakeNew=()=>({cv:null,gk:"",ck:"",c0:0,c1:0,x0:0,y0:0});
+// Desenha fn() no canvas do slot (w x h, coordenadas locais) trocando o ctx global por um instante; todo o código de desenho do jogo usa o ctx global
+function bakeOn(slot,w,h,fn){
+ w=Math.max(1,Math.ceil(w));h=Math.max(1,Math.ceil(h));
+ const c=slot.cv||(slot.cv=document.createElement("canvas"));
+ if(c.width!==w||c.height!==h){c.width=w;c.height=h}
+ const g=c.getContext("2d");g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,w,h);g.imageSmoothingEnabled=false;
+ const o=ctx;ctx=g;
+ try{fn()}finally{ctx=o}
+}
+// Faixa horizontal presa a uma camada com parallax: colunas de largura ps numeradas k (posição no mundo da camada = k*ps), altura hmax (a base fica embaixo).
+// paint(k, xLocal) desenha a coluna k com a base em y = hmax. Devolve o slot pronto; desenhe com ctx.drawImage(slot.cv, Math.round(slot.c0*ps-off), Math.round(sky-hmax)).
+function stripFor(slot,off,ps,hmax,gk,ck,paint){
+ const kA=Math.floor(off/ps)-1,kB=Math.ceil((off+W)/ps)+1;
+ const fit=slot.cv&&slot.gk===gk&&kA>=slot.c0&&kB<=slot.c1;
+ if(!fit||(slot.ck!==ck&&bakeBudget>0)){
+  if(fit)bakeBudget--;
+  const m=Math.ceil(W/ps/2),c0=kA-m,c1=kB+m;
+  bakeOn(slot,(c1-c0)*ps,hmax,()=>{for(let k=c0;k<c1;k++)paint(k,(k-c0)*ps)});
+  slot.gk=gk;slot.ck=ck;slot.c0=c0;slot.c1=c1;
+ }
+ return slot;
+}
+// Camada de fundo com câmera PRÓPRIA (o chamador já ajustou T e camX, como faz drawScenery): paint(y0, k) desenha as colunas da camada numa faixa 2x mais larga que a tela
+// (W é alargado por um instante, então colX() já cai no lugar certo) e depois só desliza: o deslocamento é a diferença da âncora colX(0) desde que a faixa foi feita.
+// id = slot · gk = chave da FORMA (tamanho, zoom, semente...) · ck = chave da COR (noite, inverno) · hc = altura máxima da camada · k = nightCol com a noite em passos de 1/32.
+const _bkSlots={},nq32=()=>Math.round(nightAmt()*32)/32;
+function bakedCols(id,gk,ck,hc,y0,paint){
+ const slot=_bkSlots[id]||(_bkSlots[id]=bakeNew()),m=Math.ceil(W*.5),xr=colX(0);
+ gk=W+"|"+H+"|"+T+"|"+hc+"|"+SEED+"|"+gk;
+ let dx=slot.cv&&slot.gk===gk?Math.round(xr-slot.x0-m):1;
+ const fit=dx<=0&&dx>=-2*m;   // a faixa ainda cobre a tela inteira?
+ if(!fit||(slot.ck!==ck&&bakeBudget>0)){
+  if(fit)bakeBudget--;
+  const W0=W,nq=nq32(),kq=hx=>nightCol(hx,nq);
+  slot.x0=xr;
+  bakeOn(slot,W0+2*m,hc,()=>{W=W0+2*m;try{paint(hc,kq)}finally{W=W0}});
+  slot.gk=gk;slot.ck=ck;dx=-m;
+ }
+ ctx.drawImage(slot.cv,dx,Math.round(y0-hc));
+}
 
 // ===== 5-desenho/01-cores-blocos.js — Cor de cada bloco por camada =====
 function blockColor(d,c,v){const B=BIO[layerOf(d)%BIO.length];return"hsl("+B[1]+","+B[2]+"%,"+(B[3]+(v||0)+((c+d)%2?1.5:0))+"%)"}
@@ -3377,7 +3498,7 @@ function skyLayers(sky,fn,tile){
  if(tile&&off>0){
   const step=Math.max(8,Math.round(sh*.62));
   ctx.save();ctx.beginPath();ctx.rect(0,0,W,off);ctx.clip();
-  for(let dy=off-step,k=1;dy+sh*.72>0;dy-=step,k++){ctx.save();ctx.translate(0,dy);fn(sh,k);ctx.restore()}
+  for(let dy=off-step,k=1;dy+sh*.72>0;dy-=step,k++){if(dy>=H)continue;ctx.save();ctx.translate(0,dy);fn(sh,k);ctx.restore()}   // faixas abaixo da tela não precisam ser desenhadas (no alto o horizonte fica bem abaixo)
   ctx.restore();
  }
 }
@@ -3415,8 +3536,8 @@ function drawSky(sky,t){
  skyLife(sky,t,scale,night,ps);   // pássaros, pipa, avião de papel e balão
  sceneRanges(sky,ps,night);   // cordilheiras ao fundo, em 3 camadas (5-desenho/11-cenario.js)
  // colinas distantes (azul-acinzentado) e próximas (verde escuro), em degraus de pixel, com parallax (altura fixa: não crescem quando se sobe)
- pixHills(sky,.03,skyH()*.2,nightCol(SEA.fh,night),nightCol(SEA.fhh,night),40,ps);   // as colinas escurecem de noite pela própria cor
- pixHills(sky,.08,skyH()*.11,nightCol(SEA.nh,night),nightCol(SEA.nhh,night),300,ps);   // as cores das colinas e da grama vêm da estação do ano (2-sistemas/07-estacoes.js)
+ pixHills(0,sky,.03,skyH()*.2,SEA.fh,SEA.fhh,40,ps,night);   // as colinas escurecem de noite pela própria cor
+ pixHills(1,sky,.08,skyH()*.11,SEA.nh,SEA.nhh,300,ps,night);   // as cores das colinas e da grama vêm da estação do ano (2-sistemas/07-estacoes.js)
  weatherSky(sky,scale,night);   // clima: nuvens extras, véu escuro, neblina e clarão do raio (5-desenho/10-clima.js)
  ctx.restore();
 }
@@ -3460,16 +3581,19 @@ function solidTile(L,vi,tb){
 function drawSolid(x,y,ts,tb,c,r){
  ctx.imageSmoothingEnabled=false;
  ctx.drawImage(solidTile(layerOf(r),Math.floor(hash(c*3+1,r*5+2)*TILE_VARIANTS),tb),x,y,tb*ts+1,tb*ts+1);
- const v=hash(r,c);ctx.save();ctx.translate(x,y);ctx.scale(ts,ts);
+ // Bloco comum (a maioria): só o tile. O save/translate/scale/restore abaixo só vale a pena quando há algo extra para desenhar por cima
+ const lv=lava(c,r),band=r>0&&r%LAYER_HEIGHT===0,vein=isVein(c,r);let rk=-1,chest=0;if(!vein){rk=oreVeinAt(c,r);if(rk<0)chest=chestAt(c,r)}
+ if(r!==0&&!lv&&!band&&!vein&&rk<0&&!chest)return;
+ ctx.save();ctx.translate(x,y);ctx.scale(ts,ts);
  if(r===0){ // primeira linha: inquebrável (grama por cima e pedras cinzentas por dentro)
   ctx.fillStyle="rgba(20,20,26,.35)";ctx.fillRect(0,0,tb+1,tb+1);ctx.fillStyle="#6a6e74";ctx.fillRect(3,tb-9,8,5);ctx.fillRect(tb-14,tb-14,9,6);
   ctx.fillStyle=SEA.g;ctx.fillRect(0,0,tb+1,5);ctx.fillStyle=SEA.h;ctx.fillRect(0,0,tb+1,2);
   for(let g=0;g<6;g++){const gx=hash(c+g*7,515)*(tb-2)+1,gh=2+hash(g,c+733)*3;ctx.fillRect(gx,-gh,2,gh+2)}
  }
- if(lava(c,r)){ctx.fillStyle="#ff5a1f";ctx.fillRect(0,0,tb+1,tb+1);ctx.globalAlpha=.16;ctx.fillRect(-tb/2,-tb/2,tb*2,tb*2);ctx.globalAlpha=1}
- if(r>0&&r%LAYER_HEIGHT===0){ctx.fillStyle="rgba(255,255,255,.1)";ctx.fillRect(0,0,tb+1,2)}
- if(isVein(c,r))drawVein(tb,c,r);
- else{const rk=oreVeinAt(c,r);if(rk>=0)drawRich(tb,c,r,rk);else if(chestAt(c,r))drawChestBlock(tb,c,r)}
+ if(lv){ctx.fillStyle="#ff5a1f";ctx.fillRect(0,0,tb+1,tb+1);ctx.globalAlpha=.16;ctx.fillRect(-tb/2,-tb/2,tb*2,tb*2);ctx.globalAlpha=1}
+ if(band){ctx.fillStyle="rgba(255,255,255,.1)";ctx.fillRect(0,0,tb+1,2)}
+ if(vein)drawVein(tb,c,r);
+ else if(rk>=0)drawRich(tb,c,r,rk);else if(chest)drawChestBlock(tb,c,r);
  ctx.restore();
 }
 // Pedra dura: placas de aço azulado com chanfro e parafusos (tile em cache, ver 00-pixel.js). Só a dinamite quebra.
@@ -3556,8 +3680,10 @@ function drawShop(t){
  if(atSurface())lbl(nearShop()?__("Loja: compre aqui"):__("Loja"),c,y-(s.h+12)*u-Math.sin(t*4)*2,nearShop()?"#6fe3a0":"#ffd45c");
 }
 function drawGateAndChest(t){
- // portão de madeira em volta do buraco: dois postes finos em pixel art e uma viga escura sobre a abertura
  const u=pu(),x=colX(0)-T/2,y=Math.round(rowY(0)),pl=sprPillar();
+ // Lá embaixo (linha 0 muito acima do topo da tela) nada da superfície aparece: só a escada de corda continua descendo pelo poço
+ if(y<-T*4){drawRopeLadder(t);return}
+ // portão de madeira em volta do buraco: dois postes finos em pixel art e uma viga escura sobre a abertura
  ctx.fillStyle="#2b1a0d";ctx.fillRect(Math.round(x-u),y-Math.round(u*.6),Math.round(T+2*u),Math.round(u*1.4));
  ctx.fillStyle="#8a5a2b";ctx.fillRect(Math.round(x-u),y-Math.round(u*.6),Math.round(T+2*u),Math.max(1,Math.round(u*.4)));
  drawSpr(pl,x-pl.w*u/2+u,y,u);drawSpr(pl,x+T+pl.w*u/2-u,y,u);
@@ -3575,6 +3701,7 @@ function drawGateAndChest(t){
 }
 // Voo para os lados: o corpo se inclina para a frente (pose de super-herói) com os braços à frente e as pernas esticadas para trás. plK vai de 0 (em pé) a 1 (deitado no ar), suavizado
 let plK=0,plAt=0,plHAt=-9999;
+let jetNz={x:0,y:0,t:0};   // bocal da mochila a jato em coordenadas da tela, medido no desenho do jogador (inclui espelho, inclinação e zoom) para as partículas nascerem no lugar certo
 let flameL=4;   // comprimento médio da chama da mochila, suavizado (mudar de direção rápido não faz a chama disparar)
 // Passos: nuvenzinhas de poeira atrás dos pés (mais e maiores com Shift); com chuva, respingos de poça; com neve, flocos levantados
 function stepDust(mx,my,sg,dt){
@@ -3591,7 +3718,7 @@ function stepDust(mx,my,sg,dt){
  }
 }
 function drawPlayer(){
- const now=performance.now(),mx=colX(mX),my=rowY(mY);
+ const now=performance.now(),mx=colX(mX),my=rowY(mY),B0=ctx.getTransform();
  const dx=S.mc-mX,dy=S.depth-mY,descending=S.depth!==0&&S.dir==="down"&&(dy>.05||airborne()),flying=!descending&&(jetT>0||dy<-.05||airborne()),falling=descending||(!flying&&dy>.05),walking=!flying&&!falling&&Math.abs(dx)>.05;
  const ph=now/(shiftOn?65:105),sw=Math.sin(ph),idle=Math.sin(now/280);
  const bob=flying?Math.sin(now/60)*1.3:walking?-Math.abs(sw)*3:idle*.9;
@@ -3613,6 +3740,7 @@ function drawPlayer(){
  // mochila a jato (nas costas): tanque, bocal e chama
  ctx.fillStyle="#4a4f58";ctx.fillRect(mx-15,my-25+bob,7,14);ctx.fillStyle="#7d8591";ctx.fillRect(mx-15,my-25+bob,7,3);ctx.fillStyle="#c8452f";ctx.fillRect(mx-14,my-20+bob,5,3);
  ctx.fillStyle="#2b2e34";ctx.fillRect(mx-14,my-11+bob,5,3);
+ {const q=B0.inverse().transformPoint(ctx.getTransform().transformPoint(new DOMPoint(mx-11.5,my-8+bob)));jetNz.x=q.x;jetNz.y=q.y;jetNz.t=now}
  if(!descending&&(jetT>0||flying)){const sb=shiftOn&&!fs&&(S.dir==="left"||S.dir==="right"),fl=(flameL+=(Math.min(30,(jetT>0?16:4.25)*(1+.6*k1)*(sb?2.4:1))-flameL)*Math.min(1,dtK*12))*(.6+Math.random()*.8);   // Shift + A/D: o jato queima muito mais forte
   ctx.fillStyle="#ffb43a";ctx.fillRect(mx-14,my-8+bob,5,fl);ctx.fillStyle="#fff3a0";ctx.fillRect(mx-13,my-8+bob,3,fl*.55);ctx.fillStyle="#ff5a1f";ctx.fillRect(mx-14,my-8+bob+fl,5,3)}
  // braço de trás (balança ao contrário do braço da picareta)
@@ -3678,7 +3806,7 @@ function drawEffects(dt){
  drawAmb(dt);
  weatherFront();
  for(const p of parts){p.l-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=(p.g===undefined?520:p.g)*dt;ctx.globalAlpha=clamp(p.l*1.6,0,1)*(p.a||1);ctx.fillStyle=p.c;let s=p.s||(p.big?6:4);if(p.gr)s*=1+p.gr*(1-p.l/p.l0);s=Math.round(s);ctx.fillRect(Math.round(p.x-s/2),Math.round(p.y-s/2),s,s)}
- parts=parts.filter(p=>p.l>0);if(parts.length>500)parts.splice(0,parts.length-500);ctx.globalAlpha=1;
+ {let j=0;for(let i=0;i<parts.length;i++){const p=parts[i];if(p.l>0)parts[j++]=p}parts.length=j}if(parts.length>500)parts.splice(0,parts.length-500);ctx.globalAlpha=1;
  ctx.textAlign="center";
  for(const t of texts){t.t+=dt;const life=t.big?1.5:1.1;ctx.globalAlpha=clamp(1-t.t/life,0,1);ctx.font=(t.big?"800 19px":"700 15px")+" "+FONT;const yy=t.y-t.t*(t.big?42:50),pop=t.t<.12?1+(.12-t.t)*4:1;
   ctx.save();ctx.translate(t.x,yy);ctx.scale(pop,pop);ctx.fillStyle="#000";ctx.fillText(t.s,1,1);ctx.fillStyle=t.c;ctx.fillText(t.s,0,0);ctx.restore()}
@@ -3740,7 +3868,7 @@ function drawTarget(){
  }
 }
 function draw(dt){
- const t=performance.now()/1000;
+ const t=performance.now()/1000;bakeBudget=1;   // camadas pré-renderizadas: no máximo 1 refeita só por mudança de cor neste quadro (00b-cache.js)
  ctx.setTransform(dpr,0,0,dpr,0,0);
  let sx=0,sy=0;if(shake>0){sx=Math.round((Math.random()-.5)*shake);sy=Math.round((Math.random()-.5)*shake);   // em pixels inteiros: a pixel art não borra ao tremer
  shake=Math.max(0,shake-BAL.shake.decay*dt)}
@@ -3802,7 +3930,7 @@ function drawPet(dt,t){
  ctx.fillStyle="#ff9a3a";ctx.fillRect(px-u,py-u,2*u,3*u);
  ctx.fillStyle="#ffd45c";ctx.fillRect(px-u,py+u,2*u,u);
  ctx.fillStyle=nt>.3?"#fffbd8":"#fff3a0";ctx.fillRect(px-u,py-u,u,u);
- if(Math.random()<dt*7)parts.push({x:px,y:py+2*u,vx:(Math.random()-.5)*18,vy:6,l:.45,c:"#ffd45c"});
+ if(Math.random()<dt*7)parts.push({x:px+(Math.random()-.5)*u,y:py+2.5*u,vx:(Math.random()-.5)*10,vy:5,g:6,l:.45,l0:.45,c:"#ffd45c",s:Math.max(2,Math.round(u))});   // pó de brilho sai da pontinha da barriga e flutua (sem a gravidade padrão, que o fazia despencar)
 }
 
 // ===== 5-desenho/08-dia-noite.js — Ciclo de dia e noite (sol, lua, estrelas, aurora boreal, estrela cadente e tons do céu) =====
@@ -3810,12 +3938,24 @@ function drawPet(dt,t){
 // O céu é pintado só com degradês contínuos (um por camada de cor), sem faixas nem retângulos translúcidos sobrepostos,
 // que deixavam linhas horizontais visíveis. O degradê é ancorado na linha do horizonte e rola junto com o chão.
 let dayT=BAL.day.start;
-const dayTick=dt=>{dayT=(dayT+dt/BAL.day.len)%1};
+const dayTick=dt=>{dayT=(dayT+dt/BAL.day.len)%1;S.moon=(S.moon+dt/BAL.day.len)%BAL.moon.cycle};
+// Fases da lua (só visual). S.moon = idade da lua em dias de jogo; moonP(): 0 = nova · .25 = quarto crescente · .5 = cheia · .75 = quarto minguante.
+const moonP=()=>(((S.moon/BAL.moon.cycle)%1)+1)%1;
+const moonLight=(p=moonP())=>(1-Math.cos(p*Math.PI*2))/2;                   // fração iluminada: 0 = nova · 1 = cheia
+const MOON_NAMES=[N_("Lua nova"),N_("Crescente"),N_("Quarto crescente"),N_("Gibosa crescente"),N_("Lua cheia"),N_("Gibosa minguante"),N_("Quarto minguante"),N_("Minguante")];
+const moonName=(p=moonP())=>__(MOON_NAMES[Math.round(p*8)%8]);
+// O ponto (x,y) do disco unitário (x para a direita, y para baixo) está na parte iluminada? O terminador é uma meia-elipse de largura cos(2πp)·√(1-y²).
+function moonLit(x,y,p){const w=Math.sqrt(Math.max(0,1-y*y)),xt=Math.cos(p*Math.PI*2)*w,xx=BAL.moon.south?-x:x;return p<.5?xx>xt-.001:xx<-xt+.001}
 const sunElev=()=>Math.sin(dayT*Math.PI*2);                 // altura do sol: 1 = zênite, -1 = nadir
 const nightAmt=()=>clamp((.18-sunElev())/.5,0,1);           // 0 = dia · 1 = noite fechada
 const skyH=()=>Math.max(H*SURF,120);                        // altura do céu quando a câmera está na superfície
 // Mistura uma cor "#rrggbb" com o azul-noite (usado nas colinas, que são desenhadas depois do tom do céu)
-function nightCol(hex,n){const k=n*.55;return"rgb("+[1,3,5].map((i,j)=>Math.round(parseInt(hex.substr(i,2),16)+([8,12,44][j]-parseInt(hex.substr(i,2),16))*k))+")"}
+const _ncMem=new Map();   // memória: o mesmo hex com a mesma noite se repete dezenas de vezes por quadro (árvores, pedras, montanhas)
+function nightCol(hex,n){
+ const key=hex+n;let v=_ncMem.get(key);if(v!==undefined)return v;
+ const k=n*.55,r=parseInt(hex.substr(1,2),16),g=parseInt(hex.substr(3,2),16),b=parseInt(hex.substr(5,2),16);
+ v="rgb("+Math.round(r+(8-r)*k)+","+Math.round(g+(12-g)*k)+","+Math.round(b+(44-b)*k)+")";
+ if(_ncMem.size>400)_ncMem.clear();_ncMem.set(key,v);return v}
 // Tom do céu: azul-noite (mais forte no topo) e laranja perto do horizonte no amanhecer e no pôr do sol
 function skyTint(sky){
  const n=nightAmt(),e=sunElev(),dusk=Math.max(0,1-Math.abs(e)/.38)*(1-n*.4);
@@ -3834,10 +3974,8 @@ function skyStars(sky,t,ps){
 }
 // Aurora boreal: duas cortinas de raios verdes, azul-turquesa e roxos que ondulam devagar. Só de noite e com o céu aberto
 // (sem nuvens, chuva, neve ou neblina); no inverno aparece mais forte. Colunas de 2 pixels de sprite, cada uma com seu degradê vertical.
-function skyAurora(sky,t,ps){
- const al=altAmt(),n=clamp(nightAmt()+altSmooth(.3,1,al)*.4,0,1);if(n<.2)return;   // lá no alto a aurora aparece até de dia (fraca) e fica mais forte
- const aur=Math.pow(n,1.4)*clamp(1-wx.cover*1.25,0,1)*clamp(1-wx.fog*1.5,0,1)*(SEA.idx===3?1:.62)*(.8+.2*Math.sin(t*.23))*(1+.4*al);
- if(aur<.03)return;
+const _auroraSlot=bakeNew();
+function auroraCols(sky,t,ps,aur){
  const cw=ps*2,top0=sky-skyH();
  ctx.save();ctx.globalCompositeOperation="lighter";
  for(let L=0;L<2;L++){
@@ -3856,6 +3994,26 @@ function skyAurora(sky,t,ps){
  }
  ctx.restore();
 }
+function skyAurora(sky,t,ps){
+ const al=altAmt(),n=clamp(nightAmt()+altSmooth(.3,1,al)*.4,0,1);if(n<.2)return;   // lá no alto a aurora aparece até de dia (fraca) e fica mais forte
+ const aur=Math.pow(n,1.4)*clamp(1-wx.cover*1.25,0,1)*clamp(1-wx.fog*1.5,0,1)*(SEA.idx===3?1:.62)*(.8+.2*Math.sin(t*.23))*(1+.4*al);
+ if(aur<.03)return;
+ // As cortinas são luz difusa e ondulam devagar: o canvas é feito em METADE da resolução (4x menos pixels de degradê para pintar) e só ~12 vezes por segundo (ela muda bem devagar); nos outros quadros só se amplia e soma a luz
+ const sl=_auroraSlot,k=.5,cw=Math.ceil(W*k),ch=Math.ceil(sky*k);
+ if(!sl.cv||sl.cv.width!==cw||sl.cv.height!==ch||sl.gk!==ps||t-sl.t>1/12||t<sl.t){bakeOn(sl,cw,ch,()=>{ctx.scale(k,k);auroraCols(sky,t,ps,aur)});sl.gk=ps;sl.t=t}
+ ctx.save();ctx.globalCompositeOperation="lighter";ctx.imageSmoothingEnabled=true;ctx.drawImage(sl.cv,0,0,W,sky);ctx.restore();
+}
+// Disco da lua (raio 5 em pixels de sprite) com a fase atual: parte iluminada clara com crateras e parte escura (luz cinzenta da Terra) quase invisível
+function moonDisc(cx,cy,ps){
+ const p=moonP(),R=5.2;
+ for(let j=-5;j<=5;j++){const w=Math.floor(Math.sqrt(25-j*j+.5));
+  for(let i=-w;i<=w;i++){
+   const lit=moonLit(i/R,j/R,p);
+   ctx.fillStyle=lit?(Math.hypot(i,j)<=4?"#f4f6fb":"#dfe5f5"):"rgba(38,46,82,.6)";
+   ctx.fillRect(cx+i*ps,cy+j*ps,ps,ps);
+   if(lit&&(i===-2&&j===-1||i===1&&j===1||i===-1&&j===2)){ctx.fillStyle="#c3cae0";ctx.fillRect(cx+i*ps,cy+j*ps,ps,ps)}   // crateras só onde há luz
+  }}
+}
 // Sol (dia) ou lua (noite) cruzando o céu em arco
 function skyBody(sky,ps){
  const e=sunElev(),horizon=sky*.8,arc=sky*.6,u=dayT<.5?dayT/.5:(dayT-.5)/.5,x=Math.round(W*(.08+.84*u)/ps)*ps;
@@ -3867,14 +4025,13 @@ function skyBody(sky,ps){
   const al=altAmt();   // lá no alto a lua também aparece de dia, do lado oposto ao do sol
   if(al>.3){
    const mu=(u+.5)%1,ma=altSmooth(.3,.85,al)*Math.sin(Math.PI*mu)*.75*clamp(1-wx.cover*.8,0,1),mx=Math.round(W*(.08+.84*mu)/ps)*ps,my=Math.round((horizon-Math.sin(Math.PI*mu)*arc)/ps)*ps;
-   if(ma>.02){ctx.globalAlpha=ma;pixDisc(mx,my,9,ps,"rgba(200,215,255,.08)");pixDisc(mx,my,7,ps,"rgba(200,215,255,.1)");pixDisc(mx,my,5,ps,"#dfe5f5");pixDisc(mx,my,4,ps,"#f4f6fb");ctx.fillStyle="#c3cae0";ctx.fillRect(mx-2*ps,my-ps,ps,ps);ctx.fillRect(mx+ps,my+ps,ps,ps);ctx.fillRect(mx-ps,my+2*ps,ps,ps);ctx.globalAlpha=1}
+   if(ma>.02){const gl=BAL.moon.glow+(1-BAL.moon.glow)*moonLight();ctx.globalAlpha=ma;pixDisc(mx,my,9,ps,"rgba(200,215,255,"+(.08*gl).toFixed(3)+")");pixDisc(mx,my,7,ps,"rgba(200,215,255,"+(.1*gl).toFixed(3)+")");moonDisc(mx,my,ps);ctx.globalAlpha=1}
   }
  }else{
-  const y=Math.round((horizon+e*arc)/ps)*ps,al=altAmt();
-  if(al>.05){pixDisc(x,y,13,ps,"rgba(200,215,255,"+(.05*al).toFixed(3)+")");pixDisc(x,y,11,ps,"rgba(200,215,255,"+(.07*al).toFixed(3)+")")}   // no alto o brilho da lua é maior
-  pixDisc(x,y,9,ps,"rgba(200,215,255,.07)");pixDisc(x,y,7,ps,"rgba(200,215,255,.1)");
-  pixDisc(x,y,5,ps,"#dfe5f5");pixDisc(x,y,4,ps,"#f4f6fb");
-  ctx.fillStyle="#c3cae0";ctx.fillRect(x-2*ps,y-ps,ps,ps);ctx.fillRect(x+ps,y+ps,ps,ps);ctx.fillRect(x-ps,y+2*ps,ps,ps);
+  const y=Math.round((horizon+e*arc)/ps)*ps,al=altAmt(),gl=BAL.moon.glow+(1-BAL.moon.glow)*moonLight();   // gl: o halo some junto com a parte iluminada
+  if(al>.05){pixDisc(x,y,13,ps,"rgba(200,215,255,"+(.05*al*gl).toFixed(3)+")");pixDisc(x,y,11,ps,"rgba(200,215,255,"+(.07*al*gl).toFixed(3)+")")}   // no alto o brilho da lua é maior
+  pixDisc(x,y,9,ps,"rgba(200,215,255,"+(.07*gl).toFixed(3)+")");pixDisc(x,y,7,ps,"rgba(200,215,255,"+(.1*gl).toFixed(3)+")");
+  moonDisc(x,y,ps);
  }
 }
 // Estrela cadente: cabeça brilhante e cauda de pixels que se apaga, cruzando o céu na diagonal (evento em 2-sistemas/05-noite-estrelas.js)
@@ -3951,14 +4108,19 @@ function weatherVeil(sky){
 }
 function weatherFront(){   // por cima do mundo, antes da escuridão da noite
  const g=rowY(0);if(g<=8)return;
- const ck=wx.clock;ctx.save();
+ const ck=wx.clock,co=camX*T;ctx.save();   // co = deslocamento horizontal da câmera em pixels: os respingos acompanham o chão (1x) e as gotas e flocos andam um pouco (parallax), então correr ou voar rápido não deixa a chuva "colada" na tela
+
  if(wx.rain>.02){
-  const N=Math.round(wx.rain*Math.min(200,W/4.5)),slope=.12+.22*wx.wind,sp=1+.25*wx.rain,SPL=.3;
+  // O ciclo de cada gota usa um período FIXO (PER, independente da altura do chão na tela): antes ele dependia de g, e ao voar para cima ou para baixo o chão mudava de lugar a cada quadro e todas as gotas e respingos pulavam.
+  // As gotas são cortadas no chão (y>=g) e os respingos têm relógio próprio, então a câmera pode subir e descer sem nada piscar.
+  const N=Math.round(wx.rain*Math.min(200,W/4.5)),slope=.12+.22*wx.wind,sp=1+.25*wx.rain,SPL=.3,PER=H+320;
   ctx.strokeStyle="rgba(196,214,238,.5)";ctx.lineWidth=1;ctx.beginPath();
   const sp2=[];
   for(let i=0;i<N;i++){
-   const r1=wxR(i,1),r2=wxR(i,2),v=(520+r1*240)*sp,len=7+r1*7,y=(r1*4000+ck*v)%(g+v*SPL),yy=Math.min(y,g),x=((r2*(W+260)+yy*slope-60)%(W+260)+W+260)%(W+260)-130;
-   if(y<g-2){ctx.moveTo(x,y);ctx.lineTo(x-slope*len,y-len)}else if(y>=g)sp2.push([x,(y-g)/(v*SPL)]);   // chegou ao chão: respingo (q de 0 a 1 ao longo de ~0,3 s)
+   const r1=wxR(i,1),r2=wxR(i,2),v=(520+r1*240)*sp,len=7+r1*7,y=(r1*4000+ck*v)%PER,yy=Math.min(y,g),x=((r2*(W+260)+yy*slope-60-co*.35)%(W+260)+W+260)%(W+260)-130;
+   if(y<g-2){ctx.moveTo(x,y);ctx.lineTo(x-slope*len,y-len)}
+   const cyc=PER/v,t=(ck+wxR(i,5)*cyc)%cyc;   // respingo no chão: uma vez por ciclo da gota, dura SPL s (q de 0 a 1)
+   if(t<SPL)sp2.push([((wxR(i,6)*(W+260)-60-co)%(W+260)+W+260)%(W+260)-130,t/SPL]);
   }
   ctx.stroke();
   const gy=Math.round(g),pz=Math.max(2,Math.round(T/24));
@@ -3973,7 +4135,7 @@ function weatherFront(){   // por cima do mundo, antes da escuridão da noite
  if(wx.snow>.02){
   const N=Math.round(wx.snow*Math.min(150,W/6));ctx.fillStyle="rgba(255,255,255,.88)";
   for(let i=0;i<N;i++){
-   const r1=wxR(i,3),r2=wxR(i,4),y=(r1*3000+ck*(26+r1*34))%(g+8),x=(((r2*(W+120)+Math.sin(ck*.7+r1*6.3)*18+ck*wx.wind*16)%(W+120))+W+120)%(W+120)-60;
+   const r1=wxR(i,3),r2=wxR(i,4),y=(r1*3000+ck*(26+r1*34))%(H+8),x=(((r2*(W+120)+Math.sin(ck*.7+r1*6.3)*18+ck*wx.wind*16-co*.35)%(W+120))+W+120)%(W+120)-60;
    if(y<g-1){const s=r2>.7?3:2;ctx.fillRect(Math.round(x),Math.round(y),s,s)}
   }
  }
@@ -3990,8 +4152,6 @@ function weatherFront(){   // por cima do mundo, antes da escuridão da noite
 
 // ===== 5-desenho/11-cenario.js — Cenário da superfície: cordilheiras ao fundo, bloqueio rochoso à esquerda e passagem até a grande montanha à direita =====
 // Tudo aqui é só visual e só aparece ACIMA da linha 0 (o subsolo não muda). Quem barra o jogador é inS()/isDug (3-mundo/01-celulas.js) com SURF_L e SURF_R (1-nucleo/02-camadas-minerios.js).
-// As cores vêm da estação do ano (SEA) e escurecem de noite (nightCol), como as colinas.
-const sm3=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)};
 const winterAmt=()=>clamp((hexCh(SEA.g,5)-70)/150,0,1);   // 0 fora do inverno · 1 no meio do inverno (a grama vira neve): mais neve nas montanhas
 const ridgeV=(wx,sd)=>Math.pow(clamp((1-Math.abs(Math.sin(wx*.0052+sd)))*.55+(1-Math.abs(Math.sin(wx*.0127+sd*2.3)))*.3+(Math.sin(wx*.031+sd)+1)*.075,0,1),1.25);
 // Colunas de pixel PRESAS AO MUNDO: cada coluna tem largura q e posição fixa no mundo, então ao andar a forma inteira só desliza (os pixels nunca são reamostrados, não "fervem" nem piscam).
@@ -4004,20 +4164,38 @@ function worldCols(q,wA,wB,fn){
 // ---------- cordilheiras do fundo (dentro do clip do céu, atrás das colinas) ----------
 // Três camadas de profundidade. Cada uma é uma faixa fixa na própria camada que desliza devagar (par menor que o das colinas da frente, em 02-ceu-nuvens.js: .03 e .08).
 // O tamanho dos picos NÃO depende da posição do jogador. As montanhas grandes das pontas (massa à esquerda, grande montanha à direita) são presas ao mundo, mais abaixo.
+const vn=(x,s)=>{const i=Math.floor(x),f=x-i,u=f*f*(3-2*f);return hash(i,s)*(1-u)+hash(i+1,s)*u};   // ruído de valor suave (determinístico, preso ao mundo)
+// Cumes tipo Everest: pirâmide com ombros largos na base e ponta íngreme (curva em S, não uma reta), espigões laterais e rochedos irregulares no alto; vales largos entre eles
+const ridgeP=(wx,sd)=>{
+ const m=1-Math.abs(Math.sin(wx*.0029+sd)),sh=m*m*(3-2*m),prof=.5*sh+.5*Math.pow(m,1.15),spur=.16*Math.pow(1-Math.abs(Math.sin(wx*.0071+sd*1.7)),2.2);
+ const crag=((vn(wx*.011,sd)-.5)*.26+(vn(wx*.033,sd+3)-.5)*.12+(vn(wx*.09,sd+7)-.5)*.05)*(.25+prof);
+ return clamp(prof*.86+spur*prof+crag,0,1)};
+const _rangeStrips=[];   // uma faixa pré-renderizada por camada (00b-cache.js)
 function sceneRanges(sky,ps,night){
  if(sky<=0)return;
- const A=H*SURF,wint=winterAmt(),fogL=mixHex(SEA.fh,"#ffffff",.25);
+ const A=H*SURF,wint=winterAmt(),fogL=mixHex(SEA.fh,"#ffffff",.25),nq=Math.round(night*32)/32;
  const layers=[   // par = parallax (fração do movimento da câmera) · amp = altura máxima (fração do céu) · sn = a partir de que fração da altura há neve
-  {par:.010,sd:1.7,amp:.92,sn:.84,body:mixHex(SEA.fh,"#8ea4c6",.55),lit:mixHex(SEA.fhh,"#ffffff",.3)},
+  {par:.005,sd:11.3,amp:1.2,sn:.5,sf:1.05,peaky:1,body:mixHex(SEA.fh,"#a9bad6",.62),lit:mixHex("#ffffff","#c9d7ec",.35)},   // bem ao fundo: poucos cumes altíssimos e pontudos, com muita neve, quase azul-céu (altura passa de 1 para aparecerem acima da montanha gigante)
+  {par:.010,sd:1.7,amp:1.12,sn:.84,body:mixHex(SEA.fh,"#8ea4c6",.55),lit:mixHex(SEA.fhh,"#ffffff",.3)},
   {par:.018,sd:4.1,amp:.64,sn:.9,body:mixHex(SEA.fh,"#5f79a3",.72),lit:mixHex(fogL,"#7f98bd",.45)},
   {par:.026,sd:7.3,amp:.4,sn:2,body:mixHex(SEA.nh,"#3f567c",.68),lit:mixHex(SEA.nhh,"#5d78a0",.62)}];
- for(const L of layers){
-  const off=camX*T*L.par,body=nightCol(L.body,night),lit=nightCol(L.lit,night),snow=nightCol(mixHex("#eef4fa","#ffffff",wint),night),snowD=nightCol("#b9c9dc",night),sn=L.sn-.22*wint;
-  for(let k=Math.floor(off/ps)-1,k1=Math.ceil((off+W)/ps)+1;k<k1;k++){   // coluna k da camada: posição fixa na camada (wx = k*ps), vai para a tela em wx - off
-   const wx=k*ps,x=Math.round(wx-off),v=ridgeV(wx,L.sd),v2=ridgeV(wx+ps*1.5,L.sd),r=.3+.7*v,h=Math.max(ps,Math.round(A*L.amp*r/ps)*ps),top=sky-h;
-   ctx.fillStyle=v2>v?lit:body;ctx.fillRect(x,top,ps,h);
-   if(r>sn*.9){const sh=Math.min(h,Math.round((r-sn*.9)*A*L.amp*1.6/ps)*ps);if(sh>0){ctx.fillStyle=v2>v?snow:snowD;ctx.fillRect(x,top,ps,Math.max(ps,sh))}}
-  }
+ for(let li=0;li<layers.length;li++){
+  const L=layers[li],off=camX*T*L.par,hmax=Math.max(ps,Math.ceil(A*L.amp/ps)*ps),ridge=L.peaky?ridgeP:ridgeV;
+  // A faixa é feita uma vez (forma: ps, altura, semente; cor: estação e noite em passos de 1/32) e depois só desliza; as colunas ficam presas à camada (k*ps)
+  let body,lit,snow,snowD,sn,dk,hl;
+  const s=stripFor(_rangeStrips[li]||(_rangeStrips[li]=bakeNew()),off,ps,hmax,ps+"|"+hmax+"|"+SEED+"|"+L.sd,nq+"|"+wint.toFixed(3)+"|"+L.body+"|"+L.lit,(k,x)=>{
+   if(body===undefined){body=nightCol(L.body,nq);lit=nightCol(L.lit,nq);snow=nightCol(mixHex("#eef4fa","#ffffff",wint),nq);snowD=nightCol("#b9c9dc",nq);sn=L.sn-.22*wint;
+    if(L.peaky){dk=nightCol(mixHex(L.body,"#3a4a6c",.5),nq);hl=nightCol(mixHex(L.lit,"#ffffff",.5),nq)}}
+   const wx=k*ps,v=ridge(wx,L.sd),v2=ridge(wx+ps*(L.peaky?4:1.5),L.sd),r=L.peaky?.12+.88*v:.3+.7*v,h=Math.max(ps,Math.round(A*L.amp*r/ps)*ps),top=hmax-h,up=v2>v;
+   ctx.fillStyle=up?lit:body;ctx.fillRect(x,top,ps,h);
+   if(L.peaky){   // ravinas diagonais e arestas (presas à coluna do mundo): dão relevo às faces, sem listras verticais
+    for(let y=top+ps*3;y<hmax;y+=ps*2){const g=Math.sin(wx*.021+(hmax-y)/(ps*7.5)+Math.sin(wx*.006+L.sd)*2);
+     if(g>.86){ctx.fillStyle=dk;ctx.globalAlpha=up?.3:.5;ctx.fillRect(x,y,ps,ps)}else if(up&&g<-.93){ctx.fillStyle=hl;ctx.globalAlpha=.35;ctx.fillRect(x,y,ps,ps)}}
+    ctx.globalAlpha=1}
+   if(r>sn*.9){let sh=(r-sn*.9)*A*L.amp*(L.sf||1.6);if(L.peaky)sh*=(up?1:.72)*(.78+.44*vn(wx*.045,L.sd+11));sh=Math.min(h,Math.round(sh/ps)*ps);   // neve irregular: as faces íngremes à sombra soltam neve
+    if(sh>0){ctx.fillStyle=up?snow:snowD;ctx.fillRect(x,top,ps,Math.max(ps,sh));}}
+  });
+  ctx.drawImage(s.cv,Math.round(s.c0*ps-off),Math.round(sky-hmax));
  }
 }
 
@@ -4078,18 +4256,34 @@ function drawPathTop(x,y,ts,tb,c){
 
 // ---------- cenário preso ao mundo (atrás do chão e do jogador) ----------
 // árvores, arbustos e pedras espalhados entre as colunas c0 e c1 (deterministas: não piscam nem mudam ao andar)
-const sceneBlocked=c=>(c>=-22&&c<=-11)||(c>=-30&&c<=-22.5)||(c>=22&&c<=32)||(c>=35.5&&c<=41)||c>=BEACH_C0;   // horta, moinho, riacho, fogueira e praia ficam sem árvores aleatórias
-function sceneScatter(y0,q,P,k,c0,c1,back){
+const sceneBlocked=c=>(c>=-22&&c<=-11)||(c>=-30&&c<=-22.5)||(c>=22&&c<=32)||(c>=FRIV_C0&&c<=FRIV_C1)||(c>=35.5&&c<=41)||c>=BEACH_C0;   // horta, moinho, riacho, fogueira e praia ficam sem árvores aleatórias
+const sceneBlockedB=c=>sceneBlocked(c)&&!(c>=FRIV_C0&&c<=FRIV_C1);   // as fileiras de trás passam por cima da água do riacho da floresta (árvores ao fundo, na outra margem)
+function sceneScatter(y0,q,P,k,c0,c1,back,dens=1,sd=0,thr0){   // dens = árvores possíveis por coluna (bosque denso da esquerda usa 3); sd = fileira (muda as sementes); thr0 = limiar de vazios
  for(let c=c0;c<=c1;c++){
-  const x=colX(c);if(x<-T*3||x>W+T*3||sceneBlocked(c))continue;
-  const s=back?hash(c,911):hash(c,901),thr=back?.35:.5;if(s<thr)continue;
-  const j=(hash(c,back?913:903)-.5)*T*.9,kind=hash(c,back?917:907),hh=T*((back?1.5:1.1)+hash(c,back?919:909)*1.1)*(back?.8:1);
-  if(back){if(kind<.62)pxPine(x+j,y0,hh,q,P,k,true);else pxTree(x+j,y0,hh*.8,q,P,k,true)}
-  else if(kind<.45)pxPine(x+j,y0+q,hh,q,P,k,false);
-  else if(kind<.72)pxTree(x+j,y0+q,hh*.85,q,P,k,false);
-  else if(kind<.88)pxBush(x+j,y0+q,T*.38,q,P,k);
-  else pxBoulder(x+j,y0+q,T*.3,q,P,k);
+  const x0=colX(c);if(x0<-T*3||x0>W+T*3||(back?sceneBlockedB(c):sceneBlocked(c)))continue;
+  for(let m=0;m<dens;m++){
+   const ck=(m===0&&sd===0)?c:c*7+m*131+sd*977,x=x0+(m===0?0:m*T/dens),s=back?hash(ck,911):hash(ck,901),thr=thr0!==undefined?thr0:back?.35:.5;if(s<thr)continue;
+   const j=(hash(ck,back?913:903)-.5)*T*.9,kind=hash(ck,back?917:907),hh=T*((back?1.5:1.1)+hash(ck,back?919:909)*1.1)*(back?.8:1);
+   if(back){if(kind<.62)pxPine(x+j,y0,hh,q,P,k,true);else pxTree(x+j,y0,hh*.8,q,P,k,true)}
+   else if(kind<.45)pxPine(x+j,y0+q,hh,q,P,k,false);
+   else if(kind<.72)pxTree(x+j,y0+q,hh*.85,q,P,k,false);
+   else if(kind<.88)pxBush(x+j,y0+q,T*.38,q,P,k);
+   else pxBoulder(x+j,y0+q,T*.3,q,P,k);
+  }
  }
+}
+// Pedras do lado direito (passagem, riacho, fogueira e praia): pedras isoladas e grupos de três de tamanhos variados no cenário de fundo, mais duas pilhas de pedras (cairns)
+const stonesBlocked=c=>isRiver(c)||(c>=BOARD_C-1&&c<=BOARD_C+1)||(c>=WELL_C-1&&c<=WELL_C+1)||(c>=CAMP_C-2.4&&c<=CAMP_C+2.4)||(c>=LIGHT_C-1.2&&c<=LIGHT_C+1.2)||c>=PIER_C-1;
+const CAIRNS_R=[21.8,33.6];
+function sceneStones(y0,q,P,k){
+ for(let c=HALF+2;c<=SURF_R;c++){
+  const x0=colX(c);if(x0<-T*3||x0>W+T*3||stonesBlocked(c))continue;
+  if(hash(c,961)<.86)continue;   // poucas pedras isoladas ao longo da passagem
+  const x=x0+(hash(c,962)-.5)*T*.9,r=T*(.18+hash(c,964)*.26);
+  pxBoulder(x,y0+q,r,q,P,k);
+  if(hash(c,963)>.85){pxBoulder(x+r*1.15,y0+q,r*.6,q,P,k);pxBoulder(x-r*.9,y0+q,r*.45,q,P,k)}   // grupo: uma grande e duas pequenas coladas
+ }
+ for(const c of CAIRNS_R)drawCairn(y0,q,P,k,c);
 }
 function drawScenery(t){
  const y0=Math.round(rowY(0));if(y0<=8)return;
@@ -4101,6 +4295,8 @@ function drawScenery(t){
  // x = centro + (w-SURF_L)*Tm + (SURF_L-camX)*Tp -> o pé da montanha em SURF_L anda a Tp px por coluna, linear, e chega ao centro junto com o jogador no fim da trilha.
  // Para isso troca por um instante a escala T e a câmera por uma câmera "de fundo".
  const T0=T,cam0=camX,Tm=baseTile()*zoomPreference,Tp=Tm*.6,qm=Math.max(.75,Math.round(baseTile()/11)*zoomPreference);
+ T=Tm;camX=cam0<=-30?SURF_L-(SURF_L-cam0)*.25:SURF_L-(SURF_L+30)*.25+(cam0+30)*1.6;   // a montanha gigante rola bem devagar (.25) na floresta; depois do moinho (-30) passa a sair da tela rápido (1.6) e some antes da casa: nunca aparece na praia
+ giantMountain(y0,qm,A,P,k,t,-90,Tm);
  T=Tm;camX=SURF_L-(SURF_L-cam0)*Tp/Tm;
  tallRange(y0,qm,A,P,k,SURF_L-14,-40,31,1.45,["#a4b4d0","#7d90b3","#5b6f93"],1.02);
  tallRange(y0,qm,A,P,k,SURF_L-10,-50,57,1.12,["#7584a4","#52617f","#37455f"],.86);
@@ -4108,19 +4304,52 @@ function drawScenery(t){
  T=T0;camX=cam0;
  for(const c of CAIRNS)drawCairn(y0,q,P,k,c);
  // fileira de trás (árvores menores e mais frias) e depois a da frente, nos trechos livres das trilhas
- sceneScatter(y0,q,P,k,SURF_L-16,-HALF-1,true);sceneScatter(y0,q,P,k,HALF+2,SURF_R-1,true);
- sceneScatter(y0,q,P,k,SURF_L-16,-HALF-2,false);sceneScatter(y0,q,P,k,HALF+2,SURF_R-1,false);   // a mata passa 16 colunas do fim da trilha (SURF_L): a câmera mostra além dele e antes ficava sem árvores
+ // À esquerda: bosque bem denso, com três fileiras (duas de trás e a da frente) e várias árvores por coluna; à direita a mata continua rala.
+ sceneScatter(y0,q,P,k,SURF_L-16,-HALF-1,true,3,0,.25);sceneScatter(y0,q,P,k,SURF_L-16,-HALF-1,true,2,1,.25);sceneScatter(y0,q,P,k,HALF+2,SURF_R-1,true);
+ sceneScatter(y0,q,P,k,SURF_L-16,-HALF-2,false,3,0,.3);sceneScatter(y0,q,P,k,HALF+2,SURF_R-1,false);
+ sceneStones(y0,q,P,k);   // mais pedras à direita
+ // árvores nas margens do riacho da floresta: uma de cada lado, maiores que as do bosque, e a mata fecha em volta (só a água fica sem árvores)
+ for(const[cc,sd]of[[FRIV_C0-.9,1],[FRIV_C1+.9,2],[FRIV_C0-2.1,3],[FRIV_C1+2.2,4]]){const x=colX(cc);if(x<-T*3||x>W+T*3)continue;const hh=T*(1.5+hash(sd,951)*.6);if(sd<3)pxTree(x,y0+q,hh,q,P,k,false);else pxPine(x,y0+q,hh*.9,q,P,k,false)}
  ctx.restore();
 }
 
 // ---------- cordilheira alta e marcos da esquerda estendida ----------
 const CAIRNS=[-58,-74,-91];   // pilhas de pedras à beira da trilha (só visual)
 const _rangeCache={};
+// Montanha gigantesca ao fundo da esquerda: bem mais larga e alta que as outras, passa do topo da tela (voando alto dá para ver o cume), com neve e geleira no alto, estratos de rocha, névoa no pé e nuvens enroladas na encosta.
+// Cores azuladas e claras de montanha muito distante (perspectiva atmosférica). Desenhada com a câmera de fundo própria (ver drawScenery).
+// Perfil de uma montanha (u = 0 no pé, 1 no cume): ombros largos e ponta íngreme (curva em S) com rochedos irregulares, em vez de um triângulo reto
+function mtnShape(u,w,c){const s=u*u*(3-2*u),b=.5*s+.5*Math.pow(u,1.15);return b*(1+(vn(w*.55,Math.floor(c)+5)-.5)*.3*Math.min(1,u*2.2)+(vn(w*1.5,Math.floor(c)+9)-.5)*.1*Math.min(1,u*3))}
+function giantMountain(y0,q,A,P,k,t,wp,Tm){
+ const peaks=[[wp,.88,24],[wp-17,.62,13],[wp+15,.66,15],[wp+29,.44,10],[wp-30,.48,11]];   // [coluna do pico, altura (fração do céu), meia-largura em colunas]
+ const hOf=w=>{let h=0;for(const[c,a,hw]of peaks){const u=1-Math.abs(w-c)/hw;if(u>0)h=Math.max(h,a*mtnShape(u,w,c))}return h*A*(1+.035*Math.sin(w*1.7)+.025*Math.sin(w*4.3+1)+.015*Math.sin(w*9.1))};
+ if(colX(wp+42)<=0||colX(wp-42)>=W)return;
+ bakedCols("giant",wp+"|"+q+"|"+A+"|"+Tm,nq32()+"|"+P.wint.toFixed(3),Math.ceil(A*.88*1.32)+q*2,y0,(y0,k)=>{
+ const lit=k(mixHex("#b9c6dc","#e4ecf6",P.wint*.4)),shade=k("#8d9db9"),deep=k("#6a7b9a"),band=k("#7889a8"),sL=k("#f6f9fc"),sD=k("#c9d6e8"),haze=k("#d6e3f0"),snowAt=A*(.66-.2*P.wint);
+ worldCols(q,wp-42,wp+42,(w,x,cw)=>{
+  const h=Math.round(hOf(w)/q)*q;if(h<=0)return;
+  const up=hOf(w+.5)>hOf(w-.5),top=y0-h;
+  ctx.fillStyle=up?lit:shade;ctx.fillRect(x,top,cw,h);
+  for(let y=Math.max(top+q*2,y0-A*1.3);y<y0;y+=q*2){   // estratos de rocha (faixas horizontais) e ravinas em diagonal
+   const hh=(y0-y)/A,v=Math.sin(w*1.6+(y0-y)/(Tm*.7)+Math.sin(w*.5)*1.6);
+   if(v>.84){ctx.fillStyle=deep;ctx.globalAlpha=.4;ctx.fillRect(x,y,cw,q);ctx.globalAlpha=1}
+   else if(Math.sin(hh*34+Math.floor(w*.5))>.93){ctx.fillStyle=band;ctx.globalAlpha=.3;ctx.fillRect(x,y,cw,q);ctx.globalAlpha=1}
+  }
+  if(h>snowAt){const wq=Math.floor(w*3),sh=Math.round(((h-snowAt)*.95+hash(wq,37)*q*5)/q)*q;ctx.fillStyle=up?sL:sD;ctx.fillRect(x,top,cw,Math.min(h,Math.max(q,sh)));
+   if(h>snowAt+A*.22&&hash(wq,39)>.55){ctx.fillStyle=up?sD:k("#b3c4dc");ctx.globalAlpha=.6;ctx.fillRect(x,top+Math.round(sh*.5/q)*q,cw,Math.round(sh*.45/q)*q);ctx.globalAlpha=1}}   // geleira: línguas de gelo mais azuladas descendo da neve
+  ctx.fillStyle=haze;ctx.globalAlpha=.4;ctx.fillRect(x,y0-Math.round(A*.16/q)*q,cw,Math.round(A*.16/q)*q);ctx.globalAlpha=1;   // névoa no pé
+ });
+ });
+ const xc=colX(wp);ctx.fillStyle=k("#ffffff");   // nuvens enroladas na encosta, andando devagar
+ for(let i=0;i<5;i++){const cy=y0-A*(.42+i*.1),cw=Tm*(6+i*1.4),cx=xc+Math.sin(t*.04+i*1.9)*Tm*(10+i*2.5),hh=Math.max(q,Math.round(A*.012/q)*q);
+  ctx.globalAlpha=.42;ctx.fillRect(Math.round(cx-cw/2),Math.round(cy),Math.round(cw),hh);ctx.fillRect(Math.round(cx-cw*.35),Math.round(cy-hh),Math.round(cw*.7),hh);ctx.fillRect(Math.round(cx-cw*.2),Math.round(cy-hh*2),Math.round(cw*.4),hh);ctx.globalAlpha=1}
+}
 function tallRange(y0,q,A,P,k,w0,w1,sd,amp,cols,snowF){   // picos presos ao mundo entre as colunas w0 e w1; amp = altura máxima em frações do céu (passa de 1: o pico sai da tela)
  const key=sd+":"+w0+":"+w1;let pk=_rangeCache[key];
  if(!pk){pk=[];for(let c=w0,i=0;c<w1;c+=10+hash(i,sd)*7,i++)pk.push([c+(hash(i,sd+1)-.5)*4,amp*(.55+hash(i,sd+2)*.45),7+hash(i,sd+3)*7]);_rangeCache[key]=pk}
  if(colX(w1+10)<=0||colX(w0-10)>=W)return;
- const hOf=w=>{let h=0;for(const[c,a,hw]of pk){const t=1-Math.abs(w-c)/hw;if(t>0)h=Math.max(h,a*Math.pow(t,.85))}return h*A*(1+.05*Math.sin(w*2.9+sd)+.035*Math.sin(w*6.7+2))};
+ const hOf=w=>{let h=0;for(const[c,a,hw]of pk){const t=1-Math.abs(w-c)/hw;if(t>0)h=Math.max(h,a*mtnShape(t,w,c))}return h*A*(1+.05*Math.sin(w*2.9+sd)+.035*Math.sin(w*6.7+2))};
+ bakedCols("t"+sd,w0+"|"+w1+"|"+amp+"|"+snowF+"|"+q+"|"+A,nq32()+"|"+P.wint.toFixed(3)+"|"+cols,Math.ceil(A*amp*1.32)+q*2,y0,(y0,k)=>{
  const lit=k(cols[0]),shade=k(cols[1]),deep=k(cols[2]),sL=k("#f4f8fb"),sD=k("#c3d1e3"),wint=P.wint,snowAt=A*(snowF-.15*wint);
  worldCols(q,w0-10,w1+10,(w,x,cw)=>{
   const h=Math.round(hOf(w)/q)*q;if(h<=0)return;
@@ -4128,6 +4357,7 @@ function tallRange(y0,q,A,P,k,w0,w1,sd,amp,cols,snowF){   // picos presos ao mun
   ctx.fillStyle=up?lit:shade;ctx.fillRect(x,top,cw,h);
   for(let y=Math.max(top+q*2,y0-A*1.1);y<y0;y+=q){const v=Math.sin(w*2.2+(y0-y)/(T*.6)+Math.sin(w*.65+sd)*1.5);if(v>.82){ctx.fillStyle=deep;ctx.globalAlpha=.4;ctx.fillRect(x,y,cw,q);ctx.globalAlpha=1}}
   if(h>snowAt){const wq=Math.floor(w*4),sh=Math.round(((h-snowAt)*.9+hash(wq,sd)*q*3)/q)*q;ctx.fillStyle=up?sL:sD;ctx.fillRect(x,top,cw,Math.min(h,Math.max(q,sh)))}
+ });
  });
 }
 function drawCairn(y0,q,P,k,c){   // três pedras empilhadas
@@ -4137,9 +4367,10 @@ function drawCairn(y0,q,P,k,c){   // três pedras empilhadas
 // Grande montanha à direita: sobe logo depois da última coluna andável (SURF_R) e ocupa o fundo até o limite da câmera. Sem portas nem estruturas: só rocha, neve e floresta no pé.
 function bigMountain(y0,q,A,P,k,B,mir){   // mir = espelhada (usada à esquerda: sobe depois de SURF_L)
  const C=B+5,L0=B-7,R0=C+11,sg=mir?-1:1,e0=mir?2*B-R0:L0,e1=mir?2*B-L0:R0;if(colX(e1)<=0||colX(e0)>=W)return;
- const PK=A*1.04,wint=P.wint,snowAt=PK*(.72-.22*wint);   // quase a altura toda do céu: o pico aparece e a encosta já é uma parede em SURF_R
- const prof=w0=>{const w=mir?2*B-w0:w0,t=w<=C?(w-L0)/(C-L0):1-(w-C)/(R0-C);return t<=0?0:Math.pow(Math.min(1,t),.62)};
- const hOf=w=>PK*prof(w)*(1+.07*Math.sin(w*2.3)+.05*Math.sin(w*5.9+1));
+ const PK=A*.56,wint=P.wint,snowAt=PK*(.72-.22*wint);   // bem abaixo da altura do céu: deixa as cordilheiras do fundo (o Everest) aparecerem por cima
+ const prof=w0=>{const w=mir?2*B-w0:w0,t=w<=C?(w-L0)/(C-L0):1-(w-C)/(R0-C);return t<=0?0:mtnShape(Math.min(1,t),w0,B)};
+ const hOf=w=>PK*prof(w)*(1+.05*Math.sin(w*2.3)+.035*Math.sin(w*5.9+1));
+ bakedCols("big"+(mir?"m":"r")+B,B+"|"+q+"|"+A,nq32()+"|"+P.wint.toFixed(3),Math.ceil(PK*1.32)+q*2,y0,(y0,k)=>{
  const lit=k("#9a928d"),shade=k("#615952"),deep=k("#3b342f"),hi=k("#c4bcb4"),sL=k("#fbfcfd"),sD=k("#cdd8e6");
  worldCols(q,e0,e1,(w,x,cw)=>{
   const h=Math.round(hOf(w)/q)*q;if(h<=0)return;
@@ -4152,48 +4383,12 @@ function bigMountain(y0,q,A,P,k,B,mir){   // mir = espelhada (usada à esquerda:
   }
   if(h>snowAt){const wq=Math.floor(w*4),sh=Math.round(((h-snowAt)*.85+hash(wq,29)*q*3)/q)*q;ctx.fillStyle=up?sL:sD;ctx.fillRect(x,top,cw,Math.min(h,Math.max(q,sh)))}
  });
+ });
  // pedras caídas no pé da encosta e floresta de pinheiros (a trilha termina aqui)
  pxBoulder(colX(B-sg*.05),y0+q,T*.62,q,P,k);pxBoulder(colX(B+sg*.55),y0+q,T*.45,q,P,k);pxBoulder(colX(B-sg*1.4),y0+q,T*.4,q,P,k);
  for(let o=-6;o<3;o+=.6){const w=B+sg*o,j=hash(Math.floor(w*5),71);if(j<.3)continue;
   const x=colX(w+(j-.5)*.4),hh=T*(1.0+hash(Math.floor(w*5),73)*1.2)*(o>0?.7:1);if(x<-T||x>W+T)continue;
   if(j>.6)pxPine(x,y0+q,hh,q,P,k,true);else pxPine(x,y0+q,hh*.85,q,P,k,false)}
-}
-
-// Massa de montanhas ao fundo da esquerda: presa ao mundo (não muda de tamanho nem pisca ao andar), atrás do terreno do bloqueio. Dois picos grandes com neve; passa um pouco de SURF_L para o lado da passagem.
-function leftMassif(y0,q,A,P,k,E){
- const peaks=[[E-4.5,.98,7.5],[E-12,.82,8],[E+1.5,.52,5.5],[E-20,.7,9]];   // [centro, altura (fração do céu), meia-largura] em colunas
- const hOf=w=>{let h=0;for(const[c,a,hw]of peaks){const t=1-Math.abs(w-c)/hw;if(t>0)h=Math.max(h,a*Math.pow(t,.8))}return h*A*(1+.06*Math.sin(w*2.7)+.04*Math.sin(w*6.1+2))};
- const lit=k("#8397b6"),shade=k("#566a8c"),deep=k("#3b4d6c"),sL=k("#f4f8fb"),sD=k("#c3d1e3"),wint=P.wint,snowAt=A*(.66-.2*wint);
- worldCols(q,E-30,E+8,(w,x,cw)=>{
-  const h=Math.round(hOf(w)/q)*q;if(h<=0)return;
-  const up=hOf(w+.4)>hOf(w-.4),top=y0-h;
-  ctx.fillStyle=up?lit:shade;ctx.fillRect(x,top,cw,h);
-  for(let y=top+q*2;y<y0;y+=q){const v=Math.sin(w*1.9+(y0-y)/(T*.6)+Math.sin(w*.6)*1.4);if(v>.82){ctx.fillStyle=deep;ctx.globalAlpha=.4;ctx.fillRect(x,y,cw,q);ctx.globalAlpha=1}}
-  if(h>snowAt){const wq=Math.floor(w*4),sh=Math.round(((h-snowAt)*.9+hash(wq,31)*q*3)/q)*q;ctx.fillStyle=up?sL:sD;ctx.fillRect(x,top,cw,Math.min(h,Math.max(q,sh)))}
- });
-}
-// Bloqueio à esquerda: terreno elevado de rocha e grama com pedras enormes e árvores, bem atrás de SURF_L. O jogador para na base.
-function leftBlock(y0,q,A,P,k,E,back){
- const hOf=w=>{const d=E-w;if(d<=0)return 0;const wq=Math.floor(w*3);return(Math.min(3.5,1.5+d*.5)+(hash(wq,71)-.5)*.5)*T};
- const footH=(w,rc)=>Math.min(hOf(w-rc),hOf(w),hOf(w+rc));   // altura do terreno sob uma peça de meia-largura rc (em colunas): ela assenta no ponto mais baixo
- if(colX(E)<=0)return;
- if(back){   // árvores atrás do terreno (a base fica escondida por ele)
-  for(const[dw,kind,r]of[[1.2,0,2.6],[3.0,0,3.1],[4.7,1,2.3],[6.4,0,3.3],[7.9,0,2.7]]){const w=E-dw,x=colX(w);if(x<-T||x>W+T)continue;const by=y0-footH(w,.3)+q*2;kind?pxTree(x,by,T*r*.8,q,P,k,true):pxPine(x,by,T*r,q,P,k,true)}
-  return}
- const gr=k(P.gr),grH=k(P.grH),m=k(P.rkM),mD=k(P.rkD),mL=k(P.rkL);
- worldCols(q,E-20,E,(w,x,cw)=>{
-  const h=Math.round(hOf(w)/q)*q;if(h<=0)return;
-  const top=y0-h,wq=Math.floor(w*3);
-  ctx.fillStyle=m;ctx.fillRect(x,top,cw,h);
-  ctx.fillStyle=(hash(wq,81)>.5)?mL:mD;ctx.globalAlpha=.55;ctx.fillRect(x,top+q*2,cw,Math.round(h*.45/q)*q);ctx.globalAlpha=1;   // faixas de rocha clara/escura
-  for(let y=top+q*4;y<y0-q;y+=q*3)if(hash(wq,Math.floor((y0-y)/(q*3))+90)>.55){ctx.fillStyle="rgba(0,0,0,.18)";ctx.fillRect(x,y,cw,q)}
-  ctx.fillStyle=gr;ctx.fillRect(x,top,cw,q*2);ctx.fillStyle=grH;ctx.fillRect(x,top,cw,q);   // grama no topo do terreno
-  if(P.wint>.25){ctx.globalAlpha=P.wint;ctx.fillStyle=k(P.snow);ctx.fillRect(x,top,cw,q*2);ctx.globalAlpha=1}
- });
- for(const[dw,r]of[[.3,1.0],[1.5,.75],[2.9,1.1],[4.8,.85],[6.3,1.05]]){const w=E-dw,x=colX(w);if(x<-T*2||x>W+T*2)continue;pxBoulder(x,y0-footH(w,r*.55)+q*2,T*r*.55,q,P,k)}
- for(const[dw,kind,r]of[[2.2,0,2.2],[4.0,1,1.9],[5.6,0,2.8],[7.0,0,2.0]]){const w=E-dw,x=colX(w);if(x<-T||x>W+T)continue;const by=y0-footH(w,.3)+q*2;kind?pxTree(x,by,T*r*.8,q,P,k,false):pxPine(x,by,T*r,q,P,k,false)}
- // barreira rochosa na frente do terreno, em SURF_L: pedras maiores para o bloqueio ficar legível
- pxBoulder(colX(E+.1),y0+q,T*.55,q,P,k);pxBoulder(colX(E-.7),y0+q,T*.7,q,P,k);
 }
 
 // ===== 5-desenho/12-povoado.js — Cama, lamparina da carrocinha da loja, poço de água, ferraria alemã de enxaimel, quadro de contratos e caça-níquel na superfície =====
@@ -4246,6 +4441,7 @@ const FORGE_LAN={dx:-6,dy:19.5};    // lanterna: deslocamento em relação ao pi
 const forgeFx=c=>Math.round(colX(0))+Math.round(c*T);   // coluna -> x da tela com UM só arredondamento (âncora) e deslocamentos inteiros: nada treme entre si ao andar
 function forgeLantern(){const u=pu();return{x:forgeFx(FORGE_LANTERN_C)+Math.round(FORGE_LAN.dx*u),y:rowY(0)-FORGE_LAN.dy*u}}
 function forgeStackTopY(){return rowY(0)-FORGE_TOP*pu()}
+const _forgeSlot=bakeNew();
 function drawForge(t){
  const u=pu(),y=Math.round(rowY(0)),n=nightAmt(),P=FORGE_PILLARS,xl=forgeFx(P[0]),xr=forgeFx(P[P.length-1]);
  if(xr<-T*8||xl>W+T*8)return;
@@ -4253,6 +4449,8 @@ function drawForge(t){
  const hs=(a,b)=>{const v=Math.sin(a*127.1+b*311.7)*43758.5453;return v-Math.floor(v)};
  const TB="#4a2f16",TH="#6b4423",TD="#2f1c0e",ST=["#8d8984","#9a968f","#7f7b76","#a39e96"];   // madeira escura do enxaimel e pedras
  const by=y-FORGE_H*u,pl=7*u,wl=xl-Math.round(1.5*u),ww=xr-xl+Math.round(3*u),wallTop=by+2*u;
+
+ const paintForgeStatic=()=>{
  // ---- 1. embasamento de pedra ao longo de toda a parede dos fundos
  R(wl,y-pl,ww,pl,"#4f4c48");
  [[0,2],[2,2],[4,3]].forEach(([r0,h],r)=>{
@@ -4297,7 +4495,7 @@ function drawForge(t){
   for(let k=0;k<6;k++){if(i<P.length-1)R(x+1.5*u+k*u,by+(7-k)*u,u*1.3,u*1.5,TB);if(i>0)R(x-2.8*u-k*u,by+(7-k)*u,u*1.3,u*1.5,TB)}   // escoras (só para dentro da casa: a de fora dos pilares das pontas ficava solta no ar)
  });
  // ---- chaminé de pedra por DENTRO da casa: sobe da fornalha atrás dos pilares e da viga; o telhado fica na frente dela e só a ponta aparece saindo da cumeeira
- const sF=sprFurnace(),cF=Math.round(colX(FURN_C)),y0F=Math.round(y-sF.h*u),csx=cF-Math.round(sF.w*u/2)+10*u,csw=5*u,ctop=Math.round(forgeStackTopY());
+ const sF=sprFurnace(),cF=Math.round(colX(FURN_C)),y0F=Math.round(y-sF.h*u),csx=cF-Math.round(sF.w*u/2)+10*u,csw=5*u,ctop=y-Math.round(FORGE_TOP*u);
  R(csx,ctop,csw,y0F-ctop+u,"#8a7868");R(csx,ctop,u,y0F-ctop+u,"#a99886");R(csx+csw-u,ctop,u,y0F-ctop+u,"#66574b");   // corpo
  for(let yy=ctop+3*u,r=0;yy<y0F;yy+=3*u,r++){R(csx,yy,csw,Math.max(1,Math.round(u*.7)),"#66574b");R(csx+((r%2)?1:3)*u,yy-3*u,Math.max(1,Math.round(u*.7)),3*u,"#66574b")}   // juntas das pedras
  R(csx-u,ctop-u,csw+2*u,2*u,"#a99886");R(csx-u,ctop+u,csw+2*u,Math.max(1,Math.round(u*.7)),"#66574b");R(csx+u,ctop-u,csw-2*u,Math.round(u*.8),"#1c120c");   // boca com tampa e fuligem
@@ -4313,6 +4511,16 @@ function drawForge(t){
  }
  const ridge=rb-rows*u;R(L0+rows*u-u,ridge-Math.round(u*1.2),Wd-2*rows*u+2*u,Math.round(1.6*u),"#5a2418");R(L0+rows*u-u,ridge-Math.round(u*1.2),Wd-2*rows*u+2*u,Math.max(1,Math.round(u*.6)),"#7a3424");   // cumeeira
  R(csx-u,ridge-Math.round(2.2*u),csw+2*u,Math.round(1.6*u),"#6d7077");R(csx-u,ridge-Math.round(2.2*u),csw+2*u,Math.max(1,Math.round(u*.5)),"#9aa0a8");   // colar de chumbo: a chaminé sai de dentro do telhado
+ };
+ // Partes 1 a 4 (embasamento, chão, painéis, pilares, chaminé e telhado) não mudam com o tempo: são pré-renderizadas (00b-cache.js) e só deslizam com a câmera.
+ // A caixa [bx0,by0] é relativa à âncora (xl,y); a forma só muda com o tamanho do pixel (u) e o tile (T).
+ const bx0=xl-Math.round(9*u),by0=y-Math.round((FORGE_TOP+4)*u),bw=xr-xl+Math.round(18*u),bh=y+Math.round(6*u)-by0;
+ const fslot=_forgeSlot,fk=u.toFixed(3)+"|"+T.toFixed(3)+"|"+(xr-xl)+"|"+(Math.round(colX(FURN_C))-xl);
+ if(fslot.gk!==fk||!fslot.cv){
+  bakeOn(fslot,bw,bh,()=>{ctx.translate(-bx0,-by0);paintForgeStatic()});
+  fslot.gk=fk;fslot.x0=bx0-xl;fslot.y0=by0-y;
+ }
+ ctx.drawImage(fslot.cv,xl+fslot.x0,y+fslot.y0);
  // ---- 5. lanterna de ferro forjado no pilar do meio (braço com voluta, corrente, vidro e chama)
  {const px0=forgeFx(FORGE_LANTERN_C),Lt=forgeLantern(),ly=Math.round(Lt.y),swy=Math.sin(t*1.6)*u*.4,lx=Math.round(Lt.x+swy),fl=.9+.1*Math.sin(t*8.3)+.04*Math.sin(t*13.1),ay=ly-3*u,IR="#2f3238",ax=Lt.x;
   R(ax-u,ay,px0-1.5*u-(ax-u),u,IR);R(ax-u,ay,u,2*u,IR);R(ax,ay+u,u,u,IR);   // braço (para o lado da cama) e voluta
@@ -4456,7 +4664,7 @@ const STONE4=["#8d8984","#9a968f","#7f7b76","#a39e96"];
 // ---------- chão: água (riacho e mar) e areia da praia ----------
 function drawWaterCell(x,y,ts,tb,c,r,sea){
  const t=performance.now()/1000,X=Math.round(x),Y=Math.round(y),w=Math.round(T)+1,q=Math.max(.75,Math.round(baseTile()/16)*worldZoom);
- const cols=sea?["#3b93d6","#2a73b4","#1f5a94"]:["#58aee0","#3b8fcf"];
+ const cols=sea?["#3b93d6","#2a73b4","#1f5a94"]:(c>=FRIV_C0&&c<=FRIV_C1)?["#4d9fa6","#357f8c"]:["#58aee0","#3b8fcf"];   // riacho da floresta: água mais escura e esverdeada
  ctx.fillStyle=cols[Math.min(r,cols.length-1)];ctx.fillRect(X,Y,w,w);
  if(r===0){ctx.fillStyle="rgba(255,255,255,.38)";ctx.fillRect(X,Y,w,Math.max(2,Math.round(q*.8)))}   // brilho da superfície
  for(let i=0;i<3;i++){   // linhas de onda que deslizam (riacho: sempre para a direita; mar: vai e vem)
@@ -4547,17 +4755,26 @@ function drawWindmill(t){
 }
 
 // ---------- riacho: margens de pedra, juncos, vitórias-régias, roda d'água por trás e ponte de madeira ----------
-function drawRiver(t){
- const u=pu(),y=Math.round(rowY(0)),xa=Math.round(colX(RIVER_C0-.5)),xb=xa+Math.round((RIVER_C1-RIVER_C0+1)*T);
+function drawRiver(t){drawRiverAt(t,RIVER_C0,RIVER_C1,WHEEL_C);drawRiverAt(t,FRIV_C0,FRIV_C1,null)}   // o da direita tem roda d'água; o da floresta (esquerda) é mais selvagem, com pedras no leito
+function drawRiverAt(t,C0,C1,WC){
+ const u=pu(),y=Math.round(rowY(0)),xa=Math.round(colX(C0-.5)),xb=xa+Math.round((C1-C0+1)*T);
  if(xb<-T*5||xa>W+T*5)return;
- const TB="#4a2f16",TH="#6b4423",dp=Math.round(T*2);
- for(const[bx,dir]of[[xa,-1],[xb,1]]){   // muros de pedra nas duas margens (por baixo da linha da água)
+ const TB="#4a2f16",TH="#6b4423",dp=Math.round(T*2),wild=WC==null;
+ if(!wild)for(const[bx,dir]of[[xa,-1],[xb,1]]){   // muros de pedra nas duas margens (por baixo da linha da água)
   const sx=dir<0?bx-2.5*u:bx;
   for(let k=0,yy=0;yy<dp;k++,yy+=3*u)PX(sx,y+yy,2.5*u,Math.min(3*u,dp-yy)-1,STONE4[(k+(dir<0?0:2))%4]);
   PX(dir<0?bx-.8*u:bx,y,.8*u,dp,"rgba(8,20,48,.25)");
  }
+ if(wild)for(const[bx,dir]of[[xa,-1],[xb,1]]){   // margens naturais: barranco de terra irregular, pedras soltas, grama pendurada e samambaias
+  const off=dir<0?0:9;
+  for(let k=0,yy=0;yy<dp;k++,yy+=2.5*u){const w=(2+hash(k+off,71)*2.2)*u;PX(dir<0?bx-w:bx,y+yy,w,Math.min(2.5*u,dp-yy),k%3===1?"#6b4a2b":"#7d5a35")}
+  for(let k=0;k<6;k++){const w=(2+hash(k+off,73)*3)*u,sy=y+hash(k+off,75)*(dp-3*u),sx=dir<0?bx-w*.8:bx-w*.2;PX(sx,sy,w,w*.7,STONE4[k%4]);PX(sx,sy,w,.5*u,"#b8b2a8")}
+  PX(dir<0?bx-3.5*u:bx-.5*u,y-.8*u,4*u,1.4*u,"#4f9a3a");
+  for(let f=0;f<3;f++){const fx=bx+dir*(3+f*3.5+hash(f+off,77)*2)*u,sw=Math.round(Math.sin(t*1.2+f+off)*.5*u);
+   PX(fx,y-4*u,.7*u,4*u,"#2f7a34");PX(fx-2*u,y-3*u,2*u,.8*u,"#3f9a44");PX(fx+.7*u,y-3.4*u,2*u,.8*u,"#3f9a44");PX(fx-1.4*u+sw,y-4.4*u,1.6*u,.8*u,"#4fb054");PX(fx+.7*u+sw,y-4.8*u,1.6*u,.8*u,"#4fb054")}
+ }
  // roda d'água (por trás da ponte): suportes, aro, raios e pás girando, parte de baixo dentro da água
- {const wx=forgeFx(WHEEL_C),cy=y-6*u,Rw=12*u;
+ if(WC!=null){const wx=forgeFx(WC),cy=y-6*u,Rw=12*u;
   ctx.save();ctx.strokeStyle=TB;ctx.lineWidth=1.6*u;ctx.beginPath();ctx.moveTo(wx,cy);ctx.lineTo(wx-15*u,y+8*u);ctx.moveTo(wx,cy);ctx.lineTo(wx+15*u,y+8*u);ctx.stroke();
   ctx.translate(wx,cy);ctx.rotate(t*.7);
   ctx.strokeStyle="#5a3a1c";ctx.lineWidth=1.4*u;ctx.beginPath();ctx.arc(0,0,Rw,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.arc(0,0,Rw-3*u,0,Math.PI*2);ctx.stroke();
@@ -4569,10 +4786,19 @@ function drawRiver(t){
   for(let i=0;i<5;i++){const ph=(t*1.6+hash(i,31))%1;PX(wx-Rw+hash(i,33)*2*Rw,y-Math.sin(ph*Math.PI)*6*u,u*.8,u*.8,"rgba(255,255,255,"+(1-ph).toFixed(2)+")")}   // respingos
  }
  // vitórias-régias e juncos
- for(let i=0;i<5;i++){const px=xa+(.12+.76*hash(i,3))*(xb-xa);PX(px,y+u*.2,4*u,u,"#2f8a3a");PX(px,y+u*.2,2*u,u*.5,"#4dbb4d");if(i%2===0)PX(px+1.6*u,y-.7*u,u,u,"#f2a6c8")}
+ for(let i=0;i<5;i++){const px=xa+(.12+.76*hash(i+(WC==null?7:0),3))*(xb-xa);PX(px,y+u*.2,4*u,u,"#2f8a3a");PX(px,y+u*.2,2*u,u*.5,"#4dbb4d");if(i%2===0)PX(px+1.6*u,y-.7*u,u,u,"#f2a6c8")}
+ if(wild)for(let i=0;i<5;i++){const px=xa+(.08+.84*hash(i,61))*(xb-xa),sz=(2.5+hash(i,63)*3)*u;PX(px-u,y,sz+2*u,.5*u,"rgba(255,255,255,.6)");PX(px,y-sz*.55,sz,sz*.55+.3*u,STONE4[i%4]);PX(px,y-sz*.55,sz,.5*u,"#b8b2a8");PX(px+sz*.3,y-sz*.55,sz*.4,.5*u,"#6aa05a")}   // pedras no leito, com espuma e musgo
  [xa-4*u,xa-8*u,xb+4*u,xb+8*u].forEach((rx,ri)=>{for(let k=0;k<3;k++){const sw=Math.round(Math.sin(t*1.3+ri*2.1+k)*.7*u),hh=(6+k*1.5)*u;PX(rx+k*1.4*u+sw,y-hh,.8*u,hh,"#3f8a3a");PX(rx+k*1.4*u+sw-.2*u,y-hh-1.2*u,1.2*u,2.4*u,"#6b4423")}})
  // ponte de madeira: pilares na água, tabuleiro de tábuas, vigas e guarda-corpo
  const b0=xa-5*u,b1=xb+5*u,len=b1-b0;
+ if(wild){   // travessia: um tronco caído coberto de musgo
+  PX(xa,y+T*.5,xb-xa,T*.4,"rgba(20,60,70,.3)");
+  PX(b0,y-.5*u,len,4.5*u,"#5a3a1c");PX(b0,y-.5*u,len,1.2*u,"#7d5a35");PX(b0,y+2.8*u,len,1.2*u,"#3a2410");
+  for(let x=b0+3*u,ix=0;x<b1-2*u;x+=Math.round((6+hash(ix,81)*5)*u),ix++)PX(x,y+.6*u,.6*u,2.4*u,"#3a2410");
+  for(let ix=0;ix<5;ix++)PX(b0+hash(ix,83)*(len-4*u),y-1.1*u,(2+hash(ix,85)*3)*u,.9*u,"#4f9a3a");
+  PX(b0-.8*u,y-.2*u,1.6*u,4*u,"#c9a36a");PX(b1-.8*u,y-.2*u,1.6*u,4*u,"#c9a36a");PX(b0+len*.3,y-2.4*u,1.2*u,2*u,"#5a3a1c");
+  return;
+ }
  for(let i=0;i<4;i++){const px=xa+(xb-xa)*(i+.5)/4;PX(px-u,y+2.5*u,2*u,T*1.1,TB);PX(px-u,y+2.5*u,.7*u,T*1.1,TH)}
  PX(xa,y+T*.5,xb-xa,T*.7,"rgba(50,125,190,.35)");
  PX(b0,y,len,2.5*u,"#8a5a2b");PX(b0,y,len,.8*u,"#b27a3a");PX(b0,y+1.7*u,len,.8*u,"#3a2410");
@@ -4721,8 +4947,8 @@ function drawCritters(t){
   PX(x,by-2*q,3*q,2*q,"#d8d0bc");PX(x+(dir>0?2:0)*q,by-3*q,q,q,"#e8e0cc");PX(x+(dir>0?2:0)*q,by-4*q,q,q,"#d8d0bc");PX(x+(dir>0?0:2)*q,by-3*q,q,q,"#d8d0bc");PX(x+(dir>0?-1:3)*q,by-2*q,q,q,"#ffffff");PX(x+(dir>0?2:0)*q,by-3*q,q*.6,q*.6,"#2f1c0e");
  }
  // sapos nas margens do riacho: cada salto termina numa nova posição e não desfaz o movimento
- for(let i=0;i<4;i++){
-  const home=[22.9,23.4,31.1,31.6][i],cyc=3+i*.7,tt=t+i*.9,ph=tt%cyc,cnt=Math.floor(tt/cyc),hop=ph>cyc-.6?(ph-(cyc-.6))/.6:-1;
+ for(let i=0;i<8;i++){
+  const home=[22.9,23.4,31.1,31.6,FRIV_C0-1.1,FRIV_C0-.6,FRIV_C1+1.1,FRIV_C1+1.6][i],cyc=3+i*.7,tt=t+i*.9,ph=tt%cyc,cnt=Math.floor(tt/cyc),hop=ph>cyc-.6?(ph-(cyc-.6))/.6:-1;
   const p0=(hash(cnt,i+181)-.5)*2.5*u,p1=(hash(cnt+1,i+181)-.5)*2.5*u,k=hop>=0?hop:0,x=colX(home)+Math.round(p0+(p1-p0)*k);if(x<-T||x>W+T)continue;
   const by=y-(hop>=0?Math.sin(hop*Math.PI)*3*u:0);PX(x,by-2*q,3*q,2*q,"#4da64d");PX(x,by-3*q,q,q,"#7ad07a");PX(x+2*q,by-3*q,q,q,"#7ad07a");PX(x,by-3*q,q*.5,q*.5,"#1c120c");PX(x+2.5*q,by-3*q,q*.5,q*.5,"#1c120c");
  }
@@ -4730,9 +4956,9 @@ function drawCritters(t){
  for(let i=0;i<4;i++){const x=colX(45+i*2.2+Math.sin(t*.6+i*2)*.7);if(x<-T||x>W+T)continue;const m=Math.sin(t*6+i)>0;
   PX(x,y-q,3*q,q,"#e0553a");PX(x-q,y-2*q,q,q,"#e0553a");PX(x+3*q,y-2*q,q,q,"#e0553a");PX(x,y-2*q,q*.6,q*.6,"#1c120c");PX(x+2*q,y-2*q,q*.6,q*.6,"#1c120c");PX(x+(m?-1:3)*q,y,q,q*.6,"#e0553a")}
  // peixes que saltam no riacho e no mar: o próximo salto começa onde o anterior aterrissou
- for(let i=0;i<6;i++){
-  const sea=i>=3,per=5+hash(i,141)*5,tt=t+hash(i,143)*per,cnt=Math.floor(tt/per),ph=tt%per;if(ph>.8)continue;
-  const f=ph/.8,home=sea?54+hash(i,145)*5:24.8+hash(i,145)*4.4;
+ for(let i=0;i<9;i++){
+  const sea=i>=3&&i<6,per=5+hash(i,141)*5,tt=t+hash(i,143)*per,cnt=Math.floor(tt/per),ph=tt%per;if(ph>.8)continue;
+  const f=ph/.8,home=sea?54+hash(i,145)*5:i>=6?FRIV_C0+.8+hash(i,145)*3.4:24.8+hash(i,145)*4.4;
   // Posição de cada aterrissagem dentro do trecho de água. O destino vira a origem do salto seguinte.
   const p0=hash(cnt,i+147)*6*u,p1=hash(cnt+1,i+147)*6*u,x=colX(home)+p0+(p1-p0)*f,by=y-Math.sin(f*Math.PI)*9*u,fl=p1>=p0?1:-1;
   if(x<-T||x>W+T)continue;
@@ -4752,9 +4978,24 @@ function drawFireflies(t){   // vaga-lumes: pontinhos que piscam e passeiam sobr
 }
 
 // ---------- tudo junto (chamado por drawGateAndChest, atrás do jogador) ----------
+// pedrinhas e pedras chatas assentadas na linha do chão (direita): detalhe de terreno ao longo da passagem, nas margens do riacho e na praia (aí mais claras)
+function drawPebbles(){
+ const u=pu(),y=Math.round(rowY(0));
+ for(let c=HALF+2;c<=SURF_R;c++){
+  if(isRiver(c)||c>=PIER_C-1)continue;
+  const beach=isBeach(c);
+  for(let m=0;m<1;m++){
+   const h=hash(c*3+m,971);if(h<(beach?.72:.8))continue;
+   const x=forgeFx(c+(hash(c*3+m,973)-.5)*.9),w=(1.4+hash(c*3+m,975)*2.4)*u,hh=Math.max(u,w*(.45+hash(c*3+m,977)*.3));
+   if(x<-T||x>W+T)continue;
+   const i=Math.floor(hash(c*3+m,979)*4);
+   PX(x,y-hh,w,hh,beach?["#d8cfb8","#c9bfa4","#e6dfcc","#b7ac92"][i]:STONE4[i]);PX(x,y-hh,w,Math.max(1,.45*u),beach?"#f2ecdc":"#bdb8ae");PX(x+w*.6,y-hh*.5,w*.4,hh*.5,"rgba(0,0,0,.14)");
+  }
+ }
+}
 function drawLandscape(t){
  if(rowY(0)<=8)return;
- drawWindmill(t);drawGarden(t);drawRiver(t);drawCampfire(t);drawBeach(t);drawFishHints(t);drawCritters(t);
+ drawWindmill(t);drawGarden(t);drawRiver(t);drawPebbles();drawCampfire(t);drawBeach(t);drawFishHints(t);drawCritters(t);
 }
 
 // ===== 5-desenho/14-cenoura-dourada.js — A cenoura dourada brotando da Rocha-mãe, no fundo do abismo =====
@@ -4836,11 +5077,6 @@ function fishIcon(g,cx,cy,s,col,dir,tail,uFix){   // s = comprimento aproximado 
 }
 // Peixinho de 10x5 para a pista fina do minigame (olhando para a esquerda)
 const FISHM_PX=["...DDD....",".DDBBBB.FF",".PEBBBBFFF",".LLLLLL.FF","...LL....."];
-function fishMini(g,cx,cy,col,dir,tail){
- const d=dir||1,x0=Math.round(cx-5),y0=Math.round(cy-2.5),st=clamp(Math.round((tail||0)/2),-1,1),pal={B:col,D:mixHex(col,"#000000",.28),L:mixHex(col,"#ffffff",.32),F:mixHex(col,"#000000",.14),E:"#ffffff",P:"#111111"},px=[];
- FISHM_PX.forEach((row,j)=>{for(let i=0;i<10;i++){const c=row[i];if(c!==".")px.push([d>0?i:9-i,j+(i>=7?st:0),pal[c]])}});
- fsPx(g,px,x0,y0,1);
-}
 // Peixe da pista fina do minigame, de pé (5x10, escala u): a cabeça aponta para onde ele está indo (dir -1 = sobe, 1 = desce)
 function fishLane(g,cx,cy,col,dir,tail,u){
  const d=dir||-1,x0=Math.round(cx-2.5*u),y0=Math.round(cy-5*u),st=clamp(Math.round((tail||0)/2),-1,1),pal={B:col,D:mixHex(col,"#000000",.28),L:mixHex(col,"#ffffff",.32),F:mixHex(col,"#000000",.14),E:"#ffffff",P:"#111111"},px=[];
@@ -4864,8 +5100,6 @@ function pxCurve(g,x0,y0,cx,cy,x1,y1,u,col){
  g.fillStyle=col;const n=Math.max(2,Math.ceil((Math.abs(x1-x0)+Math.abs(y1-y0))/u));
  for(let i=0;i<=n;i++){const t=i/n,m=1-t,x=m*m*x0+2*m*t*cx+t*t*x1,y=m*m*y0+2*m*t*cy+t*t*y1;g.fillRect(Math.round(x/u)*u,Math.round(y/u)*u,u,u)}
 }
-// Corta o texto com reticências para caber em maxW
-function fsClip(g,txt,maxW){let t=String(txt);if(g.measureText(t).width<=maxW)return t;while(t.length>1&&g.measureText(t+"\u2026").width>maxW)t=t.slice(0,-1);return t+"\u2026"}
 const fsLerp=(a,b,k)=>a+(b-a)*k;
 // ---------- pesca no mundo ----------
 let fishTip={x:0,y:0};   // ponta da vara na tela (calculada em drawPlayer a cada quadro)
@@ -4901,16 +5135,9 @@ function fishSplash(n){   // gotinhas na água onde a boia está
  if(!fs)return;const B=fishBob();
  for(let i=0;i<n;i++)parts.push({x:B.x+(Math.random()-.5)*10,y:B.y,vx:(Math.random()-.5)*120,vy:-70-Math.random()*140,l:.55,c:i%3?"#bfe6ff":"#ffffff"});
 }
-function fsWrap(g,txt,maxW){const w=String(txt).split(" "),L=[];let c="";for(const x of w){const t=c?c+" "+x:x;if(g.measureText(t).width>maxW&&c){L.push(c);c=x}else c=t}if(c)L.push(c);return L}
-function fsText(g,s,x,y,col,size,wt){g.font=(wt||700)+" "+size+"px "+FONT;g.lineWidth=Math.max(3,size/4);g.lineJoin="round";g.strokeStyle="rgba(0,0,0,.8)";g.strokeText(s,x,y);g.fillStyle=col;g.fillText(s,x,y)}
 // Visual das janelas: cor por raridade (comum, raro, lendário), painel com cantos arredondados e pílula de texto
 const TIERC=["#7f9db3","#5fb8ff","#ffb43a"];
 function fsRR(g,x,y,w,h){g.beginPath();g.rect(Math.round(x),Math.round(y),Math.round(w),Math.round(h))}   // cantos retos, como o resto do jogo (o raio é ignorado)
-function fsPanel(g,x,y,w,h,acc){   // painel chapado como a hotbar: borda preta de 2px, sem chanfro nem brilho; acc = faixa de cor no alto
- x=Math.round(x);y=Math.round(y);w=Math.round(w);h=Math.round(h);
- g.fillStyle="#000";g.fillRect(x,y,w,h);g.fillStyle="#1b1b1b";g.fillRect(x+2,y+2,w-4,h-4);
- if(acc){g.fillStyle=acc;g.fillRect(x+4,y+4,w-8,2)}
-}
 // Painel no estilo da janela do baú e do caça-níquel: fundo escuro em degradê com pedrinhas, moldura grossa de 3px na cor da raridade e lâmpadas correndo na borda de cima
 // (mais rápidas quando está indo bem). Tudo em quadradinhos inteiros.
 function fsBox(g,x,y,w,h,col,t,fast,noLamps){
@@ -5049,7 +5276,7 @@ function campDraw(g,dt){
 function drawFishHints(t){
  if(!atSurface()||modal||fs)return;
  const u=pu(),y=Math.round(rowY(0)),sp=fishSpot();
- if(sp){const c=sp==="r"?(RIVER_C0+RIVER_C1)/2:PIER_C+.6,x=Math.round(forgeFx(c));if(x>-T*3&&x<W+T*3)lbl(sp==="r"?__("Riacho: clique para pescar"):__("Mar: clique para pescar"),x,y-14*u-Math.sin(t*4)*2,"#6fe3a0")}
+ if(sp){const rv=riverOf(S.mc),forest=rv[0]===FRIV_C0,c=sp==="r"?(rv[0]+rv[1])/2:PIER_C+.6,x=Math.round(forgeFx(c));if(x>-T*3&&x<W+T*3)lbl(sp==="r"?(forest?__("Riacho da floresta: clique para pescar"):__("Riacho: clique para pescar")):__("Mar: clique para pescar"),x,y-14*u-Math.sin(t*4)*2,"#6fe3a0")}
  if(nearKeeper()&&S.fb.length){const x=Math.round(colX(KEEPER_C));lbl(__("Vender"),x,y-66*worldZoom-Math.sin(t*4)*2,"#6fe3a0")}   // logo acima do nome do Izans
 }
 
@@ -5150,6 +5377,7 @@ function skyLife(sky,t,scale,night,ps){
 // ===== 6-jogo/01-laco-inicio.js — Laço principal, eventos, salvar/exportar/importar e inicialização =====
 let last=performance.now(),acc=0,sv=0,autoMsgT=0;
 function loop(now){
+ requestAnimationFrame(loop);   // agenda o próximo quadro antes de tudo: uma exceção num quadro não congela o jogo para sempre
  const dt=modal==="pause"||modal==="lv"||modal==="chest"?0:Math.min(.1,(now-last)/1000);last=now;   // pausa, escolha de melhoria ao subir de nível e animação de abrir baú congelam o jogo (tempo, habilidades, energia, combo, clima, fornalha...)
  if(modal!=="title")S.play+=dt;dayTick(dt);seasonTick(dt);weatherTick(dt);starTick(dt);cmbT-=dt;if(cmbT<=0){if(cmb>0)comboEnd();cmb=0}
  for(let i=0;i<2;i++){if(skT[i]>0)skT[i]-=dt;if(skCD[i]>0)skCD[i]-=dt}
@@ -5157,8 +5385,8 @@ function loop(now){
  if(!Number.isFinite(S.gold)&&!S.debug)S.gold=0;
  ambT-=dt;if(musOn&&!mute&&S.vol.a>0&&ambT<=0){ambT=3+Math.random()*4;drip()}
  musT-=dt;if(musOn&&!mute&&S.vol.m>0&&musT<=0){musT=2+Math.random();note()}
- if(S.dir==="down")jetT=0;if(jetT>0)jetT-=dt;if(jetT>0||(!modal&&airborne()&&S.dir!=="down")){const jx=colX(mX),jy=rowY(mY);const sb=shiftOn&&!fs&&(S.dir==="left"||S.dir==="right");if(Math.random()<dt*(jetT>0?60:sb?55:14)){const bz=sb?2.2:1;parts.push({x:jx-9*worldZoom+(Math.random()-.5)*4,y:jy-6*worldZoom,vx:(Math.random()-.5)*(jetT>0?50:25)*bz,vy:(jetT>0?90+Math.random()*110:40+Math.random()*50)*bz,l:.3,c:Math.random()<.5?"#ffb43a":"#ff6a2a",jet:true})}}
- dynCD=Math.max(0,dynCD-dt);tpCD=Math.max(0,tpCD-dt);toastT-=dt;autoMsgT-=dt;
+ if(S.dir==="down")jetT=0;if(jetT>0)jetT-=dt;if(jetT>0||(!modal&&airborne()&&S.dir!=="down")){const jx=colX(mX),jy=rowY(mY);const sb=shiftOn&&!fs&&(S.dir==="left"||S.dir==="right");if(Math.random()<dt*(jetT>0?60:sb?55:14)){const bz=sb?2.2:1;const nzk=performance.now()-jetNz.t<150;parts.push({x:(nzk?jetNz.x:jx+(S.dir==="left"?9:-9)*worldZoom)+(Math.random()-.5)*4,y:(nzk?jetNz.y:jy-8*worldZoom)+2*worldZoom,vx:(Math.random()-.5)*(jetT>0?50:25)*bz,vy:(jetT>0?90+Math.random()*110:40+Math.random()*50)*bz,l:.3,c:Math.random()<.5?"#ffb43a":"#ff6a2a",jet:true})}}
+ dynCD=Math.max(0,dynCD-dt);tpCD=Math.max(0,tpCD-dt);toastTick(dt);autoMsgT-=dt;
  if(ev>0)ev-=dt;else{evNext-=dt;if(evNext<=0){ev=BAL.events.len;evT=Math.random()<.5?0:1;evNext=BAL.events.gapMin+Math.random()*BAL.events.gapRand;sayK(evT?"mine":"gold",evT?__("Frenesi mineral! Minérios x3 por 20s"):__("Corrida do ouro! Ouro x3 por 20s"))}}
  // superfície: recupera energia rápido e entrega a mochila ao chegar perto do baú
  if(atSurface()){const m=maxEn();if(S.en<m)S.en=Math.min(m,S.en+60*dt);}
@@ -5186,7 +5414,6 @@ function loop(now){
  draw(dt);
  acc+=dt;if(acc>.15){acc=0;checkAch();checkUnlocks();autoTab();refresh();buffsUI()}
  sv+=dt;if(sv>5){sv=0;save()}
- requestAnimationFrame(loop);
 }
 document.addEventListener("visibilitychange",()=>{if(document.hidden)save()});
 addEventListener("pagehide",save);
@@ -5209,5 +5436,5 @@ if(S.lvp>0&&!modal)levelUp();
 onLang(()=>{relabelTabs();if(fsLab)fsLab();buildBar();build();statsHtml="";bagHtml="";buffsHtml="";clkLast="";if(modal==="pause"){paintPause();const lb=document.querySelector("#bx .lp-btn");if(lb)lb.focus()}refresh()});
 requestAnimationFrame(loop);
 // gancho opcional usado só por tools/smoke.js (não faz nada no jogo normal)
-if(typeof window.__TESTE__==="function")window.__TESTE__({get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,furyActiveMult,frenzyActiveMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v}});
+if(typeof window.__TESTE__==="function")window.__TESTE__({sayK,toastTick,toastHas,get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,WALK_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,furyActiveMult,frenzyActiveMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,moonP,moonLit,moonLight,moonName,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v}});
 })();
