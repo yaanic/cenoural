@@ -82,7 +82,7 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 #buffs{position:absolute;top:38px;left:12px;z-index:1;display:flex;flex-direction:column;gap:4px;pointer-events:none}
 .buff{display:flex;align-items:center;gap:6px;padding:3px 8px 3px 5px;border:1px solid #ffffff26;border-radius:8px;background:#000b;font-size:.72rem;font-weight:600;white-space:nowrap}
 .buff svg{width:16px;height:16px;flex:none}
-.buff.night{color:#c4d0ff;border-color:#9db4ff55}.buff.star{color:#ffe08a;border-color:#ffd45c66;animation:slotOn 1s ease-in-out infinite alternate}
+.buff.night{color:#c4d0ff;border-color:#9db4ff55}.buff.star{color:#ffe08a;border-color:#ffd45c66;animation:slotOn 1s ease-in-out infinite alternate}.buff.mine{color:#a8ecff;border-color:#7fe3ff66}.buff.gold{color:#ffe08a;border-color:#ffd45c66}
 /* Barra de habilidades no estilo da hotbar do Minecraft: faixa cinza com casas em relevo, ícones em pixel art, contagem no canto e recarga em véu branco subindo */
 #bar{position:absolute;left:0;right:0;bottom:8px;z-index:4;display:flex;justify-content:center;pointer-events:none}
 /* Hotbar no estilo das janelas do baú, da fogueira e da pesca: fundo escuro em degradê com pedrinhas, os slots em 3 grupos */
@@ -441,3 +441,28 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 .potbox .pting.soft .pi.use i{background:var(--fc)}
 .potbox .pting.soft .pi.use b{color:var(--ok)}
 .potbox .pting.soft .pi.no{opacity:.35}
+
+/* Poder: mesmas seções recolhíveis do Menu (sem mudar o tamanho das letras dos botões de poder) */
+.help.pw{font-size:inherit;line-height:inherit;margin-bottom:6px}
+.help.pw>details>summary{font-size:.72rem}
+.help.pw .ph{margin:0 0 8px}
+/* Menu: final com áudio e save organizados */
+.help.snd{margin-top:6px}
+.help.snd .qty{margin-bottom:8px}
+.help.snd #b-snd{flex:1;text-align:left;display:flex;align-items:center;gap:8px}
+.help.snd #b-snd::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--mute);flex:none}
+.help.snd #b-snd.on::before{background:#6fe3a0;box-shadow:0 0 6px #6fe3a099}
+.vrow{display:grid;grid-template-columns:76px 1fr 38px;align-items:center;gap:10px;margin:0 0 8px;transition:opacity .2s}
+.vrow .vl{color:var(--mute);font-size:.78rem}
+.vrow .vv{text-align:right;color:var(--text);font-size:.74rem;font-variant-numeric:tabular-nums}
+.snd.off .vrow{opacity:.45}
+.vrow input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:18px;margin:0;background:transparent;cursor:pointer;--v:100%}
+.vrow input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(to right,var(--acc) var(--v),var(--line) var(--v))}
+.vrow input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:var(--line)}
+.vrow input[type=range]::-moz-range-progress{height:6px;border-radius:3px;background:var(--acc)}
+.vrow input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;margin-top:-4px;border-radius:50%;background:var(--text);border:2px solid var(--acc)}
+.vrow input[type=range]::-moz-range-thumb{width:10px;height:10px;border-radius:50%;background:var(--text);border:2px solid var(--acc)}
+.help.sav p,.help .sav p{color:var(--mute);margin:0 0 8px}
+.help.snd #sv{width:100%;box-sizing:border-box;margin:0 0 8px;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px;font-size:.75rem;resize:vertical}
+.help.snd .dangerbtn{width:100%;margin-top:4px;padding:7px;font-size:.78rem;color:#ff8a7a;background:transparent;border:1px solid rgba(255,90,74,.35);border-radius:8px}
+.help.snd .dangerbtn:hover{background:rgba(255,90,74,.1)}

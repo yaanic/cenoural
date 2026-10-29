@@ -71,12 +71,14 @@
   </div>
   <div class="pane">
     <div class="ph" data-i18n>Poderes de renascimento (comprados com fragmentos), Renascer, estatísticas e conquistas.</div>
-    <h2><span data-i18n>Poderes de renascimento</span> · <span id="pts">0</span> <span data-i18n>fragmentos</span></h2><div class="ph" id="skmsg"></div><div id="sks"></div>
-    <button class="up" id="prest"><span class="n" data-i18n>Renascer</span><span class="d" id="prestd"></span><span class="c" id="prestc"></span></button>
-    <h2 data-i18n>Estatísticas</h2>
-    <div class="help" id="stats"></div>
-    <h2><span data-i18n>Conquistas</span> · <span id="achc">0/0</span></h2>
-    <div class="help" id="achl"></div>
+    <div class="help pw">
+      <details open><summary><span><span data-i18n>Poderes de renascimento</span> · <span id="pts">0</span> <span data-i18n>fragmentos</span></span></summary><div class="ph" id="skmsg"></div><div id="sks"></div></details>
+      <details open><summary data-i18n>Renascer</summary>
+        <button class="up" id="prest"><span class="n" data-i18n>Renascer</span><span class="d" id="prestd"></span><span class="c" id="prestc"></span></button>
+      </details>
+      <details><summary data-i18n>Estatísticas</summary><div class="help" id="stats"></div></details>
+      <details><summary><span><span data-i18n>Conquistas</span> · <span id="achc">0/0</span></span></summary><div class="help" id="achl"></div></details>
+    </div>
   </div>
   <div class="pane">
     <div class="ph" data-i18n>Como jogar, controles, som e save. Toque num título para abrir ou fechar a seção.</div>
@@ -172,11 +174,19 @@
     </div>
     <div class="help"><details><summary data-i18n>Sobre o save</summary><p data-i18n>Seu progresso fica salvo <b>só neste navegador e neste aparelho</b>. Se você limpar os dados do navegador, usar aba anônima ou trocar de aparelho, o progresso some. Para guardar ou levar para outro lugar, use <b>Exportar save</b> abaixo e guarde o texto.</p></details>
     <details><summary data-i18n>Créditos</summary><p data-i18n>Criado por <b>João Pedro Borges</b> com auxílio de <b>inteligência artificial</b> (Claude, da Anthropic): parte do código e do conteúdo do jogo foi gerada com IA.<br>Fonte: Silkscreen (Jason Kottke, licença SIL OFL).</p><p style="opacity:.7" data-i18n>© 2026 João Pedro Borges. Todos os direitos reservados.</p></details></div>
-    <div class="qty"><button id="b-snd"></button></div>
-    <details style="margin:6px 0"><summary data-i18n>Áudio</summary><div class="stats"><span data-i18n>Música</span> <input id="vm" type="range" min="0" max="1" step=".05"><br><span data-i18n>Efeitos</span> <input id="vs" type="range" min="0" max="1" step=".05"><br><span data-i18n>Ambiente</span> <input id="va" type="range" min="0" max="1" step=".05"></div></details>
-    <textarea id="sv" rows="3" data-i18n-attr="placeholder" placeholder="Texto do save: exporte ou cole aqui para importar" style="width:100%;margin-top:10px;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px;font-size:.75rem"></textarea>
-    <div class="qty"><button id="exp" data-i18n>Exportar save</button><button id="imp" data-i18n>Importar save</button></div>
-    <button id="reset" data-i18n style="margin-top:6px;font-size:.8rem;color:var(--mute)">Apagar progresso</button>
+    <div class="help snd">
+      <details open class="aud"><summary data-i18n>Áudio</summary>
+        <div class="qty"><button id="b-snd"></button></div>
+        <div class="vrow"><span class="vl" data-i18n>Efeitos</span><input id="vs" type="range" min="0" max="1" step=".05"><output class="vv" id="vsv">100%</output></div>
+        <div class="vrow"><span class="vl" data-i18n>Ambiente</span><input id="va" type="range" min="0" max="1" step=".05"><output class="vv" id="vav">100%</output></div>
+      </details>
+      <details class="sav"><summary data-i18n>Salvar e transferir</summary>
+        <p data-i18n>Exporte o progresso como texto para guardar, ou cole um texto salvo para importar.</p>
+        <textarea id="sv" rows="3" data-i18n-attr="placeholder" placeholder="Texto do save: exporte ou cole aqui para importar"></textarea>
+        <div class="qty"><button id="exp" data-i18n>Exportar save</button><button id="imp" data-i18n>Importar save</button></div>
+        <button id="reset" class="dangerbtn" data-i18n>Apagar progresso</button>
+      </details>
+    </div>
   </div>
 </aside>
 <div id="title"><div class="tt"><h1 class="brand" aria-label="Cenoural"><span class="brand-icon" role="img" aria-hidden="true"></span><span class="brand-logo" role="img" aria-hidden="true"></span></h1><button id="play" type="button" data-i18n>Jogar</button><div data-langmenu></div><small data-i18n style="display:block;margin-top:14px;opacity:.5;font-size:.7rem">© 2026 João Pedro Borges · Todos os direitos reservados<br>Feito com auxílio de inteligência artificial · Seu progresso fica salvo só neste navegador</small></div></div>
