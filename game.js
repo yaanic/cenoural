@@ -599,6 +599,7 @@ addLang("en","English",{
 "Colete {0} de {1}":"Collect {0} {1}",
 "Chegue a {0} m de profundidade":"Reach {0} m depth",
 "Contrato: +{0}":"Contract: +{0}",
+"Contrato cumprido! Entregue no quadro (+{0} de ouro)":"Contract complete! Turn it in at the board (+{0} gold)",
 "{0} / {1} · recompensa {2} de ouro + XP":"{0} / {1} · reward {2} gold + XP",
 "Entregar":"Deliver",
 "Em andamento":"In progress",
@@ -1363,6 +1364,54 @@ function hitSfx(kind,depth){
   else{nz(t,"bandpass",2800+r*500,1.4,.14*v,.03);nz(t,"highpass",5500,.7,.04*v,.015);tn(t,"triangle",320+lay*8+r*40,200,.03*v,.04);if(kind==="ore")ting(t,1500+r*150,.03*v,.1)}
  }catch(e){}
 }
+// ----- Passos -----
+// Cada superfície tem seu timbre (tudo sintetizado, sem arquivos de áudio): "grass" grama · "forest" bosque (grama com folhas e gravetos) · "dirt" terra · "stone" pedra do subsolo (com eco de túnel)
+// "tile" piso da igreja (estalo claro com eco de nave) · "wood" ponte, tronco e trapiche (toc oco) · "sand" areia da praia · "snow" neve (inverno ou nevasca, estalinhos de gelo).
+// Chuva molhada acrescenta um chapinho leve por cima. Os dois pés alternam: um é um pouco mais grave e mais forte que o outro.
+function footKind(c,d){
+ if(d<0)return null;                                  // no ar (mochila a jato): sem passos
+ if(d>0)return layerOf(d)<DIRT_LAYERS?"dirt":"stone"; // túnel cavado
+ if(c>SURF_R||(c>=RIVER_C0&&c<=RIVER_C1)||(c>=FRIV_C0&&c<=FRIV_C1))return"wood";   // trapiche, ponte e tronco do riacho da floresta
+ if(Math.abs(c-CHURCH_C)<=7)return"tile";
+ if(winterAmt()>.45||wx.snow>.35)return"snow";
+ if(isBeach(c))return"sand";
+ return c<-30?"forest":"grass";
+}
+function footSfx(kind,run,foot){
+ if(mute||S.vol.s<=0)return;
+ try{ac();const t=actx.currentTime,v=S.vol.s,r=Math.random(),k=(run?.85:1)*(foot?1:.88),p=(foot?1:.93)*(1+(r-.5)*.1),wet=wx.rain>.3&&kind!=="snow"&&kind!=="stone"&&kind!=="tile";
+  // Timbre grave: filtros e tons bem mais baixos, baque (seno) forte por baixo e quase nada de agudo
+  if(kind==="grass"||kind==="forest"){   // "fof" abafado: sopro de folhas grave + baque surdo
+   nz(t,"bandpass",1000*p,.8,.09*k*v,.12);nz(t,"lowpass",420,.6,.1*k*v,.1);nz(t+.012,"highpass",3200,.6,.012*k*v,.06);tn(t,"sine",68*p,38,.13*k*v,.1);
+   if(kind==="forest"&&r<.22){nz(t+.025,"bandpass",1900+r*1500,5,.045*v,.02);nz(t+.05,"bandpass",1200,2,.02*v,.06)}   // graveto estalando (mais grosso)
+  }else if(kind==="dirt"){   // baque de terra fundo, grãos graves caindo depois
+   nz(t,"lowpass",430*p,.5,.2*k*v,.1);tn(t,"sine",72*p,36,.16*k*v,.12);nz(t+.03,"bandpass",900+r*300,1,.035*k*v,.06);nz(t+.065,"bandpass",1100+r*200,1,.02*k*v,.05);
+  }else if(kind==="stone"){   // pedra: toc grave e seco com eco de caverna
+   nz(t,"bandpass",1000*p,1.2,.12*k*v,.04);tn(t,"triangle",105*p,58,.09*k*v,.09);tn(t,"sine",64*p,40,.1*k*v,.1);
+   nz(t+.1,"bandpass",950*p,1.5,.024*k*v,.05);tn(t+.1,"triangle",100*p,62,.02*k*v,.1);
+  }else if(kind==="tile"){   // piso de igreja: clac fundo e eco grave de nave
+   nz(t,"bandpass",1500*p,1.6,.1*k*v,.03);tn(t,"triangle",150*p,85,.08*k*v,.08);tn(t,"sine",70*p,42,.09*k*v,.11);ting(t+.004,900*p,.008*v,.28);
+   nz(t+.12,"bandpass",1400*p,2,.026*k*v,.06);tn(t+.12,"sine",135*p,90,.02*k*v,.16);nz(t+.22,"bandpass",1250,2,.012*k*v,.05);
+  }else if(kind==="wood"){   // madeira oca grave: toc fundo, caixa de ressonância e rangido mais grosso
+   tn(t,"sine",120*p,66*p,.17*k*v,.13);tn(t,"triangle",230*p,120,.04*k*v,.07);nz(t,"bandpass",500*p,1.5,.08*k*v,.05);tn(t+.012,"sine",78*p,52,.09*k*v,.2);
+   if(r<.09){tn(t+.03,"triangle",130+r*500,95,.016*v,.18);tn(t+.07,"triangle",170+r*400,115,.012*v,.14)}
+  }else if(kind==="sand"){   // areia: chiado granulado mais abafado, com peso embaixo
+   nz(t,"bandpass",1700*p,.7,.08*k*v,.15,900);nz(t,"lowpass",600,.5,.07*k*v,.1);nz(t+.02,"highpass",4000,.5,.012*k*v,.1);nz(t+.045,"bandpass",1400,.8,.035*k*v,.09);tn(t,"sine",60*p,38,.1*k*v,.09);
+  }else if(kind==="snow"){   // neve: estalos de gelo mais surdos + baque macio
+   for(let i=0;i<5;i++)nz(t+i*.015+Math.random()*.006,"bandpass",1300+Math.random()*1500,3,.05*k*v,.022);
+   nz(t,"lowpass",520,.5,.11*k*v,.12);tn(t,"sine",62*p,38,.11*k*v,.1);
+  }
+  if(wet){nz(t+.02,"bandpass",2200,1.2,.03*wx.rain*k*v,.09,1000);tn(t+.045,"sine",520+r*220,300,.012*wx.rain*v,.06)}   // chuva: chapinho mais grave
+ }catch(e){}
+}
+let footAcc=0,footLast=0,footFlip=0;
+// Chamado a cada coluna andada de lado (ver step em 3-mundo/03-mineracao.js): 1 passo a cada 2 colunas andando e 1 a cada 4 correndo; o primeiro sai na hora.
+function stepSound(){
+ const k=footKind(S.mc,S.depth);if(!k)return;
+ const now=performance.now();if(now-footLast>450)footAcc=99;footLast=now;
+ const need=shiftOn?4:2;if(++footAcc<need)return;
+ footAcc=0;footFlip^=1;footSfx(k,shiftOn,footFlip);
+}
 function note(){try{if(!actx)return;const sc=[0,3,5,7,10,12],f=(110+layerOf(S.depth)*6)*Math.pow(2,sc[Math.floor(Math.random()*6)]/12),o=actx.createOscillator(),g=actx.createGain(),t=actx.currentTime;o.type="sine";o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.025*S.vol.m,t+.6);g.gain.exponentialRampToValueAtTime(.0001,t+3);o.connect(g);g.connect(actx.destination);o.start();o.stop(t+3.1)}catch(e){}}
 function drip(){if(!actx)return;try{const o=actx.createOscillator(),g=actx.createGain(),t=actx.currentTime;o.type="sine";o.frequency.value=300+layerOf(S.depth)%BIO.length*110+Math.random()*120;g.gain.setValueAtTime(.02*S.vol.a,t);g.gain.exponentialRampToValueAtTime(.0001,t+.25);o.connect(g);g.connect(actx.destination);o.start();o.stop(t+.3)}catch(e){}}
 // ----- Fila de avisos -----
@@ -1853,8 +1902,14 @@ function ctProg(kind,key,amt,r){
   if(kind==="blk"&&c.t==="blk")c.p=Math.min(c.n,c.p+amt);
   else if(kind==="ore"&&c.t==="ore"&&c.o===key)c.p=Math.min(c.n,c.p+amt)}
 }
+// Aviso de contrato cumprido: c.nf marca que já avisou (fica no save, então não repete ao recarregar). Aviso na pilha + duas notinhas subindo; o ouro só vem ao entregar no quadro.
+function ctDone(c){
+ c.nf=1;sayGold(__("Contrato cumprido! Entregue no quadro (+{0} de ouro)",fmt(c.g)));
+ sfx(659,.09,"triangle");setTimeout(()=>sfx(880,.16,"triangle"),90);
+}
 function ctTick(dt){
  for(const c of S.ct)if(c.t==="dep"&&c.p<c.n)c.p=Math.max(c.p,Math.min(c.n,Math.floor(S.depth)));
+ for(const c of S.ct)if(c.p>=c.n&&!c.nf)ctDone(c);   // contrato acabou de ficar pronto (qualquer tipo, em qualquer lugar): avisa uma vez só
  if(S.ct.length<BAL.contracts.slots){if(S.ctW>0)S.ctW-=dt;if(S.ctW<=0)while(S.ct.length<BAL.contracts.slots)ctGen()}
 }
 const fmtClock=t=>{t=Math.max(0,Math.ceil(t));return Math.floor(t/60)+":"+String(t%60).padStart(2,"0")};   // m:ss do próximo contrato
@@ -2849,7 +2904,7 @@ function move(d){if(modal||fs)return;prayCancel();if(d==="up"&&S.depth<=-SKY_CEI
  const[a,b]=tgt();if(isDug(a,b)){S.prog=0;step(d==="down")}}   // descer por buraco já cavado é de graça
 function step(free){
  const[tc]=tgt();
- if(S.dir==="left"||S.dir==="right")S.mc=tc;
+ if(S.dir==="left"||S.dir==="right"){S.mc=tc;if(free!==undefined)stepSound()}   // passos só ao andar (move passa true/false); avançar depois de quebrar o bloco usa o som da quebra
  else if(S.dir==="up")S.depth--;
  else S.depth++;
  S.depth=clamp(S.depth,-SKY_CEIL,FINAL_DEPTH);
@@ -5968,5 +6023,5 @@ if(S.lvp>0&&!modal)levelUp();
 onLang(()=>{relabelTabs();if(fsLab)fsLab();buildBar();build();statsHtml="";bagHtml="";buffsHtml="";clkLast="";if(modal==="pause"){paintPause();const lb=document.querySelector("#bx .lp-btn");if(lb)lb.focus()}refresh()});
 requestAnimationFrame(loop);
 // gancho opcional usado só por tools/smoke.js (não faz nada no jogo normal)
-if(typeof window.__TESTE__==="function")window.__TESTE__({get pot(){return pot},deepOres,POT_RECIPES,ORES,churchSolid,roofSolid,houseBlocks,bell,bellCol,nearBell,bellUse,altarCol,nearAltar,altarUse,prayTick,prayCancel,get prayA(){return prayA},CHURCH_C,CAULDRON_C,nearCauldron,cauldronUse,openPot,potCook,potMax,forageAt,forageProg,forageOn,forageUse,sayK,toastTick,toastHas,get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,WALK_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,furyActiveMult,frenzyActiveMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,moonP,moonLit,moonLight,moonName,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v}});
+if(typeof window.__TESTE__==="function")window.__TESTE__({get pot(){return pot},deepOres,POT_RECIPES,ORES,churchSolid,roofSolid,houseBlocks,bell,bellCol,nearBell,bellUse,altarCol,nearAltar,altarUse,prayTick,prayCancel,get prayA(){return prayA},CHURCH_C,CAULDRON_C,nearCauldron,cauldronUse,openPot,potCook,potMax,forageAt,forageProg,forageOn,forageUse,sayK,toastTick,toastHas,get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,WALK_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,furyActiveMult,frenzyActiveMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,moonP,moonLit,moonLight,moonName,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,footKind,footSfx,stepSound,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v}});
 })();
