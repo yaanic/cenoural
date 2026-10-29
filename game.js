@@ -953,6 +953,7 @@ const BAL={
  fish:{wait:[1.8,5.2],window:1,baitCut:.07,baitRare:.18,rain:1.6,junk:.08,junkV:.5,bag:80,perfect:1.5,perfectOut:.9,maxTime:60,
   bar:{h:288,base:44,per:2,lift:520,grav:330,bounce:.35,maxV:270},fishSpd:24,fishSpdD:15,prog:{up:.16,down:.09,downD:.05,start:.35},
   cook:{speed:[1.5,1.9,2.4],ramp:.1,passes:6,zones:[.38,.6,.74]}},
+ pray:{dur:240,mult:.04,time:3},   // altar da igreja (2-sistemas/18-altar.js), mecânica secreta: rezar parado por time s dá +4% de ouro, energia máxima e dano por dur s; rezar de novo só reinicia
  fort:{per:.1,max:.5},                                   // Melhoria de minérios: +10% de chance por nível (teto 50%) de o minério render unidades extras (+1 a +ceil(nível/2))
  critMax:.75,                                          // teto da chance de crítico
  critPer:.04,                                           // chance de crítico por nível da melhoria
@@ -1089,12 +1090,13 @@ const FISH_BAG_MAX=80;   // teto de peixes na bolsa (o save é limpo com este n�
 
 // ===== 1-nucleo/03-estado-save.js — Estado do jogo (S), validação do save, carregar/salvar e variáveis de sessão =====
 const SAVE_KEY="abismo-v3";
-const fresh=()=>({gc:0,gcAt:-1,gold:0,depth:0,mc:0,prog:0,best:0,runMax:0,tier:0,runs:0,total:0,oc:0,blocks:0,deaths:0,sold:0,en:-1,
+const fresh=()=>({pray:0,gc:0,gcAt:-1,gold:0,depth:0,mc:0,prog:0,best:0,runMax:0,tier:0,runs:0,total:0,oc:0,blocks:0,deaths:0,sold:0,en:-1,
  lv:{sharp:0,emax:0,eco:0,jet:0,jetspd:0,auto:0,autopow:0,speed:0,crit:0,luck:0,xp:0,duration:0,furia:0,frenesi:0,tele:0,pet:0,furn:0,lavares:0,lant:0,clock:0,back:0,fort:0,rod:0,bait:0},items:{dyn:0,dyn2:0,dyn3:0,dyn4:0,dyn5:0,cen:0,sop:0,poc:0,ptp:0,pas:0,pgr:0,pbq:0,cog:0},dsel:"dyn",fsel:"pas",fg:{},
  bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,moon:BAL.moon.start*BAL.moon.cycle,dir:"down",dug:[],ach:[],debug:false,real:0,pts:0,sk:{her:0,ini:0,ouro:0,dmg:0,fol:0,jato:0,gar:0,xp:0},od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,fb:[],fdx:{},fishN:0,fishP:0,fishG:0,cookN:0,cookP:0,play:0,v:9,vol:{m:.7,s:1,a:.7}});
 let S=fresh();S.seed=newSeed();
 function clean(o){const src=o&&typeof o==="object"?o:{},hasVersion=Number.isFinite(src.v),f=fresh();o=Object.assign(f,src);if(!hasVersion)o.v=7;
  for(const k of["gold","depth","prog","best","runMax","tier","runs","total","oc","blocks","deaths","sold","pts","real","xp","lvp","bombs","eaten","tps","veins","sleeps","rich","refined","ctDone","spins","pend","chests","chTop","chGold","chFr","chPk","ptpUsed","fishN","fishP","fishG","cookN","cookP","play","gc"])if(!Number.isFinite(o[k])||o[k]<0)o[k]=0;
+ o.pray=Number.isFinite(o.pray)&&o.pray>0?Math.min(o.pray,BAL.pray.dur):0;   // tempo restante da bênção do altar (s)
  o.gc=Math.min(GARDEN_SLOTS,Math.floor(o.gc));if(!Number.isFinite(o.gcAt))o.gcAt=-1;
  o.chT=BAL.chest.tiers.map((_,i)=>Array.isArray(o.chT)&&Number.isFinite(o.chT[i])&&o.chT[i]>0?Math.floor(o.chT[i]):0);   // baús abertos por raridade
  // pesca: bolsa de peixes [id, cm, perfeito] e álbum (melhor tamanho por espécie)
@@ -1178,10 +1180,11 @@ const CHEATS=["CENOURA","CLIMA","SEASON","FINAL"],CHEATS_SURF=["CLIMA","SEASON"]
 
 // ===== 1-nucleo/04-formulas.js — Fórmulas de dano, dureza, ouro, energia e custos (os números ficam em BAL, 00-balanceamento.js) =====
 const pk=k=>S.pk[k]||0;
-const gmult=()=>(1+.12*S.lv.luck)*(1+.08*S.sk.ouro)*(1+.12*pk("gold"))*(ev>0&&!evT?3:1)*(star>0&&!starT?BAL.star.gold:1);
+const prayMult=()=>S.pray>0?1+BAL.pray.mult:1;   // bênção do altar (secreta)
+const gmult=()=>prayMult()*(1+.12*S.lv.luck)*(1+.08*S.sk.ouro)*(1+.12*pk("gold"))*(ev>0&&!evT?3:1)*(star>0&&!starT?BAL.star.gold:1);
 // Dano: a picareta de cada camada vale 2,6x a anterior; a dureza dos blocos cresce 3x a cada 100 m.
 // Assim as camadas fundas ficam duras mesmo com todos os upgrades no máximo (sem a picareta e os upgrades certos, ficam muito duras).
-const basePow=()=>BAL.dig.powBase*Math.pow(BAL.tier.dmgMult,S.tier)*(1+.12*S.lv.sharp)*(1+.08*S.sk.dmg)*(1+.15*pk("dmg"));
+const basePow=()=>prayMult()*BAL.dig.powBase*Math.pow(BAL.tier.dmgMult,S.tier)*(1+.12*S.lv.sharp)*(1+.08*S.sk.dmg)*(1+.15*pk("dmg"));
 const furyMult=()=>BAL.skills.fury.mult+BAL.skills.fury.per*S.lv.furia;        // dano x2 até x3,5 com a melhoria no máximo
 const frenzyMult=()=>BAL.skills.frenzy.mult+BAL.skills.frenzy.per*S.lv.frenesi;   // velocidade x1,4 até x2,2 com a melhoria no máximo
 // Ao manter as duas habilidades ativas, cada bônus acima de 1x é reduzido pela metade.
@@ -1204,7 +1207,7 @@ const HARD_BASE=BAL.dig.hardBase;
 const hardness=r=>r>=FINAL_DEPTH?Infinity:HARD_BASE*Math.pow(BAL.dig.hardK,r/100);
 const blockGold=r=>BAL.dig.goldBase*Math.pow(BAL.dig.goldK,r/100)*gmult();
 // Energia: cavar e voar gastam; só se recupera na superfície.
-const maxEn=()=>Math.round((BAL.energy.base+BAL.energy.perLevel*S.lv.emax)*(1+.06*S.sk.fol)*(1+.08*pk("energy")));
+const maxEn=()=>Math.round((BAL.energy.base+BAL.energy.perLevel*S.lv.emax)*(1+.06*S.sk.fol)*(1+.08*pk("energy"))*prayMult());
 const ecoMult=()=>Math.pow(1-BAL.ecoPer,S.lv.eco);   // composto: cada nível multiplica o gasto por 0,95
 const jetSpdMult=()=>1+BAL.jetSpd*S.lv.jetspd;               // mochila a jato: velocidade de subida
 const jetMult=()=>Math.pow(1-BAL.jetPer,S.lv.jet)*(1-.06*S.sk.jato);     // mochila a jato: custo de subir
@@ -2667,6 +2670,32 @@ function bellUse(){
  const P=bellPos();texts.push({x:P.x,y:P.oy+24*P.u,t:0,s:bell.flip>0?"DING!":"DONG!",c:"#ffd45c",big:1});
  return true}
 
+// ===== 2-sistemas/18-altar.js — Altar da igreja: rezar parado dá uma bênção curta e pequena (mecânica secreta: sem marcador nem texto; só um som suave) =====
+// Espaço (ou clique) perto do altar: o personagem se ajoelha por BAL.pray.time s. Qualquer movimento cancela. Ao terminar, S.pray = BAL.pray.dur (s) e, enquanto durar,
+// prayMult() (1-nucleo/04-formulas.js) dá +4% de ouro, energia máxima e dano. Rezar de novo só reinicia o tempo (não acumula). A mesa de encantar do altar continua só visual.
+let prayA=0,prayCD=0,prayK=0;   // prayA: segundos já rezados (0 = não reza) · prayCD: pausa curta após rezar (Espaço seguro não reinicia na hora) · prayK: 0 a 1, suaviza a pose e o brilho
+const altarCol=()=>CHURCH_C+CHURCH_ALTAR_DX*pu()/T;   // coluna do altar (mesma conta do sino: pixels do sprite da igreja convertidos em colunas)
+const nearAltar=()=>onGround()&&Math.abs(S.mc-altarCol())<=2.2;
+function altarHit(px,py){
+ if(!atSurface())return false;
+ const u=pu(),x=forgeFx(CHURCH_C)+CHURCH_ALTAR_DX*u,y=rowY(0)-CHURCH_ALTAR_LIFT*u;
+ return Math.abs(px-x)<=9*u&&py<=y+2*u&&py>=y-16*u}
+function praySfx(done){   // começo: zumbido grave e suave (acorde de quinta) · fim: duas notas que sobem, como um "amém"
+ if(!done){sfx(196,1.8,"sine");sfx(294,1.6,"sine");sfx(392,1.2,"triangle")}
+ else{sfx(392,1,"sine");sfx(588,1.1,"sine");setTimeout(()=>{sfx(523,1.4,"sine");sfx(784,1.2,"sine")},220)}}
+function altarUse(){
+ if(!nearAltar())return false;
+ if(modal||fs)return true;
+ if(prayA>0||prayCD>0)return true;
+ prayA=.001;praySfx(false);return true}
+function prayCancel(){prayA=0}
+function prayTick(dt){
+ prayCD=Math.max(0,prayCD-dt);
+ if(prayA>0){
+  if(!nearAltar()||modal||fs)prayA=0;
+  else{prayA+=dt;if(prayA>=BAL.pray.time){prayA=0;prayCD=1;S.pray=BAL.pray.dur;praySfx(true)}}}
+ if(S.pray>0){S.pray=Math.max(0,S.pray-dt);if(S.pray===0)S.en=Math.min(S.en,maxEn())}}   // ao acabar, a energia que passava do novo máximo volta ao teto
+
 // ===== 3-mundo/00-camera.js — Canvas, câmera, zoom limitado ao mundo e conversão de coordenadas =====
 const cv=$("cv");let ctx=cv.getContext("2d");   // let: 5-desenho/00b-cache.js troca o ctx por um instante para pré-renderizar camadas
 let W=0,H=0,T=44,dpr=1,worldZoom=1,zoomPreference=1;
@@ -2812,7 +2841,7 @@ function openBottom(){
  $("bt-re").onclick=()=>{closeModal();doRebirth()};
  $("bt-no").focus();
 }
-function move(d){if(modal||fs)return;if(d==="up"&&S.depth<=-SKY_CEIL)return;setDir(d);if(houseBlocks(d))return;   // telhado da casa: sólido; só se passa por cima dele
+function move(d){if(modal||fs)return;prayCancel();if(d==="up"&&S.depth<=-SKY_CEIL)return;setDir(d);if(houseBlocks(d))return;   // telhado da casa: sólido; só se passa por cima dele
  const[a,b]=tgt();if(isDug(a,b)){S.prog=0;step(d==="down")}}   // descer por buraco já cavado é de graça
 function step(free){
  const[tc]=tgt();
@@ -2879,7 +2908,7 @@ function hit(dmg,crit,auto){
   const[a2,b2]=tgt();if(isDug(a2,b2)||!canBreak(a2,b2)){S.prog=0;break}
  }
 }
-function clickDig(){if(modal)return;if(fs){fishAct();return}if(atSurface()){if(nearFurnace()){furUse();return}if(nearChest()){chestUse();return}if(nearBoard()){boardUse();return}if(nearSlot()){slotUse();return}if(nearCamp()){campUse();return}if(forageUse())return;if(nearCauldron()){cauldronUse();return}if(nearBell()){bellUse();return}if(fishSpot()){fishUse();return}if(nearKeeper()&&S.fb.length){marketUse();return}}const c=Math.random()<critCh();hit(clickPow()*(c?CRIT_MULT:1),c)}
+function clickDig(){if(modal)return;if(fs){fishAct();return}if(atSurface()){if(nearFurnace()){furUse();return}if(nearChest()){chestUse();return}if(nearBoard()){boardUse();return}if(nearSlot()){slotUse();return}if(nearCamp()){campUse();return}if(forageUse())return;if(nearCauldron()){cauldronUse();return}if(nearAltar()){altarUse();return}if(nearBell()){bellUse();return}if(fishSpot()){fishUse();return}if(nearKeeper()&&S.fb.length){marketUse();return}}const c=Math.random()<critCh();hit(clickPow()*(c?CRIT_MULT:1),c)}
 
 // Ícones em pixel dos avisos (9x9): a = cor principal, b = brilho, c = detalhe escuro. Cada categoria tem sua cor: mina, pesca, ouro, clima, estrela, nível, habilidade, comida, alerta e geral.
 const NOTE_ICONS={
@@ -3158,7 +3187,7 @@ function barUI(){const slots=document.querySelectorAll(".slot");BAR.forEach((s,i
 // ===== 4-interface/04-entrada.js — Mouse, teclado, toque e botões de celular =====
 cv.addEventListener("pointerdown",e=>{e.preventDefault();
  if(fs&&!modal){fishHold=true;fishAct();return}   // pescando: tocar/clicar fisga, segura a barra e lança de novo
- if(atSurface()&&!modal){for(const[hit,use]of[[boardHit,boardUse],[slotHit,slotUse],[campHit,campUse],[cauldronHit,cauldronUse],[bellHit,bellUse],[forageHit,forageUse],[fishHit,fishUse],[marketHit,marketUse]])if(hit(e.offsetX,e.offsetY)&&use())return}
+ if(atSurface()&&!modal){for(const[hit,use]of[[boardHit,boardUse],[slotHit,slotUse],[campHit,campUse],[cauldronHit,cauldronUse],[bellHit,bellUse],[altarHit,altarUse],[forageHit,forageUse],[fishHit,fishUse],[marketHit,marketUse]])if(hit(e.offsetX,e.offsetY)&&use())return}
  if(atSurface()&&furHit(e.offsetX,e.offsetY)){furUse();return}
  if(atSurface()&&chestHit(e.offsetX,e.offsetY)){chestUse();return}
  const c=Math.floor((e.offsetX-W/2)/T+camX+.5),r=Math.floor((e.offsetY-H*SURF)/T+camY),p=S.depth,m=S.mc;
@@ -3867,9 +3896,10 @@ function drawPlayer(){
  const dtK=Math.min(.1,Math.max(0,(now-plAt)/1000));plAt=now;
  if(walking&&!modal&&!fs)stepDust(mx,my,Math.sign(dx),dtK);
  const hf=flying&&!fs&&now-plHAt<240;plK+=((hf?1:0)-plK)*Math.min(1,dtK*(hf?9:7));if(plK<.002)plK=0;
+ prayK+=((prayA>0?1:0)-prayK)*Math.min(1,dtK*9);if(prayK<.003)prayK=0;   // ajoelhar no altar (2-sistemas/18-altar.js)
  const k1=plK,glide=k1*(.3+Math.sin(now/130)*.02);   // inclinação leve (~17°) no voo para os lados
- const lean=(fs?0:flying?-.2:walking?.1:falling?-.04:0)*(1-k1)+glide;   // inclinação do corpo (em torno dos pés; no voo lateral, em torno do meio do corpo)
- const squash=1-Math.min(.07,swing*.07);                                    // agacha um pouco no golpe
+ const lean=(fs?0:flying?-.2:walking?.1:falling?-.04:0)*(1-k1)+glide+prayK*.2;   // inclinação do corpo (em torno dos pés; no voo lateral, em torno do meio do corpo)
+ const squash=1-Math.min(.07,swing*.07)-prayK*.22;                                    // agacha um pouco no golpe
  const cloth="#3b6fb5",clothD="#2c5590",skin="#e6b48a";
  ctx.save();ctx.translate(mx,my);ctx.scale(worldZoom,worldZoom);ctx.translate(-mx,-my);
  ctx.translate(mx,0);ctx.scale(S.dir==="left"?-1:1,1);ctx.translate(-mx,0);
@@ -3885,7 +3915,7 @@ function drawPlayer(){
  if(!descending&&(jetT>0||flying)){const sb=shiftOn&&!fs&&(S.dir==="left"||S.dir==="right"),fl=(flameL+=(Math.min(30,(jetT>0?16:4.25)*(1+.6*k1)*(sb?2.4:1))-flameL)*Math.min(1,dtK*12))*(.6+Math.random()*.8);   // Shift + A/D: o jato queima muito mais forte
   ctx.fillStyle="#ffb43a";ctx.fillRect(mx-14,my-8+bob,5,fl);ctx.fillStyle="#fff3a0";ctx.fillRect(mx-13,my-8+bob,3,fl*.55);ctx.fillStyle="#ff5a1f";ctx.fillRect(mx-14,my-8+bob+fl,5,3)}
  // braço de trás (balança ao contrário do braço da picareta)
- ctx.save();ctx.translate(mx-6,my-21+bob);ctx.rotate((flying?-2.3:falling?-2.5:walking?-sw*.8+.2:.25+idle*.06)*(1-k1)+(-1.15+Math.sin(now/110)*.06)*k1);ctx.fillStyle=clothD;ctx.fillRect(-2,0,4,7);ctx.fillStyle=skin;ctx.fillRect(-2,6,4,3);ctx.restore();
+ ctx.save();ctx.translate(mx-6,my-21+bob);ctx.rotate(((flying?-2.3:falling?-2.5:walking?-sw*.8+.2:.25+idle*.06)*(1-k1)+(-1.15+Math.sin(now/110)*.06)*k1)*(1-prayK)-.55*prayK);ctx.fillStyle=clothD;ctx.fillRect(-2,0,4,7);ctx.fillStyle=skin;ctx.fillRect(-2,6,4,3);ctx.restore();
  // tronco com cinto e gola
  ctx.fillStyle=cloth;ctx.fillRect(mx-9,my-24+bob,18,16);ctx.fillStyle=clothD;ctx.fillRect(mx-9,my-24+bob,3,16);ctx.fillStyle="#5a8fd6";ctx.fillRect(mx-6,my-24+bob,12,2);
  ctx.fillStyle="#6a4a2a";ctx.fillRect(mx-9,my-12+bob,18,3);ctx.fillStyle="#d9b24a";ctx.fillRect(mx-1,my-12+bob,3,3);
@@ -3898,14 +3928,14 @@ function drawPlayer(){
  ctx.globalAlpha=.25+.1*Math.sin(now/200);ctx.fillStyle="#fff3a0";ctx.fillRect(mx+9,my-38+hb,6,5);ctx.globalAlpha=1;
  // braço da frente com a picareta: levanta ao voar/cair, balança ao andar, golpeia ao cavar. Pescando, segura a vara (rodPose em 16-pesca-desenho.js)
  const rp=fs?rodPose():null,base0=rp?rp.a:S.dir==="up"?-1.6:flying?-2.3:falling?-2.1:walking?-.9+sw*.55:-1.1+idle*.05,base=base0*(1-k1)+(-1.0+Math.sin(now/110+.8)*.05)*k1;
- ctx.save();ctx.translate(mx+8,my-20+bob);ctx.rotate(base+(rp?0:swing*1.8));
+ ctx.save();ctx.translate(mx+8,my-20+bob);ctx.rotate(base*(1-prayK)-.45*prayK+(rp?0:swing*1.8));
  if(rp){
   ctx.fillStyle="#7a5428";ctx.fillRect(-4,-1.5,26,3);ctx.fillStyle="#caa264";ctx.fillRect(-4,-1.5,26,1);
   ctx.fillStyle="#555b66";ctx.fillRect(6,1.5,6,4);ctx.fillStyle="#9aa3b0";ctx.fillRect(7,2.5,4,2);   // carretilha
   ctx.save();ctx.translate(22,0);ctx.rotate(rp.b);ctx.fillStyle="#8a6334";ctx.fillRect(0,-1.2,24,2.4);ctx.fillStyle="#d9b97a";ctx.fillRect(0,-1.2,24,.9);ctx.restore();   // ponta da vara, que envergada
   const ex=22+24*Math.cos(rp.b),ey=24*Math.sin(rp.b),X=mx+8+ex*Math.cos(rp.a)-ey*Math.sin(rp.a),Y=my-20+bob+ex*Math.sin(rp.a)+ey*Math.cos(rp.a),fx=S.dir==="left"?2*mx-X:X;
   fishTip={x:mx+(fx-mx)*worldZoom,y:my+(Y-my)*worldZoom};   // onde a linha começa (tela)
- }else{
+ }else if(prayK<.5){
   ctx.fillStyle="#8a5a2b";ctx.fillRect(0,-2,22,4);ctx.fillStyle=TCOL[S.tier%TCOL.length];ctx.fillRect(18,-9,5,18);ctx.fillStyle="rgba(255,255,255,.35)";ctx.fillRect(18,-9,2,18);
   if(swing>.5){ctx.fillStyle="#fff6b8";ctx.fillRect(22,-4,4,4)}
  }
@@ -5197,6 +5227,7 @@ function drawEnchant(t){
  if(c<-T*6||c>W+T*6)return;
  pxShadow(c,(s.w+2)*u,y,u);
  ctx.save();ctx.fillStyle="#b45cff";ctx.globalAlpha=.035+.012*Math.sin(t*3);ctx.fillRect(c-s.w*u*.75,y0-5*u,s.w*u*1.5,(s.h+5)*u);ctx.restore();
+ if(prayK>0){ctx.save();ctx.fillStyle="#fff3a0";ctx.globalAlpha=.14*prayK;ctx.fillRect(c-s.w*u*1.1,y0-8*u,s.w*u*2.2,(s.h+8)*u);ctx.restore()}   // brilho leve enquanto se reza
  drawSpr(s,c,y,u);
  ctx.fillStyle=Math.sin(t*3)>0?"#fff3a0":"#ffd45c";ctx.fillRect(x0+4*u,y0+4*u,2*u,u);ctx.fillRect(x0+3*u,y0+5*u,4*u,u);ctx.fillRect(x0+4*u,y0+6*u,2*u,u);
  const bob=Math.round(Math.sin(t*2.2)*u*.6),bx=c-Math.round(2.5*u),by=y0-3*u+bob;
@@ -5882,7 +5913,7 @@ function loop(now){
  if(ev>0)ev-=dt;else{evNext-=dt;if(evNext<=0){ev=BAL.events.len;evT=Math.random()<.5?0:1;evNext=BAL.events.gapMin+Math.random()*BAL.events.gapRand;sayK(evT?"mine":"gold",evT?__("Frenesi mineral! Minérios x3 por 20s"):__("Corrida do ouro! Ouro x3 por 20s"))}}
  // superfície: recupera energia rápido e entrega a mochila ao chegar perto do baú
  if(atSurface()){const m=maxEn();if(S.en<m)S.en=Math.min(m,S.en+60*dt);}
- furTick(dt);ctTick(dt);chestTick();memCheck();fishTick(dt);
+ furTick(dt);ctTick(dt);chestTick();memCheck();fishTick(dt);prayTick(dt);
  // escavação automática (pausa sozinha quando a energia só dá para voltar)
  const ad=autoDps();
  if(ad>0&&!modal&&!fs){if(autoOK())hit(ad*dt,false,true);else if(autoMsgT<=0&&S.depth>0&&canBreak(...tgt())){autoMsgT=6;sayWarn(__("Escavação automática pausada: energia só para voltar"))}}
@@ -5933,5 +5964,5 @@ if(S.lvp>0&&!modal)levelUp();
 onLang(()=>{relabelTabs();if(fsLab)fsLab();buildBar();build();statsHtml="";bagHtml="";buffsHtml="";clkLast="";if(modal==="pause"){paintPause();const lb=document.querySelector("#bx .lp-btn");if(lb)lb.focus()}refresh()});
 requestAnimationFrame(loop);
 // gancho opcional usado só por tools/smoke.js (não faz nada no jogo normal)
-if(typeof window.__TESTE__==="function")window.__TESTE__({get pot(){return pot},deepOres,POT_RECIPES,ORES,churchSolid,roofSolid,houseBlocks,bell,bellCol,nearBell,bellUse,CHURCH_C,CAULDRON_C,nearCauldron,cauldronUse,openPot,potCook,potMax,forageAt,forageProg,forageOn,forageUse,sayK,toastTick,toastHas,get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,WALK_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,furyActiveMult,frenzyActiveMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,moonP,moonLit,moonLight,moonName,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v}});
+if(typeof window.__TESTE__==="function")window.__TESTE__({get pot(){return pot},deepOres,POT_RECIPES,ORES,churchSolid,roofSolid,houseBlocks,bell,bellCol,nearBell,bellUse,altarCol,nearAltar,altarUse,prayTick,prayCancel,get prayA(){return prayA},CHURCH_C,CAULDRON_C,nearCauldron,cauldronUse,openPot,potCook,potMax,forageAt,forageProg,forageOn,forageUse,sayK,toastTick,toastHas,get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,WALK_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,furyActiveMult,frenzyActiveMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,moonP,moonLit,moonLight,moonName,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v}});
 })();
