@@ -146,7 +146,7 @@ addLang("en","English",{
 "<b>Buraco:</b> a entrada da mina.":"<b>Hole:</b> the mine entrance.",
 "<b>Caça-níquel:</b> aposte uma parte do seu ouro. A casa ganha no longo prazo.":"<b>Slot machine:</b> bet part of your gold. The house wins in the long run.",
 "<b>Baú:</b> fique ao lado dele e clique (ou aperte <kbd>Espaço</kbd>) para vender a mochila.":"<b>Chest:</b> stand next to it and click (or press <kbd>Space</kbd>) to sell your backpack.",
-"<b>Loja:</b> dinamite e comida de energia.":"<b>Shop:</b> dynamite and energy food.",
+"<b>Loja:</b> dinamite, comida de energia e isca premium.":"<b>Shop:</b> dynamite, energy food and premium bait.",
 "<b>Riacho e praia:</b> perto da água, aperte <kbd>Espaço</kbd> (ou clique) para lançar a vara: a câmera dá zoom na água e a pesca acontece ali mesmo. Quando aparecer um <b>!</b>, aperte <kbd>Espaço</kbd>; depois segure <kbd>Espaço</kbd> para manter o peixe na barra verde. <kbd>Esc</kbd> sai da pesca.":"<b>Stream and beach:</b> near the water, press <kbd>Space</kbd> (or click) to cast the rod: the camera zooms in on the water and the fishing happens right there. When a <b>!</b> appears, press <kbd>Space</kbd>; then hold <kbd>Space</kbd> to keep the fish inside the green bar. <kbd>Esc</kbd> leaves fishing.",
 "<b>Fogueira:</b> asse os peixes no ponto certo e ganhe comida de energia. Os peixes também podem ser vendidos na carrocinha da loja.":"<b>Campfire:</b> roast fish to just the right point and get energy food. Fish can also be sold at the shop cart.",
 "<b>Quadro de contratos:</b> missões que pagam ouro e XP.":"<b>Contract board:</b> missions that pay gold and XP.",
@@ -246,12 +246,14 @@ addLang("en","English",{
 "Dinamite pesada":"Heavy dynamite",
 "Carga de nitro":"Nitro charge",
 "Bomba de demolição":"Demolition bomb",
+"Isca premium":"Premium bait",
+"Gasta 1 a cada lançamento da vara: os peixes raros aparecem {0}x mais. Soma com a isca da mesa de trabalho":"Uses 1 per cast: rare fish show up {0}x more. Stacks with the workbench bait",
 "Cenourinha":"Little carrot",
 "Recupera 10% da energia máxima. Só se colhe no bosque":"Restores 10% of max energy. Only found in the grove",
 "Sopa de cogumelo":"Mushroom soup",
-"Recupera 25% da energia máxima. Só se faz no caldeirão da igreja":"Restores 25% of max energy. Only made in the church cauldron",
+"Recupera 25% da energia máxima. Faz-se no caldeirão da igreja ou se compra na loja, bem mais caro":"Restores 25% of max energy. Made in the church cauldron, or bought at the shop for much more",
 "Poção de energia":"Energy potion",
-"Recupera 50% da energia máxima. Só se faz no caldeirão da igreja":"Restores 50% of max energy. Only made in the church cauldron",
+"Recupera 50% da energia máxima. Faz-se no caldeirão da igreja ou se compra na loja, bem mais caro":"Restores 50% of max energy. Made in the church cauldron, or bought at the shop for much more",
 "Poção de teleporte":"Teleport potion",
 "Uso único: leva ao baú sem gastar energia (na superfície, volta ao ponto de onde saiu). Cai de baús ou se faz no caldeirão da igreja":"Single use: takes you to the chest without spending energy (on the surface, returns you to where you left from). Drops from chests or is made in the church cauldron",
 "Peixe assado":"Roasted fish",
@@ -642,6 +644,7 @@ addLang("en","English",{
 "raro":"rare",
 "lendário":"legendary",
 "Bolsa de peixes cheia: venda na carrocinha ou asse na fogueira":"Fish bag full: sell at the cart or roast at the campfire",
+"Isca premium! Espere morder. Aperte Espaço no !":"Premium bait! Wait for a bite. Press Space at the !",
 "Espere morder. Aperte Espaço no !":"Wait for a bite. Press Space at the !",
 "O peixe soltou a isca antes de você puxar!":"The fish let go of the bait before you pulled!",
 "AGORA!":"NOW!",
@@ -656,9 +659,9 @@ addLang("en","English",{
 "Dica: peixes também podem ser assados na fogueira e viram comida de energia.":"Tip: fish can also be roasted at the campfire into energy food.",
 "Peixes vendidos: +{0}":"Fish sold: +{0}",
 // --- 2-sistemas/14-fogueira.js
-"Escolha um peixe · no ponto perfeito sobe um nível":"Pick a fish · perfect doneness goes up a tier",
+"Escolha um peixe · ↑ ↓ trocam · Espaço assa":"Pick a fish · ↑ ↓ to switch · Space roasts",
 "Sem peixes · pesque no riacho ou no mar":"No fish · catch some in the creek or sea",
-"Comidas":"Food",
+"Suas comidas":"Your food",
 "+{0}% de energia":"+{0}% energy",
 "Fechar · Esc":"Close · Esc",
 "<b>Espaço</b> na faixa <b>dourada</b> · não demore ou queima!":"<b>Space</b> on the <b>golden</b> zone · don’t wait or it burns!",
@@ -680,9 +683,7 @@ addLang("en","English",{
 // --- 2-sistemas/16-caldeirao.js
 "Minério fundo":"Deep ore",
 "Escolha uma receita · ↑ ↓ trocam · Espaço cozinha":"Pick a recipe · ↑ ↓ switch · Space cooks",
-"Ingredientes":"Ingredients",
-"Do bosque":"From the grove",
-"Comidas e poções":"Food and potions",
+"Seus ingredientes":"Your ingredients",
 "a partir de {0}":"{0} or better",
 "Cozinhar tudo ({0})":"Cook all ({0})",
 "Você já tem itens demais.":"You already have too many.",
@@ -718,6 +719,7 @@ addLang("en","English",{
 "CRÍTICO! {0}":"CRITICAL! {0}",
 // --- 4-interface/01-painel.js
 "Dinamites":"Dynamites",
+"Comida de energia":"Energy food",
 "Picareta":"Pickaxe",
 "Sorte e experiência":"Luck and experience",
 "Habilidades":"Skills",
@@ -733,7 +735,7 @@ addLang("en","English",{
 "Ouro x3":"Gold x3",
 "Melhorias só na superfície. Suba (ou use o teleporte) para comprar.":"Upgrades only on the surface. Go up (or use teleport) to buy.",
 "A loja fica na superfície. Suba (ou use o teleporte) para comprar.":"The shop is on the surface. Go up (or use teleport) to buy.",
-"Na loja: compre dinamite.":"At the shop: buy dynamite.",
+"Na loja: compre dinamite, comida e isca.":"At the shop: buy dynamite, food and bait.",
 "Vá até a loja (à direita do baú) para comprar.":"Go to the shop (right of the chest) to buy.",
 "{0} · você tem {1}":"{0} · you have {1}",
 "(preço sobe a cada camada alcançada)":"(price rises with every layer reached)",
@@ -943,14 +945,14 @@ const BAL={
  // O recorde sobrevive ao Renascer, então o que foi liberado não some. Quem já tem nível/estoque no save continua vendo. on:false libera tudo (modo antigo).
  unlock:{on:true,
   ups:{sharp:0,speed:0,emax:0,eco:10,jet:15,luck:20,lant:25,xp:30,furn:30,crit:40,auto:50,duration:50,furia:50,autopow:60,clock:60,jetspd:70,lavares:80,tele:120,frenesi:150,pet:150,back:150,fort:120},
-  items:{cen:0,dyn:25,sop:60,dyn2:100,poc:150,dyn3:250,dyn4:500,dyn5:900},
+  items:{cen:0,dyn:25,isc:30,sop:60,dyn2:100,poc:150,dyn3:250,dyn4:500,dyn5:900},
   build:{furnace:30,board:60,slot:150}},
  // PESCA (2-sistemas/13-pesca.js) e FOGUEIRA (2-sistemas/14-fogueira.js). Espécies e valores: FISH em 1-nucleo/02-camadas-minerios.js (valor = blocos de ouro da profundidade do recorde).
- // wait = espera até morder (s, dividida pela isca) · window = tempo para fisgar depois do "!" (s) · baitCut = -7% de espera por nível de isca · baitRare = +18% de chance dos peixes raros por nível · rain = chuva favorece os raros · junk = chance de lixo · bag = peixes na bolsa
+ // wait = espera até morder (s, dividida pela isca) · window = tempo para fisgar depois do "!" (s) · baitCut = -7% de espera por nível de isca · baitRare = +18% de chance dos peixes raros por nível · premRare = Isca premium da loja (gasta 1 por lançamento): peso dos peixes raros x premRare (não mexe na espera) · rain = chuva favorece os raros · junk = chance de lixo · bag = peixes na bolsa
  // bar (minijogo): h = altura da pista (px) · base/per = zona verde (px) e ganho por nível da vara (teto 60% da pista) · lift/grav = aceleração ao segurar/soltar · bounce = quique no fundo · maxV = velocidade máxima da zona
  // fishSpd/fishSpdD = velocidade do peixe (px/s) base e por ponto de dificuldade · prog = progresso por segundo (sobe dentro da zona, desce fora; downD = descida extra por dificuldade) · perfectOut = máximo de segundos fora da zona para a pesca ser perfeita (valor x perfect)
  // cook: speed = voltas do marcador por segundo (vai e volta na barra) por raridade do peixe · ramp = aumento de velocidade a cada ida/volta · passes = idas e voltas até queimar sozinho · zones = limites do ponto (cru < z0 <= no ponto < z1 <= perfeito < z2 <= queimado)
- fish:{wait:[1.8,5.2],window:1,baitCut:.07,baitRare:.18,rain:1.6,junk:.08,junkV:.5,bag:80,perfect:1.5,perfectOut:.9,maxTime:60,
+ fish:{wait:[1.8,5.2],window:1,baitCut:.07,baitRare:.18,premRare:2.5,rain:1.6,junk:.08,junkV:.5,bag:80,perfect:1.5,perfectOut:.9,maxTime:60,
   bar:{h:288,base:44,per:2,lift:520,grav:330,bounce:.35,maxV:270},fishSpd:24,fishSpdD:15,prog:{up:.16,down:.09,downD:.05,start:.35},
   cook:{speed:[1.5,1.9,2.4],ramp:.1,passes:6,zones:[.38,.6,.74]}},
  pray:{dur:240,mult:.04,time:3},   // altar da igreja (2-sistemas/18-altar.js), mecânica secreta: rezar parado por time s dá +4% de ouro, energia máxima e dano por dur s; rezar de novo só reinicia
@@ -960,7 +962,7 @@ const BAL={
  ecoPer:.05,jetPer:.05,                                  // economia e eficiência do jato: -5% COMPOSTO por nível (0,95^nível), então nunca zera mesmo com muitos níveis
  jetSpd:.1,                                           // velocidade de subida com a mochila a jato: +10% por nível (intervalo entre blocos dividido por 1 + jetSpd x nível)
  tier:{b:600,k:3.4,dmgMult:2.6},                       // nova picareta: custo = b x k^(tier+1) · dano x dmgMult por tipo
- items:{dyn:40,dyn2:100,dyn3:260,dyn4:650,dyn5:1700,cen:30,sop:90,poc:220},itemK:1.9,       // loja: preço base e crescimento por camada alcançada
+ items:{dyn:40,dyn2:100,dyn3:260,dyn4:650,dyn5:1700,isc:50,cen:30,sop:90,poc:220},itemK:1.9,premium:{sop:4,poc:4},       // loja: preço base e crescimento por camada alcançada · premium = multiplicador de preço das comidas vendidas na loja (sopa e poção saem 4x mais caras que o valor-base; o caldeirão da igreja segue sendo o jeito barato)
  dig:{powBase:4,hardBase:50,hardK:3.25,goldBase:1.5,goldK:2.15,crit:3},   // dano inicial · dureza (x hardK a cada 100 m) · ouro por bloco · multiplicador de crítico
  // Energia: máxima, custo de cavar (digBase x digGrow^camada: cresce 20% a cada 100 m), custo de andar/subir e fração gasta pela escavação automática
  energy:{base:100,perLevel:30,digBase:2.5,digGrow:1.2,stepBase:.06,stepLayer:.014,auto:.5,dyn:2,retMargin:.15,retBlocks:2},   // dyn = dinamite gasta o equivalente a 2 blocos cavados · aviso de volta: apertado quando a energia < custo de subir x (1 + retMargin) + retBlocks blocos cavados da profundidade seguinte
@@ -971,7 +973,7 @@ const BAL={
  furnace:{base:.4,per:.3,bonus:.3},
  xp:{base:20,k:1.22},                                  // XP para o próximo nível = base x k^(nível-1)
  events:{len:20,gapMin:90,gapRand:90},                 // frenesi/corrida do ouro: duração e intervalo (s)
- skills:{fury:{dur:8,cd:80,at:50,mult:2,per:.15},frenzy:{dur:6,cd:110,at:150,mult:1.4,per:.08},comboFactor:.5}, // habilidades ativas: bônus reduzido quando Fúria e Frenesi são usados juntos
+ skills:{fury:{dur:8,cd:80,at:50,mult:2,per:.05},frenzy:{dur:6,cd:110,at:150,mult:1.4,per:.03},comboFactor:.5,durCap:2}, // habilidades ativas: bônus reduzido quando Fúria e Frenesi são usados juntos · potência no nível 10: Fúria x2,5 (2 + 10 x .05) e Frenesi x1,7 (1,4 + 10 x .03) · durCap = teto do multiplicador de duração (melhoria + poder de nível somados: no máximo x2, ou seja Fúria 16 s e Frenesi 12 s)
  tele:{base:180,perLevel:18,min:25},                    // recarga do teleporte (s): base - perLevel x nível, nunca abaixo de min
  // Dinamites da loja (mesmo preço-base em items): r = raio da explosão (blocos) · p = força (x dano da picareta, gasta a dureza dos blocos) · e = energia gasta (x o custo de cavar 1 bloco aqui) · cd = recarga (s) até poder usar qualquer dinamite de novo
  dyn:{dyn:{r:2.2,p:60,e:2,cd:1.5},dyn2:{r:3,p:160,e:3,cd:3},dyn3:{r:4,p:420,e:4.5,cd:6},dyn4:{r:5,p:1100,e:6.5,cd:10},dyn5:{r:6.5,p:3000,e:9,cd:16}},
@@ -1091,7 +1093,7 @@ const FISH_BAG_MAX=80;   // teto de peixes na bolsa (o save é limpo com este n�
 // ===== 1-nucleo/03-estado-save.js — Estado do jogo (S), validação do save, carregar/salvar e variáveis de sessão =====
 const SAVE_KEY="abismo-v3";
 const fresh=()=>({pray:0,gc:0,gcAt:-1,gold:0,depth:0,mc:0,prog:0,best:0,runMax:0,tier:0,runs:0,total:0,oc:0,blocks:0,deaths:0,sold:0,en:-1,
- lv:{sharp:0,emax:0,eco:0,jet:0,jetspd:0,auto:0,autopow:0,speed:0,crit:0,luck:0,xp:0,duration:0,furia:0,frenesi:0,tele:0,pet:0,furn:0,lavares:0,lant:0,clock:0,back:0,fort:0,rod:0,bait:0},items:{dyn:0,dyn2:0,dyn3:0,dyn4:0,dyn5:0,cen:0,sop:0,poc:0,ptp:0,pas:0,pgr:0,pbq:0,cog:0},dsel:"dyn",fsel:"pas",fg:{},
+ lv:{sharp:0,emax:0,eco:0,jet:0,jetspd:0,auto:0,autopow:0,speed:0,crit:0,luck:0,xp:0,duration:0,furia:0,frenesi:0,tele:0,pet:0,furn:0,lavares:0,lant:0,clock:0,back:0,fort:0,rod:0,bait:0},items:{dyn:0,dyn2:0,dyn3:0,dyn4:0,dyn5:0,isc:0,cen:0,sop:0,poc:0,ptp:0,pas:0,pgr:0,pbq:0,cog:0},dsel:"dyn",fsel:"pas",fg:{},
  bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,moon:BAL.moon.start*BAL.moon.cycle,dir:"down",dug:[],ach:[],debug:false,real:0,pts:0,sk:{her:0,ini:0,ouro:0,dmg:0,fol:0,jato:0,gar:0,xp:0},od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,fb:[],fdx:{},fishN:0,fishP:0,fishG:0,cookN:0,cookP:0,play:0,v:9,vol:{m:.7,s:1,a:.7}});
 let S=fresh();S.seed=newSeed();
 function clean(o){const src=o&&typeof o==="object"?o:{},hasVersion=Number.isFinite(src.v),f=fresh();o=Object.assign(f,src);if(!hasVersion)o.v=7;
@@ -1185,8 +1187,8 @@ const gmult=()=>prayMult()*(1+.12*S.lv.luck)*(1+.08*S.sk.ouro)*(1+.12*pk("gold")
 // Dano: a picareta de cada camada vale 2,6x a anterior; a dureza dos blocos cresce 3x a cada 100 m.
 // Assim as camadas fundas ficam duras mesmo com todos os upgrades no máximo (sem a picareta e os upgrades certos, ficam muito duras).
 const basePow=()=>prayMult()*BAL.dig.powBase*Math.pow(BAL.tier.dmgMult,S.tier)*(1+.12*S.lv.sharp)*(1+.08*S.sk.dmg)*(1+.15*pk("dmg"));
-const furyMult=()=>BAL.skills.fury.mult+BAL.skills.fury.per*S.lv.furia;        // dano x2 até x3,5 com a melhoria no máximo
-const frenzyMult=()=>BAL.skills.frenzy.mult+BAL.skills.frenzy.per*S.lv.frenesi;   // velocidade x1,4 até x2,2 com a melhoria no máximo
+const furyMult=()=>BAL.skills.fury.mult+BAL.skills.fury.per*S.lv.furia;        // dano x2 até x2,5 com a melhoria no máximo
+const frenzyMult=()=>BAL.skills.frenzy.mult+BAL.skills.frenzy.per*S.lv.frenesi;   // velocidade x1,4 até x1,7 com a melhoria no máximo
 // Ao manter as duas habilidades ativas, cada bônus acima de 1x é reduzido pela metade.
 const furyActiveMult=()=>1+(furyMult()-1)*(skT[1]>0?BAL.skills.comboFactor:1);
 const frenzyActiveMult=()=>1+(frenzyMult()-1)*(skT[0]>0?BAL.skills.comboFactor:1);
@@ -1195,7 +1197,7 @@ const clickPow=()=>basePow()*(skT[0]>0?furyActiveMult():1);
 const autoDps=()=>S.lv.auto*.25*basePow()*(1+.1*S.lv.autopow);
 const AUTO_ENERGY=BAL.energy.auto;   // a escavação automática gasta metade da energia por bloco
 const attackSpeedMult=()=>(1+.1*pk("spd"))*(1+.05*S.lv.speed);
-const skillDurationMult=()=>(1+.1*pk("duration"))*(1+.05*S.lv.duration);
+const skillDurationMult=()=>Math.min(BAL.skills.durCap,(1+.1*pk("duration"))*(1+.05*S.lv.duration));
 const nightDive=()=>S.depth>0&&nightAmt()>=BAL.night.from;   // abaixo da superfície com a noite caída: ganha um pouco mais de XP
 const xpGainMult=()=>(1+.1*pk("xp"))*(1+.1*S.lv.xp)*(1+.1*S.sk.xp)*(nightDive()?1+BAL.night.xp:1);
 const oreChance=()=>Math.min(.95,((S.dir==="down"?.1:.16)+.02*S.sk.gar+.02*S.lv.luck)*(ev>0&&evT?3:1)*(star>0&&starT?BAL.star.luck:1));
@@ -1237,16 +1239,17 @@ const ITEMS={
  dyn3:{g:"Dinamites",get n(){return __("Dinamite pesada")},get d(){return dynDesc("dyn3")},b:BAL.items.dyn3,c:"#3fa8ff"},
  dyn4:{g:"Dinamites",get n(){return __("Carga de nitro")},get d(){return dynDesc("dyn4")},b:BAL.items.dyn4,c:"#b45cff"},
  dyn5:{g:"Dinamites",get n(){return __("Bomba de demolição")},get d(){return dynDesc("dyn5")},b:BAL.items.dyn5,c:"#ffd45c"},
+ isc:{g:"Pesca",get n(){return __("Isca premium")},get d(){return __("Gasta 1 a cada lançamento da vara: os peixes raros aparecem {0}x mais. Soma com a isca da mesa de trabalho",ndec(BAL.fish.premRare))},b:BAL.items.isc,c:"#7fe6ff"},
  cen:{g:"Comida de energia",get n(){return __("Cenourinha")},get d(){return __("Recupera 10% da energia máxima. Só se colhe no bosque")},b:BAL.items.cen,c:"#ff9a3a",en:.1,noShop:1},
- sop:{g:"Comida de energia",get n(){return __("Sopa de cogumelo")},get d(){return __("Recupera 25% da energia máxima. Só se faz no caldeirão da igreja")},b:BAL.items.sop,c:"#c9a27a",en:.25,noShop:1},
- poc:{g:"Comida de energia",get n(){return __("Poção de energia")},get d(){return __("Recupera 50% da energia máxima. Só se faz no caldeirão da igreja")},b:BAL.items.poc,c:"#6ff0ff",en:.5,noShop:1},
+ sop:{g:"Comida de energia",get n(){return __("Sopa de cogumelo")},get d(){return __("Recupera 25% da energia máxima. Faz-se no caldeirão da igreja ou se compra na loja, bem mais caro")},b:BAL.items.sop,c:"#c9a27a",en:.25},
+ poc:{g:"Comida de energia",get n(){return __("Poção de energia")},get d(){return __("Recupera 50% da energia máxima. Faz-se no caldeirão da igreja ou se compra na loja, bem mais caro")},b:BAL.items.poc,c:"#6ff0ff",en:.5},
  ptp:{get n(){return __("Poção de teleporte")},get d(){return __("Uso único: leva ao baú sem gastar energia (na superfície, volta ao ponto de onde saiu). Cai de baús ou se faz no caldeirão da igreja")},b:0,c:"#9a5cff",tp:1,noShop:1},
  pas:{get n(){return __("Peixe assado")},get d(){return __("Recupera 20% da energia máxima. Só se faz na fogueira")},b:0,c:"#e0a45f",en:.2,noShop:1},
  pgr:{get n(){return __("Peixe grelhado")},get d(){return __("Recupera 45% da energia máxima. Só se faz na fogueira")},b:0,c:"#ee8a4a",en:.45,noShop:1},
  cog:{get n(){return __("Cogumelo")},get d(){return __("Ingrediente: {0} cogumelos viram 1 Sopa de cogumelo no caldeirão da igreja",BAL.forage.soupCost)},b:0,c:"#d23a2a",noShop:1},
  pbq:{get n(){return __("Banquete do pescador")},get d(){return __("Recupera 85% da energia máxima. Só se faz na fogueira")},b:0,c:"#ffd45c",en:.85,noShop:1}
 };
-const itemCost=k=>Math.ceil(ITEMS[k].b*Math.pow(BAL.itemK,layerOf(S.best)));
+const itemCost=k=>Math.ceil(ITEMS[k].b*(BAL.premium[k]||1)*Math.pow(BAL.itemK,layerOf(S.best)));
 const have=k=>S.items[k]||0;
 // Quantos níveis/unidades dá para comprar agora com o ouro que se tem (mostrado como "xN" ao lado de cada melhoria e item da loja)
 const affordUp=k=>{const mx=UPS[k].max;let l=S.lv[k],g=S.gold,n=0;while(l<mx){const c=upCost(k,l);if(g<c)break;g-=c;l++;n++}return n};
@@ -1610,7 +1613,7 @@ function boom(){
  if(!cells.length){sayWarn(__("Nada para explodir aqui"));return}
  if(!S.debug)S.items[dk]--;
  S.dsel=dk;
- cells.sort((x,y)=>x[0]-y[0]);let B=DB.p*clickPow();   // força da explosão = p x dano da picareta (gasta a dureza dos blocos; veios de pedra dura sempre quebram)
+ cells.sort((x,y)=>x[0]-y[0]);let B=DB.p*basePow();   // força da explosão = p x dano da picareta (sem a Fúria) (gasta a dureza dos blocos; veios de pedra dura sempre quebram)
  for(const[,c,r]of cells){if(!isVein(c,r)){const hh=hardness(r);if(B<hh)continue;B-=hh}const o=collect(c,r);tot+=o.v;n++;if(Math.random()<.5){const p=blockXY(c,r);parts.push({x:p.x,y:p.y+T/2,vx:(Math.random()-.5)*300,vy:-Math.random()*260,l:.8,c:ITEMS[dk].c})}}
  dynCDt=DB.cd;dynCD=dynCDt;S.bombs++;const big=DYN_IDS.indexOf(dk);shake=Math.max(shake,BAL.shake.dyn[big]||0);flash=.4+big*.08;flashC=ITEMS[dk].c;sfx(90-big*8,.4+big*.08,"sawtooth");
  const p=blockXY(tc,tr);texts.push({x:p.x,y:p.y-T*.5,t:0,s:__("{0}: {1} blocos · +{2}",ITEMS[dk].n,n,fmt(tot)),c:ITEMS[dk].c,big:1});
@@ -2256,7 +2259,7 @@ function fishOk(f,p){
 // Sorteia a espécie (null = lixo). A isca e a chuva aumentam a chance dos peixes raros.
 function fishPick(p){
  if(Math.random()<BAL.fish.junk)return null;
- const bo=baitRare(S.lv.bait),rb=rainy()?BAL.fish.rain:1,pool=FISH.filter(f=>fishOk(f,p)).map(f=>({f,w:f.w*(f.t>0?bo*rb:1)}));
+ const bo=baitRare(S.lv.bait)*(fs&&fs.prem?BAL.fish.premRare:1),rb=rainy()?BAL.fish.rain:1,pool=FISH.filter(f=>fishOk(f,p)).map(f=>({f,w:f.w*(f.t>0?bo*rb:1)}));
  let tot=0;for(const x of pool)tot+=x.w;
  let r=Math.random()*tot;for(const x of pool){r-=x.w;if(r<=0)return x.f}
  return pool[0].f;
@@ -2302,9 +2305,10 @@ function startFish(p){
 function fishEnd(){fishHold=false;fs=null;document.body.classList.remove("fishing")}
 function fishCast(){
  const B=BAL.fish;
- Object.assign(fs,{ph:"cast",t:0,rel:false,rip:9,wait:(B.wait[0]+Math.random()*(B.wait[1]-B.wait[0]))*baitBite(S.lv.bait),f:null,junk:null,res:null,lost:false,msg:""});
+ const pr=have("isc")>0;if(pr&&!S.debug)S.items.isc--;   // Isca premium da loja: gasta 1 por lançamento
+ Object.assign(fs,{ph:"cast",t:0,prem:pr,rel:false,rip:9,wait:(B.wait[0]+Math.random()*(B.wait[1]-B.wait[0]))*baitBite(S.lv.bait),f:null,junk:null,res:null,lost:false,msg:""});
  sfx(360,.06,"triangle");setTimeout(()=>sfx(240,.09,"sine"),70);
- sayFish(__("Espere morder. Aperte Espaço no !"));
+ sayFish(pr?__("Isca premium! Espere morder. Aperte Espaço no !"):__("Espere morder. Aperte Espaço no !"));if(pr)refresh();
 }
 // Um passo da pesca (chamado pelo laço do jogo; dt = 0 com o jogo pausado)
 function fishTick(dt){
@@ -2441,7 +2445,7 @@ function fishSell(id){   // id = espécie; null vende tudo
 const FOODS=["pas","pgr","pbq"];
 const nearCamp=()=>onGround()&&Math.abs(S.mc-CAMP_C)<=2;
 const CPC={w:460,h:220};
-let cp=null,cpRaf=0,cpCv=null,cpG=null;
+let cp=null,cpRaf=0,cpCv=null,cpG=null,cpSel=0;   // cpSel: peixe marcado na lista (↑ ↓ trocam, Espaço assa), como a receita marcada do caldeirão
 function campHit(px,py){
  const y=rowY(0);if(py<y-T*2.6||py>y+T*.4)return false;
  return Math.abs(camX+(px-W/2)/T-CAMP_C)<=2.2;
@@ -2464,12 +2468,13 @@ function openCamp(){
 function campPaint(){
  const ui=$("cpui");if(!ui||!cp||modal!=="camp")return;
  if(cp.sc==="list"){
-  const gs=fishGroups();
-  ui.innerHTML="<div class='fshint'><span>"+(gs.length?__("Escolha um peixe · no ponto perfeito sobe um nível"):__("Sem peixes · pesque no riacho ou no mar"))+"</span></div>"
-   +(gs.length?"<div class='fklist'>"+gs.map(x=>"<button data-s='"+x.f.id+"' data-t='"+x.f.t+"' style='--tc:"+x.f.c+"'><span class='rn'>"+__(x.f.n)+"</span><span class='rq'><em>"+tierName(x.f.t)+"</em><u>\u2192</u><em class='ok'>"+ITEMS[FOODS[x.f.t]].n+"</em></span><span class='v'>x"+x.n+"</span></button>").join("")+"</div>":"")
-   +"<div class='cpfoods'><div class='cpft'><span>"+__("Comidas")+"</span></div><div class='cpfg'>"+FOODS.map(k=>"<div class='fd"+(have(k)?"":" no")+"' style='--fc:"+ITEMS[k].c+"'><i></i><span class='fn'"+(ITEMS[k].n.length>16?" style='font-size:.54rem'":"")+">"+ITEMS[k].n+"</span><small>"+__("+{0}% de energia",Math.round(ITEMS[k].en*100))+"</small><b>x"+have(k)+"</b></div>").join("")+"</div></div>"
+  const gs=fishGroups();cpSel=gs.length?clamp(cpSel,0,gs.length-1):0;
+  const sf=gs.length?FOODS[gs[cpSel].f.t]:null;   // comida que o peixe marcado vira (só ela ganha cor na faixa de baixo; as outras ficam apagadas, como os ingredientes do caldeirão)
+  ui.innerHTML="<div class='fshint'><span>"+(gs.length?__("Escolha um peixe · ↑ ↓ trocam · Espaço assa"):__("Sem peixes · pesque no riacho ou no mar"))+"</span></div>"
+   +(gs.length?"<div class='fklist'>"+gs.map((x,i)=>"<button data-i='"+i+"' data-s='"+x.f.id+"' data-t='"+x.f.t+"' class='"+(i===cpSel?"sel":"")+"' style='--tc:"+x.f.c+"'><span class='rn'>"+__(x.f.n)+"</span><span class='rq'><em>"+tierName(x.f.t)+"</em><u>\u2192</u><em"+(i===cpSel?" class='ok'":"")+">"+ITEMS[FOODS[x.f.t]].n+"</em></span><span class='v'>x"+x.n+"</span></button>").join("")+"</div>":"")
+   +"<div class='pting soft'><span class='pt'>"+__("Suas comidas")+"</span>"+FOODS.map(k=>"<span class='pi"+(have(k)?"":" no")+(k===sf?" use":"")+"' style='--fc:"+ITEMS[k].c+"' title='"+__("+{0}% de energia",Math.round(ITEMS[k].en*100))+"'><i></i>"+ITEMS[k].n+" <b>"+have(k)+"</b></span>").join("")+"</div>"
    +"<div class='fsbtns'><button id='cpclose'>"+__("Fechar · Esc")+"</button></div>";
-  ui.querySelectorAll("button[data-s]").forEach(x=>x.onclick=()=>campStart(x.dataset.s));
+  ui.querySelectorAll("button[data-s]").forEach(x=>x.onclick=()=>{cpSel=+x.dataset.i;campStart(x.dataset.s)});
   $("cpclose").onclick=closeModal;
  }else if(cp.sc==="roast"){
   ui.innerHTML="<div class='fshint'><span>"+__("<b>Espaço</b> na faixa <b>dourada</b> · não demore ou queima!")+"</span></div>"
@@ -2523,10 +2528,17 @@ function campFrame(now){
 }
 function campKey(e){
  if(e.code==="Escape"){e.preventDefault();closeModal();return}
+ if(cp&&cp.sc==="list"){
+  const N=fishGroups().length,sel=i=>{e.preventDefault();if(!N)return;cpSel=(i+N)%N;campPaint()};
+  if(e.code==="ArrowUp"||e.code==="KeyW"){sel(cpSel-1);return}
+  if(e.code==="ArrowDown"||e.code==="KeyS"){sel(cpSel+1);return}
+  if(/^Digit[1-9]$/.test(e.code)&&+e.code.slice(5)<=N){sel(+e.code.slice(5)-1);return}
+ }
  if(e.code==="Space"||e.code==="Enter"){
   if(!cp)return;
   e.preventDefault();if(e.repeat)return;
-  if(cp.sc==="roast")campTake();
+  if(cp.sc==="list"){const gs=fishGroups();if(gs.length)campStart(gs[clamp(cpSel,0,gs.length-1)].f.id)}
+  else if(cp.sc==="roast")campTake();
   else if(cp.sc==="result"&&cp.t>.5){cp={sc:"list",t:0,age:cp.age};campPaint()}
  }
 }
@@ -2606,19 +2618,11 @@ function openPot(){
 function potPaint(){
  const ui=$("ptui");if(!ui||!pot||modal!=="pot")return;
  const r0=POT_RECIPES[pot.sel],mx=potMax(r0),ore=ORES[BAL.forage.tpPot.minOre],nd0=r0.need();
- const cell=(k,c,nm,sm,n)=>"<div class='fd"+(n?"":" no")+(nd0[k]||k===r0.id?" use":"")+"' style='--fc:"+c+"'><span class='fn'>"+nm+"</span><small>"+sm+"</small><b>x"+n+"</b></div>";
+ const ing=(k,c,nm,tip,n)=>"<span class='pi"+(n?"":" no")+(nd0[k]?" use":"")+"' style='--fc:"+c+"'"+(tip?" title='"+tip.replace(/'/g,"&#39;")+"'":"")+"><i></i>"+nm+" <b>"+n+"</b></span>";
  const chips=r=>{const nd=r.need();return Object.keys(nd).map(k=>"<em class='"+(potHave(k)>=nd[k]?"ok":"no")+"'>"+nd[k]+"x "+(k==="ore"?__("Minério fundo"):ITEMS[k].n)+"</em>").join("<u>+</u>")};
  ui.innerHTML="<div class='fshint"+(pot.msg?" msg":"")+"'><span>"+(pot.msg||__("Escolha uma receita · ↑ ↓ trocam · Espaço cozinha"))+"</span></div>"
   +"<div class='fklist'>"+POT_RECIPES.map((r,i)=>"<button data-i='"+i+"' class='"+(i===pot.sel?"sel":"")+(potMax(r)<1?" no":"")+"' style='--tc:"+ITEMS[r.id].c+"'><span class='rn'>"+ITEMS[r.id].n+"</span><span class='rq'>"+chips(r)+"</span><span class='v'>x"+have(r.id)+"</span></button>").join("")+"</div>"
-  +"<div class='cpfoods'><div class='cpft'><span>"+__("Ingredientes")+"</span></div><div class='cpfg'>"
-  +cell("cog",ITEMS.cog.c,ITEMS.cog.n,__("Do bosque"),have("cog"))
-  +cell("cen",ITEMS.cen.c,ITEMS.cen.n,__("+{0}% de energia",Math.round(ITEMS.cen.en*100)),have("cen"))
-  +cell("ore",ore[2],__("Minério fundo"),__("a partir de {0}",__(ore[0])),deepOres())
-  +"</div><div class='cpft'><span>"+__("Comidas e poções")+"</span></div><div class='cpfg'>"
-  +cell("sop",ITEMS.sop.c,ITEMS.sop.n,__("+{0}% de energia",Math.round(ITEMS.sop.en*100)),have("sop"))
-  +cell("poc",ITEMS.poc.c,ITEMS.poc.n,__("+{0}% de energia",Math.round(ITEMS.poc.en*100)),have("poc"))
-  +cell("ptp",ITEMS.ptp.c,ITEMS.ptp.n,__("Teleporte"),have("ptp"))
-  +"</div></div>"
+  +"<div class='pting'><span class='pt'>"+__("Seus ingredientes")+"</span>"+ing("cog",ITEMS.cog.c,ITEMS.cog.n,"",have("cog"))+ing("cen",ITEMS.cen.c,ITEMS.cen.n,"",have("cen"))+ing("ore",ore[2],__("Minério fundo"),__("a partir de {0}",__(ore[0])),deepOres())+"</div>"
   +"<div class='fsbtns'>"+(mx>1?"<button id='potall' class='go'>"+__("Cozinhar tudo ({0})",mx)+"</button>":"")+"<button id='potclose'>"+__("Fechar · Esc")+"</button></div>";
  ui.querySelectorAll("button[data-i]").forEach(b=>b.onclick=()=>{pot.sel=+b.dataset.i;pot.msg="";potCook(false)});
  if($("potall"))$("potall").onclick=()=>potCook(true);$("potclose").onclick=closeModal}
@@ -2947,7 +2951,7 @@ function setLayerText(txt,kind){
 // ===== 4-interface/01-painel.js — Construção do painel (build) e atualização da interface (refresh), Renascer e apagar progresso =====
 const mk=(tag,cls,html)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e};
 const upBtn=(id,fn)=>{const b=mk("button","up",'<span class="n"></span><span class="d"></span><span class="c"></span><span class="k"></span><span class="lv"><b class="lt"></b><span class="pips"></span></span>');b.id=id;b.onclick=fn;return b};
-const SGROUPS=[N_("Dinamites")];   // categorias da aba Loja
+const SGROUPS=[N_("Dinamites"),N_("Comida de energia"),N_("Pesca")];   // categorias da aba Loja
 const GROUPS=[N_("Picareta"),N_("Energia"),N_("Escavação automática"),N_("Sorte e experiência"),N_("Habilidades"),N_("Utilidades"),N_("Fornalha"),N_("Pesca")];
 function build(){
  const keepScroll=[...document.querySelectorAll(".pane")].map(p=>[p,p.scrollTop]);   // recriar a lista não pode jogar o scroll de volta para o topo ao comprar
@@ -3013,7 +3017,7 @@ function refresh(){
  {const l=$("layer"),tt=l.textContent;if(l.title!==tt)l.title=tt}
  txSet($("surfmsg"),!surf?__("Melhorias só na superfície. Suba (ou use o teleporte) para comprar."):"");{const d=surf?"none":"";if($("surfmsg").style.display!==d)$("surfmsg").style.display=d}   // só o aviso no subsolo: na superfície a aba não traz texto de ajuda
  $("surfmsg").classList.toggle("warn",!shop);
- const nshop=nearShop();txSet($("shopmsg"),!surf?__("A loja fica na superfície. Suba (ou use o teleporte) para comprar."):nshop?__("Na loja: compre dinamite."):__("Vá até a loja (à direita do baú) para comprar."));
+ const nshop=nearShop();txSet($("shopmsg"),!surf?__("A loja fica na superfície. Suba (ou use o teleporte) para comprar."):nshop?__("Na loja: compre dinamite, comida e isca."):__("Vá até a loja (à direita do baú) para comprar."));
  $("shopmsg").classList.toggle("warn",!nshop);
  for(const k in ITEMS){if(ITEMS[k].noShop)continue;const c=itemCost(k),mx=have(k)>=99;setTxt("i-"+k,__("{0} · você tem {1}",ITEMS[k].n,have(k)),ITEMS[k].d+(ITEMS[k].en?"":" "+__("(preço sobe a cada camada alcançada)")),mx?__("MÁX"):fmt(c),mx||!nshop||S.gold<c,undefined,mx?0:affordItem(k))}
  if($("furmsg")){const f=S.fur;txSet($("furmsg"),f.n>0?__("Fornalha: {0} minérios na fila · pronta em {1}. Pode ir cavar: ela vende sozinha.",f.n,fmtT(furEta())):__("Refina os minérios com o tempo e vende sozinha (+{0}% de ouro). Pedra comum vai para o baú.",Math.round(BAL.furnace.bonus*100)))}

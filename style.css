@@ -373,14 +373,6 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 .fklist button:hover{background:#ffb43a22;transform:translateX(2px);border-color:var(--acc)}
 .fklist button[data-t="1"]{--tc:#5fb8ff}.fklist button[data-t="2"]{--tc:#ffb43a}
 .fklist button .v{background:#ffb43a1f;border:1px solid #ffb43a55;border-radius:4px;padding:2px 8px;white-space:nowrap}
-.cpfoods{margin:10px 0 2px}.cpft{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);text-align:center;margin-bottom:5px}
-.cpfg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.cpfg .fd{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;padding:7px 4px 6px;background:#ffffff0a;border:1px solid var(--line);border-top:3px solid var(--fc);border-radius:4px;min-width:0}
-.cpfg .fd i{display:none}
-.cpfg .fd .fn{font-size:.72rem;font-weight:700;color:var(--fc);line-height:1.15}
-.cpfg .fd small{font-size:.62rem;color:var(--mute);line-height:1.2}
-.cpfg .fd b{font-size:1.05rem;color:var(--ok);margin-top:2px}
-.cpfg .fd.no{opacity:.55}.cpfg .fd.no b{color:var(--mute)}
 .fsbtns .go:active,#fkall:active{transform:translateY(2px)}
 #fkall{padding:11px 8px;font-size:1rem}
 
@@ -427,13 +419,25 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 .potbox .fklist button .rq em.no{color:#ff9a7a;border-color:#ff9a7a44}
 .potbox .fklist button .v{position:absolute;right:10px;top:50%;transform:translateY(-50%);min-width:42px;text-align:center;white-space:nowrap}
 .potbox .fklist button.sel{box-shadow:inset 0 0 0 1px var(--acc)}
-.potbox .cpfoods{margin:2px 0 10px;padding-top:10px;border-top:1px solid var(--line)}
-.potbox .cpft{display:flex;align-items:center;gap:8px;margin:0 0 6px;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);white-space:nowrap}
-.potbox .cpft::before,.potbox .cpft::after{content:"";flex:1;height:1px;background:var(--line)}
-.potbox .cpfg{margin-bottom:10px}.potbox .cpfg:last-child{margin-bottom:0}
-.potbox .cpfg .fd{padding:8px 4px 7px;gap:3px;justify-content:center}
-.potbox .cpfg .fd.use{border-color:#ffb43a77;background:#ffb43a14}
-.potbox .cpfg .fd .fn,.potbox .cpfg .fd small{display:block;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.potbox .cpfg .fd .fn{font-size:.68rem}.potbox .cpfg .fd small{font-size:.58rem}
+.potbox .pting{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 14px;margin:2px 0 10px;padding-top:9px;border-top:1px solid var(--line);font-size:.64rem;color:var(--mute)}
+.potbox .pting .pt{width:100%;text-align:center;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
+.potbox .pting .pi{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;cursor:default}
+.potbox .pting .pi i{display:block;width:7px;height:7px;border-radius:2px;background:var(--fc);flex:none}
+.potbox .pting .pi b{color:var(--text);font-weight:700}
+.potbox .pting .pi.use b{color:var(--ok)}
+.potbox .pting .pi.no{opacity:.5}.potbox .pting .pi.no b{color:var(--mute)}
 .potbox .fsbtns{flex-wrap:nowrap;margin-top:0}.potbox .fsbtns button{flex:1 1 0;white-space:nowrap;min-width:0}
 .potbox .fsbtns .go{width:auto;flex:1.4 1 0;font-size:.8rem;letter-spacing:0;padding:11px 4px}
+
+/* Fogueira no estilo do caldeirão: linhas discretas (só o peixe marcado ganha cor) e comidas de peixe apagadas, só a que o peixe marcado vira acende */
+.campbox:not(.potbox) .fklist button{border-left-color:#ffffff22}
+.campbox:not(.potbox) .fklist button.sel{border-left-color:var(--tc);border-color:var(--acc);background:#ffb43a22}
+.potbox .fklist button .v{background:#ffffff0d;border-color:var(--line);color:var(--text)}
+.potbox .fklist button.sel .v{background:#ffb43a1f;border-color:#ffb43a55;color:#ffd45c}
+.potbox .pting.soft .pi{opacity:.6}
+.potbox .pting.soft .pi i{background:#ffffff40}
+.potbox .pting.soft .pi b{color:var(--mute)}
+.potbox .pting.soft .pi.use{opacity:1}
+.potbox .pting.soft .pi.use i{background:var(--fc)}
+.potbox .pting.soft .pi.use b{color:var(--ok)}
+.potbox .pting.soft .pi.no{opacity:.35}
