@@ -195,6 +195,11 @@ addLang("en","English",{
 "Raro":"Rare",
 "Épico":"Epic",
 "Lendário":"Legendary",
+"Militar":"Mil-Spec",
+"Restrito":"Restricted",
+"Classificado":"Classified",
+"Secreto":"Covert",
+"Raro especial":"Rare Special",
 // --- 1-nucleo/02-camadas-minerios.js
 "Terra":"Dirt",
 "Argila":"Clay",
@@ -275,9 +280,9 @@ addLang("en","English",{
 "Banquete do pescador":"Fisherman's feast",
 "Recupera 85% da energia máxima. Só se faz na fogueira":"Restores 85% of max energy. Only made at the campfire",
 "Fornalha":"Furnace",
+"Caixa de ouro":"Gold case",
 "Quadro de contratos":"Contract board",
 "NOVIDADE LIBERADA":"NEW UNLOCK",
-"e mais {0}":"and {0} more",
 "Próxima novidade aos {0} m: {1}":"Next unlock at {0} m: {1}",
 // --- 1-nucleo/05-audio-avisos.js
 "Clima: {0}":"Weather: {0}",
@@ -303,10 +308,6 @@ addLang("en","English",{
 "Resistência à lava":"Lava resistance",
 "-10% do dano da lava por nível. Agora: {0}% (próximo: {1}%)":"-10% lava damage per level. Now: {0}% (next: {1}%)",
 "-10% do dano da lava por nível. Agora: {0}%":"-10% lava damage per level. Now: {0}%",
-"Escavação automática":"Auto digging",
-"Quebra o bloco à frente sozinho: +0,25 golpe/s por nível. Gasta metade da energia, mas é mais fraco":"Breaks the block ahead by itself: +0.25 hits/s per level. Half the energy, but weaker",
-"Força da escavação automática":"Auto-dig power",
-"+10% de dano dos golpes automáticos por nível":"+10% damage on automatic hits per level",
 "Sorte para ouro e minérios":"Luck for gold and ores",
 "+12% de ouro e +2% de chance de minério por nível":"+12% gold and +2% ore chance per level",
 "Ganho de experiência":"Experience gain",
@@ -389,6 +390,9 @@ addLang("en","English",{
 "Nível {0}!":"Level {0}!",
 "Nível {0}":"Level {0}",
 "Escolha uma melhoria · {0} s":"Choose an upgrade · {0} s",
+"Bolsa de ouro":"Bag of gold",
+"+{0} de ouro":"+{0} gold",
+"ouro na hora":"instant gold",
 "nv {0} → {1}":"lv {0} → {1}",
 // --- 2-sistemas/04-habilidades.js
 "Bônus de ouro":"Gold bonus",
@@ -563,7 +567,6 @@ addLang("en","English",{
 "Asse um peixe no ponto perfeito":"Roast a fish to the perfect point",
 "Horta dourada":"Golden Garden",
 "Doure todas as cenouras da horta":"Gild every carrot in the garden",
-"{0} CONQUISTAS":"{0} ACHIEVEMENTS",
 "CONQUISTA":"ACHIEVEMENT",
 // --- 2-sistemas/05-noite-estrelas.js
 "Noite · +{0}% XP":"Night · +{0}% XP",
@@ -641,7 +644,6 @@ addLang("en","English",{
 "Pular":"Skip",
 "BAÚ {0}!":"{0} CHEST!",
 "achado a {0} m de profundidade":"found at {0} m deep",
-"+{0} de ouro":"+{0} gold",
 "BÔNUS {0}: {1} +{2} nv":"{0} BONUS: {1} +{2} lv",
 // --- 2-sistemas/13-pesca.js
 "Bota velha":"Old boot",
@@ -695,26 +697,13 @@ addLang("en","English",{
 "Cozinhar tudo ({0})":"Cook all ({0})",
 "Você já tem itens demais.":"You already have too many.",
 "Faltam ingredientes.":"Missing ingredients.",
-"Bolsa de ouro":"Bag of gold",
-"ouro na hora":"instant gold",
 // --- 2-sistemas/22-caixa.js
-"Na loja: compre dinamite, comida e isca.":"At the shop: buy dynamite, food and bait.",
-"Militar":"Mil-Spec",
-"Restrito":"Restricted",
-"Classificado":"Classified",
-"Secreto":"Covert",
-"Raro especial":"Rare Special",
-"Caixa de ouro":"Gold case",
 "CAIXA DE OURO":"GOLD CASE",
 "Caixa de ouro ({0}): +{1} de ouro":"Gold case ({0}): +{1} gold",
 "Ouro insuficiente para abrir a caixa":"Not enough gold to open the case",
 "Abrindo...":"Opening...",
 "Abrir outra · {0}":"Open another · {0}",
 "Abrir caixa · {0}":"Open case · {0}",
-"Caixa de ouro: clique para abrir":"Gold case: click to open",
-"Caixas de ouro":"Gold cases",
-"Caixas abertas":"Cases opened",
-"Saldo das caixas":"Case balance",
 // --- 3-mundo/02-coleta.js
 "Novo minério: {0}":"New ore: {0}",
 // --- 3-mundo/03-mineracao.js
@@ -760,6 +749,7 @@ addLang("en","English",{
 "INQUEBRÁVEL":"UNBREAKABLE",
 "Melhorias só na superfície. Suba (ou use o teleporte) para comprar.":"Upgrades only on the surface. Go up (or use teleport) to buy.",
 "A loja fica na superfície. Suba (ou use o teleporte) para comprar.":"The shop is on the surface. Go up (or use teleport) to buy.",
+"Na loja: compre dinamite, comida e isca.":"At the shop: buy dynamite, food and bait.",
 "Vá até a loja (à direita do baú) para comprar.":"Go to the shop (right of the chest) to buy.",
 "{0} · você tem {1}":"{0} · you have {1}",
 "(preço sobe a cada camada alcançada)":"(price rises with every layer reached)",
@@ -779,11 +769,9 @@ addLang("en","English",{
 "+{0} fragmentos":n=>"+"+n+(n==1?" shard":" shards"),
 "Escavação":"Digging",
 "Dano por golpe":"Damage per hit",
-"Dano automático":"Automatic damage",
 "Chance de crítico":"Crit chance",
 "Velocidade":"Speed",
 "Por bloco (aqui)":"Per block (here)",
-"Por bloco (automático)":"Per block (auto)",
 "Subir 1 m com o jato":"Fly up 1 m with jetpack",
 "Dano da lava (aqui)":"Lava damage (here)",
 "sem lava":"no lava",
@@ -816,6 +804,9 @@ addLang("en","English",{
 "Fragmentos de baús":"Shards from chests",
 "Bônus de melhoria":"Upgrade bonuses",
 "Poções de teleporte usadas":"Teleport potions used",
+"Caixas de ouro":"Gold cases",
+"Caixas abertas":"Cases opened",
+"Saldo das caixas":"Case balance",
 "Peixes pescados":"Fish caught",
 "Pescarias perfeitas":"Perfect catches",
 "Peixes na bolsa":"Fish in bag",
@@ -852,7 +843,6 @@ addLang("en","English",{
 "{0} — leva ao baú sem gastar energia; na superfície, volta ao ponto de onde saiu (compre em Melhorias)":"{0} — takes you to the chest without spending energy; on the surface, returns to where you left from (buy in Upgrades)",
 "{0} — {1} (desbloqueia aos {2} m)":"{0} — {1} (unlocks at {2} m)",
 "{0} (raio {1})":"{0} (radius {1})",
-// --- 4-interface/04-entrada.js
 // --- 4-interface/05-pausa.js
 "nível {0}":"level {0}",
 "Continuar":"Continue",
@@ -951,8 +941,9 @@ addLang("en","English",{
 "Caldeirão: clique para cozinhar":"Cauldron: click to cook",
 "Sopa pronta!":"Soup ready!",
 "Poção pronta!":"Potion ready!",
+// --- 5-desenho/21-caixa-mundo.js
+"Caixa de ouro: clique para abrir":"Gold case: click to open",
 // --- 6-jogo/01-laco-inicio.js
-"Escavação automática pausada: energia só para voltar":"Auto digging paused: energy is only enough to go back",
 "Save exportado: copie o texto":"Save exported: copy the text",
 "Falha ao exportar":"Export failed",
 "Save importado!":"Save imported!",
@@ -980,8 +971,6 @@ const BAL={
   jet:{b:250,k:1.919,max:20}, // eficiência do jato
   jetspd:{b:250,k:2.306,max:15}, // velocidade da mochila a jato (subida)
   lavares:{b:150,k:2.606,max:15},  // resistência à lava
-  auto:{b:400,k:2.955,max:12}, // escavação automática
-  autopow:{b:500,k:2.896,max:12}, // força da escavação automática
   luck:{b:200,k:2.038,max:20}, // sorte
   xp:{b:300,k:1.767,max:20}, // experiência
   duration:{b:500,k:1.72,max:20}, // duração das habilidades
@@ -1000,7 +989,7 @@ const BAL={
  // LIBERAÇÃO GRADUAL: cada coisa só aparece quando o recorde de profundidade (m) chega ao número abaixo (0 = desde o início). Vale para melhorias da mesa, itens da loja e construções da superfície.
  // O recorde sobrevive ao Renascer, então o que foi liberado não some. Quem já tem nível/estoque no save continua vendo. on:false libera tudo (modo antigo).
  unlock:{on:true,
-  ups:{sharp:0,speed:0,emax:0,eco:10,jet:15,luck:20,lant:25,xp:30,furn:30,crit:40,auto:50,duration:50,furia:50,autopow:60,clock:60,jetspd:70,lavares:80,tele:120,frenesi:150,pet:150,back:150,fort:120},
+  ups:{sharp:0,speed:0,emax:0,eco:10,jet:15,luck:20,lant:25,xp:30,furn:30,crit:40,duration:50,furia:50,clock:60,jetspd:70,lavares:80,tele:120,frenesi:150,pet:150,back:150,fort:120},
   items:{cen:0,dyn:25,isc:30,sop:60,dyn2:100,poc:150,dyn3:250,dyn4:500,dyn5:900},
   build:{furnace:30,case:30,board:60,slot:150}},
  // PESCA (2-sistemas/13-pesca.js) e FOGUEIRA (2-sistemas/14-fogueira.js). Espécies e valores: FISH em 1-nucleo/02-camadas-minerios.js (valor = blocos de ouro da profundidade do recorde).
@@ -1021,7 +1010,7 @@ const BAL={
  items:{dyn:40,dyn2:100,dyn3:260,dyn4:650,dyn5:1700,isc:50,cen:30,sop:90,poc:220},itemK:1.9,premium:{sop:4,poc:4},       // loja: preço base e crescimento por camada alcançada · premium = multiplicador de preço das comidas vendidas na loja (sopa e poção saem 4x mais caras que o valor-base; o caldeirão da igreja segue sendo o jeito barato)
  dig:{powBase:4,hardBase:50,hardK:3.25,goldBase:1.5,goldK:2.15,crit:3},   // dano inicial · dureza (x hardK a cada 100 m) · ouro por bloco · multiplicador de crítico
  // Energia: máxima, custo de cavar (digBase x digGrow^camada: cresce 20% a cada 100 m), custo de andar/subir e fração gasta pela escavação automática
- energy:{base:100,perLevel:30,digBase:2.5,digGrow:1.2,stepBase:.06,stepLayer:.014,auto:.5,dyn:2,retMargin:.15,retBlocks:2},   // dyn = dinamite gasta o equivalente a 2 blocos cavados · aviso de volta: apertado quando a energia < custo de subir x (1 + retMargin) + retBlocks blocos cavados da profundidade seguinte
+ energy:{base:100,perLevel:30,digBase:2.5,digGrow:1.2,stepBase:.06,stepLayer:.014,dyn:2,retMargin:.15,retBlocks:2},   // dyn = dinamite gasta o equivalente a 2 blocos cavados · aviso de volta: apertado quando a energia < custo de subir x (1 + retMargin) + retBlocks blocos cavados da profundidade seguinte
  // Lava (a partir de 100 m): chance por bloco = p0 + pL x camada. Ao quebrar tira flat + flatL x camada + (pct + pctL x camada) da energia máxima; não é reduzida pela economia.
  // res = cada nível de Resistência à lava multiplica o dano por (1 - res).
  lava:{from:100,p0:.012,pL:.0025,flat:6,flatL:3,pct:.03,pctL:.006,res:.1},
@@ -1160,7 +1149,7 @@ const FISH_BAG_MAX=80;   // teto de peixes na bolsa (o save é limpo com este n�
 // ===== 1-nucleo/03-estado-save.js — Estado do jogo (S), validação do save, carregar/salvar e variáveis de sessão =====
 const SAVE_KEY="abismo-v3";
 const fresh=()=>({pray:0,gc:0,gcAt:-1,gold:0,depth:0,mc:0,prog:0,best:0,runMax:0,tier:0,runs:0,total:0,oc:0,blocks:0,deaths:0,sold:0,en:-1,
- lv:{sharp:0,emax:0,eco:0,jet:0,jetspd:0,auto:0,autopow:0,speed:0,crit:0,luck:0,xp:0,duration:0,furia:0,frenesi:0,tele:0,pet:0,furn:0,lavares:0,lant:0,clock:0,back:0,fort:0,rod:0,bait:0},items:{dyn:0,dyn2:0,dyn3:0,dyn4:0,dyn5:0,isc:0,cen:0,sop:0,poc:0,ptp:0,pas:0,pgr:0,pbq:0,cog:0},dsel:"dyn",fsel:"pas",fg:{},
+ lv:{sharp:0,emax:0,eco:0,jet:0,jetspd:0,speed:0,crit:0,luck:0,xp:0,duration:0,furia:0,frenesi:0,tele:0,pet:0,furn:0,lavares:0,lant:0,clock:0,back:0,fort:0,rod:0,bait:0},items:{dyn:0,dyn2:0,dyn3:0,dyn4:0,dyn5:0,isc:0,cen:0,sop:0,poc:0,ptp:0,pas:0,pgr:0,pbq:0,cog:0},dsel:"dyn",fsel:"pas",fg:{},
  bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,moon:BAL.moon.start*BAL.moon.cycle,dir:"down",dug:[],ach:[],debug:false,cheat:false,real:0,pts:0,sk:{ouro:0,dmg:0,fol:0,gar:0,xp:0,rec:0,ven:0},od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,cases:0,caseNet:0,caseT:[0,0,0,0,0],chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,fb:[],fdx:{},fishN:0,fishP:0,fishG:0,cookN:0,cookP:0,play:0,v:10,vol:{m:.7,s:1,a:.7}});
 let S=fresh();S.seed=newSeed();
 function clean(o){const src=o&&typeof o==="object"?o:{},hasVersion=Number.isFinite(src.v),f=fresh();o=Object.assign(f,src);if(!hasVersion)o.v=7;
@@ -1182,7 +1171,7 @@ function clean(o){const src=o&&typeof o==="object"?o:{},hasVersion=Number.isFini
   const old=o.sk&&typeof o.sk==="object"?o.sk:{};for(const k of["gar","her","ouro","fol"]){const L=Math.floor(old[k])||0;if(L>0)o.pts+=L*(L+1)/2}
   if(Number.isFinite(o.shards)&&o.shards>0)o.pts+=o.shards;o.sk={};delete o.shards}
  if(o.v<5&&o.lv&&o.lv.blast>0){let r=0;for(let l=0;l<Math.floor(o.lv.blast);l++)r+=Math.ceil(600*Math.pow(1.4,l));o.gold+=r}   // upgrade "Alcance da dinamite" foi removido: devolve o ouro gasto
- if(o.lv)delete o.lv.blast;
+ if(o.lv){delete o.lv.blast;delete o.lv.auto;delete o.lv.autopow}   // "Escavação automática" e sua força foram removidas (o ouro gasto não volta)
  if(o.v<5&&o.tab>=1)o.tab++;   // entrou a aba Loja (posição 1)
  if(o.sk&&typeof o.sk==="object")for(const k of["her","ini","jato"]){const L=Math.floor(o.sk[k])||0;if(L>0)o.pts=(Number.isFinite(o.pts)?o.pts:0)+L*(L+1)/2;delete o.sk[k]}   // poderes removidos (Ouro inicial, Picareta inicial, Economia do jato): devolve os fragmentos gastos
  o.lv=Object.assign(fresh().lv,o.lv);o.sk=Object.assign(fresh().sk,o.sk);
@@ -1263,9 +1252,6 @@ const furyMult=()=>BAL.skills.fury.mult+BAL.skills.fury.per*S.lv.furia;        /
 const frenzyMult=()=>BAL.skills.frenzy.mult+BAL.skills.frenzy.per*S.lv.frenesi;   // velocidade x1,4 até x1,7 com a melhoria no máximo
 // As duas habilidades não podem ficar ativas ao mesmo tempo (useSk, 2-sistemas/04-habilidades.js), então cada uma vale o seu multiplicador cheio.
 const clickPow=()=>basePow()*(skT[0]>0?furyMult():1);
-// Escavação automática: cada nível dá +0,25 golpe/s; a força dá +10% por nível (12 níveis de cada: ~100% do manual, sem Fúria nem crítico).
-const autoDps=()=>S.lv.auto*.25*basePow()*(1+.1*S.lv.autopow);
-const AUTO_ENERGY=BAL.energy.auto;   // a escavação automática gasta metade da energia por bloco
 const attackSpeedMult=()=>(1+.1*pk("spd"))*(1+.05*S.lv.speed);
 const skillDurationMult=()=>Math.min(BAL.skills.durCap,(1+.1*pk("duration"))*(1+.05*S.lv.duration));
 const nightDive=()=>S.depth>0&&nightAmt()>=BAL.night.from;   // abaixo da superfície com a noite caída: ganha um pouco mais de XP
@@ -1293,7 +1279,6 @@ const returnCost=()=>WALK[clamp(S.depth,0,FINAL_DEPTH)]*ecoMult()*jetMult();
 // Energia para voltar: 0 = folga · 1 = apertado (sobra menos que o custo de subir + uma margem e uns blocos de cavada) · 2 = não dá para chegar à superfície subindo
 const returnNeed=()=>returnCost()*(1+BAL.energy.retMargin)+digCost(S.depth+1)*BAL.energy.retBlocks;
 const returnState=()=>{if(S.debug||S.depth<=0||S.lv.back<1)return 0;return S.en<returnCost()?2:S.en<returnNeed()?1:0};
-const autoOK=()=>S.debug||S.depth<=0||S.en>returnCost()+digCost(S.depth)*AUTO_ENERGY+4;
 // Custos
 const tierCost=()=>Math.ceil(BAL.tier.b*Math.pow(BAL.tier.k,S.tier+1));
 const upCost=(k,l)=>Math.ceil(UPS[k].b*Math.pow(UPS[k].k,l));
@@ -1586,8 +1571,6 @@ const UPS={
  jet:{g:"Energia",get n(){return __("Eficiência da mochila a jato")},d:l=>__("-5% de energia gasta no jato por nível (cumulativo). Gasto atual: {0}%",Math.round(Math.pow(1-BAL.jetPer,l)*100)),...BAL.ups.jet},
  jetspd:{g:"Energia",get n(){return __("Velocidade da mochila a jato")},d:l=>__("+10% de velocidade do jato por nível"),...BAL.ups.jetspd},
  lavares:{g:"Energia",get n(){return __("Resistência à lava")},d:l=>l<BAL.ups.lavares.max?__("-10% do dano da lava por nível. Agora: {0}% (próximo: {1}%)",Math.round(Math.pow(1-BAL.lava.res,l)*100),Math.round(Math.pow(1-BAL.lava.res,l+1)*100)):__("-10% do dano da lava por nível. Agora: {0}%",Math.round(Math.pow(1-BAL.lava.res,l)*100)),...BAL.ups.lavares},
- auto:{g:"Escavação automática",get n(){return __("Escavação automática")},d:l=>__("Quebra o bloco à frente sozinho: +0,25 golpe/s por nível. Gasta metade da energia, mas é mais fraco"),...BAL.ups.auto},
- autopow:{g:"Escavação automática",get n(){return __("Força da escavação automática")},d:l=>__("+10% de dano dos golpes automáticos por nível"),...BAL.ups.autopow},
  luck:{g:"Sorte e experiência",get n(){return __("Sorte para ouro e minérios")},d:l=>__("+12% de ouro e +2% de chance de minério por nível"),...BAL.ups.luck},
  xp:{g:"Sorte e experiência",get n(){return __("Ganho de experiência")},d:l=>__("+10% de experiência por nível"),...BAL.ups.xp},
  duration:{g:"Habilidades",get n(){return __("Duração das habilidades")},d:l=>__("+5% de duração da Fúria e da Frenética por nível"),...BAL.ups.duration},
@@ -3555,7 +3538,7 @@ function collect(c,r){
  return{v,ore,rich,n,fort};
 }
 
-// ===== 3-mundo/03-mineracao.js — Movimento, golpes, combo e escavação automática =====
+// ===== 3-mundo/03-mineracao.js — Movimento, golpes e combo =====
 // Chegada à Rocha-mãe: tremor, clarão dourado com o título e uma fanfarra (só na primeira vez de cada vida em que se chega ao fundo); depois a cena da cenoura dourada (2-sistemas/15-fundo.js)
 function reachBottom(){
  shake=Math.max(shake,10);flash=1.8;flashC="#ffd45c";flashText=__("VOCÊ CHEGOU AO FUNDO");
@@ -3610,8 +3593,8 @@ function onCombo(){
 function comboEnd(){   // o tempo acabou: combos de 10 para cima mostram o total final e tocam um som descendente
  if(cmb>=10){cmbLast=cmb;cmbLastT=1.4;comboEndSfx()}
 }
-function breakPrimary(tc,tr,auto,crit){
- if(!auto){cmb=cmbT>0?cmb+1:1;cmbT=1.8;onCombo()}   // só o golpe manual conta para o combo
+function breakPrimary(tc,tr,crit){
+ cmb=cmbT>0?cmb+1:1;cmbT=1.8;onCombo()
  const{v,ore,rich,n,fort}=collect(tc,tr),p=blockXY(tc,tr);
  gainXp(1+tr/25);if(ore)gainXp((4+ORES.indexOf(ore)*3)*n);
  breakSfx(tr,blockKind(tc,tr,ore),ore?ORES.indexOf(ore):0);   // som pelo tipo de bloco (terra, pedra, minério, lava)
@@ -3622,24 +3605,24 @@ function breakPrimary(tc,tr,auto,crit){
  if(fort>0){texts.push({x:p.x,y:p.y-T*.95,t:0,s:__("Minério extra! +{0}",fort),c:"#7dffb0",big:1});sfx(1250,.1,"sine");setTimeout(()=>sfx(1670,.14,"sine"),70);for(let i=0;i<8;i++)parts.push({x:p.x,y:p.y+T/2,vx:(Math.random()-.5)*200,vy:-60-Math.random()*200,l:.6,c:i%2?"#7dffb0":"#ffffff"})}
  if(Math.random()<.02){const g=maxEn()*.06;S.en=Math.min(maxEn(),S.en+g);texts.push({x:p.x,y:p.y-T*.7,t:0,s:__("+Energia"),c:"#6ff0ff",big:1});sfx(1320,.15,"sine")}
  if(lava(tc,tr)){const l=lavaDmg(tr);texts.push({x:p.x,y:p.y-T*.9,t:0,s:__("Lava! -{0} de energia",Math.round(l)),c:"#ff5a1f",big:1});spend(l)}
- spend(digCost(tr)*(auto?AUTO_ENERGY:1));
+ spend(digCost(tr));
 }
-function hit(dmg,crit,auto){
+function hit(dmg,crit){
  const[a,b]=tgt();
  if(isDug(a,b))return;
- if(!canBreak(a,b)){S.prog=0;if(isVein(a,b)&&!auto){hitSfx("hard",b);{const m=__("Pedra dura: use dinamite");if(!toastHas(m))sayWarn(m)}}return}
+ if(!canBreak(a,b)){S.prog=0;if(isVein(a,b)){hitSfx("hard",b);{const m=__("Pedra dura: use dinamite");if(!toastHas(m))sayWarn(m)}}return}
  const d0=S.deaths;
- if(!auto||Math.random()<.04)swing=1;
- if(!auto)hitSfx(blockKind(a,b),b);
+ swing=1;
+ hitSfx(blockKind(a,b),b);
  S.prog+=dmg;
  const p=blockXY(a,b);
- if(!auto||Math.random()<.05)for(let i=0;i<4;i++)parts.push({x:p.x+(Math.random()-.5)*T*.6,y:p.y+T/2,vx:(Math.random()-.5)*120,vy:-Math.random()*140,l:.5,c:blockColor(b,a,hash(b,i)*8)});
+ for(let i=0;i<4;i++)parts.push({x:p.x+(Math.random()-.5)*T*.6,y:p.y+T/2,vx:(Math.random()-.5)*120,vy:-Math.random()*140,l:.5,c:blockColor(b,a,hash(b,i)*8)});
  if(crit){texts.push({x:p.x+(Math.random()-.5)*40,y:p.y-T*.5,t:0,s:__("CRÍTICO! {0}",fmt(dmg)),c:"#ff7a3a",big:1});shake=Math.max(shake,BAL.shake.crit)}   // tremor de tela: só no crítico e nas dinamites grandes (BAL.shake)
  for(let g=0;g<40;g++){
   const[tc,tr]=tgt();if(!canBreak(tc,tr))break;
   const h=hardness(tr);if(S.prog<h)break;
   S.prog-=h;
-  breakPrimary(tc,tr,auto,crit&&g===0);if(S.deaths!==d0)return;
+  breakPrimary(tc,tr,crit&&g===0);if(S.deaths!==d0)return;
   step();if(S.deaths!==d0)return;
   const[a2,b2]=tgt();if(isDug(a2,b2)||!canBreak(a2,b2)){S.prog=0;break}
  }
@@ -3685,7 +3668,7 @@ function setLayerText(txt,kind){
 const mk=(tag,cls,html)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e};
 const upBtn=(id,fn)=>{const b=mk("button","up",'<span class="n"></span><span class="d"></span><span class="c"></span><span class="k"></span><span class="lv"><b class="lt"></b><span class="pips"></span></span>');b.id=id;b.onclick=fn;return b};
 const SGROUPS=[N_("Dinamites"),N_("Comida de energia"),N_("Pesca")];   // categorias da aba Loja
-const GROUPS=[N_("Picareta"),N_("Energia"),N_("Escavação automática"),N_("Sorte e experiência"),N_("Habilidades"),N_("Utilidades"),N_("Fornalha"),N_("Pesca")];
+const GROUPS=[N_("Picareta"),N_("Energia"),N_("Sorte e experiência"),N_("Habilidades"),N_("Utilidades"),N_("Fornalha"),N_("Pesca")];
 function build(){
  const keepScroll=[...document.querySelectorAll(".pane")].map(p=>[p,p.scrollTop]);   // recriar a lista não pode jogar o scroll de volta para o topo ao comprar
  $("qty").innerHTML="";
@@ -3780,8 +3763,8 @@ let statsHtml="";
 function renderStats(){
  if((S.tab||0)!==2)return;
  const row=(l,v)=>"<dt>"+l+"</dt><dd>"+v+"</dd>",sec=(t,r)=>"<h3>"+t+"</h3><dl class='sg'>"+r.join("")+"</dl>",pct=x=>Math.round(x*100)+"%";
- const st=sec(__("Escavação"),[row(__("Dano por golpe"),fmt(clickPow())),row(__("Dano automático"),fmt(autoDps())+"/s"),row(__("Chance de crítico"),pct(critCh())),row(__("Velocidade"),"+"+Math.round((attackSpeedMult()-1)*100)+"%")])
-  +sec(__("Energia"),[row(__("Por bloco (aqui)"),digCost(Math.max(0,S.depth)).toFixed(1)),row(__("Por bloco (automático)"),(digCost(Math.max(0,S.depth))*AUTO_ENERGY).toFixed(1)),row(__("Subir 1 m com o jato"),(stepCost(Math.max(0,S.depth))*jetMult()).toFixed(2)),row(__("Dano da lava (aqui)"),S.depth>=BAL.lava.from?Math.round(lavaDmg(S.depth)):__("sem lava"))])
+ const st=sec(__("Escavação"),[row(__("Dano por golpe"),fmt(clickPow())),row(__("Chance de crítico"),pct(critCh())),row(__("Velocidade"),"+"+Math.round((attackSpeedMult()-1)*100)+"%")])
+  +sec(__("Energia"),[row(__("Por bloco (aqui)"),digCost(Math.max(0,S.depth)).toFixed(1)),row(__("Subir 1 m com o jato"),(stepCost(Math.max(0,S.depth))*jetMult()).toFixed(2)),row(__("Dano da lava (aqui)"),S.depth>=BAL.lava.from?Math.round(lavaDmg(S.depth)):__("sem lava"))])
   +sec(__("Nesta profundidade · {0} m",fmt(S.depth)),[row(__("Ouro por bloco"),fmt(blockGold(S.depth))),row(__("Dureza"),fmt(hardness(S.depth))),row(__("Chance de minério"),pct(oreChance())),row(__("Bônus de XP"),"+"+Math.round((xpGainMult()-1)*100)+"%")])
   +sec(__("Progresso"),[row(__("Profundidade máxima"),fmt(S.best)+" m"),row(__("Ouro total"),fmt(S.total)),row(__("Blocos quebrados"),fmt(S.blocks)),row(__("Minérios coletados"),fmt(S.oc)),row(__("Catálogo de minérios"),S.od.length+"/"+ORES.length),row(__("Renascimentos"),S.runs),row(__("Fragmentos"),S.pts),row(__("Estação do ano"),SEASONS[SEA.idx].n)])
   +sec(__("Uso"),[row(__("Vendas no baú"),S.sold),row(__("Vezes sem energia"),S.deaths),row(__("Dinamites usadas"),S.bombs),row(__("Itens comidos"),S.eaten),row(__("Teleportes"),S.tps),row(__("Pedras duras quebradas"),S.veins),row(__("Veios de minério quebrados"),S.rich),row(__("Vezes na cama"),S.sleeps),row(__("Minérios refinados"),fmt(S.refined))])
@@ -6972,7 +6955,7 @@ function drawCaseBox(t){
 }
 
 // ===== 6-jogo/01-laco-inicio.js — Laço principal, eventos, salvar/exportar/importar e inicialização =====
-let last=performance.now(),acc=0,sv=0,autoMsgT=0,exitUp=false;   // exitUp: está subindo pelo buraco (vale até o passo que cruza a superfície)
+let last=performance.now(),acc=0,sv=0,exitUp=false;   // exitUp: está subindo pelo buraco (vale até o passo que cruza a superfície)
 function loop(now){
  requestAnimationFrame(loop);   // agenda o próximo quadro antes de tudo: uma exceção num quadro não congela o jogo para sempre
  const dt=modal==="pause"||modal==="lv"||modal==="chest"?0:Math.min(.1,(now-last)/1000);last=now;   // pausa, escolha de melhoria ao subir de nível e animação de abrir baú congelam o jogo (tempo, habilidades, energia, combo, clima, fornalha...)
@@ -6983,14 +6966,11 @@ function loop(now){
  if(!Number.isFinite(S.gold)&&!S.debug)S.gold=0;
  caveTick(dt);   // som ambiente do subsolo e do abismo (2-sistemas/21-som-subsolo.js)
  if(S.dir==="down")jetT=0;if(jetT>0)jetT-=dt;if(jetT>0||(!modal&&airborne()&&S.dir!=="down")){const jx=colX(mX),jy=rowY(mY);const sb=shiftOn&&!fs&&(S.dir==="left"||S.dir==="right");if(Math.random()<dt*(jetT>0?60:sb?55:14)){const bz=sb?2.2:1;const nzk=performance.now()-jetNz.t<150;parts.push({x:(nzk?jetNz.x:jx+(S.dir==="left"?9:-9)*worldZoom)+(Math.random()-.5)*4,y:(nzk?jetNz.y:jy-8*worldZoom)+2*worldZoom,vx:(Math.random()-.5)*(jetT>0?50:25)*bz,vy:(jetT>0?90+Math.random()*110:40+Math.random()*50)*bz,l:.3,c:Math.random()<.5?"#ffb43a":"#ff6a2a",jet:true})}}
- dynCD=Math.max(0,dynCD-dt);tpCD=Math.max(0,tpCD-dt);toastTick(dt);autoMsgT-=dt;
+ dynCD=Math.max(0,dynCD-dt);tpCD=Math.max(0,tpCD-dt);toastTick(dt);
  if(ev>0)ev-=dt;else{evNext-=dt;if(evNext<=0){ev=BAL.events.len;evT=Math.random()<.5?0:1;evNext=BAL.events.gapMin+Math.random()*BAL.events.gapRand;sfx(784,.12,"triangle");setTimeout(()=>sfx(1047,.2,"triangle"),110)}}
  // superfície: recupera energia rápido e entrega a mochila ao chegar perto do baú
  if(atSurface()){const m=maxEn();if(S.en<m)S.en=Math.min(m,S.en+60*dt);}
  furTick(dt);ctTick(dt);chestTick();memCheck();fishTick(dt);prayTick(dt);
- // escavação automática (pausa sozinha quando a energia só dá para voltar)
- const ad=autoDps();
- if(ad>0&&!modal&&!fs){if(autoOK())hit(ad*dt,false,true);else if(autoMsgT<=0&&S.depth>0&&canBreak(...tgt())){autoMsgT=6;sayWarn(__("Escavação automática pausada: energia só para voltar"))}}
  if(!modal&&!fs&&holdS&&now-lastH>(skT[1]>0?150/frenzyMult():150)/attackSpeedMult()){lastH=now;clickDig()}
  // queda livre: segurando ↓ sobre buraco já cavado, desce de graça e acelera aos poucos; soltar a tecla para na hora
  const falling=!modal&&!fs&&held==="down"&&S.depth<FINAL_DEPTH&&isDug(S.mc,S.depth);fallR=falling?fallR+dt:0;
@@ -7038,5 +7018,5 @@ if(S.lvp>0&&!modal)levelUp();
 onLang(()=>{relabelTabs();if(fsLab)fsLab();buildBar();build();statsHtml="";bagHtml="";buffsHtml="";clkLast="";if(modal==="pause"){paintPause();const lb=document.querySelector("#bx .lp-btn");if(lb)lb.focus()}refresh()});
 requestAnimationFrame(loop);
 // gancho opcional usado só por tools/smoke.js (não faz nada no jogo normal)
-if(typeof window.__TESTE__==="function")window.__TESTE__({get blkShake(){return blkShake},get pot(){return pot},deepOres,POT_RECIPES,ORES,churchSolid,roofSolid,houseBlocks,bell,bellCol,nearBell,bellUse,altarCol,nearAltar,altarUse,prayTick,prayCancel,get prayA(){return prayA},CHURCH_C,CAULDRON_C,nearCauldron,cauldronUse,openPot,potCook,potMax,forageAt,forageProg,forageOn,forageUse,sayK,toastTick,toastHas,get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,WALK_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,TELE_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,openCase,nearCase,CASE_C,caseOpenNow,caseKey,caseCost,caseRtp,caseTier,caseItem,get cxBusy(){return cxBusy},get cxFx(){return cxFx},get cxStrip(){return cxStrip},chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,moonP,moonLit,moonLight,moonName,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,footKind,footSfx,stepSound,cricketAmt,frogAmt,windStrength,ambTick,caveTick,CAVE,caveMix,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v},get shakeDec(){return shakeDec},get blasts(){return blasts},get parts(){return parts},set musOn(v){musOn=v},skillBurst,useFx,skillFxTick,useGlows,thunderSfx,actx:()=>actx,ac,boomSfx,blastFx,setMute(v){mute=v},RANK_CFG,RK,rankOk,rankName,rankSnap,rankPush,rankPaint,rankLeave,rankLoad,rankOpen});
+if(typeof window.__TESTE__==="function")window.__TESTE__({get blkShake(){return blkShake},get pot(){return pot},deepOres,POT_RECIPES,ORES,churchSolid,roofSolid,houseBlocks,bell,bellCol,nearBell,bellUse,altarCol,nearAltar,altarUse,prayTick,prayCancel,get prayA(){return prayA},CHURCH_C,CAULDRON_C,nearCauldron,cauldronUse,openPot,potCook,potMax,forageAt,forageProg,forageOn,forageUse,sayK,toastTick,toastHas,get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,WALK_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,TELE_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,openCase,nearCase,CASE_C,caseOpenNow,caseKey,caseCost,caseRtp,caseTier,caseItem,get cxBusy(){return cxBusy},get cxFx(){return cxFx},get cxStrip(){return cxStrip},chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,moonP,moonLit,moonLight,moonName,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,footKind,footSfx,stepSound,cricketAmt,frogAmt,windStrength,ambTick,caveTick,CAVE,caveMix,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v},get shakeDec(){return shakeDec},get blasts(){return blasts},get parts(){return parts},set musOn(v){musOn=v},skillBurst,useFx,skillFxTick,useGlows,thunderSfx,actx:()=>actx,ac,boomSfx,blastFx,setMute(v){mute=v},RANK_CFG,RK,rankOk,rankName,rankSnap,rankPush,rankPaint,rankLeave,rankLoad,rankOpen});
 })();
