@@ -19,19 +19,6 @@
 
 ---
 
-## Controles
-
-| Tecla | Ação |
-| --- | --- |
-| `Espaço` | Cavar (e usar baú, fornalha, quadro, caça-níquel, fogueira, carrocinha de peixes e pescar quando estiver perto) |
-| `W` `A` `S` `D` ou setas | Mover e escolher a direção |
-| `Shift` | Correr |
-| `E` / `R` | Usar dinamite / trocar o tipo de dinamite |
-| `Q` | Teleporte para o baú |
-| `1` `2` | Habilidades |
-| `N` | Som ligado ou desligado |
-| `Esc` ou `P` | Pausa |
-
 ## Feito com IA
 
 Este jogo foi criado por **João Pedro Borges** com auxílio de inteligência artificial ([Claude](https://claude.ai), da Anthropic). Parte do código e do conteúdo foi gerada com IA, sob direção e curadoria do autor.
