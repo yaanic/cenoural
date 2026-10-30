@@ -17,8 +17,6 @@
   Português · <a href="README.en.md">English</a>
 </p>
 
----
-
 ## Feito com IA
 
 Este jogo foi criado por **João Pedro Borges** com auxílio de inteligência artificial ([Claude](https://claude.ai), da Anthropic). Parte do código e do conteúdo foi gerada com IA, sob direção e curadoria do autor.

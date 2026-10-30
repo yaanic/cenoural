@@ -3047,9 +3047,10 @@ function fxAuraDraw(){
 //  · subsolo: ar de caverna (sopro grave e abafado) + pingos de água com eco
 //  · abismo (a partir de BAL.cave.deepFrom m, camada do Xisto; entra aos poucos desde deepFade m antes): zumbido grave que bate (dois tons quase iguais), vento uivando
 //    pelos túneis e, de vez em quando, ronco distante e rangido de rocha. Quanto mais fundo (até FINAL_DEPTH), mais forte e mais grave.
-// Sem estalos nem notas: nada soa como música ou como fogo crepitando.
+// Sons raros (a cada ~40-110 s, só abaixo de 8 m): pedregulhos, batida distante, gorgolejo, viga rangendo, morcegos, suspiro de vento, cristal e, no abismo, tom fantasma e desabamento.
+// Nada soa como música contínua nem como fogo crepitando: os pingos, o ronco e o rangido são espaçados de propósito.
 const CAVE={airVol:.1,mouthVol:.09,howlVol:.075,humVol:.05,dripVol:.03,rumbleVol:.12,groanVol:.045};
-let cvNodes=null,cvDrip=2,cvRumble=12,cvGroan=18,cvGust=1,cvGustT=0;
+let cvNodes=null,cvDrip=14,cvRumble=40,cvGroan=60,cvRare=45,cvGust=1,cvGustT=0;
 const cvSmooth=x=>x*x*(3-2*x);
 // quanto de cada camada está presente (0..1): u = fora da vista da superfície · mouth = boca do buraco · deep = abismo · K = intensidade do abismo até o fim
 function caveMix(){
@@ -3095,6 +3096,109 @@ function caveGroanSfx(vol,dur){
  g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(vol,t+dur*.45);g.gain.linearRampToValueAtTime(.0001,t+dur);
  o.connect(fl);o2.connect(fl);fl.connect(g);g.connect(A.destination);g.connect(cvNodes.echo);o.start(t);o2.start(t);o.stop(t+dur+.05);o2.stop(t+dur+.05);
 }
+// ---- sons raros de caverna (estilo "ambiente de caverna" do Minecraft): sorteados bem de vez em quando, sempre distantes e com eco ----
+// pedregulhos: pedrinhas caindo e quicando lá longe (estalinhos abafados cada vez mais espaçados)
+function caveRockfallSfx(vol){
+ const A=actx,t0=A.currentTime+.02;let t=t0,gap=.05;
+ for(let i=0;i<7+Math.floor(Math.random()*6);i++){
+  const s=A.createBufferSource(),fl=A.createBiquadFilter(),g=A.createGain(),v=vol*(1-i*.06);
+  s.buffer=noiseBuf();fl.type="bandpass";fl.frequency.value=500+Math.random()*900;fl.Q.value=1.2;
+  g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(Math.max(.001,v),t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+.07);
+  s.connect(fl);fl.connect(g);g.connect(A.destination);g.connect(cvNodes.echo);s.start(t,Math.random()*.4);s.stop(t+.09);
+  gap*=1.28;t+=gap*(.6+Math.random()*.8);
+ }
+}
+// batida distante: duas ou três pancadas surdas, como alguém batendo em pedra longe daqui
+function caveKnockSfx(vol){
+ const A=actx;let t=A.currentTime+.02;
+ for(let i=0;i<2+Math.floor(Math.random()*2);i++){
+  const f=95+Math.random()*30,o=A.createOscillator(),g=A.createGain();
+  o.type="sine";o.frequency.setValueAtTime(f,t);o.frequency.exponentialRampToValueAtTime(f*.55,t+.12);
+  g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(vol,t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+.22);
+  o.connect(g);g.connect(A.destination);g.connect(cvNodes.echo);o.start(t);o.stop(t+.25);
+  t+=.28+Math.random()*.35;
+ }
+}
+// tom fantasma: duas notas graves e suaves que entram e saem bem devagar, com leve vibrato (o "oooh" misterioso das cavernas profundas)
+function caveGhostSfx(vol,dur){
+ const A=actx,t=A.currentTime+.02,base=[196,220,175,165][Math.floor(Math.random()*4)],fl=A.createBiquadFilter(),g=A.createGain();
+ fl.type="lowpass";fl.frequency.value=700;fl.Q.value=.5;
+ g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(vol,t+dur*.5);g.gain.linearRampToValueAtTime(.0001,t+dur);
+ fl.connect(g);g.connect(A.destination);g.connect(cvNodes.echo);
+ for(const m of[1,1.5]){
+  const o=A.createOscillator(),lf=A.createOscillator(),lg=A.createGain();
+  o.type="sine";o.frequency.value=base*m*.5;lf.frequency.value=4.5;lg.gain.value=base*m*.5*.012;lf.connect(lg);lg.connect(o.frequency);
+  o.connect(fl);o.start(t);lf.start(t);o.stop(t+dur+.05);lf.stop(t+dur+.05);
+ }
+}
+// gorgolejo: borbulhar abafado de água ou lava (ruído grave com o volume pulsando)
+function caveGurgleSfx(vol,dur){
+ const A=actx,t=A.currentTime+.02,s=A.createBufferSource(),fl=A.createBiquadFilter(),g=A.createGain();
+ s.buffer=noiseBuf();s.loop=true;fl.type="bandpass";fl.frequency.setValueAtTime(230,t);fl.frequency.linearRampToValueAtTime(160,t+dur);fl.Q.value=4;
+ g.gain.setValueAtTime(.0001,t);
+ for(let x=.15;x<dur-.2;x+=.09+Math.random()*.14){g.gain.linearRampToValueAtTime(vol*(.3+Math.random()*.7),t+x);g.gain.linearRampToValueAtTime(vol*.1,t+x+.06)}
+ g.gain.linearRampToValueAtTime(.0001,t+dur);
+ s.connect(fl);fl.connect(g);g.connect(A.destination);g.connect(cvNodes.echo);s.start(t);s.stop(t+dur+.05);
+}
+// viga rangendo: madeira velha de escoramento de mina estalando devagar (tom que desliza passando por um filtro que "abre e fecha")
+function caveCreakSfx(vol){
+ const A=actx,t=A.currentTime+.02,dur=.9+Math.random()*.9,o=A.createOscillator(),fl=A.createBiquadFilter(),g=A.createGain(),f=70+Math.random()*40;
+ o.type="sawtooth";o.frequency.setValueAtTime(f,t);o.frequency.linearRampToValueAtTime(f*(Math.random()<.5?1.5:.65),t+dur);
+ fl.type="bandpass";fl.Q.value=7;fl.frequency.setValueAtTime(300,t);fl.frequency.linearRampToValueAtTime(700+Math.random()*300,t+dur);
+ g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(vol,t+dur*.3);g.gain.linearRampToValueAtTime(vol*.4,t+dur*.6);g.gain.linearRampToValueAtTime(vol*.9,t+dur*.8);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+ o.connect(fl);fl.connect(g);g.connect(A.destination);g.connect(cvNodes.echo);o.start(t);o.stop(t+dur+.05);
+}
+// morcegos: bater de asas (rajadas curtas de ruído) com alguns chiados agudos bem baixinhos, passando e sumindo
+function caveBatsSfx(vol){
+ const A=actx;let t=A.currentTime+.02;
+ for(let i=0;i<10+Math.floor(Math.random()*8);i++){
+  const s=A.createBufferSource(),fl=A.createBiquadFilter(),g=A.createGain(),k=Math.sin(Math.PI*i/16);
+  s.buffer=noiseBuf();fl.type="bandpass";fl.frequency.value=1100+Math.random()*500;fl.Q.value=1.5;
+  g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(vol*.7*Math.max(.15,k),t+.015);g.gain.exponentialRampToValueAtTime(.0001,t+.07);
+  s.connect(fl);fl.connect(g);g.connect(A.destination);s.start(t,Math.random()*.4);s.stop(t+.09);
+  if(Math.random()<.22){const o=A.createOscillator(),og=A.createGain(),f=3800+Math.random()*1800;o.type="sine";o.frequency.setValueAtTime(f,t);o.frequency.exponentialRampToValueAtTime(f*.7,t+.09);og.gain.setValueAtTime(.0001,t);og.gain.linearRampToValueAtTime(vol*.25,t+.01);og.gain.exponentialRampToValueAtTime(.0001,t+.1);o.connect(og);og.connect(A.destination);o.start(t);o.stop(t+.12)}
+  t+=.07+Math.random()*.05;
+ }
+}
+// desabamento distante: um estalo seco, um ronco que desce e uma chuva de pedrinhas no fim
+function caveCollapseSfx(vol){
+ const A=actx,t=A.currentTime+.02;
+ caveRumbleSfx(vol*1.1,2.4);
+ const s=A.createBufferSource(),fl=A.createBiquadFilter(),g=A.createGain();
+ s.buffer=noiseBuf();fl.type="lowpass";fl.frequency.value=600;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(vol*.8,t+.005);g.gain.exponentialRampToValueAtTime(.0001,t+.18);
+ s.connect(fl);fl.connect(g);g.connect(A.destination);g.connect(cvNodes.echo);s.start(t);s.stop(t+.2);
+ setTimeout(()=>{try{if(actx&&cvNodes)caveRockfallSfx(vol*.5)}catch(e){}},1700);
+}
+// suspiro de vento: uma lufada lenta que sobe e desce por um túnel, como uma respiração da caverna
+function caveSighSfx(vol){
+ const A=actx,t=A.currentTime+.02,dur=4+Math.random()*2,s=A.createBufferSource(),fl=A.createBiquadFilter(),g=A.createGain();
+ s.buffer=noiseBuf();s.loop=true;fl.type="bandpass";fl.Q.value=2.5;fl.frequency.setValueAtTime(220,t);fl.frequency.linearRampToValueAtTime(520,t+dur*.45);fl.frequency.linearRampToValueAtTime(200,t+dur);
+ g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(vol,t+dur*.45);g.gain.linearRampToValueAtTime(.0001,t+dur);
+ s.connect(fl);fl.connect(g);g.connect(A.destination);g.connect(cvNodes.echo);s.start(t);s.stop(t+dur+.05);
+}
+// cristal: um tinido limpo e fino que ressoa e some longe (cristais vibrando na parede)
+function caveCrystalSfx(vol){
+ const A=actx,t=A.currentTime+.02,f=[880,988,1175,1319,1568][Math.floor(Math.random()*5)];
+ for(const[m,a,d]of[[1,1,2.2],[2.76,.45,1.3],[5.4,.2,.7]]){
+  const o=A.createOscillator(),g=A.createGain();o.type="sine";o.frequency.value=f*m;
+  g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(vol*a,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);
+  o.connect(g);g.connect(A.destination);g.connect(cvNodes.echo);o.start(t);o.stop(t+d+.05);
+ }
+}
+// sorteia um som raro conforme a profundidade (subsolo: pedras, batidas, gorgolejo, viga, morcegos, cristal, suspiro · abismo: tudo isso + desabamento e tom fantasma, mais forte)
+function caveRareSfx(m){
+ const v=S.vol.a,deep=m.deep>.5,pool=[
+  [3,()=>caveRockfallSfx(.05*v*(.6+.4*m.K))],
+  [3,()=>caveKnockSfx(.07*v)],
+  [2,()=>caveGurgleSfx(.05*v,1.6+Math.random()*1.4)],
+  [2,()=>caveCreakSfx(.045*v)],
+  [2,()=>caveBatsSfx(.04*v)],
+  [2,()=>caveSighSfx(.06*v)],
+  [1.5,()=>caveCrystalSfx(.03*v)]];
+ if(deep){pool.push([2,()=>caveGhostSfx(.04*v*m.deep,6+Math.random()*3)],[1.2,()=>caveCollapseSfx(.09*v*m.deep)])}
+ let r=Math.random()*pool.reduce((a,x)=>a+x[0],0);
+ for(const[w,f]of pool){r-=w;if(r<=0){f();return}}
+}
 function caveTick(dt){
  if(!actx)return;
  if(cvNodes===null)caveInit();
@@ -3110,10 +3214,11 @@ function caveTick(dt){
  }catch(e){}
  if(q||dt<=0||m.u<=.05)return;
  try{
-  cvDrip-=dt;if(cvDrip<=0){cvDrip=(2.5+Math.random()*5)/(.5+.5*m.mid+.3*m.deep);if(m.mid+m.deep>.2)caveDripSfx(C.dripVol*S.vol.a*(m.mid+.6*m.deep),m.deep>.5)}
+  cvDrip-=dt;if(cvDrip<=0){cvDrip=(10+Math.random()*20)/(.6+.4*m.mid+.2*m.deep);if(m.mid+m.deep>.2)caveDripSfx(C.dripVol*S.vol.a*(m.mid+.6*m.deep),m.deep>.5)}
+  cvRare-=dt;if(cvRare<=0){cvRare=(40+Math.random()*70)/(.7+.5*m.K);if(m.mid+m.deep>.3&&S.depth>8)caveRareSfx(m)}
   if(m.deep>.3){
-   cvRumble-=dt;if(cvRumble<=0){cvRumble=(9+Math.random()*14)/(.6+.8*m.K);caveRumbleSfx(C.rumbleVol*S.vol.a*m.deep*(.5+.5*m.K),2.2+Math.random()*1.6)}
-   cvGroan-=dt;if(cvGroan<=0){cvGroan=(15+Math.random()*18)/(.6+.8*m.K);caveGroanSfx(C.groanVol*S.vol.a*m.deep,3+Math.random()*2)}
+   cvRumble-=dt;if(cvRumble<=0){cvRumble=(30+Math.random()*40)/(.6+.8*m.K);caveRumbleSfx(C.rumbleVol*S.vol.a*m.deep*(.5+.5*m.K),2.2+Math.random()*1.6)}
+   cvGroan-=dt;if(cvGroan<=0){cvGroan=(45+Math.random()*50)/(.6+.8*m.K);caveGroanSfx(C.groanVol*S.vol.a*m.deep,3+Math.random()*2)}
   }
  }catch(e){}
 }

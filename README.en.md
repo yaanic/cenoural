@@ -17,8 +17,6 @@
   English · <a href="README.md">Português</a>
 </p>
 
----
-
 ## Made with AI
 
 This game was created by **João Pedro Borges** with the help of artificial intelligence ([Claude](https://claude.ai), by Anthropic). Part of the code and content was generated with AI, under the author's direction and curation.
