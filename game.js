@@ -160,7 +160,7 @@ addLang("en","English",{
 "Energia":"Energy",
 "Subir com a mochila a jato gasta mais que cavar.":"Flying up with the jetpack costs more than digging.",
 "Comece a subir quando a energia chegar a 25%.":"Start heading up when your energy reaches 25%.",
-"O teleporte leva ao baú sem gastar energia. A <b>Poção de teleporte</b> (cai de baús ou sai do caldeirão) faz o mesmo uma vez, sem precisar da melhoria.":"Teleport takes you to the chest without spending energy. The <b>Teleport potion</b> (drops from chests or is brewed in the cauldron) does the same once, without needing the upgrade.",
+"O teleporte leva entre a cama e a mesa sem gastar energia. A <b>Poção de teleporte</b> (cai de baús ou sai do caldeirão) faz o mesmo uma vez, sem precisar da melhoria.":"Teleport takes you between the bed and the workbench without spending energy. The <b>Teleport potion</b> (drops from chests or is brewed in the cauldron) does the same once, without needing the upgrade.",
 "Comida de energia (da loja, da fogueira, do caldeirão ou as cenourinhas do bosque) fica na barra e recupera energia no subsolo.":"Energy food (from the shop, the campfire, the cauldron, or the little carrots from the forest) sits on the bar and restores energy underground.",
 "Na superfície a energia se recupera sozinha.":"On the surface, energy recovers by itself.",
 "Bom saber":"Good to know",
@@ -265,7 +265,7 @@ addLang("en","English",{
 "Poção de energia":"Energy potion",
 "Recupera 50% da energia máxima. Faz-se no caldeirão da igreja ou se compra na loja, bem mais caro":"Restores 50% of max energy. Made in the church cauldron, or bought at the shop for much more",
 "Poção de teleporte":"Teleport potion",
-"Uso único: leva ao baú sem gastar energia (na superfície, volta ao ponto de onde saiu). Cai de baús ou se faz no caldeirão da igreja":"Single use: takes you to the chest without spending energy (on the surface, returns you to where you left from). Drops from chests or is made in the church cauldron",
+"Uso único: leva entre a cama e a mesa sem gastar energia (na superfície, volta ao ponto de onde saiu). Cai de baús ou se faz no caldeirão da igreja":"Single use: takes you between the bed and the workbench without spending energy (on the surface, returns you to where you left from). Drops from chests or is made in the church cauldron",
 "Peixe assado":"Roasted fish",
 "Recupera 20% da energia máxima. Só se faz na fogueira":"Restores 20% of max energy. Only made at the campfire",
 "Peixe grelhado":"Grilled fish",
@@ -344,7 +344,7 @@ addLang("en","English",{
 "Relógio de sol e lua na barra do topo (o dia dura {0} min)":"Sun-and-moon clock on the top bar (a day lasts {0} min)",
 "Comprado: hora do dia na barra do topo (passe o mouse para ver o período)":"Bought: time of day on the top bar (hover for the period)",
 "Teleporte":"Teleport",
-"Teleporte ao baú sem gastar energia; na superfície, volta de onde saiu":"Teleports to the chest for free; on the surface, returns you to where you left",
+"Teleporte entre a cama e a mesa sem gastar energia; na superfície, volta de onde saiu":"Teleports between the bed and the workbench for free; on the surface, returns you to where you left",
 "Recarga: {0} s ({1} s no próximo)":"Cooldown: {0} s ({1} s next)",
 "Recarga: {0} s":"Cooldown: {0} s",
 "Nova picareta: {0}":"New pickaxe: {0}",
@@ -355,7 +355,7 @@ addLang("en","English",{
 // --- 2-sistemas/02-energia-mochila.js
 "Leve <b>comida de energia</b> (cenourinha do bosque, sopa e poção do caldeirão, peixe da fogueira): ela fica na barra ao lado das habilidades e recupera energia no subsolo.":"Bring <b>energy food</b> (carrots from the grove, soup and potions from the cauldron, fish from the campfire): it sits on the bar next to the skills and restores energy underground.",
 "Melhore a <b>Energia máxima</b> na mesa de trabalho para ir mais fundo em cada descida.":"Upgrade your <b>Max energy</b> at the workbench to go deeper on every descent.",
-"O <b>Teleporte</b> leva ao baú sem gastar energia: ótimo para voltar com a mochila cheia.":"<b>Teleport</b> takes you to the chest without spending energy: great for coming back with a full backpack.",
+"O <b>Teleporte</b> leva entre a cama e a mesa sem gastar energia: ótimo para voltar com a mochila cheia.":"<b>Teleport</b> takes you between the bed and the workbench without spending energy: great for coming back with a full backpack.",
 "Comece a subir quando a energia chegar a 25%: subir com a mochila a jato gasta mais.":"Start heading up when your energy reaches 25%: flying up with the jetpack costs more.",
 "SEM ENERGIA":"OUT OF ENERGY",
 "Você apagou e a mochila ficou para trás.":"You passed out and your backpack was left behind.",
@@ -370,7 +370,7 @@ addLang("en","English",{
 "Vendido: +{0}":"Sold: +{0}",
 "Mochila vazia: nada para vender.":"Backpack empty: nothing to sell.",
 "Sem Poção de teleporte":"No Teleport potion",
-"Teleporte: use no subsolo para subir ao baú":"Teleport: use it underground to go up to the chest",
+"Teleporte: use no subsolo para subir até a cama e a mesa":"Teleport: use it underground to go up to the bed and workbench",
 // --- 2-sistemas/03-nivel-xp.js
 "Dano da picareta":"Pickaxe damage",
 "+15% de dano":"+15% damage",
@@ -1087,7 +1087,7 @@ const inS=c=>c>=SURF_L&&c<=WALK_R;
 const CHEST_C=5;                 // coluna do baú de depósito, na superfície
 const KEEPER_C=10.7;   // Izans, o dono da carrocinha (SHOP_C+1.7): é com ele que se vendem os peixes
 const SHOP_C=9;                  // coluna da loja de consumáveis (dinamite, comida de energia), na superfície, depois do baú
-const BED_C=-9;                  // coluna da cama (salva o jogo e abre o menu), na superfície, depois da mesa de trabalho
+const BED_C=-9;                  // coluna da cama (salva o jogo ao chegar perto), na superfície, depois da mesa de trabalho
 const ENCH_C=CHURCH_C+4;         // mesa decorativa de encantamento, apenas visual, agora no altar da igreja (a posição exata em pixels vem de CHURCH_ALTAR_DX em 18-igreja.js)
 const SLOT_C=3;                  // máquina de caça-níquel, ao lado do baú (entre o buraco e o baú)
 const BOARD_C=14;                // quadro de contratos, na passagem da direita
@@ -1096,6 +1096,7 @@ const WELL_C=19;                 // poço de água (só enfeite), na passagem da
 const FORGE_PILLARS=[-10.4,-6.97,-3.46,-0.95],FORGE_LANTERN_C=-6.97;
 const FURN_C=-2;                 // coluna da fornalha (refina minérios), na superfície, entre o buraco e a mesa de trabalho
 const BENCH_C=-5;                // coluna da mesa de trabalho (onde se compram as melhorias), na superfície
+const TELE_C=(BED_C+BENCH_C)/2;  // destino do teleporte: no meio, entre a cama e a mesa de trabalho (fora do alcance das duas)
 // [nome, matiz, saturação, luminosidade, cor de detalhe, estilo de textura]
 const BIO=[[N_("Terra"),27,40,30,"#a97847",0],[N_("Argila"),19,45,31,"#b66445",0],[N_("Areia e cascalho"),39,32,36,"#c7ad72",0],[N_("Calcário"),45,17,41,"#c3bda2",0],[N_("Arenito"),24,48,34,"#bd7c4c",0],[N_("Xisto"),210,13,31,"#888f96",0],[N_("Carvão mineral"),220,9,21,"#70747a",0],[N_("Granito"),220,12,40,"#9da3a8",0],[N_("Basalto"),10,19,27,"#8b7467",0],[N_("Gnaisse"),210,13,32,"#969899",0],
  [N_("Quartzito"),335,22,46,"#e8c9d8",0],[N_("Mármore"),200,8,60,"#d9dde2",0],[N_("Magma solidificado"),8,55,24,"#ff7a2a",0],[N_("Cristais profundos"),265,42,29,"#b78cff",0],[N_("Vidro vulcânico"),270,12,13,"#6a5a8a",0],
@@ -1286,7 +1287,7 @@ const ITEMS={
  cen:{g:"Comida de energia",get n(){return __("Cenourinha")},get d(){return __("Recupera 10% da energia máxima. Só se colhe no bosque")},b:BAL.items.cen,c:"#ff9a3a",en:.1,noShop:1},
  sop:{g:"Comida de energia",get n(){return __("Sopa de cogumelo")},get d(){return __("Recupera 25% da energia máxima. Faz-se no caldeirão da igreja ou se compra na loja, bem mais caro")},b:BAL.items.sop,c:"#c9a27a",en:.25},
  poc:{g:"Comida de energia",get n(){return __("Poção de energia")},get d(){return __("Recupera 50% da energia máxima. Faz-se no caldeirão da igreja ou se compra na loja, bem mais caro")},b:BAL.items.poc,c:"#6ff0ff",en:.5},
- ptp:{get n(){return __("Poção de teleporte")},get d(){return __("Uso único: leva ao baú sem gastar energia (na superfície, volta ao ponto de onde saiu). Cai de baús ou se faz no caldeirão da igreja")},b:0,c:"#9a5cff",tp:1,noShop:1},
+ ptp:{get n(){return __("Poção de teleporte")},get d(){return __("Uso único: leva entre a cama e a mesa sem gastar energia (na superfície, volta ao ponto de onde saiu). Cai de baús ou se faz no caldeirão da igreja")},b:0,c:"#9a5cff",tp:1,noShop:1},
  pas:{get n(){return __("Peixe assado")},get d(){return __("Recupera 20% da energia máxima. Só se faz na fogueira")},b:0,c:"#e0a45f",en:.2,noShop:1},
  pgr:{get n(){return __("Peixe grelhado")},get d(){return __("Recupera 45% da energia máxima. Só se faz na fogueira")},b:0,c:"#ee8a4a",en:.45,noShop:1},
  cog:{get n(){return __("Cogumelo")},get d(){return __("Ingrediente: {0} cogumelos viram 1 Sopa de cogumelo no caldeirão da igreja",BAL.forage.soupCost)},b:0,c:"#d23a2a",noShop:1},
@@ -1572,7 +1573,7 @@ const UPS={
  bait:{g:"Pesca",get n(){return __("Isca")},d:l=>l<BAL.ups.bait.max?__("Peixe morde {0}% mais rápido; raros {1}% mais (próximo: {2}% e {3}%)",Math.round((1-baitBite(l))*100),Math.round((baitRare(l)-1)*100),Math.round((1-baitBite(l+1))*100),Math.round((baitRare(l+1)-1)*100)):__("Peixe morde {0}% mais rápido; raros {1}% mais",Math.round((1-baitBite(l))*100),Math.round((baitRare(l)-1)*100)),...BAL.ups.bait},
  back:{g:"Energia",get n(){return __("Medidor de retorno")},d:l=>l<1?__("Marca na barra de energia a reserva para voltar e pulsa quando fica apertada. Compra única"):__("Comprado: a barra mostra a reserva para voltar e avisa quando fica apertada"),...BAL.ups.back},
  clock:{g:"Utilidades",get n(){return __("Relógio")},d:l=>l<1?__("Relógio de sol e lua na barra do topo (o dia dura {0} min)",Math.round(BAL.day.len/60)):__("Comprado: hora do dia na barra do topo (passe o mouse para ver o período)"),...BAL.ups.clock},
- tele:{g:"Habilidades",get n(){return __("Teleporte")},d:l=>{const c=fmtN(Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*l)*cdMult());return l<1?__("Teleporte ao baú sem gastar energia; na superfície, volta de onde saiu"):l<BAL.ups.tele.max?__("Recarga: {0} s ({1} s no próximo)",c,fmtN(Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*(l+1))*cdMult())):__("Recarga: {0} s",c)},...BAL.ups.tele}
+ tele:{g:"Habilidades",get n(){return __("Teleporte")},d:l=>{const c=fmtN(Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*l)*cdMult());return l<1?__("Teleporte entre a cama e a mesa sem gastar energia; na superfície, volta de onde saiu"):l<BAL.ups.tele.max?__("Recarga: {0} s ({1} s no próximo)",c,fmtN(Math.max(BAL.tele.min,BAL.tele.base-BAL.tele.perLevel*(l+1))*cdMult())):__("Recarga: {0} s",c)},...BAL.ups.tele}
 };
 function buy(k){
  if(!nearBench()||!isUnl("ups",k))return;
@@ -1628,7 +1629,7 @@ function showDeath(info){
  const eat=Object.keys(ITEMS).filter(k=>ITEMS[k].en),noFood=eat.every(k=>have(k)<1);
  const tip=noFood?__("Leve <b>comida de energia</b> (cenourinha do bosque, sopa e poção do caldeirão, peixe da fogueira): ela fica na barra ao lado das habilidades e recupera energia no subsolo.")
   :S.lv.emax<5?__("Melhore a <b>Energia máxima</b> na mesa de trabalho para ir mais fundo em cada descida.")
-  :S.lv.tele<1?__("O <b>Teleporte</b> leva ao baú sem gastar energia: ótimo para voltar com a mochila cheia.")
+  :S.lv.tele<1?__("O <b>Teleporte</b> leva entre a cama e a mesa sem gastar energia: ótimo para voltar com a mochila cheia.")
   :__("Comece a subir quando a energia chegar a 25%: subir com a mochila a jato gasta mais.");
  b.innerHTML="<div class='dead'><h2>"+__("SEM ENERGIA")+"</h2><div class='sub'>"+(info.n?__("Você apagou e a mochila ficou para trás."):__("Você apagou e voltou à superfície."))+"</div>"
   +"<div class='grid'><div class='st'><b>"+fmt(info.depth)+" m</b><small>"+__("PROFUNDIDADE · {0}",layerName(info.depth).toUpperCase())+"</small></div>"
@@ -1670,9 +1671,9 @@ function chestHit(px,py){   // o ponto (px,py) da tela está sobre o desenho do 
 function teleport(pot){   // pot: poção de teleporte (uso único, sem nível de teleporte nem recarga)
  if(modal||(!pot&&(S.lv.tele<1||tpCD>0)))return;
  if(pot&&have("ptp")<1){sayWarn(__("Sem Poção de teleporte"));return}
- if(S.depth>0){S.tpBack={c:S.mc,d:S.depth};goTo(CHEST_C,0)}
+ if(S.depth>0){S.tpBack={c:S.mc,d:S.depth};goTo(TELE_C,0)}
  else if(S.tpBack&&isDug(S.tpBack.c,S.tpBack.d-1)){goTo(S.tpBack.c,S.tpBack.d);S.tpBack=null}
- else{sayInfo(__("Teleporte: use no subsolo para subir ao baú"));return}
+ else{sayInfo(__("Teleporte: use no subsolo para subir até a cama e a mesa"));return}
  if(pot){if(!S.debug)S.items.ptp--;S.ptpUsed++}else tpCD=teleCD();
  S.tps++;sfx(300,.15,"sine");sfx(900,.18,"sine");
 }
@@ -3639,8 +3640,8 @@ function buildTabs(){
 const zoneNow=()=>nearBed()?"bed":nearBench()?"bench":nearShop()?"shop":nearFurnace()?"furn":nearChest()?"chest":null;
 let zonePrev=zoneNow();
 function autoTab(){const z=zoneNow();if(z===zonePrev)return;zonePrev=z;if(z==="bench"&&(S.tab||0)!==0)setTab(0);else if(z==="shop"&&(S.tab||0)!==1)setTab(1);else if(z==="bed")sleepSave()}
-// Cama (ao lado da mesa de trabalho): ao chegar perto dela o jogo é salvo e o painel abre a aba Menu (save, som, exportar/importar).
-function sleepSave(){S.sleeps++;save();if((S.tab||0)!==MENU_TAB)setTab(MENU_TAB);sayInfo(__("Jogo salvo na cama"));sfx(440,.15,"sine");setTimeout(()=>sfx(660,.2,"sine"),120)}
+// Cama (ao lado da mesa de trabalho): ao chegar perto dela o jogo é salvo (a aba Menu não abre mais sozinha).
+function sleepSave(){S.sleeps++;save();sayInfo(__("Jogo salvo na cama"));sfx(440,.15,"sine");setTimeout(()=>sfx(660,.2,"sine"),120)}
 
 // ===== 4-interface/03-barra-habilidades.js — Barra de habilidades no estilo hotbar do Minecraft (Dinamite, Fúria, Frenesi, Teleporte e itens de energia) com ícones em pixel art =====
 // Ícones: matrizes 14x14 (cada letra é uma cor da paleta, "." é vazio). O contorno escuro é desenhado automaticamente e o SVG sai com pixels nítidos (sem suavização).
@@ -6810,5 +6811,5 @@ if(S.lvp>0&&!modal)levelUp();
 onLang(()=>{relabelTabs();if(fsLab)fsLab();buildBar();build();statsHtml="";bagHtml="";buffsHtml="";clkLast="";if(modal==="pause"){paintPause();const lb=document.querySelector("#bx .lp-btn");if(lb)lb.focus()}refresh()});
 requestAnimationFrame(loop);
 // gancho opcional usado só por tools/smoke.js (não faz nada no jogo normal)
-if(typeof window.__TESTE__==="function")window.__TESTE__({get blkShake(){return blkShake},get pot(){return pot},deepOres,POT_RECIPES,ORES,churchSolid,roofSolid,houseBlocks,bell,bellCol,nearBell,bellUse,altarCol,nearAltar,altarUse,prayTick,prayCancel,get prayA(){return prayA},CHURCH_C,CAULDRON_C,nearCauldron,cauldronUse,openPot,potCook,potMax,forageAt,forageProg,forageOn,forageUse,sayK,toastTick,toastHas,get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,WALK_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,moonP,moonLit,moonLight,moonName,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,footKind,footSfx,stepSound,cricketAmt,frogAmt,windStrength,ambTick,caveTick,CAVE,caveMix,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v},get shakeDec(){return shakeDec},get blasts(){return blasts},get parts(){return parts},set musOn(v){musOn=v},skillBurst,useFx,skillFxTick,useGlows,thunderSfx,actx:()=>actx,ac,boomSfx,blastFx,setMute(v){mute=v},RANK_CFG,RK,rankOk,rankName,rankSnap,rankPush,rankPaint,rankLeave,rankLoad,rankOpen});
+if(typeof window.__TESTE__==="function")window.__TESTE__({get blkShake(){return blkShake},get pot(){return pot},deepOres,POT_RECIPES,ORES,churchSolid,roofSolid,houseBlocks,bell,bellCol,nearBell,bellUse,altarCol,nearAltar,altarUse,prayTick,prayCancel,get prayA(){return prayA},CHURCH_C,CAULDRON_C,nearCauldron,cauldronUse,openPot,potCook,potMax,forageAt,forageProg,forageOn,forageUse,sayK,toastTick,toastHas,get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,WALK_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,TELE_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,moonP,moonLit,moonLight,moonName,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,footKind,footSfx,stepSound,cricketAmt,frogAmt,windStrength,ambTick,caveTick,CAVE,caveMix,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v},get shakeDec(){return shakeDec},get blasts(){return blasts},get parts(){return parts},set musOn(v){musOn=v},skillBurst,useFx,skillFxTick,useGlows,thunderSfx,actx:()=>actx,ac,boomSfx,blastFx,setMute(v){mute=v},RANK_CFG,RK,rankOk,rankName,rankSnap,rankPush,rankPaint,rankLeave,rankLoad,rankOpen});
 })();
