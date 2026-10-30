@@ -809,6 +809,7 @@ addLang("en","English",{
 "Melhorias":"Upgrades",
 "Loja":"Shop",
 "Poder":"Power",
+"Ranking":"Ranking",
 "Menu":"Menu",
 "Sair da tela":"Exit fullscreen",
 "Tela cheia":"Fullscreen",
@@ -843,6 +844,42 @@ addLang("en","English",{
 "Painel: A escolhe, LB/RB troca de aba, B volta":"Panel: A selects, LB/RB switch tab, B goes back",
 "Controle conectado":"Controller connected",
 "Controle desconectado":"Controller disconnected",
+// --- 4-interface/08-ranking.js
+"Ouro, pesca e tempo":"Gold, fishing and time",
+"Profundidade":"Depth",
+"Tempo jogado":"Time played",
+"Compare seu progresso com o de outros jogadores. Escolha um apelido e entre: a pontuação é enviada sozinha.":"Compare your progress with other players. Pick a nickname and join: your score is sent automatically.",
+"Ranking indisponível: o Firebase deste jogo ainda não foi configurado.":"Ranking unavailable: this game's Firebase has not been set up yet.",
+"Categoria":"Category",
+"Categoria anterior":"Previous category",
+"Próxima categoria":"Next category",
+"Atualizar lista":"Refresh list",
+"Seu perfil":"Your profile",
+"Seu apelido (3 a 16 letras ou números)":"Your nickname (3 to 16 letters or numbers)",
+"Seu apelido":"Your nickname",
+"Sair do ranking":"Leave the ranking",
+"O que é enviado":"What is sent",
+"Só o apelido e os números abaixo, mais um identificador anônimo. Nada de e-mail ou dados pessoais.":"Only the nickname and the numbers below, plus an anonymous ID. No email or personal data.",
+"Nv {0}":"Lv {0}",
+"Top {0} · {1}":"Top {0} · {1}",
+"Sem conexão com o ranking.":"Can't reach the ranking.",
+"Não foi possível carregar o ranking agora.":"Couldn't load the ranking right now.",
+"Ninguém no ranking ainda. Seja o primeiro!":"Nobody is on the ranking yet. Be the first!",
+"Carregando…":"Loading…",
+"Este save usou códigos secretos e não pode entrar no ranking. Apague o progresso (aba Menu) para recomeçar valendo.":"This save used secret codes and can't join the ranking. Erase your progress (Menu tab) to start over for real.",
+"Você está no ranking como {0}. Seu progresso é enviado sozinho enquanto joga.":"You're on the ranking as {0}. Your progress is sent automatically while you play.",
+"Escolha como você aparece na lista. Dá para trocar depois.":"Choose how you appear on the list. You can change it later.",
+"Trocar apelido":"Change nickname",
+"Entrar no ranking":"Join the ranking",
+"Pontuação enviada.":"Score sent.",
+"Enviando…":"Sending…",
+"Você saiu do ranking.":"You left the ranking.",
+"Apelido inválido: use de 3 a 16 caracteres (letras, números, espaço, _ . -).":"Invalid nickname: use 3 to 16 characters (letters, numbers, space, _ . -).",
+"Sem conexão: tentaremos de novo daqui a pouco.":"No connection: we'll try again shortly.",
+"O servidor recusou o envio. Tentaremos de novo daqui a pouco.":"The server refused the update. We'll try again shortly.",
+"O ranking não está configurado direito (chave da API ou login anônimo).":"The ranking isn't set up correctly (API key or anonymous sign-in).",
+"O ranking está instável. Tentaremos de novo daqui a pouco.":"The ranking is unstable. We'll try again shortly.",
+"Apelido":"Nickname",
 // --- 5-desenho/03-mundo.js
 "Mesa de trabalho: compre aqui":"Workbench: buy here",
 "Mesa de trabalho":"Workbench",
@@ -1089,7 +1126,7 @@ const FISH_BAG_MAX=80;   // teto de peixes na bolsa (o save é limpo com este n�
 const SAVE_KEY="abismo-v3";
 const fresh=()=>({pray:0,gc:0,gcAt:-1,gold:0,depth:0,mc:0,prog:0,best:0,runMax:0,tier:0,runs:0,total:0,oc:0,blocks:0,deaths:0,sold:0,en:-1,
  lv:{sharp:0,emax:0,eco:0,jet:0,jetspd:0,auto:0,autopow:0,speed:0,crit:0,luck:0,xp:0,duration:0,furia:0,frenesi:0,tele:0,pet:0,furn:0,lavares:0,lant:0,clock:0,back:0,fort:0,rod:0,bait:0},items:{dyn:0,dyn2:0,dyn3:0,dyn4:0,dyn5:0,isc:0,cen:0,sop:0,poc:0,ptp:0,pas:0,pgr:0,pbq:0,cog:0},dsel:"dyn",fsel:"pas",fg:{},
- bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,moon:BAL.moon.start*BAL.moon.cycle,dir:"down",dug:[],ach:[],debug:false,real:0,pts:0,sk:{ouro:0,dmg:0,fol:0,gar:0,xp:0,rec:0,ven:0},od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,fb:[],fdx:{},fishN:0,fishP:0,fishG:0,cookN:0,cookP:0,play:0,v:9,vol:{m:.7,s:1,a:.7}});
+ bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,moon:BAL.moon.start*BAL.moon.cycle,dir:"down",dug:[],ach:[],debug:false,cheat:false,real:0,pts:0,sk:{ouro:0,dmg:0,fol:0,gar:0,xp:0,rec:0,ven:0},od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,fb:[],fdx:{},fishN:0,fishP:0,fishG:0,cookN:0,cookP:0,play:0,v:10,vol:{m:.7,s:1,a:.7}});
 let S=fresh();S.seed=newSeed();
 function clean(o){const src=o&&typeof o==="object"?o:{},hasVersion=Number.isFinite(src.v),f=fresh();o=Object.assign(f,src);if(!hasVersion)o.v=7;
  for(const k of["gold","depth","prog","best","runMax","tier","runs","total","oc","blocks","deaths","sold","pts","real","xp","lvp","bombs","eaten","tps","veins","sleeps","rich","refined","ctDone","spins","pend","chests","chTop","chGold","chFr","chPk","ptpUsed","fishN","fishP","fishG","cookN","cookP","play","gc"])if(!Number.isFinite(o[k])||o[k]<0)o[k]=0;
@@ -1124,6 +1161,7 @@ function clean(o){const src=o&&typeof o==="object"?o:{},hasVersion=Number.isFini
  if(!["down","left","right","up"].includes(o.dir))o.dir="down";
  for(const k of["ach","dug","od"])if(!Array.isArray(o[k]))o[k]=[];
  o.lvl=Math.max(1,Math.floor(o.lvl)||1);
+ o.cheat=!!(o.cheat||o.debug);   // usou código secreto (CENOURA/FINAL): fica fora do ranking online até apagar o progresso
  if(!o.pk||typeof o.pk!=="object"||Array.isArray(o.pk))o.pk={};
  for(const k of["crit","ore"]){const L=Math.round(Number(o.pk[k]))||0;if(L>0)o.lvp=(Number.isFinite(o.lvp)?o.lvp:0)+L;delete o.pk[k]}   // cartas de crítico e minério por nível foram removidas: devolve os pontos para escolher outra melhoria
 for(const k in o.pk)if(!Number.isFinite(o.pk[k])||o.pk[k]<0)o.pk[k]=0;
@@ -1149,7 +1187,8 @@ for(const k in o.pk)if(!Number.isFinite(o.pk[k])||o.pk[k]<0)o.pk[k]=0;
   delete o.lv.wide;delete o.lv.refine;
   o.ach=o.ach.filter(i=>i!==11).map(i=>i>11?i-1:i);
  }
- delete o.marks;delete o.shards;o.v=9;return o}
+ if(o.v<10&&o.tab>=3)o.tab++;   // entrou a aba Ranking (posição 3, antes do Menu)
+ delete o.marks;delete o.shards;o.v=10;return o}
 let dug=new Set(),saveSeen=false;   // saveSeen: já existe save gravado por este jogo (se ele sumir, o jogador apagou o save)
 try{
  const r=localStorage.getItem(SAVE_KEY);
@@ -1470,12 +1509,12 @@ function runCheat(w){
  if(cheatPos&&S.mc===cheatPos.mc&&S.depth===cheatPos.depth+1){S.depth=cheatPos.depth;S.best=cheatPos.best;S.runMax=cheatPos.runMax;mY=camY=S.depth;S.prog=0}
  if(w==="FINAL"){   // vai direto para a Rocha-mãe (abre o poço da coluna atual, para dar para subir de volta) e roda a cena de chegada
   if(modal)return;S.mc=clamp(S.mc,-HALF,HALF);for(let r=1;r<FINAL_DEPTH;r++)dug.add(S.mc+","+r);
-  S.depth=FINAL_DEPTH;S.best=Math.max(S.best,FINAL_DEPTH);S.runMax=Math.max(S.runMax,FINAL_DEPTH);S.prog=0;S.en=maxEn();
+  S.cheat=true;S.depth=FINAL_DEPTH;S.best=Math.max(S.best,FINAL_DEPTH);S.runMax=Math.max(S.runMax,FINAL_DEPTH);S.prog=0;S.en=maxEn();
   mX=camX=S.mc;mY=camY=S.depth;layerSeen=BIO.length-1;carrotC=null;reachBottom();return}
  if(w==="CLIMA"){const k=WX_KEYS[(WX_KEYS.indexOf(wx.cur)+1)%WX_KEYS.length];weatherSet(k);sayWeather(__("Clima: {0}",WX[k].n));return}
  if(w==="SEASON"){const L=BAL.season.len,i=(Math.floor(S.sea/L)+1)%4;S.sea=i*L+L/2;sayWeather(__("Estação: {0}",SEASONS[i].n))}   // vai para o meio da próxima estação (a paleta dela vale por inteira ali)
 }
-function toggleDbg(){S.debug=!S.debug;if(S.debug){S.real=S.gold;S.gold=Infinity}else S.gold=S.real||0;sayInfo(S.debug?__("Cenoura! Ouro e energia infinitos"):__("Cenoura desligada"));build()}
+function toggleDbg(){S.debug=!S.debug;if(S.debug){S.cheat=true;S.real=S.gold;S.gold=Infinity}else S.gold=S.real||0;sayInfo(S.debug?__("Cenoura! Ouro e energia infinitos"):__("Cenoura desligada"));build()}
 
 // ===== 2-sistemas/01-melhorias.js — Tabela de melhorias (mesa de trabalho) e compra de melhorias, picareta e consumáveis (loja) =====
 // g = grupo no painel · n = nome · d = descrição · b = custo base · k = crescimento do custo · max = nível máximo
@@ -3429,7 +3468,7 @@ $("prest").onclick=()=>{
 };
 function doRebirth(){   // Renascer (botão do painel, depois de confirmar, e janela de chegada ao fundo)
  gainGoldenCarrot();   // quem chegou ao fundo nesta vida e não tocou na cenoura (jogo reaberto lá embaixo) também ganha a dourada
- const keep={gc:S.gc,gcAt:S.gcAt,runs:S.runs+1,best:S.best,ach:S.ach,oc:S.oc,total:S.total,debug:S.debug,sk:S.sk,pts:S.pts+prestGain(),od:S.od,xp:S.xp,lvl:S.lvl,lvp:S.lvp,pk:S.pk,vol:S.vol,deaths:S.deaths,sold:S.sold,play:S.play,blocks:S.blocks,tab:S.tab,items:S.items,bombs:S.bombs,eaten:S.eaten,tps:S.tps,veins:S.veins,rich:S.rich,sleeps:S.sleeps,refined:S.refined,ctDone:S.ctDone,spins:S.spins,chests:S.chests,chTop:S.chTop,chT:S.chT,chGold:S.chGold,chFr:S.chFr,chPk:S.chPk,ptpUsed:S.ptpUsed,slotNet:S.slotNet,sea:S.sea,moon:S.moon,fb:S.fb,fdx:S.fdx,fishN:S.fishN,fishP:S.fishP,fishG:S.fishG,cookN:S.cookN,cookP:S.cookP};
+ const keep={gc:S.gc,gcAt:S.gcAt,runs:S.runs+1,best:S.best,ach:S.ach,oc:S.oc,total:S.total,debug:S.debug,cheat:S.cheat,sk:S.sk,pts:S.pts+prestGain(),od:S.od,xp:S.xp,lvl:S.lvl,lvp:S.lvp,pk:S.pk,vol:S.vol,deaths:S.deaths,sold:S.sold,play:S.play,blocks:S.blocks,tab:S.tab,items:S.items,bombs:S.bombs,eaten:S.eaten,tps:S.tps,veins:S.veins,rich:S.rich,sleeps:S.sleeps,refined:S.refined,ctDone:S.ctDone,spins:S.spins,chests:S.chests,chTop:S.chTop,chT:S.chT,chGold:S.chGold,chFr:S.chFr,chPk:S.chPk,ptpUsed:S.ptpUsed,slotNet:S.slotNet,sea:S.sea,moon:S.moon,fb:S.fb,fdx:S.fdx,fishN:S.fishN,fishP:S.fishP,fishG:S.fishG,cookN:S.cookN,cookP:S.cookP};
  const clk=S.lv.clock,bk=S.lv.back,rd=S.lv.rod,bt=S.lv.bait;S=Object.assign(fresh(),keep);S.lv.clock=clk;S.lv.back=bk;S.lv.rod=rd;S.lv.bait=bt;   // o relógio (compra única), a vara e a isca de pesca e a estação do ano não se perdem ao renascer
  S.seed=SEED=newSeed();chQ.length=0;carrotC=null;dug=new Set();mX=mY=camX=camY=0;layerSeen=0;
  S.gold=S.debug?Infinity:0;S.en=maxEn();build();save();sayLevel(__("Renascido! Fragmentos: {0}",S.pts));
@@ -3452,8 +3491,9 @@ function refreshBagPop(){
 }
 
 // ===== 4-interface/02-abas.js — Abas do painel (Melhorias, Loja, Poder, Menu), botões rápidos e abertura automática da aba certa na mesa/loja =====
-function setTab(i){S.tab=i;document.querySelectorAll(".tabs button").forEach((b,k)=>b.classList.toggle("on",k===i));document.querySelectorAll("#side .pane").forEach((p,k)=>p.classList.toggle("on",k===i))}
-const TAB_NAMES=[N_("Melhorias"),N_("Loja"),N_("Poder"),N_("Menu")];
+function setTab(i){S.tab=i;document.querySelectorAll(".tabs button").forEach((b,k)=>b.classList.toggle("on",k===i));document.querySelectorAll("#side .pane").forEach((p,k)=>p.classList.toggle("on",k===i));if(i===RANK_TAB)rankOpen()}   // abrir a aba Ranking atualiza a lista (4-interface/08-ranking.js)
+const TAB_NAMES=[N_("Melhorias"),N_("Loja"),N_("Poder"),N_("Ranking"),N_("Menu")];
+const MENU_TAB=TAB_NAMES.length-1;   // a aba Menu é sempre a última
 let fsLab=null;   // refaz o texto do botão de tela cheia (ao trocar de idioma)
 const relabelTabs=()=>document.querySelectorAll("#tabs button").forEach((b,i)=>{b.innerHTML=__(TAB_NAMES[i])+"<i class='dot'></i>"});
 function buildTabs(){
@@ -3466,14 +3506,14 @@ function buildTabs(){
    fb.onclick=()=>{fb.blur();try{const p=isF()?(document.exitFullscreen||document.webkitExitFullscreen).call(document):(de.requestFullscreen||de.webkitRequestFullscreen).call(de);if(p&&p.catch)p.catch(()=>{})}catch(e){}};
    document.addEventListener("fullscreenchange",lab);document.addEventListener("webkitfullscreenchange",lab);lab()}}
  $("b-snd").onclick=()=>{mute=!mute;refresh()};
- setTab(clamp(Math.floor(Number.isFinite(S.tab)?S.tab:0),0,3));
+ setTab(clamp(Math.floor(Number.isFinite(S.tab)?S.tab:0),0,TAB_NAMES.length-1));
 }
 // Ao chegar na mesa de trabalho abre "Melhorias"; ao chegar na loja abre "Loja" (só na chegada: depois dá para trocar de aba à vontade).
 const zoneNow=()=>nearBed()?"bed":nearBench()?"bench":nearShop()?"shop":nearFurnace()?"furn":nearChest()?"chest":null;
 let zonePrev=zoneNow();
 function autoTab(){const z=zoneNow();if(z===zonePrev)return;zonePrev=z;if(z==="bench"&&(S.tab||0)!==0)setTab(0);else if(z==="shop"&&(S.tab||0)!==1)setTab(1);else if(z==="bed")sleepSave()}
 // Cama (ao lado da mesa de trabalho): ao chegar perto dela o jogo é salvo e o painel abre a aba Menu (save, som, exportar/importar).
-function sleepSave(){S.sleeps++;save();if((S.tab||0)!==3)setTab(3);sayInfo(__("Jogo salvo na cama"));sfx(440,.15,"sine");setTimeout(()=>sfx(660,.2,"sine"),120)}
+function sleepSave(){S.sleeps++;save();if((S.tab||0)!==MENU_TAB)setTab(MENU_TAB);sayInfo(__("Jogo salvo na cama"));sfx(440,.15,"sine");setTimeout(()=>sfx(660,.2,"sine"),120)}
 
 // ===== 4-interface/03-barra-habilidades.js — Barra de habilidades no estilo hotbar do Minecraft (Dinamite, Fúria, Frenesi, Teleporte e itens de energia) com ícones em pixel art =====
 // Ícones: matrizes 14x14 (cada letra é uma cor da paleta, "." é vazio). O contorno escuro é desenhado automaticamente e o SVG sai com pixels nítidos (sem suavização).
@@ -3565,7 +3605,7 @@ function releaseDir(id){const i=dirKeys.findIndex(x=>x.id===id);if(i>=0)dirKeys.
 addEventListener("pointerup",()=>holdM=false);
 addEventListener("pointercancel",()=>holdM=false);
 addEventListener("keydown",e=>{
- if(/^(TEXTAREA|INPUT)$/.test(e.target.tagName))return;
+ if(/^(TEXTAREA|INPUT|SELECT)$/.test(e.target.tagName))return;
  if(modal){
   if(modal==="pause"){pauseKey(e);return}
   if(modal==="mem"){memKey(e);return}
@@ -3752,7 +3792,7 @@ function gpPanelPaint(scroll){
  const el=bs[GP.psel];el.classList.add("gp-sel");if(scroll)el.scrollIntoView({block:"nearest"});return el;
 }
 function gpPanelOff(){GP.panel=false;$("side").classList.remove("gp-panel");document.querySelectorAll("#side .gp-sel").forEach(x=>x.classList.remove("gp-sel"))}
-function gpTab(d){const t=clamp((S.tab||0)+d,0,3);if(t!==(S.tab||0)){setTab(t);GP.psel=0;sfx(500,.04,"sine")}gpPanelPaint(true)}
+function gpTab(d){const t=clamp((S.tab||0)+d,0,TAB_NAMES.length-1);if(t!==(S.tab||0)){setTab(t);GP.psel=0;sfx(500,.04,"sine")}gpPanelPaint(true)}
 function gpPanelInput(pa,pb,up,down,left,right,rb,lb){
  if(pb){gpPanelOff();return}
  if(GP.edge&&(up||down)){const n=gpPanelList().length;if(n){GP.psel=(GP.psel+(down?1:-1)+n)%n;sfx(560,.04,"sine");gpPanelPaint(true)}}
@@ -3827,6 +3867,241 @@ addEventListener("gamepadconnected",e=>{sayInfo(__("Controle conectado"));musOn=
 addEventListener("gamepaddisconnected",()=>{gpRelease();sayInfo(__("Controle desconectado"))});
 addEventListener("blur",gpRelease);
 requestAnimationFrame(gpFrame);
+
+// ===== 4-interface/08-ranking.js — Ranking online (aba Ranking): Firebase Realtime Database via REST, com login anônimo =====
+// Como funciona: o jogador escolhe um apelido e entra no ranking. A partir daí o jogo envia sozinho, de tempos em tempos, só estes números:
+// apelido, profundidade máxima, nível, renascimentos e ouro total. Cada navegador ganha uma identidade anônima do Firebase (uid) e as regras
+// do banco (firebase/database.rules.json) só deixam essa identidade gravar na PRÓPRIA entrada. Ler o ranking é público.
+// Sem SDK: tudo é fetch() para a API REST, então o jogo continua sendo um arquivo único e funciona abrindo o index.html local.
+// Enquanto RANK_CFG estiver vazio a aba só avisa que o ranking está indisponível e o jogo funciona normalmente. Passo a passo: firebase/LEIA-ME.md
+const RANK_CFG={
+ apiKey:"AIzaSyC3WbVHU4xCvkGo1dTvbCUV_4ZOT7lvHtA",        // Firebase > Configurações do projeto > Geral > "Chave de API da Web"
+ databaseURL:"https://cenoural-default-rtdb.firebaseio.com",   // Firebase > Realtime Database > endereço do banco, ex.: https://meu-jogo-default-rtdb.firebaseio.com
+ path:"ranking"    // nó do banco onde ficam as entradas (as regras de firebase/database.rules.json usam este mesmo nome)
+};
+const RANK_TAB=3,RANK_TOP=50,RANK_KEY="cenoural-rank",RANK_EVERY=45000;   // posição da aba (antes do Menu) · quantos nomes a lista mostra · intervalo mínimo entre envios (ms)
+// Categorias do ranking, agrupadas como as seções do painel. k = campo no banco · g = grupo · f = como o valor aparece.
+// ds = profundidade*10000 + nível (desempata quem já chegou aos 1500 m); os outros campos são o próprio número do save.
+const rankTime=t=>t>=3600?Math.floor(t/3600)+"h "+String(Math.floor(t%3600/60)).padStart(2,"0")+"min":Math.floor(t/60)+"min";
+const RANK_GROUPS=[N_("Progresso"),N_("Escavação"),N_("Ouro, pesca e tempo")];   // grupos da lista suspensa de categorias (a ordem de RANK_CATS segue os grupos)
+const RANK_CATS=[
+ {k:"ds",g:0,n:N_("Profundidade"),f:r=>r.best+" m"},
+ {k:"lvl",g:0,n:N_("Nível"),f:r=>fmt(r.lvl)},
+ {k:"runs",g:0,n:N_("Renascimentos"),f:r=>fmt(r.runs)},
+ {k:"ach",g:0,n:N_("Conquistas"),f:r=>fmt(r.ach)},
+ {k:"blocks",g:1,n:N_("Blocos quebrados"),f:r=>fmt(r.blocks)},
+ {k:"ore",g:1,n:N_("Minérios coletados"),f:r=>fmt(r.ore)},
+ {k:"bombs",g:1,n:N_("Dinamites usadas"),f:r=>fmt(r.bombs)},
+ {k:"chests",g:1,n:N_("Baús abertos"),f:r=>fmt(r.chests)},
+ {k:"gold",g:2,n:N_("Ouro total"),f:r=>fmt(r.gold)},
+ {k:"fish",g:2,n:N_("Peixes pescados"),f:r=>fmt(r.fish)},
+ {k:"play",g:2,n:N_("Tempo jogado"),f:r=>rankTime(r.play)}
+];
+const rankOk=()=>!!(RANK_CFG.apiKey&&RANK_CFG.databaseURL&&typeof fetch==="function");
+const rankUrl=(sub,q)=>RANK_CFG.databaseURL.replace(/\/+$/,"")+"/"+RANK_CFG.path+sub+".json"+(q||"");
+
+// identidade e escolha do jogador (fica fora do save: apagar o progresso do jogo não derruba o login do ranking)
+const RK={uid:"",refresh:"",name:"",on:false};
+try{const r=JSON.parse(localStorage.getItem(RANK_KEY)||"null");if(r&&typeof r==="object"){RK.uid=String(r.uid||"");RK.refresh=String(r.refresh||"");RK.name=rankName(r.name);RK.on=!!r.on&&!!RK.name}}catch(e){}
+const rankStore=()=>{try{localStorage.setItem(RANK_KEY,JSON.stringify(RK))}catch(e){}};
+// apelido válido: 3 a 16 caracteres, letras/números/espaço/_ . -, começando e terminando com letra ou número (devolve "" se inválido)
+function rankName(s){s=String(s||"").normalize("NFC").replace(/\s+/g," ").trim();return s.length<=16&&/^[\p{L}\p{N}][\p{L}\p{N} _.\-]{1,14}[\p{L}\p{N}]$/u.test(s)?s:""}
+
+// estado da sessão
+let rkTok="",rkExp=0,rkTokP=null,rkBusy=false,rkLoading=false,rkLast=0,rkNext=0,rkFail=0,rkSig="",rkCat=0,rkSt={k:"",t:0};
+const rkData={};   // categoria -> {rows,at,err}
+
+async function rankFetch(url,opt){
+ const ac=typeof AbortController==="function"?new AbortController():null,tm=ac?setTimeout(()=>ac.abort(),12000):0;
+ try{
+  const r=await fetch(url,Object.assign({signal:ac&&ac.signal},opt));let j=null;
+  try{j=await r.json()}catch(e){}
+  if(!r.ok){const e=new Error("http "+r.status);e.status=r.status;e.body=j;throw e}
+  return j;
+ }finally{clearTimeout(tm)}
+}
+// token de acesso do Firebase (vale ~1 h). Reaproveita a identidade guardada; se o servidor a recusar, cria outra.
+function rankToken(){return rkTokP||(rkTokP=rankToken0().finally(()=>{rkTokP=null}))}
+async function rankToken0(){
+ if(rkTok&&Date.now()<rkExp-60000)return rkTok;
+ const key=encodeURIComponent(RANK_CFG.apiKey);
+ if(RK.refresh){
+  try{
+   const j=await rankFetch("https://securetoken.googleapis.com/v1/token?key="+key,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"grant_type=refresh_token&refresh_token="+encodeURIComponent(RK.refresh)});
+   rkTok=j.id_token;rkExp=Date.now()+(+j.expires_in||3600)*1000;
+   if(j.refresh_token)RK.refresh=j.refresh_token;if(j.user_id)RK.uid=j.user_id;rankStore();return rkTok;
+  }catch(e){if(!(e.status>=400&&e.status<500&&e.status!==429))throw e}   // sem rede ou servidor instável: tenta depois, sem trocar de identidade
+ }
+ const j=await rankFetch("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key="+key,{method:"POST",headers:{"Content-Type":"application/json"},body:'{"returnSecureToken":true}'});
+ RK.uid=j.localId;RK.refresh=j.refreshToken;rkTok=j.idToken;rkExp=Date.now()+(+j.expiresIn||3600)*1000;rankStore();return rkTok;
+}
+// o que seria enviado agora (só números do próprio jogo, limitados ao que as regras do banco aceitam)
+function rankSnap(){
+ const b=clamp(Math.floor(S.best)||0,0,FINAL_DEPTH),l=clamp(Math.floor(S.lvl)||1,1,99999),n=x=>Number.isFinite(x)&&x>0?Math.floor(Math.min(x,1e300)):0;
+ return{name:RK.name,best:b,ds:b*10000+Math.min(l,9999),lvl:l,runs:clamp(Math.floor(S.runs)||0,0,99999),gold:n(S.total),
+  blocks:n(S.blocks),ore:n(S.oc),bombs:n(S.bombs),chests:n(S.chests),fish:n(S.fishN),play:n(S.play),ach:Array.isArray(S.ach)?S.ach.length:0};
+}
+const rankCheat=()=>!!(S.cheat||S.debug);   // quem usou código secreto não entra no ranking
+function rankSet(k){rkSt={k,t:Date.now()};rankPaint()}
+function rankFailed(e){
+ const k=!e||!e.status?"net":e.status===401||e.status===403?"perm":e.status===400?"cfg":"srv";
+ rkFail++;rkNext=Date.now()+Math.min(600000,30000*Math.pow(2,rkFail));   // espera cada vez mais depois de falhar
+ try{console.warn("[ranking]",k,e&&e.status,e&&e.body)}catch(x){}
+ rankSet(k);
+}
+// envia a pontuação. force ignora o intervalo mínimo; quick (ao esconder a aba) não espera login e usa keepalive.
+async function rankPush(force,quick){
+ if(!rankOk()||!RK.on||!RK.name||rkBusy||rankCheat())return false;
+ const sn=rankSnap(),sig=JSON.stringify(sn),now=Date.now();
+ if(!force&&(sig===rkSig||now<rkNext||(!quick&&now-rkLast<RANK_EVERY)||(quick&&now-rkLast<5000)))return false;
+ if(quick&&!(rkTok&&now<rkExp-30000))return false;
+ rkBusy=true;
+ try{
+  const t=await rankToken();
+  await rankFetch(rankUrl("/"+RK.uid,"?auth="+encodeURIComponent(t)),{method:"PUT",keepalive:!!quick,headers:{"Content-Type":"application/json"},body:JSON.stringify(Object.assign({},sn,{ts:{".sv":"timestamp"}}))});
+  rkSig=sig;rkLast=Date.now();rkFail=0;rkNext=0;for(const k in rkData)rkData[k].at=0;rankSet("ok");return true;
+ }catch(e){rankFailed(e);return false}
+ finally{rkBusy=false}
+}
+// sai do ranking: apaga a própria entrada do banco
+async function rankLeave(){
+ if(!rankOk()||rkBusy)return;
+ rkBusy=true;
+ try{
+  if(RK.uid){const t=await rankToken();await rankFetch(rankUrl("/"+RK.uid,"?auth="+encodeURIComponent(t)),{method:"DELETE"})}
+  RK.on=false;rankStore();rkSig="";rkNext=0;rkFail=0;for(const k in rkData)rkData[k].at=0;rankSet("left");rankLoad(rkCat,true);
+ }catch(e){rankFailed(e)}
+ finally{rkBusy=false}
+}
+// lista das 50 melhores entradas da categoria (o banco devolve um objeto sem ordem: a ordenação é feita aqui)
+function rankRow(id,v){
+ if(!v||typeof v!=="object")return null;
+ const n=x=>Number.isFinite(x)&&x>=0?x:0,name=rankName(v.name);
+ return name?{id,name,best:n(v.best),ds:n(v.ds),lvl:n(v.lvl),runs:n(v.runs),gold:n(v.gold),blocks:n(v.blocks),ore:n(v.ore),bombs:n(v.bombs),chests:n(v.chests),fish:n(v.fish),play:n(v.play),ach:n(v.ach)}:null;
+}
+async function rankLoad(ci,force){
+ const c=RANK_CATS[ci];if(!c||!rankOk())return;
+ const d=rkData[c.k]||(rkData[c.k]={rows:null,at:0,err:""});
+ if(!force&&d.at&&Date.now()-d.at<20000)return;
+ if(rkLoading)return;
+ rkLoading=true;rankPaint();
+ try{
+  const j=await rankFetch(rankUrl("","?orderBy="+encodeURIComponent('"'+c.k+'"')+"&limitToLast="+RANK_TOP));
+  const by=(a,b)=>b[c.k]-a[c.k]||b.ds-a.ds||b.gold-a.gold||(a.name<b.name?-1:1);
+  d.rows=Object.keys(j||{}).map(id=>rankRow(id,j[id])).filter(Boolean).sort(by);d.at=Date.now();d.err="";
+ }catch(e){d.err=!e.status?"net":"srv";try{console.warn("[ranking]",d.err,e.status,e.body)}catch(x){}}
+ finally{
+  rkLoading=false;rankPaint();
+  const cd=rkData[RANK_CATS[rkCat].k];if(!cd||(!cd.at&&!cd.err))rankLoad(rkCat);   // trocou de categoria enquanto carregava: carrega a nova
+ }
+}
+
+// ----- interface -----
+const rkT=(tag,cls,t)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(t!=null)e.textContent=t;return e};
+function rkDet(open,title){const d=document.createElement("details"),sm=document.createElement("summary"),sp=document.createElement("span");d.open=open;sp.textContent=title||"";sm.appendChild(sp);d.appendChild(sm);d.t=sp;return d}   // seção recolhível, igual às da aba Poder
+let rkUI=null;
+function rankBuild(){
+ const p=$("rankpane");if(!p)return;
+ const keep=rkUI?rkUI.name.value:"",op=rkUI?[rkUI.dL.open,rkUI.dP.open,rkUI.dI.open]:[true,true,false];
+ p.innerHTML="";
+ const ui=rkUI={};
+ ui.hint=rkT("div","ph",__("Compare seu progresso com o de outros jogadores. Escolha um apelido e entre: a pontuação é enviada sozinha."));
+ ui.off=rkT("div","ph rk-note",__("Ranking indisponível: o Firebase deste jogo ainda não foi configurado."));
+ const box=rkT("div","help pw");ui.box=box;
+ // categoria: lista suspensa agrupada + setas para o controle e para passar uma a uma
+ const pick=i=>{rkCat=(i+RANK_CATS.length)%RANK_CATS.length;sfx(500,.04,"sine");ui.dL.open=true;rankPaint();rankLoad(rkCat)};
+ ui.pickLab=rkT("div","ph rk-lab",__("Categoria"));
+ ui.pick=rkT("div","rk-pick");
+ ui.prev=rkT("button","rk-nav","‹");ui.prev.title=__("Categoria anterior");ui.prev.setAttribute("aria-label",ui.prev.title);ui.prev.onclick=()=>pick(rkCat-1);
+ ui.next=rkT("button","rk-nav","›");ui.next.title=__("Próxima categoria");ui.next.setAttribute("aria-label",ui.next.title);ui.next.onclick=()=>pick(rkCat+1);
+ ui.sel=document.createElement("select");ui.sel.className="rk-sel";ui.sel.setAttribute("aria-label",__("Categoria"));
+ RANK_CATS.forEach((c,i)=>{const o=document.createElement("option");o.value=i;o.textContent=__(c.n);ui.sel.appendChild(o)});   // lista simples, sem separar em grupos
+ // Escolha com mouse/toque devolve o teclado ao jogo (blur). Com o teclado o foco fica (digitar uma inicial troca a opção); Esc ou Enter saem.
+ ui.sel.onpointerdown=()=>{ui.sel._kb=false};
+ ui.sel.onkeydown=e=>{ui.sel._kb=true;if(e.key==="Escape"||e.key==="Enter")ui.sel.blur()};
+ ui.sel.onchange=()=>{const i=+ui.sel.value;if(!ui.sel._kb)ui.sel.blur();pick(i)};
+ ui.pick.append(ui.prev,ui.sel,ui.next);
+ // lista
+ ui.dL=rkDet(op[0]);
+ ui.list=rkT("ol","rk");ui.msg=rkT("div","ph rk-msg");ui.me=rkT("ol","rk rk-out");
+ ui.refresh=rkT("button","rk-ref",__("Atualizar lista"));ui.refresh.onclick=()=>{if(rkLoading)return;rankPush(false);rankLoad(rkCat,true)};
+ ui.dL.append(ui.list,ui.msg,ui.me,ui.refresh);
+ // perfil
+ ui.dP=rkDet(op[1],__("Seu perfil"));
+ ui.pd=rkT("div","ph");
+ ui.name=rkT("input","rk-in");ui.name.type="text";ui.name.maxLength=16;ui.name.placeholder=__("Seu apelido (3 a 16 letras ou números)");ui.name.autocomplete="off";ui.name.spellcheck=false;ui.name.setAttribute("autocapitalize","off");ui.name.setAttribute("enterkeyhint","done");ui.name.setAttribute("aria-label",__("Seu apelido"));
+ ui.name.value=keep||RK.name;
+ ui.act=rkT("div","rk-btns");ui.join=rkT("button","pri");ui.leave=rkT("button","dng",__("Sair do ranking"));ui.act.append(ui.join,ui.leave);
+ ui.st=rkT("div","ph rk-st");
+ ui.dP.append(ui.pd,ui.name,ui.act,ui.st);
+ // o que é enviado
+ ui.dI=rkDet(op[2],__("O que é enviado"));
+ ui.id=rkT("p","rk-id",__("Só o apelido e os números abaixo, mais um identificador anônimo. Nada de e-mail ou dados pessoais."));
+ ui.dl=rkT("dl","sg rk-sg");ui.dI.append(ui.id,ui.dl);
+ box.append(ui.pickLab,ui.pick,ui.dL,ui.dP,ui.dI);
+ const join=()=>{
+  const nm=rankName(ui.name.value);
+  if(!nm){rankSet("badname");return}
+  if(rankCheat())return;
+  ui.name.value=nm;RK.name=nm;RK.on=true;rankStore();rkNext=0;rankSet("saving");
+  rankPush(true).then(ok=>{if(ok)rankLoad(rkCat,true)});
+ };
+ ui.join.onclick=join;ui.leave.onclick=rankLeave;
+ ui.name.oninput=rankPaint;
+ ui.name.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();join()}else if(e.key==="Escape")ui.name.blur()};
+ p.append(ui.hint,ui.off,box);
+ rankPaint();
+}
+function rankRows(ol,rows,from){
+ ol.innerHTML="";
+ const c=RANK_CATS[rkCat];
+ rows.forEach((r,i)=>{
+  const li=rkT("li",r.id===RK.uid?"me":""),nm=rkT("div","nm"),lv=__("Nv {0}",fmt(r.lvl)),dp=r.best+" m",sub=c.k==="ds"?[lv]:c.k==="lvl"?[dp]:[lv,dp];   // linha de baixo: o que a categoria não mostra
+  nm.append(rkT("b","",r.name),rkT("small","",sub.join(" · ")));
+  li.append(rkT("span","p",from?"·":String(i+1)),nm,rkT("span","v",c.f(r)));
+  ol.appendChild(li);
+ });
+}
+function rankPaint(){
+ const ui=rkUI;if(!ui)return;
+ const ok=rankOk(),cheat=rankCheat(),c=RANK_CATS[rkCat],d=rkData[c.k];
+ ui.off.style.display=ok?"none":"";ui.hint.style.display=ok?"":"none";ui.box.style.display=ok?"":"none";
+ if(!ok)return;
+ ui.sel.value=String(rkCat);
+ ui.dL.t.textContent=__("Top {0} · {1}",RANK_TOP,__(c.n));
+ // lista
+ const rows=d&&d.rows;
+ if(rows&&rows.length)rankRows(ui.list,rows.slice(0,RANK_TOP));else ui.list.innerHTML="";
+ ui.msg.textContent=rows&&rows.length?"":d&&d.err?d.err==="net"?__("Sem conexão com o ranking."):__("Não foi possível carregar o ranking agora."):rows?__("Ninguém no ranking ainda. Seja o primeiro!"):rkLoading?__("Carregando…"):"";
+ ui.msg.style.display=ui.msg.textContent?"":"none";
+ // você, quando fora da lista
+ if(RK.on&&!cheat&&rows&&!rows.some(r=>r.id===RK.uid)){rankRows(ui.me,[Object.assign({id:RK.uid},rankSnap())],true);ui.me.style.display=""}else ui.me.style.display="none";
+ ui.refresh.disabled=rkLoading;
+ // perfil
+ const nm=rankName(ui.name.value);
+ ui.pd.textContent=cheat?__("Este save usou códigos secretos e não pode entrar no ranking. Apague o progresso (aba Menu) para recomeçar valendo."):RK.on?__("Você está no ranking como {0}. Seu progresso é enviado sozinho enquanto joga.",RK.name):__("Escolha como você aparece na lista. Dá para trocar depois.");
+ ui.name.style.display=cheat&&!RK.on?"none":"";
+ ui.join.textContent=RK.on?__("Trocar apelido"):__("Entrar no ranking");
+ ui.join.disabled=cheat||!nm||(RK.on&&nm===RK.name);
+ ui.join.style.display=cheat?"none":"";
+ ui.leave.style.display=RK.on?"":"none";
+ ui.act.style.display=!cheat||RK.on?"":"none";
+ const M={ok:__("Pontuação enviada."),saving:__("Enviando…"),left:__("Você saiu do ranking."),badname:__("Apelido inválido: use de 3 a 16 caracteres (letras, números, espaço, _ . -)."),
+  net:__("Sem conexão: tentaremos de novo daqui a pouco."),perm:__("O servidor recusou o envio. Tentaremos de novo daqui a pouco."),cfg:__("O ranking não está configurado direito (chave da API ou login anônimo)."),srv:__("O ranking está instável. Tentaremos de novo daqui a pouco.")};
+ ui.st.textContent=M[rkSt.k]||"";ui.st.className="ph rk-st"+(rkSt.k==="ok"||rkSt.k==="left"?" ok":rkSt.k&&rkSt.k!=="saving"?" err":"");
+ ui.st.style.display=ui.st.textContent?"":"none";
+ // números que seriam enviados agora
+ const sn=rankSnap(),key=LANG+"|"+RK.name+"|"+RANK_CATS.map(x=>x.f(sn)).join("|");
+ if(ui.dl._s!==key){ui.dl._s=key;ui.dl.innerHTML="";
+  const row=(l,v)=>{ui.dl.append(rkT("dt","",l),rkT("dd","",v))};
+  row(__("Apelido"),RK.name||"—");RANK_CATS.forEach(x=>row(__(x.n),x.f(sn)));}
+}
+// ao abrir a aba: mostra o que já se sabe e atualiza a lista
+function rankOpen(){rankPaint();rankLoad(rkCat);rankPush(false)}
+onLang(rankBuild);
+// envio automático em segundo plano; ao esconder a aba do navegador manda o que faltar
+setInterval(()=>{rankPush(false);if((S.tab||0)===RANK_TAB)rankPaint()},20000);
+document.addEventListener("visibilitychange",()=>{if(document.hidden)rankPush(false,true)});
 
 // ===== 5-desenho/00-pixel.js — Direção de arte: sprites em pixel art, tiles de apoio (cavidade, rocha-base, pedra dura, veio de minério) =====
 // Regras do estilo (as mesmas dos blocos): grade de pixels grossos, nada de degradê liso; luz clara em cima/à esquerda,
@@ -6346,7 +6621,7 @@ for(const[id,k]of[["vs","s"],["va","a"]]){const e=$(id),o=$(id+"v"),paint=()=>{i
 S.en=S.en<0?maxEn():Math.min(S.en,maxEn());
 layerSeen=layerOf(S.depth);
 camY=mY=S.depth;camX=mX=S.mc;
-buildTabs();buildBar();build();
+rankBuild();buildTabs();buildBar();build();
 // Menu inicial (só nome + Play): o jogo fica pausado até apertar Play, Espaço ou Enter. O gancho de teste pula o menu.
 const ttl=$("title");
 function startGame(){if(modal!=="title")return;modal=null;ttl.classList.add("off");setTimeout(()=>{ttl.style.display="none"},500);musOn=true;setHeld();if(S.lvp>0)levelUp()}
@@ -6358,5 +6633,5 @@ if(S.lvp>0&&!modal)levelUp();
 onLang(()=>{relabelTabs();if(fsLab)fsLab();buildBar();build();statsHtml="";bagHtml="";buffsHtml="";clkLast="";if(modal==="pause"){paintPause();const lb=document.querySelector("#bx .lp-btn");if(lb)lb.focus()}refresh()});
 requestAnimationFrame(loop);
 // gancho opcional usado só por tools/smoke.js (não faz nada no jogo normal)
-if(typeof window.__TESTE__==="function")window.__TESTE__({get pot(){return pot},deepOres,POT_RECIPES,ORES,churchSolid,roofSolid,houseBlocks,bell,bellCol,nearBell,bellUse,altarCol,nearAltar,altarUse,prayTick,prayCancel,get prayA(){return prayA},CHURCH_C,CAULDRON_C,nearCauldron,cauldronUse,openPot,potCook,potMax,forageAt,forageProg,forageOn,forageUse,sayK,toastTick,toastHas,get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,WALK_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,furyActiveMult,frenzyActiveMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,moonP,moonLit,moonLight,moonName,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,footKind,footSfx,stepSound,cricketAmt,frogAmt,windStrength,ambTick,caveTick,CAVE,caveMix,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v},get shakeDec(){return shakeDec},get blasts(){return blasts},get parts(){return parts},set musOn(v){musOn=v},skillBurst,useFx,skillFxTick,useGlows,thunderSfx,actx:()=>actx,ac,boomSfx,blastFx,setMute(v){mute=v}});
+if(typeof window.__TESTE__==="function")window.__TESTE__({get pot(){return pot},deepOres,POT_RECIPES,ORES,churchSolid,roofSolid,houseBlocks,bell,bellCol,nearBell,bellUse,altarCol,nearAltar,altarUse,prayTick,prayCancel,get prayA(){return prayA},CHURCH_C,CAULDRON_C,nearCauldron,cauldronUse,openPot,potCook,potMax,forageAt,forageProg,forageOn,forageUse,sayK,toastTick,toastHas,get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,WALK_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,furyActiveMult,frenzyActiveMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,moonP,moonLit,moonLight,moonName,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,footKind,footSfx,stepSound,cricketAmt,frogAmt,windStrength,ambTick,caveTick,CAVE,caveMix,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v},get shakeDec(){return shakeDec},get blasts(){return blasts},get parts(){return parts},set musOn(v){musOn=v},skillBurst,useFx,skillFxTick,useGlows,thunderSfx,actx:()=>actx,ac,boomSfx,blastFx,setMute(v){mute=v},RANK_CFG,RK,rankOk,rankName,rankSnap,rankPush,rankPaint,rankLeave,rankLoad,rankOpen});
 })();

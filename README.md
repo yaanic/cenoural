@@ -73,6 +73,8 @@ No celular, use os botões na tela (setas, **Minerar** e **Pausa**) e toque nos 
 
 ## O que tem no jogo
 
+- Aba **Ranking** online (Firebase, opcional): veja `firebase/LEIA-ME.md` para configurar
+
 - 15 camadas quebráveis (1500 m de profundidade) e uma rocha-mãe inquebrável no fundo
 - Mesa de trabalho com dezenas de melhorias, picaretas diferentes e loja de itens
 - Liberação gradual: melhorias, itens da loja, fornalha, contratos e caça-níquel vão sendo liberados conforme o seu recorde de profundidade (as construções já aparecem na superfície, quebradas, e voltam a funcionar ao chegar na profundidade), com aviso na tela e dica do que vem a seguir
