@@ -27,7 +27,7 @@
 <meta name="twitter:image" content="https://yaanic.github.io/cenoural/img/icon.png">
 <meta name="theme-color" content="#14110f">
 <link rel="icon" type="image/png" href="img/favicon.png">
-<link rel="stylesheet" href="style.css?v=1793354420">
+<link rel="stylesheet" href="style.css?v=1793355004">
 </head>
 <body>
 <noscript><div style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;background:#14110f;color:#eee;font:16px/1.5 system-ui,sans-serif"><div><h1 style="margin:0 0 12px">Cenoural</h1>Este jogo precisa de JavaScript para funcionar.<br>Ative o JavaScript no seu navegador e recarregue a página.<br><br>This game needs JavaScript to run.<br>Enable JavaScript in your browser and reload the page.</div></div></noscript>
@@ -97,7 +97,7 @@
       </details>
       <details open><summary data-i18n>Teclado</summary>
         <dl class="keys">
-          <dt data-i18n><kbd>Espaço</kbd></dt><dd data-i18n>Segure para cavar. Perto do baú, da fornalha, do quadro ou do caça-níquel, usa o objeto</dd>
+          <dt data-i18n><kbd>Espaço</kbd></dt><dd data-i18n>Segure para cavar. Perto do baú, da fornalha, do quadro, do caça-níquel, da fogueira, do caldeirão ou do sino, usa o objeto. Perto de cenouras e cogumelos no chão do bosque, colhe</dd>
           <dt><kbd>W A S D</kbd> <kbd>←↑↓→</kbd></dt><dd data-i18n>Mover e escolher a direção (W = cima). Segure ↓ num buraco já cavado para cair de graça</dd>
           <dt><kbd>Shift</kbd></dt><dd data-i18n>Correr</dd>
           <dt><kbd>E</kbd></dt><dd data-i18n>Dinamite</dd>
@@ -113,7 +113,7 @@
       <details><summary data-i18n>Mouse</summary>
         <dl class="keys">
           <dt data-i18n><kbd>Clique</kbd></dt><dd data-i18n>Num bloco ao lado do personagem: muda a direção</dd>
-          <dt data-i18n><kbd>Clique</kbd></dt><dd data-i18n>No baú, na fornalha, no quadro ou no caça-níquel (estando perto): usa</dd>
+          <dt data-i18n><kbd>Clique</kbd></dt><dd data-i18n>No baú, na fornalha, no quadro, no caça-níquel, na fogueira, no caldeirão, no sino ou numa cenoura/cogumelo do chão (estando perto): usa ou colhe</dd>
           <dt data-i18n><kbd>Clique</kbd></dt><dd data-i18n>Nos ícones da barra: usa a dinamite, a habilidade, o teleporte, a comida ou a poção</dd>
           <dt data-i18n><kbd>Botão direito</kbd></dt><dd data-i18n>No ícone da dinamite: troca o tipo</dd>
         </dl>
@@ -121,7 +121,7 @@
       <details><summary data-i18n>Celular</summary>
         <dl class="keys">
           <dt><kbd>◀ ▲ ▼ ▶</kbd></dt><dd data-i18n>Mover e escolher a direção</dd>
-          <dt data-i18n><kbd>Minerar</kbd></dt><dd data-i18n>Segure para cavar (também usa baú, fornalha, quadro e caça-níquel quando perto)</dd>
+          <dt data-i18n><kbd>Minerar</kbd></dt><dd data-i18n>Segure para cavar (também usa baú, fornalha, quadro, caça-níquel, fogueira, caldeirão e sino, e colhe cenouras e cogumelos, quando perto)</dd>
           <dt data-i18n><kbd>Ícones</kbd></dt><dd data-i18n>Toque nos ícones da barra para dinamite, habilidades, teleporte, comida e poções</dd>
           <dt data-i18n><kbd>Pausa</kbd></dt><dd data-i18n>Botão no topo do painel</dd>
         </dl>
@@ -131,6 +131,7 @@
           <dt data-i18n>Caça-níquel</dt><dd data-i18n><kbd>←</kbd> <kbd>→</kbd> ou <kbd>A</kbd> <kbd>D</kbd> mudam a aposta, <kbd>Espaço</kbd> ou <kbd>Enter</kbd> gira, <kbd>Esc</kbd> sai</dd>
           <dt data-i18n>Pesca</dt><dd data-i18n><kbd>Espaço</kbd> ou clique lança e fisga; segure <kbd>Espaço</kbd> para subir a barra verde; <kbd>Esc</kbd> sai</dd>
           <dt data-i18n>Fogueira</dt><dd data-i18n><kbd>Espaço</kbd> tira o peixe do fogo; <kbd>Esc</kbd> fecha (o peixe não se perde)</dd>
+          <dt data-i18n>Caldeirão</dt><dd data-i18n><kbd>W</kbd> <kbd>S</kbd> ou setas escolhem a receita, <kbd>Espaço</kbd> ou <kbd>Enter</kbd> cozinha, <kbd>Esc</kbd> fecha (nada se perde)</dd>
           <dt data-i18n>Baú do subsolo</dt><dd data-i18n><kbd>Espaço</kbd>, <kbd>Enter</kbd> ou <kbd>Esc</kbd> avançam</dd>
           <dt data-i18n>Subir de nível</dt><dd data-i18n><kbd>W A S D</kbd> ou setas escolhem, <kbd>Espaço</kbd> ou <kbd>Enter</kbd> confirma. Em 30 s o jogo escolhe por você</dd>
           <dt data-i18n>Pausa</dt><dd data-i18n><kbd>W</kbd> <kbd>S</kbd> navegam, <kbd>Esc</kbd> ou <kbd>P</kbd> continuam</dd>
@@ -152,12 +153,22 @@
           <li data-i18n><b>Quadro de contratos:</b> missões que pagam ouro e XP.</li>
         </ul>
       </details>
+      <details><summary data-i18n>Esquerda da casa</summary>
+        <p data-i18n>Do lado esquerdo da superfície, passando a horta e o moinho, há um bosque que leva até a igreja:</p>
+        <ul>
+          <li data-i18n><b>Horta:</b> toda vez que você chega ao fundo, uma cenoura da horta fica dourada. Com a horta inteira dourada, sai uma conquista.</li>
+          <li data-i18n><b>Cenouras e cogumelos no chão:</b> espalhados pelo bosque. Chegue perto e aperte <kbd>Espaço</kbd> (ou clique) para colher. Eles voltam a crescer sozinhos depois de uns 5 minutos de jogo (enquanto crescem, só aparece um brotinho ou um pontinho) e somem no inverno. A cenourinha é comida de energia; o cogumelo é ingrediente do caldeirão.</li>
+          <li data-i18n><b>Riacho da floresta:</b> dá para pescar nele também, igual ao riacho da direita.</li>
+          <li data-i18n><b>Igreja:</b> toque o sino com <kbd>Espaço</kbd> (ou clique) perto da torre. O caldeirão fica ao lado dela.</li>
+          <li data-i18n><b>Caldeirão:</b> chegue perto e aperte <kbd>Espaço</kbd> para cozinhar. <b>Sopa de cogumelo</b> (3 cogumelos, recupera 25% da energia), <b>Poção de energia</b> (4 cogumelos e 2 cenourinhas, recupera 50%) e <b>Poção de teleporte</b> (2 cogumelos e 1 minério fundo da mochila, Safira ou melhor: o minério é gasto em vez de vendido).</li>
+        </ul>
+      </details>
       <details><summary data-i18n>Energia</summary>
         <ul>
           <li data-i18n>Subir com a mochila a jato gasta mais que cavar.</li>
           <li data-i18n>Comece a subir quando a energia chegar a 25%.</li>
-          <li data-i18n>O teleporte leva ao baú sem gastar energia. A <b>Poção de teleporte</b> (só cai de baús) faz o mesmo uma vez, sem precisar da melhoria.</li>
-          <li data-i18n>Comida de energia (da loja) fica na barra e recupera energia no subsolo.</li>
+          <li data-i18n>O teleporte leva ao baú sem gastar energia. A <b>Poção de teleporte</b> (cai de baús ou sai do caldeirão) faz o mesmo uma vez, sem precisar da melhoria.</li>
+          <li data-i18n>Comida de energia (da loja, da fogueira, do caldeirão ou as cenourinhas do bosque) fica na barra e recupera energia no subsolo.</li>
           <li data-i18n>Na superfície a energia se recupera sozinha.</li>
         </ul>
       </details>
@@ -167,6 +178,8 @@
           <li data-i18n><b>Veios de minério</b> são raros: manchas de blocos brilhantes que rendem vários minérios cada.</li>
           <li data-i18n>Há <b>baús raros</b> escondidos no subsolo, e o visual mostra a raridade: madeira (comum), ferro (incomum), ouro (raro), roxo (épico) e obsidiana (lendário). Dão ouro, XP, itens, minérios, fragmentos, poções de teleporte e, às vezes, um bônus de melhoria como os de subir de nível.</li>
           <li data-i18n>De <b>noite</b> a superfície escurece (o vagalume brilha mais) e descer dá um pouco mais de XP.</li>
+          <li data-i18n><b>Eventos:</b> de tempos em tempos acontece um <b>Frenesi mineral</b> (minérios x3) ou uma <b>Corrida do ouro</b> (ouro x3) por cerca de 20 segundos. Uma plaquinha embaixo do nível mostra o tempo que falta.</li>
+          <li data-i18n><b>Estações e clima:</b> a superfície muda com as estações do ano e com o tempo (nublado, chuva, tempestade, neve e neblina). Alguns peixes só aparecem em certa estação, à noite ou na chuva.</li>
           <li data-i18n><b>Estrelas cadentes</b> aparecem raramente à noite e dão ouro ou sorte por um tempo.</li>
           <li data-i18n><b>Liberação gradual:</b> o jogo começa com poucas melhorias e itens, e a fornalha, o quadro de contratos e o caça-níquel só aparecem depois. Tudo vai sendo liberado conforme o seu <b>recorde de profundidade</b>, com um aviso dourado na tela, e a dica no topo das Melhorias mostra o que vem a seguir. O que já foi liberado não some ao Renascer.</li>
           <li data-i18n>Cada mundo novo (jogo novo ou Renascer) usa uma semente aleatória.</li>
@@ -192,6 +205,6 @@
 </aside>
 <div id="title"><div class="tt"><h1 class="brand" aria-label="Cenoural"><span class="brand-icon" role="img" aria-hidden="true"></span><span class="brand-logo" role="img" aria-hidden="true"></span></h1><button id="play" type="button" data-i18n>Jogar</button><div data-langmenu></div><small data-i18n style="display:block;margin-top:14px;opacity:.5;font-size:.7rem">© 2026 João Pedro Borges · Todos os direitos reservados<br>Feito com auxílio de inteligência artificial · Seu progresso fica salvo só neste navegador</small></div></div>
 <div id="ov"><div class="box" id="bx"></div></div>
-<script src="game.js?v=1793354420"></script>
+<script src="game.js?v=1793355004"></script>
 </body>
 </html>
