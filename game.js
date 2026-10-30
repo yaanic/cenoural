@@ -3986,7 +3986,7 @@ async function rankLoad(ci,force){
  if(rkLoading)return;
  rkLoading=true;rankPaint();
  try{
-  const j=await rankFetch(rankUrl("","?orderBy="+encodeURIComponent('"'+c.k+'"')+"&limitToLast="+RANK_TOP));
+  const j=await rankFetch(rankUrl("","?orderBy="+encodeURIComponent('"'+c.k+'"')+"&limitToLast="+RANK_TOP+"&_="+Date.now()),{cache:"no-store"});   // no-store + carimbo: o navegador nunca devolve a lista antiga do cache
   const by=(a,b)=>b[c.k]-a[c.k]||b.ds-a.ds||b.gold-a.gold||(a.name<b.name?-1:1);
   d.rows=Object.keys(j||{}).map(id=>rankRow(id,j[id])).filter(Boolean).sort(by);d.at=Date.now();d.err="";
  }catch(e){d.err=!e.status?"net":"srv";try{console.warn("[ranking]",d.err,e.status,e.body)}catch(x){}}
@@ -4024,7 +4024,7 @@ function rankBuild(){
  // lista
  ui.dL=rkDet(op[0]);
  ui.list=rkT("ol","rk");ui.msg=rkT("div","ph rk-msg");ui.me=rkT("ol","rk rk-out");
- ui.refresh=rkT("button","rk-ref",__("Atualizar lista"));ui.refresh.onclick=()=>{if(rkLoading)return;rankPush(false);rankLoad(rkCat,true)};
+ ui.refresh=rkT("button","rk-ref",__("Atualizar lista"));ui.refresh.onclick=async()=>{if(rkLoading||rkBusy||ui.refresh._w)return;ui.refresh._w=true;try{if(JSON.stringify(rankSnap())!==rkSig&&Date.now()-rkLast>5000)await rankPush(true)}catch(e){}ui.refresh._w=false;rankLoad(rkCat,true)};   // manda a sua pontuação atual (sem esperar os 45 s) e SÓ DEPOIS lê a lista
  ui.dL.append(ui.list,ui.msg,ui.me,ui.refresh);
  // perfil
  ui.dP=rkDet(op[1],__("Seu perfil"));
