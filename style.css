@@ -99,7 +99,7 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 .slot .k,.slot .qn{position:absolute;white-space:nowrap;font-weight:700;color:#fff;text-shadow:1px 1px 0 #000;pointer-events:none}
 .slot .k{left:3px;top:1px;font-size:.62rem;color:#ffe9b0}
 .slot .qn{right:3px;bottom:1px;font-size:.8rem}
-.slot.lock svg,.slot.empty svg{filter:grayscale(1) brightness(.55);opacity:.7}
+.slot.lock svg,.slot.empty svg,.slot.blk svg{filter:grayscale(1) brightness(.55);opacity:.7}
 .slot.active{outline:3px solid #fff;outline-offset:-1px;z-index:1;animation:hotOn .6s ease-in-out infinite alternate}
 @keyframes hotOn{from{box-shadow:0 0 0 2px #000}to{box-shadow:0 0 0 2px #ffe08a}}
 .dwrap{position:relative;width:46px;height:46px;pointer-events:none}

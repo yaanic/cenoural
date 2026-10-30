@@ -29,7 +29,7 @@ Nothing to install, no sign-up, and it works on desktop and mobile.
 
 ## How to play
 
-1. **Dig:** pick a direction and hold **Space** (or the **Mine** button on mobile).
+1. **Dig:** pick a direction and hold **Space** (or the on-screen "-" button on mobile).
 2. **Collect:** blocks give gold, and some drop ores that go into your backpack.
 3. **Sell:** return to the surface (or use the teleport) and hand your backpack over at the chest.
 4. **Upgrade:** spend your gold at the workbench and the shop to get deeper on every run.
@@ -48,7 +48,6 @@ Nothing to install, no sign-up, and it works on desktop and mobile.
 | `1` `2` | Skills |
 | `N` | Sound on or off |
 | `Esc` or `P` | Pause |
-| Scroll | Zoom |
 
 ### Gamepad
 
@@ -65,7 +64,6 @@ Plug in a controller (Xbox, PlayStation, Switch Pro, or similar) and press any b
 | `LT` | Teleport to the chest |
 | `RT` | Run (hold) |
 | `Start` | Pause |
-| Right stick (up/down) | Zoom |
 | Left stick click | Sound on or off |
 | Right stick click | Enter/leave the side panel (Upgrades, Shop, Power, Menu) |
 

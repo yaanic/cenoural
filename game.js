@@ -99,7 +99,7 @@ addLang("en","English",{
 "<b>Renasça:</b> depois de 100 m, Renascer troca o progresso da vida por fragmentos, que compram poderes permanentes na aba Poder. Baús raros também podem dar fragmentos.":"<b>Be reborn:</b> after 100 m, Rebirth trades your run's progress for shards, which buy permanent powers in the Power tab. Rare chests can also give shards.",
 "Teclado":"Keyboard",
 "<kbd>Espaço</kbd>":"<kbd>Space</kbd>",
-"Segure para cavar. Perto do baú, da fornalha, do quadro, do caça-níquel, da fogueira, do caldeirão ou do sino, usa o objeto. Perto de cenouras e cogumelos no chão do bosque, colhe":"Hold to dig. Near the chest, furnace, board, slot machine, campfire, cauldron or bell, it uses that object. Near carrots and mushrooms on the forest floor, it picks them",
+"Cavar e interagir":"Mine and interact",
 "Mover e escolher a direção (W = cima). Segure ↓ num buraco já cavado para cair de graça":"Move and pick a direction (W = up). Hold ↓ over a dug hole to fall for free",
 "Correr":"Run",
 "Dinamite":"Dynamite",
@@ -108,7 +108,6 @@ addLang("en","English",{
 "Teleporte (compre em Melhorias)":"Teleport (buy it in Upgrades)",
 "Fúria do Minerador (libera aos 50 m) e Escavação Frenética (aos 150 m)":"Miner's Fury (unlocks at 50 m) and Frenzied Digging (at 150 m)",
 "Som ligado/desligado":"Sound on/off",
-"Zoom do jogo":"Game zoom",
 "Mouse":"Mouse",
 "<kbd>Clique</kbd>":"<kbd>Click</kbd>",
 "Num bloco ao lado do personagem: muda a direção":"On a block next to the character: changes direction",
@@ -118,8 +117,7 @@ addLang("en","English",{
 "No ícone da dinamite: troca o tipo":"On the dynamite icon: switches type",
 "Celular":"Mobile",
 "Mover e escolher a direção":"Move and pick a direction",
-"<kbd>Minerar</kbd>":"<kbd>Mine</kbd>",
-"Segure para cavar (também usa baú, fornalha, quadro, caça-níquel, fogueira, caldeirão e sino, e colhe cenouras e cogumelos, quando perto)":"Hold to dig (also uses the chest, furnace, board, slot machine, campfire, cauldron and bell, and picks carrots and mushrooms, when close)",
+"<kbd>Botão -</kbd>":"<kbd>- button</kbd>",
 "<kbd>Ícones</kbd>":"<kbd>Icons</kbd>",
 "Toque nos ícones da barra para dinamite, habilidades, teleporte, comida e poções":"Tap the bar icons for dynamite, skills, teleport, food and potions",
 "<kbd>Pausa</kbd>":"<kbd>Pause</kbd>",
@@ -838,7 +836,6 @@ addLang("en","English",{
 "{0} — {1} (desbloqueia aos {2} m)":"{0} — {1} (unlocks at {2} m)",
 "{0} (raio {1})":"{0} (radius {1})",
 // --- 4-interface/04-entrada.js
-"Minerar":"Mine",
 // --- 4-interface/05-pausa.js
 "nível {0}":"level {0}",
 "Continuar":"Continue",
@@ -1472,14 +1469,14 @@ function boomSfx(big){
 const TOAST_MAX=5;
 function toastClean(m){return String(m).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u27FF\u2B00-\u2BFF]|\uFE0F|\u200D|\u20E3/g,"").trim()}
 function toastHas(m){const t=toastClean(m);return toasts.some(x=>x.txt===t)}
-function sayK(k,m){
+function sayK(k,m,img){   // img (opcional): ícone próprio (url CSS) no lugar do ícone da categoria
  const txt=toastClean(m),dur=Math.min(8,Math.max(4,2+txt.length*.05));
  if(!txt)return;
  const old=toasts.find(x=>x.txt===txt);
  if(old){old.t=dur;old.el.classList.remove("out");return}
  const box=document.getElementById("toasts");if(!box)return;
  const el=document.createElement("div");el.className="toast";
- const ic=document.createElement("i");ic.className="ic";ic.style.backgroundImage=noteIcon(k);
+ const ic=document.createElement("i");ic.className="ic";ic.style.backgroundImage=img||noteIcon(k);
  el.appendChild(ic);el.appendChild(document.createTextNode(txt));box.appendChild(el);
  toastFit(el);toasts.push({el,txt,t:dur});
  while(toasts.length>TOAST_MAX){const o=toasts.shift();o.el.remove()}
@@ -1725,7 +1722,7 @@ const skillDuration=i=>SKL[i][2]*skillDurationMult();
 const skillDescription=i=>i===0?__("Dano x{0} por {1} s (recarga {2} s; só uma habilidade ativa por vez)",fmtN(furyMult()),fmt(skillDuration(i)),fmtN(SKL[i][3]*cdMult())):__("Cava x{0} mais rápido por {1} s (recarga {2} s; só uma habilidade ativa por vez)",fmtN(frenzyMult()),fmt(skillDuration(i)),fmtN(SKL[i][3]*cdMult()));
 function useSk(i){if(modal||i<0||i>=SKL.length||S.best<SKL[i][4]||skCD[i]>0)return;
  if(skT[1-i]>0){const m=__("Espere a outra habilidade acabar");if(!toastHas(m))sayWarn(m);return}   // Fúria e Frenesi não podem ficar ativas juntas
- skCD[i]=SKL[i][3]*cdMult();skT[i]=skillDuration(i);flash=.1;flashC=i?"#ffe66a":"#ff5a2a";skillBurst(i);sayPower(__("Habilidade ativada: {0}",__(SKL[i][0])))}
+ skCD[i]=SKL[i][3]*cdMult();skT[i]=skillDuration(i);flash=.1;flashC=i?"#ffe66a":"#ff5a2a";skillBurst(i);sayK("power",__("Habilidade ativada: {0}",__(SKL[i][0])),spriteURL(i?"frenzy":"fury"))}
 const dynMax=()=>dynCDt;   // recarga da última dinamite usada (BAL.dyn[tipo].cd): quanto mais forte, maior
 const DYN_IDS=["dyn","dyn2","dyn3","dyn4","dyn5"];   // tipos de dinamite, do mais fraco ao mais forte (números em BAL.dyn)
 // Dinamite em uso: a escolhida (tecla R troca); se acabou, usa a mais forte que ainda houver
@@ -3570,6 +3567,8 @@ function pixSVG(rows,pal){
 // Dinamite: o corpo muda de cor conforme o tipo (cor do item)
 function dynSprite(k){const key="d"+k;return hotCache[key]||(hotCache[key]=pixSVG(SPR.dyn,{R:ITEMS[k].c,r:lighten(ITEMS[k].c,.4),W:"#f6e6b8",k:"#3a2a1a",f:"#e9d9aa",y:"#ffd45c",o:"#ff9a3a"}))}
 const sprite=k=>hotCache[k]||(hotCache[k]=pixSVG(SPR[k],SPR_PAL[k]));
+// mesmo sprite da barra, como imagem de fundo CSS (usado nos avisos: o aviso de uma habilidade mostra o ícone dela)
+const spriteURL=k=>"url(\"data:image/svg+xml,"+encodeURIComponent(sprite(k).replace("<svg ","<svg xmlns='http://www.w3.org/2000/svg' "))+"\")";
 // [nome, tecla, item de energia (clique), sprite]. Dinamite e itens de energia são consumíveis comprados na loja; os itens de energia só têm clique.
 const BAR=[[N_("Dinamite"),"E",null,"dyn"],[N_("Fúria do Minerador"),"1",null,"fury"],[N_("Escavação Frenética"),"2",null,"frenzy"],[N_("Teleporte"),"Q",null,"tele"],[N_("Cenourinha"),"","cen","cen"],[N_("Sopa de cogumelo"),"","sop","sop"],[N_("Poção de energia"),"","poc","poc"],[N_("Poção de teleporte"),"","ptp","ptp"],[N_("Comida de peixe"),"F",null,"fish"]];
 const FI=BAR.length-1;   // slot único das comidas de peixe (alterna entre assado, grelhado e banquete)
@@ -3606,7 +3605,7 @@ function barUI(){const slots=document.querySelectorAll(".slot");BAR.forEach((s,i
  else if(s[2]){empty=have(s[2])<1&&!S.debug;txt=S.debug?"∞":String(have(s[2]))}
  else if(i===3){lock=S.lv.tele<1;frac=tpCD>0?tpCD/teleCD():0;if(tpCD>0)txt=Math.ceil(tpCD)+"s"}
  else{const k=SKL[i-1];lock=S.best<k[4];active=skT[i-1];blk=active<=0&&skT[2-i]>0;frac=!lock&&active<=0&&skCD[i-1]>0?skCD[i-1]/(k[3]*cdMult()):0;txt=lock?k[4]+"m":active>0?Math.ceil(active)+"s":skCD[i-1]>0?Math.ceil(skCD[i-1])+"s":""}
- const cl="slot"+(lock||blk?" lock":"")+(empty?" empty":"")+(active>0?" active":"");if(b.className!==cl)b.className=cl;
+ const cl="slot"+(lock?" lock":"")+(blk?" blk":"")+(empty?" empty":"")+(active>0?" active":"");if(b.className!==cl)b.className=cl;
  b.querySelector(".cd").style.height=Math.round(clamp(frac,0,1)*38)+"px";
  const q=b.querySelector(".qn");if(q.textContent!==txt){q.textContent=txt}
  const t=slotTitle(i);if(b.title!==t)b.title=t});dpickUI()}
@@ -3682,9 +3681,9 @@ addEventListener("keydown",e=>{
  if(e.code==="Space"){e.preventDefault();if(!e.repeat){holdS=true;clickDig();lastH=performance.now()}}});
 addEventListener("keyup",e=>{if(e.code==="Space"){holdS=false;e.preventDefault()}releaseDir(e.code);if(e.key==="Shift")shiftOn=false});
 addEventListener("blur",()=>{holdS=holdM=false;dirKeys.length=0;setHeld();shiftOn=false});
-cv.addEventListener("wheel",e=>{e.preventDefault();setZoom(zoomPreference*(e.deltaY<0?1.12:1/1.12))},{passive:false});
+cv.addEventListener("wheel",e=>e.preventDefault(),{passive:false});   // sem zoom no scroll; só impede a página de rolar sobre o jogo
 if(matchMedia("(pointer:coarse)").matches||innerWidth<760){
- // Controles de celular: direcionais à esquerda, Minerar à direita (a Pausa fica só no painel e no teclado).
+ // Controles de celular: direcionais à esquerda, botão "-" (cavar e interagir) à direita (a Pausa fica só no painel e no teclado).
  const bar=mk("div");bar.style.cssText="position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:flex-end;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));pointer-events:none;z-index:9;-webkit-touch-callout:none;background:linear-gradient(rgba(11,12,16,0),#0b0c10 42%)";
  const ups=[];   // liberadores ativos: soltam tudo se o toque se perder (janela abriu, app foi para segundo plano etc.)
  const btn=(t,dn,up,w,fs)=>{const b=mk("button","",t);
@@ -3695,9 +3694,9 @@ if(matchMedia("(pointer:coarse)").matches||innerWidth<760){
  const pad=mk("div");pad.style.cssText="display:grid;grid-template-columns:repeat(3,56px);gap:6px";
  const dr=(t,d)=>btn(t,()=>{pressDir("touch-"+d,d);move(d);lastMv=performance.now()},()=>releaseDir("touch-"+d));
  [mk("span"),dr("▲","up"),mk("span"),dr("◀","left"),dr("▼","down"),dr("▶","right")].forEach(x=>pad.appendChild(x));
- const mine=btn(__("Minerar"),()=>{holdS=true;if(fs)fishHold=true;clickDig();lastH=performance.now()},()=>{holdS=false;fishHold=false},104,15);
- mine.style.height="118px";mine.style.letterSpacing=".03em";mine.style.fontWeight="700";
- bar.appendChild(pad);bar.appendChild(mine);onLang(()=>{mine.textContent=__("Minerar")});
+ const mine=btn("-",()=>{holdS=true;if(fs)fishHold=true;clickDig();lastH=performance.now()},()=>{holdS=false;fishHold=false},104,34);
+ mine.style.height="118px";mine.style.display="flex";mine.style.alignItems="center";mine.style.justifyContent="center";mine.setAttribute("aria-label",__("Cavar e interagir"));   // o botão mostra só "-" (sem texto de ação); o rótulo fica para leitores de tela
+ bar.appendChild(pad);bar.appendChild(mine);onLang(()=>mine.setAttribute("aria-label",__("Cavar e interagir")));
  addEventListener("blur",()=>ups.forEach(f=>f()));document.addEventListener("visibilitychange",()=>{if(document.hidden)ups.forEach(f=>f())});
  bar.oncontextmenu=e=>e.preventDefault();document.body.style.overscrollBehavior="none";document.body.appendChild(bar);document.body.style.paddingBottom="150px"}
 
@@ -3762,7 +3761,7 @@ function clockUpdate(){
 // ===== 4-interface/07-controle.js — Suporte a controle (Gamepad API: Xbox, PlayStation, Switch Pro e genéricos no layout padrão) =====
 // Jogo:   direcional ou analógico esquerdo = mover · A = cavar (segure) / usar baú, fornalha, quadro e caça-níquel · B (segure) = correr
 //         X = dinamite · Y = trocar dinamite · LB / RB = habilidades 1 e 2 · LT = teleporte · RT (segure) = correr
-//         Start = pausa · analógico direito (cima/baixo) = zoom · clique do analógico esquerdo = som · clique do analógico direito = painel (Melhorias/Loja)
+//         Start = pausa · clique do analógico esquerdo = som · clique do analógico direito = painel (Melhorias/Loja)
 // Janelas: direcional/analógico navega · A confirma · B volta/fecha · Start fecha a pausa
 const GP={dz:.5,id:"",dir:null,a:false,prev:[],navT:0,navD:null,lastModal:null,wait:{a:false,b:false,st:false},tLast:0,seen:false,sel:-1,edge:false,panel:false,psel:0};
 function gpPad(){
@@ -3834,7 +3833,7 @@ function gpFrame(now){
  if(!GP.seen){GP.seen=true;GP.id=p.id}
  const B=i=>!!(p.buttons[i]&&p.buttons[i].pressed),ax=i=>p.axes[i]||0;
  const pr=i=>B(i)&&!GP.prev[i];                 // acabou de apertar
- let lx=ax(0),ly=ax(1);const ry=ax(3);
+ let lx=ax(0),ly=ax(1);
  let dh=0;if(p.mapping!=="standard"&&p.axes.length>9){const h=p.axes[9],T=[[-1,"u"],[-.714,"ur"],[-.428,"r"],[-.142,"dr"],[.143,"d"],[.428,"dl"],[.714,"l"],[1,"ul"]];const m=T.find(x=>Math.abs(x[0]-h)<.1);dh=m?m[1]:""}
  let up=B(12)||dh==="u"||dh==="ur"||dh==="ul"||ly<-GP.dz,down=B(13)||dh==="d"||dh==="dr"||dh==="dl"||ly>GP.dz,left=B(14)||dh==="l"||dh==="dl"||dh==="ul"||lx<-GP.dz,right=B(15)||dh==="r"||dh==="ur"||dh==="dr"||lx>GP.dz;
  if(!B(12)&&!B(13)&&!B(14)&&!B(15)&&(up||down)&&(left||right)){   // analógico na diagonal: vale o eixo mais forte
@@ -3883,7 +3882,6 @@ function gpFrame(now){
    if(pr(6))teleport();
    if(pr(10)){mute=!mute;refresh()}
    if(pst&&!GP.wait.st)openPause();
-   if(Math.abs(ry)>.25)setZoom(zoomPreference*Math.exp(-ry*dt*1.4));
   }
  }
  GP.prev=p.buttons.map(b=>b.pressed);
@@ -5031,6 +5029,30 @@ function worldCols(q,wA,wB,fn){
 // Três camadas de profundidade. Cada uma é uma faixa fixa na própria camada que desliza devagar (par menor que o das colinas da frente, em 02-ceu-nuvens.js: .03 e .08).
 // O tamanho dos picos NÃO depende da posição do jogador. As montanhas grandes das pontas (massa à esquerda, grande montanha à direita) são presas ao mundo, mais abaixo.
 const vn=(x,s)=>{const i=Math.floor(x),f=x-i,u=f*f*(3-2*f);return hash(i,s)*(1-u)+hash(i+1,s)*u};   // ruído de valor suave (determinístico, preso ao mundo)
+// ----- Textura das montanhas (só desenho; roda dentro das faixas pré-renderizadas, então não custa nada por quadro) -----
+// Manchas de rocha claras e escuras em blocos de 2x2 pixels, presas ao mundo (a chave vem da coluna e da linha, nunca da tela), e luz de borda na crista da face iluminada.
+// Só pinta DENTRO da silhueta: a forma das montanhas não muda. dk/lt = cor escura/clara; sd = semente; amt = intensidade.
+function rockTex(x,cw,top,y0,q,w,up,dk,lt,sd,amt){
+ const kx=Math.floor(w*11),bx=kx>>1,rows=Math.floor((y0-top)/q);amt=amt||1;
+ for(let r=1;r<rows;r++){
+  const y=y0-(r+1)*q,n=hash(bx*131+(r>>1),sd),m=hash(kx*977+r,sd+1);
+  if(n<.14*amt){ctx.fillStyle=dk;ctx.globalAlpha=up?.3:.4;ctx.fillRect(x,y,cw,q)}
+  else if(n>1-.1*amt){ctx.fillStyle=lt;ctx.globalAlpha=up?.42:.22;ctx.fillRect(x,y,cw,q)}
+  if(m<.07*amt){ctx.fillStyle=dk;ctx.globalAlpha=.24;ctx.fillRect(x,y,cw,q)}   // grão fino de um pixel só
+  else if(m>1-.04*amt){ctx.fillStyle=lt;ctx.globalAlpha=.26;ctx.fillRect(x,y,cw,q)}
+ }
+ if(up){ctx.fillStyle=lt;ctx.globalAlpha=.5;ctx.fillRect(x,top,cw,q)}   // crista iluminada
+ ctx.globalAlpha=1;
+}
+// Neve com textura: borda de baixo salpicada (não é mais uma linha reta) e manchas de sombra/brilho dentro dela. sh = altura da neve, h = altura da montanha na coluna.
+function snowTex(x,cw,top,sh,h,q,w,sn,fl,sd){
+ const kx=Math.floor(w*11),rows=Math.floor(sh/q);
+ ctx.fillStyle=fl;ctx.globalAlpha=.5;
+ for(let r=0;r<rows;r++)if(hash((kx>>1)*83+(r>>1),sd+2)<.11)ctx.fillRect(x,top+r*q,cw,q);
+ ctx.globalAlpha=1;ctx.fillStyle=sn;
+ if(sh+q<=h&&hash(kx,sd+5)<.55)ctx.fillRect(x,top+sh,cw,q);
+ if(sh+q*2<=h&&hash(kx,sd+6)<.2)ctx.fillRect(x,top+sh+q,cw,q);
+}
 // Cumes tipo Everest: pirâmide com ombros largos na base e ponta íngreme (curva em S, não uma reta), espigões laterais e rochedos irregulares no alto; vales largos entre eles
 const ridgeP=(wx,sd)=>{
  const m=1-Math.abs(Math.sin(wx*.0029+sd)),sh=m*m*(3-2*m),prof=.5*sh+.5*Math.pow(m,1.15),spur=.16*Math.pow(1-Math.abs(Math.sin(wx*.0071+sd*1.7)),2.2);
@@ -5048,12 +5070,16 @@ function sceneRanges(sky,ps,night){
  for(let li=0;li<layers.length;li++){
   const L=layers[li],off=camX*T*L.par,hmax=Math.max(ps,Math.ceil(A*L.amp/ps)*ps),ridge=L.peaky?ridgeP:ridgeV;
   // A faixa é feita uma vez (forma: ps, altura, semente; cor: estação e noite em passos de 1/32) e depois só desliza; as colunas ficam presas à camada (k*ps)
-  let body,lit,snow,snowD,sn,dk,hl;
+  let body,lit,snow,snowD,sn,dk,hl,tdk,tlt;
   const s=stripFor(_rangeStrips[li]||(_rangeStrips[li]=bakeNew()),off,ps,hmax,ps+"|"+hmax+"|"+SEED+"|"+L.sd,nq+"|"+wint.toFixed(3)+"|"+L.body+"|"+L.lit,(k,x)=>{
    if(body===undefined){body=nightCol(L.body,nq);lit=nightCol(L.lit,nq);snow=nightCol(mixHex("#eef4fa","#ffffff",wint),nq);snowD=nightCol("#b9c9dc",nq);sn=L.sn-.22*wint;
-    if(L.peaky){dk=nightCol(mixHex(L.body,"#3a4a6c",.5),nq);hl=nightCol(mixHex(L.lit,"#ffffff",.5),nq)}}
+    if(L.peaky){dk=nightCol(mixHex(L.body,"#3a4a6c",.5),nq);hl=nightCol(mixHex(L.lit,"#ffffff",.5),nq)}
+    tdk=nightCol(mixHex(L.body,"#2c3d60",.5),nq);tlt=nightCol(mixHex(L.lit,"#ffffff",.5),nq)}
    const wx=k*ps,v=ridge(wx,L.sd),v2=ridge(wx+ps*(L.peaky?4:1.5),L.sd),r=L.peaky?.12+.88*v:.3+.7*v,h=Math.max(ps,Math.round(A*L.amp*r/ps)*ps),top=hmax-h,up=v2>v;
    ctx.fillStyle=up?lit:body;ctx.fillRect(x,top,ps,h);
+   for(let y=top+ps;y<hmax;y+=ps){const rr=Math.round((hmax-y)/ps),n=hash((k>>1)*131+(rr>>1),L.sd*10+3);   // textura: manchas de rocha em blocos 2x2 (suave, é fundo distante)
+    if(n<.11){ctx.fillStyle=tdk;ctx.globalAlpha=up?.2:.3;ctx.fillRect(x,y,ps,ps)}else if(n>.92){ctx.fillStyle=tlt;ctx.globalAlpha=up?.3:.16;ctx.fillRect(x,y,ps,ps)}}
+   ctx.globalAlpha=1;
    if(L.peaky){   // ravinas diagonais e arestas (presas à coluna do mundo): dão relevo às faces, sem listras verticais
     for(let y=top+ps*3;y<hmax;y+=ps*2){const g=Math.sin(wx*.021+(hmax-y)/(ps*7.5)+Math.sin(wx*.006+L.sd)*2);
      if(g>.86){ctx.fillStyle=dk;ctx.globalAlpha=up?.3:.5;ctx.fillRect(x,y,ps,ps)}else if(up&&g<-.93){ctx.fillStyle=hl;ctx.globalAlpha=.35;ctx.fillRect(x,y,ps,ps)}}
@@ -5071,11 +5097,14 @@ function scenePal(){
  const w=winterAmt();
  return{wint:w,trunk:"#5a3f2a",pL:mixHex("#2f7a45","#e9f2f6",w*.55),pD:mixHex("#1c4f33","#c3d2dc",w*.5),pLb:mixHex("#3b6a52","#cfdde4",w*.4),pDb:mixHex("#27503f","#a9bccb",w*.35),
   lf:SEA.nhh,lfD:SEA.nh,lfb:mixHex(SEA.nh,"#2d4d3f",.4),
+  lfH:mixHex(SEA.nhh,"#ffffff",.22),lfS:mixHex(SEA.nh,"#000000",.32),lfbH:mixHex(SEA.nh,"#ffffff",.16),lfbS:mixHex(SEA.nh,"#0b1c14",.5),
+  pLH:mixHex(mixHex("#2f7a45","#e9f2f6",w*.55),"#ffffff",.2),pDS:mixHex(mixHex("#1c4f33","#c3d2dc",w*.5),"#000000",.3),pLbH:mixHex(mixHex("#3b6a52","#cfdde4",w*.4),"#ffffff",.16),pDbS:mixHex(mixHex("#27503f","#a9bccb",w*.35),"#000000",.3),trD:"#3a281a",
   rkL:"#a3a7ae",rkM:"#7c8189",rkD:"#575c66",rkE:"#3f434c",moss:SEA.nh,gr:SEA.g,grH:SEA.h,
   snow:"#f4f8fb",dirt:SEA.d,dirtH:SEA.dh};
 }
 const TREE_K=2.2;   // fator de tamanho das árvores e pinheiros (altura e largura crescem juntas)
-function pxPine(cx,by,hpx,q,P,k,back){   // pinheiro em degraus; back = versão mais escura e fria (fileira de trás)
+const _tdk=[],_tlt=[];   // pixels de textura da árvore atual (listas reaproveitadas, sem alocar por quadro)
+function pxPine(cx,by,hpx,q,P,k,back,sd=0){   // pinheiro em degraus; back = versão mais escura e fria (fileira de trás)
  hpx*=TREE_K;cx=Math.round(cx);by=Math.round(by);
  const th=Math.max(q,Math.round(hpx*.16/q)*q),R=Math.max(3,Math.round((hpx-th)/q)),mh=Math.max(2,Math.round(hpx*.2/q)),tr=Math.max(2,Math.round(R/3));
  ctx.fillStyle=k(P.trunk);ctx.fillRect(cx-Math.floor(q/2),by-th,q,th);
@@ -5084,9 +5113,18 @@ function pxPine(cx,by,hpx,q,P,k,back){   // pinheiro em degraus; back = versão 
   const hw=Math.max(1,Math.round(mh*((i+1)/R)*(.7+.3*((i%tr)/tr)))),y=by-th-(R-i)*q+q;
   ctx.fillStyle=cL;ctx.fillRect(cx-hw*q,y,hw*q,q);ctx.fillStyle=cD;ctx.fillRect(cx,y,hw*q,q);
   if(P.wint>.25&&i%tr===0){ctx.globalAlpha=P.wint*.85;ctx.fillStyle=cS;ctx.fillRect(cx-hw*q,y,hw*q*2,q);ctx.globalAlpha=1}
+  else{   // textura das agulhas: tufos claros do lado da luz (esquerda), escuros na sombra (direita) e uma linha de sombra sob cada degrau; só dentro da silhueta
+   const under=i%tr===tr-1;
+   for(let j=-hw;j<hw;j++){const n=hash(sd*61+i*17+j,733);
+    if(n<(j<0?.08:.15)||(under&&n<.34))_tdk.push(cx+j*q,y);else if(n>(j<0?.86:.95))_tlt.push(cx+j*q,y)}
+  }
  }
+ ctx.fillStyle=k(back?P.pDbS:P.pDS);for(let i=0;i<_tdk.length;i+=2)ctx.fillRect(_tdk[i],_tdk[i+1],q,q);
+ ctx.fillStyle=k(back?P.pLbH:P.pLH);for(let i=0;i<_tlt.length;i+=2)ctx.fillRect(_tlt[i],_tlt[i+1],q,q);
+ _tdk.length=0;_tlt.length=0;
+ ctx.fillStyle=k(P.trD);for(let r=0;r<th/q;r++)if(hash(sd*7+r,741)<.4)ctx.fillRect(cx-Math.floor(q/2),by-th+r*q,q,q);   // casca: pixels escuros no tronco
 }
-function pxTree(cx,by,hpx,q,P,k,back){   // árvore de copa redonda (copa nas cores da estação)
+function pxTree(cx,by,hpx,q,P,k,back,sd=0){   // árvore de copa redonda (copa nas cores da estação)
  hpx*=TREE_K;cx=Math.round(cx);by=Math.round(by);
  const th=Math.max(q,Math.round(hpx*.36/q)*q),cw=Math.max(2,Math.round(hpx*.28/q)),ch=Math.max(3,Math.round((hpx-th)/q)+1);
  ctx.fillStyle=k(P.trunk);ctx.fillRect(cx-Math.floor(q/2),by-th,q,th);
@@ -5094,7 +5132,14 @@ function pxTree(cx,by,hpx,q,P,k,back){   // árvore de copa redonda (copa nas co
  for(let i=0;i<ch;i++){
   const hw=Math.max(1,Math.round(cw*Math.sin(Math.PI*(i+.5)/ch))),y=by-hpx+i*q;
   ctx.fillStyle=cL;ctx.fillRect(cx-hw*q,y,hw*q,q);ctx.fillStyle=cD;ctx.fillRect(cx,y,hw*q,q);
+  const low=i>=ch-2;   // textura das folhas: manchas claras no alto à esquerda, escuras à direita e embaixo (copa mais densa ali)
+  for(let j=-hw;j<hw;j++){const n=hash(sd*61+i*17+j+hw*3,737);
+   if(n<(j<0?.08:.17)+(low?.14:0))_tdk.push(cx+j*q,y);else if(n>(j<0?.84:.95)-(i<ch*.4&&j<0?.04:0))_tlt.push(cx+j*q,y)}
  }
+ ctx.fillStyle=k(back?P.lfbS:P.lfS);for(let i=0;i<_tdk.length;i+=2)ctx.fillRect(_tdk[i],_tdk[i+1],q,q);
+ ctx.fillStyle=k(back?P.lfbH:P.lfH);for(let i=0;i<_tlt.length;i+=2)ctx.fillRect(_tlt[i],_tlt[i+1],q,q);
+ _tdk.length=0;_tlt.length=0;
+ ctx.fillStyle=k(P.trD);for(let r=0;r<th/q;r++)if(hash(sd*7+r,743)<.4)ctx.fillRect(cx-Math.floor(q/2),by-th+r*q,q,q);   // casca
 }
 function pxBush(cx,by,w,q,P,k){cx=Math.round(cx);by=Math.round(by);const n=Math.max(2,Math.round(w/q));for(let i=0;i<2;i++){const hw=n-i;ctx.fillStyle=k(P.lf);ctx.fillRect(cx-hw*q,by-(i+1)*q,hw*q,q);ctx.fillStyle=k(P.lfD);ctx.fillRect(cx,by-(i+1)*q,hw*q,q)}}
 function pxBoulder(cx,by,rad,q,P,k){   // pedra grande: meia elipse em degraus, luz à esquerda, musgo em cima
@@ -5130,9 +5175,9 @@ function sceneScatter(y0,q,P,k,c0,c1,back,dens=1,sd=0,thr0){   // dens = árvore
   for(let m=0;m<dens;m++){
    const ck=(m===0&&sd===0)?c:c*7+m*131+sd*977,x=x0+(m===0?0:m*T/dens),s=back?hash(ck,911):hash(ck,901),thr=thr0!==undefined?thr0:back?.35:.5;if(s<thr)continue;
    const j=(hash(ck,back?913:903)-.5)*T*.9,kind=hash(ck,back?917:907),hh=T*((back?1.5:1.1)+hash(ck,back?919:909)*1.1)*(back?.8:1);
-   if(back){if(kind<.62)pxPine(x+j,y0,hh,q,P,k,true);else pxTree(x+j,y0,hh*.8,q,P,k,true)}
-   else if(kind<.45)pxPine(x+j,y0+q,hh,q,P,k,false);
-   else if(kind<.72)pxTree(x+j,y0+q,hh*.85,q,P,k,false);
+   if(back){if(kind<.62)pxPine(x+j,y0,hh,q,P,k,true,ck+5000);else pxTree(x+j,y0,hh*.8,q,P,k,true,ck+5000)}
+   else if(kind<.45)pxPine(x+j,y0+q,hh,q,P,k,false,ck);
+   else if(kind<.72)pxTree(x+j,y0+q,hh*.85,q,P,k,false,ck);
    else if(kind<.88)pxBush(x+j,y0+q,T*.38,q,P,k);
    else pxBoulder(x+j,y0+q,T*.3,q,P,k);
   }
@@ -5175,7 +5220,7 @@ function drawScenery(t){
  sceneScatter(y0,q,P,k,SURF_L-16,-HALF-2,false,3,0,.3);sceneScatter(y0,q,P,k,HALF+2,SURF_R-1,false);
  sceneStones(y0,q,P,k);   // mais pedras à direita
  // árvores nas margens do riacho da floresta: uma de cada lado, maiores que as do bosque, e a mata fecha em volta (só a água fica sem árvores)
- for(const[cc,sd]of[[FRIV_C0-.9,1],[FRIV_C1+.9,2],[FRIV_C0-2.1,3],[FRIV_C1+2.2,4]]){const x=colX(cc);if(x<-T*3||x>W+T*3)continue;const hh=T*(1.5+hash(sd,951)*.6);if(sd<3)pxTree(x,y0+q,hh,q,P,k,false);else pxPine(x,y0+q,hh*.9,q,P,k,false)}
+ for(const[cc,sd]of[[FRIV_C0-.9,1],[FRIV_C1+.9,2],[FRIV_C0-2.1,3],[FRIV_C1+2.2,4]]){const x=colX(cc);if(x<-T*3||x>W+T*3)continue;const hh=T*(1.5+hash(sd,951)*.6);if(sd<3)pxTree(x,y0+q,hh,q,P,k,false,sd*37);else pxPine(x,y0+q,hh*.9,q,P,k,false,sd*37)}
  ctx.restore();
 }
 
@@ -5191,17 +5236,17 @@ function giantMountain(y0,q,A,P,k,t,wp,Tm){
  const hOf=w=>{let h=0;for(const[c,a,hw]of peaks){const u=1-Math.abs(w-c)/hw;if(u>0)h=Math.max(h,a*mtnShape(u,w,c))}return h*A*(1+.035*Math.sin(w*1.7)+.025*Math.sin(w*4.3+1)+.015*Math.sin(w*9.1))};
  if(colX(wp+42)<=0||colX(wp-42)>=W)return;
  bakedCols("giant",wp+"|"+q+"|"+A+"|"+Tm,nq32()+"|"+P.wint.toFixed(3),Math.ceil(A*.88*1.32)+q*2,y0,(y0,k)=>{
- const lit=k(mixHex("#b9c6dc","#e4ecf6",P.wint*.4)),shade=k("#8d9db9"),deep=k("#6a7b9a"),band=k("#7889a8"),sL=k("#f6f9fc"),sD=k("#c9d6e8"),haze=k("#d6e3f0"),snowAt=A*(.66-.2*P.wint);
+ const lit=k(mixHex("#b9c6dc","#e4ecf6",P.wint*.4)),shade=k("#8d9db9"),deep=k("#6a7b9a"),band=k("#7889a8"),sL=k("#f6f9fc"),sD=k("#c9d6e8"),haze=k("#d6e3f0"),snowAt=A*(.66-.2*P.wint),hl=k(mixHex("#b9c6dc","#ffffff",.6)),sdk=k("#a7bad4");
  worldCols(q,wp-42,wp+42,(w,x,cw)=>{
   const h=Math.round(hOf(w)/q)*q;if(h<=0)return;
   const up=hOf(w+.5)>hOf(w-.5),top=y0-h;
-  ctx.fillStyle=up?lit:shade;ctx.fillRect(x,top,cw,h);
+  ctx.fillStyle=up?lit:shade;ctx.fillRect(x,top,cw,h);rockTex(x,cw,top,y0,q,w,up,deep,hl,53,1);
   for(let y=Math.max(top+q*2,y0-A*1.3);y<y0;y+=q*2){   // estratos de rocha (faixas horizontais) e ravinas em diagonal
    const hh=(y0-y)/A,v=Math.sin(w*1.6+(y0-y)/(Tm*.7)+Math.sin(w*.5)*1.6);
    if(v>.84){ctx.fillStyle=deep;ctx.globalAlpha=.4;ctx.fillRect(x,y,cw,q);ctx.globalAlpha=1}
    else if(Math.sin(hh*34+Math.floor(w*.5))>.93){ctx.fillStyle=band;ctx.globalAlpha=.3;ctx.fillRect(x,y,cw,q);ctx.globalAlpha=1}
   }
-  if(h>snowAt){const wq=Math.floor(w*3),sh=Math.round(((h-snowAt)*.95+hash(wq,37)*q*5)/q)*q;ctx.fillStyle=up?sL:sD;ctx.fillRect(x,top,cw,Math.min(h,Math.max(q,sh)));
+  if(h>snowAt){const wq=Math.floor(w*3),sh=Math.round(((h-snowAt)*.95+hash(wq,37)*q*5)/q)*q;const ss=Math.min(h,Math.max(q,sh));ctx.fillStyle=up?sL:sD;ctx.fillRect(x,top,cw,ss);snowTex(x,cw,top,ss,h,q,w,up?sL:sD,up?sdk:hl,59);
    if(h>snowAt+A*.22&&hash(wq,39)>.55){ctx.fillStyle=up?sD:k("#b3c4dc");ctx.globalAlpha=.6;ctx.fillRect(x,top+Math.round(sh*.5/q)*q,cw,Math.round(sh*.45/q)*q);ctx.globalAlpha=1}}   // geleira: línguas de gelo mais azuladas descendo da neve
   ctx.fillStyle=haze;ctx.globalAlpha=.4;ctx.fillRect(x,y0-Math.round(A*.16/q)*q,cw,Math.round(A*.16/q)*q);ctx.globalAlpha=1;   // névoa no pé
  });
@@ -5216,13 +5261,13 @@ function tallRange(y0,q,A,P,k,w0,w1,sd,amp,cols,snowF){   // picos presos ao mun
  if(colX(w1+10)<=0||colX(w0-10)>=W)return;
  const hOf=w=>{let h=0;for(const[c,a,hw]of pk){const t=1-Math.abs(w-c)/hw;if(t>0)h=Math.max(h,a*mtnShape(t,w,c))}return h*A*(1+.05*Math.sin(w*2.9+sd)+.035*Math.sin(w*6.7+2))};
  bakedCols("t"+sd,w0+"|"+w1+"|"+amp+"|"+snowF+"|"+q+"|"+A,nq32()+"|"+P.wint.toFixed(3)+"|"+cols,Math.ceil(A*amp*1.32)+q*2,y0,(y0,k)=>{
- const lit=k(cols[0]),shade=k(cols[1]),deep=k(cols[2]),sL=k("#f4f8fb"),sD=k("#c3d1e3"),wint=P.wint,snowAt=A*(snowF-.15*wint);
+ const lit=k(cols[0]),shade=k(cols[1]),deep=k(cols[2]),sL=k("#f4f8fb"),sD=k("#c3d1e3"),wint=P.wint,snowAt=A*(snowF-.15*wint),hl=k(mixHex(cols[0],"#ffffff",.45)),sdk=k("#9fb4d0");
  worldCols(q,w0-10,w1+10,(w,x,cw)=>{
   const h=Math.round(hOf(w)/q)*q;if(h<=0)return;
   const up=hOf(w+.4)>hOf(w-.4),top=y0-h;
-  ctx.fillStyle=up?lit:shade;ctx.fillRect(x,top,cw,h);
+  ctx.fillStyle=up?lit:shade;ctx.fillRect(x,top,cw,h);rockTex(x,cw,top,y0,q,w,up,deep,hl,sd*3+41,1);
   for(let y=Math.max(top+q*2,y0-A*1.1);y<y0;y+=q){const v=Math.sin(w*2.2+(y0-y)/(T*.6)+Math.sin(w*.65+sd)*1.5);if(v>.82){ctx.fillStyle=deep;ctx.globalAlpha=.4;ctx.fillRect(x,y,cw,q);ctx.globalAlpha=1}}
-  if(h>snowAt){const wq=Math.floor(w*4),sh=Math.round(((h-snowAt)*.9+hash(wq,sd)*q*3)/q)*q;ctx.fillStyle=up?sL:sD;ctx.fillRect(x,top,cw,Math.min(h,Math.max(q,sh)))}
+  if(h>snowAt){const wq=Math.floor(w*4),sh=Math.round(((h-snowAt)*.9+hash(wq,sd)*q*3)/q)*q;const ss=Math.min(h,Math.max(q,sh));ctx.fillStyle=up?sL:sD;ctx.fillRect(x,top,cw,ss);snowTex(x,cw,top,ss,h,q,w,up?sL:sD,up?sdk:hl,sd*3+43)}
  });
  });
 }
@@ -5237,24 +5282,24 @@ function bigMountain(y0,q,A,P,k,B,mir){   // mir = espelhada (usada à esquerda:
  const prof=w0=>{const w=mir?2*B-w0:w0,t=w<=C?(w-L0)/(C-L0):1-(w-C)/(R0-C);return t<=0?0:mtnShape(Math.min(1,t),w0,B)};
  const hOf=w=>PK*prof(w)*(1+.05*Math.sin(w*2.3)+.035*Math.sin(w*5.9+1));
  bakedCols("big"+(mir?"m":"r")+B,B+"|"+q+"|"+A,nq32()+"|"+P.wint.toFixed(3),Math.ceil(PK*1.32)+q*2,y0,(y0,k)=>{
- const lit=k("#9a928d"),shade=k("#615952"),deep=k("#3b342f"),hi=k("#c4bcb4"),sL=k("#fbfcfd"),sD=k("#cdd8e6");
+ const lit=k("#9a928d"),shade=k("#615952"),deep=k("#3b342f"),hi=k("#c4bcb4"),sL=k("#fbfcfd"),sD=k("#cdd8e6"),sdk=k("#a9bad2");
  worldCols(q,e0,e1,(w,x,cw)=>{
   const h=Math.round(hOf(w)/q)*q;if(h<=0)return;
   const up=hOf(w+.45)>hOf(w-.45),top=y0-h;   // encosta voltada para a luz (esquerda) ou para a sombra
-  ctx.fillStyle=up?lit:shade;ctx.fillRect(x,top,cw,h);
+  ctx.fillStyle=up?lit:shade;ctx.fillRect(x,top,cw,h);rockTex(x,cw,top,y0,q,w,up,deep,hi,61,1.15);
   for(let y=top+q*2;y<y0;y+=q){   // ravinas e cristas em diagonal (presas ao mundo): dão volume à encosta
    const v=Math.sin(w*2.1+(y0-y)/(T*.55)+Math.sin(w*.7)*1.5);
    if(v>.8){ctx.fillStyle=deep;ctx.globalAlpha=.4;ctx.fillRect(x,y,cw,q);ctx.globalAlpha=1}
    else if(v<-.93){ctx.fillStyle=hi;ctx.globalAlpha=.35;ctx.fillRect(x,y,cw,q);ctx.globalAlpha=1}
   }
-  if(h>snowAt){const wq=Math.floor(w*4),sh=Math.round(((h-snowAt)*.85+hash(wq,29)*q*3)/q)*q;ctx.fillStyle=up?sL:sD;ctx.fillRect(x,top,cw,Math.min(h,Math.max(q,sh)))}
+  if(h>snowAt){const wq=Math.floor(w*4),sh=Math.round(((h-snowAt)*.85+hash(wq,29)*q*3)/q)*q;const ss=Math.min(h,Math.max(q,sh));ctx.fillStyle=up?sL:sD;ctx.fillRect(x,top,cw,ss);snowTex(x,cw,top,ss,h,q,w,up?sL:sD,up?sdk:hi,67)}
  });
  });
  // pedras caídas no pé da encosta e floresta de pinheiros (a trilha termina aqui)
  pxBoulder(colX(B-sg*.05),y0+q,T*.62,q,P,k);pxBoulder(colX(B+sg*.55),y0+q,T*.45,q,P,k);pxBoulder(colX(B-sg*1.4),y0+q,T*.4,q,P,k);
  for(let o=-6;o<3;o+=.6){const w=B+sg*o,j=hash(Math.floor(w*5),71);if(j<.3)continue;
   const x=colX(w+(j-.5)*.4),hh=T*(1.0+hash(Math.floor(w*5),73)*1.2)*(o>0?.7:1);if(x<-T||x>W+T)continue;
-  if(j>.6)pxPine(x,y0+q,hh,q,P,k,true);else pxPine(x,y0+q,hh*.85,q,P,k,false)}
+  if(j>.6)pxPine(x,y0+q,hh,q,P,k,true,Math.floor(w*5)+9000);else pxPine(x,y0+q,hh*.85,q,P,k,false,Math.floor(w*5)+9000)}
 }
 
 // ===== 5-desenho/12-povoado.js — Cama, lamparina da carrocinha da loja, poço de água, ferraria alemã de enxaimel, quadro de contratos e caça-níquel na superfície =====
