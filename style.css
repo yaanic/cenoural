@@ -320,13 +320,16 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 .lock{display:none!important}
 /* faixa de novidade liberada */
 /* Notificações de canto: novidade liberada (#unl) e conquista (#ach) ficam dentro de #notis, no centro, no alto da tela, logo abaixo do aviso comum (#layer). Cada uma ocupa seu próprio espaço (coluna), então nunca se cobrem; o aviso comum do topo (#layer) fica livre. */
-#notis{position:absolute;top:60px;left:50%;transform:translateX(-50%);z-index:7;display:flex;flex-direction:column;align-items:center;gap:8px;width:max-content;max-width:min(340px,calc(100% - 100px));pointer-events:none}
-#unl{opacity:0;display:none;flex-direction:column;align-items:flex-start;gap:3px;padding:10px 18px 12px;width:max-content;min-width:200px;max-width:100%;box-sizing:border-box;text-align:left;background:#140d03;border:2px solid #ffd45c;border-radius:6px;box-shadow:0 0 0 2px #000}
-#unl small{color:#ffd45c;font-size:.66rem;letter-spacing:.2em}
-#unl b{align-self:stretch;color:#fff3c4;font-size:.9rem;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#unl span{color:#c9b27a;font-size:.7rem}
+#notis{position:absolute;top:60px;left:50%;transform:translateX(-50%);z-index:7;display:flex;flex-direction:column;align-items:center;gap:8px;width:max-content;max-width:none;pointer-events:none}
+/* Caixa FIXA (a mesma para novidade e conquista): só uma aparece por vez (fila em 1-nucleo/05-audio-avisos.js). Cada linha: uma linha só, sem quebrar; a fonte encolhe por JS (notiFit) para o texto caber inteiro. */
+#unl,#ach{--nw:min(340px,calc(100vw - 24px));opacity:0;display:none;flex-direction:column;justify-content:center;align-items:stretch;gap:3px;width:var(--nw);height:78px;padding:8px 14px;box-sizing:border-box;text-align:center;font-size:1rem;overflow:hidden}
+#unl{background:#140d03;border:2px solid #ffd45c;border-radius:6px;box-shadow:0 0 0 2px #000}
+#unl small,#unl b,#unl span,#ach small,#ach b,#ach span{display:block;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+#unl small{color:#ffd45c;font-size:.66em;letter-spacing:.2em}
+#unl b{color:#fff3c4;font-size:.95em;letter-spacing:.03em}
+#unl span{color:#c9b27a;font-size:.7em}
 #unl small::before{content:"\2605";margin-right:8px;color:#ffb43a}
-#unl.on{display:flex;animation:unlIn 4.3s ease both}
+#unl.on{display:flex;animation:unlIn 4.2s ease both}
 @keyframes unlIn{0%{opacity:0;transform:translateY(-24px)}9%{opacity:1;transform:translateY(4px)}14%{transform:translateY(0)}86%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-24px)}}
 /* cena da cenoura dourada: papel escuro com borda dourada, cada parágrafo aparece em sequência */
 .carta{background:#2a2110;color:#ffe9a8;border:3px solid #d9a83a;box-shadow:0 0 0 3px #000;padding:20px 22px 18px;text-align:left;line-height:1.55;max-height:88vh;overflow:auto}
@@ -338,12 +341,11 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 @media (prefers-reduced-motion:reduce){.carta p,.carta button{animation:none;opacity:1}}
 .carta button:disabled{pointer-events:none}
 /* notificação de conquista: azul com troféu (posição: #notis, acima) */
-#ach{opacity:0;display:none;flex-direction:column;align-items:flex-start;gap:3px;padding:10px 18px 12px 54px;position:relative;width:max-content;min-width:200px;max-width:100%;box-sizing:border-box;text-align:left;background:#0c1c2c;border:2px solid #5fd3ff;border-radius:6px;box-shadow:0 0 0 2px #000}
-#ach::before{content:"\1F3C6";position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:1.8rem}
-#ach small,#ach b,#ach span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#ach small{align-self:stretch;color:#5fd3ff;font-size:.66rem;letter-spacing:.2em}
-#ach b{align-self:stretch;color:#e8f8ff;font-size:1rem;letter-spacing:.03em}
-#ach span{align-self:stretch;color:#9fc7dc;font-size:.7rem}
+#ach{position:relative;padding-left:54px;background:#0c1c2c;border:2px solid #5fd3ff;border-radius:6px;box-shadow:0 0 0 2px #000}
+#ach::before{content:"\1F3C6";position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:1.8em}
+#ach small{color:#5fd3ff;font-size:.66em;letter-spacing:.2em}
+#ach b{color:#e8f8ff;font-size:1em;letter-spacing:.03em}
+#ach span{color:#9fc7dc;font-size:.7em}
 #ach.on{display:flex;animation:achIn 4.2s ease both}
 @keyframes achIn{0%{opacity:0;transform:translateY(-24px)}9%{opacity:1;transform:translateY(4px)}14%{transform:translateY(0)}88%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-24px)}}
 @media (prefers-reduced-motion:reduce){#unl.on,#ach.on{animation-name:notiFade}}

@@ -410,8 +410,9 @@ addLang("en","English",{
 "Dano maior":"More damage",
 "Escavação Frenética":"Frenzied Digging",
 "Cava mais rápido":"Digs faster",
-"Dano x{0} por {1} s (recarga {2} s; efeito reduzido quando combinada)":"Damage x{0} for {1} s ({2} s cooldown; reduced when combined)",
-"Cava x{0} mais rápido por {1} s (recarga {2} s; efeito reduzido quando combinada)":"Digs x{0} faster for {1} s ({2} s cooldown; reduced when combined)",
+"Dano x{0} por {1} s (recarga {2} s; só uma habilidade ativa por vez)":"Damage x{0} for {1} s ({2} s cooldown; only one skill active at a time)",
+"Cava x{0} mais rápido por {1} s (recarga {2} s; só uma habilidade ativa por vez)":"Digs x{0} faster for {1} s ({2} s cooldown; only one skill active at a time)",
+"Espere a outra habilidade acabar":"Wait for the other skill to end",
 "Habilidade ativada: {0}":"Skill activated: {0}",
 "Dinamite escolhida: {0}":"Dynamite selected: {0}",
 "Sem dinamite: compre na loja (na superfície)":"No dynamite: buy some at the shop (on the surface)",
@@ -563,7 +564,7 @@ addLang("en","English",{
 "Ponto perfeito":"Perfectly done",
 "Asse um peixe no ponto perfeito":"Roast a fish to the perfect point",
 "Horta dourada":"Golden Garden",
-"Deixe todas as cenouras da horta douradas":"Turn every carrot in the garden golden",
+"Doure todas as cenouras da horta":"Gild every carrot in the garden",
 "{0} CONQUISTAS":"{0} ACHIEVEMENTS",
 "CONQUISTA":"ACHIEVEMENT",
 // --- 2-sistemas/05-noite-estrelas.js
@@ -1014,7 +1015,7 @@ const BAL={
  furnace:{base:.4,per:.3,bonus:.3},
  xp:{base:20,k:1.22},                                  // XP para o próximo nível = base x k^(nível-1)
  events:{len:20,gapMin:90,gapRand:90,mult:3},                 // frenesi/corrida do ouro: duração e intervalo (s)
- skills:{fury:{dur:8,cd:80,at:50,mult:2,per:.05},frenzy:{dur:6,cd:110,at:150,mult:1.4,per:.03},comboFactor:.5,durCap:2}, // habilidades ativas: bônus reduzido quando Fúria e Frenesi são usados juntos · potência no nível 10: Fúria x2,5 (2 + 10 x .05) e Frenesi x1,7 (1,4 + 10 x .03) · durCap = teto do multiplicador de duração (melhoria + poder de nível somados: no máximo x2, ou seja Fúria 16 s e Frenesi 12 s)
+ skills:{fury:{dur:8,cd:80,at:50,mult:2,per:.05},frenzy:{dur:6,cd:110,at:150,mult:1.4,per:.03},durCap:2}, // habilidades ativas (só uma de cada vez) · potência no nível 10: Fúria x2,5 (2 + 10 x .05) e Frenesi x1,7 (1,4 + 10 x .03) · durCap = teto do multiplicador de duração (melhoria + poder de nível somados: no máximo x2, ou seja Fúria 16 s e Frenesi 12 s)
  tele:{base:180,perLevel:18,min:25},                    // recarga do teleporte (s): base - perLevel x nível, nunca abaixo de min
  // Dinamites da loja (mesmo preço-base em items): r = raio da explosão (blocos) · p = força (x dano da picareta, gasta a dureza dos blocos) · e = energia gasta (x o custo de cavar 1 bloco aqui) · cd = recarga (s) até poder usar qualquer dinamite de novo
  dyn:{dyn:{r:2.2,p:60,e:2,cd:1.5},dyn2:{r:3,p:160,e:3,cd:3},dyn3:{r:4,p:420,e:4.5,cd:6},dyn4:{r:5,p:1100,e:6.5,cd:10},dyn5:{r:6.5,p:3000,e:9,cd:16}},
@@ -1220,7 +1221,7 @@ let cmb=0,cmbT=0,cmbPulse=0,cmbMax=0,cmbFlash=0,cmbBanner=0,cmbBannerT="",cmbLas
 let skT=[0,0],skCD=[0,0],dynCD=0,dynCDt=1.5,tpCD=0,ev=0,evT=0,evNext=60+Math.random()*60;
 let star=0,starT=0,starNext=60+Math.random()*120,shoot=null;   // estrela cadente: segundos de bônus restantes · tipo (0 ouro, 1 sorte) · espera até a próxima · risco no céu
 let mute=false,actx=null,toasts=[],breakNoise=null,breakSfxNext=0;
-let camX=0,camY=0,mX=0,mY=0,swing=0,parts=[],texts=[],shake=0,shakeDec=0,blasts=[],flash=0,flashC="#ff2a2a",flashText="",chestOpen=0,lowEnPulse=0,retSeen=0,layerSeen=0,jetT=0;
+let camX=0,camY=0,mX=0,mY=0,swing=0,blkShake=0,parts=[],texts=[],shake=0,shakeDec=0,blasts=[],flash=0,flashC="#ff2a2a",flashText="",chestOpen=0,lowEnPulse=0,retSeen=0,layerSeen=0,jetT=0;
 let holdM=false,holdS=false,lastH=0,held=null,heldC=null,lastMv=0,shiftOn=false,fallR=0,fallAcc=0,cheatBuf="",cheatT=0,cheatSurf=false,cheatPos=null;
 // Códigos secretos (digitar a palavra, como em GTA). CENOURA: ouro e energia infinitos (em qualquer lugar). FINAL: teleporta para a Rocha-mãe e dispara a cena da cenoura dourada (em qualquer lugar) · CLIMA: troca o clima · SEASON: avança a estação (esses dois só valem na superfície, onde se vê o efeito).
 const CHEATS=["CENOURA","CLIMA","SEASON","FINAL"],CHEATS_SURF=["CLIMA","SEASON"];
@@ -1234,10 +1235,8 @@ const gmult=()=>prayMult()*(1+.12*S.lv.luck)*(1+.08*S.sk.ouro)*(1+.12*pk("gold")
 const basePow=()=>prayMult()*BAL.dig.powBase*Math.pow(BAL.tier.dmgMult,S.tier)*(1+.12*S.lv.sharp)*(1+.08*S.sk.dmg)*(1+.15*pk("dmg"));
 const furyMult=()=>BAL.skills.fury.mult+BAL.skills.fury.per*S.lv.furia;        // dano x2 até x2,5 com a melhoria no máximo
 const frenzyMult=()=>BAL.skills.frenzy.mult+BAL.skills.frenzy.per*S.lv.frenesi;   // velocidade x1,4 até x1,7 com a melhoria no máximo
-// Ao manter as duas habilidades ativas, cada bônus acima de 1x é reduzido pela metade.
-const furyActiveMult=()=>1+(furyMult()-1)*(skT[1]>0?BAL.skills.comboFactor:1);
-const frenzyActiveMult=()=>1+(frenzyMult()-1)*(skT[0]>0?BAL.skills.comboFactor:1);
-const clickPow=()=>basePow()*(skT[0]>0?furyActiveMult():1);
+// As duas habilidades não podem ficar ativas ao mesmo tempo (useSk, 2-sistemas/04-habilidades.js), então cada uma vale o seu multiplicador cheio.
+const clickPow=()=>basePow()*(skT[0]>0?furyMult():1);
 // Escavação automática: cada nível dá +0,25 golpe/s; a força dá +10% por nível (12 níveis de cada: ~100% do manual, sem Fúria nem crítico).
 const autoDps=()=>S.lv.auto*.25*basePow()*(1+.1*S.lv.autopow);
 const AUTO_ENERGY=BAL.energy.auto;   // a escavação automática gasta metade da energia por bloco
@@ -1326,17 +1325,9 @@ function checkUnlocks(){   // avisa na tela quando o recorde libera algo novo (n
  const l=unlockNames(ulSeen,S.best);ulSeen=S.best;
  if(l.length)showUnlock(l.map(x=>x[1]));
 }
-// Faixa própria de "novidade liberada": dourada, com fanfarra, no canto inferior direito (#notis, junto com as conquistas, sem cobrir uma à outra); várias seguidas entram em fila
-let ulQ=[],ulT=0;
-function showUnlock(names){ulQ.push(names);if(!ulT)ulNext()}
-function ulNext(){
- const el=$("unl");ulT=0;if(!el)return;
- const n=ulQ.shift();if(!n){el.className="";return}
- el.innerHTML="<small>"+__("NOVIDADE LIBERADA")+"</small>"+n.slice(0,3).map(x=>"<b>"+x+"</b>").join("")+(n.length>3?"<span>"+__("e mais {0}",n.length-3)+"</span>":"");
- el.className="";void el.offsetWidth;el.className="on";
- [523,659,784,1047,1319].forEach((f,i)=>setTimeout(()=>sfx(f,.2,"triangle"),i*85));setTimeout(()=>sfx(2093,.35,"sine"),430);
- ulT=setTimeout(ulNext,4300);
-}
+// Faixa própria de "novidade liberada": dourada, com fanfarra, no canto inferior direito (#notis); só uma notificação por vez, as demais entram em fila
+function unlSnd(){[523,659,784,1047,1319].forEach((f,i)=>setTimeout(()=>sfx(f,.2,"triangle"),i*85));setTimeout(()=>sfx(2093,.35,"sine"),430)}
+function showUnlock(names){names.forEach(n=>notiPush({id:"unl",kicker:__("NOVIDADE LIBERADA"),title:n,sub:"",snd:unlSnd}))}   // uma notificação por novidade (fila única, ver 1-nucleo/05-audio-avisos.js)
 function nextUnlockText(){   // dica no topo das melhorias: o que vem a seguir
  const l=unlockNames(S.best,1e9);if(!l.length)return"";
  const m=Math.min(...l.map(x=>x[0]));
@@ -1512,6 +1503,34 @@ function sayPower(m){sayK("power",m)}
 function sayFood(m){sayK("food",m)}
 function sayWarn(m){sayK("warn",m)}
 function sayInfo(m){sayK("info",m)}
+// ----- Notificações de conquista (#ach) e de novidade liberada (#unl): fila ÚNICA, uma por vez -----
+// Nunca aparecem duas ao mesmo tempo (nem duas conquistas, nem conquista + novidade): cada item entra na fila e a próxima só abre quando a anterior termina.
+// A caixa tem tamanho FIXO (ver style.css). Cada linha do texto fica em UMA linha só e inteira: se não couber, a letra daquela linha diminui só o necessário
+// (reticências só como último recurso, abaixo do tamanho mínimo legível).
+// item = {id:"ach"|"unl", kicker: rótulo pequeno do topo, title: nome (já traduzido), sub: linha de detalhe (opcional), snd: função do som}
+const notiQ=[];let notiT=0;
+function notiPush(it){notiQ.push(it);if(!notiT)notiNext()}
+function notiNext(){
+ notiT=0;
+ const els={ach:$("ach"),unl:$("unl")};
+ if(modal&&notiQ.length){notiT=setTimeout(notiNext,400);return}   // com tela aberta (título, pausa, nível...) a caixa ficaria atrás: espera fechar
+ const it=notiQ.shift();
+ for(const k in els)if(els[k]&&(!it||k!==it.id))els[k].className="";
+ const el=it&&els[it.id];if(!it||!el)return;
+ el.textContent="";
+ for(const[tag,t]of[["small",it.kicker],["b",it.title],["span",it.sub]])if(t){const e=document.createElement(tag);e.textContent=t;el.appendChild(e)}
+ el.className="";void el.offsetWidth;el.className="on";notiFit(el);
+ it.snd();
+ notiT=setTimeout(notiNext,notiQ.length?2800:4200);   // com fila, cada uma fica menos tempo para não acumular
+}
+// cada linha cabe inteira na largura fixa da caixa: reduz só a fonte daquela linha (mínimo 8 px; abaixo disso o CSS corta com reticências)
+function notiFit(el){
+ for(const c of el.children){
+  c.style.fontSize="";
+  const w=c.clientWidth,n=c.scrollWidth;
+  if(w>0&&n>w)c.style.fontSize=Math.max(8,parseFloat(getComputedStyle(c).fontSize)*w/n*.97).toFixed(2)+"px";
+ }
+}
 // Executa um código secreto digitado (ver CHEATS em 1-nucleo/03-estado-save.js e o tratamento em 4-interface/04-entrada.js)
 function runCheat(w){
  if(w==="CENOURA"){toggleDbg();return}
@@ -1703,8 +1722,10 @@ const SK={
 // [nome, descrição, duração s, recarga s, desbloqueia ao chegar a X m]
 const SKL=[[N_("Fúria do Minerador"),N_("Dano maior"),BAL.skills.fury.dur,BAL.skills.fury.cd,BAL.skills.fury.at],[N_("Escavação Frenética"),N_("Cava mais rápido"),BAL.skills.frenzy.dur,BAL.skills.frenzy.cd,BAL.skills.frenzy.at]];
 const skillDuration=i=>SKL[i][2]*skillDurationMult();
-const skillDescription=i=>i===0?__("Dano x{0} por {1} s (recarga {2} s; efeito reduzido quando combinada)",fmtN(skT[1]>0?furyActiveMult():furyMult()),fmt(skillDuration(i)),fmtN(SKL[i][3]*cdMult())):__("Cava x{0} mais rápido por {1} s (recarga {2} s; efeito reduzido quando combinada)",fmtN(skT[0]>0?frenzyActiveMult():frenzyMult()),fmt(skillDuration(i)),fmtN(SKL[i][3]*cdMult()));
-function useSk(i){if(modal||i<0||i>=SKL.length||S.best<SKL[i][4]||skCD[i]>0)return;skCD[i]=SKL[i][3]*cdMult();skT[i]=skillDuration(i);flash=.1;flashC=i?"#ffe66a":"#ff5a2a";skillBurst(i);sayPower(__("Habilidade ativada: {0}",__(SKL[i][0])))}
+const skillDescription=i=>i===0?__("Dano x{0} por {1} s (recarga {2} s; só uma habilidade ativa por vez)",fmtN(furyMult()),fmt(skillDuration(i)),fmtN(SKL[i][3]*cdMult())):__("Cava x{0} mais rápido por {1} s (recarga {2} s; só uma habilidade ativa por vez)",fmtN(frenzyMult()),fmt(skillDuration(i)),fmtN(SKL[i][3]*cdMult()));
+function useSk(i){if(modal||i<0||i>=SKL.length||S.best<SKL[i][4]||skCD[i]>0)return;
+ if(skT[1-i]>0){const m=__("Espere a outra habilidade acabar");if(!toastHas(m))sayWarn(m);return}   // Fúria e Frenesi não podem ficar ativas juntas
+ skCD[i]=SKL[i][3]*cdMult();skT[i]=skillDuration(i);flash=.1;flashC=i?"#ffe66a":"#ff5a2a";skillBurst(i);sayPower(__("Habilidade ativada: {0}",__(SKL[i][0])))}
 const dynMax=()=>dynCDt;   // recarga da última dinamite usada (BAL.dyn[tipo].cd): quanto mais forte, maior
 const DYN_IDS=["dyn","dyn2","dyn3","dyn4","dyn5"];   // tipos de dinamite, do mais fraco ao mais forte (números em BAL.dyn)
 // Dinamite em uso: a escolhida (tecla R troca); se acabou, usa a mais forte que ainda houver
@@ -1763,22 +1784,15 @@ ACH.push(
  [N_("Primeira fisgada"),N_("Pesque seu primeiro peixe"),()=>S.fishN>=1],[N_("Pescador"),N_("Pesque 25 peixes"),()=>S.fishN>=25],[N_("Mestre das águas"),N_("Pesque 150 peixes"),()=>S.fishN>=150],[N_("Mão firme"),N_("Faça uma pescaria perfeita"),()=>S.fishP>=1],
  [N_("Álbum completo"),N_("Descubra todas as espécies de peixe"),()=>Object.keys(S.fdx).length>=FISH.length],[N_("Lenda das águas"),N_("Pesque um peixe lendário"),()=>FISH.some(f=>f.t===2&&S.fdx[f.id])],
  [N_("Churrasqueiro"),N_("Asse 10 peixes na fogueira"),()=>S.cookN>=10],[N_("Ponto perfeito"),N_("Asse um peixe no ponto perfeito"),()=>S.cookP>=1],
- [N_("Horta dourada"),N_("Deixe todas as cenouras da horta douradas"),()=>S.gc>=GARDEN_SLOTS]
+ [N_("Horta dourada"),N_("Doure todas as cenouras da horta"),()=>S.gc>=GARDEN_SLOTS]
 );
 // Notificação de conquista: caixa própria (azul, com troféu) e fanfarra própria; várias de uma vez viram uma caixa só
-let achQ=[],achT=0;
 function checkAch(){const n=[];for(let i=0;i<ACH.length;i++)if(!S.ach.includes(i)&&ACH[i][2]()){S.ach.push(i);n.push(i)}if(n.length)showAch(n)}
-function showAch(l){achQ.push(l);if(!achT)achNext()}
-function achNext(){
- const el=$("ach");achT=0;if(!el)return;
- if(modal&&achQ.length){achT=setTimeout(achNext,400);return}   // com tela aberta (título, pausa, nível...) a caixa ficaria atrás: espera fechar
- const l=achQ.shift();if(!l){el.className="";return}
- el.innerHTML="<small>"+(l.length>1?__("{0} CONQUISTAS",l.length):__("CONQUISTA"))+"</small>"+l.slice(0,3).map(i=>"<b>"+__(ACH[i][0])+"</b>"+(l.length===1?"<span>"+__(ACH[i][1])+"</span>":"")).join("")+(l.length>3?"<span>"+__("e mais {0}",l.length-3)+"</span>":"");
- el.className="";void el.offsetWidth;el.className="on";
+function achSnd(){
  [392,494,587].forEach((f,i)=>setTimeout(()=>sfx(f,.14,"square"),i*90));   // fanfarra: três notas curtas e um acorde brilhante
  setTimeout(()=>{[784,988,1175].forEach(f=>sfx(f,.7,"sine"));sfx(1568,.5,"triangle")},300);
- achT=setTimeout(achNext,4200);
 }
+function showAch(l){l.forEach(i=>notiPush({id:"ach",kicker:__("CONQUISTA"),title:__(ACH[i][0]),sub:__(ACH[i][1]),snd:achSnd}))}   // uma conquista por vez, nunca agrupadas
 
 // ===== 2-sistemas/05-noite-estrelas.js — Estrela cadente (evento raro, só de noite) e indicadores de bônus da noite =====
 // De noite, de tempos em tempos, uma estrela cruza o céu e dá um bônus por BAL.star.len segundos: ouro x2 ou chance de minério x2.
@@ -3318,6 +3332,7 @@ function hit(dmg,crit,auto){
   step();if(S.deaths!==d0)return;
   const[a2,b2]=tgt();if(isDug(a2,b2)||!canBreak(a2,b2)){S.prog=0;break}
  }
+ {const[a3,b3]=tgt();if(S.prog>0&&!isDug(a3,b3)&&canBreak(a3,b3))blkShake=.14}   // o bloco alvo treme um instante a cada golpe que não o quebra (5-desenho/06-quadro.js)
 }
 function clickDig(){if(modal)return;if(fs){fishAct();return}if(atSurface()){if(nearFurnace()){furUse();return}if(nearChest()){chestUse();return}if(nearBoard()){boardUse();return}if(nearSlot()){slotUse();return}if(nearCamp()){campUse();return}if(forageUse())return;if(nearCauldron()){cauldronUse();return}if(nearAltar()){altarUse();return}if(nearBell()){bellUse();return}if(fishSpot()){fishUse();return}if(nearKeeper()&&S.fb.length){marketUse();return}}const c=Math.random()<critCh();hit(clickPow()*(c?CRIT_MULT:1),c)}
 
@@ -3583,15 +3598,15 @@ function dpickUI(){
  pickUI("dpick",DYN_IDS,dynPick(),dynSprite,k=>__("{0} (raio {1})",ITEMS[k].n,fmtN(BAL.dyn[k].r)),k=>{S.dsel=k;sayMine(__("Dinamite escolhida: {0}",ITEMS[k].n));refresh()});
  pickUI("fpick",FOODS,foodPick(),sprite,k=>ITEMS[k].n,k=>{S.fsel=k;sayFood(__("Comida escolhida: {0}",ITEMS[k].n));refresh()})}
 function barUI(){const slots=document.querySelectorAll(".slot");BAR.forEach((s,i)=>{const b=slots[i];if(!b)return;
- let lock=false,empty=false,active=0,frac=0,txt="";   // frac = parte da recarga que falta (véu branco que desce, como no Minecraft)
+ let lock=false,blk=false,empty=false,active=0,frac=0,txt="";   // frac = parte da recarga que falta (véu branco que desce, como no Minecraft)
  if(i===0){const dk=dynPick();empty=have(dk)<1&&!S.debug;frac=dynCD>0?dynCD/dynMax():0;txt=S.debug?"∞":String(have(dk));
   if(b.dataset.dk!==dk){b.dataset.dk=dk;b.querySelector("svg").outerHTML=dynSprite(dk)}}
  else if(i===FI){const fk=foodPick();empty=have(fk)<1&&!S.debug;txt=S.debug?"∞":String(have(fk));if(b.dataset.fk!==fk){b.dataset.fk=fk;b.querySelector("svg").outerHTML=sprite(fk);b.style.setProperty("--tc",ITEMS[fk].c)}
   const hid=S.cookN<1&&!FOODS.some(k=>have(k)>0)&&!S.debug,grp=b.closest(".hg"),dsp=hid?"none":"";if(grp&&grp.style.display!==dsp)grp.style.display=dsp}
  else if(s[2]){empty=have(s[2])<1&&!S.debug;txt=S.debug?"∞":String(have(s[2]))}
  else if(i===3){lock=S.lv.tele<1;frac=tpCD>0?tpCD/teleCD():0;if(tpCD>0)txt=Math.ceil(tpCD)+"s"}
- else{const k=SKL[i-1];lock=S.best<k[4];active=skT[i-1];frac=!lock&&active<=0&&skCD[i-1]>0?skCD[i-1]/(k[3]*cdMult()):0;txt=lock?k[4]+"m":active>0?Math.ceil(active)+"s":skCD[i-1]>0?Math.ceil(skCD[i-1])+"s":""}
- const cl="slot"+(lock?" lock":"")+(empty?" empty":"")+(active>0?" active":"");if(b.className!==cl)b.className=cl;
+ else{const k=SKL[i-1];lock=S.best<k[4];active=skT[i-1];blk=active<=0&&skT[2-i]>0;frac=!lock&&active<=0&&skCD[i-1]>0?skCD[i-1]/(k[3]*cdMult()):0;txt=lock?k[4]+"m":active>0?Math.ceil(active)+"s":skCD[i-1]>0?Math.ceil(skCD[i-1])+"s":""}
+ const cl="slot"+(lock||blk?" lock":"")+(empty?" empty":"")+(active>0?" active":"");if(b.className!==cl)b.className=cl;
  b.querySelector(".cd").style.height=Math.round(clamp(frac,0,1)*38)+"px";
  const q=b.querySelector(".qn");if(q.textContent!==txt){q.textContent=txt}
  const t=slotTitle(i);if(b.title!==t)b.title=t});dpickUI()}
@@ -4701,6 +4716,8 @@ function draw(dt){
  ctx.save();ctx.translate(sx,sy);
  const sky=rowY(0);
  drawSky(sky,t);
+ let tgc=1e9,tgr=1e9,tox=0,toy=0;   // bloco alvo: treme levemente (1 a 2 px inteiros, a pixel art não borra) a cada golpe, mais forte quanto mais perto de quebrar
+ if(blkShake>0){const[c0,r0t]=tgt();blkShake=Math.max(0,blkShake-dt);if(!isDug(c0,r0t)&&canBreak(c0,r0t)&&S.prog>0){const pr=Math.min(1,S.prog/hardness(r0t)),a=Math.max(1,T*.03)*(.6+.8*pr),k=blkShake/.14;tgc=c0;tgr=r0t;tox=Math.round(a*k*Math.sin(t*95));toy=Math.round(a*k*.6*Math.sin(t*121+1.1))}}
  const r0=Math.max(0,Math.floor(camY-H*SURF/T)-1),r1=Math.ceil(camY+H*(1-SURF)/T)+1;
  layerBackdrops(r0,r1);
  drawScenery(t);weatherVeil(rowY(0));   // cenário da superfície que fica preso ao mundo: bloqueio à esquerda, árvores e a grande montanha à direita
@@ -4715,7 +4732,7 @@ function draw(dt){
     else drawBedrock(x,y,ts,tb,c,r);
     continue}
    if(isDug(c,r)){drawCave(x,y,ts,tb,c,r);continue}
-   drawSolid(x,y,ts,tb,c,r);
+   if(c===tgc&&r===tgr)drawSolid(x+tox,y+toy,ts,tb,c,r);else drawSolid(x,y,ts,tb,c,r);
   }
  }
  drawGateAndChest(t);
@@ -6596,7 +6613,7 @@ function loop(now){
  // escavação automática (pausa sozinha quando a energia só dá para voltar)
  const ad=autoDps();
  if(ad>0&&!modal&&!fs){if(autoOK())hit(ad*dt,false,true);else if(autoMsgT<=0&&S.depth>0&&canBreak(...tgt())){autoMsgT=6;sayWarn(__("Escavação automática pausada: energia só para voltar"))}}
- if(!modal&&!fs&&holdS&&now-lastH>(skT[1]>0?150/frenzyActiveMult():150)/attackSpeedMult()){lastH=now;clickDig()}
+ if(!modal&&!fs&&holdS&&now-lastH>(skT[1]>0?150/frenzyMult():150)/attackSpeedMult()){lastH=now;clickDig()}
  // queda livre: segurando ↓ sobre buraco já cavado, desce de graça e acelera aos poucos; soltar a tecla para na hora
  const falling=!modal&&!fs&&held==="down"&&S.depth<FINAL_DEPTH&&isDug(S.mc,S.depth);fallR=falling?fallR+dt:0;
  let mvMs=(shiftOn?60:130)/(1+.1*pk("mov"))/(held==="up"?jetSpdMult():1);
@@ -6643,5 +6660,5 @@ if(S.lvp>0&&!modal)levelUp();
 onLang(()=>{relabelTabs();if(fsLab)fsLab();buildBar();build();statsHtml="";bagHtml="";buffsHtml="";clkLast="";if(modal==="pause"){paintPause();const lb=document.querySelector("#bx .lp-btn");if(lb)lb.focus()}refresh()});
 requestAnimationFrame(loop);
 // gancho opcional usado só por tools/smoke.js (não faz nada no jogo normal)
-if(typeof window.__TESTE__==="function")window.__TESTE__({get pot(){return pot},deepOres,POT_RECIPES,ORES,churchSolid,roofSolid,houseBlocks,bell,bellCol,nearBell,bellUse,altarCol,nearAltar,altarUse,prayTick,prayCancel,get prayA(){return prayA},CHURCH_C,CAULDRON_C,nearCauldron,cauldronUse,openPot,potCook,potMax,forageAt,forageProg,forageOn,forageUse,sayK,toastTick,toastHas,get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,WALK_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,furyActiveMult,frenzyActiveMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,moonP,moonLit,moonLight,moonName,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,footKind,footSfx,stepSound,cricketAmt,frogAmt,windStrength,ambTick,caveTick,CAVE,caveMix,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v},get shakeDec(){return shakeDec},get blasts(){return blasts},get parts(){return parts},set musOn(v){musOn=v},skillBurst,useFx,skillFxTick,useGlows,thunderSfx,actx:()=>actx,ac,boomSfx,blastFx,setMute(v){mute=v},RANK_CFG,RK,rankOk,rankName,rankSnap,rankPush,rankPaint,rankLeave,rankLoad,rankOpen});
+if(typeof window.__TESTE__==="function")window.__TESTE__({get blkShake(){return blkShake},get pot(){return pot},deepOres,POT_RECIPES,ORES,churchSolid,roofSolid,houseBlocks,bell,bellCol,nearBell,bellUse,altarCol,nearAltar,altarUse,prayTick,prayCancel,get prayA(){return prayA},CHURCH_C,CAULDRON_C,nearCauldron,cauldronUse,openPot,potCook,potMax,forageAt,forageProg,forageOn,forageUse,sayK,toastTick,toastHas,get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,WALK_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,moonP,moonLit,moonLight,moonName,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,footKind,footSfx,stepSound,cricketAmt,frogAmt,windStrength,ambTick,caveTick,CAVE,caveMix,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v},get shakeDec(){return shakeDec},get blasts(){return blasts},get parts(){return parts},set musOn(v){musOn=v},skillBurst,useFx,skillFxTick,useGlows,thunderSfx,actx:()=>actx,ac,boomSfx,blastFx,setMute(v){mute=v},RANK_CFG,RK,rankOk,rankName,rankSnap,rankPush,rankPaint,rankLeave,rankLoad,rankOpen});
 })();
