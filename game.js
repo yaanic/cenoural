@@ -632,8 +632,6 @@ addLang("en","English",{
 "Girar · {0}":"Spin · {0}",
 "3 iguais: {0}":"3 of a kind: {0}",
 "2 primeiros iguais: x0,5 a x8 conforme o símbolo":"First 2 matching: x0.5 to x8 depending on the symbol",
-"Retorno médio de ~{0}%: a casa sempre ganha no longo prazo. Aposte só o que não vai fazer falta.":"Average return ~{0}%: the house always wins in the long run. Only bet what you won't miss.",
-"Saldo da máquina:":"Machine balance:",
 "Boa sorte!":"Good luck!",
 // --- 2-sistemas/12-baus.js
 "Minério: {0} x{1}":"Ore: {0} x{1}",
@@ -697,6 +695,26 @@ addLang("en","English",{
 "Cozinhar tudo ({0})":"Cook all ({0})",
 "Você já tem itens demais.":"You already have too many.",
 "Faltam ingredientes.":"Missing ingredients.",
+"Bolsa de ouro":"Bag of gold",
+"ouro na hora":"instant gold",
+// --- 2-sistemas/22-caixa.js
+"Na loja: compre dinamite, comida e isca.":"At the shop: buy dynamite, food and bait.",
+"Militar":"Mil-Spec",
+"Restrito":"Restricted",
+"Classificado":"Classified",
+"Secreto":"Covert",
+"Raro especial":"Rare Special",
+"Caixa de ouro":"Gold case",
+"CAIXA DE OURO":"GOLD CASE",
+"Caixa de ouro ({0}): +{1} de ouro":"Gold case ({0}): +{1} gold",
+"Ouro insuficiente para abrir a caixa":"Not enough gold to open the case",
+"Abrindo...":"Opening...",
+"Abrir outra · {0}":"Open another · {0}",
+"Abrir caixa · {0}":"Open case · {0}",
+"Caixa de ouro: clique para abrir":"Gold case: click to open",
+"Caixas de ouro":"Gold cases",
+"Caixas abertas":"Cases opened",
+"Saldo das caixas":"Case balance",
 // --- 3-mundo/02-coleta.js
 "Novo minério: {0}":"New ore: {0}",
 // --- 3-mundo/03-mineracao.js
@@ -742,7 +760,6 @@ addLang("en","English",{
 "INQUEBRÁVEL":"UNBREAKABLE",
 "Melhorias só na superfície. Suba (ou use o teleporte) para comprar.":"Upgrades only on the surface. Go up (or use teleport) to buy.",
 "A loja fica na superfície. Suba (ou use o teleporte) para comprar.":"The shop is on the surface. Go up (or use teleport) to buy.",
-"Na loja: compre dinamite, comida e isca.":"At the shop: buy dynamite, food and bait.",
 "Vá até a loja (à direita do baú) para comprar.":"Go to the shop (right of the chest) to buy.",
 "{0} · você tem {1}":"{0} · you have {1}",
 "(preço sobe a cada camada alcançada)":"(price rises with every layer reached)",
@@ -985,7 +1002,7 @@ const BAL={
  unlock:{on:true,
   ups:{sharp:0,speed:0,emax:0,eco:10,jet:15,luck:20,lant:25,xp:30,furn:30,crit:40,auto:50,duration:50,furia:50,autopow:60,clock:60,jetspd:70,lavares:80,tele:120,frenesi:150,pet:150,back:150,fort:120},
   items:{cen:0,dyn:25,isc:30,sop:60,dyn2:100,poc:150,dyn3:250,dyn4:500,dyn5:900},
-  build:{furnace:30,board:60,slot:150}},
+  build:{furnace:30,case:30,board:60,slot:150}},
  // PESCA (2-sistemas/13-pesca.js) e FOGUEIRA (2-sistemas/14-fogueira.js). Espécies e valores: FISH em 1-nucleo/02-camadas-minerios.js (valor = blocos de ouro da profundidade do recorde).
  // wait = espera até morder (s, dividida pela isca) · window = tempo para fisgar depois do "!" (s) · baitCut = -7% de espera por nível de isca · baitRare = +18% de chance dos peixes raros por nível · premRare = Isca premium da loja (gasta 1 por lançamento): peso dos peixes raros x premRare (não mexe na espera) · rain = chuva favorece os raros · junk = chance de lixo · bag = peixes na bolsa
  // bar (minijogo): h = altura da pista (px) · base/per = zona verde (px) e ganho por nível da vara (teto 60% da pista) · lift/grav = aceleração ao segurar/soltar · bounce = quique no fundo · maxV = velocidade máxima da zona
@@ -1050,6 +1067,14 @@ const BAL={
   {n:N_("Raro"),c:"#4aa8ff",w:10,g:110,xp:.07,it:[["sop",1,1],["dyn",.7,2],["ptp",.3,1]],pk:[.7,2],ore:[.8,4],fr:[.1,1]},
   {n:N_("Épico"),c:"#b45cff",w:3.5,g:300,xp:.15,it:[["poc",1,1],["dyn2",1,2],["ptp",.6,1]],pk:[1,3],ore:[1,8],fr:[.4,1]},
   {n:N_("Lendário"),c:"#ffb02e",w:.5,g:1000,xp:.4,it:[["poc",1,2],["dyn3",1,3],["dyn4",.5,1],["ptp",1,2]],pk:[1,4],ore:[1,15],fr:[1,2]}]},
+ // Caixa de ouro (loja; 2-sistemas/22-caixa.js), aberta como as caixas do CS. b = preço-base (sobe como os itens: x itemK por camada do recorde) · dur = duração da roleta (s) · n = itens da fita · win = posição do prêmio na fita
+ // tiers: p = chance (%, as mesmas do CS) · m = [mín,máx] do prêmio em múltiplos do preço (sorteio uniforme). Retorno médio = soma de p x média(m) = ~87%: a caixa é um ralo de ouro, de propósito (como o caça-níquel).
+ cse:{b:150,dur:7,n:64,win:52,tiers:[
+  {n:N_("Militar"),c:"#4b69ff",p:79.92,m:[.25,.55]},
+  {n:N_("Restrito"),c:"#8847ff",p:15.98,m:[.9,1.9]},
+  {n:N_("Classificado"),c:"#d32ee6",p:3.2,m:[2.5,4.5]},
+  {n:N_("Secreto"),c:"#eb4b4b",p:.64,m:[8,18]},
+  {n:N_("Raro especial"),c:"#ffd700",p:.26,m:[35,70]}]},
  slot:{w:[10,7,5,3,2,1],p3:[5,12,24,55,170,500],p2:[.5,1,2,3,5,8],bets:[.01,.05,.1,.25,.5,.75,1],spin:[1.1,1.55,2.1]},
  prestigeBonus:5                                       // fragmentos extras por chegar ao fundo
 };
@@ -1089,6 +1114,7 @@ const KEEPER_C=10.7;   // Izans, o dono da carrocinha (SHOP_C+1.7): é com ele q
 const SHOP_C=9;                  // coluna da loja de consumáveis (dinamite, comida de energia), na superfície, depois do baú
 const BED_C=-9;                  // coluna da cama (salva o jogo ao chegar perto), na superfície, depois da mesa de trabalho
 const ENCH_C=CHURCH_C+4;         // mesa decorativa de encantamento, apenas visual, agora no altar da igreja (a posição exata em pixels vem de CHURCH_ALTAR_DX em 18-igreja.js)
+const CASE_C=34;                // caixa de ouro (abre caixas estilo CS), na floresta da praia, à esquerda da fogueira
 const SLOT_C=3;                  // máquina de caça-níquel, ao lado do baú (entre o buraco e o baú)
 const BOARD_C=14;                // quadro de contratos, na passagem da direita
 const WELL_C=19;                 // poço de água (só enfeite), na passagem da direita, depois do quadro de contratos
@@ -1135,10 +1161,10 @@ const FISH_BAG_MAX=80;   // teto de peixes na bolsa (o save é limpo com este n�
 const SAVE_KEY="abismo-v3";
 const fresh=()=>({pray:0,gc:0,gcAt:-1,gold:0,depth:0,mc:0,prog:0,best:0,runMax:0,tier:0,runs:0,total:0,oc:0,blocks:0,deaths:0,sold:0,en:-1,
  lv:{sharp:0,emax:0,eco:0,jet:0,jetspd:0,auto:0,autopow:0,speed:0,crit:0,luck:0,xp:0,duration:0,furia:0,frenesi:0,tele:0,pet:0,furn:0,lavares:0,lant:0,clock:0,back:0,fort:0,rod:0,bait:0},items:{dyn:0,dyn2:0,dyn3:0,dyn4:0,dyn5:0,isc:0,cen:0,sop:0,poc:0,ptp:0,pas:0,pgr:0,pbq:0,cog:0},dsel:"dyn",fsel:"pas",fg:{},
- bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,moon:BAL.moon.start*BAL.moon.cycle,dir:"down",dug:[],ach:[],debug:false,cheat:false,real:0,pts:0,sk:{ouro:0,dmg:0,fol:0,gar:0,xp:0,rec:0,ven:0},od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,fb:[],fdx:{},fishN:0,fishP:0,fishG:0,cookN:0,cookP:0,play:0,v:10,vol:{m:.7,s:1,a:.7}});
+ bag:{v:0,n:0,o:{},ov:{}},fur:{n:0,v:0,a:0,e:0,tg:0,tn:0},refined:0,sea:BAL.season.len*1.5,moon:BAL.moon.start*BAL.moon.cycle,dir:"down",dug:[],ach:[],debug:false,cheat:false,real:0,pts:0,sk:{ouro:0,dmg:0,fol:0,gar:0,xp:0,rec:0,ven:0},od:[],xp:0,lvl:1,lvp:0,pk:{},tpBack:null,tab:0,ts:0,seed:0,bombs:0,eaten:0,tps:0,veins:0,sleeps:0,rich:0,ct:[],ctW:0,ctDone:0,pend:0,spins:0,slotNet:0,cases:0,caseNet:0,caseT:[0,0,0,0,0],chests:0,chTop:0,chT:BAL.chest.tiers.map(()=>0),chGold:0,chFr:0,chPk:0,ptpUsed:0,fb:[],fdx:{},fishN:0,fishP:0,fishG:0,cookN:0,cookP:0,play:0,v:10,vol:{m:.7,s:1,a:.7}});
 let S=fresh();S.seed=newSeed();
 function clean(o){const src=o&&typeof o==="object"?o:{},hasVersion=Number.isFinite(src.v),f=fresh();o=Object.assign(f,src);if(!hasVersion)o.v=7;
- for(const k of["gold","depth","prog","best","runMax","tier","runs","total","oc","blocks","deaths","sold","pts","real","xp","lvp","bombs","eaten","tps","veins","sleeps","rich","refined","ctDone","spins","pend","chests","chTop","chGold","chFr","chPk","ptpUsed","fishN","fishP","fishG","cookN","cookP","play","gc"])if(!Number.isFinite(o[k])||o[k]<0)o[k]=0;
+ for(const k of["gold","depth","prog","best","runMax","tier","runs","total","oc","blocks","deaths","sold","pts","real","xp","lvp","bombs","eaten","tps","veins","sleeps","rich","refined","ctDone","spins","cases","pend","chests","chTop","chGold","chFr","chPk","ptpUsed","fishN","fishP","fishG","cookN","cookP","play","gc"])if(!Number.isFinite(o[k])||o[k]<0)o[k]=0;
  o.pray=Number.isFinite(o.pray)&&o.pray>0?Math.min(o.pray,BAL.pray.dur):0;   // tempo restante da bênção do altar (s)
  o.gc=Math.min(GARDEN_SLOTS,Math.floor(o.gc));if(!Number.isFinite(o.gcAt))o.gcAt=-1;
  o.chT=BAL.chest.tiers.map((_,i)=>Array.isArray(o.chT)&&Number.isFinite(o.chT[i])&&o.chT[i]>0?Math.floor(o.chT[i]):0);   // baús abertos por raridade
@@ -1188,6 +1214,8 @@ for(const k in o.pk)if(!Number.isFinite(o.pk[k])||o.pk[k]<0)o.pk[k]=0;
   .map(c=>({t:c.t,n:Math.floor(c.n),p:Number.isFinite(c.p)&&c.p>0?Math.min(Math.floor(c.p),Math.floor(c.n)):0,g:c.g,o:c.t==="ore"?c.o:"",d:Number.isFinite(c.d)&&c.d>0&&c.t!=="dep"?c.d:0,x:Number.isFinite(c.x)&&c.x>0?c.x:0}));
  if(!Number.isFinite(o.ctW)||o.ctW<0)o.ctW=0;
  if(!Number.isFinite(o.slotNet))o.slotNet=0;
+ if(!Number.isFinite(o.caseNet))o.caseNet=0;o.cases=Math.floor(o.cases);
+ o.caseT=BAL.cse.tiers.map((_,i)=>Array.isArray(o.caseT)&&Number.isFinite(o.caseT[i])&&o.caseT[i]>0?Math.floor(o.caseT[i]):0);   // caixas abertas por raridade
  if(o.pend>0){o.gold+=o.pend;o.pend=0}   // fechou o jogo no meio de uma rodada do caça-níquel: o prêmio já sorteado é pago
  if(o.v<8)o.ach=o.ach.filter(i=>i!==49).map(i=>i>49?i-1:i);   // conquista "Cartógrafo" (marcador no mapa) foi removida: as seguintes sobem uma posição
  if(o.v<9){   // remove Picareta ampla e Aprimoramento: devolve o ouro investido e remove a conquista Túnel largo
@@ -1299,13 +1327,13 @@ const have=k=>S.items[k]||0;
 const affordUp=k=>{const mx=UPS[k].max;let l=S.lv[k],g=S.gold,n=0;while(l<mx){const c=upCost(k,l);if(g<c)break;g-=c;l++;n++}return n};
 const affordItem=k=>{const room=99-have(k);return room<=0?0:Math.min(room,Math.floor(S.gold/itemCost(k)))};
 // ----- Liberação gradual (BAL.unlock): o que ainda não foi liberado fica escondido -----
-const BUILD_NAMES={furnace:N_("Fornalha"),board:N_("Quadro de contratos"),slot:N_("Caça-níquel")};
+const BUILD_NAMES={furnace:N_("Fornalha"),case:N_("Caixa de ouro"),board:N_("Quadro de contratos"),slot:N_("Caça-níquel")};
 function unlockAt(kind,k){const u=BAL.unlock[kind];return u&&u[k]!=null?u[k]:0}
 function isUnl(kind,k){
  if(!BAL.unlock.on||S.debug)return true;
  if(kind==="ups"&&S.lv[k]>0)return true;                 // já comprou: continua visível
  if(kind==="items"&&have(k)>0)return true;
- if(kind==="build"&&(k==="furnace"?S.fur.n>0||S.refined>0:k==="board"?S.ctDone>0:S.spins>0))return true;
+ if(kind==="build"&&(k==="furnace"?S.fur.n>0||S.refined>0:k==="board"?S.ctDone>0:k==="case"?S.cases>0:S.spins>0))return true;
  return S.best>=unlockAt(kind,k);
 }
 // nomes (já traduzidos) do que se libera ao passar de `from` até `to` m; sem `from`, tudo que ainda está bloqueado
@@ -1615,6 +1643,7 @@ const nearChest=()=>onGround()&&Math.abs(S.mc-CHEST_C)<=1;
 const nearBench=()=>onGround()&&Math.abs(S.mc-BENCH_C)<=1;
 const nearBed=()=>onGround()&&Math.abs(S.mc-BED_C)<=1;
 const nearSlot=()=>onGround()&&isUnl("build","slot")&&Math.abs(S.mc-SLOT_C)<=1;
+const nearCase=()=>onGround()&&isUnl("build","case")&&Math.abs(S.mc-CASE_C)<=1;
 const nearBoard=()=>onGround()&&isUnl("build","board")&&Math.abs(S.mc-BOARD_C)<=1;
 const nearFurnace=()=>onGround()&&isUnl("build","furnace")&&Math.abs(S.mc-FURN_C)<=1;
 const nearShop=()=>onGround()&&Math.abs(S.mc-SHOP_C)<=1;
@@ -1686,11 +1715,18 @@ function goTo(c,d){
 // ===== 2-sistemas/03-nivel-xp.js — Experiência e escolha de melhoria a cada nível =====
 const PK={dmg:[N_("Dano da picareta"),N_("+15% de dano"),.15],spd:[N_("Velocidade de ataque"),N_("+10% de velocidade ao minerar"),.1],duration:[N_("Duração das habilidades"),N_("+10% de duração"),.1],gold:[N_("Ouro extra"),N_("+12% de ouro"),.12],energy:[N_("Energia máxima"),N_("+8% de energia máxima"),.08],mov:[N_("Velocidade de movimento"),N_("+10% de velocidade"),.1],xp:[N_("Ganho de experiência"),N_("+10% de experiência"),.1]};
 const RAR=[[N_("Comum"),1,"#9aa0a6",60],[N_("Incomum"),1.5,"#6fcf6f",25],[N_("Rara"),2,"#5aa0ff",10],[N_("Épica"),3,"#b06cff",4],[N_("Lendária"),5,"#ffb43a",1]];
+const PERK_MAX=50;   // nível máximo de cada melhoria de nível (era 10)
+// Exceções: duração das habilidades já bate no teto BAL.skills.durCap (x2) no nível 10; movimento passa de 1 passo por quadro (~16 ms correndo) perto do nível 30
+const perkMax=k=>k==="duration"?10:k==="mov"?30:PERK_MAX;
 const xpNeed=l=>Math.round(BAL.xp.base*Math.pow(BAL.xp.k,l-1));
 function gainXp(n){if(!(n>0)||!isFinite(n))return;S.xp+=n*xpGainMult();let g=0;while(S.xp>=xpNeed(S.lvl)&&g++<50){S.xp-=xpNeed(S.lvl);S.lvl++;S.lvp++;sayLevel(__("Nível {0}!",S.lvl));sfx(1100,.4,"sine")}if(S.lvp>0&&!modal)levelUp()}
 function clearLevelChoiceTimer(){clearInterval(levelChoiceTicker);levelChoiceTicker=0;levelChoiceId++}
-function rollPerks(n){const pool=Object.keys(PK).filter(k=>pk(k)<10),out=[];while(out.length<n&&pool.length){const k=pool.splice(Math.floor(Math.random()*pool.length),1)[0];let r=Math.random()*100,ri=0;for(;ri<4;ri++){r-=RAR[ri][3];if(r<0)break}out.push([k,ri])}return out}
-function addPerk(k,m){S.pk[k]=Math.min(10,pk(k)+m)}
+function rollPerks(n){const pool=Object.keys(PK).filter(k=>pk(k)<perkMax(k)),out=[];while(out.length<n&&pool.length){const k=pool.splice(Math.floor(Math.random()*pool.length),1)[0];let r=Math.random()*100,ri=0;for(;ri<4;ri++){r-=RAR[ri][3];if(r<0)break}out.push([k,ri])}
+ while(out.length<n){let r=Math.random()*100,ri=0;for(;ri<4;ri++){r-=RAR[ri][3];if(r<0)break}out.push(["_gold",ri])}   // melhorias no teto (nível 10) não somem da escolha: sempre 3 opções, completadas com a Bolsa de ouro
+ return out}
+const GOLD_PERK=150;   // Bolsa de ouro (opção de nível quando as melhorias estão no teto): blocos do recorde x raridade
+const goldPerk=m=>Math.ceil(blockGold(S.best)*GOLD_PERK*m);
+function addPerk(k,m){if(k==="_gold"){S.gold+=goldPerk(m);return}S.pk[k]=Math.min(perkMax(k),pk(k)+m)}
 function openModal(m){modal=m;held=null;holdS=false;$("ov").classList.add("on");const b=$("bx");b.style.cssText="";$("ov").style.padding="";b.innerHTML="";sfx(520,.05,"sine");return b}
 function closeModal(){clearLevelChoiceTimer();modal=null;setHeld();$("ov").classList.remove("on");refresh();if(S.lvp>0)levelUp()}
 // Escolha por teclado: lvSel = cartão selecionado, lvPick = confirma o selecionado, lvLock = trava curta contra apertar Espaço sem querer ao abrir.
@@ -1702,7 +1738,7 @@ function levelUp(){clearLevelChoiceTimer();const choiceId=levelChoiceId,b=openMo
  b.innerHTML="<h2>"+__("Nível {0}",S.lvl)+"</h2><div id='lvchoice-clock' style='color:var(--mute);margin-bottom:10px'>"+__("Escolha uma melhoria · {0} s",30)+"</div>";
  const w=document.createElement("div");w.className="cards";
  const choose=(k,ri)=>{if(choiceId!==levelChoiceId||S.lvp<=0||modal!=="lv")return;clearLevelChoiceTimer();S.lvp--;addPerk(k,RAR[ri][1]);sfx(800,.15,"triangle");modal=null;if(S.lvp>0)levelUp();else closeModal()};
- opts.forEach(([k,ri],oi)=>{const R=RAR[ri],c=document.createElement("div");c.className="card";c.style.borderColor=R[2];c.innerHTML="<div style='color:"+R[2]+";font-weight:700'>"+__(R[0])+"</div><div style='font-weight:600;margin:6px 0'>"+__(PK[k][0])+"</div><div>"+__(PK[k][1]).replace(/\d+%/,m=>Math.round(parseFloat(m)*R[1])+"%")+"</div><div style='color:var(--mute);font-size:.8rem;margin-top:6px'>"+__("nv {0} → {1}",fmtN(pk(k)),fmtN(Math.min(10,pk(k)+R[1])))+"</div>";c.onclick=()=>choose(k,ri);c.onmouseenter=()=>{lvSel=oi;lvPaint()};w.appendChild(c)});
+ opts.forEach(([k,ri],oi)=>{const R=RAR[ri],c=document.createElement("div");c.className="card";c.style.borderColor=R[2];c.innerHTML=k==="_gold"?"<div style='color:"+R[2]+";font-weight:700'>"+__(R[0])+"</div><div style='font-weight:600;margin:6px 0'>"+__("Bolsa de ouro")+"</div><div>"+__("+{0} de ouro",fmt(goldPerk(R[1])))+"</div><div style='color:var(--mute);font-size:.8rem;margin-top:6px'>"+__("ouro na hora")+"</div>":"<div style='color:"+R[2]+";font-weight:700'>"+__(R[0])+"</div><div style='font-weight:600;margin:6px 0'>"+__(PK[k][0])+"</div><div>"+__(PK[k][1]).replace(/\d+%/,m=>Math.round(parseFloat(m)*R[1])+"%")+"</div><div style='color:var(--mute);font-size:.8rem;margin-top:6px'>"+__("nv {0} → {1}",fmtN(pk(k)),fmtN(Math.min(perkMax(k),pk(k)+R[1])))+"</div>";c.onclick=()=>choose(k,ri);c.onmouseenter=()=>{lvSel=oi;lvPaint()};w.appendChild(c)});
  lvN=opts.length;lvSel=Math.floor((lvN-1)/2);lvPick=i=>choose(opts[i][0],opts[i][1]);lvLock=performance.now()+450;lvPaint();
  b.appendChild(w);lvPaint();const deadline=Date.now()+30000;levelChoiceTicker=setInterval(()=>{if(choiceId!==levelChoiceId||modal!=="lv"){clearLevelChoiceTimer();return}const secs=Math.max(0,Math.ceil((deadline-Date.now())/1000)),clock=$("lvchoice-clock");if(clock)clock.textContent=__("Escolha uma melhoria · {0} s",secs);if(secs===0){const rarity=Math.max(...opts.map(x=>x[1])),best=opts.filter(x=>x[1]===rarity),[k,ri]=best[Math.floor(Math.random()*best.length)];choose(k,ri)}},200)}
 
@@ -2259,8 +2295,6 @@ function paintSlotUi(){
  ui.innerHTML="<div class='sgold'>"+__("Ouro: <b>{0}</b>",fmt(S.gold))+"</div><div class='sbets'>"+bets+"</div>"
   +"<button id='slgo' class='go' "+(slotBusy||!(S.gold>=slotBetAmt(slotSel)&&slotBetAmt(slotSel)>0)?"disabled":"")+">"+(slotBusy?__("Girando..."):__("Girar · {0}",fmt(slotBetAmt(slotSel))))+"</button>"
   +"<div class='stbl'>"+__("3 iguais: {0}",sym)+"<br>"+__("2 primeiros iguais: x0,5 a x8 conforme o símbolo")+"</div>"
-  +"<div class='snote'>"+__("Retorno médio de ~{0}%: a casa sempre ganha no longo prazo. Aposte só o que não vai fazer falta.",Math.round(slotRtp()*100))
-  +(S.spins?" · "+__("Saldo da máquina:")+" <b style='color:"+(S.slotNet>=0?"#6fe3a0":"#ff7a6a")+"'>"+(S.slotNet>=0?"+":"-")+fmt(Math.abs(S.slotNet))+"</b>":"")+"</div>"
   +"<button id='slok' class='cl' "+(slotBusy?"disabled":"")+">"+__("Fechar")+"</button>";
  ui.querySelectorAll("button[data-b]").forEach(b=>b.onclick=()=>{slotSel=+b.dataset.b;paintSlotUi();sfx(560,.04,"sine")});
  $("slgo").onclick=slotSpin;$("slok").onclick=()=>{if(!slotBusy)closeModal()};
@@ -2283,7 +2317,7 @@ function chestRoll(r,ti=chestTierPick(Math.random())){
  let ore=null,frag=0;
  if(t.ore&&Math.random()<t.ore[0]){const us=ORES.filter(o=>o[3]<=r),o=us[us.length-1-Math.floor(Math.random()*Math.min(2,us.length))];ore=[o[0],t.ore[1],o[2],blockGold(r)*o[1]*t.ore[1]]}
  if(t.fr&&Math.random()<t.fr[0])frag=t.fr[1];
- let perk=null;const pool=Object.keys(PK).filter(k=>pk(k)<10);
+ let perk=null;const pool=Object.keys(PK).filter(k=>pk(k)<perkMax(k));
  if(pool.length&&Math.random()<t.pk[0])perk=[pool[Math.floor(Math.random()*pool.length)],t.pk[1]];
  const shown=items.map(([k,q])=>[ITEMS[k].n+" x"+q,ITEMS[k].c]);
  if(ore)shown.push([__("Minério: {0} x{1}",__(ore[0]),ore[1]),ore[2]]);
@@ -3224,6 +3258,180 @@ function caveTick(dt){
  }catch(e){}
 }
 
+// ===== 2-sistemas/22-caixa.js — Caixa de ouro (loja): abertura estilo CS, com roleta horizontal, 5 raridades e sons sintetizados =====
+// Compra = abrir: o preço sai na hora, o prêmio (só ouro, por enquanto) é sorteado na hora e fica em S.pend até a roleta parar
+// (se fechar o jogo no meio, clean() paga o prêmio ao carregar, como no caça-níquel). Números em BAL.cse.
+// As raridades e as chances são as das caixas do CS: Militar 79,92% · Restrito 15,98% · Classificado 3,2% · Secreto 0,64% · Raro especial 0,26%.
+// A faixa do prêmio de cada raridade é um múltiplo do preço (BAL.cse.tiers[].m); o retorno médio (caseRtp) fica abaixo de 100%: é um ralo de ouro, de propósito.
+const caseCost=()=>Math.ceil(BAL.cse.b*Math.pow(BAL.itemK,layerOf(S.best)));   // sobe a cada camada alcançada, como os itens da loja
+const caseTotalP=()=>BAL.cse.tiers.reduce((a,t)=>a+t.p,0);
+const caseMid=t=>(t.m[0]+t.m[1])/2;
+function caseRtp(){const T=caseTotalP();return BAL.cse.tiers.reduce((a,t)=>a+t.p/T*caseMid(t),0)}
+function caseTier(r=Math.random()){const T=caseTotalP();let x=r*T;for(let i=0;i<BAL.cse.tiers.length;i++){x-=BAL.cse.tiers[i].p;if(x<0)return i}return 0}
+function caseItem(price,ti=caseTier()){const t=BAL.cse.tiers[ti];return{ti,gold:Math.max(1,Math.round(price*(t.m[0]+Math.random()*(t.m[1]-t.m[0]))))}}
+const caseRgba=(c,a)=>{const n=parseInt(c.slice(1),16);return"rgba("+(n>>16)+","+((n>>8)&255)+","+(n&255)+","+a+")"};
+function caseUse(){   // clique na caixa ou Espaço perto dela (clickDig)
+ if(!nearCase())return false;
+ if(modal)return true;
+ openCase();return true;
+}
+function caseHit(px,py){if(!isUnl("build","case"))return false;const u=pu(),s=sprCaseBox(),c=colX(CASE_C),y=rowY(0);return px>=c-s.w*u/2&&px<=c+s.w*u/2&&py>=y-s.h*u&&py<=y}
+
+// ---------- sons (todos sintetizados, como o resto do jogo) ----------
+// tick da roleta (um por item que passa pela marca) · "clunk" da trava + catraca + sopro ao abrir · baque ao parar · jingle por raridade (quanto mais rara, mais longo e mais cheio)
+function caseSfx(fn){if(mute||S.vol.s<=0)return;try{ac();fn(actx.currentTime,S.vol.s)}catch(e){}}
+function caseTickSfx(sp){caseSfx((t,v)=>{const r=Math.random();nz(t,"bandpass",2500+r*500,3,.1*v,.02);tn(t,"square",1180+r*60,780,.016*v,.022);tn(t,"sine",190,120,.05*v,.03*(1+sp))})}
+function caseOpenSfx(){caseSfx((t,v)=>{
+ tn(t,"sine",160,46,.18*v,.22);nz(t,"lowpass",900,.7,.12*v,.14);ting(t+.02,1500,.04*v,.45);   // trava abrindo
+ for(let i=0;i<3;i++)nz(t+.13+i*.07,"bandpass",3200,4,.07*v,.02);                              // catraca
+ nz(t+.3,"bandpass",300,.8,.075*v,1.4,3200);tn(t+.3,"sawtooth",90,420,.018*v,1.2);             // a roleta ganha velocidade
+})}
+function caseLandSfx(){caseSfx((t,v)=>{tn(t,"sine",130,58,.16*v,.2);nz(t,"lowpass",1200,.7,.09*v,.08);ting(t+.01,1900,.03*v,.25)})}
+function caseWinSfx(ti){caseSfx((t,v)=>{
+ const N=[523,587,659,784,880,988,1047,1319,1568,2093];
+ if(ti===0){tn(t,"triangle",659,659,.05*v,.4);ting(t+.02,1318,.03*v,.45)}
+ else if(ti===1){tn(t,"triangle",523,523,.05*v,.3);tn(t+.1,"triangle",784,784,.05*v,.45);ting(t+.1,1568,.03*v,.5)}
+ else if(ti===2){[523,659,784].forEach((f,i)=>tn(t+i*.09,"triangle",f,f,.05*v,.4));ting(t+.3,2093,.035*v,.7);nz(t+.2,"highpass",5000,.7,.03*v,.5)}
+ else if(ti===3){[523,659,784,1047].forEach((f,i)=>{tn(t+i*.08,"triangle",f,f,.055*v,.5);tn(t+i*.08,"sine",f/2,f/2,.04*v,.5)});tn(t,"sine",100,40,.14*v,.45);ting(t+.35,2093,.04*v,.9);ting(t+.45,3136,.025*v,.9);nz(t+.3,"highpass",5500,.7,.04*v,.7)}
+ else{                                                                                  // raro especial: ronco que sobe, acorde cheio, sinos agudos e chuva de moedas
+  tn(t,"sawtooth",55,160,.07*v,.9);nz(t,"lowpass",300,.8,.1*v,.9,1800);
+  [N[0],N[2],N[3],N[6]].forEach((f,i)=>{tn(t+.8+i*.07,"triangle",f,f,.06*v,1.1);tn(t+.8+i*.07,"sine",f/2,f/2,.05*v,1.1)});
+  tn(t+.8,"sine",98,40,.18*v,.7);
+  [N[7],N[8],N[9],N[8],N[9]].forEach((f,i)=>ting(t+1.0+i*.11,f,.04*v,1.1));nz(t+.85,"highpass",5000,.7,.05*v,1.4);
+ }
+})}
+
+// ---------- visual ----------
+const CX={w:520,h:208,pitch:126,tw:120,th:150,top:22};
+let cxG=null,cxCv=null,cxRaf=0,cxT=0,cxState="idle",cxStrip=[],cxPos=3,cxP0=0,cxP1=0,cxT0=0,cxDur=7,cxLastC=0,cxLastTick=0,cxFx=null,cxParts=[],cxBusy=false;
+// Ícones em pixel art 14x14 (um por raridade, como nas outras janelas): moeda, três moedas, barra, pilha de barras e coroa
+function caseSprite(i){
+ const P={y:"#ffd45c",Y:"#fff3a0",G:"#d6a02a",D:"#8a5a10",r:"#d23a2a",R:"#ff8a6a"};
+ return mkSpr("cx"+i,14,14,P,R=>{
+  const coin=(x,y,s)=>{   // moeda redonda de lado s (7 ou 10)
+   if(s===10){R(x+3,y,4,1,"G");R(x+2,y+1,6,1,"G");R(x,y+2,10,6,"G");R(x+2,y+8,6,1,"G");R(x+3,y+9,4,1,"G");R(x+3,y+1,4,1,"y");R(x+1,y+2,8,6,"y");R(x+3,y+8,4,1,"y");R(x+4,y+3,2,4,"G");R(x+2,y+2,2,1,"Y");R(x+1,y+3,1,2,"Y")}
+   else{R(x+2,y,3,1,"G");R(x+1,y+1,5,1,"G");R(x,y+2,7,3,"G");R(x+1,y+5,5,1,"G");R(x+2,y+6,3,1,"G");R(x+2,y+1,3,1,"y");R(x+1,y+2,5,3,"y");R(x+2,y+5,3,1,"y");R(x+1,y+2,1,1,"Y");R(x+3,y+3,1,1,"G")}
+  };
+  const bar=(x,y,w)=>{R(x+1,y,w,2,"Y");R(x,y+2,w,3,"y");R(x+w,y+1,1,4,"G");R(x,y+4,w,1,"G");R(x+1,y+2,2,1,"Y")};   // barra vista de frente, com o topo claro
+  if(i===0)coin(2,2,10);
+  else if(i===1){coin(0,6,7);coin(7,6,7);coin(3,1,7)}
+  else if(i===2)bar(1,4,11);
+  else if(i===3){bar(0,8,7);bar(7,8,7);bar(3,3,8)}
+  else{R(2,3,2,2,"Y");R(6,2,2,2,"Y");R(10,3,2,2,"Y");R(2,5,2,4,"y");R(6,4,2,5,"y");R(10,5,2,4,"y");R(2,9,10,3,"y");R(2,11,10,1,"G");R(3,9,2,1,"Y");R(6,10,2,1,"r");R(6,9,1,1,"R");R(11,9,1,3,"G");R(5,6,1,1,"Y")}
+ },1);
+}
+function caseDrawTile(g,it,x,dim,hl,t){
+ const{tw,th,top}=CX,T=BAL.cse.tiers[it.ti],y=top,cx=x+tw/2;
+ const bg=g.createLinearGradient(0,y,0,y+th);bg.addColorStop(0,"#2c2c3a");bg.addColorStop(1,"#15151c");g.fillStyle=bg;g.fillRect(x,y,tw,th);
+ const gl=g.createRadialGradient(cx,y+th,4,cx,y+th,tw*.95);gl.addColorStop(0,caseRgba(T.c,.6));gl.addColorStop(1,caseRgba(T.c,0));g.fillStyle=gl;g.fillRect(x,y,tw,th);
+ const sp=caseSprite(it.ti),sz=(sp.w+2)*4,bob=hl?Math.round(Math.sin(t*6)*2):0;g.imageSmoothingEnabled=false;g.drawImage(sp.cv,Math.round(cx-sz/2),Math.round(y+22+bob),sz,sz);
+ g.textAlign="center";g.textBaseline="middle";
+ g.fillStyle="#ffe08a";g.font="900 15px "+FONT;g.fillText("+"+fmt(it.gold),cx,y+th-33);
+ g.fillStyle=T.c;g.font="700 9px "+FONT;g.fillText(__(T.n),cx,y+th-17);
+ g.fillStyle=T.c;g.fillRect(x,y+th-6,tw,6);
+ if(dim>0){g.fillStyle="rgba(8,8,12,"+dim+")";g.fillRect(x,y,tw,th)}
+}
+function caseDrawFrame(dt){
+ const g=cxG,{w,h,pitch,tw,th,top}=CX,t=cxT,done=!!(cxFx&&cxFx.done),wi=BAL.cse.win;
+ g.setTransform(cxCv.width/w,0,0,cxCv.height/h,0,0);
+ g.fillStyle="#101016";g.fillRect(0,0,w,h);
+ g.fillStyle="#7d7d90";g.font="700 9px "+FONT;g.textAlign="left";g.textBaseline="middle";g.fillText(__("CAIXA DE OURO"),10,11);
+ // fita de itens
+ g.save();g.beginPath();g.rect(0,top,w,th);g.clip();
+ const c0=Math.floor(cxPos)-4;
+ for(let i=c0;i<=c0+9;i++){const it=cxStrip[i];if(!it)continue;
+  const x=w/2+(i-cxPos)*pitch-tw/2,win=done&&i===wi;
+  caseDrawTile(g,it,x,done&&!win?.6:0,win,t);
+  if(win){const T=BAL.cse.tiers[it.ti],p=.55+.45*Math.sin(t*8);g.strokeStyle=caseRgba(T.c,p);g.lineWidth=3;g.strokeRect(x+1.5,top+1.5,tw-3,th-3)}}
+ const fl=g.createLinearGradient(0,0,w,0);fl.addColorStop(0,"rgba(16,16,22,1)");fl.addColorStop(.14,"rgba(16,16,22,0)");fl.addColorStop(.86,"rgba(16,16,22,0)");fl.addColorStop(1,"rgba(16,16,22,1)");g.fillStyle=fl;g.fillRect(0,top,w,th);
+ g.restore();
+ // marca do centro (laranja, como no CS; vira a cor da raridade quando o prêmio sai)
+ const pc=done?BAL.cse.tiers[cxFx.ti].c:"#ffa51f";
+ g.fillStyle=pc;g.fillRect(w/2-1,top-8,2,th+16);
+ g.beginPath();g.moveTo(w/2-7,top-12);g.lineTo(w/2+7,top-12);g.lineTo(w/2,top-2);g.fill();
+ g.beginPath();g.moveTo(w/2-7,top+th+12);g.lineTo(w/2+7,top+th+12);g.lineTo(w/2,top+th+2);g.fill();
+ // partículas (moedas)
+ for(const p of cxParts){p.vy+=620*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.r+=p.vr*dt;p.l-=dt;
+  if(p.y>h-4&&p.vy>0){p.y=h-4;p.vy*=-.45;p.vx*=.7}
+  g.save();g.translate(p.x,p.y);g.rotate(p.r);g.globalAlpha=Math.max(0,Math.min(1,p.l*1.5));g.fillStyle=p.c;g.beginPath();g.ellipse(0,0,p.s*1.3,p.s*1.3*Math.abs(Math.cos(p.r*2)),0,0,7);g.fill();g.restore()}
+ cxParts=cxParts.filter(p=>p.l>0);
+ // faixa de resultado (por cima das moedas, para continuar legível)
+ if(done&&cxFx.gold>0){const T=BAL.cse.tiers[cxFx.ti],tx=__(T.n)+"  ·  +"+fmt(cxFx.gold);g.textAlign="center";g.textBaseline="middle";g.font="900 13px "+FONT;g.lineJoin="round";g.lineWidth=4;g.strokeStyle="rgba(8,8,12,.9)";g.strokeText(tx,w/2,h-11);g.fillStyle=T.c;g.fillText(tx,w/2,h-11)}
+ if(cxFx&&cxFx.flash>0){g.fillStyle=caseRgba(BAL.cse.tiers[cxFx.ti].c,cxFx.flash*.4);g.fillRect(0,0,w,h);cxFx.flash=Math.max(0,cxFx.flash-dt*1.3)}
+ g.strokeStyle=done?caseRgba(BAL.cse.tiers[cxFx.ti].c,.9):"#3a3a4a";g.lineWidth=2;g.strokeRect(1,1,w-2,h-2);
+}
+function caseCoins(n,power){for(let i=0;i<n;i++)cxParts.push({x:CX.w/2+(Math.random()-.5)*CX.w*.8,y:-6-Math.random()*30,vx:(Math.random()-.5)*160,vy:Math.random()*80,r:Math.random()*6,vr:(Math.random()-.5)*14,s:3.5+Math.random()*2.5,c:Math.random()<.2?"#fff3a0":"#ffd45c",l:1.6+Math.random()*1.6*power})}
+// desacelera forte no fim (o último trecho "se arrasta" até parar, como no CS)
+const caseEase=x=>1-Math.pow(1-x,3.6);
+function caseFrame(now){
+ if(modal!=="case"||!cxCv){cxRaf=0;if(cxBusy)casePay();return}   // a janela foi trocada no meio da roleta: o prêmio é pago sem a cerimônia
+ const dt=Math.min(.05,(now-(caseFrame.last||now))/1000);caseFrame.last=now;cxT+=dt;
+ if(cxState==="spin"){
+  const x=Math.min(1,(cxT-cxT0)/cxDur);cxPos=cxP0+(cxP1-cxP0)*caseEase(x);
+  const c=Math.floor(cxPos+.5);if(c!==cxLastC){cxLastC=c;if(cxT-cxLastTick>.022){cxLastTick=cxT;caseTickSfx(1-x)}}
+  if(x>=1){cxPos=cxP1;cxState="done";caseFinish()}
+ }
+ caseDrawFrame(dt);
+ cxRaf=requestAnimationFrame(caseFrame);
+}
+caseFrame.last=0;
+
+// ---------- jogo ----------
+function casePay(){   // idempotente: devolve o prêmio pendente ao ouro
+ const f=cxFx;cxBusy=false;if(!f||f.paid)return;f.paid=true;f.done=true;
+ S.gold+=f.gold;S.pend=0;S.caseNet+=f.gold-f.price;save();
+}
+function caseFinish(){
+ const f=cxFx,T=BAL.cse.tiers[f.ti];casePay();
+ f.flash=f.ti>=3?1:f.ti===2?.5:0;
+ caseLandSfx();setTimeout(()=>{if(modal==="case")caseWinSfx(f.ti)},180);
+ if(f.ti>=1)caseCoins([0,8,18,34,70][f.ti],[0,.4,.6,.9,1.2][f.ti]);
+ if(f.ti===4)for(let i=1;i<5;i++)setTimeout(()=>{if(modal==="case")caseCoins(16,1)},i*300);
+ if(f.ti>=3)slotCoinSfx(f.ti===4?40:12,f.ti===4?50:70);
+ sayGold(__("Caixa de ouro ({0}): +{1} de ouro",__(T.n),fmt(f.gold)));
+ paintCaseUi();refresh();
+}
+function caseOpenNow(){   // gasta o preço, sorteia o prêmio e liga a roleta
+ if(cxBusy||modal!=="case")return;
+ const price=caseCost();
+ if(!(S.gold>=price)){sayWarn(__("Ouro insuficiente para abrir a caixa"));sfx(140,.1,"square");return}
+ const prize=caseItem(price),B=BAL.cse,wi=B.win;
+ S.gold-=price;S.pend=prize.gold;S.cases++;S.caseT[prize.ti]++;save();   // preço sai agora, prêmio fica pendente até a roleta parar
+ // nova fita: os itens que já estavam à vista continuam iguais (a roleta não "pula"), o resto é sorteado e o prêmio vai na posição B.win
+ const keep=Math.round(cxPos)-3,strip=[];
+ for(let i=0;i<B.n;i++)strip.push((i<9&&cxStrip[keep+i])||caseItem(price));
+ strip[wi]=prize;
+ cxStrip=strip;cxP0=3+(cxPos-Math.round(cxPos));cxPos=cxP0;cxP1=wi+(Math.random()-.5)*.8;   // para em qualquer ponto do item, nunca na borda
+ cxT0=cxT;cxDur=B.dur;cxLastC=Math.floor(cxPos+.5);cxState="spin";cxBusy=true;cxParts=[];
+ cxFx={price,ti:prize.ti,gold:prize.gold,done:false,paid:false,flash:0};
+ caseOpenSfx();paintCaseUi();refresh();
+}
+function caseKey(e){
+ if(e.code==="Escape"){e.preventDefault();if(!cxBusy)closeModal();return}
+ if(e.code==="Space"||e.code==="Enter"){e.preventDefault();if(!e.repeat)caseOpenNow()}
+}
+function paintCaseUi(){
+ const ui=$("cxui");if(!ui)return;
+ const price=caseCost(),B=BAL.cse,T=caseTotalP();
+ const rows=B.tiers.map(t=>"<div class='cxr'><i style='background:"+t.c+"'></i><span style='color:"+t.c+"'>"+__(t.n)+"</span><span>"+ndec(+(t.p/T*100).toFixed(2))+"%</span><b>"+fmt(Math.round(price*t.m[0]))+" – "+fmt(Math.round(price*t.m[1]))+"</b></div>").join("");
+ const can=S.gold>=price;
+ ui.innerHTML="<div class='sgold'>"+__("Ouro: <b>{0}</b>",fmt(S.gold))+"</div>"
+  +"<button id='cxgo' class='go' "+(cxBusy||!can?"disabled":"")+">"+(cxBusy?__("Abrindo..."):cxState==="done"?__("Abrir outra · {0}",fmt(price)):__("Abrir caixa · {0}",fmt(price)))+"</button>"
+  +"<div class='cxtbl'>"+rows+"</div>"
+  +"<button id='cxok' class='cl' "+(cxBusy?"disabled":"")+">"+__("Fechar")+"</button>";
+ $("cxgo").onclick=caseOpenNow;$("cxok").onclick=()=>{if(!cxBusy)closeModal()};
+}
+function openCase(){
+ const b=openModal("case");b.style.maxWidth="560px";cxBusy=false;cxFx=null;cxState="idle";cxParts=[];
+ b.innerHTML="<div class='casino'><canvas id='cxcv'></canvas><div id='cxui'></div></div>";
+ cxCv=$("cxcv");const dpr=Math.min(2,window.devicePixelRatio||1);cxCv.width=CX.w*dpr;cxCv.height=CX.h*dpr;cxCv.style.cssText="width:100%;max-width:"+CX.w+"px;aspect-ratio:"+CX.w+"/"+CX.h+";display:block;margin:0 auto 10px;border-radius:10px;image-rendering:auto";
+ cxG=cxCv.getContext("2d");
+ const price=caseCost();cxStrip=[];for(let i=0;i<BAL.cse.n;i++)cxStrip.push(caseItem(price));cxPos=3;cxLastC=3;   // fita de vitrine: os itens que a caixa pode dar
+ paintCaseUi();
+ sfx(660,.06,"triangle");setTimeout(()=>sfx(880,.08,"triangle"),70);
+ cancelAnimationFrame(cxRaf);caseFrame.last=0;cxRaf=requestAnimationFrame(caseFrame);
+}
+
 // ===== 3-mundo/00-camera.js — Canvas, câmera, zoom limitado ao mundo e conversão de coordenadas =====
 const cv=$("cv");let ctx=cv.getContext("2d");   // let: 5-desenho/00b-cache.js troca o ctx por um instante para pré-renderizar camadas
 let W=0,H=0,T=44,dpr=1,worldZoom=1,zoomPreference=1;
@@ -3437,7 +3645,7 @@ function hit(dmg,crit,auto){
  }
  {const[a3,b3]=tgt();if(S.prog>0&&!isDug(a3,b3)&&canBreak(a3,b3))blkShake=.14}   // o bloco alvo treme um instante a cada golpe que não o quebra (5-desenho/06-quadro.js)
 }
-function clickDig(){if(modal)return;if(fs){fishAct();return}if(atSurface()){if(nearFurnace()){furUse();return}if(nearChest()){chestUse();return}if(nearBoard()){boardUse();return}if(nearSlot()){slotUse();return}if(nearCamp()){campUse();return}if(forageUse())return;if(nearCauldron()){cauldronUse();return}if(nearAltar()){altarUse();return}if(nearBell()){bellUse();return}if(fishSpot()){fishUse();return}if(nearKeeper()&&S.fb.length){marketUse();return}}const c=Math.random()<critCh();hit(clickPow()*(c?CRIT_MULT:1),c)}
+function clickDig(){if(modal)return;if(fs){fishAct();return}if(atSurface()){if(nearFurnace()){furUse();return}if(nearChest()){chestUse();return}if(nearBoard()){boardUse();return}if(nearSlot()){slotUse();return}if(nearCase()){caseUse();return}if(nearCamp()){campUse();return}if(forageUse())return;if(nearCauldron()){cauldronUse();return}if(nearAltar()){altarUse();return}if(nearBell()){bellUse();return}if(fishSpot()){fishUse();return}if(nearKeeper()&&S.fb.length){marketUse();return}}const c=Math.random()<critCh();hit(clickPow()*(c?CRIT_MULT:1),c)}
 
 // Ícones em pixel dos avisos (9x9): a = cor principal, b = brilho, c = detalhe escuro. Cada categoria tem sua cor: mina, pesca, ouro, clima, estrela, nível, habilidade, comida, alerta e geral.
 const NOTE_ICONS={
@@ -3578,6 +3786,7 @@ function renderStats(){
   +sec(__("Progresso"),[row(__("Profundidade máxima"),fmt(S.best)+" m"),row(__("Ouro total"),fmt(S.total)),row(__("Blocos quebrados"),fmt(S.blocks)),row(__("Minérios coletados"),fmt(S.oc)),row(__("Catálogo de minérios"),S.od.length+"/"+ORES.length),row(__("Renascimentos"),S.runs),row(__("Fragmentos"),S.pts),row(__("Estação do ano"),SEASONS[SEA.idx].n)])
   +sec(__("Uso"),[row(__("Vendas no baú"),S.sold),row(__("Vezes sem energia"),S.deaths),row(__("Dinamites usadas"),S.bombs),row(__("Itens comidos"),S.eaten),row(__("Teleportes"),S.tps),row(__("Pedras duras quebradas"),S.veins),row(__("Veios de minério quebrados"),S.rich),row(__("Vezes na cama"),S.sleeps),row(__("Minérios refinados"),fmt(S.refined))])
   +sec(__("Baús"),[row(__("Baús abertos"),S.chests)].concat(BAL.chest.tiers.map((t,i)=>row(__(t.n),"<span style='color:"+t.c+"'>"+S.chT[i]+"</span>")),[row(__("Ouro de baús"),fmt(S.chGold)),row(__("Fragmentos de baús"),S.chFr),row(__("Bônus de melhoria"),S.chPk),row(__("Poções de teleporte usadas"),S.ptpUsed)]))
+  +sec(__("Caixas de ouro"),[row(__("Caixas abertas"),S.cases)].concat(BAL.cse.tiers.map((t,i)=>row(__(t.n),"<span style='color:"+t.c+"'>"+S.caseT[i]+"</span>")),[row(__("Saldo das caixas"),(S.caseNet>=0?"+":"-")+fmt(Math.abs(S.caseNet)))]))
   +sec(__("Pesca"),[row(__("Peixes pescados"),S.fishN),row(__("Pescarias perfeitas"),S.fishP),row(__("Peixes na bolsa"),S.fb.length+"/"+BAL.fish.bag),row(__("Peixes assados"),S.cookN),row(__("Ouro de peixes"),fmt(S.fishG)),row(__("Álbum de peixes"),Object.keys(S.fdx).length+"/"+FISH.length)].concat(FISH.map(f=>row(S.fdx[f.id]?"<span style='color:"+f.c+"'>"+__(f.n)+"</span>":"???",S.fdx[f.id]?S.fdx[f.id]+" cm":"-"))));
  const all=ACH.map((a,i)=>({a,i,ok:S.ach.includes(i)})),todo=all.filter(x=>!x.ok),done=all.filter(x=>x.ok);
  const li=x=>"<li class='"+(x.ok?"ok":"")+"'><i>"+(x.ok?"✓":"")+"</i><span><b>"+__(x.a[0])+"</b><small>"+__(x.a[1])+"</small></span></li>";
@@ -3596,7 +3805,7 @@ $("prest").onclick=()=>{
 };
 function doRebirth(){   // Renascer (botão do painel, depois de confirmar, e janela de chegada ao fundo)
  gainGoldenCarrot();   // quem chegou ao fundo nesta vida e não tocou na cenoura (jogo reaberto lá embaixo) também ganha a dourada
- const keep={gc:S.gc,gcAt:S.gcAt,runs:S.runs+1,best:S.best,ach:S.ach,oc:S.oc,total:S.total,debug:S.debug,cheat:S.cheat,sk:S.sk,pts:S.pts+prestGain(),od:S.od,xp:S.xp,lvl:S.lvl,lvp:S.lvp,pk:S.pk,vol:S.vol,deaths:S.deaths,sold:S.sold,play:S.play,blocks:S.blocks,tab:S.tab,items:S.items,bombs:S.bombs,eaten:S.eaten,tps:S.tps,veins:S.veins,rich:S.rich,sleeps:S.sleeps,refined:S.refined,ctDone:S.ctDone,spins:S.spins,chests:S.chests,chTop:S.chTop,chT:S.chT,chGold:S.chGold,chFr:S.chFr,chPk:S.chPk,ptpUsed:S.ptpUsed,slotNet:S.slotNet,sea:S.sea,moon:S.moon,fb:S.fb,fdx:S.fdx,fishN:S.fishN,fishP:S.fishP,fishG:S.fishG,cookN:S.cookN,cookP:S.cookP};
+ const keep={gc:S.gc,gcAt:S.gcAt,runs:S.runs+1,best:S.best,ach:S.ach,oc:S.oc,total:S.total,debug:S.debug,cheat:S.cheat,sk:S.sk,pts:S.pts+prestGain(),od:S.od,xp:S.xp,lvl:S.lvl,lvp:S.lvp,pk:S.pk,vol:S.vol,deaths:S.deaths,sold:S.sold,play:S.play,blocks:S.blocks,tab:S.tab,items:S.items,bombs:S.bombs,eaten:S.eaten,tps:S.tps,veins:S.veins,rich:S.rich,sleeps:S.sleeps,refined:S.refined,ctDone:S.ctDone,spins:S.spins,cases:S.cases,caseNet:S.caseNet,caseT:S.caseT,chests:S.chests,chTop:S.chTop,chT:S.chT,chGold:S.chGold,chFr:S.chFr,chPk:S.chPk,ptpUsed:S.ptpUsed,slotNet:S.slotNet,sea:S.sea,moon:S.moon,fb:S.fb,fdx:S.fdx,fishN:S.fishN,fishP:S.fishP,fishG:S.fishG,cookN:S.cookN,cookP:S.cookP};
  const clk=S.lv.clock,bk=S.lv.back,rd=S.lv.rod,bt=S.lv.bait;S=Object.assign(fresh(),keep);S.lv.clock=clk;S.lv.back=bk;S.lv.rod=rd;S.lv.bait=bt;   // o relógio (compra única), a vara e a isca de pesca e a estação do ano não se perdem ao renascer
  S.seed=SEED=newSeed();chQ.length=0;carrotC=null;dug=new Set();mX=mY=camX=camY=0;layerSeen=0;
  S.gold=S.debug?Infinity:0;S.en=maxEn();build();save();sayLevel(__("Renascido! Fragmentos: {0}",S.pts));
@@ -3719,7 +3928,7 @@ function barUI(){const slots=document.querySelectorAll(".slot");BAR.forEach((s,i
 // ===== 4-interface/04-entrada.js — Mouse, teclado, toque e botões de celular =====
 cv.addEventListener("pointerdown",e=>{e.preventDefault();
  if(fs&&!modal){fishHold=true;fishAct();return}   // pescando: tocar/clicar fisga, segura a barra e lança de novo
- if(atSurface()&&!modal){for(const[hit,use]of[[boardHit,boardUse],[slotHit,slotUse],[campHit,campUse],[cauldronHit,cauldronUse],[bellHit,bellUse],[altarHit,altarUse],[forageHit,forageUse],[fishHit,fishUse],[marketHit,marketUse]])if(hit(e.offsetX,e.offsetY)&&use())return}
+ if(atSurface()&&!modal){for(const[hit,use]of[[boardHit,boardUse],[slotHit,slotUse],[caseHit,caseUse],[campHit,campUse],[cauldronHit,cauldronUse],[bellHit,bellUse],[altarHit,altarUse],[forageHit,forageUse],[fishHit,fishUse],[marketHit,marketUse]])if(hit(e.offsetX,e.offsetY)&&use())return}
  if(atSurface()&&furHit(e.offsetX,e.offsetY)){furUse();return}
  if(atSurface()&&chestHit(e.offsetX,e.offsetY)){chestUse();return}
  const c=Math.floor((e.offsetX-W/2)/T+camX+.5),r=Math.floor((e.offsetY-H*SURF)/T+camY),p=S.depth,m=S.mc;
@@ -3740,6 +3949,7 @@ addEventListener("keydown",e=>{
   if(modal==="pause"){pauseKey(e);return}
   if(modal==="mem"){memKey(e);return}
   if(modal==="slot"){slotKey(e);return}
+  if(modal==="case"){caseKey(e);return}
   if(modal==="chest"){chestKey(e);return}
   if(modal==="camp"){campKey(e);return}
   if(modal==="pot"){potKey(e);return}
@@ -3900,11 +4110,11 @@ function gpConfirmMenu(){const el=gpPaintSel();if(el)el.click()}
 function gpModalInput(p,now,up,down,left,right,pa,pb,pst){
  const m=modal,dir=up?-1:down?1:left?-1:right?1:0;
  if(m==="title"){if(pa||pst)startGame();return}
- if(m==="lv"||m==="slot"){   // esquerda/direita escolhem (cartões ou aposta); cima/baixo também no nível
+ if(m==="lv"||m==="slot"||m==="case"){   // esquerda/direita escolhem (cartões ou aposta); cima/baixo também no nível
   const k=m==="lv"?(up||left?"ArrowLeft":down||right?"ArrowRight":null):(left?"ArrowLeft":right?"ArrowRight":null);
   if(k&&GP.edge)gpKey(k);
   if(pa)gpKey("Space");
-  if(pb&&m==="slot")gpKey("Escape");
+  if(pb&&(m==="slot"||m==="case"))gpKey("Escape");
   return;
  }
  if(m==="death"||m==="mem"||m==="chest"){if(pa||pb&&m!=="mem")gpKey(pa?"Space":"Escape");return}
@@ -3958,7 +4168,7 @@ function gpFrame(now){
   if(GP.lastModal!==modal){gpPanelOff();gpRelease();GP.lastModal=modal;GP.sel=-1;GP.wait.a=B(0);GP.wait.b=B(1);GP.wait.st=B(9)}
   // botões que já estavam apertados quando a janela abriu só valem depois de soltos
   if(!B(0))GP.wait.a=false;if(!B(1))GP.wait.b=false;if(!B(9))GP.wait.st=false;
-  if(!/^(title|lv|slot|death|mem|chest)$/.test(modal))gpPaintSel();
+  if(!/^(title|lv|slot|case|death|mem|chest)$/.test(modal))gpPaintSel();
   gpModalInput(p,now,up,down,left,right,pa&&!GP.wait.a,pb&&!GP.wait.b,pst&&!GP.wait.st);
  }else{
   if(GP.lastModal){GP.lastModal=null;document.querySelectorAll(".gp-sel").forEach(x=>x.classList.remove("gp-sel"));GP.wait.a=B(0);GP.wait.b=B(1);GP.wait.st=B(9)}
@@ -5290,7 +5500,7 @@ function sceneScatter(y0,q,P,k,c0,c1,back,dens=1,sd=0,thr0){   // dens = árvore
  }
 }
 // Pedras do lado direito (passagem, riacho, fogueira e praia): pedras isoladas e grupos de três de tamanhos variados no cenário de fundo, mais duas pilhas de pedras (cairns)
-const stonesBlocked=c=>isRiver(c)||(c>=BOARD_C-1&&c<=BOARD_C+1)||(c>=WELL_C-1&&c<=WELL_C+1)||(c>=CAMP_C-2.4&&c<=CAMP_C+2.4)||(c>=LIGHT_C-1.2&&c<=LIGHT_C+1.2)||c>=PIER_C-1;
+const stonesBlocked=c=>isRiver(c)||(c>=BOARD_C-1&&c<=BOARD_C+1)||(c>=WELL_C-1&&c<=WELL_C+1)||(c>=CAMP_C-2.4&&c<=CAMP_C+2.4)||(c>=CASE_C-1.5&&c<=CASE_C+1.5)||(c>=LIGHT_C-1.2&&c<=LIGHT_C+1.2)||c>=PIER_C-1;
 const CAIRNS_R=[21.8,33.6];
 function sceneStones(y0,q,P,k){
  for(let c=HALF+2;c<=SURF_R;c++){
@@ -6012,7 +6222,7 @@ function drawPebbles(){
 }
 function drawLandscape(t){
  if(rowY(0)<=8)return;
- drawWindmill(t);drawChurch(t);drawCauldron(t);drawForage(t);drawGarden(t);drawRiver(t);drawPebbles();drawCampfire(t);drawBeach(t);drawFishHints(t);drawCritters(t);
+ drawWindmill(t);drawChurch(t);drawCauldron(t);drawForage(t);drawGarden(t);drawRiver(t);drawPebbles();drawCampfire(t);drawCaseBox(t);drawBeach(t);drawFishHints(t);drawCritters(t);
 }
 
 // ===== 5-desenho/14-cenoura-dourada.js — A cenoura dourada brotando da Rocha-mãe, no fundo do abismo =====
@@ -6744,6 +6954,23 @@ function potHoles(g,k){   // abre a escuridão em volta da fogueirinha do caldei
  g.fillStyle=gr;g.fillRect(cx-r,cy-r,r*2,r*2);g.globalCompositeOperation="source-over";
 }
 
+// ===== 5-desenho/21-caixa-mundo.js — A caixa de ouro no cenário: caixote dourado pequeno ao lado da fogueira (a janela de abertura fica em 2-sistemas/22-caixa.js) =====
+// Pixel art própria (caixote dourado liso, fechos de metal e alça lateral). Antes de liberar (BAL.unlock.build.case) aparece quebrada, como as outras construções.
+function sprCaseBox(){return mkSpr("casebox3",8,6,{y:"#e0a82a",Y:"#ffd45c",W:"#fff3a0",G:"#a87414",D:"#6b4a0c",k:"#241609",M:"#cfd4db"},R=>{
+ R(0,0,8,5,"y");R(0,0,8,1,"Y");R(0,2,8,1,"D");R(0,4,8,1,"G");                  // tampa, fresta e sombra de baixo
+ R(1,1,1,3,"M");R(6,1,1,3,"M");R(1,1,1,1,"W");R(6,1,1,1,"W");                  // fechos de metal
+ R(3,3,2,1,"Y");R(7,3,1,1,"k");                                               // moeda no painel e alça
+ R(0,5,2,1,"D");R(6,5,2,1,"D");                                               // pés
+},1)}
+function drawCaseBox(t){
+ if(!isUnl("build","case")){drawBroken(sprCaseBox(),Math.round(colX(CASE_C)),Math.round(rowY(0)),pu(),__("Caixa de ouro"),"case");return}
+ const u=pu(),s=sprCaseBox(),c=Math.round(colX(CASE_C)),y=Math.round(rowY(0)),near=nearCase();
+ if(c<-T*3||c>W+T*3)return;
+ pxShadow(c,(s.w+2)*u,y,u);drawSpr(s,c,y,u);
+ for(let k=0;k<3;k++){const ph=(t*(near?1.1:.5)+k/3)%1;if(ph>.5&&!near)continue;ctx.fillStyle="rgba(255,243,160,"+(1-ph).toFixed(2)+")";ctx.fillRect(Math.round(c+(k-1)*2.4*u+Math.sin(t*3+k)*u),Math.round(y-s.h*u-ph*4*u),u,u)}   // brilhos subindo da tampa
+ if(atSurface())lbl(near?__("Caixa de ouro: clique para abrir"):__("Caixa de ouro"),c,y-(s.h+2)*u-Math.sin(t*4)*2,near?"#6fe3a0":"#ffd45c");
+}
+
 // ===== 6-jogo/01-laco-inicio.js — Laço principal, eventos, salvar/exportar/importar e inicialização =====
 let last=performance.now(),acc=0,sv=0,autoMsgT=0,exitUp=false;   // exitUp: está subindo pelo buraco (vale até o passo que cruza a superfície)
 function loop(now){
@@ -6811,5 +7038,5 @@ if(S.lvp>0&&!modal)levelUp();
 onLang(()=>{relabelTabs();if(fsLab)fsLab();buildBar();build();statsHtml="";bagHtml="";buffsHtml="";clkLast="";if(modal==="pause"){paintPause();const lb=document.querySelector("#bx .lp-btn");if(lb)lb.focus()}refresh()});
 requestAnimationFrame(loop);
 // gancho opcional usado só por tools/smoke.js (não faz nada no jogo normal)
-if(typeof window.__TESTE__==="function")window.__TESTE__({get blkShake(){return blkShake},get pot(){return pot},deepOres,POT_RECIPES,ORES,churchSolid,roofSolid,houseBlocks,bell,bellCol,nearBell,bellUse,altarCol,nearAltar,altarUse,prayTick,prayCancel,get prayA(){return prayA},CHURCH_C,CAULDRON_C,nearCauldron,cauldronUse,openPot,potCook,potMax,forageAt,forageProg,forageOn,forageUse,sayK,toastTick,toastHas,get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,WALK_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,TELE_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,moonP,moonLit,moonLight,moonName,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,footKind,footSfx,stepSound,cricketAmt,frogAmt,windStrength,ambTick,caveTick,CAVE,caveMix,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v},get shakeDec(){return shakeDec},get blasts(){return blasts},get parts(){return parts},set musOn(v){musOn=v},skillBurst,useFx,skillFxTick,useGlows,thunderSfx,actx:()=>actx,ac,boomSfx,blastFx,setMute(v){mute=v},RANK_CFG,RK,rankOk,rankName,rankSnap,rankPush,rankPaint,rankLeave,rankLoad,rankOpen});
+if(typeof window.__TESTE__==="function")window.__TESTE__({get blkShake(){return blkShake},get pot(){return pot},deepOres,POT_RECIPES,ORES,churchSolid,roofSolid,houseBlocks,bell,bellCol,nearBell,bellUse,altarCol,nearAltar,altarUse,prayTick,prayCancel,get prayA(){return prayA},CHURCH_C,CAULDRON_C,nearCauldron,cauldronUse,openPot,potCook,potMax,forageAt,forageProg,forageOn,forageUse,sayK,toastTick,toastHas,get worldZoom(){return worldZoom},get zoomPreference(){return zoomPreference},set fishHold(v){fishHold=v},fishTick,fishEnd,startFish,fishSpot,fishUse,fishAct,fishCast,fishBite,fishHook,reelStep,fishPick,fishValue,fishWin,FISH,FISH_BY,fishGroups,fishSell,marketUse,nearCamp,campUse,campStart,campTake,campQuality,FOODS,rodZone,baitBite,get fs(){return fs},get cp(){return cp},fortCh,returnCost,returnNeed,returnState,get skT(){return skT},get skCD(){return skCD},get modal(){return modal},SURF_L,SURF_R,WALK_R,clampCam,get camX(){return camX},set camX(v){camX=v},wx,WX,WX_KEYS,weatherSet,weatherTick,weatherPick,onCombo,comboEnd,get cmb(){return cmb},set cmb(v){cmb=v},get cmbBanner(){return cmbBanner},get cmbLastT(){return cmbLastT},lavaRes,furLoad,furTick,furRate,furEta,nearFurnace,FURN_C,airborne,lava,lavaDmg,teleCD,get S(){return S},isUnl,checkUnlocks,nextUnlockText,unlockNames,openMemoria,carrotSpot,get carrotC(){return carrotC},reachBottom,get dug(){return dug},hit,move,step,die,sellBag,teleport,spend,maxEn,isDug,canBreak,tgt,buy,buyTier,clickPow,hardness,setDir,goTo,digCost,returnCost,autoOK,tierCost,upCost,UPS,FINAL_DEPTH,HALF,CHEST_C,BED_C,TELE_C,SLOT_C,BOARD_C,WELL_C,nearBed,nearSlot,nearBoard,ctGen,ctProg,ctTick,ctClaim,ctDrop,openBoard,openSlot,slotSpin,openCase,nearCase,CASE_C,caseOpenNow,caseKey,caseCost,caseRtp,caseTier,caseItem,get cxBusy(){return cxBusy},get cxFx(){return cxFx},get cxStrip(){return cxStrip},chestAt,chestFound,chestTick,chestKey,chestRoll,get chQ(){return chQ},slotRtp,slotMult,slotBetAmt,slotKey,get slotBusy(){return slotBusy},get SEED(){return SEED},atSurface,closeModal,BENCH_C,blockGold,gainXp,nearBench,basePow,autoDps,TIERS,BIO,SK,prestGain,get held(){return held},get jetT(){return jetT},boom,dynNext,dynPick,DYN_IDS,BAL,furyMult,frenzyMult,useSk,fmtN,skillDescription,get skT(){return skT},useItem,buyItem,isVein,canBlast,have,ITEMS,SHOP_C,nearShop,itemCost,collect,wipeAll,save,clean,get dynCD(){return dynCD},oreVeinAt,starFall,starTick,nightAmt,nightDive,moonP,moonLit,moonLight,moonName,xpGainMult,gmult,oreChance,get star(){return star},get starT(){return starT},get shoot(){return shoot},get dayT(){return dayT},set dayT(v){dayT=v},RV_W,RV_H,ORES,SEASONS,seasonMix,seasonTick,blockKind,breakSfx,hitSfx,footKind,footSfx,stepSound,cricketAmt,frogAmt,windStrength,ambTick,caveTick,CAVE,caveMix,get SEA(){return SEA},get shake(){return shake},set shake(v){shake=v},get shakeDec(){return shakeDec},get blasts(){return blasts},get parts(){return parts},set musOn(v){musOn=v},skillBurst,useFx,skillFxTick,useGlows,thunderSfx,actx:()=>actx,ac,boomSfx,blastFx,setMute(v){mute=v},RANK_CFG,RK,rankOk,rankName,rankSnap,rankPush,rankPaint,rankLeave,rankLoad,rankOpen});
 })();

@@ -264,6 +264,9 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 .go:hover:not(:disabled){filter:brightness(1.15)}.go:disabled{opacity:.55;cursor:default}
 .stbl{margin-top:10px;font-size:.7rem;color:var(--mute);line-height:1.6}.stbl span{display:inline-block;margin:0 6px;white-space:nowrap}.stbl b{color:#ffd45c}
 .snote{margin-top:8px;font-size:.68rem;color:var(--mute);line-height:1.35}
+.cxtbl{margin-top:10px;display:grid;gap:3px}
+.cxr{display:grid;grid-template-columns:10px 1fr auto auto;gap:10px;align-items:center;font-size:.74rem;padding:2px 2px}
+.cxr i{width:10px;height:10px;border-radius:2px}.cxr span:nth-child(3){color:var(--mute);text-align:right}.cxr b{color:#ffd45c;min-width:110px;text-align:right;font-weight:600}
 
 /* Mochila sempre visível no painel lateral (fora da área do jogo, não cobre nada) */
 #bagside{flex:0 0 auto;margin:0;padding:7px 12px;border-bottom:1px solid var(--line);font-size:.78rem;line-height:1.4;color:var(--text);max-height:96px;overflow:auto}
