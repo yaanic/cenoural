@@ -1449,9 +1449,12 @@ function footSfx(kind,run,foot){
   }else if(kind==="sand"){   // areia: "chuf" fofo e bem audível: sopro que desliza do médio para o grave + pé afundando (baque) + um segundo "shh" do pé arrastando (nada agudo, sem estalinho)
    nz(t,"bandpass",1150*p,.7,.15*k*v,.17,420);nz(t+.008,"lowpass",620,.5,.1*k*v,.13);tn(t,"sine",92*p,52,.13*k*v,.1);
    nz(t+.055,"bandpass",820*p,.8,.06*k*v,.12,380);tn(t+.05,"sine",70*p,45,.04*k*v,.09);
-  }else if(kind==="snow"){   // neve: estalos de gelo mais surdos + baque macio
-   for(let i=0;i<5;i++)nz(t+i*.015+Math.random()*.006,"bandpass",1300+Math.random()*1500,3,.05*k*v,.022);
-   nz(t,"lowpass",520,.5,.11*k*v,.12);tn(t,"sine",62*p,38,.11*k*v,.1);
+  }else if(kind==="snow"){   // neve: "crunch" grave de neve compactada. Grãos médio-graves (700-2000 Hz) esmagando em ~170 ms, compressão que desliza para o grave, baque fofo por baixo e um segundo esmagamento do calcanhar
+   for(let i=0;i<14;i++)nz(t+i*.011+Math.random()*.009,"bandpass",700+Math.random()*1300,1.3,(.05+Math.random()*.05)*k*v,.016+Math.random()*.012);
+   nz(t,"bandpass",1500*p,.6,.1*k*v,.17,520);   // compressão da neve sob o pé, descendo para o grave
+   nz(t,"lowpass",420,.5,.12*k*v,.13);tn(t,"sine",70*p,44,.1*k*v,.11);   // peso do pé afundando
+   nz(t+.085,"bandpass",900*p,1,.05*k*v,.1,500);tn(t+.085,"sine",62*p,42,.04*k*v,.09);   // calcanhar assentando
+   if(r<.3)tn(t+.02,"sine",1250+r*900,980+r*400,.006*v,.07);   // às vezes um rangido de neve fria, bem mais grave que antes
   }
   if(wet){nz(t+.02,"bandpass",2200,1.2,.03*wx.rain*k*v,.09,1000);tn(t+.045,"sine",520+r*220,300,.012*wx.rain*v,.06)}   // chuva: chapinho mais grave
  }catch(e){}
@@ -1710,20 +1713,24 @@ function rollPerks(n){const pool=Object.keys(PK).filter(k=>pk(k)<perkMax(k)),out
 const GOLD_PERK=150;   // Bolsa de ouro (opção de nível quando as melhorias estão no teto): blocos do recorde x raridade
 const goldPerk=m=>Math.ceil(blockGold(S.best)*GOLD_PERK*m);
 function addPerk(k,m){if(k==="_gold"){S.gold+=goldPerk(m);return}S.pk[k]=Math.min(perkMax(k),pk(k)+m)}
-function openModal(m){modal=m;held=null;holdS=false;$("ov").classList.add("on");const b=$("bx");b.style.cssText="";$("ov").style.padding="";b.innerHTML="";sfx(520,.05,"sine");return b}
+function openModal(m){modal=m;held=null;holdS=false;$("ov").classList.add("on");const b=$("bx");b.style.cssText="";b.classList.remove("lvbox");$("ov").classList.remove("lvov");$("ov").style.padding="";b.innerHTML="";sfx(520,.05,"sine");return b}
 function closeModal(){clearLevelChoiceTimer();modal=null;setHeld();$("ov").classList.remove("on");refresh();if(S.lvp>0)levelUp()}
 // Escolha por teclado: lvSel = cartão selecionado, lvPick = confirma o selecionado, lvLock = trava curta contra apertar Espaço sem querer ao abrir.
 let lvSel=0,lvN=0,lvPick=null,lvLock=0;
 function lvMove(d){if(modal!=="lv"||lvN<1)return;lvSel=(lvSel+d+lvN)%lvN;lvPaint();sfx(560,.04,"sine")}
+// Centraliza as cartas na horizontal com a hotbar (o centro da área do jogo, não da janela inteira, que tem o painel lateral à direita); sem sair da tela.
+function lvCenter(){const b=$("bx"),o=$("ov").getBoundingClientRect(),h=$("bar").getBoundingClientRect();if(!b||modal!=="lv"||!h.width){return}
+ const bw=Math.min(b.offsetWidth||820,o.width-24),mid=o.left+o.width/2;let dx=h.left+h.width/2-mid;const half=bw/2,lo=o.left+12+half-mid,hi=o.right-12-half-mid;dx=Math.max(lo,Math.min(hi,dx));b.style.transform="translateX("+Math.round(dx)+"px)"}
+window.addEventListener("resize",lvCenter);
 function lvPaint(){document.querySelectorAll("#bx .card").forEach((c,i)=>c.classList.toggle("sel",i===lvSel))}
 function lvConfirm(){if(modal!=="lv"||!lvPick||performance.now()<lvLock)return;lvPick(lvSel)}
-function levelUp(){clearLevelChoiceTimer();const choiceId=levelChoiceId,b=openModal("lv"),opts=rollPerks(3);if(!opts.length){S.lvp=0;closeModal();return}
+function levelUp(){clearLevelChoiceTimer();const choiceId=levelChoiceId,b=openModal("lv"),opts=rollPerks(3);b.classList.add("lvbox");$("ov").classList.add("lvov");if(!opts.length){S.lvp=0;closeModal();return}
  b.innerHTML="<h2>"+__("Nível {0}",S.lvl)+"</h2><div id='lvchoice-clock' style='color:var(--mute);margin-bottom:10px'>"+__("Escolha uma melhoria · {0} s",30)+"</div>";
  const w=document.createElement("div");w.className="cards";
  const choose=(k,ri)=>{if(choiceId!==levelChoiceId||S.lvp<=0||modal!=="lv")return;clearLevelChoiceTimer();S.lvp--;addPerk(k,RAR[ri][1]);sfx(800,.15,"triangle");modal=null;if(S.lvp>0)levelUp();else closeModal()};
  opts.forEach(([k,ri],oi)=>{const R=RAR[ri],c=document.createElement("div");c.className="card";c.style.borderColor=R[2];c.innerHTML=k==="_gold"?"<div style='color:"+R[2]+";font-weight:700'>"+__(R[0])+"</div><div style='font-weight:600;margin:6px 0'>"+__("Bolsa de ouro")+"</div><div>"+__("+{0} de ouro",fmt(goldPerk(R[1])))+"</div><div style='color:var(--mute);font-size:.8rem;margin-top:6px'>"+__("ouro na hora")+"</div>":"<div style='color:"+R[2]+";font-weight:700'>"+__(R[0])+"</div><div style='font-weight:600;margin:6px 0'>"+__(PK[k][0])+"</div><div>"+__(PK[k][1]).replace(/\d+%/,m=>Math.round(parseFloat(m)*R[1])+"%")+"</div><div style='color:var(--mute);font-size:.8rem;margin-top:6px'>"+__("nv {0} → {1}",fmtN(pk(k)),fmtN(Math.min(perkMax(k),pk(k)+R[1])))+"</div>";c.onclick=()=>choose(k,ri);c.onmouseenter=()=>{lvSel=oi;lvPaint()};w.appendChild(c)});
  lvN=opts.length;lvSel=Math.floor((lvN-1)/2);lvPick=i=>choose(opts[i][0],opts[i][1]);lvLock=performance.now()+450;lvPaint();
- b.appendChild(w);lvPaint();const deadline=Date.now()+30000;levelChoiceTicker=setInterval(()=>{if(choiceId!==levelChoiceId||modal!=="lv"){clearLevelChoiceTimer();return}const secs=Math.max(0,Math.ceil((deadline-Date.now())/1000)),clock=$("lvchoice-clock");if(clock)clock.textContent=__("Escolha uma melhoria · {0} s",secs);if(secs===0){const rarity=Math.max(...opts.map(x=>x[1])),best=opts.filter(x=>x[1]===rarity),[k,ri]=best[Math.floor(Math.random()*best.length)];choose(k,ri)}},200)}
+ b.appendChild(w);lvCenter();lvPaint();const deadline=Date.now()+30000;levelChoiceTicker=setInterval(()=>{if(choiceId!==levelChoiceId||modal!=="lv"){clearLevelChoiceTimer();return}const secs=Math.max(0,Math.ceil((deadline-Date.now())/1000)),clock=$("lvchoice-clock");if(clock)clock.textContent=__("Escolha uma melhoria · {0} s",secs);if(secs===0){const rarity=Math.max(...opts.map(x=>x[1])),best=opts.filter(x=>x[1]===rarity),[k,ri]=best[Math.floor(Math.random()*best.length)];choose(k,ri)}},200)}
 
 // ===== 2-sistemas/04-habilidades.js — Habilidades permanentes, ativas (Fúria, Frenesi), dinamite e conquistas =====
 // Poderes de renascimento: só se compram com fragmentos (ganhos ao Renascer). [nome, descrição, nível máximo]. O nível N custa N+1 fragmentos (15 no total por poder). (Ouro inicial, Picareta inicial e Economia do jato foram removidos; os fragmentos gastos neles voltam ao carregar o save, em 1-nucleo/03-estado-save.js.)
@@ -3065,7 +3072,7 @@ function fxAuraDraw(){
 //  · subsolo: ar de caverna (sopro grave e abafado) + pingos de água com eco
 //  · abismo (a partir de BAL.cave.deepFrom m, camada do Xisto; entra aos poucos desde deepFade m antes): zumbido grave que bate (dois tons quase iguais), vento uivando
 //    pelos túneis e, de vez em quando, ronco distante e rangido de rocha. Quanto mais fundo (até FINAL_DEPTH), mais forte e mais grave.
-// Sons raros (a cada ~40-110 s, só abaixo de 8 m): pedregulhos, batida distante, gorgolejo, viga rangendo, morcegos, suspiro de vento, cristal e, no abismo, tom fantasma e desabamento.
+// Sons raros (a cada ~40-110 s, só abaixo de 8 m): pedregulhos, batida distante, gorgolejo, viga rangendo, morcegos, suspiro de vento e, no abismo, tom fantasma e desabamento.
 // Nada soa como música contínua nem como fogo crepitando: os pingos, o ronco e o rangido são espaçados de propósito.
 const CAVE={airVol:.1,mouthVol:.09,howlVol:.075,humVol:.05,dripVol:.03,rumbleVol:.12,groanVol:.045};
 let cvNodes=null,cvDrip=14,cvRumble=40,cvGroan=60,cvRare=45,cvGust=1,cvGustT=0;
@@ -3194,16 +3201,7 @@ function caveSighSfx(vol){
  g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(vol,t+dur*.45);g.gain.linearRampToValueAtTime(.0001,t+dur);
  s.connect(fl);fl.connect(g);g.connect(A.destination);g.connect(cvNodes.echo);s.start(t);s.stop(t+dur+.05);
 }
-// cristal: um tinido limpo e fino que ressoa e some longe (cristais vibrando na parede)
-function caveCrystalSfx(vol){
- const A=actx,t=A.currentTime+.02,f=[880,988,1175,1319,1568][Math.floor(Math.random()*5)];
- for(const[m,a,d]of[[1,1,2.2],[2.76,.45,1.3],[5.4,.2,.7]]){
-  const o=A.createOscillator(),g=A.createGain();o.type="sine";o.frequency.value=f*m;
-  g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(vol*a,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);
-  o.connect(g);g.connect(A.destination);g.connect(cvNodes.echo);o.start(t);o.stop(t+d+.05);
- }
-}
-// sorteia um som raro conforme a profundidade (subsolo: pedras, batidas, gorgolejo, viga, morcegos, cristal, suspiro · abismo: tudo isso + desabamento e tom fantasma, mais forte)
+// sorteia um som raro conforme a profundidade (subsolo: pedras, batidas, gorgolejo, viga, morcegos, suspiro · abismo: tudo isso + desabamento e tom fantasma, mais forte)
 function caveRareSfx(m){
  const v=S.vol.a,deep=m.deep>.5,pool=[
   [3,()=>caveRockfallSfx(.05*v*(.6+.4*m.K))],
@@ -3211,8 +3209,7 @@ function caveRareSfx(m){
   [2,()=>caveGurgleSfx(.05*v,1.6+Math.random()*1.4)],
   [2,()=>caveCreakSfx(.045*v)],
   [2,()=>caveBatsSfx(.04*v)],
-  [2,()=>caveSighSfx(.06*v)],
-  [1.5,()=>caveCrystalSfx(.03*v)]];
+  [2,()=>caveSighSfx(.06*v)]];
  if(deep){pool.push([2,()=>caveGhostSfx(.04*v*m.deep,6+Math.random()*3)],[1.2,()=>caveCollapseSfx(.09*v*m.deep)])}
  let r=Math.random()*pool.reduce((a,x)=>a+x[0],0);
  for(const[w,f]of pool){r-=w;if(r<=0){f();return}}
@@ -3672,7 +3669,7 @@ const GROUPS=[N_("Picareta"),N_("Energia"),N_("Sorte e experiência"),N_("Habili
 function build(){
  const keepScroll=[...document.querySelectorAll(".pane")].map(p=>[p,p.scrollTop]);   // recriar a lista não pode jogar o scroll de volta para o topo ao comprar
  $("qty").innerHTML="";
- [[1,"x1"],[10,"x10"],[100,"x100"],[0,__("Máx")]].forEach(([v,t])=>{const b=mk("button",qty===v?"on":"",t);b.onclick=()=>{qty=v;build()};$("qty").appendChild(b)});
+ [[1,"x1"],[10,"x10"],[0,__("Máx")]].forEach(([v,t])=>{const b=mk("button",qty===v?"on":"",t);b.onclick=()=>{qty=v;build()};$("qty").appendChild(b)});
  const box=$("ups");box.innerHTML="";
  {const nx=mk("div","ph");nx.id="nextul";box.appendChild(nx)}   // dica: o que se libera a seguir (liberação gradual)
  for(const g of GROUPS){

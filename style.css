@@ -70,6 +70,17 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 .box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;max-width:760px;width:100%;max-height:90vh;overflow:auto;text-align:center}
 .cards{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 .card{flex:1 1 170px;max-width:230px;border:2px solid var(--line);border-radius:10px;padding:12px;cursor:pointer;background:var(--bg);animation:pop .25s}
+/* Escolha de nível: sem painel nem fundo preto, só 3 cartas soltas sobre o jogo (fundo bem leve só para dar leitura) */
+#ov.lvov{background:rgba(0,0,0,.28)}
+.box.lvbox{background:none;border:0;box-shadow:none;overflow:visible;max-width:820px}
+.box.lvbox h2,.box.lvbox #lvchoice-clock{text-shadow:0 2px 0 #000,0 0 8px #000}
+.box.lvbox #lvchoice-clock{margin-bottom:0!important}
+/* Escolha de nível: as cartas crescem na tela (simples e rápido) */
+.cards{margin-top:30px}
+.cards .card{animation:cardGrow .22s ease-out backwards}
+.cards .card:nth-child(2){animation-delay:.05s}
+.cards .card:nth-child(3){animation-delay:.1s}
+@keyframes cardGrow{from{opacity:0;transform:scale(.3)}60%{transform:scale(1.06)}}
 .cards .card:hover{transform:translateY(-3px)}
 .cards .card.sel{transform:translateY(-6px);box-shadow:0 0 0 3px #ffd45c,0 6px 0 rgba(0,0,0,.45);background:#1c1a12}
 
