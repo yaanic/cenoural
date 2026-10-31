@@ -278,6 +278,15 @@ details{margin-bottom:8px}summary{cursor:pointer;font-weight:600;margin:6px 0}
 .cxtbl{margin-top:10px;display:grid;gap:3px}
 .cxr{display:grid;grid-template-columns:10px 1fr 64px 152px;gap:10px;align-items:center;font-size:.74rem;padding:2px 2px}
 .cxr span:nth-child(2){text-align:left}
+#cxui .cl{margin:10px 4px 0}
+.skw{text-align:center;max-height:82vh;overflow-y:auto;padding-right:4px}.skw h2{margin:0 0 4px;font-size:1.4rem;letter-spacing:.14em}.skw .sub{color:var(--mute);font-size:.8rem;margin-bottom:6px}
+.skw h3{margin:14px 0 6px;font-size:.8rem;letter-spacing:.12em;color:var(--mute);text-align:left}
+.skg{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
+.skc{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px 6px;border:2px solid;border-radius:8px;background:#1a1a22;cursor:pointer;color:var(--text)}
+.skc canvas{width:60px;height:60px;image-rendering:pixelated}
+.skc span{font-size:.72rem;font-weight:700;line-height:1.15}.skc small{font-size:.62rem;color:var(--mute);min-height:.8em}
+.skc.on{background:#2a2412;box-shadow:0 0 0 2px #ffd45c55}.skc.na{opacity:.55;cursor:default}
+.skc:hover:not(:disabled):not(.on){filter:brightness(1.2)}
 .cxr i{width:10px;height:10px;border-radius:2px}.cxr span:nth-child(3){color:var(--mute);text-align:right}.cxr b{color:#ffd45c;text-align:right;font-weight:600;white-space:nowrap}
 
 /* Mochila sempre visível no painel lateral (fora da área do jogo, não cobre nada) */
