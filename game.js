@@ -275,7 +275,7 @@ addLang("en","English",{
 "Banquete do pescador":"Fisherman's feast",
 "Recupera 85% da energia máxima. Só se faz na fogueira":"Restores 85% of max energy. Only made at the campfire",
 "Fornalha":"Furnace",
-"Caixa de ouro":"Gold case",
+"Caixa de skins":"Skin case",
 "Quadro de contratos":"Contract board",
 "NOVIDADE LIBERADA":"NEW UNLOCK",
 "Próxima novidade aos {0} m: {1}":"Next unlock at {0} m: {1}",
@@ -695,10 +695,10 @@ addLang("en","English",{
 // --- 2-sistemas/22-caixa.js
 "Chapéu":"Hat",
 "Roupa":"Outfit",
-"CAIXA DE OURO":"GOLD CASE",
+"CAIXA DE SKINS":"SKIN CASE",
 "NOVA!":"NEW!",
-"Caixa de ouro ({0}): {1} (repetida, x{2})":"Gold case ({0}): {1} (duplicate, x{2})",
-"Caixa de ouro ({0}): {1}!":"Gold case ({0}): {1}!",
+"Caixa de skins ({0}): {1} (repetida, x{2})":"Skin case ({0}): {1} (duplicate, x{2})",
+"Caixa de skins ({0}): {1}!":"Skin case ({0}): {1}!",
 "Ouro insuficiente para abrir a caixa":"Not enough gold to open the case",
 "skins":"skins",
 "Abrindo...":"Opening...",
@@ -792,7 +792,7 @@ addLang("en","English",{
 "Manto do pântano":"Swamp Cloak",
 "Fantasia de vagalume":"Firefly Costume",
 "Armadura de luz":"Armor of Light",
-"{0} de {1} skins · vêm da caixa de ouro":"{0} of {1} skins · won from the gold case",
+"{0} de {1} skins · vêm da caixa de skins":"{0} of {1} skins · won from the skin case",
 "Chapéus":"Hats",
 "Roupas":"Outfits",
 "Capacete padrão":"Default helmet",
@@ -898,7 +898,7 @@ addLang("en","English",{
 "Fragmentos de baús":"Shards from chests",
 "Bônus de melhoria":"Upgrade bonuses",
 "Poções de teleporte usadas":"Teleport potions used",
-"Caixas de ouro":"Gold cases",
+"Caixas de skins":"Skin cases",
 "Caixas abertas":"Cases opened",
 "Skins obtidas":"Skins collected",
 "Peixes pescados":"Fish caught",
@@ -1036,7 +1036,7 @@ addLang("en","English",{
 "Sopa pronta!":"Soup ready!",
 "Poção pronta!":"Potion ready!",
 // --- 5-desenho/21-caixa-mundo.js
-"Caixa de ouro: clique para abrir":"Gold case: click to open",
+"Caixa de skins: clique para abrir":"Skin case: click to open",
 // --- 6-jogo/01-laco-inicio.js
 "Save exportado: copie o texto":"Save exported: copy the text",
 "Falha ao exportar":"Export failed",
@@ -1150,7 +1150,7 @@ const BAL={
   {n:N_("Raro"),c:"#4aa8ff",w:10,g:110,xp:.07,it:[["sop",1,1],["dyn",.7,2],["ptp",.3,1]],pk:[.7,2],ore:[.8,4],fr:[.1,1]},
   {n:N_("Épico"),c:"#b45cff",w:3.5,g:300,xp:.15,it:[["poc",1,1],["dyn2",1,2],["ptp",.6,1]],pk:[1,3],ore:[1,8],fr:[.4,1]},
   {n:N_("Lendário"),c:"#ffb02e",w:.5,g:1000,xp:.4,it:[["poc",1,2],["dyn3",1,3],["dyn4",.5,1],["ptp",1,2]],pk:[1,4],ore:[1,15],fr:[1,2]}]},
- // Caixa de ouro (loja; 2-sistemas/22-caixa.js), aberta com roleta. b = preço-base (sobe como os itens: x itemK por camada do recorde) · dur = duração da roleta (s) · n = itens da fita · win = posição do prêmio na fita
+ // Caixa de skins (loja; 2-sistemas/22-caixa.js), aberta com roleta. b = preço-base (sobe como os itens: x itemK por camada do recorde) · dur = duração da roleta (s) · n = itens da fita · win = posição do prêmio na fita
  // O prêmio é uma skin (chapéu ou roupa, 2-sistemas/23-skins.js) da raridade sorteada; tiers: p = chance (%, somam 100). As skins de cada raridade têm o campo t = índice daqui.
  cse:{b:600,dur:7,n:64,win:52,tiers:[
   {n:N_("Comum"),c:"#9aa0a6",p:48},
@@ -1197,7 +1197,7 @@ const KEEPER_C=10.7;   // Izans, o dono da carrocinha (SHOP_C+1.7): é com ele q
 const SHOP_C=9;                  // coluna da loja de consumáveis (dinamite, comida de energia), na superfície, depois do baú
 const BED_C=-9;                  // coluna da cama (salva o jogo ao chegar perto), na superfície, depois da mesa de trabalho
 const ENCH_C=CHURCH_C+4;         // mesa decorativa de encantamento, apenas visual, agora no altar da igreja (a posição exata em pixels vem de CHURCH_ALTAR_DX em 18-igreja.js)
-const CASE_C=34;                // caixa de ouro (abre caixas estilo CS), na floresta da praia, à esquerda da fogueira
+const CASE_C=34;                // caixa de skins (abre caixas estilo CS), na floresta da praia, à esquerda da fogueira
 const SLOT_C=3;                  // máquina de caça-níquel, ao lado do baú (entre o buraco e o baú)
 const BOARD_C=14;                // quadro de contratos, na passagem da direita
 const WELL_C=19;                 // poço de água (só enfeite), na passagem da direita, depois do quadro de contratos
@@ -1410,7 +1410,7 @@ const have=k=>S.items[k]||0;
 const affordUp=k=>{const mx=UPS[k].max;let l=S.lv[k],g=S.gold,n=0;while(l<mx){const c=upCost(k,l);if(g<c)break;g-=c;l++;n++}return n};
 const affordItem=k=>{const room=99-have(k);return room<=0?0:Math.min(room,Math.floor(S.gold/itemCost(k)))};
 // ----- Liberação gradual (BAL.unlock): o que ainda não foi liberado fica escondido -----
-const BUILD_NAMES={furnace:N_("Fornalha"),case:N_("Caixa de ouro"),board:N_("Quadro de contratos"),slot:N_("Caça-níquel")};
+const BUILD_NAMES={furnace:N_("Fornalha"),case:N_("Caixa de skins"),board:N_("Quadro de contratos"),slot:N_("Caça-níquel")};
 function unlockAt(kind,k){const u=BAL.unlock[kind];return u&&u[k]!=null?u[k]:0}
 function isUnl(kind,k){
  if(!BAL.unlock.on||S.debug)return true;
@@ -3340,7 +3340,7 @@ function caveTick(dt){
  }catch(e){}
 }
 
-// ===== 2-sistemas/22-caixa.js — Caixa de ouro (loja): abertura estilo CS, com roleta horizontal, 5 raridades e sons sintetizados =====
+// ===== 2-sistemas/22-caixa.js — Caixa de skins (loja): abertura estilo CS, com roleta horizontal, 5 raridades e sons sintetizados =====
 // Compra = abrir: o preço sai na hora, o prêmio (uma SKIN de chapéu ou de picareta, não mais ouro) é sorteado na hora e fica em S.pendSk até a roleta parar
 // (se fechar o jogo no meio, clean() entrega a skin ao carregar, como no caça-níquel). Preço em BAL.cse; as skins estão em 2-sistemas/23-skins.js.
 // Raridades e chances (BAL.cse.tiers): Comum 48% · Incomum 28% · Raro 15% · Épico 7% · Lendário 2%.
@@ -3400,7 +3400,7 @@ function caseDrawFrame(dt){
  const g=cxG,{w,h,pitch,tw,th,top}=CX,t=cxT,done=!!(cxFx&&cxFx.done),wi=BAL.cse.win;
  g.setTransform(cxCv.width/w,0,0,cxCv.height/h,0,0);
  g.fillStyle="#101016";g.fillRect(0,0,w,h);
- g.fillStyle="#7d7d90";g.font="700 9px "+FONT;g.textAlign="left";g.textBaseline="middle";g.fillText(__("CAIXA DE OURO"),10,11);
+ g.fillStyle="#7d7d90";g.font="700 9px "+FONT;g.textAlign="left";g.textBaseline="middle";g.fillText(__("CAIXA DE SKINS"),10,11);
  // fita de itens
  g.save();g.beginPath();g.rect(0,top,w,th);g.clip();
  const c0=Math.floor(cxPos)-4;
@@ -3453,7 +3453,7 @@ function caseFinish(){
  if(f.ti>=1)caseCoins([0,8,18,34,70][f.ti],[0,.4,.6,.9,1.2][f.ti],T.c);
  if(f.ti===4)for(let i=1;i<5;i++)setTimeout(()=>{if(modal==="case")caseCoins(16,1,T.c)},i*300);
  if(f.ti>=3)slotCoinSfx(f.ti===4?40:12,f.ti===4?50:70);
- sayGold(f.n>1?__("Caixa de ouro ({0}): {1} (repetida, x{2})",__(T.n),__(sk.n),f.n):__("Caixa de ouro ({0}): {1}!",__(T.n),__(sk.n)));
+ sayGold(f.n>1?__("Caixa de skins ({0}): {1} (repetida, x{2})",__(T.n),__(sk.n),f.n):__("Caixa de skins ({0}): {1}!",__(T.n),__(sk.n)));
  paintCaseUi();refresh();
 }
 function caseOpenNow(){   // gasta o preço, sorteia a skin e liga a roleta
@@ -3498,7 +3498,7 @@ function openCase(){
 }
 
 // ===== 2-sistemas/23-skins.js — Skins de chapéu e roupa: catálogo, desenho (no jogador e nos ícones) e tela de skins (equipar) =====
-// As skins são o prêmio da caixa de ouro (22-caixa.js): cada raridade da caixa (BAL.cse.tiers, índice t) tem as suas.
+// As skins são o prêmio da caixa de skins (22-caixa.js): cada raridade da caixa (BAL.cse.tiers, índice t) tem as suas.
 // S.cos = {own:{id:quantas}, hat/outfit: id equipado ("" = padrão)}. O padrão (capacete laranja, picareta que muda de cor com o nível) sempre existe.
 // O jogo desenha por aqui: drawHat/outfitBody (usados em 5-desenho/03-mundo.js) e skinIcon (ícone 72x72, usado na roleta e na tela de skins).
 const SKF=(g,c,x,y,w,h)=>{g.fillStyle=c;g.fillRect(x,y,w,h)};
@@ -3642,14 +3642,14 @@ function skinIcon(kind,id,dark){
  return cv;
 }
 
-// ---------- guarda-roupa (janela "skins": abre pela caixa de ouro e pelo menu de pausa) ----------
+// ---------- guarda-roupa (janela "skins": abre pela caixa de skins e pelo menu de pausa) ----------
 function openSkins(){const b=openModal("skins");b.style.maxWidth="640px";paintSkins()}
 function skinsKey(e){if(e.code==="Escape"||e.code==="KeyP"){e.preventDefault();if(!e.repeat)closeModal()}}
 function paintSkins(){
  const b=$("bx");if(!b||modal!=="skins")return;
  b.innerHTML="";const root=document.createElement("div");root.className="skw";b.appendChild(root);
  const h=document.createElement("h2");h.textContent=__("Skins");root.appendChild(h);
- const have=SKINS.filter(s=>skinOwn(s.id)>0).length,sub=document.createElement("div");sub.className="sub";sub.textContent=__("{0} de {1} skins · vêm da caixa de ouro",have,SKINS.length);root.appendChild(sub);
+ const have=SKINS.filter(s=>skinOwn(s.id)>0).length,sub=document.createElement("div");sub.className="sub";sub.textContent=__("{0} de {1} skins · vêm da caixa de skins",have,SKINS.length);root.appendChild(sub);
  for(const kind of["hat","outfit"]){
   const t=document.createElement("h3");t.textContent=kind==="hat"?__("Chapéus"):__("Roupas");root.appendChild(t);
   const grid=document.createElement("div");grid.className="skg";root.appendChild(grid);
@@ -4024,7 +4024,7 @@ function renderStats(){
   +sec(__("Progresso"),[row(__("Profundidade máxima"),fmt(S.best)+" m"),row(__("Ouro total"),fmt(S.total)),row(__("Blocos quebrados"),fmt(S.blocks)),row(__("Minérios coletados"),fmt(S.oc)),row(__("Catálogo de minérios"),S.od.length+"/"+ORES.length),row(__("Renascimentos"),S.runs),row(__("Fragmentos"),S.pts),row(__("Estação do ano"),SEASONS[SEA.idx].n)])
   +sec(__("Uso"),[row(__("Vendas no baú"),S.sold),row(__("Vezes sem energia"),S.deaths),row(__("Dinamites usadas"),S.bombs),row(__("Itens comidos"),S.eaten),row(__("Teleportes"),S.tps),row(__("Pedras duras quebradas"),S.veins),row(__("Veios de minério quebrados"),S.rich),row(__("Vezes na cama"),S.sleeps),row(__("Minérios refinados"),fmt(S.refined))])
   +sec(__("Baús"),[row(__("Baús abertos"),S.chests)].concat(BAL.chest.tiers.map((t,i)=>row(__(t.n),"<span style='color:"+t.c+"'>"+S.chT[i]+"</span>")),[row(__("Ouro de baús"),fmt(S.chGold)),row(__("Fragmentos de baús"),S.chFr),row(__("Bônus de melhoria"),S.chPk),row(__("Poções de teleporte usadas"),S.ptpUsed)]))
-  +sec(__("Caixas de ouro"),[row(__("Caixas abertas"),S.cases)].concat(BAL.cse.tiers.map((t,i)=>row(__(t.n),"<span style='color:"+t.c+"'>"+S.caseT[i]+"</span>")),[row(__("Skins obtidas"),SKINS.filter(s=>S.cos.own[s.id]>0).length+"/"+SKINS.length)]))
+  +sec(__("Caixas de skins"),[row(__("Caixas abertas"),S.cases)].concat(BAL.cse.tiers.map((t,i)=>row(__(t.n),"<span style='color:"+t.c+"'>"+S.caseT[i]+"</span>")),[row(__("Skins obtidas"),SKINS.filter(s=>S.cos.own[s.id]>0).length+"/"+SKINS.length)]))
   +sec(__("Pesca"),[row(__("Peixes pescados"),S.fishN),row(__("Pescarias perfeitas"),S.fishP),row(__("Peixes na bolsa"),S.fb.length+"/"+BAL.fish.bag),row(__("Peixes assados"),S.cookN),row(__("Ouro de peixes"),fmt(S.fishG)),row(__("Álbum de peixes"),Object.keys(S.fdx).length+"/"+FISH.length)].concat(FISH.map(f=>row(S.fdx[f.id]?"<span style='color:"+f.c+"'>"+__(f.n)+"</span>":"???",S.fdx[f.id]?S.fdx[f.id]+" cm":"-"))));
  const all=ACH.map((a,i)=>({a,i,ok:S.ach.includes(i)})),todo=all.filter(x=>!x.ok),done=all.filter(x=>x.ok);
  const li=x=>"<li class='"+(x.ok?"ok":"")+"'><i>"+(x.ok?"✓":"")+"</i><span><b>"+__(x.a[0])+"</b><small>"+__(x.a[1])+"</small></span></li>";
@@ -7192,7 +7192,7 @@ function potHoles(g,k){   // abre a escuridão em volta da fogueirinha do caldei
  g.fillStyle=gr;g.fillRect(cx-r,cy-r,r*2,r*2);g.globalCompositeOperation="source-over";
 }
 
-// ===== 5-desenho/21-caixa-mundo.js — A caixa de ouro no cenário: caixote dourado pequeno ao lado da fogueira (a janela de abertura fica em 2-sistemas/22-caixa.js) =====
+// ===== 5-desenho/21-caixa-mundo.js — A caixa de skins no cenário: caixote dourado pequeno ao lado da fogueira (a janela de abertura fica em 2-sistemas/22-caixa.js) =====
 // Pixel art própria (caixote dourado liso, fechos de metal e alça lateral). Antes de liberar (BAL.unlock.build.case) aparece quebrada, como as outras construções.
 function sprCaseBox(){return mkSpr("casebox3",8,6,{y:"#e0a82a",Y:"#ffd45c",W:"#fff3a0",G:"#a87414",D:"#6b4a0c",k:"#241609",M:"#cfd4db"},R=>{
  R(0,0,8,5,"y");R(0,0,8,1,"Y");R(0,2,8,1,"D");R(0,4,8,1,"G");                  // tampa, fresta e sombra de baixo
@@ -7201,12 +7201,12 @@ function sprCaseBox(){return mkSpr("casebox3",8,6,{y:"#e0a82a",Y:"#ffd45c",W:"#f
  R(0,5,2,1,"D");R(6,5,2,1,"D");                                               // pés
 },1)}
 function drawCaseBox(t){
- if(!isUnl("build","case")){drawBroken(sprCaseBox(),Math.round(colX(CASE_C)),Math.round(rowY(0)),pu(),__("Caixa de ouro"),"case");return}
+ if(!isUnl("build","case")){drawBroken(sprCaseBox(),Math.round(colX(CASE_C)),Math.round(rowY(0)),pu(),__("Caixa de skins"),"case");return}
  const u=pu(),s=sprCaseBox(),c=Math.round(colX(CASE_C)),y=Math.round(rowY(0)),near=nearCase();
  if(c<-T*3||c>W+T*3)return;
  pxShadow(c,(s.w+2)*u,y,u);drawSpr(s,c,y,u);
  for(let k=0;k<3;k++){const ph=(t*(near?1.1:.5)+k/3)%1;if(ph>.5&&!near)continue;ctx.fillStyle="rgba(255,243,160,"+(1-ph).toFixed(2)+")";ctx.fillRect(Math.round(c+(k-1)*2.4*u+Math.sin(t*3+k)*u),Math.round(y-s.h*u-ph*4*u),u,u)}   // brilhos subindo da tampa
- if(atSurface())lbl(near?__("Caixa de ouro: clique para abrir"):__("Caixa de ouro"),c,y-(s.h+2)*u-Math.sin(t*4)*2,near?"#6fe3a0":"#ffd45c");
+ if(atSurface())lbl(near?__("Caixa de skins: clique para abrir"):__("Caixa de skins"),c,y-(s.h+2)*u-Math.sin(t*4)*2,near?"#6fe3a0":"#ffd45c");
 }
 
 // ===== 6-jogo/01-laco-inicio.js — Laço principal, eventos, salvar/exportar/importar e inicialização =====
